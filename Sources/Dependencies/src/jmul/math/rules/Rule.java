@@ -28,7 +28,7 @@
 /*
  * This section contains meta informations.
  *
- * $Id: f09ec883b25696cbb8d0969e884e4a8b1efb93ef $
+ * $Id$
  */
 
 package jmul.math.rules;

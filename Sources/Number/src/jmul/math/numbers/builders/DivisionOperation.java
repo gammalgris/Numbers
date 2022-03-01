@@ -31,33 +31,15 @@
  * $Id$
  */
 
-package jmul.math.numbers.operations;
+package jmul.math.numbers.builders;
 
 
 import jmul.math.numbers.DigitSequence;
 import jmul.math.numbers.digits.Digit;
 
 
-/**
- * This interface describes a function for a adding two numbers (see strategy pattern).
- *
- * @param <T>
- *        The actual implementation of a digit sequence (i,.e. a number)
- *
- * @author Kristian Kutin
- */
-public interface Addition<T extends DigitSequence<? extends Digit>> {
+public interface DivisionOperation<T extends DigitSequence<? extends Digit>> {
 
-    /**
-     * Adds the specified numbers and returns a number containing the result.
-     *
-     * @param n
-     *        a number
-     * @param m
-     *        a number
-     *
-     * @return a result
-     */
-    T add(T n, T m);
+    T divide(T n);
 
 }

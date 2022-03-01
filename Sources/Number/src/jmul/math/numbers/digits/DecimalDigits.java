@@ -125,4 +125,25 @@ public enum DecimalDigits implements Digit {
         throw new IllegalArgumentException(message);
     }
 
+    /**
+     * Find a digit that corresponds to the specified ordinal number.
+     *
+     * @param ordinal
+     *        an ordinal number
+     *
+     * @return a digit
+     */
+    public static Digit ordinalToDigit(int ordinal) {
+
+        int base = ZERO.base();
+        if (ordinal >= base) {
+
+            String message =
+                String.format("The specified ordinal number (%d) is greater than this digit base (%d)!", ordinal, base);
+            throw new IllegalArgumentException(message);
+        }
+
+        return DecimalDigits.values()[ordinal];
+    }
+
 }

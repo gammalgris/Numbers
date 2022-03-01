@@ -39,7 +39,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import jmul.math.numbers.RealNumber;
+import jmul.math.numbers.RealDecimalNumber;
 
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
@@ -85,7 +85,7 @@ public class RealNumberInstantiationWithBigDecimalTest {
 
         String message = String.format("Test failed for %s!", input);
 
-        RealNumber number = new RealNumber(input);
+        RealDecimalNumber number = new RealDecimalNumber(input);
         assertEquals(message, expectedOutput, number.toStandardNotation());
         assertEquals(message, expectedOutput, number.toString());
 

@@ -37,7 +37,7 @@ package test.jmul.math.numbers;
 import java.util.regex.Matcher;
 
 import jmul.math.numbers.Constants;
-import jmul.math.numbers.PatternHelper;
+import jmul.patterns.PatternHelper;
 import jmul.math.numbers.Sign;
 import jmul.math.numbers.Signs;
 

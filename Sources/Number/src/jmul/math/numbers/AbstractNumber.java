@@ -91,7 +91,7 @@ abstract class AbstractNumber<T extends Digit> extends AbstractSignedNumber<T> {
     /**
      * All relevant digits.
      */
-    private final T[] digits;
+    protected final T[] digits;
 
     /**
      * The index of a separator relative to the first digit of the array. Thus <code>0</code> means the separator is
@@ -101,7 +101,7 @@ abstract class AbstractNumber<T extends Digit> extends AbstractSignedNumber<T> {
      * A value of <code>null</code> indicate that there is no separator. No index and an empty array of digits
      * represent infinity.
      */
-    private final Integer relativeSeparatorIndex;
+    protected final Integer relativeSeparatorIndex;
 
     /**
      * Creates a new number (i.e. digit sequence) according to the specified parameters. This constructor is
@@ -114,7 +114,7 @@ abstract class AbstractNumber<T extends Digit> extends AbstractSignedNumber<T> {
      * @param aRelativeSeparatorIndex
      *        the index of a separator (i.e. point or comma) relative to the first digit
      */
-    public AbstractNumber(Sign aSign, T[] allDigits, Integer aRelativeSeparatorIndex) {
+    protected AbstractNumber(Sign aSign, T[] allDigits, Integer aRelativeSeparatorIndex) {
 
         super(aSign);
 
@@ -124,7 +124,7 @@ abstract class AbstractNumber<T extends Digit> extends AbstractSignedNumber<T> {
             relativeSeparatorIndex = aRelativeSeparatorIndex;
 
         } else {
-            
+
             digits = trimArray(allDigits);
             relativeSeparatorIndex = aRelativeSeparatorIndex + offset(allDigits);
         }

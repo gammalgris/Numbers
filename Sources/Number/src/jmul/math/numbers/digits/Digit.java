@@ -59,7 +59,11 @@ public interface Digit {
      * Returns the ordinal number for this digit,
      *
      * @return an ordinal number
+     *
+     * @deprecated this operation might become superfluous after digit operations are implemented. At least check
+     *             all uses and restrict calls.
      */
+    @Deprecated
     int ordinal();
 
 }

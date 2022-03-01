@@ -37,7 +37,7 @@ package test.jmul.math.numbers;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import jmul.math.numbers.RealNumber;
+import jmul.math.numbers.RealDecimalNumber;
 import jmul.math.numbers.digits.Digit;
 
 import static org.junit.Assert.assertEquals;
@@ -93,7 +93,7 @@ public class RealNumberDigitAtTest {
 
         String message = String.format("Test failed (%s; index=%d; expected digit=%s)", input, index, expectedOutput);
 
-        RealNumber number = new RealNumber(input);
+        RealDecimalNumber number = new RealDecimalNumber(input);
         Digit digit = number.digitAt(index);
         char symbol = digit.symbol();
 

@@ -34,7 +34,7 @@
 package test.jmul.math.numbers;
 
 
-import jmul.math.numbers.RealNumber;
+import jmul.math.numbers.RealDecimalNumber;
 
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
@@ -54,7 +54,7 @@ public class RealNumberSpecialNumbersTest {
     @Test
     public void testPositiveInfinity() {
 
-        RealNumber n = RealNumber.POSITIVE_INFINITY;
+        RealDecimalNumber n = RealDecimalNumber.POSITIVE_INFINITY;
         assertEquals("Infinity", n.toStandardNotation());
         assertEquals("Infinity", n.toString());
 
@@ -74,7 +74,7 @@ public class RealNumberSpecialNumbersTest {
     @Test
     public void testNegativeInfinity() {
 
-        RealNumber n = RealNumber.NEGATIVE_INFINITY;
+        RealDecimalNumber n = RealDecimalNumber.NEGATIVE_INFINITY;
         assertEquals("-Infinity", n.toStandardNotation());
         assertEquals("-Infinity", n.toString());
 

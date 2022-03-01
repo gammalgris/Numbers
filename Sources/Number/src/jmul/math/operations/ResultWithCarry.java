@@ -31,33 +31,24 @@
  * $Id$
  */
 
-package jmul.math.numbers.operations;
-
-
-import jmul.math.numbers.DigitSequence;
-import jmul.math.numbers.digits.Digit;
+package jmul.math.operations;
 
 
 /**
- * This interface describes a function for a subtracting two number (see strategy pattern).
+ * This interface describes the result of an operation that can contain a carry.
  *
  * @param <T>
- *        The actual implementation of a digit sequence (i,.e. a number)
+ *        the actual parameter type
  *
  * @author Kristian Kutin
  */
-public interface Subtraction<T extends DigitSequence<? extends Digit>> {
+public interface ResultWithCarry<T> extends Result<T> {
 
     /**
-     * Subtracts the specified number m from the specified number n and returns a number containing the result.
+     * Returns the carry. If no carry exist a default value representing no carry is returned.
      *
-     * @param n
-     *        a number
-     * @param m
-     *        a number
-     *
-     * @return a result
+     * @return carry
      */
-    T subtract(T n, T m);
+    T carry();
 
 }

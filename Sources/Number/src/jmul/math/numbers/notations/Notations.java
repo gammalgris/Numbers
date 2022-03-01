@@ -31,44 +31,19 @@
  * $Id$
  */
 
-package jmul.math.numbers;
-
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+package jmul.math.numbers.notations;
 
 
 /**
- * A utility class for pattern matching.
+ * This enumeration class contains all supported notations.
  *
  * @author Kristian Kutin
  */
-public final class PatternHelper {
+public enum Notations {
 
-    /**
-     * The static constructor.
-     */
-    private PatternHelper() {
 
-        throw new UnsupportedOperationException();
-    }
+    STANDARD_NOTATION,
+    SCIENTIFIC_NOTATION, ;
 
-    /**
-     * Compiles the specified regular expression and matches it against the specified string.
-     *
-     * @param aRegex
-     *        a regular expression
-     * @param aString
-     *        a string
-     *
-     * @return a matcher (i.e. matching results)
-     */
-    public static Matcher match(CharSequence aRegex, CharSequence aString) {
-
-        Pattern pattern = Pattern.compile(String.valueOf(aRegex));
-        Matcher matcher = pattern.matcher(String.valueOf(aString));
-
-        return matcher;
-    }
 
 }

@@ -37,7 +37,7 @@ package test.jmul.math.numbers;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import jmul.math.numbers.RealNumber;
+import jmul.math.numbers.RealDecimalNumber;
 
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
@@ -56,12 +56,12 @@ public class RealNumberNaturalOrderingTest {
     /**
      * A number.
      */
-    private final RealNumber number1;
+    private final RealDecimalNumber number1;
 
     /**
      * A number.
      */
-    private final RealNumber number2;
+    private final RealDecimalNumber number2;
 
     /**
      * The expected result for comparing in the given order.
@@ -75,7 +75,7 @@ public class RealNumberNaturalOrderingTest {
      * @param number2
      * @param expectedResult
      */
-    public RealNumberNaturalOrderingTest(RealNumber number1, RealNumber number2, int expectedResult) {
+    public RealNumberNaturalOrderingTest(RealDecimalNumber number1, RealDecimalNumber number2, int expectedResult) {
 
         super();
 
@@ -118,30 +118,30 @@ public class RealNumberNaturalOrderingTest {
 
         Collection<Object[]> parameters = new ArrayList<Object[]>();
 
-        parameters.add(new Object[] { new RealNumber(), new RealNumber(0), 0 });
+        parameters.add(new Object[] { new RealDecimalNumber(), new RealDecimalNumber(0), 0 });
 
-        parameters.add(new Object[] { new RealNumber(1), new RealNumber(1), 0 });
-        parameters.add(new Object[] { new RealNumber(1), new RealNumber(2), -1 });
-        parameters.add(new Object[] { new RealNumber(2), new RealNumber(1), 1 });
-        parameters.add(new Object[] { new RealNumber(2), new RealNumber(2), 0 });
+        parameters.add(new Object[] { new RealDecimalNumber(1), new RealDecimalNumber(1), 0 });
+        parameters.add(new Object[] { new RealDecimalNumber(1), new RealDecimalNumber(2), -1 });
+        parameters.add(new Object[] { new RealDecimalNumber(2), new RealDecimalNumber(1), 1 });
+        parameters.add(new Object[] { new RealDecimalNumber(2), new RealDecimalNumber(2), 0 });
 
-        parameters.add(new Object[] { RealNumber.POSITIVE_INFINITY, new RealNumber(2), 1 });
-        parameters.add(new Object[] { new RealNumber(2), RealNumber.POSITIVE_INFINITY, -1 });
+        parameters.add(new Object[] { RealDecimalNumber.POSITIVE_INFINITY, new RealDecimalNumber(2), 1 });
+        parameters.add(new Object[] { new RealDecimalNumber(2), RealDecimalNumber.POSITIVE_INFINITY, -1 });
 
-        parameters.add(new Object[] { RealNumber.POSITIVE_INFINITY, RealNumber.NEGATIVE_INFINITY, 1 });
-        parameters.add(new Object[] { RealNumber.NEGATIVE_INFINITY, RealNumber.POSITIVE_INFINITY, -1 });
-        parameters.add(new Object[] { RealNumber.POSITIVE_INFINITY, RealNumber.POSITIVE_INFINITY, 0 });
-        parameters.add(new Object[] { RealNumber.NEGATIVE_INFINITY, RealNumber.NEGATIVE_INFINITY, 0 });
+        parameters.add(new Object[] { RealDecimalNumber.POSITIVE_INFINITY, RealDecimalNumber.NEGATIVE_INFINITY, 1 });
+        parameters.add(new Object[] { RealDecimalNumber.NEGATIVE_INFINITY, RealDecimalNumber.POSITIVE_INFINITY, -1 });
+        parameters.add(new Object[] { RealDecimalNumber.POSITIVE_INFINITY, RealDecimalNumber.POSITIVE_INFINITY, 0 });
+        parameters.add(new Object[] { RealDecimalNumber.NEGATIVE_INFINITY, RealDecimalNumber.NEGATIVE_INFINITY, 0 });
 
-        parameters.add(new Object[] { new RealNumber("1.1"), new RealNumber("1.2"), -1 });
-        parameters.add(new Object[] { new RealNumber("11.12"), new RealNumber("11.13"), -1 });
-        parameters.add(new Object[] { new RealNumber("1.1"), new RealNumber("1.1"), 0 });
-        parameters.add(new Object[] { new RealNumber("11.12"), new RealNumber("11.12"), 0 });
-        parameters.add(new Object[] { new RealNumber("1.2"), new RealNumber("1.1"), 1 });
-        parameters.add(new Object[] { new RealNumber("11.13"), new RealNumber("11.12"), 1 });
+        parameters.add(new Object[] { new RealDecimalNumber("1.1"), new RealDecimalNumber("1.2"), -1 });
+        parameters.add(new Object[] { new RealDecimalNumber("11.12"), new RealDecimalNumber("11.13"), -1 });
+        parameters.add(new Object[] { new RealDecimalNumber("1.1"), new RealDecimalNumber("1.1"), 0 });
+        parameters.add(new Object[] { new RealDecimalNumber("11.12"), new RealDecimalNumber("11.12"), 0 });
+        parameters.add(new Object[] { new RealDecimalNumber("1.2"), new RealDecimalNumber("1.1"), 1 });
+        parameters.add(new Object[] { new RealDecimalNumber("11.13"), new RealDecimalNumber("11.12"), 1 });
 
-        parameters.add(new Object[] { new RealNumber("0.0000000001"), new RealNumber("0.00000000001"), 1 });
-        parameters.add(new Object[] { new RealNumber("0.00000000001"), new RealNumber("0.0000000001"), -1 });
+        parameters.add(new Object[] { new RealDecimalNumber("0.0000000001"), new RealDecimalNumber("0.00000000001"), 1 });
+        parameters.add(new Object[] { new RealDecimalNumber("0.00000000001"), new RealDecimalNumber("0.0000000001"), -1 });
 
         return parameters;
     }

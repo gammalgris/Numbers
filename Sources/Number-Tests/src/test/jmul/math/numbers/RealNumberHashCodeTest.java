@@ -34,7 +34,7 @@
 package test.jmul.math.numbers;
 
 
-import jmul.math.numbers.RealNumber;
+import jmul.math.numbers.RealDecimalNumber;
 
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
@@ -53,10 +53,10 @@ public class RealNumberHashCodeTest {
     @Test
     public void testZero() {
 
-        RealNumber n1 = new RealNumber(0);
+        RealDecimalNumber n1 = new RealDecimalNumber(0);
         int h1 = n1.hashCode();
 
-        RealNumber n2 = new RealNumber(0);
+        RealDecimalNumber n2 = new RealDecimalNumber(0);
         int h2 = n2.hashCode();
 
         String message = String.format("Comparing the numbers %s and %s has failed!", n1.toString(), n2.toString());
@@ -71,10 +71,10 @@ public class RealNumberHashCodeTest {
     @Test
     public void testPositiveInfinity() {
 
-        RealNumber n1 = RealNumber.POSITIVE_INFINITY;
+        RealDecimalNumber n1 = RealDecimalNumber.POSITIVE_INFINITY;
         int h1 = n1.hashCode();
 
-        RealNumber n2 = RealNumber.POSITIVE_INFINITY;
+        RealDecimalNumber n2 = RealDecimalNumber.POSITIVE_INFINITY;
         int h2 = n2.hashCode();
 
         String message = String.format("Comparing the numbers %s and %s has failed!", n1.toString(), n2.toString());
@@ -89,10 +89,10 @@ public class RealNumberHashCodeTest {
     @Test
     public void testNegativeInfinity() {
 
-        RealNumber n1 = RealNumber.NEGATIVE_INFINITY;
+        RealDecimalNumber n1 = RealDecimalNumber.NEGATIVE_INFINITY;
         int h1 = n1.hashCode();
 
-        RealNumber n2 = RealNumber.NEGATIVE_INFINITY;
+        RealDecimalNumber n2 = RealDecimalNumber.NEGATIVE_INFINITY;
         int h2 = n2.hashCode();
 
         String message = String.format("Comparing the numbers %s and %s has failed!", n1.toString(), n2.toString());

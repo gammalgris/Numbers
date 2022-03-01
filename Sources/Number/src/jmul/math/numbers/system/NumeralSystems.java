@@ -37,7 +37,7 @@ package jmul.math.numbers.system;
 import java.util.List;
 
 import jmul.math.numbers.DigitSequence;
-import jmul.math.numbers.RealNumber;
+import jmul.math.numbers.RealDecimalNumber;
 import jmul.math.numbers.Sign;
 import jmul.math.numbers.digits.BinaryDigits;
 import jmul.math.numbers.digits.DecimalDigits;
@@ -52,7 +52,10 @@ import jmul.singletons.FunctionSingletons;
  * This class provides various utility functions regarding numeral systems.
  *
  * @author Kristian Kutin
+ * 
+ * @deprecated This class may become superfluous or needs reworking when digit operations are implemented.
  */
+@Deprecated
 public final class NumeralSystems {
 
     /**
@@ -174,7 +177,7 @@ public final class NumeralSystems {
             public DigitSequence<DecimalDigits> toDigitSequence(Sign sign, List<DecimalDigits> digits,
                                                                 Integer relativeSeparatorIndex) {
                 DecimalDigits[] d = digits.toArray(new DecimalDigits[] { });
-                return RealNumber.newInstance(sign, d, relativeSeparatorIndex);
+                return new RealDecimalNumber(sign, d, relativeSeparatorIndex);
             }
         };
 

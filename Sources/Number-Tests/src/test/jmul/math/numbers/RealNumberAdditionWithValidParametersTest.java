@@ -37,9 +37,9 @@ package test.jmul.math.numbers;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import jmul.math.numbers.RealNumber;
-import jmul.math.numbers.operations.Addition;
-import jmul.math.numbers.operations.AdditionImpl;
+import jmul.math.numbers.RealDecimalNumber;
+import jmul.math.numbers.builders.AdditionOperation;
+import jmul.math.numbers.operations.AdditionOperationImpl;
 
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
@@ -60,24 +60,24 @@ public class RealNumberAdditionWithValidParametersTest {
     /**
      * A function.
      */
-    private Addition<RealNumber> additionFunction;
+    private AdditionOperation<RealDecimalNumber> additionFunction;
 
     /**
      * A number.
      */
-    private final RealNumber n;
+    private final RealDecimalNumber n;
 
     /**
      * A number.
      */
-    private final RealNumber m;
+    private final RealDecimalNumber m;
 
     /**
      * The expected result.
      */
-    private final RealNumber expectedResult;
+    private final RealDecimalNumber expectedResult;
 
-    public RealNumberAdditionWithValidParametersTest(RealNumber n, RealNumber m, RealNumber expectedResult) {
+    public RealNumberAdditionWithValidParametersTest(RealDecimalNumber n, RealDecimalNumber m, RealDecimalNumber expectedResult) {
 
         super();
 
@@ -89,7 +89,7 @@ public class RealNumberAdditionWithValidParametersTest {
     @Before
     public void setUp() {
 
-        additionFunction = new AdditionImpl<>();
+        additionFunction = new AdditionOperationImpl<>();
     }
 
     @After
@@ -103,7 +103,7 @@ public class RealNumberAdditionWithValidParametersTest {
 
         String message = String.format("Couldn't add the two numbers (n=%s; m=%s)!", n.toString(), m.toString());
 
-        RealNumber actualResult = additionFunction.add(n, m);
+        RealDecimalNumber actualResult = additionFunction.add(n, m);
 
         assertEquals(message, expectedResult, actualResult);
     }
@@ -118,17 +118,19 @@ public class RealNumberAdditionWithValidParametersTest {
 
         Collection<Object[]> parameters = new ArrayList<Object[]>();
 
-        parameters.add(new Object[] { new RealNumber(), new RealNumber(0), new RealNumber(0) });
+        parameters.add(new Object[] { new RealDecimalNumber(), new RealDecimalNumber(0), new RealDecimalNumber(0) });
 
-        parameters.add(new Object[] { RealNumber.POSITIVE_INFINITY, new RealNumber(10), RealNumber.POSITIVE_INFINITY });
-        parameters.add(new Object[] { RealNumber.NEGATIVE_INFINITY, new RealNumber(10), RealNumber.NEGATIVE_INFINITY });
+        parameters.add(new Object[] { RealDecimalNumber.POSITIVE_INFINITY, new RealDecimalNumber(10),
+                                      RealDecimalNumber.POSITIVE_INFINITY });
+        parameters.add(new Object[] { RealDecimalNumber.NEGATIVE_INFINITY, new RealDecimalNumber(10),
+                                      RealDecimalNumber.NEGATIVE_INFINITY });
 
-        parameters.add(new Object[] { new RealNumber(1), new RealNumber(10), new RealNumber(11) });
-        parameters.add(new Object[] { new RealNumber(10), new RealNumber(1), new RealNumber(11) });
+        parameters.add(new Object[] { new RealDecimalNumber(1), new RealDecimalNumber(10), new RealDecimalNumber(11) });
+        parameters.add(new Object[] { new RealDecimalNumber(10), new RealDecimalNumber(1), new RealDecimalNumber(11) });
 
-        parameters.add(new Object[] { new RealNumber(999), new RealNumber(1), new RealNumber(1000) });
-        parameters.add(new Object[] { new RealNumber(123456789), new RealNumber(987654321), new RealNumber(1111111110) });
-        parameters.add(new Object[] { new RealNumber(123456789), new RealNumber(876543211), new RealNumber(1000000000) });
+        parameters.add(new Object[] { new RealDecimalNumber(999), new RealDecimalNumber(1), new RealDecimalNumber(1000) });
+        parameters.add(new Object[] { new RealDecimalNumber(123456789), new RealDecimalNumber(987654321), new RealDecimalNumber(1111111110) });
+        parameters.add(new Object[] { new RealDecimalNumber(123456789), new RealDecimalNumber(876543211), new RealDecimalNumber(1000000000) });
 
         return parameters;
     }

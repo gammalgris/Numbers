@@ -31,15 +31,24 @@
  * $Id$
  */
 
-package jmul.math.numbers.operations;
+package jmul.math.operations;
 
 
-import jmul.math.numbers.DigitSequence;
-import jmul.math.numbers.digits.Digit;
+/**
+ * This interface describes the result of an operation.
+ *
+ * @param <T>
+ *        the actual parameter type
+ * 
+ * @author Kristian Kutin
+ */
+public interface Result<T> {
 
-
-public interface Modulo<T extends DigitSequence<? extends Digit>> {
-
-    T modulo(T n);
+    /**
+     * Returns the operation result.
+     *
+     * @return operation result
+     */
+    T result();
 
 }

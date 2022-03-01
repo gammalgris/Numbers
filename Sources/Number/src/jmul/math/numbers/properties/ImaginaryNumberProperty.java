@@ -31,15 +31,15 @@
  * $Id$
  */
 
-package jmul.math.numbers.operations;
+package jmul.math.numbers.properties;
 
 
 import jmul.math.numbers.DigitSequence;
 import jmul.math.numbers.digits.Digit;
 
 
-public interface Division<T extends DigitSequence<? extends Digit>> {
+public interface ImaginaryNumberProperty<T extends DigitSequence<? extends Digit>> {
 
-    T divide(T n);
+    boolean isImaginaryNumber(T n);
 
 }

@@ -28,7 +28,7 @@
 /*
  * This section contains meta informations.
  *
- * $Id: 6d55deba03ae8e280d491fb28c495a196b9f3ed5 $
+ * $Id$
  */
 
 package jmul.misc.equality;

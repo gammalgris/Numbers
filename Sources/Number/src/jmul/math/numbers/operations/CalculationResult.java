@@ -4,6 +4,7 @@ package jmul.math.numbers.operations;
 import jmul.math.numbers.digits.Digit;
 
 
+@Deprecated
 public class CalculationResult {
 
     private final Digit result;

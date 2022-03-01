@@ -35,7 +35,7 @@ package jmul.math.numbers;
 
 
 import jmul.math.numbers.digits.Digit;
-import jmul.math.numbers.operations.ArithmeticOperations;
+import jmul.math.numbers.builders.ArithmeticOperations;
 
 
 public abstract class NumberBuilder<T extends Digit> extends AbstractSignedNumber<T> implements ArithmeticOperations<DigitSequence<T>> {

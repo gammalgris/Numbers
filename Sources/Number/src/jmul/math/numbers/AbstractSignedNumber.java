@@ -33,6 +33,7 @@
 
 package jmul.math.numbers;
 
+
 import jmul.math.numbers.digits.Digit;
 
 
@@ -49,7 +50,7 @@ abstract class AbstractSignedNumber<T extends Digit> implements DigitSequence<T>
     /**
      * The sign of this number (i.e. digit sequence).
      */
-    private final Sign sign;
+    protected final Sign sign;
 
     /**
      * Creates a new number (i.e. digit sequence) according to the specified parameters.

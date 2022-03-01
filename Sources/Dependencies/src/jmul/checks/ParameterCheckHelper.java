@@ -28,7 +28,7 @@
 /*
  * This section contains meta informations.
  *
- * $Id: cdc67e25845d5321cef6ca7f00d0bcfe6dc55894 $
+ * $Id$
  */
 
 package jmul.checks;

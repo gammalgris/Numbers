@@ -31,15 +31,33 @@
  * $Id$
  */
 
-package jmul.math.numbers.operations;
+package jmul.math.numbers.builders;
 
 
 import jmul.math.numbers.DigitSequence;
 import jmul.math.numbers.digits.Digit;
 
 
-public interface ArithmeticOperations<T extends DigitSequence<? extends Digit>> extends Addition<T>, Subtraction<T>,
-                                                                                        Multiplication<T>, Division<T>,
-                                                                                        Modulo<T> {
+/**
+ * This interface describes a function that compares two numbers and returns the lower number (see strategy pattern).
+ *
+ * @param <T>
+ *        The actual implementation of a digit sequence (i,.e. a number)
+ *
+ * @author Kristian Kutin
+ */
+public interface MinOperation<T extends DigitSequence<? extends Digit>> {
+
+    /**
+     * Compares the two numbers and return the lower number.
+     *
+     * @param n
+     *        a number
+     * @param m
+     *        a number
+     *
+     * @return the lower number of the two specified numbers
+     */
+    T min(T n, T m);
 
 }

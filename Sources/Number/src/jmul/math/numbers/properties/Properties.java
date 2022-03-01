@@ -38,10 +38,12 @@ import jmul.math.numbers.digits.Digit;
 import jmul.math.numbers.DigitSequence;
 
 
-public interface Properties<T extends DigitSequence<? extends Digit>> {
-
-    boolean isWholeNumber(T n);
-
-    boolean isNaturalNumber(T n);
+public interface Properties<T extends DigitSequence<? extends Digit>> extends FractionProperty<T>,
+                                                                              ImaginaryNumberProperty<T>,
+                                                                              IrrationalNumberProperty<T>,
+                                                                              NaturalNumberProperty<T>,
+                                                                              PrimeNumberProperty<T>,
+                                                                              RealNumberProperty<T>,
+                                                                              WholeNumberProperty<T> {
 
 }

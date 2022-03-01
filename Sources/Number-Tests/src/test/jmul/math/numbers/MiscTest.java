@@ -38,15 +38,15 @@ import java.math.BigDecimal;
 
 import java.util.Arrays;
 
-import jmul.math.numbers.RealNumber;
+import jmul.math.numbers.RealDecimalNumber;
 
 import jmul.math.numbers.digits.HexadecimalDigits;
 
 import jmul.math.numbers.digits.OctalDigits;
 
-import jmul.math.numbers.operations.Addition;
+import jmul.math.numbers.builders.AdditionOperation;
 
-import jmul.math.numbers.operations.AdditionImpl;
+import jmul.math.numbers.operations.AdditionOperationImpl;
 
 import memutils.ObjectSizeFetcher;
 
@@ -134,15 +134,15 @@ public class MiscTest {
         System.out.println(Arrays.toString(a));
         System.out.println(Arrays.toString(b));
 
-        Addition<RealNumber> additionFunction = new AdditionImpl<>();
-        RealNumber n = new RealNumber(1);
-        RealNumber m = new RealNumber(2);
-        RealNumber r = additionFunction.add(n, m);
+        AdditionOperation<RealDecimalNumber> additionFunction = new AdditionOperationImpl<>();
+        RealDecimalNumber n = new RealDecimalNumber(1);
+        RealDecimalNumber m = new RealDecimalNumber(2);
+        RealDecimalNumber r = additionFunction.add(n, m);
         System.out.println("n:="+ n);
         System.out.println("m:="+ m);
         System.out.println("r:="+ r);
 
-        m = RealNumber.POSITIVE_INFINITY;
+        m = RealDecimalNumber.POSITIVE_INFINITY;
         r = additionFunction.add(n, m);
         System.out.println("n:="+ n);
         System.out.println("m:="+ m);

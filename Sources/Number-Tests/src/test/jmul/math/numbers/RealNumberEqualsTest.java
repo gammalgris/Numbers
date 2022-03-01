@@ -37,7 +37,7 @@ package test.jmul.math.numbers;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import jmul.math.numbers.RealNumber;
+import jmul.math.numbers.RealDecimalNumber;
 
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
@@ -56,12 +56,12 @@ public class RealNumberEqualsTest {
     /**
      * A number.
      */
-    private final RealNumber number1;
+    private final RealDecimalNumber number1;
 
     /**
      * A number.
      */
-    private final RealNumber number2;
+    private final RealDecimalNumber number2;
 
     /**
      * The expected result for comparing equality.
@@ -75,7 +75,7 @@ public class RealNumberEqualsTest {
      * @param number2
      * @param expectedResult
      */
-    public RealNumberEqualsTest(RealNumber number1, RealNumber number2, boolean expectedResult) {
+    public RealNumberEqualsTest(RealDecimalNumber number1, RealDecimalNumber number2, boolean expectedResult) {
 
         super();
 
@@ -110,35 +110,35 @@ public class RealNumberEqualsTest {
 
         Collection<Object[]> parameters = new ArrayList<Object[]>();
 
-        parameters.add(new Object[] { new RealNumber(), new RealNumber(0), true });
+        parameters.add(new Object[] { new RealDecimalNumber(), new RealDecimalNumber(0), true });
 
-        parameters.add(new Object[] { RealNumber.POSITIVE_INFINITY, new RealNumber(0), false });
-        parameters.add(new Object[] { new RealNumber(0), RealNumber.POSITIVE_INFINITY, false });
-        parameters.add(new Object[] { RealNumber.NEGATIVE_INFINITY, new RealNumber(0), false });
-        parameters.add(new Object[] { new RealNumber(0), RealNumber.NEGATIVE_INFINITY, false });
+        parameters.add(new Object[] { RealDecimalNumber.POSITIVE_INFINITY, new RealDecimalNumber(0), false });
+        parameters.add(new Object[] { new RealDecimalNumber(0), RealDecimalNumber.POSITIVE_INFINITY, false });
+        parameters.add(new Object[] { RealDecimalNumber.NEGATIVE_INFINITY, new RealDecimalNumber(0), false });
+        parameters.add(new Object[] { new RealDecimalNumber(0), RealDecimalNumber.NEGATIVE_INFINITY, false });
 
-        parameters.add(new Object[] { RealNumber.POSITIVE_INFINITY, new RealNumber(10), false });
-        parameters.add(new Object[] { new RealNumber(10), RealNumber.POSITIVE_INFINITY, false });
-        parameters.add(new Object[] { RealNumber.NEGATIVE_INFINITY, new RealNumber(10), false });
-        parameters.add(new Object[] { new RealNumber(10), RealNumber.NEGATIVE_INFINITY, false });
+        parameters.add(new Object[] { RealDecimalNumber.POSITIVE_INFINITY, new RealDecimalNumber(10), false });
+        parameters.add(new Object[] { new RealDecimalNumber(10), RealDecimalNumber.POSITIVE_INFINITY, false });
+        parameters.add(new Object[] { RealDecimalNumber.NEGATIVE_INFINITY, new RealDecimalNumber(10), false });
+        parameters.add(new Object[] { new RealDecimalNumber(10), RealDecimalNumber.NEGATIVE_INFINITY, false });
 
-        parameters.add(new Object[] { RealNumber.POSITIVE_INFINITY, new RealNumber(-10), false });
-        parameters.add(new Object[] { new RealNumber(-10), RealNumber.POSITIVE_INFINITY, false });
-        parameters.add(new Object[] { RealNumber.NEGATIVE_INFINITY, new RealNumber(-10), false });
-        parameters.add(new Object[] { new RealNumber(-10), RealNumber.NEGATIVE_INFINITY, false });
+        parameters.add(new Object[] { RealDecimalNumber.POSITIVE_INFINITY, new RealDecimalNumber(-10), false });
+        parameters.add(new Object[] { new RealDecimalNumber(-10), RealDecimalNumber.POSITIVE_INFINITY, false });
+        parameters.add(new Object[] { RealDecimalNumber.NEGATIVE_INFINITY, new RealDecimalNumber(-10), false });
+        parameters.add(new Object[] { new RealDecimalNumber(-10), RealDecimalNumber.NEGATIVE_INFINITY, false });
 
-        parameters.add(new Object[] { RealNumber.POSITIVE_INFINITY, RealNumber.POSITIVE_INFINITY, true });
-        parameters.add(new Object[] { RealNumber.POSITIVE_INFINITY, RealNumber.NEGATIVE_INFINITY, false });
-        parameters.add(new Object[] { RealNumber.NEGATIVE_INFINITY, RealNumber.POSITIVE_INFINITY, false });
-        parameters.add(new Object[] { RealNumber.NEGATIVE_INFINITY, RealNumber.NEGATIVE_INFINITY, true });
+        parameters.add(new Object[] { RealDecimalNumber.POSITIVE_INFINITY, RealDecimalNumber.POSITIVE_INFINITY, true });
+        parameters.add(new Object[] { RealDecimalNumber.POSITIVE_INFINITY, RealDecimalNumber.NEGATIVE_INFINITY, false });
+        parameters.add(new Object[] { RealDecimalNumber.NEGATIVE_INFINITY, RealDecimalNumber.POSITIVE_INFINITY, false });
+        parameters.add(new Object[] { RealDecimalNumber.NEGATIVE_INFINITY, RealDecimalNumber.NEGATIVE_INFINITY, true });
 
-        parameters.add(new Object[] { new RealNumber(1000), new RealNumber(1000), true });
-        parameters.add(new Object[] { new RealNumber(1000), new RealNumber(1001), false });
-        parameters.add(new Object[] { new RealNumber(1001), new RealNumber(1000), false });
+        parameters.add(new Object[] { new RealDecimalNumber(1000), new RealDecimalNumber(1000), true });
+        parameters.add(new Object[] { new RealDecimalNumber(1000), new RealDecimalNumber(1001), false });
+        parameters.add(new Object[] { new RealDecimalNumber(1001), new RealDecimalNumber(1000), false });
 
-        parameters.add(new Object[] { new RealNumber(1000.00001F), new RealNumber(1000.00001F), true });
-        parameters.add(new Object[] { new RealNumber(1000.00001F), new RealNumber(1001.00001F), false });
-        parameters.add(new Object[] { new RealNumber(1001.00001F), new RealNumber(1000.00001F), false });
+        parameters.add(new Object[] { new RealDecimalNumber(1000.00001F), new RealDecimalNumber(1000.00001F), true });
+        parameters.add(new Object[] { new RealDecimalNumber(1000.00001F), new RealDecimalNumber(1001.00001F), false });
+        parameters.add(new Object[] { new RealDecimalNumber(1001.00001F), new RealDecimalNumber(1000.00001F), false });
 
         return parameters;
     }

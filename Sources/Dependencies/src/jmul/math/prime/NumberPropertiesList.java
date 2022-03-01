@@ -28,7 +28,7 @@
 /*
  * This section contains meta informations.
  *
- * $Id: df21650a7d570c7fbc3862c16f415f5c027b6bc8 $
+ * $Id$
  */
 
 package jmul.math.prime;

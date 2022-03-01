@@ -35,74 +35,71 @@ package jmul.math.numbers.operations;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import jmul.math.numbers.DigitSequence;
 import jmul.math.numbers.Sign;
 import jmul.math.numbers.Signs;
+import jmul.math.numbers.builders.NegationOperation;
 import jmul.math.numbers.digits.Digit;
 import jmul.math.numbers.system.NumeralSystems;
 
 
 /**
+ * An implementation of a function for negating a number.
  *
  * @param <T>
  *        The actual implementation of a digit sequence (i,.e. a number)
  *
  * @author Kristian Kutin
  */
-public class SubtractionImpl<T extends DigitSequence<? extends Digit>> extends AbstractOperation<T> implements Subtraction<T> {
+public class NegationOperationImpl<T extends DigitSequence<? extends Digit>> extends AbstractOperation<T> implements NegationOperation<T> {
 
     /**
      * The default constructor.
      */
-    public SubtractionImpl() {
+    public NegationOperationImpl() {
 
         super();
     }
 
     /**
-     * Subtracts the specified number m from the specified number n and returns a number containing the result.
+     * Negates the specified number.
      *
      * @param n
      *        a number
-     * @param m
-     *        a number
      *
-     * @return a result
+     * @return the negated number
      */
     @Override
-    public T subtract(T n, T m) {
-
-        super.checkParameters(n, m);
+    public T negate(T n) {
 
         int base = n.base();
+        Sign sign = Signs.negate(n.sign());
+        List<Digit> digits = new ArrayList<>();
 
-        Sign sign = Signs.POSITIVE;
-        if (n.isPositive() && m.isNegative()) {
-
-            //TODO add n + -m
-            throw new UnsupportedOperationException();
-
-        } else if (n.isNegative() && m.isPositive()) {
-
-            //TODO add substract m + -n
-            throw new UnsupportedOperationException();
-
-        } else if (n.isNegative() && m.isNegative()) {
-
-            //TODO add substract -n - -m
-            throw new UnsupportedOperationException();
-        }
-
-        List<Digit> digits = new ArrayList<>(); // List<? extends Digit> is a problem!
-
-        if (n.isInfinity() || m.isInfinity()) {
+        if (n.isInfinity()) {
 
             return (T) NumeralSystems.toDigitSequence(base, sign, digits, null);
         }
 
-        return null;
+        int left = n.leftDigits();
+        int right = n.rightDigits();
+        int index = Math.max(0, left - 1);
+
+        for (int a = -right; a <= left; a++) {
+
+            if (a == 0) {
+
+                continue;
+            }
+
+            Digit d = n.digitAt(a);
+            digits.add(0, d);
+        }
+
+        return (T) NumeralSystems.toDigitSequence(base, sign, Collections.unmodifiableList(digits), index);
     }
 
 }

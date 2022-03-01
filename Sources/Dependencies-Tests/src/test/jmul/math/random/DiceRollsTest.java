@@ -28,7 +28,7 @@
 /*
  * This section contains meta informations.
  *
- * $Id: 4930daff8796aa927030f8066cee58ce5a32afaf $
+ * $Id$
  */
 
 package test.jmul.math.random;

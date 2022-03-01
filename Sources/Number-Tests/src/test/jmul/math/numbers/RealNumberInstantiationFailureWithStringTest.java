@@ -37,7 +37,7 @@ package test.jmul.math.numbers;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import jmul.math.numbers.RealNumber;
+import jmul.math.numbers.RealDecimalNumber;
 
 import static org.junit.Assert.fail;
 import org.junit.Test;
@@ -86,7 +86,7 @@ public class RealNumberInstantiationFailureWithStringTest {
         try {
 
             //RealNumber.parseString(input);
-            new RealNumber(input);
+            new RealDecimalNumber(input);
 
             fail("An exception is epxected but none was thrown!");
 

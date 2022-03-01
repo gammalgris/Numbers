@@ -93,7 +93,7 @@ public enum Signs implements Sign {
      *
      * @return a decimal digit
      */
-    public static Signs findBySymbol(char aSymbol) {
+    public static Sign findBySymbol(char aSymbol) {
 
         for (Signs sign : values()) {
 
@@ -105,6 +105,24 @@ public enum Signs implements Sign {
 
         String message = String.format("'%s' is not a valid symbol!", aSymbol);
         throw new IllegalArgumentException(message);
+    }
+
+    /**
+     * Negates the specified sign.
+     *
+     * @param aSign
+     *        a sign
+     *
+     * @return a negated sign
+     */
+    public static Sign negate(Sign aSign) {
+
+        if (POSITIVE == aSign) {
+
+            return NEGATIVE;
+        }
+
+        return POSITIVE;
     }
 
 }

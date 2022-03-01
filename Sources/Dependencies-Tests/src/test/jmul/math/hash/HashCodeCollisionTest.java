@@ -28,7 +28,7 @@
 /*
  * This section contains meta informations.
  *
- * $Id: 678185a0bc33cc4243ae06f473b79fed88379465 $
+ * $Id$
  */
 
 package test.jmul.math.hash;

@@ -28,7 +28,7 @@
 /*
  * This section contains meta informations.
  *
- * $Id: 41e96e7d44fa16e2008595f0325e071d4f15046c $
+ * $Id$
  */
 
 package jmul.checks.exceptions;

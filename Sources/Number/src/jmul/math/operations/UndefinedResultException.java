@@ -31,15 +31,11 @@
  * $Id$
  */
 
-package jmul.math.numbers.operations;
+package jmul.math.operations;
 
 
-import jmul.math.numbers.DigitSequence;
-import jmul.math.numbers.digits.Digit;
-
-
-public interface Multiplication<T extends DigitSequence<? extends Digit>> {
-
-    T multiply(T n);
-
+public class UndefinedResultException {
+    public UndefinedResultException() {
+        super();
+    }
 }

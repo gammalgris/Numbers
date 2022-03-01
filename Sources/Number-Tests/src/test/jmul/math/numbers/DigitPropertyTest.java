@@ -41,7 +41,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import jmul.math.numbers.digits.Digit;
-import jmul.math.numbers.RealNumber;
+import jmul.math.numbers.RealDecimalNumber;
 
 import static org.junit.Assert.fail;
 import org.junit.Test;
@@ -90,7 +90,7 @@ public class DigitPropertyTest {
         String message = String.format("Test failed for %s!", input);
 
         //RealNumber number = RealNumber.parseString(input);
-        RealNumber number = new RealNumber(input);
+        RealDecimalNumber number = new RealDecimalNumber(input);
 
         List<Integer> baseSequence = new ArrayList<>();
 
