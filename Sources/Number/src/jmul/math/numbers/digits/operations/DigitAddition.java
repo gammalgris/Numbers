@@ -49,7 +49,7 @@ import jmul.math.operations.ResultWithCarryImpl;
  *
  * @author Kristian Kutin
  */
-public class DigitAddition<T extends Digit> implements BinaryOperation<T> {
+public class DigitAddition<T extends Digit> implements BinaryOperation<T, ResultWithCarry<T>> {
 
     /**
      * The default constructor.

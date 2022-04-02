@@ -39,11 +39,18 @@ import java.util.Collections;
 import java.util.List;
 
 import jmul.math.numbers.DigitSequence;
+import jmul.math.numbers.FunctionIdentifiers;
 import jmul.math.numbers.Sign;
 import jmul.math.numbers.Signs;
-import jmul.math.numbers.builders.AdditionOperation;
 import jmul.math.numbers.digits.Digit;
+import jmul.math.numbers.digits.operations.DigitAddition;
 import jmul.math.numbers.system.NumeralSystems;
+import jmul.math.operations.BinaryOperation;
+import jmul.math.operations.Result;
+import jmul.math.operations.ResultImpl;
+import jmul.math.operations.ResultWithCarry;
+
+import jmul.singletons.FunctionSingletons;
 
 
 /**
@@ -58,7 +65,7 @@ import jmul.math.numbers.system.NumeralSystems;
  *
  * @author Kristian Kutin
  */
-public class AdditionOperationImpl<T extends DigitSequence<? extends Digit>> extends AbstractOperation<T> implements AdditionOperation<T> {
+public class AdditionOperationImpl<T extends DigitSequence<? extends Digit>> implements BinaryOperation<T, Result<T>> {
 
     /**
      * The default constructor.
@@ -66,6 +73,49 @@ public class AdditionOperationImpl<T extends DigitSequence<? extends Digit>> ext
     public AdditionOperationImpl() {
 
         super();
+
+        initFunctions();
+    }
+
+    /**
+     * Initializes all required functions.
+     */
+    private void initFunctions() {
+
+        if (!FunctionSingletons.existsFunction(FunctionIdentifiers.DIGIT_ADDITION)) {
+
+            BinaryOperation<Digit, ResultWithCarry<Digit>> function = new DigitAddition<>();
+            FunctionSingletons.putFunction(FunctionIdentifiers.DIGIT_ADDITION, function);
+        }
+    }
+
+    /**
+     * Returns a reference on a function.
+     *
+     * @return a function reference
+     */
+    private BinaryOperation<Digit, ResultWithCarry<Digit>> getDigitAdditionFunction() {
+
+        return (BinaryOperation<Digit, ResultWithCarry<Digit>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIGIT_ADDITION);
+    }
+
+    /**
+     * Checks the two specified parameters.
+     *
+     * @param n
+     *        a number
+     * @param m
+     *        a number
+     */
+    protected void checkParameters(T n, T m) {
+
+        if (n.base() != m.base()) {
+
+            String message =
+                String.format("The specified numbers are from different numeral systems (base=%d; base=%d)!", n.base(),
+                              m.base());
+            throw new IllegalArgumentException(message);
+        }
     }
 
     /**
@@ -79,9 +129,9 @@ public class AdditionOperationImpl<T extends DigitSequence<? extends Digit>> ext
      * @return a result
      */
     @Override
-    public T add(T n, T m) {
+    public Result<T> calculate(T n, T m) {
 
-        super.checkParameters(n, m);
+        checkParameters(n, m);
 
         int base = n.base();
 
@@ -105,14 +155,14 @@ public class AdditionOperationImpl<T extends DigitSequence<? extends Digit>> ext
 
         if (n.isInfinity() || m.isInfinity()) {
 
-            return (T) NumeralSystems.toDigitSequence(base, sign, digits, null);
+            return new ResultImpl(NumeralSystems.toDigitSequence(base, sign, digits, null));
         }
 
         int left = Math.max(n.leftDigits(), m.leftDigits());
         int right = Math.max(n.rightDigits(), m.rightDigits());
         int index = Math.max(0, left - 1);
 
-        int carry = 0;
+        Digit carry = null;
         for (int a = -right; a <= left; a++) {
 
             if (a == 0) {
@@ -123,32 +173,21 @@ public class AdditionOperationImpl<T extends DigitSequence<? extends Digit>> ext
             Digit d1 = n.digitAt(a);
             Digit d2 = m.digitAt(a);
 
-            int result = d1.ordinal() + d2.ordinal();
+            ResultWithCarry<Digit> result = getDigitAdditionFunction().calculate(d1, d2);
 
-            result += carry;
+            Digit r = result.result();
+            carry = result.carry();
 
-            if (result >= base) {
-
-                carry = result / base;
-                result = result % base;
-
-            } else {
-
-                carry = 0;
-            }
-
-            Digit r = NumeralSystems.ordinalToDigit(base, result);
             digits.add(0, r);
         }
 
-        if (carry > 0) {
+        if ((carry != null) && !carry.isZero()) {
 
-            Digit r = NumeralSystems.ordinalToDigit(base, carry);
-            digits.add(0, r);
+            digits.add(0, carry);
             index++;
         }
 
-        return (T) NumeralSystems.toDigitSequence(base, sign, Collections.unmodifiableList(digits), index);
+        return new ResultImpl(NumeralSystems.toDigitSequence(base, sign, Collections.unmodifiableList(digits), index));
     }
 
 }

@@ -31,50 +31,25 @@
  * $Id$
  */
 
-package jmul.math.numbers.operations;
-
-
-import jmul.math.numbers.DigitSequence;
-import jmul.math.numbers.digits.Digit;
+package jmul.singletons;
 
 
 /**
+ * A custom exception for cases when a singleton is being replaced.
  *
- *
- * @param <T>
- *        The actual implementation of a digit sequence (i,.e. a number)
- *
- * @deprecated when all operations are implemented check what can be moved to this parent class. Consider deleting
- *             this class if it cannot be used.
+ * @author Kristian Kutin
  */
-@Deprecated
-abstract class AbstractOperation<T extends DigitSequence<? extends Digit>> {
+public class SingletonExistsException extends RuntimeException {
 
     /**
-     * The default constructor.
-     */
-    protected AbstractOperation() {
-
-        super();
-    }
-
-    /**
-     * Checks the two specified parameters.
+     * Creates a new exception according to the specified parameter.
      *
-     * @param n
-     *        a number
-     * @param m
-     *        a number
+     * @param name
+     * the name of a singleton
      */
-    protected void checkParameters(T n, T m) {
+    public SingletonExistsException(CharSequence name) {
 
-        if (n.base() != m.base()) {
-
-            String message =
-                String.format("The specified numbers are from different numeral systems (base=%d; base=%d)!", n.base(),
-                              m.base());
-            throw new IllegalArgumentException(message);
-        }
+        super(String.format("The singleton %s already exists!", name));
     }
 
 }

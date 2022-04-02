@@ -93,7 +93,7 @@ public class ScientificNotation<T extends DigitSequence<? extends Digit>> implem
 
                 Digit d = n.digitAt(n.leftDigits());
 
-                if (d.ordinal() != 0) {
+                if (!d.isZero()) {
 
                     found = a;
                     break;

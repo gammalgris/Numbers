@@ -37,12 +37,14 @@ package jmul.math.operations;
 /**
  * This interface describes a unary operation (see strategy pattern).
  *
- * @param <T>
+ * @param <P>
  *        The actual parameter type
+ * @param <R>
+ *        the actual result type
  *
  * @author Kristian Kutin
  */
-public interface UnaryOperation<T> {
+public interface UnaryOperation<P, R extends Result<P>> {
 
     /**
      * Performs the unary operation for the specified parameter.
@@ -52,6 +54,6 @@ public interface UnaryOperation<T> {
      *
      * @return a result
      */
-    Result<T> calculate(T p1);
+    R calculate(P p1);
 
 }

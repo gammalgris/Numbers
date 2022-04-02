@@ -41,6 +41,9 @@ import jmul.math.numbers.RealDecimalNumber;
 import jmul.math.numbers.builders.AdditionOperation;
 import jmul.math.numbers.operations.AdditionOperationImpl;
 
+import jmul.math.operations.BinaryOperation;
+import jmul.math.operations.Result;
+
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
@@ -60,7 +63,7 @@ public class RealNumberAdditionWithValidParametersTest {
     /**
      * A function.
      */
-    private AdditionOperation<RealDecimalNumber> additionFunction;
+    private BinaryOperation<RealDecimalNumber, Result<RealDecimalNumber>> additionFunction;
 
     /**
      * A number.
@@ -77,7 +80,8 @@ public class RealNumberAdditionWithValidParametersTest {
      */
     private final RealDecimalNumber expectedResult;
 
-    public RealNumberAdditionWithValidParametersTest(RealDecimalNumber n, RealDecimalNumber m, RealDecimalNumber expectedResult) {
+    public RealNumberAdditionWithValidParametersTest(RealDecimalNumber n, RealDecimalNumber m,
+                                                     RealDecimalNumber expectedResult) {
 
         super();
 
@@ -103,8 +107,8 @@ public class RealNumberAdditionWithValidParametersTest {
 
         String message = String.format("Couldn't add the two numbers (n=%s; m=%s)!", n.toString(), m.toString());
 
-        RealDecimalNumber actualResult = additionFunction.add(n, m);
-
+        Result<RealDecimalNumber> result = additionFunction.calculate(n, m);
+        RealDecimalNumber actualResult = result.result();
         assertEquals(message, expectedResult, actualResult);
     }
 
@@ -128,9 +132,12 @@ public class RealNumberAdditionWithValidParametersTest {
         parameters.add(new Object[] { new RealDecimalNumber(1), new RealDecimalNumber(10), new RealDecimalNumber(11) });
         parameters.add(new Object[] { new RealDecimalNumber(10), new RealDecimalNumber(1), new RealDecimalNumber(11) });
 
-        parameters.add(new Object[] { new RealDecimalNumber(999), new RealDecimalNumber(1), new RealDecimalNumber(1000) });
-        parameters.add(new Object[] { new RealDecimalNumber(123456789), new RealDecimalNumber(987654321), new RealDecimalNumber(1111111110) });
-        parameters.add(new Object[] { new RealDecimalNumber(123456789), new RealDecimalNumber(876543211), new RealDecimalNumber(1000000000) });
+        parameters.add(new Object[] { new RealDecimalNumber(999), new RealDecimalNumber(1),
+                                      new RealDecimalNumber(1000) });
+        parameters.add(new Object[] { new RealDecimalNumber(123456789), new RealDecimalNumber(987654321),
+                                      new RealDecimalNumber(1111111110) });
+        parameters.add(new Object[] { new RealDecimalNumber(123456789), new RealDecimalNumber(876543211),
+                                      new RealDecimalNumber(1000000000) });
 
         return parameters;
     }

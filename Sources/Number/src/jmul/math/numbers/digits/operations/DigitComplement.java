@@ -49,7 +49,7 @@ import jmul.math.operations.UnaryOperation;
  *
  * @author Kristian Kutin
  */
-public class DigitComplement<T extends Digit> implements UnaryOperation<T> {
+public class DigitComplement<T extends Digit> implements UnaryOperation<T, Result<T>> {
 
     /**
      * The default constructor.

@@ -31,42 +31,68 @@
  * $Id$
  */
 
-package jmul.math.numbers.digits;
+package jmul.math.numbers;
+
+
+import jmul.singletons.Identifier;
 
 
 /**
- * This interface represents a digit from a positional numeral system.
+ * This enumeration contains various function identifiers.
  *
  * @author Kristian Kutin
  */
-public interface Digit {
+public enum FunctionIdentifiers implements Identifier {
+
+
+    DIGIT_ADDITION(),
+    DIGIT_COMPLEMENT(),
+    
+    STANDARD_NOTATION(),
+    SCIENTIFIC_NOTATION(),
+    
+    COMPARATOR(),;
+
 
     /**
-     * Returns the symbol associated with this digit.
+     * Returns the length of this identifier string.
      *
-     * @return a symbol
+     * @return a length
      */
-    char symbol();
+    @Override
+    public int length() {
+
+        return toString().length();
+    }
 
     /**
-     * Returns the base of the positional numeral system.
+     * Returns the character at the specified index position.
      *
-     * @return a base
+     * @param index
+     *        an index position
+     *
+     * @return a character
      */
-    int base();
+    @Override
+    public char charAt(int index) {
+
+        return toString().charAt(index);
+    }
 
     /**
-     * Returns the ordinal number for this digit,
+     * Returns a subsequence within this identifier string according to the specified index positions.
      *
-     * @return an ordinal number
+     * @param start
+     *        a start index
+     * @param end
+     *        a end index (not included)
+     *
+     * @return a substring
      */
-    int ordinal();
+    @Override
+    public CharSequence subSequence(int start, int end) {
 
-    /**
-     * Checks if this digit is zero.
-     *
-     * @return <code>true</code> if this digit is zero, else <code>false</code>
-     */
-    boolean isZero();
+        return toString().subSequence(start, end);
+    }
 
 }

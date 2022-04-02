@@ -93,6 +93,17 @@ public enum DecimalDigits implements Digit {
     }
 
     /**
+     * Checks if this digit is zero.
+     *
+     * @return <code>true</code> if this digit is zero, else <code>false</code>
+     */
+    @Override
+    public boolean isZero() {
+
+        return ZERO.equals(this);
+    }
+
+    /**
      * Returns a string representation of the enumeration element.
      *
      * @return a string representation

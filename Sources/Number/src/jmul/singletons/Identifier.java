@@ -31,31 +31,14 @@
  * $Id$
  */
 
-package jmul.math.operations;
+package jmul.singletons;
 
 
 /**
- * This interface describes a binary operation (see strategy pattern).
- *
- * @param <P>
- *        The actual parameter type
- * @param <R>
- *        the actual result type
+ * This itnerface describes a function identifier.
  *
  * @author Kristian Kutin
  */
-public interface BinaryOperation<P, R extends Result<P>> {
-
-    /**
-     * Performs the binary operation for the specified parameters.
-     *
-     * @param p1
-     *        a parameter
-     * @param p2
-     *        a parameter
-     *
-     * @return a result
-     */
-    R calculate(P p1, P p2);
+public interface Identifier extends CharSequence {
 
 }

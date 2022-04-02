@@ -34,21 +34,12 @@
 package test.jmul.math.numbers;
 
 
-import java.math.BigDecimal;
-
 import java.util.Arrays;
 
 import jmul.math.numbers.RealDecimalNumber;
-
-import jmul.math.numbers.digits.HexadecimalDigits;
-
-import jmul.math.numbers.digits.OctalDigits;
-
-import jmul.math.numbers.builders.AdditionOperation;
-
 import jmul.math.numbers.operations.AdditionOperationImpl;
-
-import memutils.ObjectSizeFetcher;
+import jmul.math.operations.BinaryOperation;
+import jmul.math.operations.Result;
 
 public class MiscTest {
 
@@ -123,7 +114,7 @@ public class MiscTest {
         System.out.println();
 
         System.out.println(HexadecimalDigits.ZERO.equals(OctalDigits.ZERO));*/
-        
+
         int[] a = new int[] { 1, 2, 3 };
         int[] b = a.clone();
 
@@ -134,19 +125,21 @@ public class MiscTest {
         System.out.println(Arrays.toString(a));
         System.out.println(Arrays.toString(b));
 
-        AdditionOperation<RealDecimalNumber> additionFunction = new AdditionOperationImpl<>();
+        BinaryOperation<RealDecimalNumber, Result<RealDecimalNumber>> additionFunction = new AdditionOperationImpl<>();
         RealDecimalNumber n = new RealDecimalNumber(1);
         RealDecimalNumber m = new RealDecimalNumber(2);
-        RealDecimalNumber r = additionFunction.add(n, m);
-        System.out.println("n:="+ n);
-        System.out.println("m:="+ m);
-        System.out.println("r:="+ r);
+        Result<RealDecimalNumber> _r = additionFunction.calculate(n, m);
+        RealDecimalNumber r = _r.result();
+        System.out.println("n:=" + n);
+        System.out.println("m:=" + m);
+        System.out.println("r:=" + r);
 
         m = RealDecimalNumber.POSITIVE_INFINITY;
-        r = additionFunction.add(n, m);
-        System.out.println("n:="+ n);
-        System.out.println("m:="+ m);
-        System.out.println("r:="+ r);
+        _r = additionFunction.calculate(n, m);
+        r = _r.result();
+        System.out.println("n:=" + n);
+        System.out.println("m:=" + m);
+        System.out.println("r:=" + r);
     }
 
 }

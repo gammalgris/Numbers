@@ -64,31 +64,6 @@ import jmul.singletons.FunctionSingletons;
 abstract class AbstractNumber<T extends Digit> extends AbstractSignedNumber<T> {
 
     /**
-     * A singleton name.
-     */
-    private static final String STANDARD_NOTATION_FUNCTION_SINGLETON_NAME;
-
-    /**
-     * A singleton name.
-     */
-    private static final String SCIENTIFIC_NOTATION_FUNCTION_SINGLETON_NAME;
-
-    /**
-     * A singleton name.
-     */
-    private static final String COMPARATOR_FUNCTION_SINGLETON_NAME;
-
-    /*
-     * The static initializer.
-     */
-    static {
-
-        STANDARD_NOTATION_FUNCTION_SINGLETON_NAME = "standard notation function singleton";
-        SCIENTIFIC_NOTATION_FUNCTION_SINGLETON_NAME = "scientific notation function singleton";
-        COMPARATOR_FUNCTION_SINGLETON_NAME = "comparator function singleton name";
-    }
-
-    /**
      * All relevant digits.
      */
     protected final T[] digits;
@@ -129,7 +104,7 @@ abstract class AbstractNumber<T extends Digit> extends AbstractSignedNumber<T> {
             relativeSeparatorIndex = aRelativeSeparatorIndex + offset(allDigits);
         }
 
-        initSingletons();
+        initFunctions();
     }
 
     /**
@@ -219,24 +194,24 @@ abstract class AbstractNumber<T extends Digit> extends AbstractSignedNumber<T> {
      * Here we instantiate singletons (i.e. instances of classes that implement a strategy pattern). To save memory
      * only one instance per class is needed.
      */
-    private void initSingletons() {
+    private void initFunctions() {
 
-        if (!FunctionSingletons.existsFunction(COMPARATOR_FUNCTION_SINGLETON_NAME)) {
+        if (!FunctionSingletons.existsFunction(FunctionIdentifiers.COMPARATOR)) {
 
             Comparator<DigitSequence<T>> comparatorFunction = new NaturalOrderingComparator<>();
-            FunctionSingletons.putFunction(COMPARATOR_FUNCTION_SINGLETON_NAME, comparatorFunction);
+            FunctionSingletons.putFunction(FunctionIdentifiers.COMPARATOR, comparatorFunction);
         }
 
-        if (!FunctionSingletons.existsFunction(SCIENTIFIC_NOTATION_FUNCTION_SINGLETON_NAME)) {
+        if (!FunctionSingletons.existsFunction(FunctionIdentifiers.SCIENTIFIC_NOTATION)) {
 
             ScientificNotation<DigitSequence<T>> scientificNotationFunction = new ScientificNotation<>();
-            FunctionSingletons.putFunction(SCIENTIFIC_NOTATION_FUNCTION_SINGLETON_NAME, scientificNotationFunction);
+            FunctionSingletons.putFunction(FunctionIdentifiers.SCIENTIFIC_NOTATION, scientificNotationFunction);
         }
 
-        if (!FunctionSingletons.existsFunction(STANDARD_NOTATION_FUNCTION_SINGLETON_NAME)) {
+        if (!FunctionSingletons.existsFunction(FunctionIdentifiers.STANDARD_NOTATION)) {
 
             StandardNotation<DigitSequence<T>> standardNotationFunction = new StandardNotation<>();
-            FunctionSingletons.putFunction(STANDARD_NOTATION_FUNCTION_SINGLETON_NAME, standardNotationFunction);
+            FunctionSingletons.putFunction(FunctionIdentifiers.STANDARD_NOTATION, standardNotationFunction);
         }
     }
 
@@ -381,7 +356,7 @@ abstract class AbstractNumber<T extends Digit> extends AbstractSignedNumber<T> {
     public String toScientificNotation() {
 
         ScientificNotation<DigitSequence<T>> scientificNotationFunction =
-            (ScientificNotation<DigitSequence<T>>) FunctionSingletons.getFunction(SCIENTIFIC_NOTATION_FUNCTION_SINGLETON_NAME);
+            (ScientificNotation<DigitSequence<T>>) FunctionSingletons.getFunction(FunctionIdentifiers.SCIENTIFIC_NOTATION);
         return scientificNotationFunction.toString(this);
     }
 
@@ -394,7 +369,7 @@ abstract class AbstractNumber<T extends Digit> extends AbstractSignedNumber<T> {
     public String toStandardNotation() {
 
         StandardNotation<DigitSequence<T>> standardNotationFunction =
-            (StandardNotation<DigitSequence<T>>) FunctionSingletons.getFunction(STANDARD_NOTATION_FUNCTION_SINGLETON_NAME);
+            (StandardNotation<DigitSequence<T>>) FunctionSingletons.getFunction(FunctionIdentifiers.STANDARD_NOTATION);
         return standardNotationFunction.toString(this);
     }
 
@@ -411,7 +386,7 @@ abstract class AbstractNumber<T extends Digit> extends AbstractSignedNumber<T> {
     public int compareTo(DigitSequence<T> o) {
 
         Comparator<DigitSequence<T>> comparatorFunction =
-            (Comparator<DigitSequence<T>>) FunctionSingletons.getFunction(COMPARATOR_FUNCTION_SINGLETON_NAME);
+            (Comparator<DigitSequence<T>>) FunctionSingletons.getFunction(FunctionIdentifiers.COMPARATOR);
         return comparatorFunction.compare(this, o);
     }
 

@@ -114,22 +114,3 @@ public final class FunctionSingletons {
 }
 
 
-/**
- * A custom exception for cases when a singleton is being replaced.
- *
- * @author Kristian Kutin
- */
-class SingletonExistsException extends RuntimeException {
-
-    /**
-     * Creates a new exception according to the specified parameter.
-     *
-     * @param name
-     *        the name of a singleton
-     */
-    public SingletonExistsException(CharSequence name) {
-
-        super(String.format("The singleton %s already exists!", name));
-    }
-
-}
