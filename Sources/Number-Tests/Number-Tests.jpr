@@ -74,20 +74,6 @@
          <hash>
             <hash n="dependable">
                <url n="sourceOwnerURL" path="../Math.jws"/>
-               <url n="sourceURL" path="../Dependencies/Dependencies.jpr"/>
-            </hash>
-            <value n="recognizerId" v="oracle.jdeveloper.library"/>
-         </hash>
-         <hash>
-            <hash n="dependable">
-               <url n="sourceOwnerURL" path="../Math.jws"/>
-               <url n="sourceURL" path="../Dependencies-Tests/Dependencies-Tests.jpr"/>
-            </hash>
-            <value n="recognizerId" v="oracle.jdeveloper.library"/>
-         </hash>
-         <hash>
-            <hash n="dependable">
-               <url n="sourceOwnerURL" path="../Math.jws"/>
                <url n="sourceURL" path="../Number/Number.jpr"/>
             </hash>
             <value n="recognizerId" v="oracle.jdeveloper.library"/>
@@ -116,7 +102,7 @@
       <hash n="runConfigurationDefinitions">
          <hash n="Default">
             <value n="custom" v="false"/>
-            <value n="javaOptions" v="-javaagent:..\MemoryAgent\MemoryAgent.jar"/>
+            <value n="javaOptions" v=""/>
             <value n="name" v="Default"/>
             <value n="targetURL"/>
          </hash>
@@ -125,48 +111,98 @@
    <hash n="oracle.jdevimpl.config.JProjectLibraries">
       <list n="exportedReferences">
          <hash>
-            <value n="id" v="JUnit"/>
+            <value n="id" v="Jmul-2.1.1"/>
             <value n="isJDK" v="false"/>
          </hash>
          <hash>
-            <value n="id" v="MemoryAgent"/>
+            <value n="id" v="Junit-4.11"/>
             <value n="isJDK" v="false"/>
          </hash>
       </list>
       <hash n="internalDefinitions">
+         <list n="jdkDefinitions">
+            <hash>
+               <list n="classPath">
+                  <url path="../../../../DevTools/java/jre/lib/resources.jar" jar-entry=""/>
+                  <url path="../../../../DevTools/java/jre/lib/rt.jar" jar-entry=""/>
+                  <url path="../../../../DevTools/java/jre/lib/sunrsasign.jar" jar-entry=""/>
+                  <url path="../../../../DevTools/java/jre/lib/jsse.jar" jar-entry=""/>
+                  <url path="../../../../DevTools/java/jre/lib/jce.jar" jar-entry=""/>
+                  <url path="../../../../DevTools/java/jre/lib/charsets.jar" jar-entry=""/>
+                  <url path="../../../../DevTools/java/jre/lib/jfr.jar" jar-entry=""/>
+                  <url path="../../../../DevTools/java/jre/classes/"/>
+               </list>
+               <value n="description" v="1.8.0_171"/>
+               <list n="docPath">
+                  <url protocol="http" host="docs.oracle.com" path="/javase/8/docs/api/"/>
+               </list>
+               <list n="expandedClassPath">
+                  <url path="../../../../DevTools/java/jre/lib/resources.jar" jar-entry=""/>
+                  <url path="../../../../DevTools/java/jre/lib/rt.jar" jar-entry=""/>
+                  <url path="../../../../DevTools/java/jre/lib/sunrsasign.jar" jar-entry=""/>
+                  <url path="../../../../DevTools/java/jre/lib/jsse.jar" jar-entry=""/>
+                  <url path="../../../../DevTools/java/jre/lib/jce.jar" jar-entry=""/>
+                  <url path="../../../../DevTools/java/jre/lib/charsets.jar" jar-entry=""/>
+                  <url path="../../../../DevTools/java/jre/lib/jfr.jar" jar-entry=""/>
+                  <url path="../../../../DevTools/java/jre/classes/"/>
+               </list>
+               <list n="expandedSourcePath">
+                  <url path="../../../../DevTools/java/src.zip" jar-entry=""/>
+               </list>
+               <value n="id" v="1.8.0_171"/>
+               <url n="javaExecutable" path="../../../../DevTools/java/bin/java.exe"/>
+               <url n="sdkBinDir" path="../../../../DevTools/java/bin/"/>
+               <list n="sourcePath">
+                  <url path="../../../../DevTools/java/src.zip" jar-entry=""/>
+               </list>
+               <value n="version" v="1.8.0_171"/>
+            </hash>
+         </list>
          <list n="libraryDefinitions">
             <hash>
                <list n="classPath">
-                  <url path="../JUnit/junit-4.11.jar" jar-entry=""/>
-                  <url path="../JUnit/hamcrest-core-1.3.jar" jar-entry=""/>
+                  <url path="../../Libraries/Jmul/jmul-2.1.1.jar" jar-entry=""/>
+                  <url path="../../Libraries/Jmul/properties/"/>
                </list>
-               <value n="description" v="JUnit"/>
+               <value n="description" v="Jmul-2.1.1"/>
                <list n="docPath">
-                  <url path="../JUnit/junit-4.11-javadoc.jar" jar-entry=""/>
-                  <url path="../JUnit/hamcrest-core-1.3-javadoc.jar" jar-entry=""/>
+                  <url path="../../Libraries/Jmul/jmul-2.1.1-javadoc.jar" jar-entry=""/>
                </list>
-               <value n="id" v="JUnit"/>
+               <value n="id" v="Jmul-2.1.1"/>
                <list n="sourcePath">
-                  <url path="../JUnit/junit-4.11-sources.jar" jar-entry=""/>
-                  <url path="../JUnit/hamcrest-core-1.3-sources.jar" jar-entry=""/>
+                  <url path="../../Libraries/Jmul/jmul-2.1.1-sources.jar" jar-entry=""/>
                </list>
             </hash>
             <hash>
                <list n="classPath">
-                  <url path="../MemoryAgent/MemoryAgent.jar" jar-entry=""/>
+                  <url path="../../Libraries/JUnit/junit-4.11.jar" jar-entry=""/>
+                  <url path="../../Libraries/JUnit/hamcrest-core-1.3.jar" jar-entry=""/>
                </list>
-               <value n="description" v="MemoryAgent"/>
-               <value n="id" v="MemoryAgent"/>
+               <value n="description" v="Junit-4.11"/>
+               <list n="docPath">
+                  <url path="../../Libraries/JUnit/junit-4.11-javadoc.jar" jar-entry=""/>
+                  <url path="../../Libraries/JUnit/hamcrest-core-1.3-javadoc.jar" jar-entry=""/>
+               </list>
+               <value n="id" v="Junit-4.11"/>
+               <list n="sourcePath">
+                  <url path="../../Libraries/JUnit/junit-4.11-sources.jar" jar-entry=""/>
+                  <url path="../../Libraries/JUnit/hamcrest-core-1.3-sources.jar" jar-entry=""/>
+               </list>
             </hash>
          </list>
       </hash>
+      <hash n="jdkReference">
+         <value n="id" v="1.8.0_171"/>
+         <value n="isJDK" v="true"/>
+         <value n="jdkVersion" v="1.8.0_171"/>
+      </hash>
       <list n="libraryReferences">
          <hash>
-            <value n="id" v="JUnit"/>
+            <value n="id" v="Jmul-2.1.1"/>
             <value n="isJDK" v="false"/>
          </hash>
          <hash>
-            <value n="id" v="MemoryAgent"/>
+            <value n="id" v="Junit-4.11"/>
             <value n="isJDK" v="false"/>
          </hash>
       </list>

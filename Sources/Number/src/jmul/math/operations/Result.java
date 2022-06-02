@@ -35,20 +35,61 @@ package jmul.math.operations;
 
 
 /**
- * This interface describes the result of an operation.
+ * This is a wrapper class for results of arithmetic operations.<br>
+ * <br>
+ * <i>Note:<br>
+ * This implmentation doesn't allow <code>null</code> values.</i>
+ *
+ * @author Kristian Kutin
  *
  * @param <T>
- *        the actual parameter type
- * 
- * @author Kristian Kutin
+ *        the result type
  */
-public interface Result<T> {
+public class Result<T> {
 
     /**
-     * Returns the operation result.
-     *
-     * @return operation result
+     * The actual result.
      */
-    T result();
+    private final T result;
+
+    /**
+     * Creates a new result according to the specified parameters.
+     *
+     * @param result
+     *        the result
+     */
+    public Result(T result) {
+
+        super();
+
+        checkResult(result);
+
+        this.result = result;
+    }
+
+    /**
+     * Checks the specified result.
+     *
+     * @param result
+     *        a result
+     */
+    private void checkResult(T result) {
+
+        if (result == null) {
+
+            String message = "The result is null! Null values are not allowed.";
+            throw new IllegalArgumentException(message);
+        }
+    }
+
+    /**
+     * Returns the result.
+     *
+     * @return the result
+     */
+    public T result() {
+
+        return result;
+    }
 
 }

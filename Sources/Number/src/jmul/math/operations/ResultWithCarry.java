@@ -35,20 +35,63 @@ package jmul.math.operations;
 
 
 /**
- * This interface describes the result of an operation that can contain a carry.
- *
- * @param <T>
- *        the actual parameter type
+ * This is a wrapper class for results of arithmetic operations.<br>
+ * <br>
+ * <i>Note:<br>
+ * This implmentation doesn't allow <code>null</code> values.</i>
  *
  * @author Kristian Kutin
+ *
+ * @param <T>
+ *        the result type
  */
-public interface ResultWithCarry<T> extends Result<T> {
+public class ResultWithCarry<T> extends Result<T> {
 
     /**
-     * Returns the carry. If no carry exist a default value representing no carry is returned.
-     *
-     * @return carry
+     * The carry (i.e. part of the result which is carried over for another calculation)
      */
-    T carry();
+    private final T carry;
+
+    /**
+     * Creates a new result according to the specified parameters.
+     *
+     * @param result
+     *        the result
+     * @param carry
+     *        the carry
+     */
+    public ResultWithCarry(T result, T carry) {
+
+        super(result);
+
+        checkCarry(carry);
+
+        this.carry = carry;
+    }
+
+    /**
+     * Checks the specified carry.
+     *
+     * @param carry
+     *        a carry
+     */
+    private void checkCarry(T carry) {
+
+        if (carry == null) {
+
+            String message = "The carry is null! Null values are not allowed.";
+            throw new IllegalArgumentException(message);
+        }
+    }
+
+    /**
+     * Returns the carry.
+     *
+     * @return the carry
+     */
+    public T carry() {
+
+        return carry;
+    }
 
 }

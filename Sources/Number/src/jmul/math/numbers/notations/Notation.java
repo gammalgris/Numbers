@@ -34,28 +34,26 @@
 package jmul.math.numbers.notations;
 
 
-import jmul.math.numbers.digits.Digit;
-import jmul.math.numbers.DigitSequence;
+import java.util.List;
 
 
 /**
- * This interface describes a function for generating a notation for a number.
- *
- * @param <T>
- *        the set of digits which comprises the digit sequence
+ * This interface describes an entity which represents a number notation.
  *
  * @author Kristian Kutin
  */
-public interface Notation<T extends DigitSequence<? extends Digit>> {
+public interface Notation {
 
     /**
-     * Translates the specified number into a string notation.
+     * Returns the regex string which describes this notation.
      *
-     * @param n
-     *        a number (i.e. digit sequence)
-     *
-     * @return a string notation
+     * @return a regex string
      */
-    String toString(T n);
+    String regex();
+
+    /**
+     * Returns a list of named capturing groups which are defined within the regex string.
+     */
+    List<String> namedCapturingGroups();
 
 }

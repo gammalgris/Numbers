@@ -34,16 +34,66 @@
 package jmul.math.numbers.notations;
 
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+
 /**
- * This enumeration class contains all supported notations.
+ * This enumeration contains various number notations.
  *
  * @author Kristian Kutin
  */
-public enum Notations {
+public enum Notations implements Notation {
 
 
-    STANDARD_NOTATION,
-    SCIENTIFIC_NOTATION, ;
+    STANDARD_NOTATION("^(?<SIGN>[+-]{0,1})[0]*(?<LEFT>(([1-9a-zA-Z][0-9a-zA-Z]*)|([0]))){1}([,.](?<RIGHT>[0]|[0-9a-zA-Z]*[1-9a-zA-Z])([0]+){0,1}){0,1}$",
+                      "SIGN", "LEFT", "RIGHT"),
+    SCIENTIFIC_NOATATION("^(?<SIGN>[+-]){0,1}(?<MANTISSA>[0-9a-zA-Z][.,][0-9a-zA-Z]*[1-9a-zA-Z]){1}[0]*[eE](?<SIGNEXPONENT>[+-]){0,1}(?<EXPONENT>[0-9a-zA-Z][0-9a-zA-Z]*){1}$",
+                         "SIGN", "MANTISSA", "SIGNEXPONENT", "EXPONENT"), ;
 
+
+    /**
+     * A regex string.
+     */
+    private final String regex;
+
+    /**
+     * The names of all named capturing groups which are defined within the regex string.
+     */
+    private final List<String> namedCapturingGroups;
+
+    /**
+     * Creates a new enumeration element according to the specified parameters.
+     *
+     * @param regex
+     *        a regex string
+     * @param namedCapturingGroups
+     *        the names of all named capturing groups which are defined within the regex string
+     */
+    private Notations(String regex, String... namedCapturingGroups) {
+
+        this.regex = regex;
+        this.namedCapturingGroups = Collections.unmodifiableList(Arrays.asList(namedCapturingGroups));
+    }
+
+    /**
+     * Returns the regex string which describes this notation.
+     *
+     * @return a regex string
+     */
+    @Override
+    public String regex() {
+
+        return regex;
+    }
+
+    /**
+     * Returns a list of named capturing groups which are defined within the regex string.
+     */
+    public List<String> namedCapturingGroups() {
+
+        return namedCapturingGroups;
+    }
 
 }

@@ -35,27 +35,25 @@ package jmul.math.operations;
 
 
 /**
- * This interface describes a binary operation (see strategy pattern).
- *
- * @param <P>
- *        The actual parameter type
- * @param <R>
- *        the actual result type
+ * This interface describes a binary operation (i.e. an operation that takes two arguments).
  *
  * @author Kristian Kutin
+ *
+ * @param <T>
+ *        the operand type
  */
-public interface BinaryOperation<P, R extends Result<P>> {
+public interface BinaryOperation<T> {
 
     /**
-     * Performs the binary operation for the specified parameters.
+     * Performs the binary (i.e. two operands) operation.
      *
-     * @param p1
-     *        a parameter
-     * @param p2
-     *        a parameter
+     * @param operand1
+     *        an operand
+     * @param operand2
+     *        an operand
      *
-     * @return a result
+     * @return the result
      */
-    R calculate(P p1, P p2);
+    ResultWithCarry<T> calculate(T operand1, T operand2);
 
 }

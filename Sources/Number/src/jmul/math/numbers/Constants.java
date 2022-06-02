@@ -33,17 +33,41 @@
 
 package jmul.math.numbers;
 
-
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
 
 /**
- * This utility class contains certain constants.
+ * This class contains various constant values.
  *
  * @author Kristian Kutin
  */
 public final class Constants {
+
+    /**
+     * Theabbreviation for an exponent in a scientific notation.
+     */
+    public static final String EXPONENT_ABBREVIATION;
+
+    /**
+     * The allowed maximum value for a base.
+     */
+    public static final int BASE_MAX_LIMIT;
+
+    /**
+     * The allowed minimum value for a base.
+     */
+    public static final int BASE_MIN_LIMIT;
+
+    /**
+     * The allowed maximum value for an ordinal.
+     */
+    public static final int ORDINAL_MAX_LIMIT;
+
+    /**
+     * The allowed minimum value for an ordinal.
+     */
+    public static final int ORDINAL_MIN_LIMIT;
 
     /**
      * The constant contains the decimal separator for this system. The actual decimal separator
@@ -67,52 +91,24 @@ public final class Constants {
     public static final String INFINITY_REPRESENTATION;
 
     /**
-     * This constant contains the name of a named capturing group used within {@link #DECIMAL_STANDARD_NOTATION_PATTERN_STRING}
-     * and {@link #DECIMAL_SCIENTIFIC_NOTATION_PATTERN_STRING}
+     * A character representing zero.
      */
-    public static final String SIGN_GROUP;
-
-    /**
-     * This constant contains the name of a named capturing group used within {@link #DECIMAL_STANDARD_NOTATION_PATTERN_STRING}.
-     */
-    public static final String LEFT_GROUP;
-
-    /**
-     * This constant contains the name of a named capturing group used within {@link #DECIMAL_STANDARD_NOTATION_PATTERN_STRING}.
-     */
-    public static final String RIGHT_GROUP;
-
-    /**
-     * This constant contains a regular expression which is used for identifying numbers written in the standard
-     * notation (i.e. a sequence of digits).
-     */
-    public static final String DECIMAL_STANDARD_NOTATION_PATTERN_STRING;
-
-    /**
-     * This constant contains the name of a named capturing group used within {@link #DECIMAL_SCIENTIFIC_NOTATION_PATTERN_STRING}
-     */
-    public static final String MANTISSA_GROUP;
-
-    /**
-     * This constant contains the name of a named capturing group used within {@link #DECIMAL_SCIENTIFIC_NOTATION_PATTERN_STRING}
-     */
-    public static final String SIGN_EXPONENT_GROUP;
-
-    /**
-     * This constant contains the name of a named capturing group used within {@link #DECIMAL_SCIENTIFIC_NOTATION_PATTERN_STRING}
-     */
-    public static final String EXPONENT_GROUP;
-
-    /**
-     * This constant contains a regular expression which is used for identifying numbers written in the scientifc
-     * notation (i.e. a sequence of digits).
-     */
-    public static final String DECIMAL_SCIENTIFIC_NOTATION_PATTERN_STRING;
+    public static final char ZERO;
 
     /*
-     * The static initializer.
+     * The static initializer,.
      */
     static {
+
+        ZERO = '0';
+
+        EXPONENT_ABBREVIATION = "E";
+
+        BASE_MIN_LIMIT = 1;
+        BASE_MAX_LIMIT = 64;
+
+        ORDINAL_MIN_LIMIT = BASE_MIN_LIMIT - 1;
+        ORDINAL_MAX_LIMIT = BASE_MAX_LIMIT;
 
         DECIMAL_COMMA = ',';
         DECIMAL_POINT = '.';
@@ -122,23 +118,7 @@ public final class Constants {
 
         DECIMAL_SEPARATOR = symbols.getDecimalSeparator();
 
-        INFINITY_REPRESENTATION = "Infinity";
-
-        SIGN_GROUP = "sign";
-        LEFT_GROUP = "left";
-        RIGHT_GROUP = "right";
-
-        DECIMAL_STANDARD_NOTATION_PATTERN_STRING =
-            String.format("^(?<%s>[+-]{0,1})[0]*(?<%s>(([1-9][0-9]*)|([0]))){1}([,.](?<%s>[0]|[0-9]*[1-9])([0]+){0,1}){0,1}$",
-                          SIGN_GROUP, LEFT_GROUP, RIGHT_GROUP);
-
-        MANTISSA_GROUP = "mantissa";
-        SIGN_EXPONENT_GROUP = "signExponent";
-        EXPONENT_GROUP = "exponent";
-
-        DECIMAL_SCIENTIFIC_NOTATION_PATTERN_STRING =
-            String.format("^(?<%s>[+-]){0,1}(?<%s>[0-9][.,][0-9]*[1-9]){1}[0]*[E](?<%s>[+-]){0,1}(?<%s>[1-9][0-9]*){1}$",
-                          SIGN_GROUP, MANTISSA_GROUP, SIGN_EXPONENT_GROUP, EXPONENT_GROUP);
+        INFINITY_REPRESENTATION = "infinity";
     }
 
     /**

@@ -34,28 +34,38 @@
 package jmul.math.numbers;
 
 
-import jmul.singletons.Identifier;
+import jmul.singletons.FunctionIdentifier;
 
 
 /**
- * This enumeration contains various function identifiers.
+ * This enumeration class contains identifiers for various functions.
  *
  * @author Kristian Kutin
  */
-public enum FunctionIdentifiers implements Identifier {
+public enum FunctionIdentifiers implements FunctionIdentifier {
 
 
-    DIGIT_ADDITION(),
-    DIGIT_COMPLEMENT(),
-    
-    STANDARD_NOTATION(),
-    SCIENTIFIC_NOTATION(),
-    
-    COMPARATOR(),;
+    STANDARD_NOTATION_FUNCTION,
+    SCIENTIFIC_NOTATION_FUNCTION,
+
+    STANDARD_NOTATION_PARSER,
+    SCIENTIFIC_NOTATION_PARSER,
+
+    NEGATE_NUMBER_FUNCTION,
+
+    NUMBER_COMPARATOR_FUNCTION,
+    NUMBER_EQUALITY_FUNCTION,
+    ;
 
 
     /**
-     * Returns the length of this identifier string.
+     * The default constructor.
+     */
+    private FunctionIdentifiers() {
+    }
+
+    /**
+     * Returns the length this char sequence.
      *
      * @return a length
      */
@@ -66,10 +76,10 @@ public enum FunctionIdentifiers implements Identifier {
     }
 
     /**
-     * Returns the character at the specified index position.
+     * Returns the character at the specified position.
      *
      * @param index
-     *        an index position
+     *        an index (i.e. zero or positive number up to the length of the string)
      *
      * @return a character
      */
@@ -80,12 +90,12 @@ public enum FunctionIdentifiers implements Identifier {
     }
 
     /**
-     * Returns a subsequence within this identifier string according to the specified index positions.
+     * Returns a subsequence at the specified position.
      *
      * @param start
      *        a start index
      * @param end
-     *        a end index (not included)
+     *        an end index
      *
      * @return a substring
      */

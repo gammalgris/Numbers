@@ -125,4 +125,30 @@ public enum Signs implements Sign {
         return POSITIVE;
     }
 
+    /**
+     * Checks if the speficied sign is positive.
+     *
+     * @param aSign
+     *        a sign
+     *
+     * @return <code>true</code> if the specified sign is positive, else <code>false</code>
+     */
+    public static boolean isPositive(Sign aSign) {
+
+        return POSITIVE.equals(aSign);
+    }
+
+    /**
+     * Checks if the speficied sign is positive.
+     *
+     * @param aSign
+     *        a sign
+     *
+     * @return <code>true</code> if the specified sign is positive, else <code>false</code>
+     */
+    public static boolean isNegative(Sign aSign) {
+
+        return NEGATIVE.equals(aSign);
+    }
+
 }

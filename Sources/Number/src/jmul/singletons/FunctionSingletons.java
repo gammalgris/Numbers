@@ -92,7 +92,7 @@ public final class FunctionSingletons {
 
         if (existsFunction(name)) {
 
-            throw new SingletonExistsException(name);
+            throw new FunctionExistsException(name);
         }
 
         SINGLETON_MAP.put(name, function);
