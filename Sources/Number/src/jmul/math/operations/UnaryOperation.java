@@ -34,6 +34,9 @@
 package jmul.math.operations;
 
 
+import jmul.singletons.Function;
+
+
 /**
  * This interface describes an unary operation (i.e. an operation that only takes one argument).
  *
@@ -42,7 +45,7 @@ package jmul.math.operations;
  * @param <T>
  *        the operand type
  */
-public interface UnaryOperation<T> {
+public interface UnaryOperation<T> extends Function {
 
     /**
      * Performs the unary (i.e. one operand) operation.

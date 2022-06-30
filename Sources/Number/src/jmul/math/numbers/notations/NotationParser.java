@@ -34,12 +34,15 @@
 package jmul.math.numbers.notations;
 
 
+import jmul.singletons.Function;
+
+
 /**
  * This interface describes a parser for number string. Every implementation will handle a single notation.
  *
  * @author Kristian Kutin
  */
-public interface NotationParser {
+public interface NotationParser extends Function {
 
     /**
      * Parses the specified string and returns all components of a number.

@@ -39,7 +39,7 @@ package jmul.singletons;
  *
  * @author Kristian Kutin
  */
-public class FunctionExistsException extends RuntimeException {
+public class FunctionExistsException extends IllegalArgumentException {
 
     /**
      * Creates a new exception according to the specified parameter.

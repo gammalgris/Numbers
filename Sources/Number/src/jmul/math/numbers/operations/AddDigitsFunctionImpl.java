@@ -45,7 +45,7 @@ import jmul.math.operations.ResultWithCarry;
  *
  * @author Kristian Kutin
  */
-public class AddDigitsFunctionImpl extends BaseDigitFunctionImpl implements BinaryOperation<Digit> {
+public class AddDigitsFunctionImpl extends BaseDigitFunctionImpl implements BinaryOperation<Digit, ResultWithCarry<Digit>> {
 
     /**
      * The default constructor.

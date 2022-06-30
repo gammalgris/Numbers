@@ -31,30 +31,14 @@
  * $Id$
  */
 
-package jmul.math.numbers.notations;
-
-
-import jmul.math.numbers.Number;
-
-import jmul.singletons.Function;
+package jmul.singletons;
 
 
 /**
- * This interface describes a function for generating a string representation for a number. Number can be
- * represented in various ways and there exists several different notations.
+ * This is a marker interface marking a function implementation (see strategy pattern).
  *
  * @author Kristian Kutin
  */
-public interface NotationFunction extends Function {
-
-    /**
-     * Translates the specified number into a string notation.
-     *
-     * @param number
-     *        a number
-     *
-     * @return a string representation
-     */
-    String toString(Number number);
+public interface Function {
 
 }

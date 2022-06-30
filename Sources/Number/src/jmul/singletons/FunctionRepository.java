@@ -35,58 +35,41 @@ package jmul.singletons;
 
 
 /**
- * This class manages function singletons (i.e. instances of classes that implement a strategy pattern) and shouldn't
- * exist multiple times.
+ * This interface describes a repository for functions. The repository allows registering and removing functions.
+ * Only registered functions can be accessed. Functions are instantiated on a "as needed basis" (i.e. lazy
+ * initialization).
  *
  * @author Kristian Kutin
  */
-public final class FunctionSingletons {
+public interface FunctionRepository {
 
     /**
-     * A map containing all singletons.
-     */
-    private final static FunctionRepository FUNCTION_REPOSITORY;
-
-    /*
-     * The static initializer.
-     */
-    static {
-
-        FUNCTION_REPOSITORY = new FunctionRepositoryImpl();
-    }
-
-    /**
-     * The default constructor.
-     */
-    private FunctionSingletons() {
-
-        throw new UnsupportedOperationException();
-    }
-
-    /**
-     * Registers a function with the associated identifier.
+     * Registers a function with the specified identifier and implementation class. The function implementation
+     * must have a parameterless constructor.
      *
      * @param identifier
      *        a function identifier
      * @param implementationClass
-     *        a function implementation
+     *        an implementation class
      */
-    public static void registerFunction(FunctionIdentifier identifier, Class implementationClass) {
-
-        FUNCTION_REPOSITORY.registerFunction(identifier, implementationClass);
-    }
+    void registerFunction(FunctionIdentifier identifier, Class implementationClass);
 
     /**
-     * Returns the function associated with the specified identifier.
+     * Removes the function with the function corresponding to the specified identifier.
      *
      * @param identifier
-     *        the name of a function
+     *        a function identifier
+     */
+    void removeFunction(FunctionIdentifier identifier);
+
+    /**
+     * Returns the fucntion correspondig to the specified identifier.
+     *
+     * @param identifier
+     *        a function identifier
      *
      * @return a function
      */
-    public static Function getFunction(FunctionIdentifier identifier) {
-
-        return FUNCTION_REPOSITORY.getFunction(identifier);
-    }
+    Function getFunction(FunctionIdentifier identifier);
 
 }

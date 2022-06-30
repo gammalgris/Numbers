@@ -37,9 +37,7 @@ package jmul.math.numbers;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import jmul.math.hash.HashHelper;
 import static jmul.math.numbers.ParameterHelper.checkBase;
@@ -86,11 +84,6 @@ public class NumberImpl implements Number {
     private static final int DEFAULT_BASE;
 
     /**
-     * A map containing informations to initialize functions.
-     */
-    private static final Map<FunctionIdentifier, Class> FUNCTION_CLASS_MAP;
-
-    /**
      * A list of parser functions.
      */
     private static final List<FunctionIdentifier> PARSER_FUNCTION_LIST;
@@ -102,20 +95,22 @@ public class NumberImpl implements Number {
 
         DEFAULT_BASE = 10;
 
-        Map<FunctionIdentifier, Class> tmpMap = new HashMap<>();
+        FunctionSingletons.registerFunction(FunctionIdentifiers.STANDARD_NOTATION_PARSER,
+                                            StandardNotationParserImpl.class);
+        FunctionSingletons.registerFunction(FunctionIdentifiers.SCIENTIFIC_NOTATION_PARSER,
+                                            ScientificNotationParserImpl.class);
 
-        tmpMap.put(FunctionIdentifiers.STANDARD_NOTATION_PARSER, StandardNotationParserImpl.class);
-        tmpMap.put(FunctionIdentifiers.SCIENTIFIC_NOTATION_PARSER, ScientificNotationParserImpl.class);
+        FunctionSingletons.registerFunction(FunctionIdentifiers.SCIENTIFIC_NOTATION_FUNCTION,
+                                            ScientificNotationFunctionImpl.class);
+        FunctionSingletons.registerFunction(FunctionIdentifiers.STANDARD_NOTATION_FUNCTION,
+                                            StandardNotationFunctionImpl.class);
 
-        tmpMap.put(FunctionIdentifiers.SCIENTIFIC_NOTATION_FUNCTION, ScientificNotationFunctionImpl.class);
-        tmpMap.put(FunctionIdentifiers.STANDARD_NOTATION_FUNCTION, StandardNotationFunctionImpl.class);
+        FunctionSingletons.registerFunction(FunctionIdentifiers.NEGATE_NUMBER_FUNCTION, NegateNumberFunctionImpl.class);
 
-        tmpMap.put(FunctionIdentifiers.NEGATE_NUMBER_FUNCTION, NegateNumberFunctionImpl.class);
-
-        tmpMap.put(FunctionIdentifiers.NUMBER_COMPARATOR_FUNCTION, NumberComparatorFunctionImpl.class);
-        tmpMap.put(FunctionIdentifiers.NUMBER_EQUALITY_FUNCTION, NumberEqualityFunctionImpl.class);
-
-        FUNCTION_CLASS_MAP = Collections.unmodifiableMap(tmpMap);
+        FunctionSingletons.registerFunction(FunctionIdentifiers.NUMBER_COMPARATOR_FUNCTION,
+                                            NumberComparatorFunctionImpl.class);
+        FunctionSingletons.registerFunction(FunctionIdentifiers.NUMBER_EQUALITY_FUNCTION,
+                                            NumberEqualityFunctionImpl.class);
 
 
         List<FunctionIdentifiers> tmpList = new ArrayList<>();
@@ -244,7 +239,7 @@ public class NumberImpl implements Number {
      */
     private NumberImpl(ParsingResult parsingResult) {
 
-        this(parsingResult.sign, parsingResult.base, parsingResult.centerNode);
+        this(parsingResult.base, parsingResult.sign, parsingResult.centerNode);
     }
 
     /**
@@ -263,7 +258,7 @@ public class NumberImpl implements Number {
 
         for (FunctionIdentifier identifier : PARSER_FUNCTION_LIST) {
 
-            NotationParser parser = (NotationParser) getFunction(identifier);
+            NotationParser parser = (NotationParser) FunctionSingletons.getFunction(identifier);
 
             try {
 
@@ -288,7 +283,7 @@ public class NumberImpl implements Number {
      */
     public NumberImpl(Number number) {
 
-        this(number.sign(), number.base(), Nodes.cloneLinkedList(number.centerNode()));
+        this(number.base(), number.sign(), Nodes.cloneLinkedList(number.centerNode()));
     }
 
     /**
@@ -298,14 +293,14 @@ public class NumberImpl implements Number {
      * This constructor is mainly used for internal purposes and to instantiate calculation results.
      * Calculations result don't need to be cloned.</i>
      *
-     * @param sign
-     *        the sign for this number
      * @param base
      *        the base for this number
+     * @param sign
+     *        the sign for this number
      * @param centerNode
      *        a reference to the center node of the linked list
      */
-    public NumberImpl(Sign sign, int base, DigitNode centerNode) {
+    public NumberImpl(int base, Sign sign, DigitNode centerNode) {
 
         super();
 
@@ -424,57 +419,6 @@ public class NumberImpl implements Number {
     }
 
     /**
-     * Initializes a function.<br>
-     * <br>
-     * <i>Note:<br>
-     * Call this method only once.</i>
-     *
-     * @param identifier
-     *        a function identifier
-     * @param type
-     *        the function class
-     *
-     * @return a function object
-     */
-    private static Object initializeFunction(FunctionIdentifier identifier, Class type) throws InstantiationException,
-                                                                                               IllegalAccessException {
-
-        Object function = type.newInstance();
-        FunctionSingletons.putFunction(identifier, function);
-
-        return function;
-    }
-
-    /**
-     * Returns the function associated with the specified identifier.
-     *
-     * @param identifier
-     *        a function identifier
-     *
-     * @return a function
-     */
-    private static Object getFunction(FunctionIdentifier identifier) {
-
-        if (!FunctionSingletons.existsFunction(identifier)) {
-
-            Class type = FUNCTION_CLASS_MAP.get(identifier);
-            try {
-
-                return initializeFunction(identifier, type);
-
-            } catch (IllegalAccessException | InstantiationException e) {
-
-                String message = String.format("Unable to initialize a fucntion (%s)", identifier.toString());
-                throw new RuntimeException(message, e);
-            }
-
-        } else {
-
-            return FunctionSingletons.getFunction(identifier);
-        }
-    }
-
-    /**
      * Returns a scientific notation for this number.<br>
      * <br>
      * <i>Note:<br>
@@ -486,7 +430,8 @@ public class NumberImpl implements Number {
     @Override
     public String toScientificNotation() {
 
-        NotationFunction function = (NotationFunction) getFunction(FunctionIdentifiers.SCIENTIFIC_NOTATION_FUNCTION);
+        NotationFunction function =
+            (NotationFunction) FunctionSingletons.getFunction(FunctionIdentifiers.SCIENTIFIC_NOTATION_FUNCTION);
 
         return function.toString(this);
     }
@@ -503,7 +448,8 @@ public class NumberImpl implements Number {
     @Override
     public String toStandardNotation() {
 
-        NotationFunction function = (NotationFunction) getFunction(FunctionIdentifiers.STANDARD_NOTATION_FUNCTION);
+        NotationFunction function =
+            (NotationFunction) FunctionSingletons.getFunction(FunctionIdentifiers.STANDARD_NOTATION_FUNCTION);
 
         return function.toString(this);
     }
@@ -569,7 +515,8 @@ public class NumberImpl implements Number {
     @Override
     public int compareTo(Number n) {
 
-        Comparator<Number> function = (Comparator<Number>) getFunction(FunctionIdentifiers.NUMBER_COMPARATOR_FUNCTION);
+        Comparator<Number> function =
+            (Comparator<Number>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_COMPARATOR_FUNCTION);
         int result = function.compare(this, n);
 
         return result;
@@ -592,7 +539,7 @@ public class NumberImpl implements Number {
         }
 
         EqualityFunction<Number> function =
-            (EqualityFunction<Number>) getFunction(FunctionIdentifiers.NUMBER_EQUALITY_FUNCTION);
+            (EqualityFunction<Number>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_EQUALITY_FUNCTION);
         boolean result = function.equals(this, (Number) o);
 
         return result;
@@ -684,7 +631,7 @@ public class NumberImpl implements Number {
     public Number negate() {
 
         UnaryOperation<Number> function =
-            (UnaryOperation<Number>) getFunction(FunctionIdentifiers.NEGATE_NUMBER_FUNCTION);
+            (UnaryOperation<Number>) FunctionSingletons.getFunction(FunctionIdentifiers.NEGATE_NUMBER_FUNCTION);
         Result<Number> result = function.calculate(this);
 
         return result.result();
@@ -846,6 +793,22 @@ public class NumberImpl implements Number {
 
         // TODO
         throw new UnsupportedOperationException();
+    }
+
+    /**
+     * Returns the absolute value of this number.
+     *
+     * @return the absolute value
+     */
+    @Override
+    public Number absoluteValue() {
+
+        if (isNegative()) {
+
+            return negate();
+        }
+
+        return new NumberImpl(base(), sign(), Nodes.cloneLinkedList(centerNode()));
     }
 
 }

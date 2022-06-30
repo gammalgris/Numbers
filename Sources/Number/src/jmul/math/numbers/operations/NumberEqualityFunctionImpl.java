@@ -37,13 +37,15 @@ package jmul.math.numbers.operations;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.nodes.DigitNode;
 
+import jmul.singletons.Function;
+
 
 /**
  * An implementation of an equality comparator for numbers.
  *
  * @author Kristian Kutin
  */
-public class NumberEqualityFunctionImpl implements EqualityFunction<Number> {
+public class NumberEqualityFunctionImpl implements Function, EqualityFunction<Number> {
 
     /**
      * The default constructor.

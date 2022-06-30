@@ -34,49 +34,54 @@
 package jmul.math.numbers.operations;
 
 
-import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
-import jmul.math.numbers.Sign;
-import jmul.math.numbers.Signs;
-import jmul.math.numbers.nodes.DigitNode;
-import jmul.math.numbers.nodes.Nodes;
-import jmul.math.operations.Result;
-import jmul.math.operations.UnaryOperation;
-
-
 /**
- * This function implementation negates a number.
+ * This exception is used in cases where an arithmetic calculation would lead to an undefined result.
  *
  * @author Kristian Kutin
  */
-public class NegateNumberFunctionImpl implements UnaryOperation<Number> {
+public class UndefinedResultException extends RuntimeException {
 
     /**
      * The default constructor.
      */
-    public NegateNumberFunctionImpl() {
+    public UndefinedResultException() {
 
         super();
     }
 
     /**
-     * Negates the specified number.
+     * Creates a new exception according to the specified parameters.
      *
-     * @param n
-     *        a number
-     *
-     * @return a number
+     * @param message
+     *        an exception message
      */
-    @Override
-    public Result<Number> calculate(Number n) {
+    public UndefinedResultException(String message) {
 
-        Sign sign = Signs.negate(n.sign());
-        int base = n.base();
-        DigitNode centerNode = Nodes.cloneLinkedList(n.centerNode());
+        super(message);
+    }
 
-        Number newNumber = new NumberImpl(base, sign, centerNode);
+    /**
+     * Creates a new exception according to the specified parameters.
+     *
+     * @param cause
+     *        an exception which was catched and is rethrown
+     */
+    public UndefinedResultException(Throwable cause) {
 
-        return new Result<Number>(newNumber);
+        super(cause);
+    }
+
+    /**
+     * Creates a new exception according to the specified parameters.
+     *
+     * @param message
+     *        an exception message
+     * @param cause
+     *        an exception which was catched and is rethrown
+     */
+    public UndefinedResultException(String message, Throwable cause) {
+
+        super(message, cause);
     }
 
 }

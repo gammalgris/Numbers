@@ -34,6 +34,9 @@
 package jmul.math.operations;
 
 
+import jmul.singletons.Function;
+
+
 /**
  * This interface describes a binary operation (i.e. an operation that takes two arguments).
  *
@@ -41,8 +44,10 @@ package jmul.math.operations;
  *
  * @param <T>
  *        the operand type
+ * @param <S>
+ *        the return type
  */
-public interface BinaryOperation<T> {
+public interface BinaryOperation<T, S extends Result> extends Function {
 
     /**
      * Performs the binary (i.e. two operands) operation.
@@ -54,6 +59,6 @@ public interface BinaryOperation<T> {
      *
      * @return the result
      */
-    ResultWithCarry<T> calculate(T operand1, T operand2);
+    S calculate(T operand1, T operand2);
 
 }

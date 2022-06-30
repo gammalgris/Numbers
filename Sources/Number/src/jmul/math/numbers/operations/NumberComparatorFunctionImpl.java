@@ -35,10 +35,13 @@ package jmul.math.numbers.operations;
 
 
 import java.util.Comparator;
+
 import jmul.math.numbers.Number;
 
+import jmul.singletons.Function;
 
-public class NumberComparatorFunctionImpl implements Comparator<Number> {
+
+public class NumberComparatorFunctionImpl implements Function, Comparator<Number> {
 
     public NumberComparatorFunctionImpl() {
 
@@ -47,7 +50,7 @@ public class NumberComparatorFunctionImpl implements Comparator<Number> {
 
     @Override
     public int compare(Number n1, Number n2) {
-        
+
         // TODO Implement this method
         return 0;
     }

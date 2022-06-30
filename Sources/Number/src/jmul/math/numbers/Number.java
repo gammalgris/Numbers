@@ -147,4 +147,11 @@ public interface Number extends LinkedDigitList, ArithmeticOperations, Comparabl
      */
     boolean isNegative();
 
+    /**
+     * Returns the absolute value of this number.
+     *
+     * @return the absolute value
+     */
+    Number absoluteValue();
+
 }
