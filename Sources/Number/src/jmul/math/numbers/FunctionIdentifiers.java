@@ -58,6 +58,8 @@ public enum FunctionIdentifiers implements FunctionIdentifier {
 
     NUMBER_COMPARATOR_FUNCTION,
     NUMBER_EQUALITY_FUNCTION,
+
+    ADDITION_FUNCTION
     ;
 
 

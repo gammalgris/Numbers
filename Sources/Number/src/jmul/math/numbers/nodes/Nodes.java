@@ -95,6 +95,52 @@ public final class Nodes {
     }
 
     /**
+     * Severes the linked list at the specified node and the node to the left.
+     *
+     * @param node
+     *        a node in a linked list
+     */
+    public static void removeLeftTail(DigitNode node) {
+
+        DigitNodeImpl right = (DigitNodeImpl) node;
+
+        if (right != null) {
+
+            DigitNodeImpl left = (DigitNodeImpl) node.leftNode();
+
+            if (left != null) {
+
+                left.setRightNode(null);
+            }
+
+            right.setLeftNode(null);
+        }
+    }
+
+    /**
+     * Severes the linked list at the specified node and the node to the right.
+     *
+     * @param node
+     *        a node in a linked list
+     */
+    public static void removeRightTail(DigitNode node) {
+
+        DigitNodeImpl left = (DigitNodeImpl) node;
+
+        if (left != null) {
+
+            DigitNodeImpl right = (DigitNodeImpl) node.rightNode();
+
+            if (right != null) {
+
+                right.setLeftNode(null);
+            }
+
+            left.setRightNode(null);
+        }
+    }
+
+    /**
      * Clones the list to the right of this node.
      *
      * @param node

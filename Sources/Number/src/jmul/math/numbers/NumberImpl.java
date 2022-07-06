@@ -51,10 +51,14 @@ import jmul.math.numbers.notations.ScientificNotationFunctionImpl;
 import jmul.math.numbers.notations.ScientificNotationParserImpl;
 import jmul.math.numbers.notations.StandardNotationFunctionImpl;
 import jmul.math.numbers.notations.StandardNotationParserImpl;
+import jmul.math.numbers.operations.AddDigitsFunctionImpl;
+import jmul.math.numbers.operations.AddNumbersFunctionImpl;
+import jmul.math.numbers.operations.DigitComplementFunctionImpl;
 import jmul.math.numbers.operations.EqualityFunction;
 import jmul.math.numbers.operations.NegateNumberFunctionImpl;
 import jmul.math.numbers.operations.NumberComparatorFunctionImpl;
 import jmul.math.numbers.operations.NumberEqualityFunctionImpl;
+import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
 
@@ -112,6 +116,11 @@ public class NumberImpl implements Number {
         FunctionSingletons.registerFunction(FunctionIdentifiers.NUMBER_EQUALITY_FUNCTION,
                                             NumberEqualityFunctionImpl.class);
 
+        FunctionSingletons.registerFunction(FunctionIdentifiers.ADD_DIGITS_FUNCTION, AddDigitsFunctionImpl.class);
+        FunctionSingletons.registerFunction(FunctionIdentifiers.DIGIT_COMPLEMENT_FUNCTION,
+                                            DigitComplementFunctionImpl.class);
+
+        FunctionSingletons.registerFunction(FunctionIdentifiers.ADDITION_FUNCTION, AddNumbersFunctionImpl.class);
 
         List<FunctionIdentifiers> tmpList = new ArrayList<>();
 
@@ -672,8 +681,11 @@ public class NumberImpl implements Number {
     @Override
     public Number add(Number n) {
 
-        // TODO
-        throw new UnsupportedOperationException();
+        BinaryOperation<Number, Result<Number>> function =
+            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADDITION_FUNCTION);
+        Result<Number> result = function.calculate(this, n);
+
+        return result.result();
     }
 
     /**

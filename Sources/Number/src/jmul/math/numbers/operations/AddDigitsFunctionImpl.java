@@ -79,8 +79,8 @@ public class AddDigitsFunctionImpl extends BaseDigitFunctionImpl implements Bina
 
         if (result >= base) {
 
-            carry = result % base;
-            result = result / base;
+            result = result - base;
+            carry = 1;
         }
 
         Digit resultDigit = NumeralSystems.ordinalToDigit(base, result);

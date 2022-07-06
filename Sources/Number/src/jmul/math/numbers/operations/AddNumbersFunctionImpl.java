@@ -55,16 +55,6 @@ import jmul.singletons.FunctionSingletons;
  */
 public class AddNumbersFunctionImpl implements BinaryOperation<Number, Result<Number>> {
 
-    /*
-     * The static initializer.
-     */
-    static {
-
-        FunctionSingletons.registerFunction(FunctionIdentifiers.ADD_DIGITS_FUNCTION, AddDigitsFunctionImpl.class);
-        FunctionSingletons.registerFunction(FunctionIdentifiers.DIGIT_COMPLEMENT_FUNCTION,
-                                            DigitComplementFunctionImpl.class);
-    }
-
     /**
      * The default constructor.
      */
@@ -162,7 +152,6 @@ public class AddNumbersFunctionImpl implements BinaryOperation<Number, Result<Nu
                 String message =
                     String.format("Adding %s and %s is undefined!", operand1.toString(), operand2.toString());
                 throw new UndefinedResultException(message);
-
             }
         }
     }
@@ -256,7 +245,84 @@ public class AddNumbersFunctionImpl implements BinaryOperation<Number, Result<Nu
         }
     }
 
-    private Result<Number> addIgnoreSign(Number operand1, Number operand2) {
+    /**
+     * Removes leading zeros in the linked lit.
+     *
+     * @param centerNode
+     *        the center node of a linked list
+     */
+    private void trimLeft(DigitNode centerNode) {
+
+        DigitNode left = centerNode;
+
+        while (left.leftNode() != null) {
+
+            left = left.leftNode();
+        }
+
+        DigitNode right;
+        do {
+
+            if (left == centerNode) {
+
+                break;
+            }
+
+            right = left.rightNode();
+            if (left.digit().isZero()) {
+
+                Nodes.removeLeftTail(right);
+                left = right;
+
+            } else {
+
+                break;
+            }
+
+        } while (right != null);
+    }
+
+    /**
+     * Removes trailing zeros in the linked lit.
+     *
+     * @param centerNode
+     *        the center node of a linked list
+     */
+    private void trimRight(DigitNode centerNode) {
+
+        DigitNode right = centerNode;
+
+        while (right.rightNode() != null) {
+
+            right = right.rightNode();
+        }
+
+        DigitNode left;
+        do {
+
+            if (right == centerNode) {
+
+                break;
+            }
+
+            left = right.leftNode();
+            if (right.digit().isZero()) {
+
+                Nodes.removeRightTail(left);
+                right = left;
+
+            } else {
+
+                break;
+            }
+
+        } while (left != null);
+    }
+
+    private Result<Number> addEqualSigns(Number operand1, Number operand2) {
+
+        int base = operand1.base();
+        Sign sign = operand1.sign();
 
         DigitNode node1 = operand1.centerNode();
         DigitNode node2 = operand2.centerNode();
@@ -278,15 +344,17 @@ public class AddNumbersFunctionImpl implements BinaryOperation<Number, Result<Nu
         DigitNode rightTail;
         if (node1.rightNode() != null) {
 
-            rightTail = Nodes.cloneRightTail(node1);
+            rightTail = Nodes.cloneRightTail(node1.rightNode());
 
         } else {
 
-            rightTail = Nodes.cloneRightTail(node2);
+            rightTail = Nodes.cloneRightTail(node2.rightNode());
         }
 
-        DigitNode resultCenter;
-        DigitNode resultNode;
+        DigitNode resultNode = null;
+        DigitNode previousResultNode = null;
+        DigitNode resultCenter = null;
+        DigitNode resultWithoutRightTail = null;
 
         BinaryOperation<Digit, ResultWithCarry<Digit>> function =
             (BinaryOperation<Digit, ResultWithCarry<Digit>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_DIGITS_FUNCTION);
@@ -302,14 +370,19 @@ public class AddNumbersFunctionImpl implements BinaryOperation<Number, Result<Nu
 
             } else {
 
-                resultWrapper = function.calculate(result, carry);
-                result = resultWrapper.result();
+                ResultWithCarry<Digit> resultWrapper2 = function.calculate(result, carry);
+                result = resultWrapper2.result();
                 carry = resultWrapper.carry();
             }
 
+            previousResultNode = resultNode;
             resultNode = Nodes.createNode(result);
-            Nodes.linkNodes(resultNode, rightTail);
-            rightTail = resultNode;
+            Nodes.linkNodes(resultNode, previousResultNode);
+
+            if (resultWithoutRightTail == null) {
+
+                resultWithoutRightTail = resultNode;
+            }
 
             if (node1 == operand1.centerNode()) {
 
@@ -325,20 +398,45 @@ public class AddNumbersFunctionImpl implements BinaryOperation<Number, Result<Nu
 
                 if (node1.leftNode() != null) {
 
-                    leftTail = Nodes.cloneLeftTail(node1);
+                    leftTail = node1.leftNode();
 
                 } else {
 
-                    leftTail = Nodes.cloneLeftTail(node2);
+                    leftTail = node2.leftNode();
                 }
 
-                Nodes.linkNodes(leftTail, resultNode);
                 break;
             }
         }
 
-        //TODO
-        return null;
+        Nodes.linkNodes(resultWithoutRightTail, rightTail);
+
+        while (leftTail != null) {
+
+            resultWrapper = function.calculate(leftTail.digit(), carry);
+            Digit result = resultWrapper.result();
+            carry = resultWrapper.carry();
+
+            DigitNode newLeft = Nodes.createNode(result);
+
+            Nodes.linkNodes(newLeft, resultNode);
+
+            resultNode = resultNode.leftNode();
+            leftTail = leftTail.leftNode();
+        }
+
+        if (!carry.isZero()) {
+
+            DigitNode newLeft = Nodes.createNode(carry);
+            Nodes.linkNodes(newLeft, resultNode);
+        }
+
+        trimLeft(resultCenter);
+        trimRight(resultCenter);
+
+        Number result = new NumberImpl(base, sign, resultCenter);
+
+        return new Result<Number>(result);
     }
 
     @Override
@@ -365,7 +463,7 @@ public class AddNumbersFunctionImpl implements BinaryOperation<Number, Result<Nu
              * n + m
              * -n + -m
              */
-            return addIgnoreSign(operand1, operand2);
+            return addEqualSigns(operand1, operand2);
 
         } else {
 
@@ -375,6 +473,7 @@ public class AddNumbersFunctionImpl implements BinaryOperation<Number, Result<Nu
              * n + -m
              * -n + m
              */
+            //TODO subtraction missing
         }
 
         // TODO Implement this method
