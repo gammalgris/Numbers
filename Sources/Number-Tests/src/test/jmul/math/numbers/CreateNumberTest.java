@@ -38,22 +38,20 @@ import java.lang.reflect.InvocationTargetException;
 
 import java.util.ArrayList;
 import java.util.Collection;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import jmul.math.bool.BooleanHelper;
-import jmul.math.numbers.Constants;
-import static jmul.math.numbers.Constants.ZERO;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
-
-import jmul.reflection.constructors.ConstructorInvoker;
 
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+
+import static test.jmul.math.numbers.NumberCreationHelper.createNumber;
+import static test.jmul.math.numbers.StringHelper.removeSign;
 
 
 /**
@@ -63,6 +61,11 @@ import org.junit.runners.Parameterized;
  */
 @RunWith(Parameterized.class)
 public class CreateNumberTest {
+
+    /**
+     * The base for the number.
+     */
+    private final Integer base;
 
     /**
      * The implementation class for numbers.
@@ -82,40 +85,11 @@ public class CreateNumberTest {
      * @param input
      *        an input
      */
-    public CreateNumberTest(Class type, Object input) {
+    public CreateNumberTest(Integer base, Class type, Object input) {
 
+        this.base = base;
         this.type = type;
         this.input = input;
-    }
-
-    /**
-     * Instantiates a number according to the specified parameters.
-     *
-     * @param type
-     *        a number class
-     * @param input
-     *        an input
-     *
-     * @return a new number instance
-     *
-     * @throws NoSuchMethodException
-     *         is thrown if there exists no suitable constructor.
-     * @throws InstantiationException
-     *         is thrown if an error occurs within the constructor
-     * @throws IllegalAccessException
-     *         is thrown if the constructor cannot be accessed
-     * @throws InvocationTargetException
-     *         is thrown if an error occurs within the constructo
-     */
-    private static Number createNumber(Class type, Object input) throws NoSuchMethodException, InstantiationException,
-                                                                        IllegalAccessException,
-                                                                        InvocationTargetException {
-
-        Class[] signature = { input.getClass() };
-        ConstructorInvoker invoker = new ConstructorInvoker(type, signature);
-
-        Object[] parameters = { input };
-        return (Number) invoker.invoke(parameters);
     }
 
     /**
@@ -149,17 +123,6 @@ public class CreateNumberTest {
         return string;
     }
 
-    private static String removeSign(String string) {
-
-        String sign = "+";
-        if (string.startsWith(string)) {
-
-            return string.replace(sign, "");
-        }
-
-        return string;
-    }
-
     /**
      * Tests creating a number and compares the number with the input.
      *
@@ -176,7 +139,7 @@ public class CreateNumberTest {
     public void testNumberCreation() throws NoSuchMethodException, InstantiationException, IllegalAccessException,
                                             InvocationTargetException {
 
-        Number number = createNumber(type, input);
+        Number number = createNumber(base, type, input);
 
         String normalizedInput = input.toString();
         String trimmedNormalizedInput = trimRightSide(normalizedInput);
@@ -187,8 +150,20 @@ public class CreateNumberTest {
         boolean equalsStandardNotation = unsignedTrimmedNormalizedInput.equals(standardNotation);
         boolean equalsScientificNotation = normalizedInput.equals(scientificNotation);
 
-        String message =
-            String.format("The created number (%s/%s) doesn't match the input (%s)!", standardNotation, scientificNotation, input);
+        String message;
+        if (base == null) {
+
+            message =
+                String.format("The created number (%s/%s) doesn't match the input (%s)!", standardNotation,
+                              scientificNotation, input);
+
+        } else {
+
+            message =
+                String.format("The created number (%s/%s/base %s) doesn't match the input (%s)!", standardNotation,
+                              scientificNotation, base, input);
+        }
+
         assertTrue(message, BooleanHelper.xor(equalsStandardNotation, equalsScientificNotation));
     }
 
@@ -202,70 +177,179 @@ public class CreateNumberTest {
 
         Collection<Object[]> parameters = new ArrayList<Object[]>();
 
-        parameters.add(new Object[] { NumberImpl.class, "1" });
-        parameters.add(new Object[] { NumberImpl.class, "-1" });
+        parameters.add(new Object[] { 10, NumberImpl.class, "1" });
+        parameters.add(new Object[] { 10, NumberImpl.class, "-1" });
 
-        parameters.add(new Object[] { NumberImpl.class, "1.1" });
-        parameters.add(new Object[] { NumberImpl.class, "+1.1" });
-        parameters.add(new Object[] { NumberImpl.class, "-1.1" });
+        parameters.add(new Object[] { 10, NumberImpl.class, "1.1" });
+        parameters.add(new Object[] { 10, NumberImpl.class, "+1.1" });
+        parameters.add(new Object[] { 10, NumberImpl.class, "-1.1" });
 
-        parameters.add(new Object[] { NumberImpl.class, "1.1E0" });
-        parameters.add(new Object[] { NumberImpl.class, "-1.1E0" });
+        parameters.add(new Object[] { 10, NumberImpl.class, "1.1E0" });
+        parameters.add(new Object[] { 10, NumberImpl.class, "-1.1E0" });
 
-        parameters.add(new Object[] { NumberImpl.class, "1.1E1" });
-        parameters.add(new Object[] { NumberImpl.class, "-1.1E1" });
-        parameters.add(new Object[] { NumberImpl.class, "1.1E-1" });
-        parameters.add(new Object[] { NumberImpl.class, "-1.1E-1" });
+        parameters.add(new Object[] { 10, NumberImpl.class, "1.1E1" });
+        parameters.add(new Object[] { 10, NumberImpl.class, "-1.1E1" });
+        parameters.add(new Object[] { 10, NumberImpl.class, "1.1E-1" });
+        parameters.add(new Object[] { 10, NumberImpl.class, "-1.1E-1" });
 
-        parameters.add(new Object[] { NumberImpl.class, "1.1E2" });
-        parameters.add(new Object[] { NumberImpl.class, "-1.1E2" });
-        parameters.add(new Object[] { NumberImpl.class, "1.1E-2" });
-        parameters.add(new Object[] { NumberImpl.class, "-1.1E-2" });
+        parameters.add(new Object[] { 10, NumberImpl.class, "1.1E2" });
+        parameters.add(new Object[] { 10, NumberImpl.class, "-1.1E2" });
+        parameters.add(new Object[] { 10, NumberImpl.class, "1.1E-2" });
+        parameters.add(new Object[] { 10, NumberImpl.class, "-1.1E-2" });
 
-        parameters.add(new Object[] { NumberImpl.class, "1.1E3" });
-        parameters.add(new Object[] { NumberImpl.class, "-1.1E3" });
-        parameters.add(new Object[] { NumberImpl.class, "1.1E-3" });
-        parameters.add(new Object[] { NumberImpl.class, "-1.1E-3" });
+        parameters.add(new Object[] { 10, NumberImpl.class, "1.1E3" });
+        parameters.add(new Object[] { 10, NumberImpl.class, "-1.1E3" });
+        parameters.add(new Object[] { 10, NumberImpl.class, "1.1E-3" });
+        parameters.add(new Object[] { 10, NumberImpl.class, "-1.1E-3" });
 
-        parameters.add(new Object[] { NumberImpl.class, "1.010" });
+        parameters.add(new Object[] { 10, NumberImpl.class, "1.010" });
 
-        parameters.add(new Object[] { NumberImpl.class, "21.12"});
-        parameters.add(new Object[] { NumberImpl.class, "+21.12" });
-        parameters.add(new Object[] { NumberImpl.class, "-21.12" });
+        parameters.add(new Object[] { 10, NumberImpl.class, "21.12" });
+        parameters.add(new Object[] { 10, NumberImpl.class, "+21.12" });
+        parameters.add(new Object[] { 10, NumberImpl.class, "-21.12" });
 
-        parameters.add(new Object[] { NumberImpl.class, "321.123"});
-        parameters.add(new Object[] { NumberImpl.class, "+321.123" });
-        parameters.add(new Object[] { NumberImpl.class, "-321.123" });
+        parameters.add(new Object[] { 10, NumberImpl.class, "321.123" });
+        parameters.add(new Object[] { 10, NumberImpl.class, "+321.123" });
+        parameters.add(new Object[] { 10, NumberImpl.class, "-321.123" });
 
-        parameters.add(new Object[] { NumberImpl.class, new Byte((byte) 1) });
-        parameters.add(new Object[] { NumberImpl.class, new Byte((byte) 2) });
-        parameters.add(new Object[] { NumberImpl.class, Byte.MIN_VALUE });
-        parameters.add(new Object[] { NumberImpl.class, Byte.MAX_VALUE });
 
-        parameters.add(new Object[] { NumberImpl.class, new Short((short) 1) });
-        parameters.add(new Object[] { NumberImpl.class, new Short((short) 2) });
-        parameters.add(new Object[] { NumberImpl.class, Short.MIN_VALUE });
-        parameters.add(new Object[] { NumberImpl.class, Short.MAX_VALUE });
+        parameters.add(new Object[] { null, NumberImpl.class, new Byte((byte) 1) });
+        parameters.add(new Object[] { null, NumberImpl.class, new Byte((byte) 2) });
+        parameters.add(new Object[] { null, NumberImpl.class, Byte.MIN_VALUE });
+        parameters.add(new Object[] { null, NumberImpl.class, Byte.MAX_VALUE });
 
-        parameters.add(new Object[] { NumberImpl.class, new Integer((int) 1) });
-        parameters.add(new Object[] { NumberImpl.class, new Integer((int) 2) });
-        parameters.add(new Object[] { NumberImpl.class, Integer.MIN_VALUE });
-        parameters.add(new Object[] { NumberImpl.class, Integer.MAX_VALUE });
+        parameters.add(new Object[] { null, NumberImpl.class, new Short((short) 1) });
+        parameters.add(new Object[] { null, NumberImpl.class, new Short((short) 2) });
+        parameters.add(new Object[] { null, NumberImpl.class, Short.MIN_VALUE });
+        parameters.add(new Object[] { null, NumberImpl.class, Short.MAX_VALUE });
 
-        parameters.add(new Object[] { NumberImpl.class, new Long(1L) });
-        parameters.add(new Object[] { NumberImpl.class, new Long(2L) });
-        parameters.add(new Object[] { NumberImpl.class, Long.MIN_VALUE });
-        parameters.add(new Object[] { NumberImpl.class, Long.MAX_VALUE });
+        parameters.add(new Object[] { null, NumberImpl.class, new Integer((int) 1) });
+        parameters.add(new Object[] { null, NumberImpl.class, new Integer((int) 2) });
+        parameters.add(new Object[] { null, NumberImpl.class, Integer.MIN_VALUE });
+        parameters.add(new Object[] { null, NumberImpl.class, Integer.MAX_VALUE });
 
-        parameters.add(new Object[] { NumberImpl.class, new Float(1F) });
-        parameters.add(new Object[] { NumberImpl.class, new Float(2F) });
-        parameters.add(new Object[] { NumberImpl.class, Float.MIN_VALUE });
-        parameters.add(new Object[] { NumberImpl.class, Float.MAX_VALUE });
+        parameters.add(new Object[] { null, NumberImpl.class, new Long(1L) });
+        parameters.add(new Object[] { null, NumberImpl.class, new Long(2L) });
+        parameters.add(new Object[] { null, NumberImpl.class, Long.MIN_VALUE });
+        parameters.add(new Object[] { null, NumberImpl.class, Long.MAX_VALUE });
 
-        parameters.add(new Object[] { NumberImpl.class, new Double(1D) });
-        parameters.add(new Object[] { NumberImpl.class, new Double(2D) });
-        parameters.add(new Object[] { NumberImpl.class, Double.MIN_VALUE });
-        parameters.add(new Object[] { NumberImpl.class, Double.MAX_VALUE });
+        parameters.add(new Object[] { null, NumberImpl.class, new Float(1F) });
+        parameters.add(new Object[] { null, NumberImpl.class, new Float(2F) });
+        parameters.add(new Object[] { null, NumberImpl.class, Float.MIN_VALUE });
+        parameters.add(new Object[] { null, NumberImpl.class, Float.MAX_VALUE });
+
+        parameters.add(new Object[] { null, NumberImpl.class, new Double(1D) });
+        parameters.add(new Object[] { null, NumberImpl.class, new Double(2D) });
+        parameters.add(new Object[] { null, NumberImpl.class, Double.MIN_VALUE });
+        parameters.add(new Object[] { null, NumberImpl.class, Double.MAX_VALUE });
+
+
+        parameters.add(new Object[] { 16, NumberImpl.class, "1" });
+        parameters.add(new Object[] { 16, NumberImpl.class, "-1" });
+
+        parameters.add(new Object[] { 16, NumberImpl.class, "1.1" });
+        parameters.add(new Object[] { 16, NumberImpl.class, "+1.1" });
+        parameters.add(new Object[] { 16, NumberImpl.class, "-1.1" });
+
+        parameters.add(new Object[] { 16, NumberImpl.class, "1.1E0" });
+        parameters.add(new Object[] { 16, NumberImpl.class, "-1.1E0" });
+
+        parameters.add(new Object[] { 16, NumberImpl.class, "1.1E1" });
+        parameters.add(new Object[] { 16, NumberImpl.class, "-1.1E1" });
+        parameters.add(new Object[] { 16, NumberImpl.class, "1.1E-1" });
+        parameters.add(new Object[] { 16, NumberImpl.class, "-1.1E-1" });
+
+        parameters.add(new Object[] { 16, NumberImpl.class, "1.1E2" });
+        parameters.add(new Object[] { 16, NumberImpl.class, "-1.1E2" });
+        parameters.add(new Object[] { 16, NumberImpl.class, "1.1E-2" });
+        parameters.add(new Object[] { 16, NumberImpl.class, "-1.1E-2" });
+
+        parameters.add(new Object[] { 16, NumberImpl.class, "1.1E3" });
+        parameters.add(new Object[] { 16, NumberImpl.class, "-1.1E3" });
+        parameters.add(new Object[] { 16, NumberImpl.class, "1.1E-3" });
+        parameters.add(new Object[] { 16, NumberImpl.class, "-1.1E-3" });
+
+        parameters.add(new Object[] { 16, NumberImpl.class, "1.010" });
+
+        parameters.add(new Object[] { 16, NumberImpl.class, "21.12" });
+        parameters.add(new Object[] { 16, NumberImpl.class, "+21.12" });
+        parameters.add(new Object[] { 16, NumberImpl.class, "-21.12" });
+
+        parameters.add(new Object[] { 16, NumberImpl.class, "321.123" });
+        parameters.add(new Object[] { 16, NumberImpl.class, "+321.123" });
+        parameters.add(new Object[] { 16, NumberImpl.class, "-321.123" });
+
+
+        parameters.add(new Object[] { 8, NumberImpl.class, "1" });
+        parameters.add(new Object[] { 8, NumberImpl.class, "-1" });
+
+        parameters.add(new Object[] { 8, NumberImpl.class, "1.1" });
+        parameters.add(new Object[] { 8, NumberImpl.class, "+1.1" });
+        parameters.add(new Object[] { 8, NumberImpl.class, "-1.1" });
+
+        parameters.add(new Object[] { 8, NumberImpl.class, "1.1E0" });
+        parameters.add(new Object[] { 8, NumberImpl.class, "-1.1E0" });
+
+        parameters.add(new Object[] { 8, NumberImpl.class, "1.1E1" });
+        parameters.add(new Object[] { 8, NumberImpl.class, "-1.1E1" });
+        parameters.add(new Object[] { 8, NumberImpl.class, "1.1E-1" });
+        parameters.add(new Object[] { 8, NumberImpl.class, "-1.1E-1" });
+
+        parameters.add(new Object[] { 8, NumberImpl.class, "1.1E2" });
+        parameters.add(new Object[] { 8, NumberImpl.class, "-1.1E2" });
+        parameters.add(new Object[] { 8, NumberImpl.class, "1.1E-2" });
+        parameters.add(new Object[] { 8, NumberImpl.class, "-1.1E-2" });
+
+        parameters.add(new Object[] { 8, NumberImpl.class, "1.1E3" });
+        parameters.add(new Object[] { 8, NumberImpl.class, "-1.1E3" });
+        parameters.add(new Object[] { 8, NumberImpl.class, "1.1E-3" });
+        parameters.add(new Object[] { 8, NumberImpl.class, "-1.1E-3" });
+
+        parameters.add(new Object[] { 8, NumberImpl.class, "1.010" });
+
+        parameters.add(new Object[] { 8, NumberImpl.class, "21.12" });
+        parameters.add(new Object[] { 8, NumberImpl.class, "+21.12" });
+        parameters.add(new Object[] { 8, NumberImpl.class, "-21.12" });
+
+        parameters.add(new Object[] { 8, NumberImpl.class, "321.123" });
+        parameters.add(new Object[] { 8, NumberImpl.class, "+321.123" });
+        parameters.add(new Object[] { 8, NumberImpl.class, "-321.123" });
+
+
+        parameters.add(new Object[] { 2, NumberImpl.class, "1" });
+        parameters.add(new Object[] { 2, NumberImpl.class, "-1" });
+
+        parameters.add(new Object[] { 2, NumberImpl.class, "1.1" });
+        parameters.add(new Object[] { 2, NumberImpl.class, "+1.1" });
+        parameters.add(new Object[] { 2, NumberImpl.class, "-1.1" });
+
+        parameters.add(new Object[] { 2, NumberImpl.class, "1.1E0" });
+        parameters.add(new Object[] { 2, NumberImpl.class, "-1.1E0" });
+
+        parameters.add(new Object[] { 2, NumberImpl.class, "1.1E1" });
+        parameters.add(new Object[] { 2, NumberImpl.class, "-1.1E1" });
+        parameters.add(new Object[] { 2, NumberImpl.class, "1.1E-1" });
+        parameters.add(new Object[] { 2, NumberImpl.class, "-1.1E-1" });
+
+        parameters.add(new Object[] { 2, NumberImpl.class, "1.1E2" });
+        parameters.add(new Object[] { 2, NumberImpl.class, "-1.1E2" });
+        parameters.add(new Object[] { 2, NumberImpl.class, "1.1E-2" });
+        parameters.add(new Object[] { 2, NumberImpl.class, "-1.1E-2" });
+
+        parameters.add(new Object[] { 2, NumberImpl.class, "1.1E3" });
+        parameters.add(new Object[] { 2, NumberImpl.class, "-1.1E3" });
+        parameters.add(new Object[] { 2, NumberImpl.class, "1.1E-3" });
+        parameters.add(new Object[] { 2, NumberImpl.class, "-1.1E-3" });
+
+        parameters.add(new Object[] { 2, NumberImpl.class, "1.010" });
+
+        parameters.add(new Object[] { 2, NumberImpl.class, "21.12" });
+        parameters.add(new Object[] { 2, NumberImpl.class, "+21.12" });
+        parameters.add(new Object[] { 2, NumberImpl.class, "-21.12" });
+
+        parameters.add(new Object[] { 2, NumberImpl.class, "321.123" });
+        parameters.add(new Object[] { 2, NumberImpl.class, "+321.123" });
+        parameters.add(new Object[] { 2, NumberImpl.class, "-321.123" });
 
         return parameters;
     }

@@ -99,7 +99,8 @@ public class ScientificNotationParserImpl implements NotationParser {
 
         if (!matcher.matches()) {
 
-            String message = String.format("The specified string doesn't match the standard notation (\"%s\")", string);
+            String message =
+                String.format("The specified string doesn't match the scientific notation (\"%s\")", string);
             throw new IllegalArgumentException(message);
         }
 

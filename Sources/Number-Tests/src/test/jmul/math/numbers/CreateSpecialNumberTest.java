@@ -42,12 +42,12 @@ import java.util.Collection;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
 
-import jmul.reflection.constructors.ConstructorInvoker;
-
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+
+import static test.jmul.math.numbers.NumberCreationHelper.createNumber;
 
 
 /**
@@ -99,36 +99,6 @@ public class CreateSpecialNumberTest {
         this.input = input;
         this.expectedStandardNotation = expectedStandardNotation;
         this.expectedScientificNotation = expectedScientificNotation;
-    }
-
-    /**
-     * Instantiates a number according to the specified parameters.
-     *
-     * @param type
-     *        a number class
-     * @param input
-     *        an input
-     *
-     * @return a new number instance
-     *
-     * @throws NoSuchMethodException
-     *         is thrown if there exists no suitable constructor.
-     * @throws InstantiationException
-     *         is thrown if an error occurs within the constructor
-     * @throws IllegalAccessException
-     *         is thrown if the constructor cannot be accessed
-     * @throws InvocationTargetException
-     *         is thrown if an error occurs within the constructo
-     */
-    private static Number createNumber(Class type, Object input) throws NoSuchMethodException, InstantiationException,
-                                                                        IllegalAccessException,
-                                                                        InvocationTargetException {
-
-        Class[] signature = { input.getClass() };
-        ConstructorInvoker invoker = new ConstructorInvoker(type, signature);
-
-        Object[] parameters = { input };
-        return (Number) invoker.invoke(parameters);
     }
 
     /**

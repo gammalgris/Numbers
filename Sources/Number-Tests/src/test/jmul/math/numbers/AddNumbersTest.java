@@ -50,12 +50,23 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 
+/**
+ * This test suite tests adding two numbers with various combinations of operands.
+ * 
+ * TODO do the calculations also for numbers with other bases
+ * TODO comment test suite
+ * 
+ * @author Kristian Kutin
+ */
 @UnitTest
 @RunWith(Parameterized.class)
 public class AddNumbersTest {
 
     private static final int BASE;
 
+    /*
+     * The static initializer.
+     */
     static {
 
         BASE = 10;

@@ -34,6 +34,9 @@
 package test.jmul.math.numbers;
 
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
 import jmul.math.numbers.Signs;
@@ -42,60 +45,86 @@ import jmul.test.classification.UnitTest;
 
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
 
+/**
+ * This test suite tests calculating with infinity.
+ *
+ * //TODO add tests for different binary functions (i.e. subtraction, etc.)
+ * //TODO add tests for different unary functions (i.e. faculty, etc.)
+ *
+ * @author Kristian Kutin
+ */
 @UnitTest
+@RunWith(Parameterized.class)
 public class CalculateWithInfinityTest {
 
-    private static final int BASE;
+    /**
+     * The first operand.
+     */
+    private final Number firstOperand;
 
-    static {
+    /**
+     * The second operand.
+     */
+    private final Number secondOperand;
 
-        BASE = 10;
+    /**
+     * The expected result.
+     */
+    private final Number expectedResult;
+
+    /**
+     * Creates a new test case according to the specified parameters.
+     *
+     * @param firstOperand
+     *        an oeprand for the calculation
+     * @param secondOperand
+     *        an operand for the calculation
+     * @param expectedResult
+     *        the expected result of the calculation
+     */
+    public CalculateWithInfinityTest(Number firstOperand, Number secondOperand, Number expectedResult) {
+
+        super();
+
+        this.firstOperand = firstOperand;
+        this.secondOperand = secondOperand;
+        this.expectedResult = expectedResult;
     }
 
     @Test
-    public void addPositiveNumberAndPositiveInfinity() {
+    public void testCalculation() {
 
-        Number n1 = new NumberImpl(BASE, "1");
-        Number n2 = new NumberImpl(BASE);
+        Number actualResult = firstOperand.add(secondOperand);
 
-        Number sum = n1.add(n2);
-        String message = String.format("%s + %s", n1.toString(), n2.toString());
-        assertEquals(message, sum, n2);
+        String message = String.format("%s + %s", firstOperand.toString(), secondOperand.toString());
+        assertEquals(message, expectedResult, actualResult);
     }
 
-    @Test
-    public void addNegativeNumberAndPositiveInfinity() {
+    /**
+     * Returns a matrix of test data.
+     *
+     * @return a matrix of test data
+     */
+    @Parameterized.Parameters
+    public static Collection<Object[]> data() {
 
-        Number n1 = new NumberImpl(BASE, "-1");
-        Number n2 = new NumberImpl(BASE);
+        Collection<Object[]> parameters = new ArrayList<Object[]>();
 
-        Number sum = n1.add(n2);
-        String message = String.format("%s + %s", n1.toString(), n2.toString());
-        assertEquals(message, sum, n2);
-    }
+        for (int base = 2; base < 64; base++) {
 
-    @Test
-    public void addPositiveNumberAndNegativeInfinity() {
+            parameters.add(new Object[] { new NumberImpl(base, "1"), new NumberImpl(base), new NumberImpl(base) });
+            parameters.add(new Object[] { new NumberImpl(base, "-1"), new NumberImpl(base), new NumberImpl(base) });
+            parameters.add(new Object[] { new NumberImpl(base, "1"), new NumberImpl(base, Signs.NEGATIVE),
+                                          new NumberImpl(base, Signs.NEGATIVE) });
+            parameters.add(new Object[] { new NumberImpl(base, "-1"), new NumberImpl(base, Signs.NEGATIVE),
+                                          new NumberImpl(base, Signs.NEGATIVE) });
+        }
 
-        Number n1 = new NumberImpl(BASE, "1");
-        Number n2 = new NumberImpl(BASE, Signs.NEGATIVE);
-
-        Number sum = n1.add(n2);
-        String message = String.format("%s + %s", n1.toString(), n2.toString());
-        assertEquals(message, sum, n2);
-    }
-
-    @Test
-    public void addNegativeNumberAndNegativeInfinity() {
-
-        Number n1 = new NumberImpl(BASE, "-1");
-        Number n2 = new NumberImpl(BASE, Signs.NEGATIVE);
-
-        Number sum = n1.add(n2);
-        String message = String.format("%s + %s", n1.toString(), n2.toString());
-        assertEquals(message, sum, n2);
+        return parameters;
     }
 
 }

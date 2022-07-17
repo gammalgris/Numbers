@@ -215,4 +215,33 @@ public final class Nodes {
         }
     }
 
+    /**
+     * Moves the references to the most a common node to the right.
+     *
+     * @param firstNode
+     *        a reference to a node in the first linked list
+     * @param secondNode
+     *        a reference to a node in the second linked list
+     */
+    public static NodesResult moveRightSynchronously(DigitNode firstNode, DigitNode secondNode) {
+
+        DigitNode node1 = firstNode;
+        DigitNode node2 = secondNode;
+
+        while (true) {
+
+            if ((node1.rightNode() != null) && (node2.rightNode() != null)) {
+
+                node1 = node1.rightNode();
+                node2 = node2.rightNode();
+
+            } else {
+
+                break;
+            }
+        }
+
+        return new NodesResult(node1, node2);
+    }
+
 }

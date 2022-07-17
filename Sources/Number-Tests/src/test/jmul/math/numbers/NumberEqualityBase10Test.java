@@ -38,6 +38,8 @@ import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
 import jmul.math.numbers.Signs;
 
+import jmul.test.classification.UnitTest;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
@@ -48,7 +50,21 @@ import org.junit.Test;
  *
  * @author Kristian Kutin
  */
-public class NumberEqualityTest {
+@UnitTest
+public class NumberEqualityBase10Test {
+
+    /**
+     * A base for numbers.
+     */
+    private static final int BASE;
+    
+    /*
+     * The static initializer.
+     */
+    static {
+
+        BASE = 10;
+    }
 
     @Test
     public void testZeroAndOne() {
@@ -161,6 +177,124 @@ public class NumberEqualityTest {
 
         Number n1 = new NumberImpl("9876543210987654321.0123456789123456789");
         Number n2 = new NumberImpl("9876543210987654321.0123456789123456789");
+
+        String message =
+            String.format("The equality test failed for the numbers \"%s\" and \"%s\")!", n1.toString(), n2.toString());
+        assertTrue(message, n1.equals(n2));
+        assertTrue(message, n2.equals(n1));
+    }
+
+    @Test
+    public void testZeroAndOne_Variant2() {
+
+        Number zero = new NumberImpl(BASE, "0");
+        Number one = new NumberImpl(BASE, "1");
+
+        String message =
+            String.format("The equality test failed for the numbers \"%s\" and \"%s\")!", zero.toString(),
+                          one.toString());
+        assertFalse(message, zero.equals(one));
+        assertFalse(message, one.equals(zero));
+    }
+
+    @Test
+    public void testNull_Variant2() {
+
+        Number zero = new NumberImpl(BASE, "0");
+
+        String message = String.format("The equality test failed for the number \"%s\")!", zero.toString());
+        assertFalse(message, zero.equals(null));
+    }
+
+    @Test
+    public void testZeroAndReference_Variant2() {
+
+        Number zero = new NumberImpl(BASE, "0");
+        Number reference = zero;
+
+        String message = String.format("The equality test failed for the number \"%s\"!", zero.toString());
+        assertTrue(message, zero.equals(reference));
+        assertTrue(message, reference.equals(zero));
+    }
+
+    @Test
+    public void testZeroAndClone_Variant2() {
+
+        Number zero = new NumberImpl(BASE, "0");
+        Number clone = new NumberImpl(BASE, "0");
+
+        String message = String.format("The equality test failed for the number \"%s\"!", zero.toString());
+        assertTrue(message, zero.equals(clone));
+        assertTrue(message, clone.equals(zero));
+    }
+
+    @Test
+    public void testInfinityAndNumber_Variant2() {
+
+        Number pi = new NumberImpl(BASE);
+        Number ni = new NumberImpl(BASE, "11");
+
+        String message =
+            String.format("The equality test failed for the numbers \"%s\" and \"%s\")!", pi.toString(), ni.toString());
+        assertFalse(message, pi.equals(ni));
+        assertFalse(message, ni.equals(pi));
+
+    }
+
+    @Test
+    public void testPositiveInfinityAndNegativeInfinity_Variant2() {
+
+        Number pi = new NumberImpl(BASE, Signs.POSITIVE);
+        Number ni = new NumberImpl(BASE, Signs.NEGATIVE);
+
+        String message =
+            String.format("The equality test failed for the numbers \"%s\" and \"%s\")!", pi.toString(), ni.toString());
+        assertFalse(message, pi.equals(ni));
+        assertFalse(message, ni.equals(pi));
+    }
+
+    @Test
+    public void testSimilarBigIntegers_Variant2() {
+
+        Number n1 = new NumberImpl(BASE, "9876543210987654321");
+        Number n2 = new NumberImpl(BASE, "8876543210987654321");
+
+        String message =
+            String.format("The equality test failed for the numbers \"%s\" and \"%s\")!", n1.toString(), n2.toString());
+        assertFalse(message, n1.equals(n2));
+        assertFalse(message, n2.equals(n1));
+    }
+
+    @Test
+    public void testEqualBigIntegers_Variant2() {
+
+        Number n1 = new NumberImpl(BASE, "9876543210987654321");
+        Number n2 = new NumberImpl(BASE, "9876543210987654321");
+
+        String message =
+            String.format("The equality test failed for the numbers \"%s\" and \"%s\")!", n1.toString(), n2.toString());
+        assertTrue(message, n1.equals(n2));
+        assertTrue(message, n2.equals(n1));
+    }
+
+    @Test
+    public void testDistinctBigDecimalNumbers_Variant2() {
+
+        Number n1 = new NumberImpl(BASE, "9876543210987654321.0123456789123456789");
+        Number n2 = new NumberImpl(BASE, "9876543210987654321.0123456789123456788");
+
+        String message =
+            String.format("The equality test failed for the numbers \"%s\" and \"%s\")!", n1.toString(), n2.toString());
+        assertFalse(message, n1.equals(n2));
+        assertFalse(message, n2.equals(n1));
+    }
+
+    @Test
+    public void testEqualBigDecimalNumbers_Variant2() {
+
+
+        Number n1 = new NumberImpl(BASE, "9876543210987654321.0123456789123456789");
+        Number n2 = new NumberImpl(BASE, "9876543210987654321.0123456789123456789");
 
         String message =
             String.format("The equality test failed for the numbers \"%s\" and \"%s\")!", n1.toString(), n2.toString());

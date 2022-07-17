@@ -41,6 +41,7 @@ import jmul.math.numbers.Sign;
 import jmul.math.numbers.digits.Digit;
 import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.Nodes;
+import jmul.math.numbers.nodes.NodesResult;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.Result;
 import jmul.math.operations.ResultWithCarry;
@@ -319,26 +320,24 @@ public class AddNumbersFunctionImpl implements BinaryOperation<Number, Result<Nu
         } while (left != null);
     }
 
+    /**
+     * Adds the specified numbers and retains the sign.
+     *
+     * @param operand1
+     *        an operand
+     * @param operand2
+     *        an operand
+     *
+     * @return a sum
+     */
     private Result<Number> addEqualSigns(Number operand1, Number operand2) {
 
         int base = operand1.base();
         Sign sign = operand1.sign();
 
-        DigitNode node1 = operand1.centerNode();
-        DigitNode node2 = operand2.centerNode();
-
-        while (true) {
-
-            if ((node1.rightNode() != null) && (node2.rightNode() != null)) {
-
-                node1 = node1.rightNode();
-                node2 = node2.rightNode();
-
-            } else {
-
-                break;
-            }
-        }
+        NodesResult moveResult = Nodes.moveRightSynchronously(operand1.centerNode(), operand2.centerNode());
+        DigitNode node1 = moveResult.firstNode;
+        DigitNode node2 = moveResult.secondNode;
 
         DigitNode leftTail;
         DigitNode rightTail;
@@ -439,11 +438,46 @@ public class AddNumbersFunctionImpl implements BinaryOperation<Number, Result<Nu
         return new Result<Number>(result);
     }
 
+    /**
+     * Performs a subtraction using the complement method (i.e. turns the subtraction into an addition).
+     * Calculate the complement of the minuend. Then add the subtrahend. Finally calculate complement of the
+     * result. The specified sign is applied to the end result. The caller must check which of the specified
+     * numbers has the greater absolute value and pass the oarameters accordingly (i.e. the minuend should
+     * always have the greater absolute value).
+     *
+     * @param sign
+     *        the sign of the result
+     * @param minuend
+     *        the minuend
+     * @param subtrahend
+     *        the subtrahend
+     *
+     * @return a difference
+     */
+    private Result<Number> subtractNumber(Sign sign, Number minuend, Number subtrahend) {
+
+        //TODO
+        return null;
+    }
+
+    /**
+     * Takes the two operands and calculates the sum. Depending on the respective values and
+     * signs the required operation is an addition or subtraction. In some cases (infinity and
+     * zero) no calculation is necessary.
+     *
+     * @param operand1
+     *        an operand
+     * @param operand2
+     *        an operand
+     *
+     * @return a sum
+     */
     @Override
     public Result<Number> calculate(Number operand1, Number operand2) {
 
         checkParameters(operand1, operand2);
 
+        int base = operand1.base();
         boolean equalSigns = operand1.sign() == operand2.sign();
 
         if (operand1.isInfinity() || operand2.isInfinity()) {
@@ -464,20 +498,59 @@ public class AddNumbersFunctionImpl implements BinaryOperation<Number, Result<Nu
              * -n + -m
              */
             return addEqualSigns(operand1, operand2);
+        }
+
+        Number absolute1 = operand1.absoluteValue();
+        Number absolute2 = operand2.absoluteValue();
+
+        /*
+         * cases handled:
+         *
+         * n + -m -> n - m (if abs(n) > abs(m))
+         * n + -m -> 0 (if abs(n) = abs(m))
+         * n + -m -> -m + n -> -(m - n) (if abs(m) > abs(n))
+         * -n + m -> -n + m -> -(n - m) (if abs(n) > abs(m))
+         * -n + m -> 0 (if abs(n) = abs(m))
+         * -n + m -> m - n (if abs(m) > abs(n))
+         */
+
+        if (absolute1.compareTo(absolute2) == 0) {
+
+            /*
+             * cases handled:
+             *
+             * n + -m -> 0 (if abs(n) = abs(m))
+             * -n + m -> 0 (if abs(n) = abs(m))
+             */
+
+            Number result = new NumberImpl(base, "0");
+
+            return new Result<Number>(result);
+
+        } else if (absolute1.compareTo(absolute2) > 0) {
+
+            /*
+             * cases handled:
+             *
+             * n + -m -> n - m (if abs(n) > abs(m))
+             * -n + m -> -n + m -> -(n - m) (if abs(n) > abs(m))
+             */
+
+            // TODO
+            return null;
 
         } else {
 
             /*
              * cases handled:
              *
-             * n + -m
-             * -n + m
+             * n + -m -> -m + n -> -(m - n) (if abs(m) > abs(n))
+             * -n + m -> m - n (if abs(m) > abs(n))
              */
-            //TODO subtraction missing
-        }
 
-        // TODO Implement this method
-        return null;
+            // TODO
+            return null;
+        }
     }
 
 }

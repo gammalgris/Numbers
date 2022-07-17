@@ -38,6 +38,8 @@ import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import static jmul.math.numbers.Constants.ORDINAL_MAX_LIMIT;
 import static jmul.math.numbers.Constants.ORDINAL_MIN_LIMIT;
+import jmul.math.numbers.exceptions.IllegalOrdinalException;
+import jmul.math.numbers.exceptions.UnsupportedBaseException;
 
 
 public final class ParameterHelper {
@@ -49,16 +51,9 @@ public final class ParameterHelper {
 
     public static int checkBase(int base) {
 
-        String message = String.format("Invalid base for a digit: %d", base);
+        if ((base < BASE_MIN_LIMIT) || (base > BASE_MAX_LIMIT)) {
 
-        if (base < BASE_MIN_LIMIT) {
-
-            throw new IllegalArgumentException(message);
-        }
-
-        if (base > BASE_MAX_LIMIT) {
-
-            throw new IllegalArgumentException(message);
+            throw new UnsupportedBaseException(base);
         }
 
         return base;
@@ -66,16 +61,9 @@ public final class ParameterHelper {
 
     public static int checkOrdinal(int ordinal) {
 
-        String message = String.format("Invalid ordinal number for a digit: %d", ordinal);
+        if ((ordinal < ORDINAL_MIN_LIMIT) || (ordinal > ORDINAL_MAX_LIMIT)) {
 
-        if (ordinal < ORDINAL_MIN_LIMIT) {
-
-            throw new IllegalArgumentException(message);
-        }
-
-        if (ordinal > ORDINAL_MAX_LIMIT) {
-
-            throw new IllegalArgumentException(message);
+            throw new IllegalOrdinalException(ordinal);
         }
 
         return ordinal;

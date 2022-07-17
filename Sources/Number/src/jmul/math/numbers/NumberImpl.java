@@ -42,6 +42,7 @@ import java.util.List;
 import jmul.math.hash.HashHelper;
 import static jmul.math.numbers.ParameterHelper.checkBase;
 import static jmul.math.numbers.ParameterHelper.checkSign;
+import jmul.math.numbers.exceptions.NumberParsingException;
 import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.Nodes;
 import jmul.math.numbers.notations.NotationFunction;
@@ -124,8 +125,13 @@ public class NumberImpl implements Number {
 
         List<FunctionIdentifiers> tmpList = new ArrayList<>();
 
-        tmpList.add(FunctionIdentifiers.STANDARD_NOTATION_PARSER);
+        /*
+         * Because of ambiguities we first test if the input matches the scientific notation, i.e. the letter
+         * E or e is used as separator between mantissa and exponent. This letter can also represent a digit.
+         * Thus the order of the parser functions is essential.
+         */
         tmpList.add(FunctionIdentifiers.SCIENTIFIC_NOTATION_PARSER);
+        tmpList.add(FunctionIdentifiers.STANDARD_NOTATION_PARSER);
 
         PARSER_FUNCTION_LIST = Collections.unmodifiableList(tmpList);
     }
@@ -263,7 +269,7 @@ public class NumberImpl implements Number {
      */
     private static ParsingResult parseString(int base, CharSequence s) {
 
-        List<Exception> exceptions = new ArrayList<>();
+        List<Throwable> exceptions = new ArrayList<>();
 
         for (FunctionIdentifier identifier : PARSER_FUNCTION_LIST) {
 
@@ -280,8 +286,7 @@ public class NumberImpl implements Number {
             }
         }
 
-        String message = String.format("An unknown notation is used (\"%s\")! Errors:%s", s, exceptions.toString());
-        throw new IllegalArgumentException(message);
+        throw new NumberParsingException(s, exceptions);
     }
 
     /**
@@ -319,7 +324,7 @@ public class NumberImpl implements Number {
     }
 
     /**
-     * Creaes a new number according to the specified parameter. The default base is <code>10</code>.
+     * Creates a new number according to the specified parameter. The default base is <code>10</code>.
      *
      * @param b
      *        a byte value
@@ -330,7 +335,7 @@ public class NumberImpl implements Number {
     }
 
     /**
-     * Creaes a new number according to the specified parameter. The default base is <code>10</code>.
+     * Creates a new number according to the specified parameter. The default base is <code>10</code>.
      *
      * @param s
      *        a short value
@@ -341,7 +346,7 @@ public class NumberImpl implements Number {
     }
 
     /**
-     * Creaes a new number according to the specified parameter. The default base is <code>10</code>.
+     * Creates a new number according to the specified parameter. The default base is <code>10</code>.
      *
      * @param i
      *        an integer value
@@ -352,7 +357,7 @@ public class NumberImpl implements Number {
     }
 
     /**
-     * Creaes a new number according to the specified parameter. The default base is <code>10</code>.
+     * Creates a new number according to the specified parameter. The default base is <code>10</code>.
      *
      * @param l
      *        a long value
@@ -363,7 +368,7 @@ public class NumberImpl implements Number {
     }
 
     /**
-     * Creaes a new number according to the specified parameter. The default base is <code>10</code>.
+     * Creates a new number according to the specified parameter. The default base is <code>10</code>.
      *
      * @param f
      *        a float value
@@ -374,7 +379,7 @@ public class NumberImpl implements Number {
     }
 
     /**
-     * Creaes a new number according to the specified parameter. The default base is <code>10</code>.
+     * Creates a new number according to the specified parameter. The default base is <code>10</code>.
      *
      * @param d
      *        a double value
@@ -385,7 +390,7 @@ public class NumberImpl implements Number {
     }
 
     /**
-     * Creaes a new number according to the specified parameter. The default base is <code>10</code>.
+     * Creates a new number according to the specified parameter. The default base is <code>10</code>.
      *
      * @param n
      *        a number
@@ -815,12 +820,7 @@ public class NumberImpl implements Number {
     @Override
     public Number absoluteValue() {
 
-        if (isNegative()) {
-
-            return negate();
-        }
-
-        return new NumberImpl(base(), sign(), Nodes.cloneLinkedList(centerNode()));
+        return new NumberImpl(base(), Signs.POSITIVE, Nodes.cloneLinkedList(centerNode()));
     }
 
 }
