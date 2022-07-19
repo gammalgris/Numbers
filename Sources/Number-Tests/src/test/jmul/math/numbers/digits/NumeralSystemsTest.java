@@ -43,7 +43,10 @@ import org.junit.Test;
 
 /**
  * This test suite tests a small sample of available numeral systems (i.e. if the digits are created correctly).
- * 
+ *
+ * TODO missing test for bases besides 10 and 2
+ * TODO missing tests to look up digits by characters
+ *
  * @author Kristian Kutin
  */
 public class NumeralSystemsTest {

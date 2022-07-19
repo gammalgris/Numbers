@@ -57,6 +57,8 @@ import static test.jmul.math.numbers.StringHelper.removeSign;
 /**
  * This test suite tests creating numbers with various input parameters.
  *
+ * TODO add tests for numbers with bases besides 16, 10, 8 and 2
+ *
  * @author Kristian Kutin
  */
 @RunWith(Parameterized.class)
@@ -343,13 +345,13 @@ public class CreateNumberTest {
 
         parameters.add(new Object[] { 2, NumberImpl.class, "1.010" });
 
-        parameters.add(new Object[] { 2, NumberImpl.class, "21.12" });
-        parameters.add(new Object[] { 2, NumberImpl.class, "+21.12" });
-        parameters.add(new Object[] { 2, NumberImpl.class, "-21.12" });
+        parameters.add(new Object[] { 2, NumberImpl.class, "11.11" });
+        parameters.add(new Object[] { 2, NumberImpl.class, "+11.11" });
+        parameters.add(new Object[] { 2, NumberImpl.class, "-11.11" });
 
-        parameters.add(new Object[] { 2, NumberImpl.class, "321.123" });
-        parameters.add(new Object[] { 2, NumberImpl.class, "+321.123" });
-        parameters.add(new Object[] { 2, NumberImpl.class, "-321.123" });
+        parameters.add(new Object[] { 2, NumberImpl.class, "111.111" });
+        parameters.add(new Object[] { 2, NumberImpl.class, "+111.111" });
+        parameters.add(new Object[] { 2, NumberImpl.class, "-111.111" });
 
         return parameters;
     }

@@ -38,6 +38,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import jmul.math.numbers.NumberImpl;
+import jmul.math.numbers.digits.Digit;
+import jmul.math.numbers.digits.NumeralSystems;
 import jmul.math.numbers.exceptions.NumberParsingException;
 
 import jmul.test.classification.UnitTest;
@@ -50,6 +52,8 @@ import org.junit.runners.Parameterized;
 
 /**
  * This test suite tests creating numbers with invalid parameters in order to check the error handling.
+ *
+ * TODO look for more edge cases
  *
  * @author Kristian Kutin
  */
@@ -125,6 +129,30 @@ public class CreateNumberWithIllegalDigitsTest {
     }
 
     /**
+     * Builds a number string.
+     *
+     * @param base
+     *        a number base
+     *
+     * @return a number string depending on the specified base
+     */
+    private static String buildNumberString(int base) {
+
+        if (base == 1) {
+
+            return "";
+        }
+
+        Digit first;
+        {
+            int ordinal = base - 1;
+            first = NumeralSystems.ordinalToDigit(base, ordinal);
+        }
+
+        return "" + buildNumberString(base - 1) + first;
+    }
+
+    /**
      * Returns a matrix of test data.
      *
      * @return a matrix of test data
@@ -137,6 +165,15 @@ public class CreateNumberWithIllegalDigitsTest {
         parameters.add(new Object[] { NumberParsingException.class, 1, "1" });
         parameters.add(new Object[] { NumberParsingException.class, 65, "1" });
         parameters.add(new Object[] { NumberParsingException.class, 64, "Hello World!" });
+
+        for (int base = 2; base <= 63; base++) {
+
+            parameters.add(new Object[] { NumberParsingException.class, base, buildNumberString(base + 1) });
+        }
+
+        String numberString = buildNumberString(64);
+        numberString = numberString + "!";
+        parameters.add(new Object[] { NumberParsingException.class, 64, numberString });
 
         return parameters;
     }

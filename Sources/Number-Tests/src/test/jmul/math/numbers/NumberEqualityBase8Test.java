@@ -45,6 +45,11 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 
+/**
+ *
+ * TODO merge into single test suite
+ *
+ */
 @UnitTest
 public class NumberEqualityBase8Test {
 
@@ -52,7 +57,7 @@ public class NumberEqualityBase8Test {
      * A base for numbers.
      */
     private static final int BASE;
-    
+
     /*
      * The static initializer.
      */

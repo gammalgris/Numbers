@@ -42,6 +42,8 @@ import java.util.Collection;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
 
+import jmul.test.classification.UnitTest;
+
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -55,6 +57,7 @@ import static test.jmul.math.numbers.NumberCreationHelper.createNumber;
  *
  * @author Kristian Kutin
  */
+@UnitTest
 @RunWith(Parameterized.class)
 public class CreateSpecialNumberTest {
 

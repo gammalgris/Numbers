@@ -207,7 +207,7 @@ class NumeralSystemImpl implements NumeralSystem {
 
         if (!charMap.containsKey(symbol)) {
 
-            String message = String.format("No digit exists which corresponds to the specified symbol (%d)!", symbol);
+            String message = String.format("No digit exists which corresponds to the specified symbol ('%c')!", symbol);
             throw new IllegalArgumentException(message);
         }
 

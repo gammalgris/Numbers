@@ -45,6 +45,11 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 
+/**
+ *
+ * TODO merge into single test suite
+ * 
+ */
 @UnitTest
 public class NumberEqualityBase16Test {
 

@@ -52,7 +52,10 @@ import org.junit.runners.Parameterized;
 
 
 /**
- * This test suite tests the digit count of a number (i.e. digits left and right of a separator).
+ * This test suite tests the digit count of a number (i.e. digits left and right of the decimal separator).
+ * Numbers are base 10.
+ *
+ * TODO missing test for bases besides 10
  *
  * @author Kristian Kutin
  */
@@ -132,7 +135,9 @@ public class DigitTest {
     }
 
     /**
-     * Tests creating a number and compares the number with the input.
+     * Creates a number and checks if the digit count left and right of the decimal separator
+     * is as expected.
+     *
      *
      * @throws NoSuchMethodException
      *         is thrown if there exists no suitable constructor.
@@ -209,11 +214,11 @@ public class DigitTest {
         parameters.add(new Object[] { NumberImpl.class, "+1.1", 1, 1 });
         parameters.add(new Object[] { NumberImpl.class, "-1.1", 1, 1 });
 
-        parameters.add(new Object[] { NumberImpl.class, "21.12", 2, 2});
+        parameters.add(new Object[] { NumberImpl.class, "21.12", 2, 2 });
         parameters.add(new Object[] { NumberImpl.class, "+21.12", 2, 2 });
         parameters.add(new Object[] { NumberImpl.class, "-21.12", 2, 2 });
 
-        parameters.add(new Object[] { NumberImpl.class, "321.123", 3, 3});
+        parameters.add(new Object[] { NumberImpl.class, "321.123", 3, 3 });
         parameters.add(new Object[] { NumberImpl.class, "+321.123", 3, 3 });
         parameters.add(new Object[] { NumberImpl.class, "-321.123", 3, 3 });
 

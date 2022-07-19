@@ -47,7 +47,9 @@ import org.junit.Test;
 
 /**
  * This test suite tests the equality comparison of nummbers.
- *
+ * 
+ * TODO merge into single test suite
+ * 
  * @author Kristian Kutin
  */
 @UnitTest
