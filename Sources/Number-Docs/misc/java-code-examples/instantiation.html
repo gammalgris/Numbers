@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+
+		<meta charset="utf-8">
+
+		<title>instantiation examples</title>
+
+		<script src="google-code-prettify/run_prettify.js?autoload=true&amp;skin=sons-of-obsidian&amp;lang=css" defer="defer"></script>
+
+	</head>
+
+	<body bgcolor="Black">
+
+		<?prettify linenums=1?>
+		<pre class="prettyprint" id="quine">
+
+      ...
+
+      Number number;
+
+      // instantiate an integer
+      int i = 2;
+      number = new NumberImpl(i);
+
+      // instantiate an integer via a number string
+      number = new NumberImpl("10");
+
+      // instantiate a binary number corresponding to decimal 3
+      number = new NumberImpl(2, "11");
+
+      // instantiate a floating point number
+      float f = 1.5F;
+      number = new NumberImpl(f);
+
+      // instantiate a floating point number via a number string
+      number = new NumberImpl("12.345");
+
+      // instantiate a number via a number string in scientific notation
+      number = new NumberImpl("1.2E12");
+
+      ...
+
+		</pre>
+
+	</body>
+
+</html>

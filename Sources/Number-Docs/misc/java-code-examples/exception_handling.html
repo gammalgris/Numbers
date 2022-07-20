@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+
+		<meta charset="utf-8">
+
+		<title>exception handling example</title>
+
+		<script src="google-code-prettify/run_prettify.js?autoload=true&amp;skin=sons-of-obsidian&amp;lang=css" defer="defer"></script>
+
+	</head>
+
+	<body bgcolor="Black">
+
+		<?prettify linenums=1?>
+		<pre class="prettyprint" id="quine">
+
+      ...
+
+      Number number;
+      try {
+         
+          // instantiate an integer via a string
+          number = new NumberImpl("10");
+         
+      } catch (NumberParsingException e) {
+
+         // handle exception and/ or rethrow
+         ...
+      }
+
+      ...
+
+		</pre>
+
+	</body>
+
+</html>
