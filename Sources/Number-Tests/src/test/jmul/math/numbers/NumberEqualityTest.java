@@ -36,7 +36,7 @@ package test.jmul.math.numbers;
 
 import java.util.ArrayList;
 import java.util.Collection;
-
+import static jmul.math.numbers.Signs.NEGATIVE;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
 
@@ -127,12 +127,41 @@ public class NumberEqualityTest {
 
         Collection<Object[]> parameters = new ArrayList<Object[]>();
 
-        Number n = new NumberImpl("1");
-        parameters.add(new Object[] { n, n, true });
+        for (int base = 2; base <= 64; base ++) {
 
-        parameters.add(new Object[] { new NumberImpl("1"), new NumberImpl("2"), false });
-        parameters.add(new Object[] { new NumberImpl("1"), null, false });
-        parameters.add(new Object[] { null, new NumberImpl("2"), false });
+            Number n = new NumberImpl(base, "1");
+            parameters.add(new Object[] { n, n, true });
+    
+            parameters.add(new Object[] { new NumberImpl(base, "1"), null, false });
+            parameters.add(new Object[] { null, new NumberImpl(base, "1"), false });
+    
+            parameters.add(new Object[] { new NumberImpl(base), new NumberImpl(base), true });
+            parameters.add(new Object[] { new NumberImpl(base), new NumberImpl(base, NEGATIVE), false });
+            parameters.add(new Object[] { new NumberImpl(base, NEGATIVE), new NumberImpl(base), false });
+            parameters.add(new Object[] { new NumberImpl(base, NEGATIVE), new NumberImpl(base, NEGATIVE), true });
+    
+            parameters.add(new Object[] { new NumberImpl(base, "0"), new NumberImpl(base, "0"), true });
+            parameters.add(new Object[] { new NumberImpl(base, "1"), new NumberImpl(base, "0"), false });
+            parameters.add(new Object[] { new NumberImpl(base, "0"), new NumberImpl(base, "1"), false });
+            parameters.add(new Object[] { new NumberImpl(base, "-1"), new NumberImpl(base, "0"), false });
+            parameters.add(new Object[] { new NumberImpl(base, "0"), new NumberImpl(base, "-1"), false });
+    
+            parameters.add(new Object[] { new NumberImpl(base, "1111111111"), new NumberImpl(base, "1.111111111"), false });
+            parameters.add(new Object[] { new NumberImpl(base, "1.111111111"), new NumberImpl(base, "1111111111"), false });
+        }
+
+        parameters.add(new Object[] { new NumberImpl(8, "11"), new NumberImpl(8), false });
+
+        parameters.add(new Object[] { new NumberImpl(8, "3210765432107654321"), new NumberImpl(8, "3210765432107654321"), true });
+        parameters.add(new Object[] { new NumberImpl(8, "43210765432107654321"), new NumberImpl(8, "3210765432107654321"), false });
+        parameters.add(new Object[] { new NumberImpl(8, "3210765432107654321"), new NumberImpl(8, "43210765432107654321"), false });
+        parameters.add(new Object[] { new NumberImpl(8, "3210765432107654321.0123456712345670123"), new NumberImpl(8, "3210765432107654321.0123456712345670123"), true });
+        parameters.add(new Object[] { new NumberImpl(8, "3210765432107654321.01234567123456701234"), new NumberImpl(8, "3210765432107654321.0123456712345670123"), false });
+        parameters.add(new Object[] { new NumberImpl(8, "3210765432107654321.0123456712345670123"), new NumberImpl(8, "3210765432107654321.01234567123456701234"), false });
+
+        parameters.add(new Object[] { new NumberImpl(), new NumberImpl(), true });
+        parameters.add(new Object[] { new NumberImpl(), new NumberImpl(), true });
+
 
         return parameters;
     }
