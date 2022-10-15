@@ -31,35 +31,25 @@
  * $Id$
  */
 
-package test.jmul.math.numbers;
-
-
-import org.junit.Test;
-
-import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
-
-import static org.junit.Assert.assertEquals;
+package jmul.singletons;
 
 
 /**
- * This test suite tests the currently implemented comparator for numbers.
+ * A custom exception for cases when a repsoitory doesn't contain a function.
  *
  * @author Kristian Kutin
  */
-public class NumberComparatorTest {
+public class FunctionDoesntExistException extends IllegalArgumentException {
 
-    @Test
-    public void testZeroAndOneComparison() {
+    /**
+     * Creates a new exception according to the specified parameter.
+     *
+     * @param name
+     *        the name of the function
+     */
+    public FunctionDoesntExistException(CharSequence name) {
 
-        Number zero = new NumberImpl("0");
-        Number one = new NumberImpl("1");
-
-        String message =
-            String.format("The equality test failed for the numbers \"%s\" and \"%s\")!", zero.toString(),
-                          one.toString());
-        assertEquals(message, -1, zero.compareTo(one));
-        assertEquals(message, 1, one.equals(zero));
+        super(String.format("The function %s already exists!", name));
     }
 
 }

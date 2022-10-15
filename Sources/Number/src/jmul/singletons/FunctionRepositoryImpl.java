@@ -137,7 +137,7 @@ public class FunctionRepositoryImpl implements FunctionRepository {
 
             String message =
                 String.format("No function with the specified identifier (%s) is registered!", identifier.toString());
-            throw new IllegalArgumentException(message);
+            throw new FunctionDoesntExistException(message);
         }
 
         identifierClassMap.remove(identifier);
@@ -165,7 +165,7 @@ public class FunctionRepositoryImpl implements FunctionRepository {
 
             String message =
                 String.format("No function with the specified identifier (%s) is registered!", identifier.toString());
-            throw new IllegalArgumentException(message);
+            throw new FunctionDoesntExistException(message);
         }
 
         if (identifierFunctionMap.containsKey(identifier)) {

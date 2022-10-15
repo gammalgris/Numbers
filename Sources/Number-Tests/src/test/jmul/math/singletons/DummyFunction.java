@@ -31,25 +31,25 @@
  * $Id$
  */
 
-package jmul.singletons;
+package test.jmul.math.singletons;
+
+
+import jmul.singletons.Function;
 
 
 /**
- * A custom exception for cases when a repository already contains a function.
+ * A dummy function with no function body.
  *
  * @author Kristian Kutin
  */
-public class FunctionExistsException extends IllegalArgumentException {
+public class DummyFunction implements Function {
 
     /**
-     * Creates a new exception according to the specified parameter.
-     *
-     * @param name
-     *        the name of the function
+     * The default constructor.
      */
-    public FunctionExistsException(CharSequence name) {
+    public DummyFunction() {
 
-        super(String.format("The function %s already exists!", name));
+        super();
     }
 
 }
