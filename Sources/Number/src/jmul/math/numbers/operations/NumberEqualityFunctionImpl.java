@@ -56,14 +56,14 @@ public class NumberEqualityFunctionImpl implements Function, EqualityFunction<Nu
     }
 
     /**
-     * Comapres the two specified numbers for comparison.
+     * Compares the two specified numbers regarding equality.
      *
      * @param n1
      *        a number
      * @param n2
      *        a number
      *
-     * @return <code>true</code> if both numbers are considered equal, esle <code>false</code>
+     * @return <code>true</code> if both numbers are considered equal, else <code>false</code>
      */
     public boolean equals(Number n1, Number n2) {
 

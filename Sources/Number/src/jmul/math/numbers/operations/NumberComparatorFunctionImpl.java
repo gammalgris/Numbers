@@ -41,17 +41,139 @@ import jmul.math.numbers.Number;
 import jmul.singletons.Function;
 
 
+/**
+ * An implementation of an natural ordering comparator for numbers.
+ *
+ * @author Kristian Kutin
+ */
 public class NumberComparatorFunctionImpl implements Function, Comparator<Number> {
 
+    /**
+     * A constant value indicating that a number is greater than another number.
+     */
+    private static final int GREATER_THAN;
+
+    /**
+     * A constanjt indicating that a number is equal to another number.
+     */
+    private static final int EQUALS;
+
+    /**
+     * A constant indicating that a number is lesser than another number.
+     */
+    private static final int LESSER_THAN;
+
+    /*
+     * The static initializer.
+     */
+    static {
+
+        GREATER_THAN = 1;
+        EQUALS = 0;
+        LESSER_THAN = -1;
+    }
+
+    /**
+     * The default constructor.
+     */
     public NumberComparatorFunctionImpl() {
 
         super();
     }
 
+    /**
+     * Compares the two specified numbers regarding their natural order.
+     *
+     * @param n1
+     *        a number
+     * @param n2
+     *        a number
+     *
+     * @return <code>1</code>, <code>0</code> or <code>-1</code> if the first number is greater than,
+     *         equals or lesser than the second number.
+     */
     @Override
     public int compare(Number n1, Number n2) {
 
+        if ((n1 == null) && (n2 == null)) {
+
+            return EQUALS;
+        }
+
+        if (n1 == null) {
+
+            return LESSER_THAN;
+        }
+
+        if (n2 == null) {
+
+            return GREATER_THAN;
+        }
+
+        if (n1 == n2) {
+
+            return EQUALS;
+        }
+
+        if (n1.isZero() && n2.isZero()) {
+
+            return EQUALS;
+        }
+
+        if (n1.sign() != n2.sign()) {
+
+            if (n1.isPositive()) {
+
+                return GREATER_THAN;
+
+            } else {
+
+                return LESSER_THAN;
+            }
+        }
+
+        if (n1.isInfinity() && n2.isInfinity()) {
+
+            return EQUALS;
+        }
+
+        if (n1.isInfinity()) {
+
+            return GREATER_THAN;
+        }
+
+        if (n2.isInfinity()) {
+
+            return LESSER_THAN;
+        }
+
+        if (n1.isZero()) {
+
+            if (n2.isPositive()) {
+
+                return LESSER_THAN;
+
+            } else {
+
+                return GREATER_THAN;
+            }
+        }
+
+        if (n2.isZero()) {
+
+            if (n1.isPositive()) {
+
+                return GREATER_THAN;
+
+            } else {
+
+                return LESSER_THAN;
+            }
+        }
+
+
         // TODO Implement this method
+
         return 0;
     }
 

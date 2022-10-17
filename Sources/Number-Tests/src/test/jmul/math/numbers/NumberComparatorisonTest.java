@@ -87,7 +87,7 @@ public class NumberComparatorisonTest {
      */
     public NumberComparatorisonTest(Number n1, Number n2, int result) {
 
-        number1 = n2;
+        number1 = n1;
         number2 = n2;
         expectedResult = result;
     }
