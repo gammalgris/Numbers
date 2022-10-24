@@ -31,29 +31,57 @@
  * $Id$
  */
 
-package jmul.math.numbers.operations;
+package jmul.math.numbers.functions;
+
+
+import jmul.math.numbers.digits.Digit;
+import jmul.math.numbers.exceptions.DigitBaseMismatchException;
 
 
 /**
- * This interface describes an equality comparator.
+ * A helper class for checking parameters.
  *
  * @author Kristian Kutin
- *
- * @param <T>
- *        the type of objects to compare
  */
-public interface EqualityFunction<T> {
+final class ParameterCheckHelper {
 
     /**
-     * Checks the two specified objects for equality.
-     *
-     * @param t1
-     *        an object
-     * @param t2
-     *        an object
-     *
-     * @return <code>true</code> if bothe objects are considered equal, else <code>false</code>
+     * The default constructor.
      */
-    boolean equals(T t1, T t2);
+    private ParameterCheckHelper() {
+
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * Checks the specified parameters and throws an exception if invalid.
+     *
+     * @param d
+     *        a parameter
+     */
+    public static void checkParameter(Digit d) {
+
+        if (d == null) {
+
+            String message = "The specified digit is null!";
+            throw new IllegalArgumentException(message);
+        }
+    }
+
+    /**
+     * Checks if the specified digits have the same base.
+     *
+     * @param d1
+     *        a digit
+     * @param d2
+     *        a digit
+     */
+    public static void checkParameterBase(Digit d1, Digit d2) {
+
+        if (d1.base() != d2.base()) {
+
+            throw new DigitBaseMismatchException(d1, d2);
+        }
+    }
 
 }

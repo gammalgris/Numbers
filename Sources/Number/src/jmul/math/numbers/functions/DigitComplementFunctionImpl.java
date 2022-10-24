@@ -31,25 +31,50 @@
  * $Id$
  */
 
-package jmul.singletons;
+package jmul.math.numbers.functions;
+
+
+import jmul.math.numbers.digits.Digit;
+import jmul.math.numbers.digits.NumeralSystems;
+import static jmul.math.numbers.functions.ParameterCheckHelper.checkParameter;
+import jmul.math.operations.Result;
+import jmul.math.operations.UnaryOperation;
 
 
 /**
- * A custom exception for cases when a repsoitory doesn't contain a function.
+ * This unary function implementation calculates the coplement of a digit.
  *
  * @author Kristian Kutin
  */
-public class FunctionDoesntExistException extends IllegalArgumentException {
+public class DigitComplementFunctionImpl implements UnaryOperation<Digit> {
 
     /**
-     * Creates a new exception according to the specified parameter.
-     *
-     * @param name
-     *        the name of the function
+     * The default constructor.
      */
-    public FunctionDoesntExistException(CharSequence name) {
+    public DigitComplementFunctionImpl() {
 
-        super(String.format("No function with the specified identifier (%s) is registered!", name.toString()));
+        super();
+    }
+
+    /**
+     * Calculates the complement for the specified digit.
+     *
+     * @param digit
+     *        a digit
+     *
+     * @return the result
+     */
+    @Override
+    public Result<Digit> calculate(Digit digit) {
+
+        checkParameter(digit);
+
+        int base = digit.base();
+        int result = base - digit.ordinal() - 1;
+
+        Digit newDigit = NumeralSystems.ordinalToDigit(base, result);
+
+        return new Result<Digit>(newDigit);
     }
 
 }

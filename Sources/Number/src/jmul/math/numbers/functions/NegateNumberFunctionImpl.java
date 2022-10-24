@@ -31,59 +31,52 @@
  * $Id$
  */
 
-package jmul.math.numbers.operations;
+package jmul.math.numbers.functions;
 
 
-import jmul.math.numbers.digits.Digit;
+import jmul.math.numbers.Number;
+import jmul.math.numbers.NumberImpl;
+import jmul.math.numbers.Sign;
+import jmul.math.numbers.Signs;
+import jmul.math.numbers.nodes.DigitNode;
+import jmul.math.numbers.nodes.Nodes;
+import jmul.math.operations.Result;
+import jmul.math.operations.UnaryOperation;
 
 
 /**
- * A base implementation for digit operations.
+ * This function implementation negates a number.
  *
  * @author Kristian Kutin
  */
-abstract class BaseDigitFunctionImpl {
+public class NegateNumberFunctionImpl implements UnaryOperation<Number> {
 
     /**
      * The default constructor.
      */
-    protected BaseDigitFunctionImpl() {
+    public NegateNumberFunctionImpl() {
 
         super();
     }
 
     /**
-     * Checks the specified parameters and throws an exception if invalid.
+     * Negates the specified number.
      *
-     * @param d
-     *        a parameter
-     */
-    protected void checkParameter(Digit d) {
-
-        if (d == null) {
-
-            String message = "The specified digit is null!";
-            throw new IllegalArgumentException(message);
-        }
-    }
-
-    /**
-     * Checks if the specified digits have the same base.
+     * @param n
+     *        a number
      *
-     * @param d1
-     *        a digit
-     * @param d2
-     *        a digit
+     * @return a number
      */
-    protected void checkParameterBase(Digit d1, Digit d2) {
+    @Override
+    public Result<Number> calculate(Number n) {
 
-        if (d1.base() != d2.base()) {
+        Sign sign = Signs.negate(n.sign());
+        int base = n.base();
+        DigitNode centerNode = Nodes.cloneLinkedList(n.centerNode());
 
-            String message =
-                String.format("The specified digits are from different numeral systems (base=%d; base=%d)!", d1.base(),
-                              d2.base());
-            throw new IllegalArgumentException(message);
-        }
+        Number newNumber = new NumberImpl(base, sign, centerNode);
+
+        return new Result<Number>(newNumber);
     }
 
 }

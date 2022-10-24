@@ -31,62 +31,54 @@
  * $Id$
  */
 
-package jmul.math.numbers.operations;
+package test.jmul.math.numbers.digits;
 
 
 import jmul.math.numbers.digits.Digit;
 import jmul.math.numbers.digits.NumeralSystems;
-import jmul.math.operations.BinaryOperation;
-import jmul.math.operations.ResultWithCarry;
+
+import jmul.test.classification.UnitTest;
+
+import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 
 /**
- * This binary function adds two digits.
+ * The test suite contains some special cases regarding digit comparison and equality.
  *
  * @author Kristian Kutin
  */
-public class AddDigitsFunctionImpl extends BaseDigitFunctionImpl implements BinaryOperation<Digit, ResultWithCarry<Digit>> {
+@UnitTest
+public class SpecialCasesTest {
 
     /**
      * The default constructor.
      */
-    public AddDigitsFunctionImpl() {
+    public SpecialCasesTest() {
 
         super();
     }
 
     /**
-     * Adds the specified digits.
-     *
-     * @param operand1
-     *        an operand
-     * @param operand2
-     *        an operand
-     *
-     * @return the result of the addition
+     * Tests the comparison with <code>null</code>.
      */
-    @Override
-    public ResultWithCarry<Digit> calculate(Digit operand1, Digit operand2) {
+    @Test
+    public void testEqualsNull() {
 
-        checkParameter(operand1);
-        checkParameter(operand2);
-        checkParameterBase(operand1, operand2);
+        Digit d = NumeralSystems.ordinalToDigit(10, 1);
+        boolean actualResult = d.equals(null);
 
-        int base = operand1.base();
+        assertEquals(false, actualResult);
+    }
 
-        int carry = 0;
-        int result = operand1.ordinal() + operand2.ordinal();
+    /**
+     * Tests the comparison with <code>null</code>.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testCompareNull() {
 
-        if (result >= base) {
-
-            result = result - base;
-            carry = 1;
-        }
-
-        Digit resultDigit = NumeralSystems.ordinalToDigit(base, result);
-        Digit carryDigit = NumeralSystems.ordinalToDigit(base, carry);
-
-        return new ResultWithCarry<Digit>(resultDigit, carryDigit);
+        Digit d = NumeralSystems.ordinalToDigit(10, 1);
+        d.compareTo(null);
     }
 
 }

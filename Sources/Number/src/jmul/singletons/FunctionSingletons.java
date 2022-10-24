@@ -34,6 +34,9 @@
 package jmul.singletons;
 
 
+import java.util.ResourceBundle;
+
+
 /**
  * This class manages function singletons (i.e. instances of classes that implement a strategy pattern) and shouldn't
  * exist multiple times.
@@ -43,16 +46,39 @@ package jmul.singletons;
 public final class FunctionSingletons {
 
     /**
+     * A property key.
+     */
+    private static final String INITIALIZER_KEY;
+
+    /**
      * A map containing all singletons.
      */
-    private final static FunctionRepository FUNCTION_REPOSITORY;
+    private static final FunctionRepository FUNCTION_REPOSITORY;
 
     /*
      * The static initializer.
      */
     static {
 
-        FUNCTION_REPOSITORY = new FunctionRepositoryImpl();
+        INITIALIZER_KEY = "initializer";
+
+        ResourceBundle bundle = ResourceBundle.getBundle(FunctionSingletons.class.getName());
+        String className = bundle.getString(INITIALIZER_KEY);
+
+        try {
+
+            Class initializerClass = Class.forName(className);
+            FunctionRepositoryInitializer initializer = (FunctionRepositoryInitializer) initializerClass.newInstance();
+            FUNCTION_REPOSITORY = initializer.init();
+
+        } catch (ClassNotFoundException e) {
+
+            throw new RuntimeException("Unable to initialize the function repository!", e);
+
+        } catch (IllegalAccessException | InstantiationException e) {
+
+            throw new RuntimeException("Unable to initialize the function repository!", e);
+        }
     }
 
     /**

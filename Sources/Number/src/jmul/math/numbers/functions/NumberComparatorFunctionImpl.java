@@ -31,12 +31,15 @@
  * $Id$
  */
 
-package jmul.math.numbers.operations;
+package jmul.math.numbers.functions;
 
 
 import java.util.Comparator;
 
 import jmul.math.numbers.Number;
+import jmul.math.numbers.digits.Digit;
+import jmul.math.numbers.exceptions.DigitBaseMismatchException;
+import jmul.math.numbers.nodes.DigitNode;
 
 import jmul.singletons.Function;
 
@@ -46,32 +49,7 @@ import jmul.singletons.Function;
  *
  * @author Kristian Kutin
  */
-public class NumberComparatorFunctionImpl implements Function, Comparator<Number> {
-
-    /**
-     * A constant value indicating that a number is greater than another number.
-     */
-    private static final int GREATER_THAN;
-
-    /**
-     * A constanjt indicating that a number is equal to another number.
-     */
-    private static final int EQUALS;
-
-    /**
-     * A constant indicating that a number is lesser than another number.
-     */
-    private static final int LESSER_THAN;
-
-    /*
-     * The static initializer.
-     */
-    static {
-
-        GREATER_THAN = 1;
-        EQUALS = 0;
-        LESSER_THAN = -1;
-    }
+public class NumberComparatorFunctionImpl extends ComparatorBase implements Function, Comparator<Number> {
 
     /**
      * The default constructor.
@@ -95,19 +73,16 @@ public class NumberComparatorFunctionImpl implements Function, Comparator<Number
     @Override
     public int compare(Number n1, Number n2) {
 
-        if ((n1 == null) && (n2 == null)) {
-
-            return EQUALS;
-        }
+        // Check the references
 
         if (n1 == null) {
 
-            return LESSER_THAN;
+            throw new NullPointerException();
         }
 
         if (n2 == null) {
 
-            return GREATER_THAN;
+            throw new NullPointerException();
         }
 
         if (n1 == n2) {
@@ -115,10 +90,21 @@ public class NumberComparatorFunctionImpl implements Function, Comparator<Number
             return EQUALS;
         }
 
-        if (n1.isZero() && n2.isZero()) {
+        // Check the number bases
+
+        if (n1.base() != n2.base()) {
+
+            throw new DigitBaseMismatchException(n1, n2);
+        }
+
+        // Check for zero (-0, 0, +0) and ignore the signs
+
+        if (n1.isZero() && n2.isZero()) { // may be superfluous
 
             return EQUALS;
         }
+
+        // Check the signs
 
         if (n1.sign() != n2.sign()) {
 
@@ -131,6 +117,8 @@ public class NumberComparatorFunctionImpl implements Function, Comparator<Number
                 return LESSER_THAN;
             }
         }
+
+        // Check for infinity
 
         if (n1.isInfinity() && n2.isInfinity()) {
 
@@ -147,34 +135,87 @@ public class NumberComparatorFunctionImpl implements Function, Comparator<Number
             return LESSER_THAN;
         }
 
-        if (n1.isZero()) {
+        // Check the center digit
 
-            if (n2.isPositive()) {
+        if (n1.centerNode().digit() != n2.centerNode().digit()) {
+
+            Digit d1 = n1.centerNode().digit();
+            Digit d2 = n2.centerNode().digit();
+
+            return d1.compareTo(d2);
+        }
+
+        // Check the digits left of the decimal separator
+
+        DigitNode thisLeft = n1.centerNode().leftNode();
+        DigitNode otherLeft = n2.centerNode().leftNode();
+
+        while (true) {
+
+            if ((thisLeft == null) && (otherLeft == null)) {
+
+                break;
+            }
+
+            if (thisLeft == null) {
 
                 return LESSER_THAN;
+            }
 
-            } else {
+            if (otherLeft == null) {
 
                 return GREATER_THAN;
             }
+
+            if (thisLeft.digit() != otherLeft.digit()) {
+
+                Digit d1 = thisLeft.digit();
+                Digit d2 = otherLeft.digit();
+
+                return d1.compareTo(d2);
+            }
+
+            thisLeft = thisLeft.leftNode();
+            otherLeft = otherLeft.leftNode();
         }
 
-        if (n2.isZero()) {
+        // Check the digits right of the decimal separator
 
-            if (n1.isPositive()) {
+        DigitNode thisRight = n1.centerNode().rightNode();
+        DigitNode otherRight = n2.centerNode().rightNode();
 
-                return GREATER_THAN;
+        while (true) {
 
-            } else {
+            if ((thisRight == null) && (otherRight == null)) {
+
+                break;
+            }
+
+            if (thisRight == null) {
 
                 return LESSER_THAN;
             }
+
+            if (otherRight == null) {
+
+                return GREATER_THAN;
+            }
+
+            if (thisRight.digit() != otherRight.digit()) {
+
+                Digit d1 = thisLeft.digit();
+                Digit d2 = otherLeft.digit();
+
+                return d1.compareTo(d2);
+            }
+
+            thisRight = thisRight.rightNode();
+            otherRight = otherRight.rightNode();
         }
 
+        // return a default value
 
-        // TODO Implement this method
-
-        return 0;
+        return EQUALS;
     }
 
 }

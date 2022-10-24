@@ -31,49 +31,21 @@
  * $Id$
  */
 
-package jmul.math.numbers.operations;
-
-
-import jmul.math.numbers.digits.Digit;
-import jmul.math.numbers.digits.NumeralSystems;
-import jmul.math.operations.Result;
-import jmul.math.operations.UnaryOperation;
+package jmul.singletons;
 
 
 /**
- * This unary function implementation calculates the coplement of a digit.
+ * This interface describes an initializer for a function repository.
  *
  * @author Kristian Kutin
  */
-public class DigitComplementFunctionImpl extends BaseDigitFunctionImpl implements UnaryOperation<Digit> {
+public interface FunctionRepositoryInitializer {
 
     /**
-     * The default constructor.
-     */
-    public DigitComplementFunctionImpl() {
-
-        super();
-    }
-
-    /**
-     * Calculates the complement for the specified digit.
+     * Returns an initialized function repository.
      *
-     * @param digit
-     *        a digit
-     *
-     * @return the result
+     * @return a function repository
      */
-    @Override
-    public Result<Digit> calculate(Digit digit) {
-
-        checkParameter(digit);
-
-        int base = digit.base();
-        int result = base - digit.ordinal() - 1;
-
-        Digit newDigit = NumeralSystems.ordinalToDigit(base, result);
-
-        return new Result<Digit>(newDigit);
-    }
+    FunctionRepository init();
 
 }

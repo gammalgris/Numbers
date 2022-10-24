@@ -39,7 +39,7 @@ package jmul.math.numbers.digits;
  *
  * @author Kristian Kutin
  */
-public interface Digit {
+public interface Digit extends Comparable<Digit> {
 
     /**
      * Returns the symbol associated with this digit.

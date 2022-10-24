@@ -31,7 +31,7 @@
  * $Id$
  */
 
-package jmul.math.numbers.operations;
+package jmul.math.numbers.exceptions;
 
 
 /**

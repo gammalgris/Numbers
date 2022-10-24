@@ -31,25 +31,47 @@
  * $Id$
  */
 
-package jmul.singletons;
+package jmul.math.numbers.functions;
 
 
 /**
- * A custom exception for cases when a repsoitory doesn't contain a function.
+ * A base implementation for a comparator implementation.
  *
  * @author Kristian Kutin
  */
-public class FunctionDoesntExistException extends IllegalArgumentException {
+public class ComparatorBase {
 
     /**
-     * Creates a new exception according to the specified parameter.
-     *
-     * @param name
-     *        the name of the function
+     * A constant value indicating that a number is greater than another number.
      */
-    public FunctionDoesntExistException(CharSequence name) {
+    static final int GREATER_THAN;
 
-        super(String.format("No function with the specified identifier (%s) is registered!", name.toString()));
+    /**
+     * A constanjt indicating that a number is equal to another number.
+     */
+    static final int EQUALS;
+
+    /**
+     * A constant indicating that a number is lesser than another number.
+     */
+    static final int LESSER_THAN;
+
+    /*
+     * The static initializer.
+     */
+    static {
+
+        GREATER_THAN = 1;
+        EQUALS = 0;
+        LESSER_THAN = -1;
+    }
+
+    /**
+     * The default constructor.
+     */
+    public ComparatorBase() {
+
+        super();
     }
 
 }

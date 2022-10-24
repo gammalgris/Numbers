@@ -113,10 +113,7 @@ public class FunctionRepositoryImpl implements FunctionRepository {
 
         if (identifierClassMap.containsKey(identifier)) {
 
-            String message =
-                String.format("A function with the specified identifier (%s) is already registered!",
-                              identifier.toString());
-            throw new FunctionExistsException(message);
+            throw new FunctionExistsException(identifier.toString());
         }
 
         identifierClassMap.put(identifier, implementationClass);
@@ -163,9 +160,7 @@ public class FunctionRepositoryImpl implements FunctionRepository {
 
         if (!identifierClassMap.containsKey(identifier)) {
 
-            String message =
-                String.format("No function with the specified identifier (%s) is registered!", identifier.toString());
-            throw new FunctionDoesntExistException(message);
+            throw new FunctionDoesntExistException(identifier);
         }
 
         if (identifierFunctionMap.containsKey(identifier)) {

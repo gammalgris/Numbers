@@ -43,22 +43,12 @@ import jmul.math.hash.HashHelper;
 import static jmul.math.numbers.ParameterHelper.checkBase;
 import static jmul.math.numbers.ParameterHelper.checkSign;
 import jmul.math.numbers.exceptions.NumberParsingException;
+import jmul.math.numbers.functions.EqualityFunction;
 import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.Nodes;
 import jmul.math.numbers.notations.NotationFunction;
 import jmul.math.numbers.notations.NotationParser;
 import jmul.math.numbers.notations.ParsingResult;
-import jmul.math.numbers.notations.ScientificNotationFunctionImpl;
-import jmul.math.numbers.notations.ScientificNotationParserImpl;
-import jmul.math.numbers.notations.StandardNotationFunctionImpl;
-import jmul.math.numbers.notations.StandardNotationParserImpl;
-import jmul.math.numbers.operations.AddDigitsFunctionImpl;
-import jmul.math.numbers.operations.AddNumbersFunctionImpl;
-import jmul.math.numbers.operations.DigitComplementFunctionImpl;
-import jmul.math.numbers.operations.EqualityFunction;
-import jmul.math.numbers.operations.NegateNumberFunctionImpl;
-import jmul.math.numbers.operations.NumberComparatorFunctionImpl;
-import jmul.math.numbers.operations.NumberEqualityFunctionImpl;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
@@ -99,29 +89,6 @@ public class NumberImpl implements Number {
     static {
 
         DEFAULT_BASE = 10;
-
-        FunctionSingletons.registerFunction(FunctionIdentifiers.STANDARD_NOTATION_PARSER,
-                                            StandardNotationParserImpl.class);
-        FunctionSingletons.registerFunction(FunctionIdentifiers.SCIENTIFIC_NOTATION_PARSER,
-                                            ScientificNotationParserImpl.class);
-
-        FunctionSingletons.registerFunction(FunctionIdentifiers.SCIENTIFIC_NOTATION_FUNCTION,
-                                            ScientificNotationFunctionImpl.class);
-        FunctionSingletons.registerFunction(FunctionIdentifiers.STANDARD_NOTATION_FUNCTION,
-                                            StandardNotationFunctionImpl.class);
-
-        FunctionSingletons.registerFunction(FunctionIdentifiers.NEGATE_NUMBER_FUNCTION, NegateNumberFunctionImpl.class);
-
-        FunctionSingletons.registerFunction(FunctionIdentifiers.NUMBER_COMPARATOR_FUNCTION,
-                                            NumberComparatorFunctionImpl.class);
-        FunctionSingletons.registerFunction(FunctionIdentifiers.NUMBER_EQUALITY_FUNCTION,
-                                            NumberEqualityFunctionImpl.class);
-
-        FunctionSingletons.registerFunction(FunctionIdentifiers.ADD_DIGITS_FUNCTION, AddDigitsFunctionImpl.class);
-        FunctionSingletons.registerFunction(FunctionIdentifiers.DIGIT_COMPLEMENT_FUNCTION,
-                                            DigitComplementFunctionImpl.class);
-
-        FunctionSingletons.registerFunction(FunctionIdentifiers.ADDITION_FUNCTION, AddNumbersFunctionImpl.class);
 
         List<FunctionIdentifiers> tmpList = new ArrayList<>();
 
@@ -552,11 +519,16 @@ public class NumberImpl implements Number {
             return false;
         }
 
-        EqualityFunction<Number> function =
-            (EqualityFunction<Number>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_EQUALITY_FUNCTION);
-        boolean result = function.equals(this, (Number) o);
+        if (o instanceof Number) {
 
-        return result;
+            EqualityFunction<Number> function =
+                (EqualityFunction<Number>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_EQUALITY_FUNCTION);
+            boolean result = function.equals(this, (Number) o);
+
+            return result;
+        }
+
+        return false;
     }
 
     /**

@@ -31,7 +31,7 @@
  * $Id$
  */
 
-package jmul.math.numbers.operations;
+package jmul.math.numbers.functions;
 
 
 import jmul.math.numbers.FunctionIdentifiers;
@@ -39,6 +39,7 @@ import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
 import jmul.math.numbers.Sign;
 import jmul.math.numbers.digits.Digit;
+import jmul.math.numbers.exceptions.UndefinedResultException;
 import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.Nodes;
 import jmul.math.numbers.nodes.NodesResult;

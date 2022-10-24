@@ -31,52 +31,29 @@
  * $Id$
  */
 
-package jmul.math.numbers.operations;
-
-
-import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
-import jmul.math.numbers.Sign;
-import jmul.math.numbers.Signs;
-import jmul.math.numbers.nodes.DigitNode;
-import jmul.math.numbers.nodes.Nodes;
-import jmul.math.operations.Result;
-import jmul.math.operations.UnaryOperation;
+package jmul.math.numbers.functions;
 
 
 /**
- * This function implementation negates a number.
+ * This interface describes an equality comparator.
  *
  * @author Kristian Kutin
+ *
+ * @param <T>
+ *        the type of objects to compare
  */
-public class NegateNumberFunctionImpl implements UnaryOperation<Number> {
+public interface EqualityFunction<T> {
 
     /**
-     * The default constructor.
-     */
-    public NegateNumberFunctionImpl() {
-
-        super();
-    }
-
-    /**
-     * Negates the specified number.
+     * Checks the two specified objects for equality.
      *
-     * @param n
-     *        a number
+     * @param t1
+     *        an object
+     * @param t2
+     *        an object
      *
-     * @return a number
+     * @return <code>true</code> if bothe objects are considered equal, else <code>false</code>
      */
-    @Override
-    public Result<Number> calculate(Number n) {
-
-        Sign sign = Signs.negate(n.sign());
-        int base = n.base();
-        DigitNode centerNode = Nodes.cloneLinkedList(n.centerNode());
-
-        Number newNumber = new NumberImpl(base, sign, centerNode);
-
-        return new Result<Number>(newNumber);
-    }
+    boolean equals(T t1, T t2);
 
 }

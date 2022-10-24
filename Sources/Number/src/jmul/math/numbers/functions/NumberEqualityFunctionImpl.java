@@ -31,10 +31,11 @@
  * $Id$
  */
 
-package jmul.math.numbers.operations;
+package jmul.math.numbers.functions;
 
 
 import jmul.math.numbers.Number;
+import jmul.math.numbers.exceptions.DigitBaseMismatchException;
 import jmul.math.numbers.nodes.DigitNode;
 
 import jmul.singletons.Function;
@@ -67,6 +68,8 @@ public class NumberEqualityFunctionImpl implements Function, EqualityFunction<Nu
      */
     public boolean equals(Number n1, Number n2) {
 
+        // Check the references
+
         if ((n1 == null) && (n2 == null)) {
 
             return true;
@@ -82,15 +85,21 @@ public class NumberEqualityFunctionImpl implements Function, EqualityFunction<Nu
             return true;
         }
 
+        // Check the number bases
+
+        if (n1.base() != n2.base()) {
+
+            throw new DigitBaseMismatchException(n1, n2);
+        }
+
+        // Check the signs
+
         if (n1.sign() != n2.sign()) {
 
             return false;
         }
 
-        if (n1.base() != n2.base()) {
-
-            return false;
-        }
+        // Check for infinity
 
         if ((n1.centerNode() == null) && (n2.centerNode() == null)) {
 
@@ -102,10 +111,14 @@ public class NumberEqualityFunctionImpl implements Function, EqualityFunction<Nu
             return false;
         }
 
+        // Check the center digit
+
         if (n1.centerNode().digit() != n2.centerNode().digit()) {
 
             return false;
         }
+
+        // Check the digits left of the decimal separator
 
         DigitNode thisLeft = n1.centerNode().leftNode();
         DigitNode otherLeft = n2.centerNode().leftNode();
@@ -131,6 +144,8 @@ public class NumberEqualityFunctionImpl implements Function, EqualityFunction<Nu
             otherLeft = otherLeft.leftNode();
         }
 
+        // Check the digits right of the decimal separator
+
         DigitNode thisRight = n1.centerNode().rightNode();
         DigitNode otherRight = n2.centerNode().rightNode();
 
@@ -154,6 +169,8 @@ public class NumberEqualityFunctionImpl implements Function, EqualityFunction<Nu
             thisRight = thisRight.rightNode();
             otherRight = otherRight.rightNode();
         }
+
+        // return a default value
 
         return true;
     }

@@ -34,8 +34,15 @@
 package jmul.math.numbers.digits;
 
 
+import java.util.Comparator;
+
+import jmul.math.hash.HashHelper;
+import jmul.math.numbers.FunctionIdentifiers;
 import static jmul.math.numbers.ParameterHelper.checkBase;
 import static jmul.math.numbers.ParameterHelper.checkOrdinal;
+import jmul.math.numbers.functions.EqualityFunction;
+
+import jmul.singletons.FunctionSingletons;
 
 
 /**
@@ -146,6 +153,64 @@ class DigitImpl implements Digit {
     public String toString() {
 
         return String.valueOf(symbol);
+    }
+
+    /**
+     * Checks the equality of this number and the specified object (i.e. number).
+     *
+     * @param o
+     *        another object (i.e. number)
+     *
+     * @return <code>true</code> if this number is euqal to the specified number, else <code>false</code>
+     */
+    @Override
+    public boolean equals(Object o) {
+
+        if (o == null) {
+
+            return false;
+        }
+
+        if (o instanceof Digit) {
+
+            EqualityFunction<Digit> function =
+                (EqualityFunction<Digit>) FunctionSingletons.getFunction(FunctionIdentifiers.DIGIT_EQUALITY_FUNCTION);
+            boolean result = function.equals(this, (Digit) o);
+
+            return result;
+        }
+
+        return false;
+    }
+
+    /**
+     * Calculates a hash code for this digit.
+     *
+     * @return a hash code
+     */
+    @Override
+    public int hashCode() {
+
+        return HashHelper.calculateHashCode(Digit.class, base, ordinal);
+    }
+
+    /**
+     * Compares this digit with the specified digit regardign the natural order.
+     *
+     * @param d
+     *        a digit
+     *
+     * @return <code>1</code>, <code>0</code> or <code>-1</code> if this digit is greater, equal
+     *         or lesser than the specified digit.
+     */
+    @Override
+    public int compareTo(Digit d) {
+
+        Comparator<Digit> function =
+            (Comparator<Digit>) FunctionSingletons.getFunction(FunctionIdentifiers.DIGIT_COMPARATOR_FUNCTION);
+        int result = function.compare(this, d);
+
+        return result;
     }
 
 }
