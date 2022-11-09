@@ -34,6 +34,9 @@
 package jmul.math.numbers.exceptions;
 
 
+import jmul.math.numbers.Number;
+
+
 /**
  * This exception is used in cases where an arithmetic calculation would lead to an undefined result.
  *
@@ -82,6 +85,19 @@ public class UndefinedResultException extends RuntimeException {
     public UndefinedResultException(String message, Throwable cause) {
 
         super(message, cause);
+    }
+
+    /**
+     * Creates a new exception according to the specified parameters.
+     *
+     * @param n1
+     *        a number
+     * @param n2
+     *        a number
+     */
+    public UndefinedResultException(Number n1, Number n2) {
+
+        super(String.format("Adding %s and %s is undefined!", n1.toString(), n1.toString()));
     }
 
 }

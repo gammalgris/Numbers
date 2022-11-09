@@ -151,9 +151,7 @@ public class AddNumbersFunctionImpl implements BinaryOperation<Number, Result<Nu
                  * infinity + -infinity
                  * -infinity + infinity
                  */
-                String message =
-                    String.format("Adding %s and %s is undefined!", operand1.toString(), operand2.toString());
-                throw new UndefinedResultException(message);
+                throw new UndefinedResultException(operand1, operand2);
             }
         }
     }

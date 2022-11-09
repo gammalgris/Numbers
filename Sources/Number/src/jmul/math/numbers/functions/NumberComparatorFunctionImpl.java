@@ -135,20 +135,10 @@ public class NumberComparatorFunctionImpl extends ComparatorBase implements Func
             return LESSER_THAN;
         }
 
-        // Check the center digit
-
-        if (n1.centerNode().digit() != n2.centerNode().digit()) {
-
-            Digit d1 = n1.centerNode().digit();
-            Digit d2 = n2.centerNode().digit();
-
-            return d1.compareTo(d2);
-        }
-
         // Check the digits left of the decimal separator
 
-        DigitNode thisLeft = n1.centerNode().leftNode();
-        DigitNode otherLeft = n2.centerNode().leftNode();
+        DigitNode thisLeft = n1.centerNode();
+        DigitNode otherLeft = n2.centerNode();
 
         while (true) {
 
@@ -159,12 +149,26 @@ public class NumberComparatorFunctionImpl extends ComparatorBase implements Func
 
             if (thisLeft == null) {
 
-                return LESSER_THAN;
+                if (n1.isPositive()) {
+
+                    return LESSER_THAN;
+
+                } else {
+
+                    return GREATER_THAN;
+                }
             }
 
             if (otherLeft == null) {
 
-                return GREATER_THAN;
+                if (n1.isPositive()) {
+
+                    return GREATER_THAN;
+
+                } else {
+
+                    return LESSER_THAN;
+                }
             }
 
             if (thisLeft.digit() != otherLeft.digit()) {
@@ -172,7 +176,16 @@ public class NumberComparatorFunctionImpl extends ComparatorBase implements Func
                 Digit d1 = thisLeft.digit();
                 Digit d2 = otherLeft.digit();
 
-                return d1.compareTo(d2);
+                int result = d1.compareTo(d2);
+
+                if (n1.isPositive()) {
+
+                    return result;
+
+                } else {
+
+                    return result * -1;
+                }
             }
 
             thisLeft = thisLeft.leftNode();
@@ -193,20 +206,43 @@ public class NumberComparatorFunctionImpl extends ComparatorBase implements Func
 
             if (thisRight == null) {
 
-                return LESSER_THAN;
+                if (n1.isPositive()) {
+
+                    return LESSER_THAN;
+
+                } else {
+
+                    return GREATER_THAN;
+                }
             }
 
             if (otherRight == null) {
 
-                return GREATER_THAN;
+                if (n1.isPositive()) {
+
+                    return GREATER_THAN;
+
+                } else {
+
+                    return LESSER_THAN;
+                }
             }
 
             if (thisRight.digit() != otherRight.digit()) {
 
-                Digit d1 = thisLeft.digit();
-                Digit d2 = otherLeft.digit();
+                Digit d1 = thisRight.digit();
+                Digit d2 = otherRight.digit();
 
-                return d1.compareTo(d2);
+                int result = d1.compareTo(d2);
+
+                if (n1.isPositive()) {
+
+                    return result;
+
+                } else {
+
+                    return result * -1;
+                }
             }
 
             thisRight = thisRight.rightNode();

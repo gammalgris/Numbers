@@ -37,16 +37,14 @@ package test.jmul.math.numbers;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.junit.Test;
-
-import static jmul.math.numbers.Signs.NEGATIVE;
-
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
+import static jmul.math.numbers.Signs.NEGATIVE;
 
 import jmul.test.classification.UnitTest;
 
 import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
@@ -116,7 +114,7 @@ public class NumberComparatorisonTest {
 
     /**
      * Compares the specified numbers and ciompares the result with th expected result.
-     * 
+     *
      * @param n1
      *        a number
      * @param n2
@@ -127,8 +125,7 @@ public class NumberComparatorisonTest {
     private static void testComparison(Number n1, Number n2, int result) {
 
         String message =
-            String.format("The equality test failed for the numbers \"%s\" and \"%s\")!", n1.toString(),
-                          n2.toString());
+            String.format("The equality test failed for the numbers \"%s\" and \"%s\")!", n1.toString(), n2.toString());
 
         int actualResult = n1.compareTo(n2);
         assertEquals(message, result, actualResult);
@@ -144,19 +141,6 @@ public class NumberComparatorisonTest {
         testComparison(number1, number2, expectedResult);
         testComparison(number2, number1, inverse(expectedResult));
     }
-
-    /*@Test
-    public void testZeroAndOneComparison() {
-
-        Number zero = new NumberImpl("0");
-        Number one = new NumberImpl("1");
-
-        String message =
-            String.format("The equality test failed for the numbers \"%s\" and \"%s\")!", zero.toString(),
-                          one.toString());
-        assertEquals(message, -1, zero.compareTo(one));
-        assertEquals(message, 1, one.equals(zero));
-    }*/
 
     /**
      * Returns a matrix of test data and expected results.
@@ -180,15 +164,34 @@ public class NumberComparatorisonTest {
         parameters.add(new Object[] { new NumberImpl("-1"), new NumberImpl("1"), -1 });
         parameters.add(new Object[] { new NumberImpl("1"), new NumberImpl("-1"), 1 });
 
-        parameters.add(new Object[] { new NumberImpl("123456789012345678901"), new NumberImpl("123456789012345678901"), 0 });
-        parameters.add(new Object[] { new NumberImpl("123456789012345678901"), new NumberImpl("-123456789012345678901"), 1 });
-        parameters.add(new Object[] { new NumberImpl("-123456789012345678901"), new NumberImpl("123456789012345678901"), -1 });
+        parameters.add(new Object[] { new NumberImpl("123456789012345678901"), new NumberImpl("123456789012345678901"),
+                                      0 });
+        parameters.add(new Object[] { new NumberImpl("123456789012345678901"), new NumberImpl("-123456789012345678901"),
+                                      1 });
+        parameters.add(new Object[] { new NumberImpl("-123456789012345678901"), new NumberImpl("123456789012345678901"),
+                                      -1 });
 
-        parameters.add(new Object[] { new NumberImpl("123456789012345678901"), new NumberImpl("123456789012345678902"), -1 });
-        parameters.add(new Object[] { new NumberImpl("-123456789012345678902"), new NumberImpl("-123456789012345678901"), -1 });
+        parameters.add(new Object[] { new NumberImpl("09123456789012345678901"),
+                                      new NumberImpl("123456789012345678901"), 1 });
+        parameters.add(new Object[] { new NumberImpl("09123456789012345678901"),
+                                      new NumberImpl("-123456789012345678901"), 1 });
+        parameters.add(new Object[] { new NumberImpl("-09123456789012345678901"),
+                                      new NumberImpl("123456789012345678901"), -1 });
 
-        parameters.add(new Object[] { new NumberImpl("1.23456789012345678901"), new NumberImpl("1.23456789012345678902"), -1 });
-        parameters.add(new Object[] { new NumberImpl("-1.23456789012345678902"), new NumberImpl("-1.23456789012345678901"), -1 });
+        parameters.add(new Object[] { new NumberImpl("123456789012345678901"), new NumberImpl("123456789012345678902"),
+                                      -1 });
+        parameters.add(new Object[] { new NumberImpl("-123456789012345678902"),
+                                      new NumberImpl("-123456789012345678901"), -1 });
+
+        parameters.add(new Object[] { new NumberImpl("1.23456789012345678901"),
+                                      new NumberImpl("1.23456789012345678902"), -1 });
+        parameters.add(new Object[] { new NumberImpl("-1.23456789012345678902"),
+                                      new NumberImpl("-1.23456789012345678901"), -1 });
+
+        parameters.add(new Object[] { new NumberImpl("1.2345678901234567890123"),
+                                      new NumberImpl("1.23456789012345678901"), 1 });
+        parameters.add(new Object[] { new NumberImpl("-1.23456789012345678901"),
+                                      new NumberImpl("-1.234567890123456789023"), 1 });
 
         return parameters;
     }
