@@ -61,6 +61,13 @@ public interface ArithmeticOperations {
     Number negate();
 
     /**
+     * Calculates and returns the complement of this number.
+     *
+     * @return the complement of this number
+     */
+    Number complement();
+
+    /**
      * Calculates the faculty for this number.
      *
      * @return a number

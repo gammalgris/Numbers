@@ -56,7 +56,7 @@ import org.junit.runners.Parameterized;
  */
 @UnitTest
 @RunWith(Parameterized.class)
-public class NumberComparatorisonTest {
+public class NumberComparisonTest {
 
     /**
      * A number.
@@ -83,7 +83,7 @@ public class NumberComparatorisonTest {
      * @param result
      *        the expected result
      */
-    public NumberComparatorisonTest(Number n1, Number n2, int result) {
+    public NumberComparisonTest(Number n1, Number n2, int result) {
 
         number1 = n1;
         number2 = n2;

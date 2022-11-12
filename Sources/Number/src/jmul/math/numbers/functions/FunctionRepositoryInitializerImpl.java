@@ -80,6 +80,7 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
         repository.registerFunction(FunctionIdentifiers.STANDARD_NOTATION_FUNCTION, StandardNotationFunctionImpl.class);
 
         repository.registerFunction(FunctionIdentifiers.NEGATE_NUMBER_FUNCTION, NegateNumberFunctionImpl.class);
+        repository.registerFunction(FunctionIdentifiers.NUMBER_COMPLEMENT_FUNCTION, NumberComplementFunctionImpl.class);
 
         repository.registerFunction(FunctionIdentifiers.NUMBER_COMPARATOR_FUNCTION, NumberComparatorFunctionImpl.class);
         repository.registerFunction(FunctionIdentifiers.NUMBER_EQUALITY_FUNCTION, NumberEqualityFunctionImpl.class);

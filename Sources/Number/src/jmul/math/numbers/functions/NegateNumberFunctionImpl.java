@@ -70,6 +70,11 @@ public class NegateNumberFunctionImpl implements UnaryOperation<Number> {
     @Override
     public Result<Number> calculate(Number n) {
 
+        if (n == null) {
+
+            throw new IllegalArgumentException("The specified number is null!");
+        }
+
         Sign sign = Signs.negate(n.sign());
         int base = n.base();
         DigitNode centerNode = Nodes.cloneLinkedList(n.centerNode());

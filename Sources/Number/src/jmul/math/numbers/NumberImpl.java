@@ -624,6 +624,21 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Calculates and returns the complement of this number.
+     *
+     * @return the complement of this number
+     */
+    @Override
+    public Number complement() {
+
+        UnaryOperation<Number> function =
+            (UnaryOperation<Number>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_COMPLEMENT_FUNCTION);
+        Result<Number> result = function.calculate(this);
+
+        return result.result();
+    }
+
+    /**
      * Calculates the faculty for this number.
      *
      * @return a number
