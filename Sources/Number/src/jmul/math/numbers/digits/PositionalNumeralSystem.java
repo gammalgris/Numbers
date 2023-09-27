@@ -35,11 +35,11 @@ package jmul.math.numbers.digits;
 
 
 /**
- * This interface describes properties and methods for a numeral system.
+ * A positional numeral system is a container which contains all allowed digits.
  *
  * @author Kristian Kutin
  */
-public interface NumeralSystem {
+public interface PositionalNumeralSystem {
 
     /**
      * Returns the base of the positional numeral system.
@@ -62,7 +62,7 @@ public interface NumeralSystem {
      * Find a digit that corresponds to the specified symbol.
      *
      * @param symbol
-     *        a character
+     *        a symbol, i.e. a single character
      *
      * @return a digit
      */

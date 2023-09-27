@@ -111,7 +111,7 @@
    <hash n="oracle.jdevimpl.config.JProjectLibraries">
       <list n="exportedReferences">
          <hash>
-            <value n="id" v="Jmul-2.1.1"/>
+            <value n="id" v="Jmul-2.1.2"/>
             <value n="isJDK" v="false"/>
          </hash>
          <hash>
@@ -123,56 +123,40 @@
          <list n="jdkDefinitions">
             <hash>
                <list n="classPath">
-                  <url path="../../../../DevTools/java/jre/lib/resources.jar" jar-entry=""/>
-                  <url path="../../../../DevTools/java/jre/lib/rt.jar" jar-entry=""/>
-                  <url path="../../../../DevTools/java/jre/lib/sunrsasign.jar" jar-entry=""/>
-                  <url path="../../../../DevTools/java/jre/lib/jsse.jar" jar-entry=""/>
-                  <url path="../../../../DevTools/java/jre/lib/jce.jar" jar-entry=""/>
-                  <url path="../../../../DevTools/java/jre/lib/charsets.jar" jar-entry=""/>
-                  <url path="../../../../DevTools/java/jre/lib/jfr.jar" jar-entry=""/>
-                  <url path="../../../../DevTools/java/jre/classes/"/>
+                  <url path="../../../../dependencies/java/jre/lib/resources.jar" jar-entry=""/>
+                  <url path="../../../../dependencies/java/jre/lib/rt.jar" jar-entry=""/>
+                  <url path="../../../../dependencies/java/jre/lib/jsse.jar" jar-entry=""/>
+                  <url path="../../../../dependencies/java/jre/lib/jce.jar" jar-entry=""/>
+                  <url path="../../../../dependencies/java/jre/lib/charsets.jar" jar-entry=""/>
+                  <url path="../../../../dependencies/java/jre/lib/jfr.jar" jar-entry=""/>
+                  <url path="../../../../dependencies/java/jre/classes/"/>
                </list>
-               <value n="description" v="1.8.0_171"/>
+               <value n="description" v="1.8.0_361"/>
                <list n="docPath">
                   <url protocol="http" host="docs.oracle.com" path="/javase/8/docs/api/"/>
                </list>
                <list n="expandedClassPath">
-                  <url path="../../../../DevTools/java/jre/lib/resources.jar" jar-entry=""/>
-                  <url path="../../../../DevTools/java/jre/lib/rt.jar" jar-entry=""/>
-                  <url path="../../../../DevTools/java/jre/lib/sunrsasign.jar" jar-entry=""/>
-                  <url path="../../../../DevTools/java/jre/lib/jsse.jar" jar-entry=""/>
-                  <url path="../../../../DevTools/java/jre/lib/jce.jar" jar-entry=""/>
-                  <url path="../../../../DevTools/java/jre/lib/charsets.jar" jar-entry=""/>
-                  <url path="../../../../DevTools/java/jre/lib/jfr.jar" jar-entry=""/>
-                  <url path="../../../../DevTools/java/jre/classes/"/>
+                  <url path="../../../../dependencies/java/jre/lib/resources.jar" jar-entry=""/>
+                  <url path="../../../../dependencies/java/jre/lib/rt.jar" jar-entry=""/>
+                  <url path="../../../../dependencies/java/jre/lib/jsse.jar" jar-entry=""/>
+                  <url path="../../../../dependencies/java/jre/lib/jce.jar" jar-entry=""/>
+                  <url path="../../../../dependencies/java/jre/lib/charsets.jar" jar-entry=""/>
+                  <url path="../../../../dependencies/java/jre/lib/jfr.jar" jar-entry=""/>
+                  <url path="../../../../dependencies/java/jre/classes/"/>
                </list>
                <list n="expandedSourcePath">
-                  <url path="../../../../DevTools/java/src.zip" jar-entry=""/>
+                  <url path="../../../../dependencies/java/src.zip" jar-entry=""/>
                </list>
-               <value n="id" v="1.8.0_171"/>
-               <url n="javaExecutable" path="../../../../DevTools/java/bin/java.exe"/>
-               <url n="sdkBinDir" path="../../../../DevTools/java/bin/"/>
+               <value n="id" v="1.8.0_361"/>
+               <url n="javaExecutable" path="../../../../dependencies/java/bin/java.exe"/>
+               <url n="sdkBinDir" path="../../../../dependencies/java/bin/"/>
                <list n="sourcePath">
-                  <url path="../../../../DevTools/java/src.zip" jar-entry=""/>
+                  <url path="../../../../dependencies/java/src.zip" jar-entry=""/>
                </list>
-               <value n="version" v="1.8.0_171"/>
+               <value n="version" v="1.8.0_361"/>
             </hash>
          </list>
          <list n="libraryDefinitions">
-            <hash>
-               <list n="classPath">
-                  <url path="../../Libraries/Jmul/jmul-2.1.1.jar" jar-entry=""/>
-                  <url path="../../Libraries/Jmul/properties/"/>
-               </list>
-               <value n="description" v="Jmul-2.1.1"/>
-               <list n="docPath">
-                  <url path="../../Libraries/Jmul/jmul-2.1.1-javadoc.jar" jar-entry=""/>
-               </list>
-               <value n="id" v="Jmul-2.1.1"/>
-               <list n="sourcePath">
-                  <url path="../../Libraries/Jmul/jmul-2.1.1-sources.jar" jar-entry=""/>
-               </list>
-            </hash>
             <hash>
                <list n="classPath">
                   <url path="../../Libraries/JUnit/junit-4.11.jar" jar-entry=""/>
@@ -189,16 +173,30 @@
                   <url path="../../Libraries/JUnit/hamcrest-core-1.3-sources.jar" jar-entry=""/>
                </list>
             </hash>
+            <hash>
+               <list n="classPath">
+                  <url path="../../Libraries/Jmul/jmul-2.1.2.jar" jar-entry=""/>
+                  <url path="../../Libraries/Jmul/properties/"/>
+               </list>
+               <value n="description" v="Jmul-2.1.2"/>
+               <list n="docPath">
+                  <url path="../../Libraries/Jmul/jmul-2.1.2-javadoc.jar" jar-entry=""/>
+               </list>
+               <value n="id" v="Jmul-2.1.2"/>
+               <list n="sourcePath">
+                  <url path="../../Libraries/Jmul/jmul-2.1.2-sources.jar" jar-entry=""/>
+               </list>
+            </hash>
          </list>
       </hash>
       <hash n="jdkReference">
-         <value n="id" v="1.8.0_171"/>
+         <value n="id" v="1.8.0_361"/>
          <value n="isJDK" v="true"/>
-         <value n="jdkVersion" v="1.8.0_171"/>
+         <value n="jdkVersion" v="1.8.0_361"/>
       </hash>
       <list n="libraryReferences">
          <hash>
-            <value n="id" v="Jmul-2.1.1"/>
+            <value n="id" v="Jmul-2.1.2"/>
             <value n="isJDK" v="false"/>
          </hash>
          <hash>

@@ -35,7 +35,7 @@ package jmul.math.numbers.functions;
 
 
 import jmul.math.numbers.digits.Digit;
-import jmul.math.numbers.digits.NumeralSystems;
+import jmul.math.numbers.digits.PositionalNumeralSystems;
 import static jmul.math.numbers.functions.ParameterCheckHelper.checkParameter;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
@@ -72,7 +72,7 @@ public class DigitComplementFunctionImpl implements UnaryOperation<Digit> {
         int base = digit.base();
         int result = base - digit.ordinal() - 1;
 
-        Digit newDigit = NumeralSystems.ordinalToDigit(base, result);
+        Digit newDigit = PositionalNumeralSystems.ordinalToDigit(base, result);
 
         return new Result<Digit>(newDigit);
     }

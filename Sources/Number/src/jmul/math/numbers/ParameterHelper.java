@@ -49,6 +49,7 @@ public final class ParameterHelper {
         throw new UnsupportedOperationException();
     }
 
+    @Deprecated
     public static int checkBase(int base) {
 
         if ((base < BASE_MIN_LIMIT) || (base > BASE_MAX_LIMIT)) {
@@ -59,6 +60,7 @@ public final class ParameterHelper {
         return base;
     }
 
+    @Deprecated
     public static int checkOrdinal(int ordinal) {
 
         if ((ordinal < ORDINAL_MIN_LIMIT) || (ordinal > ORDINAL_MAX_LIMIT)) {

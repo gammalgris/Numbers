@@ -39,7 +39,7 @@ import java.util.regex.Pattern;
 import jmul.math.numbers.Sign;
 import jmul.math.numbers.Signs;
 import jmul.math.numbers.digits.Digit;
-import jmul.math.numbers.digits.NumeralSystems;
+import jmul.math.numbers.digits.PositionalNumeralSystems;
 import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.Nodes;
 
@@ -173,7 +173,7 @@ public class ScientificNotationParserImpl implements NotationParser {
         for (int i = 0; i <= lastIndex; i++) {
 
             char c = string.charAt(i);
-            Digit digit = NumeralSystems.charToDigit(base, c);
+            Digit digit = PositionalNumeralSystems.charToDigit(base, c);
 
             node = Nodes.createNode(digit);
 
@@ -215,7 +215,7 @@ public class ScientificNotationParserImpl implements NotationParser {
             DigitNode rightNode = centerNode.rightNode();
             if (rightNode == null) {
 
-                Digit digit = NumeralSystems.charToDigit(base, ZERO);
+                Digit digit = PositionalNumeralSystems.charToDigit(base, ZERO);
                 rightNode = Nodes.createNode(digit);
 
                 Nodes.linkNodes(centerNode, rightNode);
@@ -249,7 +249,7 @@ public class ScientificNotationParserImpl implements NotationParser {
             DigitNode leftNode = centerNode.leftNode();
             if (leftNode == null) {
 
-                Digit digit = NumeralSystems.charToDigit(base, ZERO);
+                Digit digit = PositionalNumeralSystems.charToDigit(base, ZERO);
                 leftNode = Nodes.createNode(digit);
 
                 Nodes.linkNodes(leftNode, centerNode);

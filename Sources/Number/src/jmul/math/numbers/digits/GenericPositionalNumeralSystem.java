@@ -36,61 +36,27 @@ package jmul.math.numbers.digits;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Deque;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 
 /**
- * A simple implementation of a numeral system.
+ * A simple implementation of a positional numeral system. This implementation
+ * is immutable.
  *
  * @author Kristian Kutin
  */
-class NumeralSystemImpl implements NumeralSystem {
-
-    /**
-     * A mapping of ordinal numbers to characters.
-     */
-    private static final Map<Integer, Character> ORDINAL_TO_CHARACTER_MAPPING;
-
-    /*
-     * The static initializer.
-     */
-    static {
-
-        Map<Integer, Character> tmp = new HashMap<>();
-
-        for (int a = 0; a <= 64; a++) {
-
-            if (a < 10) {
-
-                int code = 48 + a;
-                tmp.put(a, (char) code);
-
-            } else if (a < 36) {
-
-                int code = 55 + a;
-                tmp.put(a, (char) code);
-
-            } else {
-
-                int code = 61 + a;
-                tmp.put(a, (char) code);
-            }
-        }
-
-        ORDINAL_TO_CHARACTER_MAPPING = Collections.unmodifiableMap(tmp);
-    }
+class GenericPositionalNumeralSystem implements PositionalNumeralSystem {
 
     /**
      * The base of this numeral system.
      */
     private final int base;
-
-    /**
-     * All digits for this numeral system.
-     */
-    private final List<Digit> digits;
 
     /**
      * A mapping character to digit.
@@ -103,64 +69,41 @@ class NumeralSystemImpl implements NumeralSystem {
     private final Map<Integer, Digit> ordinalMap;
 
     /**
-     * Creates a new numeral system according to the specified base.
+     * Creates a positional numeral system according to the specified parameters.
      *
-     * @param base
-     *        the base of a numeral system
+     * @param symbols
+     *        the symbols for all digits in ascending order. The array size corresponds with
+     *        the base for this positional numeral system.
      */
-    NumeralSystemImpl(int base) {
+    GenericPositionalNumeralSystem(char... symbols) {
 
         super();
 
-        this.base = base;
+        this.base = symbols.length;
 
-        digits = initDigits(base);
-        charMap = initCharMap(digits);
-        ordinalMap = initOrdinalMap(digits);
-    }
+        Set<Character> processedSymbols = new HashSet<>();
+        Map<Character, Digit> charMap = new HashMap<>();
+        Map<Integer, Digit> ordinalMap = new HashMap<>();
 
-    private static char ordinal2char(int ordinal) {
+        for (int ordinalNumber = 0; ordinalNumber < symbols.length; ordinalNumber++) {
 
-        return ORDINAL_TO_CHARACTER_MAPPING.get(ordinal);
-    }
+            char symbol = symbols[ordinalNumber];
 
-    private static List<Digit> initDigits(int base) {
+            if (processedSymbols.contains(symbol)) {
 
-        List<Digit> tmp = new ArrayList<>();
+                String message = String.format("Duplicate symbols (%c) are used! Symbols have to be unique.", symbol);
+                throw new IllegalArgumentException(message);
+            }
+            processedSymbols.add(symbol);
 
-        for (int a = 0; a < base; a++) {
+            Digit digit = new GenericDigit(symbol, base, ordinalNumber);
 
-            char symbol = ordinal2char(a);
-
-            Digit digit = new DigitImpl(symbol, base, a);
-            tmp.add(digit);
+            charMap.put(symbol, digit);
+            ordinalMap.put(ordinalNumber, digit);
         }
 
-        return Collections.unmodifiableList(tmp);
-    }
-
-    private static Map<Character, Digit> initCharMap(List<Digit> digits) {
-
-        Map<Character, Digit> tmp = new HashMap<>();
-
-        for (Digit digit : digits) {
-
-            tmp.put(digit.symbol(), digit);
-        }
-
-        return Collections.unmodifiableMap(tmp);
-    }
-
-    private static Map<Integer, Digit> initOrdinalMap(List<Digit> digits) {
-
-        Map<Integer, Digit> tmp = new HashMap<>();
-
-        for (Digit digit : digits) {
-
-            tmp.put(digit.ordinal(), digit);
-        }
-
-        return Collections.unmodifiableMap(tmp);
+        this.charMap = Collections.unmodifiableMap(charMap);
+        this.ordinalMap = Collections.unmodifiableMap(ordinalMap);
     }
 
     /**
@@ -187,7 +130,8 @@ class NumeralSystemImpl implements NumeralSystem {
 
         if (!ordinalMap.containsKey(ordinal)) {
 
-            String message = String.format("No digit exists which corresponds to the specified ordinal (%d)!", ordinal);
+            String message =
+                String.format("No digit exists which corresponds to the specified ordinal number (%d)!", ordinal);
             throw new IllegalArgumentException(message);
         }
 
@@ -212,6 +156,18 @@ class NumeralSystemImpl implements NumeralSystem {
         }
 
         return charMap.get(symbol);
+    }
+
+    /**
+     * Returns a string representation for this object.
+     *
+     * @return a string representation
+     */
+    @Override
+    public String toString() {
+
+        String message = String.format("positional numeral System : base %d", base());
+        return message;
     }
 
 }

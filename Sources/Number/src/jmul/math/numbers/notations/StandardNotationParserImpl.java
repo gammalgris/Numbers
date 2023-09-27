@@ -41,7 +41,7 @@ import static jmul.math.numbers.Constants.ZERO;
 import jmul.math.numbers.Sign;
 import jmul.math.numbers.Signs;
 import jmul.math.numbers.digits.Digit;
-import jmul.math.numbers.digits.NumeralSystems;
+import jmul.math.numbers.digits.PositionalNumeralSystems;
 import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.Nodes;
 
@@ -173,7 +173,7 @@ public class StandardNotationParserImpl implements NotationParser {
         for (int i = 0; i <= lastIndex; i++) {
 
             char c = string.charAt(i);
-            Digit digit = NumeralSystems.charToDigit(base, c);
+            Digit digit = PositionalNumeralSystems.charToDigit(base, c);
 
             node = Nodes.createNode(digit);
 
@@ -257,7 +257,7 @@ public class StandardNotationParserImpl implements NotationParser {
         for (int i = 0; i <= lastIndex; i++) {
 
             char c = string.charAt(i);
-            Digit digit = NumeralSystems.charToDigit(base, c);
+            Digit digit = PositionalNumeralSystems.charToDigit(base, c);
 
             node = Nodes.createNode(digit);
 

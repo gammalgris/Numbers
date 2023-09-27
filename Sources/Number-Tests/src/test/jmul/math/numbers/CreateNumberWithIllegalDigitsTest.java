@@ -39,7 +39,7 @@ import java.util.Collection;
 
 import jmul.math.numbers.NumberImpl;
 import jmul.math.numbers.digits.Digit;
-import jmul.math.numbers.digits.NumeralSystems;
+import jmul.math.numbers.digits.PositionalNumeralSystems;
 import jmul.math.numbers.exceptions.NumberParsingException;
 
 import jmul.test.classification.UnitTest;
@@ -146,7 +146,7 @@ public class CreateNumberWithIllegalDigitsTest {
         Digit first;
         {
             int ordinal = base - 1;
-            first = NumeralSystems.ordinalToDigit(base, ordinal);
+            first = PositionalNumeralSystems.ordinalToDigit(base, ordinal);
         }
 
         return "" + buildNumberString(base - 1) + first;

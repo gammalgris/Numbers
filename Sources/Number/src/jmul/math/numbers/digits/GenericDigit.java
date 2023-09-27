@@ -46,20 +46,29 @@ import jmul.singletons.FunctionSingletons;
 
 
 /**
- * A simple implementation of a digit for any numeral system.<br>
- * <br>
- * <i>Note:<br>
- * There is no need to implement a custom version of the {@link #equals} and
- * {@link #hashCode} methods. Each digit instance is unique and is guaranteed to exist
- * only once (see {@link NumeralSystems}). When creating new number objects the existing
- * digits are referenced. Thus the default {@link #equals} method and comparison by <code>==</code>
- * should both work for comparison.</i>
+ * An implementation of a digit for a positional numeral system. This implementation
+ * is immutable.
  *
  * @author Kristian Kutin
  *
- * @see NumeralSystems
+ * @see Digit
+ * @see PositionalNumeralSystem
+ * @see PositionalNumeralSystems
  */
-class DigitImpl implements Digit {
+class GenericDigit implements Digit {
+
+    /**
+     * A constant value.
+     */
+    private static final int ZERO;
+
+    /*
+     * The static initializer.
+     */
+    static {
+
+        ZERO = 0;
+    }
 
     /**
      * The symbol associated with this digit.
@@ -67,17 +76,12 @@ class DigitImpl implements Digit {
     private final char symbol;
 
     /**
-     * The base for this digit. Allowed values are <code>0 &lt; x &lt;= 64</code>.<br>
-     * <br>
-     * <i>Note:<br>
-     * This limitation is introduced because currently only digits and letters (lower and upper case)
-     * are used as symbols (10 digits plus 26 lower case letters plus 26 upper case letters).</i>
+     * The base of a positional numeral system.
      */
     private final int base;
 
     /**
-     * The corresponding ordinal number for this digit. Allowed values are <code>0 &lt;= x &lt;= 64</code>.
-     * The ordinal number should represent tha natural ordering of the digits within a numeral system.
+     * The corresponding ordinal number for this digit.
      */
     private final int ordinal;
 
@@ -87,23 +91,23 @@ class DigitImpl implements Digit {
      * @param symbol
      *        the symbol for this digit
      * @param base
-     *        the base for this digit
+     *        the base of a positional numeral system
      * @param ordinal
      *        the corresponding ordinal number
      */
-    public DigitImpl(char symbol, int base, int ordinal) {
+    public GenericDigit(char symbol, int base, int ordinal) {
 
         super();
 
         this.symbol = symbol;
-        this.base = checkBase(base);
-        this.ordinal = checkOrdinal(ordinal);
+        this.base = base;
+        this.ordinal = ordinal;
     }
 
     /**
      * Returns the symbol associated with this digit.
      *
-     * @return a symbol
+     * @return a symbol, i.e. a single character
      */
     @Override
     public char symbol() {
@@ -141,7 +145,7 @@ class DigitImpl implements Digit {
     @Override
     public boolean isZero() {
 
-        return ordinal == 0;
+        return ordinal == ZERO;
     }
 
     /**

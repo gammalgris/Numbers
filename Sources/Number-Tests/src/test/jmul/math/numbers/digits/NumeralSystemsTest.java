@@ -35,7 +35,7 @@ package test.jmul.math.numbers.digits;
 
 
 import jmul.math.numbers.digits.Digit;
-import jmul.math.numbers.digits.NumeralSystems;
+import jmul.math.numbers.digits.PositionalNumeralSystems;
 
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
@@ -78,34 +78,34 @@ public class NumeralSystemsTest {
 
         Digit digit;
 
-        digit = NumeralSystems.ordinalToDigit(10, 0);
+        digit = PositionalNumeralSystems.ordinalToDigit(10, 0);
         testDigit(digit, 10, 0, '0');
 
-        digit = NumeralSystems.ordinalToDigit(10, 1);
+        digit = PositionalNumeralSystems.ordinalToDigit(10, 1);
         testDigit(digit, 10, 1, '1');
 
-        digit = NumeralSystems.ordinalToDigit(10, 2);
+        digit = PositionalNumeralSystems.ordinalToDigit(10, 2);
         testDigit(digit, 10, 2, '2');
 
-        digit = NumeralSystems.ordinalToDigit(10, 3);
+        digit = PositionalNumeralSystems.ordinalToDigit(10, 3);
         testDigit(digit, 10, 3, '3');
 
-        digit = NumeralSystems.ordinalToDigit(10, 4);
+        digit = PositionalNumeralSystems.ordinalToDigit(10, 4);
         testDigit(digit, 10, 4, '4');
 
-        digit = NumeralSystems.ordinalToDigit(10, 5);
+        digit = PositionalNumeralSystems.ordinalToDigit(10, 5);
         testDigit(digit, 10, 5, '5');
 
-        digit = NumeralSystems.ordinalToDigit(10, 6);
+        digit = PositionalNumeralSystems.ordinalToDigit(10, 6);
         testDigit(digit, 10, 6, '6');
 
-        digit = NumeralSystems.ordinalToDigit(10, 7);
+        digit = PositionalNumeralSystems.ordinalToDigit(10, 7);
         testDigit(digit, 10, 7, '7');
 
-        digit = NumeralSystems.ordinalToDigit(10, 8);
+        digit = PositionalNumeralSystems.ordinalToDigit(10, 8);
         testDigit(digit, 10, 8, '8');
 
-        digit = NumeralSystems.ordinalToDigit(10, 9);
+        digit = PositionalNumeralSystems.ordinalToDigit(10, 9);
         testDigit(digit, 10, 9, '9');
     }
 
@@ -115,7 +115,7 @@ public class NumeralSystemsTest {
     @Test(expected = IllegalArgumentException.class)
     public void testDecimalSystemLowerBound() {
 
-        NumeralSystems.ordinalToDigit(10, -1);
+        PositionalNumeralSystems.ordinalToDigit(10, -1);
     }
 
     /**
@@ -124,7 +124,7 @@ public class NumeralSystemsTest {
     @Test(expected = IllegalArgumentException.class)
     public void testDecimalSystemUpperBound() {
 
-        NumeralSystems.ordinalToDigit(10, 10);
+        PositionalNumeralSystems.ordinalToDigit(10, 10);
     }
 
     /**
@@ -135,10 +135,10 @@ public class NumeralSystemsTest {
 
         Digit digit;
 
-        digit = NumeralSystems.ordinalToDigit(2, 0);
+        digit = PositionalNumeralSystems.ordinalToDigit(2, 0);
         testDigit(digit, 2, 0, '0');
 
-        digit = NumeralSystems.ordinalToDigit(2, 1);
+        digit = PositionalNumeralSystems.ordinalToDigit(2, 1);
         testDigit(digit, 2, 1, '1');
     }
 
@@ -148,7 +148,7 @@ public class NumeralSystemsTest {
     @Test(expected = IllegalArgumentException.class)
     public void testBinarySystemLowerBound() {
 
-        NumeralSystems.ordinalToDigit(2, -1);
+        PositionalNumeralSystems.ordinalToDigit(2, -1);
     }
 
     /**
@@ -157,7 +157,7 @@ public class NumeralSystemsTest {
     @Test(expected = IllegalArgumentException.class)
     public void testBinarySystemUpperBound() {
 
-        NumeralSystems.ordinalToDigit(2, 2);
+        PositionalNumeralSystems.ordinalToDigit(2, 2);
     }
 
 }

@@ -35,7 +35,16 @@ package jmul.math.numbers.digits;
 
 
 /**
- * This interface represents a digit from a positional numeral system.
+ * This interface represents a digit which is used within a positional numeral system
+ * of a specific base.<br>
+ * A digit has a symbol and an ordinal value, although a symbol can be used in positional
+ * numeral systems of different bases.<br>
+ * <br>
+ * A digit contains informations about the base of a positional numeral system in order
+ * to distinguish digits from positional numeral systems with different bases.<br>
+ * <br>
+ * The ordinal number is required to determine the natural ordering of digits. Digits from
+ * different positional numeral systems but with the same ordinal number are equal.
  *
  * @author Kristian Kutin
  */
@@ -44,7 +53,7 @@ public interface Digit extends Comparable<Digit> {
     /**
      * Returns the symbol associated with this digit.
      *
-     * @return a symbol
+     * @return a symbol, i.e. a single character
      */
     char symbol();
 
@@ -56,7 +65,7 @@ public interface Digit extends Comparable<Digit> {
     int base();
 
     /**
-     * Returns the ordinal number for this digit,
+     * Returns the ordinal number for this digit.
      *
      * @return an ordinal number
      */

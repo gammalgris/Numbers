@@ -38,7 +38,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import jmul.math.numbers.digits.Digit;
-import jmul.math.numbers.digits.NumeralSystems;
+import jmul.math.numbers.digits.PositionalNumeralSystems;
 
 import jmul.test.classification.UnitTest;
 
@@ -117,15 +117,15 @@ public class DigitComparisonTest {
 
         for (int a = 0; a < 9; a++) {
 
-            Digit d1 = NumeralSystems.ordinalToDigit(10, a);
-            Digit d2 = NumeralSystems.ordinalToDigit(10, a + 1);
+            Digit d1 = PositionalNumeralSystems.ordinalToDigit(10, a);
+            Digit d2 = PositionalNumeralSystems.ordinalToDigit(10, a + 1);
             parameters.add(new Object[] { d1, d2, -1 });
         }
 
         for (int a = 0; a < 9; a++) {
 
-            Digit d1 = NumeralSystems.ordinalToDigit(10, a);
-            Digit d2 = NumeralSystems.ordinalToDigit(10, a + 1);
+            Digit d1 = PositionalNumeralSystems.ordinalToDigit(10, a);
+            Digit d2 = PositionalNumeralSystems.ordinalToDigit(10, a + 1);
             parameters.add(new Object[] { d2, d1, 1 });
         }
 

@@ -35,7 +35,7 @@ package jmul.math.numbers.functions;
 
 
 import jmul.math.numbers.digits.Digit;
-import jmul.math.numbers.digits.NumeralSystems;
+import jmul.math.numbers.digits.PositionalNumeralSystems;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.ResultWithCarry;
 import static jmul.math.numbers.functions.ParameterCheckHelper.checkParameter;
@@ -85,8 +85,8 @@ public class AddDigitsFunctionImpl implements BinaryOperation<Digit, ResultWithC
             carry = 1;
         }
 
-        Digit resultDigit = NumeralSystems.ordinalToDigit(base, result);
-        Digit carryDigit = NumeralSystems.ordinalToDigit(base, carry);
+        Digit resultDigit = PositionalNumeralSystems.ordinalToDigit(base, result);
+        Digit carryDigit = PositionalNumeralSystems.ordinalToDigit(base, carry);
 
         return new ResultWithCarry<Digit>(resultDigit, carryDigit);
     }

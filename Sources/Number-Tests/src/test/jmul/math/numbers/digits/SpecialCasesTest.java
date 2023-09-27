@@ -35,7 +35,7 @@ package test.jmul.math.numbers.digits;
 
 
 import jmul.math.numbers.digits.Digit;
-import jmul.math.numbers.digits.NumeralSystems;
+import jmul.math.numbers.digits.PositionalNumeralSystems;
 
 import jmul.test.classification.UnitTest;
 
@@ -65,7 +65,7 @@ public class SpecialCasesTest {
     @Test
     public void testEqualsNull() {
 
-        Digit d = NumeralSystems.ordinalToDigit(10, 1);
+        Digit d = PositionalNumeralSystems.ordinalToDigit(10, 1);
         boolean actualResult = d.equals(null);
 
         assertEquals(false, actualResult);
@@ -77,7 +77,7 @@ public class SpecialCasesTest {
     @Test(expected = IllegalArgumentException.class)
     public void testCompareNull() {
 
-        Digit d = NumeralSystems.ordinalToDigit(10, 1);
+        Digit d = PositionalNumeralSystems.ordinalToDigit(10, 1);
         d.compareTo(null);
     }
 
