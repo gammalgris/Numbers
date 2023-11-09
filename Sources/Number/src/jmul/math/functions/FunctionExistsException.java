@@ -31,14 +31,25 @@
  * $Id$
  */
 
-package jmul.singletons;
+package jmul.math.functions;
 
 
 /**
- * This itnerface describes a function identifier.
+ * A custom exception for cases when a repository already contains a function.
  *
  * @author Kristian Kutin
  */
-public interface FunctionIdentifier extends CharSequence {
+public class FunctionExistsException extends IllegalArgumentException {
+
+    /**
+     * Creates a new exception according to the specified parameter.
+     *
+     * @param name
+     *        the name of the function
+     */
+    public FunctionExistsException(CharSequence name) {
+
+        super(String.format("The function %s already exists!", name));
+    }
 
 }

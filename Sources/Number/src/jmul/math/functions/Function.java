@@ -31,25 +31,14 @@
  * $Id$
  */
 
-package jmul.singletons;
+package jmul.math.functions;
 
 
 /**
- * A custom exception for cases when a repository already contains a function.
+ * This is a marker interface marking a function implementation (see strategy pattern).
  *
  * @author Kristian Kutin
  */
-public class FunctionExistsException extends IllegalArgumentException {
-
-    /**
-     * Creates a new exception according to the specified parameter.
-     *
-     * @param name
-     *        the name of the function
-     */
-    public FunctionExistsException(CharSequence name) {
-
-        super(String.format("The function %s already exists!", name));
-    }
+public interface Function {
 
 }

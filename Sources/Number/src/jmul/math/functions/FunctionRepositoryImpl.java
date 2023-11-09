@@ -31,7 +31,7 @@
  * $Id$
  */
 
-package jmul.singletons;
+package jmul.math.functions;
 
 
 import java.util.HashMap;

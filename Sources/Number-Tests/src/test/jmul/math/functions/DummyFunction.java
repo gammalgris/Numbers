@@ -31,14 +31,25 @@
  * $Id$
  */
 
-package jmul.singletons;
+package test.jmul.math.functions;
+
+
+import jmul.math.functions.Function;
 
 
 /**
- * This is a marker interface marking a function implementation (see strategy pattern).
+ * A dummy function with no function body.
  *
  * @author Kristian Kutin
  */
-public interface Function {
+public class DummyFunction implements Function {
+
+    /**
+     * The default constructor.
+     */
+    public DummyFunction() {
+
+        super();
+    }
 
 }

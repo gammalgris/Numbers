@@ -40,7 +40,7 @@ import jmul.math.numbers.digits.Digit;
 import static jmul.math.numbers.functions.ParameterCheckHelper.checkParameter;
 import static jmul.math.numbers.functions.ParameterCheckHelper.checkParameterBase;
 
-import jmul.singletons.Function;
+import jmul.math.functions.Function;
 
 
 /**

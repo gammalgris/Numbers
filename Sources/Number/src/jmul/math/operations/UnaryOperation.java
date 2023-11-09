@@ -34,7 +34,7 @@
 package jmul.math.operations;
 
 
-import jmul.singletons.Function;
+import jmul.math.functions.Function;
 
 
 /**

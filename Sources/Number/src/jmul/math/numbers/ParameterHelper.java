@@ -36,9 +36,6 @@ package jmul.math.numbers;
 
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
-import static jmul.math.numbers.Constants.ORDINAL_MAX_LIMIT;
-import static jmul.math.numbers.Constants.ORDINAL_MIN_LIMIT;
-import jmul.math.numbers.exceptions.IllegalOrdinalException;
 import jmul.math.numbers.exceptions.UnsupportedBaseException;
 
 
@@ -49,7 +46,6 @@ public final class ParameterHelper {
         throw new UnsupportedOperationException();
     }
 
-    @Deprecated
     public static int checkBase(int base) {
 
         if ((base < BASE_MIN_LIMIT) || (base > BASE_MAX_LIMIT)) {
@@ -58,17 +54,6 @@ public final class ParameterHelper {
         }
 
         return base;
-    }
-
-    @Deprecated
-    public static int checkOrdinal(int ordinal) {
-
-        if ((ordinal < ORDINAL_MIN_LIMIT) || (ordinal > ORDINAL_MAX_LIMIT)) {
-
-            throw new IllegalOrdinalException(ordinal);
-        }
-
-        return ordinal;
     }
 
     public static Sign checkSign(Sign sign) {

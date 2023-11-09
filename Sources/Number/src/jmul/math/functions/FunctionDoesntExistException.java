@@ -31,21 +31,25 @@
  * $Id$
  */
 
-package jmul.singletons;
+package jmul.math.functions;
 
 
 /**
- * This interface describes an initializer for a function repository.
+ * A custom exception for cases when a repsoitory doesn't contain a function.
  *
  * @author Kristian Kutin
  */
-public interface FunctionRepositoryInitializer {
+public class FunctionDoesntExistException extends IllegalArgumentException {
 
     /**
-     * Returns an initialized function repository.
+     * Creates a new exception according to the specified parameter.
      *
-     * @return a function repository
+     * @param name
+     *        the name of the function
      */
-    FunctionRepository init();
+    public FunctionDoesntExistException(CharSequence name) {
+
+        super(String.format("No function with the specified identifier (%s) is registered!", name.toString()));
+    }
 
 }

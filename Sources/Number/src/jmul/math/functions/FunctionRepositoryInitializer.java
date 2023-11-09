@@ -31,25 +31,21 @@
  * $Id$
  */
 
-package test.jmul.math.singletons;
-
-
-import jmul.singletons.Function;
+package jmul.math.functions;
 
 
 /**
- * A dummy function with no function body.
+ * This interface describes an initializer for a function repository.
  *
  * @author Kristian Kutin
  */
-public class DummyFunction implements Function {
+public interface FunctionRepositoryInitializer {
 
     /**
-     * The default constructor.
+     * Returns an initialized function repository.
+     *
+     * @return a function repository
      */
-    public DummyFunction() {
-
-        super();
-    }
+    FunctionRepository init();
 
 }

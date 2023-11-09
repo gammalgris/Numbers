@@ -34,7 +34,7 @@
 package jmul.math.numbers;
 
 
-import jmul.singletons.FunctionIdentifier;
+import jmul.math.functions.FunctionIdentifier;
 
 
 /**

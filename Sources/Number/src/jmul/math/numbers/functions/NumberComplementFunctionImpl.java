@@ -46,7 +46,7 @@ import jmul.math.numbers.nodes.Nodes;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
 
-import jmul.singletons.FunctionSingletons;
+import jmul.math.functions.FunctionSingletons;
 
 
 /**

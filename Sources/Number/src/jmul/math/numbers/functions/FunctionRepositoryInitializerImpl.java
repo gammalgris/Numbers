@@ -40,9 +40,9 @@ import jmul.math.numbers.notations.ScientificNotationParserImpl;
 import jmul.math.numbers.notations.StandardNotationFunctionImpl;
 import jmul.math.numbers.notations.StandardNotationParserImpl;
 
-import jmul.singletons.FunctionRepository;
-import jmul.singletons.FunctionRepositoryImpl;
-import jmul.singletons.FunctionRepositoryInitializer;
+import jmul.math.functions.FunctionRepository;
+import jmul.math.functions.FunctionRepositoryImpl;
+import jmul.math.functions.FunctionRepositoryInitializer;
 
 
 /**

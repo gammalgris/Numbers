@@ -36,13 +36,10 @@ package jmul.math.numbers.digits;
 
 import java.util.Comparator;
 
+import jmul.math.functions.FunctionSingletons;
 import jmul.math.hash.HashHelper;
 import jmul.math.numbers.FunctionIdentifiers;
-import static jmul.math.numbers.ParameterHelper.checkBase;
-import static jmul.math.numbers.ParameterHelper.checkOrdinal;
 import jmul.math.numbers.functions.EqualityFunction;
-
-import jmul.singletons.FunctionSingletons;
 
 
 /**

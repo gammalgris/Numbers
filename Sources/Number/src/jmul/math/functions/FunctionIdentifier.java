@@ -31,25 +31,14 @@
  * $Id$
  */
 
-package jmul.singletons;
+package jmul.math.functions;
 
 
 /**
- * A custom exception for cases when a repsoitory doesn't contain a function.
+ * This itnerface describes a function identifier.
  *
  * @author Kristian Kutin
  */
-public class FunctionDoesntExistException extends IllegalArgumentException {
-
-    /**
-     * Creates a new exception according to the specified parameter.
-     *
-     * @param name
-     *        the name of the function
-     */
-    public FunctionDoesntExistException(CharSequence name) {
-
-        super(String.format("No function with the specified identifier (%s) is registered!", name.toString()));
-    }
+public interface FunctionIdentifier extends CharSequence {
 
 }

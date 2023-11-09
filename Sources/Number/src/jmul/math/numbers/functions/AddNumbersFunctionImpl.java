@@ -47,7 +47,7 @@ import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.Result;
 import jmul.math.operations.ResultWithCarry;
 
-import jmul.singletons.FunctionSingletons;
+import jmul.math.functions.FunctionSingletons;
 
 
 /**

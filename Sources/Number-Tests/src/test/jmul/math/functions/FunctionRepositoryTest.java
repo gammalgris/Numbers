@@ -31,16 +31,16 @@
  * $Id$
  */
 
-package test.jmul.math.singletons;
+package test.jmul.math.functions;
 
 
 import jmul.math.numbers.FunctionIdentifiers;
 
-import jmul.singletons.Function;
-import jmul.singletons.FunctionDoesntExistException;
-import jmul.singletons.FunctionExistsException;
-import jmul.singletons.FunctionRepository;
-import jmul.singletons.FunctionRepositoryImpl;
+import jmul.math.functions.Function;
+import jmul.math.functions.FunctionDoesntExistException;
+import jmul.math.functions.FunctionExistsException;
+import jmul.math.functions.FunctionRepository;
+import jmul.math.functions.FunctionRepositoryImpl;
 
 import jmul.test.classification.UnitTest;
 

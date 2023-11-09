@@ -38,7 +38,7 @@ import jmul.math.numbers.Number;
 import jmul.math.numbers.exceptions.DigitBaseMismatchException;
 import jmul.math.numbers.nodes.DigitNode;
 
-import jmul.singletons.Function;
+import jmul.math.functions.Function;
 
 
 /**

@@ -35,7 +35,7 @@ package jmul.math.numbers;
 
 
 import jmul.math.numbers.nodes.LinkedDigitList;
-import jmul.math.numbers.operations.ArithmeticOperations;
+import jmul.math.operations.ArithmeticOperations;
 
 
 /**

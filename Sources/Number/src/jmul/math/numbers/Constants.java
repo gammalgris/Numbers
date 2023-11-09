@@ -60,16 +60,6 @@ public final class Constants {
     public static final int BASE_MIN_LIMIT;
 
     /**
-     * The allowed maximum value for an ordinal.
-     */
-    public static final int ORDINAL_MAX_LIMIT;
-
-    /**
-     * The allowed minimum value for an ordinal.
-     */
-    public static final int ORDINAL_MIN_LIMIT;
-
-    /**
      * The constant contains the decimal separator for this system. The actual decimal separator
      * depends on the current locale.
      */
@@ -104,11 +94,8 @@ public final class Constants {
 
         EXPONENT_ABBREVIATION = "E";
 
-        BASE_MIN_LIMIT = 1;
-        BASE_MAX_LIMIT = 64;
-
-        ORDINAL_MIN_LIMIT = BASE_MIN_LIMIT - 1;
-        ORDINAL_MAX_LIMIT = BASE_MAX_LIMIT;
+        BASE_MIN_LIMIT = 2;
+        BASE_MAX_LIMIT = 65;
 
         DECIMAL_COMMA = ',';
         DECIMAL_POINT = '.';

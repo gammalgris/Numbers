@@ -36,7 +36,7 @@ package jmul.math.numbers.functions;
 
 import jmul.math.numbers.digits.Digit;
 
-import jmul.singletons.Function;
+import jmul.math.functions.Function;
 
 
 /**
