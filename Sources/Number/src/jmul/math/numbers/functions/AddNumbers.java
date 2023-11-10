@@ -51,16 +51,21 @@ import jmul.math.functions.FunctionSingletons;
 
 
 /**
- * This class implements a function for adding two numbers.
+ * This class implements a function for adding two numbers. The implementation checks the operands
+ * regarding absolute values and signs and compares the numbers. Depending on the actual case an
+ * addition or subtraction is performed.<br>
+ * Addition is straightforward by adding all corresponding digits from right to left and carry over
+ * the carry. Subtractions are delegated to the corresponding function. Special cases (e.g. infinity
+ * or zero operands) are handled seperately as they don't require much computation.
  *
  * @author Kristian Kutin
  */
-public class AddNumbersFunctionImpl implements BinaryOperation<Number, Result<Number>> {
+public class AddNumbers implements BinaryOperation<Number, Result<Number>> {
 
     /**
      * The default constructor.
      */
-    public AddNumbersFunctionImpl() {
+    public AddNumbers() {
 
         super();
     }
@@ -169,154 +174,49 @@ public class AddNumbersFunctionImpl implements BinaryOperation<Number, Result<Nu
     private Result<Number> addZero(Number operand1, Number operand2) {
 
         int base = operand1.base();
-        boolean equalSigns = operand1.sign() == operand2.sign();
 
-        if (equalSigns) {
+        if (operand1.isZero() && !operand2.isZero()) {
 
-            if (operand1.isZero() && !operand2.isZero()) {
+            /*
+             * cases handled:
+             *
+             * 0 + n = n
+             * -0 + -n = -n
+             * 0 + -n = -n
+             * -0 + n = n
+             */
 
-                /*
-                 * cases handled:
-                 *
-                 * 0 + n = n
-                 * -0 + -n = -n
-                 */
-                Number result = new NumberImpl(operand2);
-                return new Result<Number>(result);
+            Number result = new NumberImpl(operand2);
+            return new Result<Number>(result);
 
-            } else if (!operand1.isZero() && operand2.isZero()) {
+        } else if (!operand1.isZero() && operand2.isZero()) {
 
-                /*
-                 * cases handled:
-                 *
-                 * n + 0 = n
-                 * -n + -0 = -n
-                 */
-                Number result = new NumberImpl(operand1);
-                return new Result<Number>(result);
+            /*
+             * cases handled:
+             *
+             * n + 0 = n
+             * -n + -0 = -n
+             * n + -0 = n
+             * -n + 0 = -n
+             */
 
-            } else {
-
-                /*
-                 * cases handled:
-                 *
-                 * 0 + 0 = 0
-                 * -0 + -0 = 0
-                 */
-                Number result = new NumberImpl(base, "0");
-                return new Result<Number>(result);
-            }
+            Number result = new NumberImpl(operand1);
+            return new Result<Number>(result);
 
         } else {
 
-            if (operand1.isZero() && !operand2.isZero()) {
+            /*
+             * cases handled:
+             *
+             * 0 + 0 = 0
+             * -0 + -0 = 0
+             * 0 + -0 = 0
+             * -0 + 0 = 0
+             */
 
-                /*
-                 * cases handled:
-                 *
-                 * 0 + -n = -n
-                 * -0 + n = n
-                 */
-                Number result = new NumberImpl(operand2);
-                return new Result<Number>(result);
-
-            } else if (!operand1.isZero() && operand2.isZero()) {
-
-                /*
-                 * cases handled:
-                 *
-                 * n + -0 = n
-                 * -n + 0 = -n
-                 */
-                Number result = new NumberImpl(operand1);
-                return new Result<Number>(result);
-
-            } else {
-
-                /*
-                 * cases handled:
-                 *
-                 * 0 + -0 = 0
-                 * -0 + 0 = 0
-                 */
-                Number result = new NumberImpl(base, "0");
-                return new Result<Number>(result);
-            }
+            Number result = new NumberImpl(base, "0");
+            return new Result<Number>(result);
         }
-    }
-
-    /**
-     * Removes leading zeros in the linked lit.
-     *
-     * @param centerNode
-     *        the center node of a linked list
-     */
-    private void trimLeft(DigitNode centerNode) {
-
-        DigitNode left = centerNode;
-
-        while (left.leftNode() != null) {
-
-            left = left.leftNode();
-        }
-
-        DigitNode right;
-        do {
-
-            if (left == centerNode) {
-
-                break;
-            }
-
-            right = left.rightNode();
-            if (left.digit().isZero()) {
-
-                Nodes.removeLeftTail(right);
-                left = right;
-
-            } else {
-
-                break;
-            }
-
-        } while (right != null);
-    }
-
-    /**
-     * Removes trailing zeros in the linked lit.
-     *
-     * @param centerNode
-     *        the center node of a linked list
-     */
-    private void trimRight(DigitNode centerNode) {
-
-        DigitNode right = centerNode;
-
-        while (right.rightNode() != null) {
-
-            right = right.rightNode();
-        }
-
-        DigitNode left;
-        do {
-
-            if (right == centerNode) {
-
-                break;
-            }
-
-            left = right.leftNode();
-            if (right.digit().isZero()) {
-
-                Nodes.removeRightTail(left);
-                right = left;
-
-            } else {
-
-                break;
-            }
-
-        } while (left != null);
     }
 
     /**
@@ -429,8 +329,8 @@ public class AddNumbersFunctionImpl implements BinaryOperation<Number, Result<Nu
             Nodes.linkNodes(newLeft, resultNode);
         }
 
-        trimLeft(resultCenter);
-        trimRight(resultCenter);
+        Nodes.trimLeft(resultCenter);
+        Nodes.trimRight(resultCenter);
 
         Number result = new NumberImpl(base, sign, resultCenter);
 
@@ -502,17 +402,6 @@ public class AddNumbersFunctionImpl implements BinaryOperation<Number, Result<Nu
         Number absolute1 = operand1.absoluteValue();
         Number absolute2 = operand2.absoluteValue();
 
-        /*
-         * cases handled:
-         *
-         * n + -m -> n - m (if abs(n) > abs(m))
-         * n + -m -> 0 (if abs(n) = abs(m))
-         * n + -m -> -m + n -> -(m - n) (if abs(m) > abs(n))
-         * -n + m -> -n + m -> -(n - m) (if abs(n) > abs(m))
-         * -n + m -> 0 (if abs(n) = abs(m))
-         * -n + m -> m - n (if abs(m) > abs(n))
-         */
-
         if (absolute1.compareTo(absolute2) == 0) {
 
             /*
@@ -523,10 +412,19 @@ public class AddNumbersFunctionImpl implements BinaryOperation<Number, Result<Nu
              */
 
             Number result = new NumberImpl(base, "0");
-
             return new Result<Number>(result);
+        }
 
-        } else if (absolute1.compareTo(absolute2) > 0) {
+        /*
+         * cases handled:
+         *
+         * n + -m -> n - m (if abs(n) > abs(m))
+         * n + -m -> -m + n -> -(m - n) (if abs(m) > abs(n))
+         * -n + m -> -n + m -> -(n - m) (if abs(n) > abs(m))
+         * -n + m -> m - n (if abs(m) > abs(n))
+         */
+        
+        if (absolute1.compareTo(absolute2) > 0) {
 
             /*
              * cases handled:

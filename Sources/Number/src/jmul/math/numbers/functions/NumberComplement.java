@@ -54,12 +54,12 @@ import jmul.math.functions.FunctionSingletons;
  *
  * @author Kristian Kutin
  */
-public class NumberComplementFunctionImpl implements UnaryOperation<Number> {
+public class NumberComplement implements UnaryOperation<Number> {
 
     /**
      * The default constructor.
      */
-    public NumberComplementFunctionImpl() {
+    public NumberComplement() {
 
         super();
     }

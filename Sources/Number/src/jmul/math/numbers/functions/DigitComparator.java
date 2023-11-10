@@ -34,54 +34,70 @@
 package jmul.math.numbers.functions;
 
 
-import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
-import jmul.math.numbers.Sign;
-import jmul.math.numbers.Signs;
-import jmul.math.numbers.nodes.DigitNode;
-import jmul.math.numbers.nodes.Nodes;
-import jmul.math.operations.Result;
-import jmul.math.operations.UnaryOperation;
+import java.util.Comparator;
+
+import jmul.math.numbers.digits.Digit;
+import static jmul.math.numbers.functions.ParameterCheckHelper.checkParameter;
+import static jmul.math.numbers.functions.ParameterCheckHelper.checkParameterBase;
+
+import jmul.math.functions.Function;
 
 
 /**
- * This function implementation negates a number.
+ * An implementation of an natural ordering comparator for digits.
  *
  * @author Kristian Kutin
  */
-public class NegateNumberFunctionImpl implements UnaryOperation<Number> {
+public class DigitComparator extends ComparatorBase implements Function, Comparator<Digit> {
 
     /**
      * The default constructor.
      */
-    public NegateNumberFunctionImpl() {
+    public DigitComparator() {
 
         super();
     }
 
     /**
-     * Negates the specified number.
+     * Compares the two specified digits regarding their natural order.
      *
-     * @param n
+     * @param d1
+     *        a number
+     * @param d2
      *        a number
      *
-     * @return a number
+     * @return <code>1</code>, <code>0</code> or <code>-1</code> if the first digit is greater than,
+     *         equals or lesser than the second digit.
      */
     @Override
-    public Result<Number> calculate(Number n) {
+    public int compare(Digit d1, Digit d2) {
 
-        if (n == null) {
+        // Check the references
 
-            throw new IllegalArgumentException("The specified number is null!");
+        checkParameter(d1);
+        checkParameter(d2);
+        checkParameterBase(d1, d2);
+
+        if (d1 == d2) {
+
+            return EQUALS;
         }
 
-        Sign sign = Signs.negate(n.sign());
-        int base = n.base();
-        DigitNode centerNode = Nodes.cloneLinkedList(n.centerNode());
+        // compare the ordinal values
 
-        Number newNumber = new NumberImpl(base, sign, centerNode);
+        if (d1.ordinal() > d2.ordinal()) {
 
-        return new Result<Number>(newNumber);
+            return GREATER_THAN;
+        }
+
+        if (d1.ordinal() < d2.ordinal()) {
+
+            return LESSER_THAN;
+        }
+
+        // return a default value
+
+        return EQUALS;
     }
 
 }

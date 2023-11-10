@@ -244,4 +244,78 @@ public final class Nodes {
         return new NodesResult(node1, node2);
     }
 
+    /**
+     * Removes leading zeros in the linked list.
+     *
+     * @param centerNode
+     *        the center node of a linked list
+     */
+    public static void trimLeft(DigitNode centerNode) {
+
+        DigitNode left = centerNode;
+
+        while (left.leftNode() != null) {
+
+            left = left.leftNode();
+        }
+
+        DigitNode right;
+        do {
+
+            if (left == centerNode) {
+
+                break;
+            }
+
+            right = left.rightNode();
+            if (left.digit().isZero()) {
+
+                removeLeftTail(right);
+                left = right;
+
+            } else {
+
+                break;
+            }
+
+        } while (right != null);
+    }
+
+    /**
+     * Removes trailing zeros in the linked list.
+     *
+     * @param centerNode
+     *        the center node of a linked list
+     */
+    public static void trimRight(DigitNode centerNode) {
+
+        DigitNode right = centerNode;
+
+        while (right.rightNode() != null) {
+
+            right = right.rightNode();
+        }
+
+        DigitNode left;
+        do {
+
+            if (right == centerNode) {
+
+                break;
+            }
+
+            left = right.leftNode();
+            if (right.digit().isZero()) {
+
+                removeRightTail(left);
+                right = left;
+
+            } else {
+
+                break;
+            }
+
+        } while (left != null);
+    }
+
 }

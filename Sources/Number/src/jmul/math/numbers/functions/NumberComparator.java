@@ -49,12 +49,12 @@ import jmul.math.functions.Function;
  *
  * @author Kristian Kutin
  */
-public class NumberComparatorFunctionImpl extends ComparatorBase implements Function, Comparator<Number> {
+public class NumberComparator extends ComparatorBase implements Function, Comparator<Number> {
 
     /**
      * The default constructor.
      */
-    public NumberComparatorFunctionImpl() {
+    public NumberComparator() {
 
         super();
     }

@@ -44,12 +44,12 @@ import jmul.math.functions.Function;
  *
  * @author Kristian Kutin
  */
-public class DigitEqualityFunctionImpl implements Function, EqualityFunction<Digit> {
+public class DigitEquality implements Function, EqualityFunction<Digit> {
 
     /**
      * The defailt constructor.
      */
-    public DigitEqualityFunctionImpl() {
+    public DigitEquality() {
 
         super();
     }

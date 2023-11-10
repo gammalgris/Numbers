@@ -248,7 +248,8 @@ public class NumberImpl implements Number {
 
             } catch (IllegalArgumentException e) {
 
-                // ignore the exception because it might not be the matching notation
+                // Ignore the exception for now because it might not be the matching notation.
+                // Remember the exception for later if needed.
                 exceptions.add(e);
             }
         }

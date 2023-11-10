@@ -34,70 +34,47 @@
 package jmul.math.numbers.functions;
 
 
-import java.util.Comparator;
-
 import jmul.math.numbers.digits.Digit;
+import jmul.math.numbers.digits.PositionalNumeralSystems;
 import static jmul.math.numbers.functions.ParameterCheckHelper.checkParameter;
-import static jmul.math.numbers.functions.ParameterCheckHelper.checkParameterBase;
-
-import jmul.math.functions.Function;
+import jmul.math.operations.Result;
+import jmul.math.operations.UnaryOperation;
 
 
 /**
- * An implementation of an natural ordering comparator for digits.
+ * This unary function implementation calculates the coplement of a digit.
  *
  * @author Kristian Kutin
  */
-public class DigitComparatorFunctionImpl extends ComparatorBase implements Function, Comparator<Digit> {
+public class DigitComplement implements UnaryOperation<Digit> {
 
     /**
      * The default constructor.
      */
-    public DigitComparatorFunctionImpl() {
+    public DigitComplement() {
 
         super();
     }
 
     /**
-     * Compares the two specified digits regarding their natural order.
+     * Calculates the complement for the specified digit.
      *
-     * @param d1
-     *        a number
-     * @param d2
-     *        a number
+     * @param digit
+     *        a digit
      *
-     * @return <code>1</code>, <code>0</code> or <code>-1</code> if the first digit is greater than,
-     *         equals or lesser than the second digit.
+     * @return the result
      */
     @Override
-    public int compare(Digit d1, Digit d2) {
+    public Result<Digit> calculate(Digit digit) {
 
-        // Check the references
+        checkParameter(digit);
 
-        checkParameter(d1);
-        checkParameter(d2);
-        checkParameterBase(d1, d2);
+        int base = digit.base();
+        int result = base - digit.ordinal() - 1;
 
-        if (d1 == d2) {
+        Digit newDigit = PositionalNumeralSystems.ordinalToDigit(base, result);
 
-            return EQUALS;
-        }
-
-        // compare the ordinal values
-
-        if (d1.ordinal() > d2.ordinal()) {
-
-            return GREATER_THAN;
-        }
-
-        if (d1.ordinal() < d2.ordinal()) {
-
-            return LESSER_THAN;
-        }
-
-        // return a default value
-
-        return EQUALS;
+        return new Result<Digit>(newDigit);
     }
 
 }

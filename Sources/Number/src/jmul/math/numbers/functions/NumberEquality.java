@@ -46,12 +46,12 @@ import jmul.math.functions.Function;
  *
  * @author Kristian Kutin
  */
-public class NumberEqualityFunctionImpl implements Function, EqualityFunction<Number> {
+public class NumberEquality implements Function, EqualityFunction<Number> {
 
     /**
      * The default constructor.
      */
-    public NumberEqualityFunctionImpl() {
+    public NumberEquality() {
 
         super();
     }

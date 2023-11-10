@@ -36,45 +36,59 @@ package jmul.math.numbers.functions;
 
 import jmul.math.numbers.digits.Digit;
 import jmul.math.numbers.digits.PositionalNumeralSystems;
+import jmul.math.operations.BinaryOperation;
+import jmul.math.operations.ResultWithCarry;
 import static jmul.math.numbers.functions.ParameterCheckHelper.checkParameter;
-import jmul.math.operations.Result;
-import jmul.math.operations.UnaryOperation;
+import static jmul.math.numbers.functions.ParameterCheckHelper.checkParameterBase;
 
 
 /**
- * This unary function implementation calculates the coplement of a digit.
+ * This binary function adds two digits.
  *
  * @author Kristian Kutin
  */
-public class DigitComplementFunctionImpl implements UnaryOperation<Digit> {
+public class AddDigits implements BinaryOperation<Digit, ResultWithCarry<Digit>> {
 
     /**
      * The default constructor.
      */
-    public DigitComplementFunctionImpl() {
+    public AddDigits() {
 
         super();
     }
 
     /**
-     * Calculates the complement for the specified digit.
+     * Adds the specified digits.
      *
-     * @param digit
-     *        a digit
+     * @param operand1
+     *        an operand
+     * @param operand2
+     *        an operand
      *
-     * @return the result
+     * @return the result of the addition
      */
     @Override
-    public Result<Digit> calculate(Digit digit) {
+    public ResultWithCarry<Digit> calculate(Digit operand1, Digit operand2) {
 
-        checkParameter(digit);
+        checkParameter(operand1);
+        checkParameter(operand2);
+        checkParameterBase(operand1, operand2);
 
-        int base = digit.base();
-        int result = base - digit.ordinal() - 1;
+        int base = operand1.base();
 
-        Digit newDigit = PositionalNumeralSystems.ordinalToDigit(base, result);
+        int carry = 0;
+        int result = operand1.ordinal() + operand2.ordinal();
 
-        return new Result<Digit>(newDigit);
+        if (result >= base) {
+
+            result = result - base;
+            carry = 1;
+        }
+
+        Digit resultDigit = PositionalNumeralSystems.ordinalToDigit(base, result);
+        Digit carryDigit = PositionalNumeralSystems.ordinalToDigit(base, carry);
+
+        return new ResultWithCarry<Digit>(resultDigit, carryDigit);
     }
 
 }
