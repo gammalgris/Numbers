@@ -71,25 +71,55 @@ public interface Number extends LinkedDigitList, ArithmeticOperations, Comparabl
     int base();
 
     /**
-     * Returns a scientific notation for this number.
+     * Returns a scientific notation for this number. The default decimal separator is used.
      *
      * @return a scientific notation for this number
      */
     String toScientificNotation();
 
     /**
-     * Returns a standard notation for this number.
+     * Returns a scientific notation for this number. The specified decimal separator is used.
+     *
+     * @param decimalSeparator
+     *        a decimal separator
+     *
+     * @return a scientific notation for this number
+     */
+    String toScientificNotation(char decimalSeparator);
+
+    /**
+     * Returns a standard notation for this number. The default decimal separator is used.
      *
      * @return a standard notation for this number
      */
     String toStandardNotation();
 
     /**
-     * Returns a string representation for this number.
+     * Returns a standard notation for this number. The specified decimal separator is used.
+     *
+     * @param decimalSeparator
+     *        a decimal separator
      *
      * @return a standard notation for this number
      */
+    String toStandardNotation(char decimalSeparator);
+
+    /**
+     * Returns a string representation (i.e. standard notation) for this number. The default decimal separator is used.
+     *
+     * @return a string representation
+     */
     String toString();
+
+    /**
+     * Returns a string representation (i.e. standard notation) for this number. The specified decimal separator is used.
+     *
+     * @param decimalSeparator
+     *        a decimal separator
+     *
+     * @return a string representation
+     */
+    String toString(char decimalSeparator);
 
     /**
      * Checks if this number represents infinity.

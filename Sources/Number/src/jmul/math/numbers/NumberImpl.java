@@ -39,6 +39,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import jmul.math.functions.FunctionIdentifier;
+import jmul.math.functions.FunctionSingletons;
 import jmul.math.hash.HashHelper;
 import static jmul.math.numbers.ParameterHelper.checkBase;
 import static jmul.math.numbers.ParameterHelper.checkSign;
@@ -52,9 +54,6 @@ import jmul.math.numbers.notations.ParsingResult;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
-
-import jmul.math.functions.FunctionIdentifier;
-import jmul.math.functions.FunctionSingletons;
 
 
 /**
@@ -401,7 +400,7 @@ public class NumberImpl implements Number {
     }
 
     /**
-     * Returns a scientific notation for this number.<br>
+     * Returns a scientific notation for this number. The default decimal separator is used.<br>
      * <br>
      * <i>Note:<br>
      * If the number has of too many digits it may not be possible to create a string representation.
@@ -412,14 +411,32 @@ public class NumberImpl implements Number {
     @Override
     public String toScientificNotation() {
 
-        NotationFunction function =
-            (NotationFunction) FunctionSingletons.getFunction(FunctionIdentifiers.SCIENTIFIC_NOTATION_FUNCTION);
-
-        return function.toString(this);
+        return toScientificNotation(Constants.DECIMAL_SEPARATOR);
     }
 
     /**
-     * Returns a standard notation for this number.<br>
+     * Returns a scientific notation for this number. The specified decimal separator is used.<br>
+     * <br>
+     * <i>Note:<br>
+     * If the number has of too many digits it may not be possible to create a string representation.
+     * In this case try converting the number to a higher base.</i>
+     *
+     * @param decimalSeparator
+     *        a decimal separator
+     *
+     * @return a scientific notation for this number
+     */
+    @Override
+    public String toScientificNotation(char decimalSeparator) {
+
+        NotationFunction function =
+            (NotationFunction) FunctionSingletons.getFunction(FunctionIdentifiers.SCIENTIFIC_NOTATION_FUNCTION);
+
+        return function.toString(this, decimalSeparator);
+    }
+
+    /**
+     * Returns a standard notation for this number. The default decimal separator is used.<br>
      * <br>
      * <i>Note:<br>
      * If the number has of too many digits it may not be possible to create a string representation.
@@ -430,10 +447,28 @@ public class NumberImpl implements Number {
     @Override
     public String toStandardNotation() {
 
+        return toStandardNotation(Constants.DECIMAL_SEPARATOR);
+    }
+
+    /**
+     * Returns a standard notation for this number. The specified decimal separator is used.<br>
+     * <br>
+     * <i>Note:<br>
+     * If the number has of too many digits it may not be possible to create a string representation.
+     * In this case try the scientific notation or converting the number to a higher base.</i>
+     *
+     * @param decimalSeparator
+     *        a decimal separator
+     *
+     * @return a standard notation for this number
+     */
+    @Override
+    public String toStandardNotation(char decimalSeparator) {
+
         NotationFunction function =
             (NotationFunction) FunctionSingletons.getFunction(FunctionIdentifiers.STANDARD_NOTATION_FUNCTION);
 
-        return function.toString(this);
+        return function.toString(this, decimalSeparator);
     }
 
     /**
@@ -445,6 +480,19 @@ public class NumberImpl implements Number {
     public String toString() {
 
         return toStandardNotation();
+    }
+
+    /**
+     * Returns a string representation of this number with the specified decimal separator.
+     *
+     * @param decimalSeparator
+     *        a decimal separator
+     *
+     * @return a string representation
+     */
+    public String toString(char decimalSeparator) {
+
+        return toStandardNotation(decimalSeparator);
     }
 
     /**

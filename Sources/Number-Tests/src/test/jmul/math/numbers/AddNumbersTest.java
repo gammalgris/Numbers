@@ -226,8 +226,8 @@ public class AddNumbersTest {
         parameters.add(new Object[] { 10, "1.2345", "10.98765", "12.22215" });
         parameters.add(new Object[] { 10, "10.98765", "1.2345", "12.22215" });
 
-        parameters.add(new Object[] { 10, "-1.2345", "10.98765", "9,75315" });
-        parameters.add(new Object[] { 10, "10.98765", "-1.2345", "9,75315" });
+        parameters.add(new Object[] { 10, "-1.2345", "10.98765", "9.75315" });
+        parameters.add(new Object[] { 10, "10.98765", "-1.2345", "9.75315" });
 
         parameters.add(new Object[] { 10, "123.45", "1.098765", "124.548765" });
         parameters.add(new Object[] { 10, "1.098765", "123.45", "124.548765" });

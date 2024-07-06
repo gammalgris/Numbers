@@ -220,7 +220,7 @@ public class AddNumbers implements BinaryOperation<Number, Result<Number>> {
     }
 
     /**
-     * Adds the specified numbers and retains the sign.
+     * Adds the specified operands. Both operands have the same sign.
      *
      * @param operand1
      *        an operand

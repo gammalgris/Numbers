@@ -123,8 +123,8 @@ public class CreateNumberWithIllegalDigitsTest {
         }
 
         String message =
-            String.format("An exception is expected (%s) but no exception was thrown!",
-                          expectedExceptionType.getCanonicalName());
+            String.format("An exception is expected (%s) but no exception was thrown (base=%s; input=%s)!",
+                          expectedExceptionType.getCanonicalName(), base, input);
         fail(message);
     }
 
@@ -162,18 +162,26 @@ public class CreateNumberWithIllegalDigitsTest {
 
         Collection<Object[]> parameters = new ArrayList<Object[]>();
 
+        // Test boundaries
         parameters.add(new Object[] { NumberParsingException.class, 1, "1" });
-        parameters.add(new Object[] { NumberParsingException.class, 65, "1" });
+        parameters.add(new Object[] { NumberParsingException.class, 66, "1" });
+
+        // Test text input
         parameters.add(new Object[] { NumberParsingException.class, 64, "Hello World!" });
 
-        for (int base = 2; base <= 63; base++) {
-
-            parameters.add(new Object[] { NumberParsingException.class, base, buildNumberString(base + 1) });
-        }
+        // Test mixed input (i.e. number and text)
+        parameters.add(new Object[] { NumberParsingException.class, 10, "Hello 10" });
+        parameters.add(new Object[] { NumberParsingException.class, 10, "10 World" });
 
         String numberString = buildNumberString(64);
         numberString = numberString + "!";
         parameters.add(new Object[] { NumberParsingException.class, 64, numberString });
+
+        // Test input with digits from a higher base
+        for (int base = 2; base <= 64; base++) {
+
+            parameters.add(new Object[] { NumberParsingException.class, base, buildNumberString(base + 1) });
+        }
 
         return parameters;
     }

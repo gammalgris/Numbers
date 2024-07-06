@@ -34,9 +34,8 @@
 package jmul.math.numbers.notations;
 
 
-import jmul.math.numbers.Number;
-
 import jmul.math.functions.Function;
+import jmul.math.numbers.Number;
 
 
 /**
@@ -52,9 +51,11 @@ public interface NotationFunction extends Function {
      *
      * @param number
      *        a number
+     * @param decimalSeparator
+     *        a decimal separator
      *
      * @return a string representation
      */
-    String toString(Number number);
+    String toString(Number number, char decimalSeparator);
 
 }

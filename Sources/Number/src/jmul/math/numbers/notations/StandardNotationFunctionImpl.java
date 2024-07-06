@@ -63,11 +63,13 @@ public class StandardNotationFunctionImpl implements NotationFunction {
      *
      * @param number
      *        a number
+     * @param decimalSeparator
+     *        a decimal separator
      *
      * @return a string representation
      */
     @Override
-    public String toString(Number number) {
+    public String toString(Number number, char decimalSeparator) {
 
         StringBuilder buffer = new StringBuilder();
 
@@ -89,7 +91,7 @@ public class StandardNotationFunctionImpl implements NotationFunction {
 
             if (node != null) {
 
-                buffer.append(Constants.DECIMAL_SEPARATOR);
+                buffer.append(decimalSeparator);
 
                 while (node != null) {
 
