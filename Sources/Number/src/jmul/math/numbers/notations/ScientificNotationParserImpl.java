@@ -41,7 +41,7 @@ import jmul.math.numbers.Signs;
 import jmul.math.numbers.digits.Digit;
 import jmul.math.numbers.digits.PositionalNumeralSystems;
 import jmul.math.numbers.nodes.DigitNode;
-import jmul.math.numbers.nodes.Nodes;
+import jmul.math.numbers.nodes.NodesHelper;
 
 
 /**
@@ -175,11 +175,11 @@ public class ScientificNotationParserImpl implements NotationParser {
             char c = string.charAt(i);
             Digit digit = PositionalNumeralSystems.charToDigit(base, c);
 
-            node = Nodes.createNode(digit);
+            node = NodesHelper.createNode(digit);
 
             if (previousNode != null) {
 
-                Nodes.linkNodes(previousNode, node);
+                NodesHelper.linkNodes(previousNode, node);
             }
 
             previousNode = node;
@@ -216,9 +216,9 @@ public class ScientificNotationParserImpl implements NotationParser {
             if (rightNode == null) {
 
                 Digit digit = PositionalNumeralSystems.charToDigit(base, ZERO);
-                rightNode = Nodes.createNode(digit);
+                rightNode = NodesHelper.createNode(digit);
 
-                Nodes.linkNodes(centerNode, rightNode);
+                NodesHelper.linkNodes(centerNode, rightNode);
             }
 
             centerNode = centerNode.rightNode();
@@ -250,9 +250,9 @@ public class ScientificNotationParserImpl implements NotationParser {
             if (leftNode == null) {
 
                 Digit digit = PositionalNumeralSystems.charToDigit(base, ZERO);
-                leftNode = Nodes.createNode(digit);
+                leftNode = NodesHelper.createNode(digit);
 
-                Nodes.linkNodes(leftNode, centerNode);
+                NodesHelper.linkNodes(leftNode, centerNode);
             }
 
             centerNode = centerNode.leftNode();

@@ -43,7 +43,7 @@ import jmul.math.numbers.Signs;
 import jmul.math.numbers.digits.Digit;
 import jmul.math.numbers.digits.PositionalNumeralSystems;
 import jmul.math.numbers.nodes.DigitNode;
-import jmul.math.numbers.nodes.Nodes;
+import jmul.math.numbers.nodes.NodesHelper;
 
 
 /**
@@ -117,7 +117,7 @@ public class StandardNotationParserImpl implements NotationParser {
 
             String trimmedRightString = trimRightString(rightString);
             DigitNode nodeRight = parseRightString(base, trimmedRightString);
-            Nodes.linkNodes(nodeLeft, nodeRight);
+            NodesHelper.linkNodes(nodeLeft, nodeRight);
         }
 
         return new ParsingResult(sign, base, nodeLeft);
@@ -175,11 +175,11 @@ public class StandardNotationParserImpl implements NotationParser {
             char c = string.charAt(i);
             Digit digit = PositionalNumeralSystems.charToDigit(base, c);
 
-            node = Nodes.createNode(digit);
+            node = NodesHelper.createNode(digit);
 
             if (previousNode != null) {
 
-                Nodes.linkNodes(previousNode, node);
+                NodesHelper.linkNodes(previousNode, node);
             }
 
             previousNode = node;
@@ -259,7 +259,7 @@ public class StandardNotationParserImpl implements NotationParser {
             char c = string.charAt(i);
             Digit digit = PositionalNumeralSystems.charToDigit(base, c);
 
-            node = Nodes.createNode(digit);
+            node = NodesHelper.createNode(digit);
 
             if (firstNode == null) {
 
@@ -268,7 +268,7 @@ public class StandardNotationParserImpl implements NotationParser {
 
             if (previousNode != null) {
 
-                Nodes.linkNodes(previousNode, node);
+                NodesHelper.linkNodes(previousNode, node);
             }
 
             previousNode = node;

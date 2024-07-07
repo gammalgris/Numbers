@@ -39,7 +39,7 @@ import jmul.math.numbers.NumberImpl;
 import jmul.math.numbers.Sign;
 import jmul.math.numbers.Signs;
 import jmul.math.numbers.nodes.DigitNode;
-import jmul.math.numbers.nodes.Nodes;
+import jmul.math.numbers.nodes.NodesHelper;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
 
@@ -77,7 +77,7 @@ public class NegateNumber implements UnaryOperation<Number> {
 
         Sign sign = Signs.negate(n.sign());
         int base = n.base();
-        DigitNode centerNode = Nodes.cloneLinkedList(n.centerNode());
+        DigitNode centerNode = NodesHelper.cloneLinkedList(n.centerNode());
 
         Number newNumber = new NumberImpl(base, sign, centerNode);
 

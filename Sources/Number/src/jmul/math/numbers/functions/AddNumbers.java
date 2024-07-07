@@ -41,7 +41,7 @@ import jmul.math.numbers.Sign;
 import jmul.math.numbers.digits.Digit;
 import jmul.math.numbers.exceptions.UndefinedResultException;
 import jmul.math.numbers.nodes.DigitNode;
-import jmul.math.numbers.nodes.Nodes;
+import jmul.math.numbers.nodes.NodesHelper;
 import jmul.math.numbers.nodes.NodesResult;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.Result;
@@ -234,7 +234,7 @@ public class AddNumbers implements BinaryOperation<Number, Result<Number>> {
         int base = operand1.base();
         Sign sign = operand1.sign();
 
-        NodesResult moveResult = Nodes.moveRightSynchronously(operand1.centerNode(), operand2.centerNode());
+        NodesResult moveResult = NodesHelper.moveRightSynchronously(operand1.centerNode(), operand2.centerNode());
         DigitNode node1 = moveResult.firstNode;
         DigitNode node2 = moveResult.secondNode;
 
@@ -242,11 +242,11 @@ public class AddNumbers implements BinaryOperation<Number, Result<Number>> {
         DigitNode rightTail;
         if (node1.rightNode() != null) {
 
-            rightTail = Nodes.cloneRightTail(node1.rightNode());
+            rightTail = NodesHelper.cloneRightTail(node1.rightNode());
 
         } else {
 
-            rightTail = Nodes.cloneRightTail(node2.rightNode());
+            rightTail = NodesHelper.cloneRightTail(node2.rightNode());
         }
 
         DigitNode resultNode = null;
@@ -274,8 +274,8 @@ public class AddNumbers implements BinaryOperation<Number, Result<Number>> {
             }
 
             previousResultNode = resultNode;
-            resultNode = Nodes.createNode(result);
-            Nodes.linkNodes(resultNode, previousResultNode);
+            resultNode = NodesHelper.createNode(result);
+            NodesHelper.linkNodes(resultNode, previousResultNode);
 
             if (resultWithoutRightTail == null) {
 
@@ -307,7 +307,7 @@ public class AddNumbers implements BinaryOperation<Number, Result<Number>> {
             }
         }
 
-        Nodes.linkNodes(resultWithoutRightTail, rightTail);
+        NodesHelper.linkNodes(resultWithoutRightTail, rightTail);
 
         while (leftTail != null) {
 
@@ -315,9 +315,9 @@ public class AddNumbers implements BinaryOperation<Number, Result<Number>> {
             Digit result = resultWrapper.result();
             carry = resultWrapper.carry();
 
-            DigitNode newLeft = Nodes.createNode(result);
+            DigitNode newLeft = NodesHelper.createNode(result);
 
-            Nodes.linkNodes(newLeft, resultNode);
+            NodesHelper.linkNodes(newLeft, resultNode);
 
             resultNode = resultNode.leftNode();
             leftTail = leftTail.leftNode();
@@ -325,12 +325,12 @@ public class AddNumbers implements BinaryOperation<Number, Result<Number>> {
 
         if (!carry.isZero()) {
 
-            DigitNode newLeft = Nodes.createNode(carry);
-            Nodes.linkNodes(newLeft, resultNode);
+            DigitNode newLeft = NodesHelper.createNode(carry);
+            NodesHelper.linkNodes(newLeft, resultNode);
         }
 
-        Nodes.trimLeft(resultCenter);
-        Nodes.trimRight(resultCenter);
+        NodesHelper.trimLeft(resultCenter);
+        NodesHelper.trimRight(resultCenter);
 
         Number result = new NumberImpl(base, sign, resultCenter);
 

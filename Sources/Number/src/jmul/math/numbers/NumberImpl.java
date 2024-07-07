@@ -47,7 +47,7 @@ import static jmul.math.numbers.ParameterHelper.checkSign;
 import jmul.math.numbers.exceptions.NumberParsingException;
 import jmul.math.numbers.functions.EqualityFunction;
 import jmul.math.numbers.nodes.DigitNode;
-import jmul.math.numbers.nodes.Nodes;
+import jmul.math.numbers.nodes.NodesHelper;
 import jmul.math.numbers.notations.NotationFunction;
 import jmul.math.numbers.notations.NotationParser;
 import jmul.math.numbers.notations.ParsingResult;
@@ -264,7 +264,7 @@ public class NumberImpl implements Number {
      */
     public NumberImpl(Number number) {
 
-        this(number.base(), number.sign(), Nodes.cloneLinkedList(number.centerNode()));
+        this(number.base(), number.sign(), NodesHelper.cloneLinkedList(number.centerNode()));
     }
 
     /**
@@ -856,7 +856,7 @@ public class NumberImpl implements Number {
     @Override
     public Number absoluteValue() {
 
-        return new NumberImpl(base(), Signs.POSITIVE, Nodes.cloneLinkedList(centerNode()));
+        return new NumberImpl(base(), Signs.POSITIVE, NodesHelper.cloneLinkedList(centerNode()));
     }
 
 }

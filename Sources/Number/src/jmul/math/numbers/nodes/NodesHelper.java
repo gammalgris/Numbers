@@ -35,22 +35,35 @@ package jmul.math.numbers.nodes;
 
 
 import jmul.math.numbers.digits.Digit;
+import jmul.math.numbers.digits.PositionalNumeralSystems;
+
+import jmul.metainfo.annotations.Modified;
 
 
 /**
- * A helper class which contains various utility functions.<br>
- * <br>
- * <i>Note:<br>
- * The <code>equals</code> and <code>hashCode</code> methods are not overridden on purpose.</i>
+ * A helper class which contains various utility functions.
  *
  * @author Kristian Kutin
  */
-public final class Nodes {
+public final class NodesHelper {
+
+    /**
+     * A constant representing a zero digit (i.e. it's ordinal value).
+     */
+    private static final int ZERO;
+
+    /*
+     * The static initializer.
+     */
+    static {
+
+        ZERO = 0;
+    }
 
     /**
      * The default constructor.
      */
-    private Nodes() {
+    private NodesHelper() {
 
         throw new UnsupportedOperationException();
     }
@@ -66,6 +79,40 @@ public final class Nodes {
     public static DigitNode createNode(Digit digit) {
 
         return new DigitNodeImpl(digit);
+    }
+
+    /**
+     * Creates a new node.
+     *
+     * @param base
+     *        the digit base
+     * @param ordinal
+     *        the ordinal value of the digit
+     *
+     * @return a digit node
+     */
+    public static DigitNode createNode(int base, int ordinal) {
+
+        Digit digit = PositionalNumeralSystems.ordinalToDigit(base, ordinal);
+        DigitNode digitNode = createNode(digit);
+
+        return digitNode;
+    }
+
+    /**
+     * Returns the base of the underlying digit.
+     *
+     * @param node
+     *        a node within a linked list
+     *
+     * @return the digit base
+     */
+    public static int getBase(DigitNode node) {
+
+        Digit digit = node.digit();
+        int base = digit.base();
+
+        return base;
     }
 
     /**
@@ -245,6 +292,35 @@ public final class Nodes {
     }
 
     /**
+     * Moves the references to the most a common node to the left.
+     *
+     * @param firstNode
+     *        a reference to a node in the first linked list
+     * @param secondNode
+     *        a reference to a node in the second linked list
+     */
+    public static NodesResult moveLeftSynchronously(DigitNode firstNode, DigitNode secondNode) {
+
+        DigitNode node1 = firstNode;
+        DigitNode node2 = secondNode;
+
+        while (true) {
+
+            if ((node1.rightNode() != null) && (node2.rightNode() != null)) {
+
+                node1 = node1.leftNode();
+                node2 = node2.leftNode();
+
+            } else {
+
+                break;
+            }
+        }
+
+        return new NodesResult(node1, node2);
+    }
+
+    /**
      * Removes leading zeros in the linked list.
      *
      * @param centerNode
@@ -316,6 +392,64 @@ public final class Nodes {
             }
 
         } while (left != null);
+    }
+
+    /**
+     * Compares the two linked lists and fills up missing leading and trailing digits in the first linked
+     * list with zeroes.
+     *
+     * @param firstNode
+     *        the center node of a linked list. This linked list is modified.
+     * @param secondNode
+     *        the center node of a linked list
+     */
+    public void fillUpWithZeroes(@Modified DigitNode firstNode, DigitNode secondNode) {
+
+        NodesResult nodesResult;
+        DigitNode node1;
+        DigitNode node2;
+
+        int base = getBase(firstNode);
+
+        nodesResult = moveLeftSynchronously(firstNode, secondNode);
+        node1 = nodesResult.firstNode;
+        node2 = nodesResult.secondNode;
+
+        while (true) {
+
+            if (node2.leftNode() == null) {
+
+                break;
+
+            } else if (node1.leftNode() == null) {
+
+                DigitNode zeroNode = createNode(base, ZERO);
+                linkNodes(zeroNode, node1);
+            }
+
+            node1 = node1.leftNode();
+            node2 = node2.leftNode();
+        }
+
+        nodesResult = moveRightSynchronously(firstNode, secondNode);
+        node1 = nodesResult.firstNode;
+        node2 = nodesResult.secondNode;
+
+        while (true) {
+
+            if (node2.rightNode() == null) {
+
+                break;
+
+            } else if (node1.rightNode() == null) {
+
+                DigitNode zeroNode = createNode(base, ZERO);
+                linkNodes(node1, zeroNode);
+            }
+
+            node1 = node1.leftNode();
+            node2 = node2.leftNode();
+        }
     }
 
 }

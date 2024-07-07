@@ -42,7 +42,7 @@ import static jmul.math.numbers.Signs.POSITIVE;
 import jmul.math.numbers.digits.Digit;
 import jmul.math.numbers.exceptions.UndefinedResultException;
 import jmul.math.numbers.nodes.DigitNode;
-import jmul.math.numbers.nodes.Nodes;
+import jmul.math.numbers.nodes.NodesHelper;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
 
@@ -101,7 +101,7 @@ public class NumberComplement implements UnaryOperation<Number> {
             Result<Digit> result = function.calculate(centerNode.digit());
             Digit complement = result.result();
 
-            resultCenterNode = Nodes.createNode(complement);
+            resultCenterNode = NodesHelper.createNode(complement);
         }
 
 
@@ -119,8 +119,8 @@ public class NumberComplement implements UnaryOperation<Number> {
             Result<Digit> result = function.calculate(leftNode.digit());
             Digit complement = result.result();
 
-            DigitNode newNode = Nodes.createNode(complement);
-            Nodes.linkNodes(newNode, resultLeftNode);
+            DigitNode newNode = NodesHelper.createNode(complement);
+            NodesHelper.linkNodes(newNode, resultLeftNode);
             resultLeftNode = resultLeftNode.leftNode();
 
             leftNode = leftNode.leftNode();
@@ -141,8 +141,8 @@ public class NumberComplement implements UnaryOperation<Number> {
             Result<Digit> result = function.calculate(rightNode.digit());
             Digit complement = result.result();
 
-            DigitNode newNode = Nodes.createNode(complement);
-            Nodes.linkNodes(resultRightNode, newNode);
+            DigitNode newNode = NodesHelper.createNode(complement);
+            NodesHelper.linkNodes(resultRightNode, newNode);
             resultRightNode = resultRightNode.rightNode();
 
             rightNode = rightNode.rightNode();
