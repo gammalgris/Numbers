@@ -34,10 +34,12 @@
 package jmul.math.numbers.functions;
 
 
+import jmul.math.functions.FunctionSingletons;
 import jmul.math.numbers.FunctionIdentifiers;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
 import jmul.math.numbers.Sign;
+import jmul.math.numbers.Signs;
 import jmul.math.numbers.digits.Digit;
 import jmul.math.numbers.exceptions.UndefinedResultException;
 import jmul.math.numbers.nodes.DigitNode;
@@ -46,8 +48,9 @@ import jmul.math.numbers.nodes.NodesResult;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.Result;
 import jmul.math.operations.ResultWithCarry;
+import jmul.math.operations.UnaryOperation;
 
-import jmul.math.functions.FunctionSingletons;
+import jmul.metainfo.annotations.Modified;
 
 
 /**
@@ -227,9 +230,9 @@ public class AddNumbers implements BinaryOperation<Number, Result<Number>> {
      * @param operand2
      *        an operand
      *
-     * @return a sum
+     * @return the sum of the two operands
      */
-    private Result<Number> addEqualSigns(Number operand1, Number operand2) {
+    private Result<Number> addOperandsWithSameSign(Number operand1, Number operand2) {
 
         int base = operand1.base();
         Sign sign = operand1.sign();
@@ -238,48 +241,62 @@ public class AddNumbers implements BinaryOperation<Number, Result<Number>> {
         DigitNode node1 = moveResult.firstNode;
         DigitNode node2 = moveResult.secondNode;
 
-        DigitNode leftTail;
-        DigitNode rightTail;
+
+        // Check which number has more digits to the right. These digits just have to be cloned and appended to
+        // the result.
+        DigitNode rightTail = null;
         if (node1.rightNode() != null) {
 
-            rightTail = NodesHelper.cloneRightTail(node1.rightNode());
+            rightTail = node1.rightNode();
 
-        } else {
+        } else if (node2.rightNode() != null) {
 
-            rightTail = NodesHelper.cloneRightTail(node2.rightNode());
+            rightTail = node2.rightNode();
         }
+
+
+        // Add the relevant digits and create a new linked list with the results.
+        BinaryOperation<Digit, ResultWithCarry<Digit>> addDigitsFunction =
+            (BinaryOperation<Digit, ResultWithCarry<Digit>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_DIGITS_FUNCTION);
 
         DigitNode resultNode = null;
         DigitNode previousResultNode = null;
         DigitNode resultCenter = null;
-        DigitNode resultWithoutRightTail = null;
+        DigitNode resultRightEndWithoutTail = null;
+        Digit previousCarry = null;
 
-        BinaryOperation<Digit, ResultWithCarry<Digit>> function =
-            (BinaryOperation<Digit, ResultWithCarry<Digit>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_DIGITS_FUNCTION);
-        Digit carry = null;
-        ResultWithCarry<Digit> resultWrapper;
         while (true) {
 
-            resultWrapper = function.calculate(node1.digit(), node2.digit());
-            Digit result = resultWrapper.result();
-            if ((carry == null) || carry.isZero()) {
+            if ((node1 == null) || (node2 == null)) {
 
-                carry = resultWrapper.carry();
+                break;
+            }
+
+            ResultWithCarry<Digit> resultWrapper = addDigitsFunction.calculate(node1.digit(), node2.digit());
+            Digit result = resultWrapper.result();
+            Digit carry = resultWrapper.carry();
+
+            if ((previousCarry != null) && !previousCarry.isZero()) {
+
+                ResultWithCarry<Digit> resultWrapperWithAddedCarry = addDigitsFunction.calculate(result, previousCarry);
+                result = resultWrapperWithAddedCarry.result();
+
+                if ((resultWrapperWithAddedCarry.carry() != null) && !resultWrapperWithAddedCarry.carry().isZero()) {
+
+                    // In this case the first addition produced no carry (i.e. zero) and we have to keep the new carry.
+                    carry = resultWrapperWithAddedCarry.carry();
+                }
+            }
+
+            if (resultNode == null) {
+
+                resultNode = NodesHelper.createNode(result);
+                resultRightEndWithoutTail = resultNode;
 
             } else {
 
-                ResultWithCarry<Digit> resultWrapper2 = function.calculate(result, carry);
-                result = resultWrapper2.result();
-                carry = resultWrapper.carry();
-            }
-
-            previousResultNode = resultNode;
-            resultNode = NodesHelper.createNode(result);
-            NodesHelper.linkNodes(resultNode, previousResultNode);
-
-            if (resultWithoutRightTail == null) {
-
-                resultWithoutRightTail = resultNode;
+                resultNode = NodesHelper.createNode(result);
+                NodesHelper.linkNodes(resultNode, previousResultNode);
             }
 
             if (node1 == operand1.centerNode()) {
@@ -287,54 +304,142 @@ public class AddNumbers implements BinaryOperation<Number, Result<Number>> {
                 resultCenter = resultNode;
             }
 
-            if ((node1.leftNode() != null) && (node2.leftNode() != null)) {
+            previousCarry = carry;
+            previousResultNode = resultNode;
+            node1 = node1.leftNode();
+            node2 = node2.leftNode();
+        }
 
-                node1 = node1.leftNode();
-                node2 = node2.leftNode();
 
-            } else {
+        // Check which number has more digits to the left.
+        DigitNode leftTail = null;
+        if (node1 != null) {
 
-                if (node1.leftNode() != null) {
+            leftTail = node1;
 
-                    leftTail = node1.leftNode();
+        } else if (node2 != null) {
 
-                } else {
+            leftTail = node2;
+        }
 
-                    leftTail = node2.leftNode();
+
+        if (leftTail == null) {
+
+            if (!previousCarry.isZero()) {
+
+                resultNode = NodesHelper.createNode(previousCarry);
+                NodesHelper.linkNodes(resultNode, previousResultNode);
+            }
+
+        } else {
+
+            while (true) {
+
+                if (leftTail == null) {
+
+                    break;
                 }
 
-                break;
+                ResultWithCarry<Digit> resultWrapper = addDigitsFunction.calculate(leftTail.digit(), previousCarry);
+                Digit result = resultWrapper.result();
+                Digit carry = resultWrapper.carry();
+
+                resultNode = NodesHelper.createNode(result);
+                NodesHelper.linkNodes(resultNode, previousResultNode);
+
+                previousCarry = carry;
+                previousResultNode = resultNode;
+                leftTail = leftTail.leftNode();
             }
         }
 
-        NodesHelper.linkNodes(resultWithoutRightTail, rightTail);
 
-        while (leftTail != null) {
+        // clone and append the right tail if there is any
+        if (rightTail != null) {
 
-            resultWrapper = function.calculate(leftTail.digit(), carry);
-            Digit result = resultWrapper.result();
-            carry = resultWrapper.carry();
-
-            DigitNode newLeft = NodesHelper.createNode(result);
-
-            NodesHelper.linkNodes(newLeft, resultNode);
-
-            resultNode = resultNode.leftNode();
-            leftTail = leftTail.leftNode();
+            DigitNode clonedRightTail = NodesHelper.cloneRightTail(rightTail);
+            NodesHelper.linkNodes(resultRightEndWithoutTail, clonedRightTail);
         }
 
-        if (!carry.isZero()) {
-
-            DigitNode newLeft = NodesHelper.createNode(carry);
-            NodesHelper.linkNodes(newLeft, resultNode);
-        }
-
-        NodesHelper.trimLeft(resultCenter);
-        NodesHelper.trimRight(resultCenter);
 
         Number result = new NumberImpl(base, sign, resultCenter);
 
         return new Result<Number>(result);
+    }
+
+    /**
+     * Adds the specified operands. The operands have different signs.
+     *
+     * @param operand1
+     *        an operand
+     * @param operand2
+     *        an operand
+     *
+     * @return the difference of the two operands
+     */
+    private Result<Number> addOperandsWithDifferentSigns(Number operand1, Number operand2) {
+
+        int base = operand1.base();
+
+        Number absolute1 = operand1.absoluteValue();
+        Number absolute2 = operand2.absoluteValue();
+
+        int comparisonResult = absolute1.compareTo(absolute2);
+
+        if (comparisonResult == 0) {
+
+            /*
+             * abs(n) = abs(m)
+             *
+             * cases handled:
+             *
+             * n + -m -> 0 (if abs(n) = abs(m))
+             * -n + m -> 0 (if abs(n) = abs(m))
+             */
+
+            Number result = new NumberImpl(base, "0");
+            return new Result<Number>(result);
+
+        } else if (comparisonResult > 0) {
+
+            /*
+             * abs(n) > abs(m)
+             *
+             * cases handled:
+             *
+             * n + -m -> n - m (if abs(n) > abs(m))
+             * -n + m -> -(n - m) (if abs(n) > abs(m))
+             */
+
+            if (operand1.isNegative()) {
+
+                return subtractNumber(Signs.NEGATIVE, absolute1, absolute2);
+
+            } else {
+
+                return subtractNumber(Signs.POSITIVE, absolute1, absolute2);
+            }
+
+        } else {
+
+            /*
+             * abs(n) < abs(m)
+             *
+             * cases handled:
+             *
+             * n + -m -> -m + n -> -(m - n) (if abs(m) > abs(n))
+             * -n + m -> m - n (if abs(m) > abs(n))
+             */
+
+            if (operand1.isNegative()) {
+
+                return subtractNumber(Signs.POSITIVE, absolute2, absolute1);
+
+            } else {
+
+                return subtractNumber(Signs.NEGATIVE, absolute2, absolute1);
+            }
+        }
     }
 
     /**
@@ -347,16 +452,58 @@ public class AddNumbers implements BinaryOperation<Number, Result<Number>> {
      * @param sign
      *        the sign of the result
      * @param minuend
-     *        the minuend
+     *        the minuend. The minuend may be modified.
      * @param subtrahend
      *        the subtrahend
      *
      * @return a difference
      */
-    private Result<Number> subtractNumber(Sign sign, Number minuend, Number subtrahend) {
+    private Result<Number> subtractNumber(Sign sign, @Modified Number minuend, Number subtrahend) {
 
-        //TODO
-        return null;
+        /*
+         * Prerequisites:
+         *
+         * 1) minuend > subtrahend
+         *    If this is not the case then this function will return a wrong result.
+         * 2) Signs should have been removed from the minuend and subtrahend. If not then
+         *    ignore the signs.
+         *
+         * Notes:
+         *
+         * 1) A subtraction by complement is made thus the subtraction is replaced with an addition.
+         *    The complement of the minuend is added to the subtrahend. The complement of the result is
+         *    the result of the subtraction.
+         * 2) The decimal part of the minuend can have less digits than the decimal part of the subtrahend.
+         *    Accordingly the minuend may need additional trailing zeroes.
+         * 3) The result can have leading and trailing zeroes. Accordingly the result has to be trimmed.
+         */
+
+        Result<Number> result;
+
+        NodesHelper.fillUpWithZeroes(minuend.centerNode(), subtrahend.centerNode());
+
+        UnaryOperation<Number> complementFunction =
+            (UnaryOperation<Number>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_COMPLEMENT_FUNCTION);
+        result = complementFunction.calculate(minuend);
+        Number complement = result.result();
+
+        result = addOperandsWithSameSign(subtrahend, complement);
+        Number sum = result.result();
+
+        result = complementFunction.calculate(sum);
+        Number unsignedSum = result.result();
+
+        Number signedSum;
+        if (Signs.POSITIVE == sign) {
+
+            signedSum = unsignedSum;
+
+        } else {
+
+            signedSum = unsignedSum.negate();
+        }
+
+        return new Result<Number>(signedSum);
     }
 
     /**
@@ -376,9 +523,9 @@ public class AddNumbers implements BinaryOperation<Number, Result<Number>> {
 
         checkParameters(operand1, operand2);
 
-        int base = operand1.base();
-        boolean equalSigns = operand1.sign() == operand2.sign();
+        boolean sameSigns = operand1.sign() == operand2.sign();
 
+        Result<Number> result;
         if (operand1.isInfinity() || operand2.isInfinity()) {
 
             return addInfinity(operand1, operand2);
@@ -386,9 +533,8 @@ public class AddNumbers implements BinaryOperation<Number, Result<Number>> {
         } else if (operand1.isZero() || operand2.isZero()) {
 
             return addZero(operand1, operand2);
-        }
 
-        if (equalSigns) {
+        } else if (sameSigns) {
 
             /*
              * cases handled:
@@ -396,58 +542,24 @@ public class AddNumbers implements BinaryOperation<Number, Result<Number>> {
              * n + m
              * -n + -m
              */
-            return addEqualSigns(operand1, operand2);
-        }
-
-        Number absolute1 = operand1.absoluteValue();
-        Number absolute2 = operand2.absoluteValue();
-
-        if (absolute1.compareTo(absolute2) == 0) {
-
-            /*
-             * cases handled:
-             *
-             * n + -m -> 0 (if abs(n) = abs(m))
-             * -n + m -> 0 (if abs(n) = abs(m))
-             */
-
-            Number result = new NumberImpl(base, "0");
-            return new Result<Number>(result);
-        }
-
-        /*
-         * cases handled:
-         *
-         * n + -m -> n - m (if abs(n) > abs(m))
-         * n + -m -> -m + n -> -(m - n) (if abs(m) > abs(n))
-         * -n + m -> -n + m -> -(n - m) (if abs(n) > abs(m))
-         * -n + m -> m - n (if abs(m) > abs(n))
-         */
-        
-        if (absolute1.compareTo(absolute2) > 0) {
-
-            /*
-             * cases handled:
-             *
-             * n + -m -> n - m (if abs(n) > abs(m))
-             * -n + m -> -n + m -> -(n - m) (if abs(n) > abs(m))
-             */
-
-            // TODO
-            return null;
+            result = addOperandsWithSameSign(operand1, operand2);
 
         } else {
 
             /*
              * cases handled:
              *
-             * n + -m -> -m + n -> -(m - n) (if abs(m) > abs(n))
-             * -n + m -> m - n (if abs(m) > abs(n))
+             * -n + m
+             * n + -m
              */
-
-            // TODO
-            return null;
+            result = addOperandsWithDifferentSigns(operand1, operand2);
         }
+
+        DigitNode resultCenter = result.result().centerNode();
+        NodesHelper.trimLeft(resultCenter);
+        NodesHelper.trimRight(resultCenter);
+
+        return result;
     }
 
 }

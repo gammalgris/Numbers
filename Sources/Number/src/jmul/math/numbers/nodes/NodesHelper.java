@@ -232,8 +232,8 @@ public final class NodesHelper {
         DigitNodeImpl clonedLeft = (DigitNodeImpl) cloneLeftTail(centerNode.leftNode());
         DigitNodeImpl clonedRight = (DigitNodeImpl) cloneRightTail(centerNode.rightNode());
 
-        clonedCenter.setLeftNode(clonedLeft);
-        clonedCenter.setRightNode(clonedRight);
+        linkNodes(clonedLeft, clonedCenter);
+        linkNodes(clonedCenter, clonedRight);
 
         return clonedCenter;
     }
@@ -306,7 +306,7 @@ public final class NodesHelper {
 
         while (true) {
 
-            if ((node1.rightNode() != null) && (node2.rightNode() != null)) {
+            if ((node1.leftNode() != null) && (node2.leftNode() != null)) {
 
                 node1 = node1.leftNode();
                 node2 = node2.leftNode();
@@ -403,7 +403,7 @@ public final class NodesHelper {
      * @param secondNode
      *        the center node of a linked list
      */
-    public void fillUpWithZeroes(@Modified DigitNode firstNode, DigitNode secondNode) {
+    public static void fillUpWithZeroes(@Modified DigitNode firstNode, DigitNode secondNode) {
 
         NodesResult nodesResult;
         DigitNode node1;
@@ -447,8 +447,8 @@ public final class NodesHelper {
                 linkNodes(node1, zeroNode);
             }
 
-            node1 = node1.leftNode();
-            node2 = node2.leftNode();
+            node1 = node1.rightNode();
+            node2 = node2.rightNode();
         }
     }
 

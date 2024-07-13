@@ -41,6 +41,7 @@ import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
 
 import jmul.test.classification.UnitTest;
+import jmul.test.exceptions.FailedTestException;
 
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
@@ -146,14 +147,33 @@ public class AddNumbersTest {
     @Test
     public void testAddition() {
 
-        assertEquals(firstSummandString, firstSummand.toString());
-        assertEquals(secondSummandString, secondSummand.toString());
-        assertEquals(sumString, sum.toString());
+        try {
 
-        Number actualResult = firstSummand.add(secondSummand);
+            assertEquals(firstSummandString, firstSummand.toString());
+            assertEquals(secondSummandString, secondSummand.toString());
+            assertEquals(sumString, sum.toString());
 
-        String message = String.format("%s + %s = %s", firstSummandString, secondSummandString, sumString);
-        assertEquals(message, sum, actualResult);
+            Number actualResult = firstSummand.add(secondSummand);
+
+            String message = String.format("%s + %s = %s", firstSummandString, secondSummandString, sumString);
+            assertEquals(message, sum, actualResult);
+
+        } catch (Exception e) {
+
+            throw new FailedTestException(toString(), e);
+        }
+    }
+
+    /**
+     * Returns a summary of this test case (i.e. the operation with its operands)
+     *
+     * @return a summary
+     */
+    @Override
+    public String toString() {
+
+        String summary = String.format("[base:%d] %s + %s", base, firstSummandString, secondSummandString);
+        return summary;
     }
 
     /**
@@ -219,8 +239,9 @@ public class AddNumbersTest {
         parameters.add(new Object[] { 10, "100", "0.555", "100.555" });
         parameters.add(new Object[] { 10, "0.555", "100", "100.555" });
 
-        parameters.add(new Object[] { 10, "-100", "0.555", "-99.555" });
-        parameters.add(new Object[] { 10, "0.555", "-100", "-99.555" });
+        parameters.add(new Object[] { 10, "899.999", "0.555", "900.554" }); // check that the carry is added correctly
+        parameters.add(new Object[] { 10, "-100", "0.555", "-99.445" });
+        parameters.add(new Object[] { 10, "0.555", "-100", "-99.445" });
 
 
         parameters.add(new Object[] { 10, "1.2345", "10.98765", "12.22215" });

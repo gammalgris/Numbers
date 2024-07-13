@@ -94,4 +94,16 @@ public class ResultWithCarry<T> extends Result<T> {
         return carry;
     }
 
+    /**
+     * Returns a result summary.
+     *
+     * @return a summary
+     */
+    @Override
+    public String toString() {
+
+        String summary = String.format("result=%s; carry=%s", result(), carry());
+
+        return summary;
+    }
 }

@@ -77,9 +77,9 @@ public class NegateNumber implements UnaryOperation<Number> {
 
         Sign sign = Signs.negate(n.sign());
         int base = n.base();
-        DigitNode centerNode = NodesHelper.cloneLinkedList(n.centerNode());
+        DigitNode clonedCenterNode = NodesHelper.cloneLinkedList(n.centerNode());
 
-        Number newNumber = new NumberImpl(base, sign, centerNode);
+        Number newNumber = new NumberImpl(base, sign, clonedCenterNode);
 
         return new Result<Number>(newNumber);
     }

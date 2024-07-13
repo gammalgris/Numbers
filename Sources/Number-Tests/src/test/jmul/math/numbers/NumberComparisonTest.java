@@ -193,6 +193,14 @@ public class NumberComparisonTest {
         parameters.add(new Object[] { new NumberImpl("-1.23456789012345678901"),
                                       new NumberImpl("-1.234567890123456789023"), 1 });
 
+        parameters.add(new Object[] { new NumberImpl("-1.2345"), new NumberImpl("10.98765"), -1 });
+        parameters.add(new Object[] { new NumberImpl("1.2345"), new NumberImpl("-10.98765"), 1 });
+        parameters.add(new Object[] { new NumberImpl("1.2345"), new NumberImpl("10.98765"), -1 });
+
+        parameters.add(new Object[] { new NumberImpl("12345678.9"), new NumberImpl("0.987654321"), 1 });
+        parameters.add(new Object[] { new NumberImpl("-12345678.9"), new NumberImpl("0.987654321"), -1 });
+        parameters.add(new Object[] { new NumberImpl("12345678.9"), new NumberImpl("-0.987654321"), 1 });
+
         return parameters;
     }
 

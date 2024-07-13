@@ -36,12 +36,15 @@ package jmul.math.numbers.functions;
 
 import java.util.Comparator;
 
+import jmul.math.functions.Function;
 import jmul.math.numbers.Number;
+import jmul.math.numbers.Sign;
+import jmul.math.numbers.Signs;
 import jmul.math.numbers.digits.Digit;
 import jmul.math.numbers.exceptions.DigitBaseMismatchException;
 import jmul.math.numbers.nodes.DigitNode;
-
-import jmul.math.functions.Function;
+import jmul.math.numbers.nodes.NodesHelper;
+import jmul.math.numbers.nodes.NodesResult;
 
 
 /**
@@ -74,7 +77,6 @@ public class NumberComparator extends ComparatorBase implements Function, Compar
     public int compare(Number n1, Number n2) {
 
         // Check the references
-
         if (n1 == null) {
 
             throw new NullPointerException();
@@ -91,21 +93,18 @@ public class NumberComparator extends ComparatorBase implements Function, Compar
         }
 
         // Check the number bases
-
         if (n1.base() != n2.base()) {
 
             throw new DigitBaseMismatchException(n1, n2);
         }
 
         // Check for zero (-0, 0, +0) and ignore the signs
-
         if (n1.isZero() && n2.isZero()) { // may be superfluous
 
             return EQUALS;
         }
 
         // Check the signs
-
         if (n1.sign() != n2.sign()) {
 
             if (n1.isPositive()) {
@@ -119,7 +118,6 @@ public class NumberComparator extends ComparatorBase implements Function, Compar
         }
 
         // Check for infinity
-
         if (n1.isInfinity() && n2.isInfinity()) {
 
             return EQUALS;
@@ -136,77 +134,47 @@ public class NumberComparator extends ComparatorBase implements Function, Compar
         }
 
         // Check the digits left of the decimal separator
+        Sign commonSign = n1.sign();
 
-        DigitNode thisLeft = n1.centerNode();
-        DigitNode otherLeft = n2.centerNode();
+        NodesResult nodesResult = NodesHelper.moveLeftSynchronously(n1.centerNode(), n2.centerNode());
+        DigitNode node1 = nodesResult.firstNode;
+        DigitNode node2 = nodesResult.secondNode;
 
-        while (true) {
+        // Check which number has more digits to the left
+        if (node1.leftNode() != null) {
 
-            if ((thisLeft == null) && (otherLeft == null)) {
+            if (Signs.isPositive(commonSign)) {
 
-                break;
+                return GREATER_THAN;
+
+            } else {
+
+                return LESSER_THAN;
             }
 
-            if (thisLeft == null) {
+        } else if (node2.leftNode() != null) {
 
-                if (n1.isPositive()) {
+            if (Signs.isPositive(commonSign)) {
 
-                    return LESSER_THAN;
+                return LESSER_THAN;
 
-                } else {
+            } else {
 
-                    return GREATER_THAN;
-                }
+                return GREATER_THAN;
             }
-
-            if (otherLeft == null) {
-
-                if (n1.isPositive()) {
-
-                    return GREATER_THAN;
-
-                } else {
-
-                    return LESSER_THAN;
-                }
-            }
-
-            if (thisLeft.digit() != otherLeft.digit()) {
-
-                Digit d1 = thisLeft.digit();
-                Digit d2 = otherLeft.digit();
-
-                int result = d1.compareTo(d2);
-
-                if (n1.isPositive()) {
-
-                    return result;
-
-                } else {
-
-                    return result * -1;
-                }
-            }
-
-            thisLeft = thisLeft.leftNode();
-            otherLeft = otherLeft.leftNode();
         }
 
-        // Check the digits right of the decimal separator
-
-        DigitNode thisRight = n1.centerNode().rightNode();
-        DigitNode otherRight = n2.centerNode().rightNode();
-
+        // Compare the digits from left to right
         while (true) {
 
-            if ((thisRight == null) && (otherRight == null)) {
+            if ((node1 == null) && (node2 == null)) {
 
                 break;
             }
 
-            if (thisRight == null) {
+            if (node1 == null) {
 
-                if (n1.isPositive()) {
+                if (Signs.isPositive(commonSign)) {
 
                     return LESSER_THAN;
 
@@ -214,11 +182,10 @@ public class NumberComparator extends ComparatorBase implements Function, Compar
 
                     return GREATER_THAN;
                 }
-            }
 
-            if (otherRight == null) {
+            } else if (node2 == null) {
 
-                if (n1.isPositive()) {
+                if (Signs.isPositive(commonSign)) {
 
                     return GREATER_THAN;
 
@@ -228,14 +195,14 @@ public class NumberComparator extends ComparatorBase implements Function, Compar
                 }
             }
 
-            if (thisRight.digit() != otherRight.digit()) {
+            Digit d1 = node1.digit();
+            Digit d2 = node2.digit();
 
-                Digit d1 = thisRight.digit();
-                Digit d2 = otherRight.digit();
+            int result = d1.compareTo(d2);
 
-                int result = d1.compareTo(d2);
+            if (result != 0) {
 
-                if (n1.isPositive()) {
+                if (Signs.isPositive(commonSign)) {
 
                     return result;
 
@@ -245,12 +212,11 @@ public class NumberComparator extends ComparatorBase implements Function, Compar
                 }
             }
 
-            thisRight = thisRight.rightNode();
-            otherRight = otherRight.rightNode();
+            node1 = node1.rightNode();
+            node2 = node2.rightNode();
         }
 
         // return a default value
-
         return EQUALS;
     }
 
