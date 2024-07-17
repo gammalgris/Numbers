@@ -665,8 +665,8 @@ public class NumberImpl implements Number {
     @Override
     public Number negate() {
 
-        UnaryOperation<Number> function =
-            (UnaryOperation<Number>) FunctionSingletons.getFunction(FunctionIdentifiers.NEGATE_NUMBER_FUNCTION);
+        UnaryOperation<Number, Result<Number>> function =
+            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.NEGATE_NUMBER_FUNCTION);
         Result<Number> result = function.calculate(this);
 
         return result.result();
@@ -680,8 +680,8 @@ public class NumberImpl implements Number {
     @Override
     public Number complement() {
 
-        UnaryOperation<Number> function =
-            (UnaryOperation<Number>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_COMPLEMENT_FUNCTION);
+        UnaryOperation<Number, Result<Number>> function =
+            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_COMPLEMENT_FUNCTION);
         Result<Number> result = function.calculate(this);
 
         return result.result();
@@ -740,8 +740,11 @@ public class NumberImpl implements Number {
     @Override
     public Number subtract(Number n) {
 
-        // TODO
-        throw new UnsupportedOperationException();
+        BinaryOperation<Number, Result<Number>> function =
+            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.SUBTRACTION_FUNCTION);
+        Result<Number> result = function.calculate(this, n);
+
+        return result.result();
     }
 
     /**

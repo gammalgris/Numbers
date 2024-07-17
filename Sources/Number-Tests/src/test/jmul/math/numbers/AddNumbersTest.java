@@ -37,6 +37,7 @@ package test.jmul.math.numbers;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import jmul.math.Math;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
 
@@ -45,6 +46,7 @@ import jmul.test.exceptions.FailedTestException;
 
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -53,8 +55,6 @@ import org.junit.runners.Parameterized;
 
 /**
  * This test suite tests adding two numbers with various combinations of operands.
- *
- * TODO do the calculations also for numbers with other bases
  *
  * @author Kristian Kutin
  */
@@ -88,7 +88,7 @@ public class AddNumbersTest {
     private Number secondSummand;
 
     /**
-     * The sexpected sum as number string.
+     * The expected sum as number string.
      */
     private final String sumString;
 
@@ -149,19 +149,95 @@ public class AddNumbersTest {
 
         try {
 
-            assertEquals(firstSummandString, firstSummand.toString());
-            assertEquals(secondSummandString, secondSummand.toString());
-            assertEquals(sumString, sum.toString());
+            // check that the operands and the expected result are built correctly
+            checkNumberEqualsStringRepresentation(firstSummand, firstSummandString);
+            checkNumberEqualsStringRepresentation(secondSummand, secondSummandString);
+            checkNumberEqualsStringRepresentation(sum, sumString);
 
+            // check the operation
             Number actualResult = firstSummand.add(secondSummand);
 
             String message = String.format("%s + %s = %s", firstSummandString, secondSummandString, sumString);
             assertEquals(message, sum, actualResult);
 
+            // check the number instances
+            checkNumbersAreUniqueInstances(firstSummand, secondSummand, actualResult);
+
+            // check that the operands didn't change
+            checkNumberEqualsStringRepresentation(firstSummand, firstSummandString);
+            checkNumberEqualsStringRepresentation(secondSummand, secondSummandString);
+
         } catch (Exception e) {
 
             throw new FailedTestException(toString(), e);
         }
+    }
+
+    /**
+     * Tests adding the summands and checks the result.
+     */
+    @Test
+    public void testAdditionVariant2() {
+
+        try {
+
+            // check that the operands and the expected result are built correctly
+            checkNumberEqualsStringRepresentation(firstSummand, firstSummandString);
+            checkNumberEqualsStringRepresentation(secondSummand, secondSummandString);
+            checkNumberEqualsStringRepresentation(sum, sumString);
+
+            // check the operation
+            Number actualResult = Math.add(firstSummand, secondSummand);
+
+            String message = String.format("%s + %s = %s", firstSummandString, secondSummandString, sumString);
+            assertEquals(message, sum, actualResult);
+
+            // check the number instances
+            checkNumbersAreUniqueInstances(firstSummand, secondSummand, actualResult);
+
+            // check that the operands didn't change
+            checkNumberEqualsStringRepresentation(firstSummand, firstSummandString);
+            checkNumberEqualsStringRepresentation(secondSummand, secondSummandString);
+
+        } catch (Exception e) {
+
+            throw new FailedTestException(toString(), e);
+        }
+    }
+
+    /**
+     * Checks that the specified operands and the result are unique number instances (i.e. linked lists).
+     *
+     * @param operand1
+     *        an operand
+     * @param operand2
+     *        an operand
+     * @param result
+     *        the operation result
+     */
+    private static void checkNumbersAreUniqueInstances(Number operand1, Number operand2, Number result) {
+
+        assertFalse(operand1 == operand2);
+        assertFalse(operand1 == result);
+        assertFalse(operand2 == result);
+
+        assertFalse(operand1.centerNode() == operand2.centerNode());
+        assertFalse(operand1.centerNode() == result.centerNode());
+        assertFalse(operand2.centerNode() == result.centerNode());
+    }
+
+    /**
+     * Compare the specified number with the specified string representation of a number. If these
+     * don't match then an assertion fails.
+     *
+     * @param number
+     *        a number
+     * @param stringRepresentation
+     *        the string representation which should match the specified number
+     */
+    private static void checkNumberEqualsStringRepresentation(Number number, String stringRepresentation) {
+
+        assertEquals(stringRepresentation, number.toString());
     }
 
     /**
@@ -186,7 +262,7 @@ public class AddNumbersTest {
 
         Collection<Object[]> parameters = new ArrayList<Object[]>();
 
-        for (int base = 2; base <= 64; base++) {
+        for (int base = 2; base <= 65; base++) {
 
             parameters.add(new Object[] { base, "0", "0", "0" });
 
@@ -278,6 +354,17 @@ public class AddNumbersTest {
         parameters.add(new Object[] { 10, "-1", "11", "10" });
         parameters.add(new Object[] { 10, "-11", "-1", "-12" });
         parameters.add(new Object[] { 10, "-1", "-11", "-12" });
+
+        parameters.add(new Object[] { 10, "1234567890.0123456789", "0.012345678987654321",
+                                      "1234567890.024691357887654321" });
+        parameters.add(new Object[] { 10, "-1234567890.0123456789", "0.012345678987654321",
+                                      "-1234567889.999999999912345679" });
+        parameters.add(new Object[] { 10, "1234567890.0123456789", "-0.012345678987654321",
+                                      "1234567889.999999999912345679" });
+        parameters.add(new Object[] { 10, "-1234567890.0123456789", "-0.012345678987654321",
+                                      "-1234567890.024691357887654321" });
+
+        parameters.add(new Object[] { 16, "FF", "11", "110" });
 
         return parameters;
     }

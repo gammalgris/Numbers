@@ -7,7 +7,7 @@
  * JMUL is a central repository for utilities which are used in my
  * other public and private repositories.
  *
- * Copyright (C) 2022  Kristian Kutin
+ * Copyright (C) 2024  Kristian Kutin
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,47 +34,30 @@
 package jmul.math.numbers.functions;
 
 
-import jmul.math.numbers.digits.Digit;
-import jmul.math.numbers.digits.PositionalNumeralSystems;
-import static jmul.math.numbers.functions.ParameterCheckHelper.checkParameter;
+import jmul.math.numbers.Number;
+import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.Result;
-import jmul.math.operations.UnaryOperation;
 
 
 /**
- * This unary function implementation calculates the coplement of a digit.
- *
+ * Implements the multiplication according to the russian peasant multiplication.
+ * The implementation checks the operands regarding absolute values and signs and
+ * compares the numbers. Depending on the actual case additional multiplications
+ * or divisions are performed.<br>
+ * 
  * @author Kristian Kutin
  */
-public class DigitComplement implements UnaryOperation<Digit, Result<Digit>> {
+public class MultiplyNumbers  implements BinaryOperation<Number, Result<Number>> {
 
-    /**
-     * The default constructor.
-     */
-    public DigitComplement() {
+    public MultiplyNumbers() {
 
         super();
     }
 
-    /**
-     * Calculates the complement for the specified digit.
-     *
-     * @param digit
-     *        a digit
-     *
-     * @return the result
-     */
     @Override
-    public Result<Digit> calculate(Digit digit) {
-
-        checkParameter(digit);
-
-        int base = digit.base();
-        int result = base - digit.ordinal() - 1;
-
-        Digit newDigit = PositionalNumeralSystems.ordinalToDigit(base, result);
-
-        return new Result<Digit>(newDigit);
+    public Result<Number> calculate(Number operand1, Number operand2) {
+        // TODO Implement this method
+        return null;
     }
 
 }

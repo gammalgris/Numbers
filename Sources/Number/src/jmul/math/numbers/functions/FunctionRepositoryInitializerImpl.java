@@ -34,15 +34,14 @@
 package jmul.math.numbers.functions;
 
 
+import jmul.math.functions.FunctionRepository;
+import jmul.math.functions.FunctionRepositoryImpl;
+import jmul.math.functions.FunctionRepositoryInitializer;
 import jmul.math.numbers.FunctionIdentifiers;
 import jmul.math.numbers.notations.ScientificNotationFunctionImpl;
 import jmul.math.numbers.notations.ScientificNotationParserImpl;
 import jmul.math.numbers.notations.StandardNotationFunctionImpl;
 import jmul.math.numbers.notations.StandardNotationParserImpl;
-
-import jmul.math.functions.FunctionRepository;
-import jmul.math.functions.FunctionRepositoryImpl;
-import jmul.math.functions.FunctionRepositoryInitializer;
 
 
 /**
@@ -89,6 +88,10 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
         repository.registerFunction(FunctionIdentifiers.DIGIT_COMPLEMENT_FUNCTION, DigitComplement.class);
 
         repository.registerFunction(FunctionIdentifiers.ADDITION_FUNCTION, AddNumbers.class);
+        repository.registerFunction(FunctionIdentifiers.SUBTRACTION_FUNCTION, SubtractNumbers.class);
+
+        repository.registerFunction(FunctionIdentifiers.SHIFT_LEFT_FUNCTION, ShiftLeft.class);
+        repository.registerFunction(FunctionIdentifiers.SHIFT_RIGHT_FUNCTION, ShiftRight.class);
 
         return repository;
     }

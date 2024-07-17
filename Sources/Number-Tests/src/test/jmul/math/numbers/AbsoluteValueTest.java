@@ -37,6 +37,7 @@ package test.jmul.math.numbers;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import jmul.math.Math;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
 import static jmul.math.numbers.Signs.NEGATIVE;
@@ -91,6 +92,21 @@ public class AbsoluteValueTest {
     public void testAbsoluteValue() {
 
         Number absoluteValue = number.absoluteValue();
+
+        String message =
+            String.format("The absolute value doesn't match (number=%s; expected absolute value=%s; actual absolute value=%s)!",
+                          number.toString(), expectedAbsoluteValue.toString(), absoluteValue.toString());
+        assertEquals(message, expectedAbsoluteValue, absoluteValue);
+        assertEquals(message, expectedAbsoluteValue.toString(), absoluteValue.toString());
+    }
+
+    /**
+     * Calculates the abslute value and checks the correctness of the result.
+     */
+    @Test
+    public void testAbsoluteValueVariant2() {
+
+        Number absoluteValue = Math.absoluteValue(number);
 
         String message =
             String.format("The absolute value doesn't match (number=%s; expected absolute value=%s; actual absolute value=%s)!",

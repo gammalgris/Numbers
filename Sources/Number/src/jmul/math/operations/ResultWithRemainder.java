@@ -7,7 +7,7 @@
  * JMUL is a central repository for utilities which are used in my
  * other public and private repositories.
  *
- * Copyright (C) 2022  Kristian Kutin
+ * Copyright (C) 2024  Kristian Kutin
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -45,53 +45,53 @@ package jmul.math.operations;
  * @param <T>
  *        the result type
  */
-public class ResultWithCarry<T> extends Result<T> {
+public class ResultWithRemainder<T> extends Result<T> {
 
     /**
-     * The carry (i.e. part of the result which is carried over for another calculation)
+     * The remainder (i.e. part of the result which is carried over for another calculation)
      */
-    private final T carry;
+    private final T remainder;
 
     /**
      * Creates a new result according to the specified parameters.
      *
      * @param result
      *        the result
-     * @param carry
-     *        the carry
+     * @param remainder
+     *        the remainder
      */
-    public ResultWithCarry(T result, T carry) {
+    public ResultWithRemainder(T result, T remainder) {
 
         super(result);
 
-        checkCarry(carry);
+        checkRemainder(remainder);
 
-        this.carry = carry;
+        this.remainder = remainder;
     }
 
     /**
-     * Checks the specified carry.
+     * Checks the specified remainder.
      *
-     * @param carry
-     *        a carry
+     * @param remainder
+     *        a remainder
      */
-    private void checkCarry(T carry) {
+    private void checkRemainder(T remainder) {
 
-        if (carry == null) {
+        if (remainder == null) {
 
-            String message = "The carry is null! Null values are not allowed.";
+            String message = "The remainder is null! Null values are not allowed.";
             throw new IllegalArgumentException(message);
         }
     }
 
     /**
-     * Returns the carry.
+     * Returns the remainder.
      *
-     * @return the carry
+     * @return the remainder
      */
-    public T carry() {
+    public T remainder() {
 
-        return carry;
+        return remainder;
     }
 
     /**
@@ -102,7 +102,7 @@ public class ResultWithCarry<T> extends Result<T> {
     @Override
     public String toString() {
 
-        String summary = String.format("result=%s; carry=%s", result(), carry());
+        String summary = String.format("result=%s; remainder=%s", result(), remainder());
 
         return summary;
     }

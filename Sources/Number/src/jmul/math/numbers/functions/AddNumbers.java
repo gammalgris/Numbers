@@ -77,7 +77,7 @@ public class AddNumbers implements BinaryOperation<Number, Result<Number>> {
      * Checks the specifiecd parameters.
      *
      * @param operand1
-     *        an oeprand
+     *        an operand
      * @param operand2
      *        an operand
      */
@@ -92,6 +92,12 @@ public class AddNumbers implements BinaryOperation<Number, Result<Number>> {
         if (operand2 == null) {
 
             String message = "The second operand is null!";
+            throw new IllegalArgumentException(message);
+        }
+
+        if (operand1.base() != operand2.base()) {
+
+            String message = "The specified numbers are of different bases!";
             throw new IllegalArgumentException(message);
         }
     }
@@ -482,8 +488,8 @@ public class AddNumbers implements BinaryOperation<Number, Result<Number>> {
 
         NodesHelper.fillUpWithZeroes(minuend.centerNode(), subtrahend.centerNode());
 
-        UnaryOperation<Number> complementFunction =
-            (UnaryOperation<Number>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_COMPLEMENT_FUNCTION);
+        UnaryOperation<Number, Result<Number>> complementFunction =
+            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_COMPLEMENT_FUNCTION);
         result = complementFunction.calculate(minuend);
         Number complement = result.result();
 

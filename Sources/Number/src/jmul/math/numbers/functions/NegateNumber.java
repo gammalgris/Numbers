@@ -49,7 +49,7 @@ import jmul.math.operations.UnaryOperation;
  *
  * @author Kristian Kutin
  */
-public class NegateNumber implements UnaryOperation<Number> {
+public class NegateNumber implements UnaryOperation<Number, Result<Number>> {
 
     /**
      * The default constructor.

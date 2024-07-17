@@ -7,7 +7,7 @@
  * JMUL is a central repository for utilities which are used in my
  * other public and private repositories.
  *
- * Copyright (C) 2022  Kristian Kutin
+ * Copyright (C) 2024  Kristian Kutin
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,47 +34,45 @@
 package jmul.math.numbers.functions;
 
 
-import jmul.math.numbers.digits.Digit;
-import jmul.math.numbers.digits.PositionalNumeralSystems;
-import static jmul.math.numbers.functions.ParameterCheckHelper.checkParameter;
+import jmul.math.functions.FunctionSingletons;
+import jmul.math.numbers.FunctionIdentifiers;
+import jmul.math.numbers.Number;
+import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
 
 
 /**
- * This unary function implementation calculates the coplement of a digit.
+ * Implements a function that doubles a specified number.
  *
  * @author Kristian Kutin
  */
-public class DigitComplement implements UnaryOperation<Digit, Result<Digit>> {
+public class DoubleNumber implements UnaryOperation<Number, Result<Number>> {
 
     /**
      * The default constructor.
      */
-    public DigitComplement() {
+    public DoubleNumber() {
 
         super();
     }
 
     /**
-     * Calculates the complement for the specified digit.
+     * Doubles the specified number.
      *
-     * @param digit
-     *        a digit
+     * @param operand
+     *        a number
      *
-     * @return the result
+     * @return double the number
      */
     @Override
-    public Result<Digit> calculate(Digit digit) {
+    public Result<Number> calculate(Number operand) {
 
-        checkParameter(digit);
+        BinaryOperation<Number, Result<Number>> function =
+            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADDITION_FUNCTION);
+        Result<Number> result = function.calculate(operand, operand);
 
-        int base = digit.base();
-        int result = base - digit.ordinal() - 1;
-
-        Digit newDigit = PositionalNumeralSystems.ordinalToDigit(base, result);
-
-        return new Result<Digit>(newDigit);
+        return result;
     }
 
 }

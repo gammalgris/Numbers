@@ -34,6 +34,7 @@
 package jmul.math.numbers.functions;
 
 
+import jmul.math.functions.FunctionSingletons;
 import jmul.math.numbers.FunctionIdentifiers;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
@@ -46,15 +47,13 @@ import jmul.math.numbers.nodes.NodesHelper;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
 
-import jmul.math.functions.FunctionSingletons;
-
 
 /**
  * This function implementation calculates nines' complement of a number.
  *
  * @author Kristian Kutin
  */
-public class NumberComplement implements UnaryOperation<Number> {
+public class NumberComplement implements UnaryOperation<Number, Result<Number>> {
 
     /**
      * The default constructor.
@@ -89,8 +88,8 @@ public class NumberComplement implements UnaryOperation<Number> {
         int base = n.base();
         Sign sign = POSITIVE;
 
-        UnaryOperation<Digit> function =
-            (UnaryOperation<Digit>) FunctionSingletons.getFunction(FunctionIdentifiers.DIGIT_COMPLEMENT_FUNCTION);
+        UnaryOperation<Digit, Result<Digit>> function =
+            (UnaryOperation<Digit, Result<Digit>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIGIT_COMPLEMENT_FUNCTION);
 
 
         // Handle the center node first

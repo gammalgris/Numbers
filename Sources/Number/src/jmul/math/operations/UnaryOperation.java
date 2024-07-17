@@ -45,7 +45,7 @@ import jmul.math.functions.Function;
  * @param <T>
  *        the operand type
  */
-public interface UnaryOperation<T> extends Function {
+public interface UnaryOperation<T, S extends Result> extends Function {
 
     /**
      * Performs the unary (i.e. one operand) operation.
@@ -55,6 +55,6 @@ public interface UnaryOperation<T> extends Function {
      *
      * @return the result
      */
-    Result<T> calculate(T operand);
+    S calculate(T operand);
 
 }
