@@ -34,45 +34,42 @@
 package jmul.math.numbers.functions;
 
 
-import jmul.math.functions.FunctionSingletons;
-import jmul.math.numbers.FunctionIdentifiers;
-import jmul.math.numbers.Number;
-import jmul.math.operations.BinaryOperation;
-import jmul.math.operations.Result;
+import jmul.math.numbers.digits.Digit;
+import jmul.math.operations.ResultWithRemainder;
 import jmul.math.operations.UnaryOperation;
 
 
 /**
- * Implements a function that doubles a specified number.
+ * Implements a function that halves a digit (i.e. divides it by two).
  *
  * @author Kristian Kutin
  */
-public class DoubleNumber implements UnaryOperation<Number, Result<Number>> {
+public class HalvingDigit implements UnaryOperation<Digit, ResultWithRemainder<Digit>> {
 
     /**
      * The default constructor.
      */
-    public DoubleNumber() {
+    public HalvingDigit() {
 
         super();
     }
 
     /**
-     * Doubles the specified number.
+     * Takes the specified digit and halves it (i.e. divides it by 2 in the corresponding number base).<br>
+     * <br>
+     * <i>Note:<br>
+     * Number base 2 may need a different algorithm than the other number bases.</i>
      *
-     * @param operand
-     *        a number
+     * @param digit
+     *        a digit
      *
-     * @return double the number
+     * @return the result with the remainder
      */
     @Override
-    public Result<Number> calculate(Number operand) {
+    public ResultWithRemainder<Digit> calculate(Digit digit) {
 
-        BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADDITION_FUNCTION);
-        Result<Number> result = function.calculate(operand, operand);
-
-        return result;
+        // TODO Implement this method
+        return null;
     }
 
 }

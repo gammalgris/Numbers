@@ -159,4 +159,29 @@ public final class Math {
         return result.result();
     }
 
+    /**
+     * Halves the specified number.
+     *
+     * @return a number
+     */
+    public static Number halving(Number n) {
+
+        //TODO
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * Doubles the specified number.
+     *
+     * @return a number
+     */
+    public static Number doubling(Number n) {
+
+        UnaryOperation<Number, Result<Number>> function =
+            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.DOUBLE_NUMBER_FUNCTION);
+        Result<Number> result = function.calculate(n);
+
+        return result.result();
+    }
+
 }

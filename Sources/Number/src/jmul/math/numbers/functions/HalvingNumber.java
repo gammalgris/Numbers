@@ -34,39 +34,22 @@
 package jmul.math.numbers.functions;
 
 
-import jmul.math.numbers.digits.Digit;
 import jmul.math.operations.ResultWithRemainder;
 import jmul.math.operations.UnaryOperation;
 
 
-/**
- * Implements a function that halves a digit (i.e. divides it by two).
- *
- * @author Kristian Kutin
- */
-public class HalveDigit implements UnaryOperation<Digit, ResultWithRemainder<Digit>> {
+public class HalvingNumber implements UnaryOperation<Number, ResultWithRemainder<Number>> {
 
     /**
      * The default constructor.
      */
-    public HalveDigit() {
+    public HalvingNumber() {
 
         super();
     }
 
-    /**
-     * Takes the specified digit and halves it (i.e. divides it by 2 in the corresponding number base).<br>
-     * <br>
-     * <i>Note:<br>
-     * Number base 2 may need a different algorithm than the other number bases.</i>
-     *
-     * @param digit
-     *        a digit
-     *
-     * @return the result with the remainder
-     */
     @Override
-    public ResultWithRemainder<Digit> calculate(Digit digit) {
+    public ResultWithRemainder<Number> calculate(Number number) {
 
         // TODO Implement this method
         return null;

@@ -712,6 +712,33 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Halves this number.
+     *
+     * @return a number
+     */
+    @Override
+    public Number halving() {
+
+        // TODO
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * Doubles this number.
+     *
+     * @return a number
+     */
+    @Override
+    public Number doubling() {
+
+        UnaryOperation<Number, Result<Number>> function =
+            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.DOUBLE_NUMBER_FUNCTION);
+        Result<Number> result = function.calculate(this);
+
+        return result.result();
+    }
+
+    /**
      * Adds this number and the specified number.
      *
      * @param n

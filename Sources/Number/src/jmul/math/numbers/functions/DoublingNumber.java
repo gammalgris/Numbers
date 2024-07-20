@@ -34,25 +34,45 @@
 package jmul.math.numbers.functions;
 
 
-import jmul.math.operations.ResultWithRemainder;
+import jmul.math.functions.FunctionSingletons;
+import jmul.math.numbers.FunctionIdentifiers;
+import jmul.math.numbers.Number;
+import jmul.math.operations.BinaryOperation;
+import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
 
 
-public class HalveNumber implements UnaryOperation<Number, ResultWithRemainder<Number>> {
+/**
+ * Implements a function that doubles a specified number.
+ *
+ * @author Kristian Kutin
+ */
+public class DoublingNumber implements UnaryOperation<Number, Result<Number>> {
 
     /**
      * The default constructor.
      */
-    public HalveNumber() {
+    public DoublingNumber() {
 
         super();
     }
 
+    /**
+     * Doubles the specified number.
+     *
+     * @param operand
+     *        a number
+     *
+     * @return double the number
+     */
     @Override
-    public ResultWithRemainder<Number> calculate(Number number) {
+    public Result<Number> calculate(Number operand) {
 
-        // TODO Implement this method
-        return null;
+        BinaryOperation<Number, Result<Number>> function =
+            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADDITION_FUNCTION);
+        Result<Number> result = function.calculate(operand, operand);
+
+        return result;
     }
 
 }

@@ -75,11 +75,25 @@ public interface ArithmeticOperations {
     Number factorial();
 
     /**
-     * Clalculates the suqare root for this number.
+     * Calculates the square root for this number.
      *
      * @return a number
      */
     Number squareRoot();
+
+    /**
+     * Halves this number.
+     *
+     * @return a number
+     */
+    Number halving();
+
+    /**
+     * Doubles this number.
+     *
+     * @return a number
+     */
+    Number doubling();
 
     /*
      * Binary arithmetic operations.

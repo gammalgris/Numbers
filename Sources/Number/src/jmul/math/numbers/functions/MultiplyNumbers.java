@@ -44,10 +44,14 @@ import jmul.math.operations.Result;
  * The implementation checks the operands regarding absolute values and signs and
  * compares the numbers. Depending on the actual case additional multiplications
  * or divisions are performed.<br>
- * 
+ * <br>
+ * <i>Note:<br>
+ * For large numbers a different algorithm may be required. Make a statistical
+ * analysis with different algorithms.</i>
+ *
  * @author Kristian Kutin
  */
-public class MultiplyNumbers  implements BinaryOperation<Number, Result<Number>> {
+public class MultiplyNumbers implements BinaryOperation<Number, Result<Number>> {
 
     public MultiplyNumbers() {
 

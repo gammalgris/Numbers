@@ -93,6 +93,8 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
         repository.registerFunction(FunctionIdentifiers.SHIFT_LEFT_FUNCTION, ShiftLeft.class);
         repository.registerFunction(FunctionIdentifiers.SHIFT_RIGHT_FUNCTION, ShiftRight.class);
 
+        repository.registerFunction(FunctionIdentifiers.DOUBLE_NUMBER_FUNCTION, DoublingNumber.class);
+
         return repository;
     }
 

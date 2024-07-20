@@ -98,7 +98,7 @@ public class AddNumbersTest {
     private Number sum;
 
     /**
-     * Creates a new test according to the specified parmaeters.
+     * Creates a new test according to the specified parameters.
      *
      * @param base
      *        the base for all numbers
@@ -120,7 +120,7 @@ public class AddNumbersTest {
     }
 
     /**
-     * Parses the specified number strings before the actual test.
+     * Parses the number strings before the actual test.
      */
     @Before
     public void setUp() {
