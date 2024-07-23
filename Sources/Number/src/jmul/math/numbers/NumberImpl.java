@@ -732,7 +732,7 @@ public class NumberImpl implements Number {
     public Number doubling() {
 
         UnaryOperation<Number, Result<Number>> function =
-            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.DOUBLE_NUMBER_FUNCTION);
+            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.DOUBLING_NUMBER_FUNCTION);
         Result<Number> result = function.calculate(this);
 
         return result.result();

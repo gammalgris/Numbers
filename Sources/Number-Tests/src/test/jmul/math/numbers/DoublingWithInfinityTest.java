@@ -7,7 +7,7 @@
  * JMUL is a central repository for utilities which are used in my
  * other public and private repositories.
  *
- * Copyright (C) 2022  Kristian Kutin
+ * Copyright (C) 2024  Kristian Kutin
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,17 +33,20 @@
 
 package test.jmul.math.numbers;
 
-
 import java.util.ArrayList;
 import java.util.Collection;
 
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
 import jmul.math.numbers.Signs;
+import jmul.math.numbers.exceptions.UndefinedOperationException;
 
 import jmul.test.classification.UnitTest;
+import jmul.test.exceptions.SetUpException;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -52,24 +55,29 @@ import org.junit.runners.Parameterized;
 /**
  * This test suite tests calculating with infinity.
  *
- * //TODO add tests for different binary functions (i.e. subtraction, etc.)
- * //TODO add tests for different unary functions (i.e. faculty, etc.)
- *
  * @author Kristian Kutin
  */
 @UnitTest
 @RunWith(Parameterized.class)
-public class CalculateWithInfinityTest {
+public class DoublingWithInfinityTest {
 
     /**
-     * The first operand.
+     * A constant value.
      */
-    private final Number firstOperand;
+    private static final Number NO_RESULT;
+
+    /*
+     * The static initializer.
+     */
+    static {
+
+        NO_RESULT = null;
+    }
 
     /**
-     * The second operand.
+     * The operand.
      */
-    private final Number secondOperand;
+    private final Number operand;
 
     /**
      * The expected result.
@@ -79,29 +87,75 @@ public class CalculateWithInfinityTest {
     /**
      * Creates a new test case according to the specified parameters.
      *
-     * @param firstOperand
-     *        an oeprand for the calculation
-     * @param secondOperand
+     * @param operand
      *        an operand for the calculation
      * @param expectedResult
      *        the expected result of the calculation
      */
-    public CalculateWithInfinityTest(Number firstOperand, Number secondOperand, Number expectedResult) {
+    public DoublingWithInfinityTest(Number operand, Number expectedResult) {
 
         super();
 
-        this.firstOperand = firstOperand;
-        this.secondOperand = secondOperand;
+        this.operand = operand;
         this.expectedResult = expectedResult;
     }
 
+    /**
+     * Performs an addition and checks the result.
+     */
     @Test
-    public void testCalculation() {
+    public void testAddition() {
 
-        Number actualResult = firstOperand.add(secondOperand);
+        if (expectedResult == null) {
 
-        String message = String.format("%s + %s", firstOperand.toString(), secondOperand.toString());
+            throw new SetUpException();
+        }
+
+        Number actualResult = operand.doubling();
+
+        String message = String.format("doubling %s", operand.toString());
         assertEquals(message, expectedResult, actualResult);
+    }
+
+    /**
+     * Creates a number which represents infinity.
+     *
+     * @param base
+     *        the number base
+     *
+     * @return a number
+     */
+    private static Number createInfinity(int base) {
+
+        return new NumberImpl(base);
+    }
+
+    /**
+     * Creates a number which represents negative infinity.
+     *
+     * @param base
+     *        the number base
+     *
+     * @return a number
+     */
+    private static Number createNegativeInfinity(int base) {
+
+        return new NumberImpl(base, Signs.NEGATIVE);
+    }
+
+    /**
+     * Creates a number according to the specified number base and number string.
+     *
+     * @param base
+     *        the number base
+     * @param numberString
+     *        a number string
+     *
+     * @return a number
+     */
+    private static Number createNumber(int base, String numberString) {
+
+        return new NumberImpl(base, numberString);
     }
 
     /**
@@ -114,14 +168,10 @@ public class CalculateWithInfinityTest {
 
         Collection<Object[]> parameters = new ArrayList<Object[]>();
 
-        for (int base = 2; base < 64; base++) {
+        for (int base = 2; base < 65; base++) {
 
-            parameters.add(new Object[] { new NumberImpl(base, "1"), new NumberImpl(base), new NumberImpl(base) });
-            parameters.add(new Object[] { new NumberImpl(base, "-1"), new NumberImpl(base), new NumberImpl(base) });
-            parameters.add(new Object[] { new NumberImpl(base, "1"), new NumberImpl(base, Signs.NEGATIVE),
-                                          new NumberImpl(base, Signs.NEGATIVE) });
-            parameters.add(new Object[] { new NumberImpl(base, "-1"), new NumberImpl(base, Signs.NEGATIVE),
-                                          new NumberImpl(base, Signs.NEGATIVE) });
+            parameters.add(new Object[] { createInfinity(base), createInfinity(base) });
+            parameters.add(new Object[] { createNegativeInfinity(base), createNegativeInfinity(base) });
         }
 
         return parameters;

@@ -41,7 +41,7 @@ import jmul.math.numbers.NumberImpl;
 import jmul.math.numbers.Sign;
 import static jmul.math.numbers.Signs.POSITIVE;
 import jmul.math.numbers.digits.Digit;
-import jmul.math.numbers.exceptions.UndefinedResultException;
+import jmul.math.numbers.exceptions.UndefinedOperationException;
 import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.NodesHelper;
 import jmul.math.operations.Result;
@@ -82,7 +82,7 @@ public class NumberComplement implements UnaryOperation<Number, Result<Number>> 
         if (n.isInfinity()) {
 
             String message = String.format("Cannot calculate the complement for %s!", n.toString());
-            throw new UndefinedResultException(message);
+            throw new UndefinedOperationException(message);
         }
 
         int base = n.base();

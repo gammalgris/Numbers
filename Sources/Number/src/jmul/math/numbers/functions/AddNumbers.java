@@ -41,7 +41,7 @@ import jmul.math.numbers.NumberImpl;
 import jmul.math.numbers.Sign;
 import jmul.math.numbers.Signs;
 import jmul.math.numbers.digits.Digit;
-import jmul.math.numbers.exceptions.UndefinedResultException;
+import jmul.math.numbers.exceptions.UndefinedOperationException;
 import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.NodesHelper;
 import jmul.math.numbers.nodes.NodesResult;
@@ -165,7 +165,7 @@ public class AddNumbers implements BinaryOperation<Number, Result<Number>> {
                  * infinity + -infinity
                  * -infinity + infinity
                  */
-                throw new UndefinedResultException(operand1, operand2);
+                throw new UndefinedOperationException("+", operand1, operand2);
             }
         }
     }

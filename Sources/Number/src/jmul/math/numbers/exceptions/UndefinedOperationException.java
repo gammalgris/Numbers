@@ -38,16 +38,17 @@ import jmul.math.numbers.Number;
 
 
 /**
- * This exception is used in cases where an arithmetic calculation would lead to an undefined result.
+ * This exception is used in cases where an arithmetic operation is undefined. This may be the case when the
+ * operands have specific values (e.g. dividing by zero, adding infinity and negative infinity, etc.).
  *
  * @author Kristian Kutin
  */
-public class UndefinedResultException extends RuntimeException {
+public class UndefinedOperationException extends RuntimeException {
 
     /**
      * The default constructor.
      */
-    public UndefinedResultException() {
+    public UndefinedOperationException() {
 
         super();
     }
@@ -58,7 +59,7 @@ public class UndefinedResultException extends RuntimeException {
      * @param message
      *        an exception message
      */
-    public UndefinedResultException(String message) {
+    public UndefinedOperationException(String message) {
 
         super(message);
     }
@@ -69,7 +70,7 @@ public class UndefinedResultException extends RuntimeException {
      * @param cause
      *        an exception which was catched and is rethrown
      */
-    public UndefinedResultException(Throwable cause) {
+    public UndefinedOperationException(Throwable cause) {
 
         super(cause);
     }
@@ -82,7 +83,7 @@ public class UndefinedResultException extends RuntimeException {
      * @param cause
      *        an exception which was catched and is rethrown
      */
-    public UndefinedResultException(String message, Throwable cause) {
+    public UndefinedOperationException(String message, Throwable cause) {
 
         super(message, cause);
     }
@@ -90,14 +91,16 @@ public class UndefinedResultException extends RuntimeException {
     /**
      * Creates a new exception according to the specified parameters.
      *
+     * @param operationSymbol
+     *        the symbol of the arithmetic operation
      * @param n1
      *        a number
      * @param n2
      *        a number
      */
-    public UndefinedResultException(Number n1, Number n2) {
+    public UndefinedOperationException(String operationSymbol, Number n1, Number n2) {
 
-        super(String.format("Adding %s and %s is undefined!", n1.toString(), n1.toString()));
+        super(String.format("%s %s %s is undefined!", n1.toString(), operationSymbol, n1.toString()));
     }
 
 }

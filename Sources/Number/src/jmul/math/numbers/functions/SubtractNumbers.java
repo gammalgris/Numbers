@@ -40,7 +40,7 @@ import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
 import jmul.math.numbers.Sign;
 import jmul.math.numbers.Signs;
-import jmul.math.numbers.exceptions.UndefinedResultException;
+import jmul.math.numbers.exceptions.UndefinedOperationException;
 import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.NodesHelper;
 import jmul.math.operations.BinaryOperation;
@@ -169,7 +169,7 @@ public class SubtractNumbers implements BinaryOperation<Number, Result<Number>> 
                  *  1) infinity - infinity = undefined operation
                  *  7) -infinity - -infinity = -infinity + infinity = undefined operation
                  */
-                throw new UndefinedResultException(operand1, operand2);
+                throw new UndefinedOperationException("-", operand1, operand2);
 
             } else {
 

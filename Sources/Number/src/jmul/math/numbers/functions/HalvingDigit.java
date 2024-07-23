@@ -35,6 +35,8 @@ package jmul.math.numbers.functions;
 
 
 import jmul.math.numbers.digits.Digit;
+import jmul.math.numbers.digits.PositionalNumeralSystems;
+import static jmul.math.numbers.functions.ParameterCheckHelper.checkParameter;
 import jmul.math.operations.ResultWithRemainder;
 import jmul.math.operations.UnaryOperation;
 
@@ -55,10 +57,7 @@ public class HalvingDigit implements UnaryOperation<Digit, ResultWithRemainder<D
     }
 
     /**
-     * Takes the specified digit and halves it (i.e. divides it by 2 in the corresponding number base).<br>
-     * <br>
-     * <i>Note:<br>
-     * Number base 2 may need a different algorithm than the other number bases.</i>
+     * Takes the specified digit and halves it (i.e. divides it by 2 in the corresponding number base).
      *
      * @param digit
      *        a digit
@@ -68,8 +67,28 @@ public class HalvingDigit implements UnaryOperation<Digit, ResultWithRemainder<D
     @Override
     public ResultWithRemainder<Digit> calculate(Digit digit) {
 
-        // TODO Implement this method
-        return null;
+        checkParameter(digit);
+
+        int base = digit.base();
+
+        int ordinal = digit.ordinal();
+        int result = ordinal / 2;
+        int modulo = ordinal % 2;
+
+        int remainder;
+        if (modulo == 1) {
+
+            remainder = base / 2;
+
+        } else {
+
+            remainder = 0;
+        }
+
+        Digit resultDigit = PositionalNumeralSystems.ordinalToDigit(base, result);
+        Digit remainderDigit = PositionalNumeralSystems.ordinalToDigit(base, remainder);
+
+        return new ResultWithRemainder<Digit>(resultDigit, remainderDigit);
     }
 
 }
