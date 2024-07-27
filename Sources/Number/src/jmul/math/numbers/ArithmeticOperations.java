@@ -31,15 +31,11 @@
  * $Id$
  */
 
-package jmul.math.operations;
-
-
-import jmul.math.numbers.Number;
+package jmul.math.numbers;
 
 
 /**
- * This interface describes various arithmetic operations. The number on which the operations are invoked
- * is the first parameter.<br>
+ * This interface describes various arithmetic operations.<br>
  * <br>
  * <i>Note:<br>
  * This interface describes something like a fluent interface for this custom number implementation and

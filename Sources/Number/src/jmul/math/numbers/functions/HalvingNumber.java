@@ -34,11 +34,27 @@
 package jmul.math.numbers.functions;
 
 
+import jmul.math.functions.FunctionSingletons;
+import jmul.math.numbers.FunctionIdentifiers;
+import jmul.math.numbers.Number;
+import jmul.math.numbers.NumberImpl;
+import jmul.math.numbers.Sign;
+import jmul.math.numbers.digits.Digit;
+import jmul.math.numbers.nodes.DigitNode;
+import jmul.math.numbers.nodes.NodesHelper;
+import jmul.math.operations.BinaryOperation;
+import jmul.math.operations.Result;
+import jmul.math.operations.ResultWithCarry;
 import jmul.math.operations.ResultWithRemainder;
 import jmul.math.operations.UnaryOperation;
 
 
-public class HalvingNumber implements UnaryOperation<Number, ResultWithRemainder<Number>> {
+/**
+ * An implementation of a function that halves numbers.
+ *
+ * @author Kristian Kutin
+ */
+public class HalvingNumber implements UnaryOperation<Number, Result<Number>> {
 
     /**
      * The default constructor.
@@ -48,11 +64,118 @@ public class HalvingNumber implements UnaryOperation<Number, ResultWithRemainder
         super();
     }
 
-    @Override
-    public ResultWithRemainder<Number> calculate(Number number) {
+    /**
+     * Checks the specified parameter.
+     *
+     * @param number
+     *        a number
+     */
+    private static void checkParameter(Number number) {
 
-        // TODO Implement this method
-        return null;
+        if (number == null) {
+
+            String message = "No number (null) was specified!";
+            throw new IllegalArgumentException(message);
+        }
+    }
+
+    /**
+     * Returns a number which is half the specified number.
+     *
+     * @param number
+     *        a number
+     *
+     * @return a number
+     */
+    @Override
+    public Result<Number> calculate(Number number) {
+
+        checkParameter(number);
+
+        if (number.isZero()) {
+
+            Number clone = new NumberImpl(number);
+            if (clone.isNegative()) {
+
+                clone = clone.negate();
+            }
+            return new Result<Number>(clone);
+        }
+
+        if (number.isInfinity()) {
+
+            Number clone = new NumberImpl(number);
+            return new Result<Number>(clone);
+        }
+
+        int base = number.base();
+        Sign sign = number.sign();
+
+        DigitNode centerNode = number.centerNode();
+        DigitNode currentNode = NodesHelper.moveLeft(centerNode);
+
+        DigitNode clonedCenterNode = null;
+        DigitNode clonedCurrentNode = null;
+        DigitNode leftTail = null;
+
+        BinaryOperation<Digit, ResultWithCarry<Digit>> addDigitsFunction =
+            (BinaryOperation<Digit, ResultWithCarry<Digit>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_DIGITS_FUNCTION);
+
+        UnaryOperation<Digit, ResultWithRemainder<Digit>> halveDigitFunction =
+            (UnaryOperation<Digit, ResultWithRemainder<Digit>>) FunctionSingletons.getFunction(FunctionIdentifiers.HALVING_DIGIT_FUNCTION);
+
+        ResultWithRemainder<Digit> previousResult = null;
+
+        while (true) {
+
+            if (currentNode == null) {
+
+                break;
+            }
+
+            Digit currentDigit = currentNode.digit();
+            ResultWithRemainder<Digit> result = halveDigitFunction.calculate(currentDigit);
+
+            if (previousResult == null) {
+
+                Digit newDigit = result.result();
+                clonedCurrentNode = NodesHelper.createNode(newDigit);
+                previousResult = result;
+
+            } else {
+
+                ResultWithCarry<Digit> sum = addDigitsFunction.calculate(result.result(), previousResult.remainder());
+                Digit newDigit = sum.result();
+                clonedCurrentNode = NodesHelper.createNode(newDigit);
+                previousResult = result;
+            }
+
+            if (currentNode == centerNode) {
+
+                clonedCenterNode = clonedCurrentNode;
+            }
+
+            NodesHelper.linkNodes(leftTail, clonedCurrentNode);
+            leftTail = clonedCurrentNode;
+
+            currentNode = currentNode.rightNode();
+        }
+
+        if (previousResult != null) {
+
+            Digit digit = previousResult.remainder();
+            if (!digit.isZero()) {
+
+                clonedCurrentNode = NodesHelper.createNode(digit);
+                NodesHelper.linkNodes(leftTail, clonedCurrentNode);
+            }
+        }
+
+        NodesHelper.trimLeft(clonedCenterNode);
+        NodesHelper.trimRight(clonedCenterNode);
+
+        Number halvedNumber = new NumberImpl(base, sign, clonedCenterNode);
+        return new Result<Number>(halvedNumber);
     }
 
 }

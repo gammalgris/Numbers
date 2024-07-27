@@ -56,13 +56,13 @@ import static test.jmul.math.numbers.NumberCheckHelper.checkNumbersAreUniqueInst
 
 
 /**
- * This test suite tests doubling numbers.
+ * This test suite tests truncating numbers.
  *
  * @author Kristian Kutin
  */
 @UnitTest
 @RunWith(Parameterized.class)
-public class DoublingNumberTest {
+public class TruncateNumberTest {
 
     /**
      * The base for all summands.
@@ -99,7 +99,7 @@ public class DoublingNumberTest {
      * @param resultString
      *        the expected result as number string
      */
-    public DoublingNumberTest(int base, String operandString, String resultString) {
+    public TruncateNumberTest(int base, String operandString, String resultString) {
 
         super();
 
@@ -129,66 +129,6 @@ public class DoublingNumberTest {
     }
 
     /**
-     * Tests doubling a number and checks the result.
-     */
-    @Test
-    public void testDoublingNumber() {
-
-        try {
-
-            // check that the operands and the expected result are built correctly
-            checkNumberEqualsStringRepresentation(operand, operandString);
-            checkNumberEqualsStringRepresentation(result, resultString);
-
-            // check the operation
-            Number actualResult = operand.doubling();
-
-            String message = String.format("doubling %s => %s", operandString, resultString);
-            assertEquals(message, result, actualResult);
-
-            // check the number instances
-            checkNumbersAreUniqueInstances(operand, actualResult);
-
-            // check that the operands didn't change
-            checkNumberEqualsStringRepresentation(operand, operandString);
-
-        } catch (Exception e) {
-
-            throw new FailedTestException(toString(), e);
-        }
-    }
-
-    /**
-     * Tests doubling a number and checks the result.
-     */
-    @Test
-    public void testDoublingNumberVariant2() {
-
-        try {
-
-            // check that the operands and the expected result are built correctly
-            checkNumberEqualsStringRepresentation(operand, operandString);
-            checkNumberEqualsStringRepresentation(result, resultString);
-
-            // check the operation
-            Number actualResult = Math.doubling(operand);
-
-            String message = String.format("doubling %s => %s", operandString, resultString);
-            assertEquals(message, result, actualResult);
-
-            // check the number instances
-            checkNumbersAreUniqueInstances(operand, actualResult);
-
-            // check that the operands didn't change
-            checkNumberEqualsStringRepresentation(operand, operandString);
-
-        } catch (Exception e) {
-
-            throw new FailedTestException(toString(), e);
-        }
-    }
-
-    /**
      * Returns a summary of this test case (i.e. the operation with its operands)
      *
      * @return a summary
@@ -196,8 +136,68 @@ public class DoublingNumberTest {
     @Override
     public String toString() {
 
-        String summary = String.format("[base:%d] doubling %s", base, operandString);
+        String summary = String.format("[base:%d] truncate %s", base, operandString);
         return summary;
+    }
+
+    /**
+     * Tests doubling a number and checks the result.
+     */
+    @Test
+    public void testTruncatingNumber() {
+
+        try {
+
+            // check that the operands and the expected result are built correctly
+            checkNumberEqualsStringRepresentation(operand, operandString);
+            checkNumberEqualsStringRepresentation(result, resultString);
+
+            // check the operation
+            Number actualResult = operand.truncate();
+
+            String message = String.format("truncate %s => %s", operandString, resultString);
+            assertEquals(message, result, actualResult);
+
+            // check the number instances
+            checkNumbersAreUniqueInstances(operand, actualResult);
+
+            // check that the operands didn't change
+            checkNumberEqualsStringRepresentation(operand, operandString);
+
+        } catch (Exception e) {
+
+            throw new FailedTestException(toString(), e);
+        }
+    }
+
+    /**
+     * Tests doubling a number and checks the result.
+     */
+    @Test
+    public void testTruncatingNumberVariant2() {
+
+        try {
+
+            // check that the operands and the expected result are built correctly
+            checkNumberEqualsStringRepresentation(operand, operandString);
+            checkNumberEqualsStringRepresentation(result, resultString);
+
+            // check the operation
+            Number actualResult = Math.truncate(operand);
+
+            String message = String.format("truncate %s => %s", operandString, resultString);
+            assertEquals(message, result, actualResult);
+
+            // check the number instances
+            checkNumbersAreUniqueInstances(operand, actualResult);
+
+            // check that the operands didn't change
+            checkNumberEqualsStringRepresentation(operand, operandString);
+
+        } catch (Exception e) {
+
+            throw new FailedTestException(toString(), e);
+        }
     }
 
     /**
@@ -210,78 +210,32 @@ public class DoublingNumberTest {
 
         Collection<Object[]> parameters = new ArrayList<Object[]>();
 
-        parameters.add(new Object[] { 2, "0", "0" });
-        parameters.add(new Object[] { 2, "-0", "0" });
+        for (int base = 2; base <= 65; base++) {
 
-        parameters.add(new Object[] { 2, "1", "10" });
-        parameters.add(new Object[] { 2, "-1", "-10" });
+            parameters.add(new Object[] { base, "0", "0" });
+            parameters.add(new Object[] { base, "-0", "-0" });
 
-        parameters.add(new Object[] { 2, "100", "1000" });
-        parameters.add(new Object[] { 2, "-100", "-1000" });
+            parameters.add(new Object[] { base, "1", "1" });
+            parameters.add(new Object[] { base, "-1", "-1" });
+
+            parameters.add(new Object[] { base, "1.1", "1" });
+            parameters.add(new Object[] { base, "-1.1", "-1" });
+
+            parameters.add(new Object[] { base, "11.1", "11" });
+            parameters.add(new Object[] { base, "-11.1", "-11" });
+
+            parameters.add(new Object[] { base, "1.1010101", "1" });
+            parameters.add(new Object[] { base, "-1.1010101", "-1" });
+        }
 
         for (int base = 3; base <= 65; base++) {
 
-            parameters.add(new Object[] { base, "0", "0" });
-            parameters.add(new Object[] { base, "-0", "0" });
+            parameters.add(new Object[] { base, "2", "2" });
+            parameters.add(new Object[] { base, "-2", "-2" });
 
-            parameters.add(new Object[] { base, "1", "2" });
-            parameters.add(new Object[] { base, "-1", "-2" });
-
-            parameters.add(new Object[] { base, "100", "200" });
-            parameters.add(new Object[] { base, "-100", "-200" });
+            parameters.add(new Object[] { base, "2.1212", "2" });
+            parameters.add(new Object[] { base, "-2.1212", "-2" });
         }
-
-
-        parameters.add(new Object[] { 2, "1.1111", "11.111" });
-        parameters.add(new Object[] { 2, "-1.1111", "-11.111" });
-
-        parameters.add(new Object[] { 2, "100.1111", "1001.111" });
-        parameters.add(new Object[] { 2, "-100.1111", "-1001.111" });
-
-
-        parameters.add(new Object[] { 10, "1.2345", "2.469" });
-        parameters.add(new Object[] { 10, "-1.2345", "-2.469" });
-
-        parameters.add(new Object[] { 10, "100.2345", "200.469" });
-        parameters.add(new Object[] { 10, "-100.2345", "-200.469" });
-
-
-        parameters.add(new Object[] { 10, "0.5", "1" });
-        parameters.add(new Object[] { 10, "-0.5", "-1" });
-
-        parameters.add(new Object[] { 10, "0.555", "1.11" });
-        parameters.add(new Object[] { 10, "-0.555", "-1.11" });
-
-        parameters.add(new Object[] { 10, "899.999", "1799.998" });
-        parameters.add(new Object[] { 10, "-899.999", "-1799.998" });
-
-        parameters.add(new Object[] { 10, "10.98765", "21.9753" });
-        parameters.add(new Object[] { 10, "-10.98765", "-21.9753" });
-
-        parameters.add(new Object[] { 10, "123.45", "246.9" });
-        parameters.add(new Object[] { 10, "-123.45", "-246.9" });
-
-        parameters.add(new Object[] { 10, "1.098765", "2.19753" });
-        parameters.add(new Object[] { 10, "-1.098765", "-2.19753" });
-
-        parameters.add(new Object[] { 10, "2", "4" });
-        parameters.add(new Object[] { 10, "10", "20" });
-        parameters.add(new Object[] { 10, "123", "246" });
-
-        parameters.add(new Object[] { 10, "123456789", "246913578" });
-        parameters.add(new Object[] { 10, "-123456789", "-246913578" });
-        parameters.add(new Object[] { 10, "987654321", "1975308642" });
-        parameters.add(new Object[] { 10, "-987654321", "-1975308642" });
-        parameters.add(new Object[] { 10, "1975308642864197532", "3950617285728395064" });
-        parameters.add(new Object[] { 10, "-1975308642864197532", "-3950617285728395064" });
-
-        parameters.add(new Object[] { 10, "1234567890.0123456789", "2469135780.0246913578" });
-        parameters.add(new Object[] { 10, "-1234567890.0123456789", "-2469135780.0246913578" });
-        parameters.add(new Object[] { 10, "0.012345678987654321", "0.024691357975308642" });
-        parameters.add(new Object[] { 10, "-0.012345678987654321", "-0.024691357975308642" });
-
-        parameters.add(new Object[] { 16, "FF", "1FE" });
-        parameters.add(new Object[] { 16, "11", "22" });
 
         return parameters;
     }

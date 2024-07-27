@@ -52,13 +52,13 @@ import org.junit.runners.Parameterized;
 
 
 /**
- * This test suite tests calculating with infinity.
+ * This test suite tests truncating infinity.
  *
  * @author Kristian Kutin
  */
 @UnitTest
 @RunWith(Parameterized.class)
-public class DoublingWithInfinityTest {
+public class TruncateWithInfinityTest {
 
     /**
      * The operand.
@@ -78,46 +78,12 @@ public class DoublingWithInfinityTest {
      * @param expectedResult
      *        the expected result of the calculation
      */
-    public DoublingWithInfinityTest(Number operand, Number expectedResult) {
+    public TruncateWithInfinityTest(Number operand, Number expectedResult) {
 
         super();
 
         this.operand = operand;
         this.expectedResult = expectedResult;
-    }
-
-    /**
-     * Doubles a number and checks the result.
-     */
-    @Test
-    public void testDoubling() {
-
-        if (expectedResult == null) {
-
-            throw new SetUpException();
-        }
-
-        Number actualResult = operand.doubling();
-
-        String message = String.format("doubling %s", operand.toString());
-        assertEquals(message, expectedResult, actualResult);
-    }
-
-    /**
-     * Doubles a number and checks the result.
-     */
-    @Test
-    public void testDoublingVariant2() {
-
-        if (expectedResult == null) {
-
-            throw new SetUpException();
-        }
-
-        Number actualResult = Math.doubling(operand);
-
-        String message = String.format("doubling %s", operand.toString());
-        assertEquals(message, expectedResult, actualResult);
     }
 
     /**
@@ -144,6 +110,40 @@ public class DoublingWithInfinityTest {
     private static Number createNegativeInfinity(int base) {
 
         return new NumberImpl(base, Signs.NEGATIVE);
+    }
+
+    /**
+     * Truncates a number and checks the result.
+     */
+    @Test
+    public void testTruncating() {
+
+        if (expectedResult == null) {
+
+            throw new SetUpException();
+        }
+
+        Number actualResult = operand.truncate();
+
+        String message = String.format("truncate %s", operand.toString());
+        assertEquals(message, expectedResult, actualResult);
+    }
+
+    /**
+     * Truncates a number and checks the result.
+     */
+    @Test
+    public void testTruncatingVariant2() {
+
+        if (expectedResult == null) {
+
+            throw new SetUpException();
+        }
+
+        Number actualResult = Math.truncate(operand);
+
+        String message = String.format("truncate %s", operand.toString());
+        assertEquals(message, expectedResult, actualResult);
     }
 
     /**

@@ -38,6 +38,7 @@ import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
 import jmul.math.numbers.Sign;
 import jmul.math.numbers.Signs;
+import jmul.math.numbers.exceptions.UndefinedOperationException;
 import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.NodesHelper;
 import jmul.math.operations.BinaryOperation;
@@ -77,19 +78,33 @@ public class ShiftLeft implements BinaryOperation<Number, Result<Number>> {
 
         checkParameters(number, shifts);
 
-        if (number.isInfinity()) {
+        if (number.isInfinity() || number.isZero()) {
 
             Number shiftedClone = new NumberImpl(number);
             return new Result<Number>(shiftedClone);
         }
 
+        int base = number.base();
+        Sign sign = shifts.sign();
+
+        if (shifts.isInfinity()) {
+
+            if (Signs.isPositive(sign)) {
+
+                Number shiftedClone = new NumberImpl(base, "0");
+                return new Result<Number>(shiftedClone);
+                
+            } else {
+                
+                Number shiftedClone = new NumberImpl(base, number.sign());
+                return new Result<Number>(shiftedClone);
+            }
+        }
+
         Number copy = new NumberImpl(number);
         DigitNode center = copy.centerNode();
 
-        Sign sign = shifts.sign();
-        int base = shifts.base();
         Number counter = shifts.absoluteValue();
-
         final Number ONE = new NumberImpl(base, "1");
 
         while (!counter.isZero()) {
@@ -155,6 +170,12 @@ public class ShiftLeft implements BinaryOperation<Number, Result<Number>> {
 
             String message = "The specified numbers are of different bases!";
             throw new IllegalArgumentException(message);
+        }
+
+        if (shifts.isFraction()) {
+
+            String message = "The operation is undefined if the number for shifts is a fraction!";
+            throw new UndefinedOperationException(message);
         }
     }
 

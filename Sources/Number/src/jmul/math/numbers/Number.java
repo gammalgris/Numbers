@@ -35,7 +35,6 @@ package jmul.math.numbers;
 
 
 import jmul.math.numbers.nodes.LinkedDigitList;
-import jmul.math.operations.ArithmeticOperations;
 
 
 /**
@@ -43,14 +42,14 @@ import jmul.math.operations.ArithmeticOperations;
  * numbers) and describes operations to access its digits and properties (e.g. sign).<br>
  * <br>
  * <i>Note:<br>
- * The linked list data model is exposed as it is required for accessing digits and is a
- * requirement for performing arithmetic operations.</i><br>
- * <br>
- * <i>Note:<br>
- * Numbers should not be modifiable.</i><br>
- * <br>
- * <i>Note:<br>
- * Periodic decimal number can only be approximated (i.e. the decimal places must be truncated).</i>
+ * <ul>
+ * <li>The linked list data model is exposed as it is required for accessing digits and is a
+ * requirement for performing arithmetic operations.</li>
+ * <li>Numbers should not be modifiable.</li>
+ * <li>Operations should return a modified copy of a number</li>
+ * <li>Periodic decimal number can only be approximated (i.e. the decimal places must be truncated).</li>
+ * </ul>
+ * </i>
  *
  * @author Kristian Kutin
  */
@@ -183,5 +182,60 @@ public interface Number extends LinkedDigitList, ArithmeticOperations, Comparabl
      * @return the absolute value
      */
     Number absoluteValue();
+
+    /**
+     * Returns a truncated number (i.e. where the fractional part is removed).
+     *
+     * @return a number
+     */
+    Number truncate();
+
+    /**
+     * Returns a number where the decimal point is shifted to the left by one digit.
+     *
+     * @return a number
+     */
+    Number shiftLeft();
+
+    /**
+     * Returns a number where the decimal point is shifted to the left by the number of specified
+     * shifts.
+     *
+     * @param shifts
+     *        the nuber of shifts to be performed. Zero will perform no shift. A positive number
+     *        will perform shifts to the left. A negative number will perform shifts to the right.
+     *
+     * @return a number
+     */
+    Number shiftLeft(Number shifts);
+
+    /**
+     * Returns a number where the decimal point is shifted to the right by one digit.
+     *
+     * @return a number
+     */
+    Number shiftRight();
+
+    /**
+     * Returns a number where the decimal point is shifted to the right by the number of specified
+     * shifts.
+     *
+     * @param shifts
+     *        the nuber of shifts to be performed. Zero will perform no shift. A positive number
+     *        will perform shifts to the right. A negative number will perform shifts to the left.
+     *
+     * @return a number
+     */
+    Number shiftRight(Number shifts);
+
+    /**
+     * Translates this number into a number of the specified base.
+     *
+     * @param base
+     *        the new base
+     *
+     * @return a number
+     */
+    Number rebase(int base);
 
 }

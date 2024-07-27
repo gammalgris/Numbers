@@ -39,6 +39,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import jmul.math.Math;
 import jmul.math.functions.FunctionIdentifier;
 import jmul.math.functions.FunctionSingletons;
 import jmul.math.hash.HashHelper;
@@ -719,8 +720,11 @@ public class NumberImpl implements Number {
     @Override
     public Number halving() {
 
-        // TODO
-        throw new UnsupportedOperationException();
+        UnaryOperation<Number, Result<Number>> function =
+            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.HALVING_NUMBER_FUNCTION);
+        Result<Number> result = function.calculate(this);
+
+        return result.result();
     }
 
     /**
@@ -887,6 +891,102 @@ public class NumberImpl implements Number {
     public Number absoluteValue() {
 
         return new NumberImpl(base(), Signs.POSITIVE, NodesHelper.cloneLinkedList(centerNode()));
+    }
+
+    /**
+     * Returns a truncated number (i.e. where the fractional part is removed).
+     *
+     * @return a number
+     */
+    @Override
+    public Number truncate() {
+
+        UnaryOperation<Number, Result<Number>> function =
+            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.TRUNCATE_NUMBER_FUNCTION);
+        Result<Number> result = function.calculate(this);
+
+        return result.result();
+    }
+
+    /**
+     * Returns a number where the decimal point is shifted to the left by one digit.
+     *
+     * @return a number
+     */
+    @Override
+    public Number shiftLeft() {
+
+        final Number ONE = Math.parseNumber(base(), "1");
+
+        return shiftLeft(ONE);
+    }
+
+    /**
+     * Returns a number where the decimal point is shifted to the left by the number of specified
+     * shifts.
+     *
+     * @param shifts
+     *        the nuber of shifts to be performed. Zero will perform no shift. A positive number
+     *        will perform shifts to the left. A negative number will perform shifts to the right.
+     *
+     * @return a number
+     */
+    @Override
+    public Number shiftLeft(Number shifts) {
+
+        BinaryOperation<Number, Result<Number>> function =
+            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.SHIFT_LEFT_FUNCTION);
+        Result<Number> result = function.calculate(this, shifts);
+
+        return result.result();
+    }
+
+    /**
+     * Returns a number where the decimal point is shifted to the right by one digit.
+     *
+     * @return a number
+     */
+    @Override
+    public Number shiftRight() {
+
+        final Number ONE = Math.parseNumber(base(), "1");
+
+        return shiftRight(ONE);
+    }
+
+    /**
+     * Returns a number where the decimal point is shifted to the right by the number of specified
+     * shifts.
+     *
+     * @param shifts
+     *        the nuber of shifts to be performed. Zero will perform no shift. A positive number
+     *        will perform shifts to the right. A negative number will perform shifts to the left.
+     *
+     * @return a number
+     */
+    @Override
+    public Number shiftRight(Number shifts) {
+
+        BinaryOperation<Number, Result<Number>> function =
+            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.SHIFT_RIGHT_FUNCTION);
+        Result<Number> result = function.calculate(this, shifts);
+
+        return result.result();
+    }
+
+    /**
+     * Translates this number into a number of the specified base.
+     *
+     * @param base
+     *        the new base
+     *
+     * @return a number
+     */
+    @Override
+    public Number rebase(int base) {
+
+        //TODO
+        throw new UnsupportedOperationException();
     }
 
 }

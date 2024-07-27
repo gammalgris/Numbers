@@ -41,6 +41,9 @@ import jmul.math.Math;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
 
+import jmul.math.numbers.digits.Digit;
+import jmul.math.numbers.digits.PositionalNumeralSystems;
+
 import jmul.test.classification.UnitTest;
 import jmul.test.exceptions.FailedTestException;
 
@@ -56,13 +59,13 @@ import static test.jmul.math.numbers.NumberCheckHelper.checkNumbersAreUniqueInst
 
 
 /**
- * This test suite tests doubling numbers.
+ * This test suite tests halving numbers.
  *
  * @author Kristian Kutin
  */
 @UnitTest
 @RunWith(Parameterized.class)
-public class DoublingNumberTest {
+public class HalvingNumberTest {
 
     /**
      * The base for all summands.
@@ -99,7 +102,7 @@ public class DoublingNumberTest {
      * @param resultString
      *        the expected result as number string
      */
-    public DoublingNumberTest(int base, String operandString, String resultString) {
+    public HalvingNumberTest(int base, String operandString, String resultString) {
 
         super();
 
@@ -129,10 +132,10 @@ public class DoublingNumberTest {
     }
 
     /**
-     * Tests doubling a number and checks the result.
+     * Tests halving a number and checks the result.
      */
     @Test
-    public void testDoublingNumber() {
+    public void testHalvingNumber() {
 
         try {
 
@@ -141,9 +144,9 @@ public class DoublingNumberTest {
             checkNumberEqualsStringRepresentation(result, resultString);
 
             // check the operation
-            Number actualResult = operand.doubling();
+            Number actualResult = operand.halving();
 
-            String message = String.format("doubling %s => %s", operandString, resultString);
+            String message = String.format("halving %s => %s", operandString, resultString);
             assertEquals(message, result, actualResult);
 
             // check the number instances
@@ -159,10 +162,10 @@ public class DoublingNumberTest {
     }
 
     /**
-     * Tests doubling a number and checks the result.
+     * Tests halving a number and checks the result.
      */
     @Test
-    public void testDoublingNumberVariant2() {
+    public void testHalvingNumberVariant2() {
 
         try {
 
@@ -171,9 +174,9 @@ public class DoublingNumberTest {
             checkNumberEqualsStringRepresentation(result, resultString);
 
             // check the operation
-            Number actualResult = Math.doubling(operand);
+            Number actualResult = Math.halving(operand);
 
-            String message = String.format("doubling %s => %s", operandString, resultString);
+            String message = String.format("halving %s => %s", operandString, resultString);
             assertEquals(message, result, actualResult);
 
             // check the number instances
@@ -196,7 +199,7 @@ public class DoublingNumberTest {
     @Override
     public String toString() {
 
-        String summary = String.format("[base:%d] doubling %s", base, operandString);
+        String summary = String.format("[base:%d] halving %s", base, operandString);
         return summary;
     }
 
@@ -213,75 +216,81 @@ public class DoublingNumberTest {
         parameters.add(new Object[] { 2, "0", "0" });
         parameters.add(new Object[] { 2, "-0", "0" });
 
-        parameters.add(new Object[] { 2, "1", "10" });
-        parameters.add(new Object[] { 2, "-1", "-10" });
+        parameters.add(new Object[] { 2, "1", "0.1" });
+        parameters.add(new Object[] { 2, "-1", "-0.1" });
 
-        parameters.add(new Object[] { 2, "100", "1000" });
-        parameters.add(new Object[] { 2, "-100", "-1000" });
+        parameters.add(new Object[] { 2, "100", "10" });
+        parameters.add(new Object[] { 2, "-100", "-10" });
 
         for (int base = 3; base <= 65; base++) {
 
             parameters.add(new Object[] { base, "0", "0" });
             parameters.add(new Object[] { base, "-0", "0" });
 
-            parameters.add(new Object[] { base, "1", "2" });
-            parameters.add(new Object[] { base, "-1", "-2" });
+            int half = base / 2;
+            Digit digit = PositionalNumeralSystems.ordinalToDigit(base, half);
 
-            parameters.add(new Object[] { base, "100", "200" });
-            parameters.add(new Object[] { base, "-100", "-200" });
+            parameters.add(new Object[] { base, "1", "0." + digit });
+            parameters.add(new Object[] { base, "-1", "-0." + digit });
+
+            parameters.add(new Object[] { base, "100", "" + digit + "0" });
+            parameters.add(new Object[] { base, "-100", "-" + digit + "0" });
         }
 
 
-        parameters.add(new Object[] { 2, "1.1111", "11.111" });
-        parameters.add(new Object[] { 2, "-1.1111", "-11.111" });
+        parameters.add(new Object[] { 2, "1.1111", "0.11111" });
+        parameters.add(new Object[] { 2, "-1.1111", "-0.11111" });
 
-        parameters.add(new Object[] { 2, "100.1111", "1001.111" });
-        parameters.add(new Object[] { 2, "-100.1111", "-1001.111" });
-
-
-        parameters.add(new Object[] { 10, "1.2345", "2.469" });
-        parameters.add(new Object[] { 10, "-1.2345", "-2.469" });
-
-        parameters.add(new Object[] { 10, "100.2345", "200.469" });
-        parameters.add(new Object[] { 10, "-100.2345", "-200.469" });
+        parameters.add(new Object[] { 2, "100.1111", "10.01111" });
+        parameters.add(new Object[] { 2, "-100.1111", "-10.01111" });
 
 
-        parameters.add(new Object[] { 10, "0.5", "1" });
-        parameters.add(new Object[] { 10, "-0.5", "-1" });
+        parameters.add(new Object[] { 10, "2.469", "1.2345"  });
+        parameters.add(new Object[] { 10, "-2.469", "-1.2345" });
 
-        parameters.add(new Object[] { 10, "0.555", "1.11" });
-        parameters.add(new Object[] { 10, "-0.555", "-1.11" });
+        parameters.add(new Object[] { 10, "200.469", "100.2345"  });
+        parameters.add(new Object[] { 10, "-200.469", "-100.2345" });
 
-        parameters.add(new Object[] { 10, "899.999", "1799.998" });
-        parameters.add(new Object[] { 10, "-899.999", "-1799.998" });
 
-        parameters.add(new Object[] { 10, "10.98765", "21.9753" });
-        parameters.add(new Object[] { 10, "-10.98765", "-21.9753" });
+        parameters.add(new Object[] { 10, "1", "0.5" });
+        parameters.add(new Object[] { 10, "-1", "-0.5" });
 
-        parameters.add(new Object[] { 10, "123.45", "246.9" });
-        parameters.add(new Object[] { 10, "-123.45", "-246.9" });
+        parameters.add(new Object[] { 10, "1.11", "0.555" });
+        parameters.add(new Object[] { 10, "-1.11", "-0.555" });
 
-        parameters.add(new Object[] { 10, "1.098765", "2.19753" });
-        parameters.add(new Object[] { 10, "-1.098765", "-2.19753" });
+        parameters.add(new Object[] { 10, "1799.998", "899.999" });
+        parameters.add(new Object[] { 10, "-1799.998", "-899.999" });
 
-        parameters.add(new Object[] { 10, "2", "4" });
-        parameters.add(new Object[] { 10, "10", "20" });
-        parameters.add(new Object[] { 10, "123", "246" });
+        parameters.add(new Object[] { 10, "21.9753", "10.98765" });
+        parameters.add(new Object[] { 10, "-21.9753", "-10.98765" });
 
-        parameters.add(new Object[] { 10, "123456789", "246913578" });
-        parameters.add(new Object[] { 10, "-123456789", "-246913578" });
-        parameters.add(new Object[] { 10, "987654321", "1975308642" });
-        parameters.add(new Object[] { 10, "-987654321", "-1975308642" });
-        parameters.add(new Object[] { 10, "1975308642864197532", "3950617285728395064" });
-        parameters.add(new Object[] { 10, "-1975308642864197532", "-3950617285728395064" });
+        parameters.add(new Object[] { 10, "246.9", "123.45" });
+        parameters.add(new Object[] { 10, "-246.9", "-123.45" });
 
-        parameters.add(new Object[] { 10, "1234567890.0123456789", "2469135780.0246913578" });
-        parameters.add(new Object[] { 10, "-1234567890.0123456789", "-2469135780.0246913578" });
-        parameters.add(new Object[] { 10, "0.012345678987654321", "0.024691357975308642" });
-        parameters.add(new Object[] { 10, "-0.012345678987654321", "-0.024691357975308642" });
+        parameters.add(new Object[] { 10, "2.19753", "1.098765" });
+        parameters.add(new Object[] { 10, "-2.19753", "-1.098765" });
 
-        parameters.add(new Object[] { 16, "FF", "1FE" });
-        parameters.add(new Object[] { 16, "11", "22" });
+        parameters.add(new Object[] { 10, "4", "2" });
+        parameters.add(new Object[] { 10, "5", "2.5" });
+        parameters.add(new Object[] { 10, "20", "10" });
+        parameters.add(new Object[] { 10, "21", "10.5" });
+        parameters.add(new Object[] { 10, "246", "123" });
+        parameters.add(new Object[] { 10, "247", "123.5" });
+
+        parameters.add(new Object[] { 10, "246913578", "123456789" });
+        parameters.add(new Object[] { 10, "-246913578", "-123456789" });
+        parameters.add(new Object[] { 10, "1975308642", "987654321" });
+        parameters.add(new Object[] { 10, "-1975308642", "-987654321" });
+        parameters.add(new Object[] { 10, "3950617285728395064", "1975308642864197532" });
+        parameters.add(new Object[] { 10, "-3950617285728395064", "-1975308642864197532" });
+
+        parameters.add(new Object[] { 10, "2469135780.0246913578", "1234567890.0123456789" });
+        parameters.add(new Object[] { 10, "-2469135780.0246913578", "-1234567890.0123456789" });
+        parameters.add(new Object[] { 10, "0.024691357975308642", "0.012345678987654321" });
+        parameters.add(new Object[] { 10, "-0.024691357975308642", "-0.012345678987654321" });
+
+        parameters.add(new Object[] { 16, "1FE", "FF" });
+        parameters.add(new Object[] { 16, "22", "11" });
 
         return parameters;
     }

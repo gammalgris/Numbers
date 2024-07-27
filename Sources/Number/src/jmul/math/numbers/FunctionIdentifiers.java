@@ -60,6 +60,7 @@ public enum FunctionIdentifiers implements FunctionIdentifier {
 
     DOUBLING_NUMBER_FUNCTION,
     HALVING_NUMBER_FUNCTION,
+    TRUNCATE_NUMBER_FUNCTION,
 
     DIGIT_EQUALITY_FUNCTION,
     DIGIT_COMPARATOR_FUNCTION,
@@ -75,7 +76,9 @@ public enum FunctionIdentifiers implements FunctionIdentifier {
     MULTIPLICATION_FUNCTION,
     DIVISION_FUNCTION,
     MODULO_FUNCTION,
-    DIVISO_FUNCTION;
+    DIVISO_FUNCTION,
+    
+    REBASE_FUNCTION;
 
 
     /**

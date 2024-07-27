@@ -56,13 +56,13 @@ import static test.jmul.math.numbers.NumberCheckHelper.checkNumbersAreUniqueInst
 
 
 /**
- * This test suite tests doubling numbers.
+ * This test suite tests shifting the decimal point to the right in numbers.
  *
  * @author Kristian Kutin
  */
 @UnitTest
 @RunWith(Parameterized.class)
-public class DoublingNumberTest {
+public class ShiftRightXTest {
 
     /**
      * The base for all summands.
@@ -78,6 +78,16 @@ public class DoublingNumberTest {
      * The operand parsed from the specified number string.
      */
     private Number operand;
+
+    /**
+     * The number of shifts as number string.
+     */
+    private final String shiftsString;
+
+    /**
+     * The number of shifts parsed from the specified number string.
+     */
+    private Number shifts;
 
     /**
      * The expected sum as number string.
@@ -96,15 +106,18 @@ public class DoublingNumberTest {
      *        the base for all numbers
      * @param operandString
      *        the operand as number string
+     * @param shiftsString
+     *        the number of shifts as number string
      * @param resultString
      *        the expected result as number string
      */
-    public DoublingNumberTest(int base, String operandString, String resultString) {
+    public ShiftRightXTest(int base, String operandString, String shiftsString, String resultString) {
 
         super();
 
         this.base = base;
         this.operandString = operandString;
+        this.shiftsString = shiftsString;
         this.resultString = resultString;
     }
 
@@ -115,6 +128,7 @@ public class DoublingNumberTest {
     public void setUp() {
 
         operand = new NumberImpl(base, operandString);
+        shifts = new NumberImpl(base, shiftsString);
         result = new NumberImpl(base, resultString);
     }
 
@@ -125,67 +139,8 @@ public class DoublingNumberTest {
     public void tearDown() {
 
         operand = null;
+        shifts = null;
         result = null;
-    }
-
-    /**
-     * Tests doubling a number and checks the result.
-     */
-    @Test
-    public void testDoublingNumber() {
-
-        try {
-
-            // check that the operands and the expected result are built correctly
-            checkNumberEqualsStringRepresentation(operand, operandString);
-            checkNumberEqualsStringRepresentation(result, resultString);
-
-            // check the operation
-            Number actualResult = operand.doubling();
-
-            String message = String.format("doubling %s => %s", operandString, resultString);
-            assertEquals(message, result, actualResult);
-
-            // check the number instances
-            checkNumbersAreUniqueInstances(operand, actualResult);
-
-            // check that the operands didn't change
-            checkNumberEqualsStringRepresentation(operand, operandString);
-
-        } catch (Exception e) {
-
-            throw new FailedTestException(toString(), e);
-        }
-    }
-
-    /**
-     * Tests doubling a number and checks the result.
-     */
-    @Test
-    public void testDoublingNumberVariant2() {
-
-        try {
-
-            // check that the operands and the expected result are built correctly
-            checkNumberEqualsStringRepresentation(operand, operandString);
-            checkNumberEqualsStringRepresentation(result, resultString);
-
-            // check the operation
-            Number actualResult = Math.doubling(operand);
-
-            String message = String.format("doubling %s => %s", operandString, resultString);
-            assertEquals(message, result, actualResult);
-
-            // check the number instances
-            checkNumbersAreUniqueInstances(operand, actualResult);
-
-            // check that the operands didn't change
-            checkNumberEqualsStringRepresentation(operand, operandString);
-
-        } catch (Exception e) {
-
-            throw new FailedTestException(toString(), e);
-        }
     }
 
     /**
@@ -196,8 +151,68 @@ public class DoublingNumberTest {
     @Override
     public String toString() {
 
-        String summary = String.format("[base:%d] doubling %s", base, operandString);
+        String summary = String.format("[base:%d] shift %s right %s", base, shiftsString, operandString);
         return summary;
+    }
+
+    /**
+     * Tests shifting a decimal point to the left.
+     */
+    @Test
+    public void testShiftRight() {
+
+        try {
+
+            // check that the operands and the expected result are built correctly
+            checkNumberEqualsStringRepresentation(operand, operandString);
+            checkNumberEqualsStringRepresentation(result, resultString);
+
+            // check the operation
+            Number actualResult = operand.shiftRight(shifts);
+
+            String message = String.format("shift %s right %s => %s", shiftsString, operandString, resultString);
+            assertEquals(message, result, actualResult);
+
+            // check the number instances
+            checkNumbersAreUniqueInstances(operand, actualResult);
+
+            // check that the operands didn't change
+            checkNumberEqualsStringRepresentation(operand, operandString);
+
+        } catch (Exception e) {
+
+            throw new FailedTestException(toString(), e);
+        }
+    }
+
+    /**
+     * Tests shifting a decimal point to the left.
+     */
+    @Test
+    public void testShiftRightVariant2() {
+
+        try {
+
+            // check that the operands and the expected result are built correctly
+            checkNumberEqualsStringRepresentation(operand, operandString);
+            checkNumberEqualsStringRepresentation(result, resultString);
+
+            // check the operation
+            Number actualResult = Math.shiftRight(operand, shifts);
+
+            String message = String.format("shift %s right %s => %s", shiftsString, operandString, resultString);
+            assertEquals(message, result, actualResult);
+
+            // check the number instances
+            checkNumbersAreUniqueInstances(operand, actualResult);
+
+            // check that the operands didn't change
+            checkNumberEqualsStringRepresentation(operand, operandString);
+
+        } catch (Exception e) {
+
+            throw new FailedTestException(toString(), e);
+        }
     }
 
     /**
@@ -210,78 +225,65 @@ public class DoublingNumberTest {
 
         Collection<Object[]> parameters = new ArrayList<Object[]>();
 
-        parameters.add(new Object[] { 2, "0", "0" });
-        parameters.add(new Object[] { 2, "-0", "0" });
+        for (int base = 2; base <= 65; base++) {
 
-        parameters.add(new Object[] { 2, "1", "10" });
-        parameters.add(new Object[] { 2, "-1", "-10" });
+            parameters.add(new Object[] { base, "0", "1", "0" });
+            parameters.add(new Object[] { base, "-0", "1", "-0" });
 
-        parameters.add(new Object[] { 2, "100", "1000" });
-        parameters.add(new Object[] { 2, "-100", "-1000" });
+            parameters.add(new Object[] { base, "1", "1", "10" });
+            parameters.add(new Object[] { base, "-1", "1", "-10" });
+
+            parameters.add(new Object[] { base, "1", "0", "1" });
+            parameters.add(new Object[] { base, "-1", "0", "-1" });
+
+            parameters.add(new Object[] { base, "1", "-1", "0.1" });
+            parameters.add(new Object[] { base, "-1", "-1", "-0.1" });
+
+            parameters.add(new Object[] { base, "1.1", "1", "11" });
+            parameters.add(new Object[] { base, "-1.1", "1", "-11" });
+
+            parameters.add(new Object[] { base, "11.1", "1", "111" });
+            parameters.add(new Object[] { base, "-11.1", "1", "-111" });
+
+            parameters.add(new Object[] { base, "1.1010101", "1", "11.010101" });
+            parameters.add(new Object[] { base, "-1.1010101", "1", "-11.010101" });
+        }
 
         for (int base = 3; base <= 65; base++) {
 
-            parameters.add(new Object[] { base, "0", "0" });
-            parameters.add(new Object[] { base, "-0", "0" });
+            parameters.add(new Object[] { base, "0", "2", "0" });
+            parameters.add(new Object[] { base, "-0", "2", "-0" });
 
-            parameters.add(new Object[] { base, "1", "2" });
-            parameters.add(new Object[] { base, "-1", "-2" });
+            parameters.add(new Object[] { base, "2", "1", "20" });
+            parameters.add(new Object[] { base, "-2", "1", "-20" });
 
-            parameters.add(new Object[] { base, "100", "200" });
-            parameters.add(new Object[] { base, "-100", "-200" });
+            parameters.add(new Object[] { base, "2", "2", "200" });
+            parameters.add(new Object[] { base, "-2", "2", "-200" });
+
+            parameters.add(new Object[] { base, "2.1212", "1", "21.212" });
+            parameters.add(new Object[] { base, "-2.1212", "1", "-21.212" });
+
+            parameters.add(new Object[] { base, "2.1212", "2", "212.12" });
+            parameters.add(new Object[] { base, "-2.1212", "2", "-212.12" });
         }
 
+        for (int base = 4; base <= 65; base++) {
 
-        parameters.add(new Object[] { 2, "1.1111", "11.111" });
-        parameters.add(new Object[] { 2, "-1.1111", "-11.111" });
+            parameters.add(new Object[] { base, "0", "3", "0" });
+            parameters.add(new Object[] { base, "-0", "3", "-0" });
 
-        parameters.add(new Object[] { 2, "100.1111", "1001.111" });
-        parameters.add(new Object[] { 2, "-100.1111", "-1001.111" });
+            parameters.add(new Object[] { base, "3", "1", "30" });
+            parameters.add(new Object[] { base, "-3", "1", "-30" });
 
+            parameters.add(new Object[] { base, "3", "3", "3000" });
+            parameters.add(new Object[] { base, "-3", "3", "-3000" });
 
-        parameters.add(new Object[] { 10, "1.2345", "2.469" });
-        parameters.add(new Object[] { 10, "-1.2345", "-2.469" });
+            parameters.add(new Object[] { base, "3.123123", "1", "31.23123" });
+            parameters.add(new Object[] { base, "-3.123123", "1", "-31.23123" });
 
-        parameters.add(new Object[] { 10, "100.2345", "200.469" });
-        parameters.add(new Object[] { 10, "-100.2345", "-200.469" });
-
-
-        parameters.add(new Object[] { 10, "0.5", "1" });
-        parameters.add(new Object[] { 10, "-0.5", "-1" });
-
-        parameters.add(new Object[] { 10, "0.555", "1.11" });
-        parameters.add(new Object[] { 10, "-0.555", "-1.11" });
-
-        parameters.add(new Object[] { 10, "899.999", "1799.998" });
-        parameters.add(new Object[] { 10, "-899.999", "-1799.998" });
-
-        parameters.add(new Object[] { 10, "10.98765", "21.9753" });
-        parameters.add(new Object[] { 10, "-10.98765", "-21.9753" });
-
-        parameters.add(new Object[] { 10, "123.45", "246.9" });
-        parameters.add(new Object[] { 10, "-123.45", "-246.9" });
-
-        parameters.add(new Object[] { 10, "1.098765", "2.19753" });
-        parameters.add(new Object[] { 10, "-1.098765", "-2.19753" });
-
-        parameters.add(new Object[] { 10, "2", "4" });
-        parameters.add(new Object[] { 10, "10", "20" });
-        parameters.add(new Object[] { 10, "123", "246" });
-
-        parameters.add(new Object[] { 10, "123456789", "246913578" });
-        parameters.add(new Object[] { 10, "-123456789", "-246913578" });
-        parameters.add(new Object[] { 10, "987654321", "1975308642" });
-        parameters.add(new Object[] { 10, "-987654321", "-1975308642" });
-        parameters.add(new Object[] { 10, "1975308642864197532", "3950617285728395064" });
-        parameters.add(new Object[] { 10, "-1975308642864197532", "-3950617285728395064" });
-
-        parameters.add(new Object[] { 10, "1234567890.0123456789", "2469135780.0246913578" });
-        parameters.add(new Object[] { 10, "-1234567890.0123456789", "-2469135780.0246913578" });
-        parameters.add(new Object[] { 10, "0.012345678987654321", "0.024691357975308642" });
-        parameters.add(new Object[] { 10, "-0.012345678987654321", "-0.024691357975308642" });
-
-        parameters.add(new Object[] { 16, "FF", "1FE" });
-        parameters.add(new Object[] { 16, "11", "22" });
+            parameters.add(new Object[] { base, "3.123123", "3", "3123.123" });
+            parameters.add(new Object[] { base, "-3.123123", "3", "-3123.123" });
+        }
 
         return parameters;
     }

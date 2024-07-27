@@ -162,16 +162,25 @@ public final class Math {
     /**
      * Halves the specified number.
      *
+     * @param n
+     *        a number
+     *
      * @return a number
      */
     public static Number halving(Number n) {
 
-        //TODO
-        throw new UnsupportedOperationException();
+        UnaryOperation<Number, Result<Number>> function =
+            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.HALVING_NUMBER_FUNCTION);
+        Result<Number> result = function.calculate(n);
+
+        return result.result();
     }
 
     /**
      * Doubles the specified number.
+     *
+     * @param n
+     *        a number
      *
      * @return a number
      */
@@ -180,6 +189,105 @@ public final class Math {
         UnaryOperation<Number, Result<Number>> function =
             (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.DOUBLING_NUMBER_FUNCTION);
         Result<Number> result = function.calculate(n);
+
+        return result.result();
+    }
+
+    /**
+     * Returns a truncated number (i.e. where the fractional part is removed).
+     *
+     * @param n
+     *        a number
+     *
+     * @return a number
+     */
+    public static Number truncate(Number n) {
+
+        UnaryOperation<Number, Result<Number>> function =
+            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.TRUNCATE_NUMBER_FUNCTION);
+        Result<Number> result = function.calculate(n);
+
+        return result.result();
+    }
+
+    /**
+     * Returns a number where the decimal point is shifted to the left by one digit.
+     *
+     * @param n
+     *        a number
+     *
+     * @return a number
+     */
+    public static Number shiftLeft(Number n) {
+
+        if (n == null) {
+
+            throw new IllegalArgumentException("No number (null) was specified!");
+        }
+
+        final Number ONE = Math.parseNumber(n.base(), "1");
+
+        return shiftLeft(n, ONE);
+    }
+
+    /**
+     * Returns a number where the decimal point is shifted to the left by the number of specified
+     * shifts.
+     *
+     * @param n
+     *        a number
+     * @param shifts
+     *        the nuber of shifts to be performed. Zero will perform no shift. A positive number
+     *        will perform shifts to the left. A negative number will perform shifts to the right.
+     *
+     * @return a number
+     */
+    public static Number shiftLeft(Number n, Number shifts) {
+
+        BinaryOperation<Number, Result<Number>> function =
+            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.SHIFT_LEFT_FUNCTION);
+        Result<Number> result = function.calculate(n, shifts);
+
+        return result.result();
+    }
+
+    /**
+     * Returns a number where the decimal point is shifted to the right by one digit.
+     *
+     * @param n
+     *        a number
+     *
+     * @return a number
+     */
+    public static Number shiftRight(Number n) {
+
+        if (n == null) {
+
+            throw new IllegalArgumentException("No number (null) was specified!");
+        }
+
+        final Number ONE = Math.parseNumber(n.base(), "1");
+
+        return shiftRight(n, ONE);
+    }
+
+    /**
+     * Returns a number where the decimal point is shifted to the right by the number of specified
+     * shifts.
+     *
+     * @param n
+     *        a number
+     * @param shifts
+     *        the nuber of shifts to be performed. Zero will perform no shift. A positive number
+     *        will perform shifts to the right. A negative number will perform shifts to the left.
+     *
+     * @return a number
+     */
+    public static Number shiftRight(Number n, Number shifts) {
+
+        BinaryOperation<Number, Result<Number>> function =
+            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.SHIFT_RIGHT_FUNCTION);
+        Result<Number> result = function.calculate(n, shifts);
 
         return result.result();
     }

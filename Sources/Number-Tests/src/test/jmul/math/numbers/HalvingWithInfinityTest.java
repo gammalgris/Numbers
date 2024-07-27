@@ -52,13 +52,13 @@ import org.junit.runners.Parameterized;
 
 
 /**
- * This test suite tests calculating with infinity.
+ * This test suite tests halving infinity.
  *
  * @author Kristian Kutin
  */
 @UnitTest
 @RunWith(Parameterized.class)
-public class DoublingWithInfinityTest {
+public class HalvingWithInfinityTest {
 
     /**
      * The operand.
@@ -78,46 +78,12 @@ public class DoublingWithInfinityTest {
      * @param expectedResult
      *        the expected result of the calculation
      */
-    public DoublingWithInfinityTest(Number operand, Number expectedResult) {
+    public HalvingWithInfinityTest(Number operand, Number expectedResult) {
 
         super();
 
         this.operand = operand;
         this.expectedResult = expectedResult;
-    }
-
-    /**
-     * Doubles a number and checks the result.
-     */
-    @Test
-    public void testDoubling() {
-
-        if (expectedResult == null) {
-
-            throw new SetUpException();
-        }
-
-        Number actualResult = operand.doubling();
-
-        String message = String.format("doubling %s", operand.toString());
-        assertEquals(message, expectedResult, actualResult);
-    }
-
-    /**
-     * Doubles a number and checks the result.
-     */
-    @Test
-    public void testDoublingVariant2() {
-
-        if (expectedResult == null) {
-
-            throw new SetUpException();
-        }
-
-        Number actualResult = Math.doubling(operand);
-
-        String message = String.format("doubling %s", operand.toString());
-        assertEquals(message, expectedResult, actualResult);
     }
 
     /**
@@ -144,6 +110,40 @@ public class DoublingWithInfinityTest {
     private static Number createNegativeInfinity(int base) {
 
         return new NumberImpl(base, Signs.NEGATIVE);
+    }
+
+    /**
+     * Halving a number and check the result.
+     */
+    @Test
+    public void testHalving() {
+
+        if (expectedResult == null) {
+
+            throw new SetUpException();
+        }
+
+        Number actualResult = operand.halving();
+
+        String message = String.format("halving %s", operand.toString());
+        assertEquals(message, expectedResult, actualResult);
+    }
+
+    /**
+     * Halving a number and check the result.
+     */
+    @Test
+    public void testHalvingVariant2() {
+
+        if (expectedResult == null) {
+
+            throw new SetUpException();
+        }
+
+        Number actualResult = Math.halving(operand);
+
+        String message = String.format("halving %s", operand.toString());
+        assertEquals(message, expectedResult, actualResult);
     }
 
     /**

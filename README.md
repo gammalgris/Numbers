@@ -5,6 +5,8 @@ This project experiments with a new number implementation which combines integer
 floating point numbers into one data type. Additionally numerical systems with different
 number bases are supported.
 
+At the same time this is a math exercise to refresh math skills.
+
 # Programming Language
 
 Java is used as programming language (Version 8+).

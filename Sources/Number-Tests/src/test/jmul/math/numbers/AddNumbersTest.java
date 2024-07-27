@@ -46,11 +46,13 @@ import jmul.test.exceptions.FailedTestException;
 
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+
+import static test.jmul.math.numbers.NumberCheckHelper.checkNumberEqualsStringRepresentation;
+import static test.jmul.math.numbers.NumberCheckHelper.checkNumbersAreUniqueInstances;
 
 
 /**
@@ -203,41 +205,6 @@ public class AddNumbersTest {
 
             throw new FailedTestException(toString(), e);
         }
-    }
-
-    /**
-     * Checks that the specified operands and the result are unique number instances (i.e. linked lists).
-     *
-     * @param operand1
-     *        an operand
-     * @param operand2
-     *        an operand
-     * @param result
-     *        the operation result
-     */
-    private static void checkNumbersAreUniqueInstances(Number operand1, Number operand2, Number result) {
-
-        assertFalse(operand1 == operand2);
-        assertFalse(operand1 == result);
-        assertFalse(operand2 == result);
-
-        assertFalse(operand1.centerNode() == operand2.centerNode());
-        assertFalse(operand1.centerNode() == result.centerNode());
-        assertFalse(operand2.centerNode() == result.centerNode());
-    }
-
-    /**
-     * Compare the specified number with the specified string representation of a number. If these
-     * don't match then an assertion fails.
-     *
-     * @param number
-     *        a number
-     * @param stringRepresentation
-     *        the string representation which should match the specified number
-     */
-    private static void checkNumberEqualsStringRepresentation(Number number, String stringRepresentation) {
-
-        assertEquals(stringRepresentation, number.toString());
     }
 
     /**

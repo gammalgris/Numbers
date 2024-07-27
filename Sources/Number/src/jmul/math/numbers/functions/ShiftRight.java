@@ -37,6 +37,7 @@ package jmul.math.numbers.functions;
 import jmul.math.functions.FunctionSingletons;
 import jmul.math.numbers.FunctionIdentifiers;
 import jmul.math.numbers.Number;
+import jmul.math.numbers.exceptions.UndefinedOperationException;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.Result;
 
@@ -107,6 +108,12 @@ public class ShiftRight implements BinaryOperation<Number, Result<Number>> {
 
             String message = "The specified numbers are of different bases!";
             throw new IllegalArgumentException(message);
+        }
+
+        if (shifts.isFraction()) {
+
+            String message = "The operation is undefined if the number for shifts is a fraction!";
+            throw new UndefinedOperationException(message);
         }
     }
 

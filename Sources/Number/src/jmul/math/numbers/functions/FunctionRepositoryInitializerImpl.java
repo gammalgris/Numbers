@@ -86,15 +86,17 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
 
         repository.registerFunction(FunctionIdentifiers.ADD_DIGITS_FUNCTION, AddDigits.class);
         repository.registerFunction(FunctionIdentifiers.DIGIT_COMPLEMENT_FUNCTION, DigitComplement.class);
-        repository.registerFunction(FunctionIdentifiers.HALVING_DIGIT_FUNCTION, DoublingNumber.class);
+        repository.registerFunction(FunctionIdentifiers.HALVING_DIGIT_FUNCTION, HalvingDigit.class);
 
         repository.registerFunction(FunctionIdentifiers.ADDITION_FUNCTION, AddNumbers.class);
         repository.registerFunction(FunctionIdentifiers.SUBTRACTION_FUNCTION, SubtractNumbers.class);
 
         repository.registerFunction(FunctionIdentifiers.SHIFT_LEFT_FUNCTION, ShiftLeft.class);
         repository.registerFunction(FunctionIdentifiers.SHIFT_RIGHT_FUNCTION, ShiftRight.class);
+        repository.registerFunction(FunctionIdentifiers.TRUNCATE_NUMBER_FUNCTION, TruncateNumber.class);
 
         repository.registerFunction(FunctionIdentifiers.DOUBLING_NUMBER_FUNCTION, DoublingNumber.class);
+        repository.registerFunction(FunctionIdentifiers.HALVING_NUMBER_FUNCTION, HalvingNumber.class);
 
         return repository;
     }

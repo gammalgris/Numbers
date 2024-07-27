@@ -292,7 +292,7 @@ public final class NodesHelper {
     }
 
     /**
-     * Moves the references to the most a common node to the left.
+     * Moves the references to the most common node to the left.
      *
      * @param firstNode
      *        a reference to a node in the first linked list
@@ -318,6 +318,36 @@ public final class NodesHelper {
         }
 
         return new NodesResult(node1, node2);
+    }
+
+    /**
+     * Moves the reference to the last node to the left.
+     *
+     * @param node
+     *        a reference to a node
+     *
+     * @return a reference to a node
+     */
+    public static DigitNode moveLeft(DigitNode node) {
+
+        DigitNode currentNode = node;
+
+        if (currentNode == null) {
+
+            return currentNode;
+        }
+
+        while (true) {
+
+            if (currentNode.leftNode() == null) {
+
+                break;
+            }
+
+            currentNode = currentNode.leftNode();
+        }
+
+        return currentNode;
     }
 
     /**
