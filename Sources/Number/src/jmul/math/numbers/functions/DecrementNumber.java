@@ -31,59 +31,53 @@
  * $Id$
  */
 
-package test.jmul.math.numbers;
+package jmul.math.numbers.functions;
 
 
-import jmul.math.Math;
+import jmul.math.functions.FunctionSingletons;
+import jmul.math.numbers.FunctionIdentifiers;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
-import jmul.math.numbers.exceptions.UndefinedOperationException;
-
-import jmul.test.classification.UnitTest;
-
-import org.junit.Test;
+import jmul.math.operations.BinaryOperation;
+import jmul.math.operations.Result;
+import jmul.math.operations.UnaryOperation;
 
 
 /**
- * This test suite tests
+ * This function implements the decrement function.
+ *
+ * @author Kristian Kutin
  */
-@UnitTest
-public class ShiftWithIllegalArgumentsTest {
+public class DecrementNumber implements UnaryOperation<Number, Result<Number>> {
 
     /**
-     * Tests shifting the decimal point by providing illegal arguments.
+     * The default constructor.
      */
-    @Test(expected = UndefinedOperationException.class)
-    public void shiftOneLeftByFraction() {
+    public DecrementNumber() {
 
-        Number n = new NumberImpl("1");
-        Number shifts = new NumberImpl("1.1");
-
-        n.shiftLeft(shifts);
+        super();
     }
 
     /**
-     * Tests shifting the decimal point by providing illegal arguments.
+     * Decrements the specified operand by one.
+     *
+     * @param operand
+     *        a number
+     *
+     * @return a number
      */
-    @Test(expected = IllegalArgumentException.class)
-    public void shiftNullLeftByOne() {
+    @Override
+    public Result<Number> calculate(Number operand) {
 
-        Number n = null;
-        Number shifts = new NumberImpl("1");
+        ParameterCheckHelper.checkParameter(operand);
 
-        Math.shiftLeft(n, shifts);
-    }
+        final Number ONE = new NumberImpl(operand.base(), "1");
 
-    /**
-     * Tests shifting the decimal point by providing illegal arguments.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void shiftOneLeftByNull() {
+        BinaryOperation<Number, Result<Number>> function =
+            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.SUBTRACTION_FUNCTION);
+        Result<Number> result = function.calculate(operand, ONE);
 
-        Number n = new NumberImpl("1");
-        Number shifts = null;
-
-        n.shiftLeft(shifts);
+        return result;
     }
 
 }

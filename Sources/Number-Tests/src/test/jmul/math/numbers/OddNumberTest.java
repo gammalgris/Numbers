@@ -42,71 +42,109 @@ import static jmul.math.Constants.MIN_BASE;
 import jmul.math.Math;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
-import jmul.math.numbers.Signs;
+import jmul.math.numbers.digits.Digit;
+import jmul.math.numbers.digits.PositionalNumeralSystems;
 
 import jmul.test.classification.UnitTest;
 
+import org.junit.After;
 import static org.junit.Assert.assertEquals;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 
 /**
- * This test suite tests negating a number.
+ * This test suite tests if numbers can be identified as odd.
  *
  * @author Kristian Kutin
  */
 @UnitTest
 @RunWith(Parameterized.class)
-public class NegateNumberTest {
+public class OddNumberTest {
 
     /**
-     * A number.
+     * The base for all operands.
      */
-    private final Number number;
+    private final int base;
 
     /**
-     * The result of the equals comparison.
+     * The operand as number string.
      */
-    private final Number expectedResult;
+    private final String operandString;
 
     /**
-     * Creates a new test case according to the specified parameters.
+     * The first operand parsed from the specified number string.
+     */
+    private Number operand;
+
+    /**
+     * The expected result.
+     */
+    private final boolean expectedResult;
+
+    /**
+     * Creates a new test case according to the specified numbers.
      *
-     * @param number
-     *        a number
+     * @param base
+     *        a number base
+     * @param operandString
+     *        the operand as number string
      * @param expectedResult
      *        the expected result
      */
-    public NegateNumberTest(Number number, Number expectedResult) {
+    public OddNumberTest(int base, String operandString, boolean expectedResult) {
 
         super();
 
-        this.number = number;
+        this.base = base;
+        this.operandString = operandString;
         this.expectedResult = expectedResult;
     }
 
     /**
-     * Tests negating a number and checks the result.
+     * Parses the number strings before the actual test.
      */
-    @Test
-    public void testNegateNumber() {
+    @Before
+    public void setUp() {
 
-        Number actualResult = number.negate();
-
-        assertEquals(expectedResult, actualResult);
+        operand = new NumberImpl(base, operandString);
     }
 
     /**
-     * Tests negating a number and checks the result.
+     * Cleans up after a test.
+     */
+    @After
+    public void tearDown() {
+
+        operand = null;
+    }
+
+    /**
+     * Tests checking if a number is even.
      */
     @Test
-    public void testNegateNumberVariant2() {
+    public void testOdd() {
 
-        Number actualResult = Math.negate(number);
+        boolean actualResult = operand.isOdd();
+        assertEquals(toString(), expectedResult, actualResult);
+    }
 
-        assertEquals(expectedResult, actualResult);
+    /**
+     * Tests checking if a number is even.
+     */
+    @Test
+    public void testOddVariant2() {
+
+        boolean actualResult = Math.isOdd(operand);
+        assertEquals(toString(), expectedResult, actualResult);
+    }
+
+    @Override
+    public String toString() {
+
+        return String.format("base=%d;number=%s", base, operandString);
     }
 
     /**
@@ -121,14 +159,12 @@ public class NegateNumberTest {
 
         for (int base = MIN_BASE; base <= MAX_BASE; base++) {
 
-            parameters.add(new Object[] { new NumberImpl(base), new NumberImpl(base, Signs.NEGATIVE) });
-            parameters.add(new Object[] { new NumberImpl(base, Signs.NEGATIVE), new NumberImpl(base) });
+            for (int ordinal = 0; ordinal < base; ordinal++) {
 
-            parameters.add(new Object[] { new NumberImpl(base, "0"), new NumberImpl(base, "-0") });
-            parameters.add(new Object[] { new NumberImpl(base, "-0"), new NumberImpl(base, "0") });
-
-            parameters.add(new Object[] { new NumberImpl(base, "1"), new NumberImpl(base, "-1") });
-            parameters.add(new Object[] { new NumberImpl(base, "-1"), new NumberImpl(base, "1") });
+                boolean expectedResult = ordinal % 2 != 0;
+                Digit digit = PositionalNumeralSystems.ordinalToDigit(base, ordinal);
+                parameters.add(new Object[] { base, "" + digit, expectedResult });
+            }
         }
 
         return parameters;

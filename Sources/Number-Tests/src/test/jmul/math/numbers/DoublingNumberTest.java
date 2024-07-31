@@ -37,6 +37,8 @@ package test.jmul.math.numbers;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import static jmul.math.Constants.MAX_BASE;
+import static jmul.math.Constants.MIN_BASE;
 import jmul.math.Math;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
@@ -219,7 +221,7 @@ public class DoublingNumberTest {
         parameters.add(new Object[] { 2, "100", "1000" });
         parameters.add(new Object[] { 2, "-100", "-1000" });
 
-        for (int base = 3; base <= 65; base++) {
+        for (int base = MIN_BASE + 1; base <= MAX_BASE; base++) {
 
             parameters.add(new Object[] { base, "0", "0" });
             parameters.add(new Object[] { base, "-0", "0" });

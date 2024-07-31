@@ -58,6 +58,9 @@ public enum FunctionIdentifiers implements FunctionIdentifier {
     SHIFT_LEFT_FUNCTION,
     SHIFT_RIGHT_FUNCTION,
 
+    MAX_FUNCTION,
+    MIN_FUNCTION,
+
     DOUBLING_NUMBER_FUNCTION,
     HALVING_NUMBER_FUNCTION,
     TRUNCATE_NUMBER_FUNCTION,
@@ -77,7 +80,13 @@ public enum FunctionIdentifiers implements FunctionIdentifier {
     DIVISION_FUNCTION,
     MODULO_FUNCTION,
     DIVISO_FUNCTION,
-    
+
+    INCREMENT_FUNCTION,
+    DECREMENT_FUNCTION,
+
+    EVEN_NUMBER_FUNCTION,
+    ODD_NUMBER_FUNCTION,
+
     REBASE_FUNCTION;
 
 

@@ -74,35 +74,6 @@ public class AddNumbers implements BinaryOperation<Number, Result<Number>> {
     }
 
     /**
-     * Checks the specifiecd parameters.
-     *
-     * @param operand1
-     *        an operand
-     * @param operand2
-     *        an operand
-     */
-    private void checkParameters(Number operand1, Number operand2) {
-
-        if (operand1 == null) {
-
-            String message = "The first operand is null!";
-            throw new IllegalArgumentException(message);
-        }
-
-        if (operand2 == null) {
-
-            String message = "The second operand is null!";
-            throw new IllegalArgumentException(message);
-        }
-
-        if (operand1.base() != operand2.base()) {
-
-            String message = "The specified numbers are of different bases!";
-            throw new IllegalArgumentException(message);
-        }
-    }
-
-    /**
      * Adds the specified operands. One or both operands are infinity.
      *
      * @param operand1
@@ -527,7 +498,7 @@ public class AddNumbers implements BinaryOperation<Number, Result<Number>> {
     @Override
     public Result<Number> calculate(Number operand1, Number operand2) {
 
-        checkParameters(operand1, operand2);
+        ParameterCheckHelper.checkParameters(operand1, operand2);
 
         boolean sameSigns = operand1.sign() == operand2.sign();
 

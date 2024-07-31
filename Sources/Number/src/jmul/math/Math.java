@@ -34,6 +34,8 @@
 package jmul.math;
 
 
+import java.util.Comparator;
+
 import jmul.math.functions.FunctionSingletons;
 import jmul.math.numbers.FunctionIdentifiers;
 import jmul.math.numbers.Number;
@@ -288,6 +290,152 @@ public final class Math {
         BinaryOperation<Number, Result<Number>> function =
             (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.SHIFT_RIGHT_FUNCTION);
         Result<Number> result = function.calculate(n, shifts);
+
+        return result.result();
+    }
+
+    /**
+     * Returns the complement of the specified number.
+     *
+     * @param n
+     *        a number
+     *
+     * @return a number
+     */
+    public static Number complement(Number n) {
+
+        UnaryOperation<Number, Result<Number>> function =
+            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_COMPLEMENT_FUNCTION);
+        Result<Number> result = function.calculate(n);
+
+        return result.result();
+    }
+
+    /**
+     * Compares the specified numbers and returns <code>1</code> if this number is greater then the specified
+     * number, <code>0</code> if this number is equal to the specified number and <code>-1</code> if this number
+     * is smaller than the specified number.
+     *
+     * @param n1
+     *        a nuber
+     * @param n2
+     *        a number
+     *
+     * @return <code>1</code> if this number is greater then the specified number, <code>0</code> if this number
+     *         is equal to the specified number and <code>-1</code> if this number is smaller than the specified
+     *         number
+     */
+    public static int compare(Number n1, Number n2) {
+
+        Comparator<Number> function =
+            (Comparator<Number>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_COMPARATOR_FUNCTION);
+        int result = function.compare(n1, n2);
+
+        return result;
+    }
+
+    /**
+     * Compares the specified numbers and returns the bigger number.
+     *
+     * @param n1
+     *        a number
+     * @param n2
+     *        a number
+     *
+     * @return a number
+     */
+    public static Number max(Number n1, Number n2) {
+
+        BinaryOperation<Number, Result<Number>> function =
+            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.MAX_FUNCTION);
+        Result<Number> result = function.calculate(n1, n2);
+
+        return result.result();
+    }
+
+    /**
+     * Compares the specified numbers and returns the lesser number.
+     *
+     * @param n1
+     *        a number
+     * @param n2
+     *        a number
+     *
+     * @return a number
+     */
+    public static Number min(Number n1, Number n2) {
+
+        BinaryOperation<Number, Result<Number>> function =
+            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.MIN_FUNCTION);
+        Result<Number> result = function.calculate(n1, n2);
+
+        return result.result();
+    }
+
+    /**
+     * Increments the specified number by one.
+     *
+     * @param number
+     *        a number
+     *
+     * @return a number
+     */
+    public static Number inc(Number number) {
+
+        UnaryOperation<Number, Result<Number>> function =
+            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.INCREMENT_FUNCTION);
+        Result<Number> result = function.calculate(number);
+
+        return result.result();
+    }
+
+    /**
+     * Decrements the specified number by one.
+     *
+     * @param number
+     *        a number
+     *
+     * @return a number
+     */
+    public static Number dec(Number number) {
+
+        UnaryOperation<Number, Result<Number>> function =
+            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.DECREMENT_FUNCTION);
+        Result<Number> result = function.calculate(number);
+
+        return result.result();
+    }
+
+    /**
+     * Checks if the specified number is an even integer.
+     *
+     * @param number
+     *        a number
+     *
+     * @return <code>true</code> if the specified number is an even integer, else <code>false</code>
+     */
+    public static boolean isEven(Number number) {
+
+        UnaryOperation<Number, Result<Boolean>> function =
+            (UnaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.EVEN_NUMBER_FUNCTION);
+        Result<Boolean> result = function.calculate(number);
+
+        return result.result();
+    }
+
+    /**
+     * Checks if the specified number is an odd integer.
+     *
+     * @param number
+     *        a number
+     *
+     * @return <code>true</code> if the specified number is an odd integer, else <code>false</code>
+     */
+    public static boolean isOdd(Number number) {
+
+        UnaryOperation<Number, Result<Boolean>> function =
+            (UnaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.ODD_NUMBER_FUNCTION);
+        Result<Boolean> result = function.calculate(number);
 
         return result.result();
     }

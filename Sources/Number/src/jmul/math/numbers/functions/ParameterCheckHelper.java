@@ -34,6 +34,7 @@
 package jmul.math.numbers.functions;
 
 
+import jmul.math.numbers.Number;
 import jmul.math.numbers.digits.Digit;
 import jmul.math.numbers.exceptions.DigitBaseMismatchException;
 
@@ -81,6 +82,71 @@ final class ParameterCheckHelper {
         if (d1.base() != d2.base()) {
 
             throw new DigitBaseMismatchException(d1, d2);
+        }
+    }
+
+    /**
+     * Checks the specifiecd parameters.
+     *
+     * @param operand1
+     *        an operand
+     * @param operand2
+     *        an operand
+     */
+    public static void checkParameters(Number operand1, Number operand2) {
+
+        if (operand1 == null) {
+
+            String message = "The first operand is null!";
+            throw new IllegalArgumentException(message);
+        }
+
+        if (operand2 == null) {
+
+            String message = "The second operand is null!";
+            throw new IllegalArgumentException(message);
+        }
+
+        if (operand1.base() != operand2.base()) {
+
+            String message = "The specified numbers are of different bases!";
+            throw new IllegalArgumentException(message);
+        }
+    }
+
+    /**
+     * Checks the specified parameter.
+     *
+     * @param number
+     *        a number
+     */
+    public static void checkParameter(Number number) {
+
+        if (number == null) {
+
+            String message = "No number (null) was specified!";
+            throw new IllegalArgumentException(message);
+        }
+    }
+
+    /**
+     * Checks the specified parameter.
+     *
+     * @param number
+     *        a number
+     */
+    public static void checkInteger(Number number) {
+
+        if (number == null) {
+
+            String message = "No number (null) was specified!";
+            throw new IllegalArgumentException(message);
+        }
+
+        if (!number.isInteger()) {
+
+            String message = "The specified number is not an integer!";
+            throw new IllegalArgumentException(message);
         }
     }
 

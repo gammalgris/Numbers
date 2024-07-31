@@ -35,6 +35,11 @@ package jmul.math.numbers.functions;
 
 
 import jmul.math.numbers.Number;
+import jmul.math.numbers.NumberImpl;
+import jmul.math.numbers.Sign;
+import jmul.math.numbers.Signs;
+import jmul.math.numbers.exceptions.UndefinedOperationException;
+import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.Result;
 
@@ -60,6 +65,81 @@ public class MultiplyNumbers implements BinaryOperation<Number, Result<Number>> 
 
     @Override
     public Result<Number> calculate(Number operand1, Number operand2) {
+
+        ParameterCheckHelper.checkParameters(operand1, operand2);
+
+        int base = operand1.base();
+
+        if (operand1.isInfinity() && operand2.isZero()) {
+
+            throw new UndefinedOperationException("*", operand1, operand2);
+
+        } else if (operand1.isZero() && operand2.isInfinity()) {
+
+            throw new UndefinedOperationException("*", operand1, operand2);
+
+        } else if (operand1.isInfinity() || operand2.isInfinity()) {
+
+            if (operand1.isNegative() || operand2.isNegative()) {
+
+                Number result = new NumberImpl(base, Signs.NEGATIVE);
+                return new Result<Number>(result);
+
+            } else {
+
+                Number result = new NumberImpl(base);
+                return new Result<Number>(result);
+            }
+
+        } else if (operand1.isZero() || operand2.isZero()) {
+
+            Number result = new NumberImpl(base, "0");
+            return new Result<Number>(result);
+        }
+
+        Sign sign;
+        if (operand1.isNegative()) {
+
+            sign = operand1.sign();
+
+        } else if (operand2.isNegative()) {
+
+            sign = operand2.sign();
+
+        } else {
+
+            sign = operand1.sign();
+        }
+
+        Number counter = new NumberImpl(base, "0");
+
+        DigitNode currentNode1 = operand1.centerNode();
+        DigitNode currentNode2 = operand2.centerNode();
+
+        while (true) {
+
+            if ((currentNode1 == null) && (currentNode2 == null)) {
+
+                break;
+            }
+
+            counter = counter.inc();
+
+            if (currentNode1.leftNode() != null) {
+
+                currentNode1 = currentNode1.leftNode();
+            }
+
+            if (currentNode2.leftNode() != null) {
+
+                currentNode2 = currentNode2.leftNode();
+            }
+        }
+
+        Number clone1 = operand1.shiftRight(counter);
+        Number clone2 = operand2.shiftRight(counter);
+
+
         // TODO Implement this method
         return null;
     }

@@ -56,9 +56,9 @@ public class NumberParsingException extends RuntimeException {
      * @param parsingExceptions
      *        all exceptions from different parsing algorithms
      */
-    public NumberParsingException(CharSequence numberString, List<Throwable> parsingExceptions) {
+    public NumberParsingException(int base, CharSequence numberString, List<Throwable> parsingExceptions) {
 
-        super(createMessage(numberString), new JoinedParsingExceptions(parsingExceptions));
+        super(createMessage(base, numberString), new JoinedParsingExceptions(parsingExceptions));
     }
 
     /**
@@ -69,9 +69,9 @@ public class NumberParsingException extends RuntimeException {
      *
      * @return an error message
      */
-    private static String createMessage(CharSequence numberString) {
+    private static String createMessage(int base, CharSequence numberString) {
 
-        return String.format("The specified number string (\"%s\") could not be parsed!", numberString);
+        return String.format("The specified number string (\"%s\"; base=%d) could not be parsed!", numberString, base);
     }
 
 }

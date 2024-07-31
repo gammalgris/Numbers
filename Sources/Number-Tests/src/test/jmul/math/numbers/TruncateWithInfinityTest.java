@@ -37,6 +37,8 @@ package test.jmul.math.numbers;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import static jmul.math.Constants.MAX_BASE;
+import static jmul.math.Constants.MIN_BASE;
 import jmul.math.Math;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
@@ -156,7 +158,7 @@ public class TruncateWithInfinityTest {
 
         Collection<Object[]> parameters = new ArrayList<Object[]>();
 
-        for (int base = 2; base < 65; base++) {
+        for (int base = MIN_BASE; base < MAX_BASE; base++) {
 
             parameters.add(new Object[] { createInfinity(base), createInfinity(base) });
             parameters.add(new Object[] { createNegativeInfinity(base), createNegativeInfinity(base) });

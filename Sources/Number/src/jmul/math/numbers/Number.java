@@ -149,6 +149,20 @@ public interface Number extends LinkedDigitList, ArithmeticOperations, Comparabl
     boolean isInteger();
 
     /**
+     * Checks if this number is an even integer.
+     *
+     * @return <code>true</code> if this number is an even integer, else <code>false</code>
+     */
+    boolean isEven();
+
+    /**
+     * Checks if this number is an odd integer.
+     *
+     * @return <code>true</code> if this number is an odd integer, else <code>false</code>
+     */
+    boolean isOdd();
+
+    /**
      * Checks if this number is a natural number, including zero.
      *
      * @return <code>true</code> if this number is a natural number, including zero, else <code>false</code>

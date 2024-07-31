@@ -33,9 +33,12 @@
 
 package test.jmul.math.numbers;
 
+
 import java.util.ArrayList;
 import java.util.Collection;
 
+import static jmul.math.Constants.MAX_BASE;
+import static jmul.math.Constants.MIN_BASE;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
 import jmul.math.numbers.Signs;
@@ -225,7 +228,7 @@ public class SubtractionWithInfinityTest {
 
         Collection<Object[]> parameters = new ArrayList<Object[]>();
 
-        for (int base = 2; base < 65; base++) {
+        for (int base = MIN_BASE; base < MAX_BASE; base++) {
 
             parameters.add(new Object[] { createNumber(base, "1"), createInfinity(base), createNegativeInfinity(base),
                                           NO_EXCEPTION });

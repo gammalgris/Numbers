@@ -37,6 +37,8 @@ package test.jmul.math.numbers;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import static jmul.math.Constants.MAX_BASE;
+import static jmul.math.Constants.MIN_BASE;
 import jmul.math.Math;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
@@ -210,7 +212,7 @@ public class TruncateNumberTest {
 
         Collection<Object[]> parameters = new ArrayList<Object[]>();
 
-        for (int base = 2; base <= 65; base++) {
+        for (int base = MIN_BASE; base <= MAX_BASE; base++) {
 
             parameters.add(new Object[] { base, "0", "0" });
             parameters.add(new Object[] { base, "-0", "-0" });
@@ -228,7 +230,7 @@ public class TruncateNumberTest {
             parameters.add(new Object[] { base, "-1.1010101", "-1" });
         }
 
-        for (int base = 3; base <= 65; base++) {
+        for (int base = MIN_BASE + 1; base <= MAX_BASE; base++) {
 
             parameters.add(new Object[] { base, "2", "2" });
             parameters.add(new Object[] { base, "-2", "-2" });

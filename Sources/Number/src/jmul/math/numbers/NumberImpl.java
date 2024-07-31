@@ -254,7 +254,7 @@ public class NumberImpl implements Number {
             }
         }
 
-        throw new NumberParsingException(s, exceptions);
+        throw new NumberParsingException(base, s, exceptions);
     }
 
     /**
@@ -834,8 +834,11 @@ public class NumberImpl implements Number {
     @Override
     public Number max(Number n) {
 
-        // TODO
-        throw new UnsupportedOperationException();
+        BinaryOperation<Number, Result<Number>> function =
+            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.MAX_FUNCTION);
+        Result<Number> result = function.calculate(this, n);
+
+        return result.result();
     }
 
     /**
@@ -843,13 +846,16 @@ public class NumberImpl implements Number {
      *
      * @param n
      *
-     * @return
+     * @return a number
      */
     @Override
     public Number min(Number n) {
 
-        // TODO
-        throw new UnsupportedOperationException();
+        BinaryOperation<Number, Result<Number>> function =
+            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.MIN_FUNCTION);
+        Result<Number> result = function.calculate(this, n);
+
+        return result.result();
     }
 
     /**
@@ -987,6 +993,66 @@ public class NumberImpl implements Number {
 
         //TODO
         throw new UnsupportedOperationException();
+    }
+
+    /**
+     * Increments this number by one.
+     *
+     * @return a number
+     */
+    @Override
+    public Number inc() {
+
+        UnaryOperation<Number, Result<Number>> function =
+            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.INCREMENT_FUNCTION);
+        Result<Number> result = function.calculate(this);
+
+        return result.result();
+    }
+
+    /**
+     * Decrements this number by one.
+     *
+     * @return a number
+     */
+    @Override
+    public Number dec() {
+
+        UnaryOperation<Number, Result<Number>> function =
+            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.DECREMENT_FUNCTION);
+        Result<Number> result = function.calculate(this);
+
+        return result.result();
+    }
+
+    /**
+     * Checks if this number is an even integer.
+     *
+     * @return <code>true</code> if this number is an even integer, else <code>false</code>
+     */
+    @Override
+    public boolean isEven() {
+
+        UnaryOperation<Number, Result<Boolean>> function =
+            (UnaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.EVEN_NUMBER_FUNCTION);
+        Result<Boolean> result = function.calculate(this);
+
+        return result.result();
+    }
+
+    /**
+     * Checks if this number is an odd integer.
+     *
+     * @return <code>true</code> if this number is an odd integer, else <code>false</code>
+     */
+    @Override
+    public boolean isOdd() {
+
+        UnaryOperation<Number, Result<Boolean>> function =
+            (UnaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.ODD_NUMBER_FUNCTION);
+        Result<Boolean> result = function.calculate(this);
+
+        return result.result();
     }
 
 }

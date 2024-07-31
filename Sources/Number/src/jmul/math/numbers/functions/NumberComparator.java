@@ -79,12 +79,12 @@ public class NumberComparator extends ComparatorBase implements Function, Compar
         // Check the references
         if (n1 == null) {
 
-            throw new NullPointerException();
+            throw new IllegalArgumentException("No number (null) was specified!");
         }
 
         if (n2 == null) {
 
-            throw new NullPointerException();
+            throw new IllegalArgumentException("No number (null) was specified!");
         }
 
         if (n1 == n2) {

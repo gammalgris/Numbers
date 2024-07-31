@@ -65,21 +65,6 @@ public class HalvingNumber implements UnaryOperation<Number, Result<Number>> {
     }
 
     /**
-     * Checks the specified parameter.
-     *
-     * @param number
-     *        a number
-     */
-    private static void checkParameter(Number number) {
-
-        if (number == null) {
-
-            String message = "No number (null) was specified!";
-            throw new IllegalArgumentException(message);
-        }
-    }
-
-    /**
      * Returns a number which is half the specified number.
      *
      * @param number
@@ -90,7 +75,7 @@ public class HalvingNumber implements UnaryOperation<Number, Result<Number>> {
     @Override
     public Result<Number> calculate(Number number) {
 
-        checkParameter(number);
+        ParameterCheckHelper.checkParameter(number);
 
         if (number.isZero()) {
 

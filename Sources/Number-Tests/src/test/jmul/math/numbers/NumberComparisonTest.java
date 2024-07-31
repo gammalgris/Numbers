@@ -37,6 +37,7 @@ package test.jmul.math.numbers;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import jmul.math.Math;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
 import static jmul.math.numbers.Signs.NEGATIVE;
@@ -132,6 +133,25 @@ public class NumberComparisonTest {
     }
 
     /**
+     * Compares the specified numbers and ciompares the result with th expected result.
+     *
+     * @param n1
+     *        a number
+     * @param n2
+     *        a number
+     * @param result
+     *        the expectedresult
+     */
+    private static void testComparisonVariant2(Number n1, Number n2, int result) {
+
+        String message =
+            String.format("The equality test failed for the numbers \"%s\" and \"%s\")!", n1.toString(), n2.toString());
+
+        int actualResult = Math.compare(n1, n2);
+        assertEquals(message, result, actualResult);
+    }
+
+    /**
      * Tests the comparison of two numbers (i.e. the numbers are compared as specified and
      * additionally in an the inverted order).
      */
@@ -140,6 +160,17 @@ public class NumberComparisonTest {
 
         testComparison(number1, number2, expectedResult);
         testComparison(number2, number1, inverse(expectedResult));
+    }
+
+    /**
+     * Tests the comparison of two numbers (i.e. the numbers are compared as specified and
+     * additionally in an the inverted order).
+     */
+    @Test
+    public void testComparisonVariant2() {
+
+        testComparisonVariant2(number1, number2, expectedResult);
+        testComparisonVariant2(number2, number1, inverse(expectedResult));
     }
 
     /**

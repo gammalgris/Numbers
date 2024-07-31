@@ -91,6 +91,20 @@ public interface ArithmeticOperations {
      */
     Number doubling();
 
+    /**
+     * Increments this number by one.
+     *
+     * @return a number
+     */
+    Number inc();
+
+    /**
+     * Decrements this number by one.
+     *
+     * @return a number
+     */
+    Number dec();
+
     /*
      * Binary arithmetic operations.
      */
@@ -160,7 +174,7 @@ public interface ArithmeticOperations {
      *
      * @param n
      *
-     * @return
+     * @return a number
      */
     Number min(Number n);
 

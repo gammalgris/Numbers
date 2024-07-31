@@ -37,6 +37,8 @@ package test.jmul.math.numbers;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import static jmul.math.Constants.MAX_BASE;
+import static jmul.math.Constants.MIN_BASE;
 import jmul.math.Math;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
@@ -225,7 +227,7 @@ public class ShiftRightXTest {
 
         Collection<Object[]> parameters = new ArrayList<Object[]>();
 
-        for (int base = 2; base <= 65; base++) {
+        for (int base = MIN_BASE; base <= MAX_BASE; base++) {
 
             parameters.add(new Object[] { base, "0", "1", "0" });
             parameters.add(new Object[] { base, "-0", "1", "-0" });
@@ -249,7 +251,7 @@ public class ShiftRightXTest {
             parameters.add(new Object[] { base, "-1.1010101", "1", "-11.010101" });
         }
 
-        for (int base = 3; base <= 65; base++) {
+        for (int base = MIN_BASE + 1; base <= MAX_BASE; base++) {
 
             parameters.add(new Object[] { base, "0", "2", "0" });
             parameters.add(new Object[] { base, "-0", "2", "-0" });
@@ -267,7 +269,7 @@ public class ShiftRightXTest {
             parameters.add(new Object[] { base, "-2.1212", "2", "-212.12" });
         }
 
-        for (int base = 4; base <= 65; base++) {
+        for (int base = MIN_BASE + 2; base <= MAX_BASE; base++) {
 
             parameters.add(new Object[] { base, "0", "3", "0" });
             parameters.add(new Object[] { base, "-0", "3", "-0" });

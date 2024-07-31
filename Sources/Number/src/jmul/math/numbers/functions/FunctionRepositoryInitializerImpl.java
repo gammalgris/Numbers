@@ -98,6 +98,15 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
         repository.registerFunction(FunctionIdentifiers.DOUBLING_NUMBER_FUNCTION, DoublingNumber.class);
         repository.registerFunction(FunctionIdentifiers.HALVING_NUMBER_FUNCTION, HalvingNumber.class);
 
+        repository.registerFunction(FunctionIdentifiers.MAX_FUNCTION, MaxFunction.class);
+        repository.registerFunction(FunctionIdentifiers.MIN_FUNCTION, MinFunction.class);
+
+        repository.registerFunction(FunctionIdentifiers.INCREMENT_FUNCTION, IncrementNumber.class);
+        repository.registerFunction(FunctionIdentifiers.DECREMENT_FUNCTION, DecrementNumber.class);
+
+        repository.registerFunction(FunctionIdentifiers.EVEN_NUMBER_FUNCTION, EvenNumberFunction.class);
+        repository.registerFunction(FunctionIdentifiers.ODD_NUMBER_FUNCTION, OddNumberFunction.class);
+
         return repository;
     }
 
