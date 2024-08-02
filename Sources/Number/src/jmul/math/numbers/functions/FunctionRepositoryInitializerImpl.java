@@ -107,6 +107,13 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
         repository.registerFunction(FunctionIdentifiers.EVEN_NUMBER_FUNCTION, EvenNumberFunction.class);
         repository.registerFunction(FunctionIdentifiers.ODD_NUMBER_FUNCTION, OddNumberFunction.class);
 
+        repository.registerFunction(FunctionIdentifiers.GREATER_COMPARISON, GreaterComparison.class);
+        repository.registerFunction(FunctionIdentifiers.GREATER_OR_EQUAL_COMPARISON, GreaterOrEqualComparison.class);
+        repository.registerFunction(FunctionIdentifiers.LESSER_COMPARISON, LesserComparison.class);
+        repository.registerFunction(FunctionIdentifiers.LESSER_OR_EQUAL_COMPARISON, LesserOrEqualComparison.class);
+
+        repository.registerFunction(FunctionIdentifiers.MULTIPLICATION_FUNCTION, MultiplyNumbers.class);
+
         return repository;
     }
 

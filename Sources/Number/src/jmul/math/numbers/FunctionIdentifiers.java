@@ -87,6 +87,11 @@ public enum FunctionIdentifiers implements FunctionIdentifier {
     EVEN_NUMBER_FUNCTION,
     ODD_NUMBER_FUNCTION,
 
+    GREATER_COMPARISON,
+    GREATER_OR_EQUAL_COMPARISON,
+    LESSER_COMPARISON,
+    LESSER_OR_EQUAL_COMPARISON,
+
     REBASE_FUNCTION;
 
 

@@ -53,7 +53,7 @@ import jmul.math.numbers.nodes.LinkedDigitList;
  *
  * @author Kristian Kutin
  */
-public interface Number extends LinkedDigitList, ArithmeticOperations, Comparable<Number> {
+public interface Number extends LinkedDigitList, ArithmeticOperations, NumberComparisons, Comparable<Number> {
 
     /**
      * Returns the sign of this number.

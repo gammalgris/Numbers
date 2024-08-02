@@ -93,9 +93,9 @@ public class ShiftLeft implements BinaryOperation<Number, Result<Number>> {
 
                 Number shiftedClone = new NumberImpl(base, "0");
                 return new Result<Number>(shiftedClone);
-                
+
             } else {
-                
+
                 Number shiftedClone = new NumberImpl(base, number.sign());
                 return new Result<Number>(shiftedClone);
             }
@@ -140,6 +140,7 @@ public class ShiftLeft implements BinaryOperation<Number, Result<Number>> {
         }
 
         Number shiftedCopy = new NumberImpl(base, number.sign(), center);
+        NodesHelper.trimLeft(shiftedCopy.centerNode());
 
         return new Result<Number>(shiftedCopy);
     }

@@ -235,6 +235,8 @@ public class ShiftRightTest {
             parameters.add(new Object[] { base, "2", "20" });
             parameters.add(new Object[] { base, "-2", "-20" });
 
+            parameters.add(new Object[] { base, "0.2", "2" });
+
             parameters.add(new Object[] { base, "2.1212", "21.212" });
             parameters.add(new Object[] { base, "-2.1212", "-21.212" });
         }

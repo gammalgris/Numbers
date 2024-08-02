@@ -440,4 +440,23 @@ public final class Math {
         return result.result();
     }
 
+    /**
+     * Multiplies the specified numbers.
+     *
+     * @param n1
+     *        a number
+     * @param n2
+     *        a number
+     *
+     * @return a number
+     */
+    public static Number multiply(Number n1, Number n2) {
+
+        BinaryOperation<Number, Result<Number>> function =
+            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.MULTIPLICATION_FUNCTION);
+        Result<Number> result = function.calculate(n1, n2);
+
+        return result.result();
+    }
+
 }

@@ -789,8 +789,11 @@ public class NumberImpl implements Number {
     @Override
     public Number multiply(Number n) {
 
-        // TODO
-        throw new UnsupportedOperationException();
+        BinaryOperation<Number, Result<Number>> function =
+            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.MULTIPLICATION_FUNCTION);
+        Result<Number> result = function.calculate(this, n);
+
+        return result.result();
     }
 
     /**
@@ -991,7 +994,7 @@ public class NumberImpl implements Number {
     @Override
     public Number rebase(int base) {
 
-        //TODO
+        //TODO 2 cases : (1) rebase to smaller base and (2) rebase to greater base
         throw new UnsupportedOperationException();
     }
 
@@ -1051,6 +1054,78 @@ public class NumberImpl implements Number {
         UnaryOperation<Number, Result<Boolean>> function =
             (UnaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.ODD_NUMBER_FUNCTION);
         Result<Boolean> result = function.calculate(this);
+
+        return result.result();
+    }
+
+    /**
+     * Checks if this number is greater than the specified number.
+     *
+     * @param number
+     *        a number
+     *
+     * @return <code>true</code> if this number is greater than the specified number, else <code>false</code>
+     */
+    @Override
+    public boolean isGreater(Number number) {
+
+        BinaryOperation<Number, Result<Boolean>> function =
+            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.GREATER_COMPARISON);
+        Result<Boolean> result = function.calculate(this, number);
+
+        return result.result();
+    }
+
+    /**
+     * Checks if this number is greater than or equal to the specified number.
+     *
+     * @param number
+     *        a number
+     *
+     * @return <code>true</code> if this number is greater than or equal to the specified number, else <code>false</code>
+     */
+    @Override
+    public boolean isGreaterOrEqual(Number number) {
+
+        BinaryOperation<Number, Result<Boolean>> function =
+            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.GREATER_OR_EQUAL_COMPARISON);
+        Result<Boolean> result = function.calculate(this, number);
+
+        return result.result();
+    }
+
+    /**
+     * Checks if this number is lesser than the specified number.
+     *
+     * @param number
+     *        a number
+     *
+     * @return <code>true</code> if this number is lesser than the specified number, else <code>false</code>
+     */
+    @Override
+    public boolean isLesser(Number number) {
+
+        BinaryOperation<Number, Result<Boolean>> function =
+            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.LESSER_COMPARISON);
+        Result<Boolean> result = function.calculate(this, number);
+
+        return result.result();
+    }
+
+    /**
+     * Checks if this number is lesser than or equal to the specified number.
+     *
+     * @param number
+     *        a number
+     *
+     * @return <code>true</code> if this number is lesser than or equal to the specified number, else <code>false</code>
+     */
+    @Override
+    public boolean isLesserOrEqual(Number number) {
+
+        BinaryOperation<Number, Result<Boolean>> function =
+            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.LESSER_OR_EQUAL_COMPARISON);
+        Result<Boolean> result = function.calculate(this, number);
 
         return result.result();
     }

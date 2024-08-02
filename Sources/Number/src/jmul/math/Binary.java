@@ -41,7 +41,7 @@ public final class Binary {
      */
     private Binary() {
 
-        super();
+        throw new UnsupportedOperationException();
     }
 
     public static Number and(Number number1, Number number2) {
@@ -57,6 +57,30 @@ public final class Binary {
     }
 
     public static Number xor(Number number1, Number number2) {
+
+        //TODO
+        throw new UnsupportedOperationException();
+    }
+
+    public static Number shiftBitPatternLeft(Number number) {
+
+        //TODO
+        throw new UnsupportedOperationException();
+    }
+
+    public static Number shiftBitPatternLeft(Number number, Number shifts) {
+
+        //TODO
+        throw new UnsupportedOperationException();
+    }
+
+    public static Number shiftBitPatternRight(Number number) {
+
+        //TODO
+        throw new UnsupportedOperationException();
+    }
+
+    public static Number shiftBitPatternRight(Number number, Number shifts) {
 
         //TODO
         throw new UnsupportedOperationException();

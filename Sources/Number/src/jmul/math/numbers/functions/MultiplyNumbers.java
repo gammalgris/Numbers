@@ -34,12 +34,16 @@
 package jmul.math.numbers.functions;
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
 import jmul.math.numbers.Sign;
 import jmul.math.numbers.Signs;
 import jmul.math.numbers.exceptions.UndefinedOperationException;
 import jmul.math.numbers.nodes.DigitNode;
+import jmul.math.numbers.nodes.NodesHelper;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.Result;
 
@@ -58,11 +62,24 @@ import jmul.math.operations.Result;
  */
 public class MultiplyNumbers implements BinaryOperation<Number, Result<Number>> {
 
+    /**
+     * The default constructor.
+     */
     public MultiplyNumbers() {
 
         super();
     }
 
+    /**
+     * Multiplies the specified numbers and returns the product.
+     *
+     * @param operand1
+     *        a number
+     * @param operand2
+     *        a number
+     *
+     * @return a number
+     */
     @Override
     public Result<Number> calculate(Number operand1, Number operand2) {
 
@@ -70,6 +87,7 @@ public class MultiplyNumbers implements BinaryOperation<Number, Result<Number>> 
 
         int base = operand1.base();
 
+        // Handle special cases which can be resolved without computation.
         if (operand1.isInfinity() && operand2.isZero()) {
 
             throw new UndefinedOperationException("*", operand1, operand2);
@@ -97,6 +115,7 @@ public class MultiplyNumbers implements BinaryOperation<Number, Result<Number>> 
             return new Result<Number>(result);
         }
 
+        // Determine the sign of the result.
         Sign sign;
         if (operand1.isNegative()) {
 
@@ -111,7 +130,13 @@ public class MultiplyNumbers implements BinaryOperation<Number, Result<Number>> 
             sign = operand1.sign();
         }
 
-        Number counter = new NumberImpl(base, "0");
+        // Remove the sign on both operands.
+        Number clone1 = operand1.absoluteValue();
+        Number clone2 = operand2.absoluteValue();
+
+        // Determine how many shifts are requiremed to transform both operands into
+        // integers.
+        Number shifts = new NumberImpl(base, "-1");
 
         DigitNode currentNode1 = operand1.centerNode();
         DigitNode currentNode2 = operand2.centerNode();
@@ -123,25 +148,71 @@ public class MultiplyNumbers implements BinaryOperation<Number, Result<Number>> 
                 break;
             }
 
-            counter = counter.inc();
+            if (currentNode1 != null) {
 
-            if (currentNode1.leftNode() != null) {
-
-                currentNode1 = currentNode1.leftNode();
+                currentNode1 = currentNode1.rightNode();
             }
 
-            if (currentNode2.leftNode() != null) {
+            if (currentNode2 != null) {
 
-                currentNode2 = currentNode2.leftNode();
+                currentNode2 = currentNode2.rightNode();
             }
+
+            shifts = shifts.inc();
         }
 
-        Number clone1 = operand1.shiftRight(counter);
-        Number clone2 = operand2.shiftRight(counter);
+        // Transform the operands into integers.
+        clone1 = operand1.shiftRight(shifts);
+        clone2 = operand2.shiftRight(shifts);
 
+        // Multiply the operands, i.e. write the second operand to the left and the first operand to the right.
+        // Keep halving the number on the left and doubling the number on the right until the number on the
+        // left is down to one. Add all numbers on the right where the corresponding number on the left is odd.
+        // The result is the product of the multiplication.
+        final Number ONE = new NumberImpl(base, "1");
+        Map<Number, Number> remainderSummandMap = new HashMap<>();
 
-        // TODO Implement this method
-        return null;
+        while (true) {
+
+            if (clone2.isOdd()) {
+
+                remainderSummandMap.put(clone2, clone1);
+            }
+
+            if (clone2.equals(ONE)) {
+
+                break;
+            }
+
+            clone2 = clone2.halving();
+            clone2 = clone2.truncate();
+            clone1 = clone1.doubling();
+        }
+
+        Number sum = new NumberImpl(base, "0");
+
+        for (Map.Entry<Number, Number> entry : remainderSummandMap.entrySet()) {
+
+            Number value = entry.getValue();
+            sum = sum.add(value);
+        }
+
+        // Reverse the shifts done before. The number of reverse shifts has to be doubled to get the
+        // right result.
+        shifts = shifts.doubling();
+        Number result = sum.shiftLeft(shifts);
+
+        // Apply the sign to the result.
+        if (Signs.isNegative(sign)) {
+
+            result = result.negate();
+        }
+
+        // Trim leading and trailing zeroes.
+        NodesHelper.trimLeft(result.centerNode());
+        NodesHelper.trimRight(result.centerNode());
+
+        return new Result<Number>(result);
     }
 
 }
