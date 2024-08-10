@@ -459,4 +459,80 @@ public final class Math {
         return result.result();
     }
 
+    /**
+     * Checks if this number is greater than the specified number.
+     *
+     * @param number1
+     *        a number
+     * @param number2
+     *        a number
+     *
+     * @return <code>true</code> if this number is greater than the specified number, else <code>false</code>
+     */
+    public static boolean isGreater(Number number1, Number number2) {
+
+        BinaryOperation<Number, Result<Boolean>> function =
+            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.GREATER_COMPARISON);
+        Result<Boolean> result = function.calculate(number1, number2);
+
+        return result.result();
+    }
+
+    /**
+     * Checks if this number is greater than or equal to the specified number.
+     *
+     * @param number1
+     *        a number
+     * @param number2
+     *        a number
+     *
+     * @return <code>true</code> if this number is greater than or equal to the specified number, else <code>false</code>
+     */
+    public static boolean isGreaterOrEqual(Number number1, Number number2) {
+
+        BinaryOperation<Number, Result<Boolean>> function =
+            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.GREATER_OR_EQUAL_COMPARISON);
+        Result<Boolean> result = function.calculate(number1, number2);
+
+        return result.result();
+    }
+
+    /**
+     * Checks if this number is lesser than the specified number.
+     *
+     * @param number1
+     *        a number
+     * @param number2
+     *        a number
+     *
+     * @return <code>true</code> if this number is lesser than the specified number, else <code>false</code>
+     */
+    public static boolean isLesser(Number number1, Number number2) {
+
+        BinaryOperation<Number, Result<Boolean>> function =
+            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.LESSER_COMPARISON);
+        Result<Boolean> result = function.calculate(number1, number2);
+
+        return result.result();
+    }
+
+    /**
+     * Checks if this number is lesser than or equal to the specified number.
+     *
+     * @param number1
+     *        a number
+     * @param number2
+     *        a number
+     *
+     * @return <code>true</code> if this number is lesser than or equal to the specified number, else <code>false</code>
+     */
+    public static boolean isLesserOrEqual(Number number1, Number number2) {
+
+        BinaryOperation<Number, Result<Boolean>> function =
+            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.LESSER_OR_EQUAL_COMPARISON);
+        Result<Boolean> result = function.calculate(number1, number2);
+
+        return result.result();
+    }
+
 }

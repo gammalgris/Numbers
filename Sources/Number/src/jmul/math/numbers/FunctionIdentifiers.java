@@ -35,6 +35,12 @@ package jmul.math.numbers;
 
 
 import jmul.math.functions.FunctionIdentifier;
+import jmul.math.operations.OperationClassifier;
+import static jmul.math.operations.OperationClassifiers.ADDITION;
+import static jmul.math.operations.OperationClassifiers.DIVISION;
+import static jmul.math.operations.OperationClassifiers.MULTIPLICATION;
+import static jmul.math.operations.OperationClassifiers.NONE;
+import static jmul.math.operations.OperationClassifiers.SUBTRACTION;
 
 
 /**
@@ -45,60 +51,80 @@ import jmul.math.functions.FunctionIdentifier;
 public enum FunctionIdentifiers implements FunctionIdentifier {
 
 
-    STANDARD_NOTATION_FUNCTION,
-    SCIENTIFIC_NOTATION_FUNCTION,
+    STANDARD_NOTATION_FUNCTION(NONE),
+    SCIENTIFIC_NOTATION_FUNCTION(NONE),
 
-    STANDARD_NOTATION_PARSER,
-    SCIENTIFIC_NOTATION_PARSER,
+    STANDARD_NOTATION_PARSER(NONE),
+    SCIENTIFIC_NOTATION_PARSER(NONE),
 
-    ADD_DIGITS_FUNCTION,
-    DIGIT_COMPLEMENT_FUNCTION,
-    HALVING_DIGIT_FUNCTION,
+    ADD_DIGITS_FUNCTION(NONE),
+    DIGIT_COMPLEMENT_FUNCTION(NONE),
+    HALVING_DIGIT_FUNCTION(NONE),
 
-    SHIFT_LEFT_FUNCTION,
-    SHIFT_RIGHT_FUNCTION,
+    SHIFT_LEFT_FUNCTION(NONE),
+    SHIFT_RIGHT_FUNCTION(NONE),
 
-    MAX_FUNCTION,
-    MIN_FUNCTION,
+    MAX_FUNCTION(NONE),
+    MIN_FUNCTION(NONE),
 
-    DOUBLING_NUMBER_FUNCTION,
-    HALVING_NUMBER_FUNCTION,
-    TRUNCATE_NUMBER_FUNCTION,
+    DOUBLING_NUMBER_FUNCTION(NONE),
+    HALVING_NUMBER_FUNCTION(NONE),
+    TRUNCATE_NUMBER_FUNCTION(NONE),
 
-    DIGIT_EQUALITY_FUNCTION,
-    DIGIT_COMPARATOR_FUNCTION,
+    DIGIT_EQUALITY_FUNCTION(NONE),
+    DIGIT_COMPARATOR_FUNCTION(NONE),
 
-    NEGATE_NUMBER_FUNCTION,
-    NUMBER_COMPLEMENT_FUNCTION,
+    NEGATE_NUMBER_FUNCTION(NONE),
+    NUMBER_COMPLEMENT_FUNCTION(NONE),
 
-    NUMBER_COMPARATOR_FUNCTION,
-    NUMBER_EQUALITY_FUNCTION,
+    NUMBER_COMPARATOR_FUNCTION(NONE),
+    NUMBER_EQUALITY_FUNCTION(NONE),
 
-    ADDITION_FUNCTION,
-    SUBTRACTION_FUNCTION,
-    MULTIPLICATION_FUNCTION,
-    DIVISION_FUNCTION,
-    MODULO_FUNCTION,
-    DIVISO_FUNCTION,
+    ADDITION_FUNCTION(ADDITION),
+    SUBTRACTION_FUNCTION(SUBTRACTION),
+    MULTIPLICATION_FUNCTION(MULTIPLICATION),
+    DIVISION_FUNCTION(DIVISION),
+    MODULO_FUNCTION(NONE),
+    DIVISO_FUNCTION(NONE),
 
-    INCREMENT_FUNCTION,
-    DECREMENT_FUNCTION,
+    INCREMENT_FUNCTION(NONE),
+    DECREMENT_FUNCTION(NONE),
 
-    EVEN_NUMBER_FUNCTION,
-    ODD_NUMBER_FUNCTION,
+    EVEN_NUMBER_FUNCTION(NONE),
+    ODD_NUMBER_FUNCTION(NONE),
 
-    GREATER_COMPARISON,
-    GREATER_OR_EQUAL_COMPARISON,
-    LESSER_COMPARISON,
-    LESSER_OR_EQUAL_COMPARISON,
+    GREATER_COMPARISON(NONE),
+    GREATER_OR_EQUAL_COMPARISON(NONE),
+    LESSER_COMPARISON(NONE),
+    LESSER_OR_EQUAL_COMPARISON(NONE),
 
-    REBASE_FUNCTION;
+    REBASE_FUNCTION(NONE);
 
 
     /**
-     * The default constructor.
+     * An operation classifier which is associated with a function identifier.
      */
-    private FunctionIdentifiers() {
+    private final OperationClassifier operationClassifier;
+
+    /**
+     * The default constructor.
+     *
+     * @param operationClassifier
+     */
+    private FunctionIdentifiers(OperationClassifier operationClassifier) {
+
+        this.operationClassifier = operationClassifier;
+    }
+
+    /**
+     * Returns the operation classifier associated with this function identifier.
+     *
+     * @return an operation classifier
+     */
+    @Override
+    public OperationClassifier operationClassifier() {
+
+        return operationClassifier;
     }
 
     /**

@@ -7,7 +7,7 @@
  * JMUL is a central repository for utilities which are used in my
  * other public and private repositories.
  *
- * Copyright (C) 2022  Kristian Kutin
+ * Copyright (C) 2024  Kristian Kutin
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,24 +31,36 @@
  * $Id$
  */
 
-package jmul.math.functions;
+package jmul.math.operations;
 
 
-import jmul.math.operations.OperationClassifier;
+import jmul.math.functions.Function;
 
 
 /**
- * This itnerface describes a function identifier.
+ * This interface describes a ternary operation (i.e. an operation that takes three arguments).
  *
  * @author Kristian Kutin
+ *
+ * @param <T>
+ *        the operand type
+ * @param <S>
+ *        the return type
  */
-public interface FunctionIdentifier extends CharSequence {
+public interface TernaryOperation<T, S extends Result> extends Function {
 
     /**
-     * Returns the operation classifier associated with this function identifier.
+     * Performs the ternary (i.e. three operands) operation.
      *
-     * @return an operation classifier
+     * @param operand1
+     *        an operand
+     * @param operand2
+     *        an operand
+     * @param operand3
+     *        an operand
+     *
+     * @return the result
      */
-    OperationClassifier operationClassifier();
+    S calculate(T operand1, T operand2, T operand3);
 
 }

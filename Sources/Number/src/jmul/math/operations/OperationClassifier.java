@@ -7,7 +7,7 @@
  * JMUL is a central repository for utilities which are used in my
  * other public and private repositories.
  *
- * Copyright (C) 2022  Kristian Kutin
+ * Copyright (C) 2024  Kristian Kutin
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,24 +31,14 @@
  * $Id$
  */
 
-package jmul.math.functions;
-
-
-import jmul.math.operations.OperationClassifier;
+package jmul.math.operations;
 
 
 /**
- * This itnerface describes a function identifier.
+ * This interface represents a mathematical operation.
  *
  * @author Kristian Kutin
  */
-public interface FunctionIdentifier extends CharSequence {
-
-    /**
-     * Returns the operation classifier associated with this function identifier.
-     *
-     * @return an operation classifier
-     */
-    OperationClassifier operationClassifier();
+public interface OperationClassifier {
 
 }
