@@ -76,7 +76,14 @@ public final class NumberHelper {
 
         while (node != null) {
 
+            int previousCount = count;
             count++;
+
+            if (count < previousCount) {
+
+                throw new ArithmeticOverflowException();
+            }
+
             node = node.leftNode();
         }
 
@@ -107,11 +114,36 @@ public final class NumberHelper {
 
         while (node != null) {
 
+            int previousCount = count;
             count++;
+
+            if (count < previousCount) {
+
+                throw new ArithmeticOverflowException();
+            }
+
             node = node.rightNode();
         }
 
         return count;
+    }
+
+}
+
+
+/**
+ * A custom exception class.
+ *
+ * @author Kristian Kutin
+ */
+class ArithmeticOverflowException extends RuntimeException {
+
+    /**
+     * The default constructor.
+     */
+    public ArithmeticOverflowException() {
+
+        super();
     }
 
 }

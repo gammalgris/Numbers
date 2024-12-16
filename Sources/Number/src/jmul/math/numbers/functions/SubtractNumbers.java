@@ -313,7 +313,7 @@ public class SubtractNumbers implements BinaryOperation<Number, Result<Number>> 
     private Result<Number> addOperandsWithSameSign(Number firstSummand, Number secondSummand) {
 
         BinaryOperation<Number, Result<Number>> additionFunction =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADDITION_FUNCTION);
+            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_NUMBERS_FUNCTION);
         Result<Number> result = additionFunction.calculate(firstSummand, secondSummand);
 
         return result;

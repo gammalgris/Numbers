@@ -53,21 +53,8 @@ import jmul.math.numbers.nodes.LinkedDigitList;
  *
  * @author Kristian Kutin
  */
-public interface Number extends LinkedDigitList, ArithmeticOperations, NumberComparisons, Comparable<Number> {
-
-    /**
-     * Returns the sign of this number.
-     *
-     * @return a sign
-     */
-    Sign sign();
-
-    /**
-     * Returns the base of the underlying numeral system for this number.
-     *
-     * @return a base
-     */
-    int base();
+public interface Number extends LinkedDigitList, NumberProperties, ArithmeticOperations, NumberComparisons,
+                                Comparable<Number> {
 
     /**
      * Returns a scientific notation for this number. The default decimal separator is used.
@@ -175,20 +162,6 @@ public interface Number extends LinkedDigitList, ArithmeticOperations, NumberCom
      * @return <code>true</code> if this number is a natural number, else <code>false</code>
      */
     boolean isNaturalNumber();
-
-    /**
-     * Checks if this number is positive.
-     *
-     * @return <code>true</code> if this number is positive, else <code>false</code>
-     */
-    boolean isPositive();
-
-    /**
-     * Checks if this number is negative.
-     *
-     * @return <code>true</code> if this number is negative, else <code>false</code>
-     */
-    boolean isNegative();
 
     /**
      * Returns the absolute value of this number.

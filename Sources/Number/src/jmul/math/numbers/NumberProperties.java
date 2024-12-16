@@ -7,7 +7,7 @@
  * JMUL is a central repository for utilities which are used in my
  * other public and private repositories.
  *
- * Copyright (C) 2022  Kristian Kutin
+ * Copyright (C) 2024  Kristian Kutin
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,47 +31,42 @@
  * $Id$
  */
 
-package jmul.math.numbers.functions;
+package jmul.math.numbers;
 
 
 /**
- * A base implementation for a comparator implementation.
+ * This interface defines some common number properties.
  *
  * @author Kristian Kutin
  */
-public class ComparatorBase {
+public interface NumberProperties {
 
     /**
-     * A constant value indicating that a number is greater than another number.
+     * Returns the sign of this number.
+     *
+     * @return a sign
      */
-    public static final int GREATER_THAN;
+    Sign sign();
 
     /**
-     * A constanjt indicating that a number is equal to another number.
+     * Returns the base of the underlying numeral system for this number.
+     *
+     * @return a base
      */
-    public static final int EQUALS;
+    int base();
 
     /**
-     * A constant indicating that a number is lesser than another number.
+     * Checks if this number is positive.
+     *
+     * @return <code>true</code> if this number is positive, else <code>false</code>
      */
-    public static final int LESSER_THAN;
-
-    /*
-     * The static initializer.
-     */
-    static {
-
-        GREATER_THAN = 1;
-        EQUALS = 0;
-        LESSER_THAN = -1;
-    }
+    boolean isPositive();
 
     /**
-     * The default constructor.
+     * Checks if this number is negative.
+     *
+     * @return <code>true</code> if this number is negative, else <code>false</code>
      */
-    public ComparatorBase() {
-
-        super();
-    }
+    boolean isNegative();
 
 }

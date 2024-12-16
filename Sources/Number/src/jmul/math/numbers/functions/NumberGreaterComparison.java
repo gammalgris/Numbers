@@ -34,50 +34,50 @@
 package jmul.math.numbers.functions;
 
 
+import java.util.Comparator;
+
 import jmul.math.functions.FunctionSingletons;
 import jmul.math.numbers.FunctionIdentifiers;
 import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.Result;
-import jmul.math.operations.UnaryOperation;
 
 
 /**
- * This function implements the decrement function.
+ * An implementation of a number comparison.
  *
  * @author Kristian Kutin
  */
-public class DecrementNumber implements UnaryOperation<Number, Result<Number>> {
+public class NumberGreaterComparison implements BinaryOperation<Number, Result<Boolean>> {
 
     /**
      * The default constructor.
      */
-    public DecrementNumber() {
+    public NumberGreaterComparison() {
 
         super();
     }
 
     /**
-     * Decrements the specified operand by one.
+     * Checks if the first operand number is greater than the second operand.
      *
-     * @param operand
+     * @param operand1
+     *        a number
+     * @param operand2
      *        a number
      *
-     * @return a number
+     * @return <code>true</code> if the first operand is greater than the second operand, else <code>false</code>
      */
     @Override
-    public Result<Number> calculate(Number operand) {
+    public Result<Boolean> calculate(Number operand1, Number operand2) {
 
-        ParameterCheckHelper.checkParameter(operand);
+        Comparator<Number> function =
+            (Comparator<Number>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_COMPARATOR_FUNCTION);
+        int comparisonResult = function.compare(operand1, operand2);
 
-        final Number ONE = new NumberImpl(operand.base(), "1");
+        boolean result = comparisonResult > 0;
 
-        BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.SUBTRACT_NUMBERS_FUNCTION);
-        Result<Number> result = function.calculate(operand, ONE);
-
-        return result;
+        return new Result<Boolean>(result);
     }
 
 }

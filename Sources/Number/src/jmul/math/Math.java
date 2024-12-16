@@ -36,6 +36,7 @@ package jmul.math;
 
 import java.util.Comparator;
 
+import jmul.math.fraction.Fraction;
 import jmul.math.functions.FunctionSingletons;
 import jmul.math.numbers.FunctionIdentifiers;
 import jmul.math.numbers.Number;
@@ -91,7 +92,7 @@ public final class Math {
     public static Number add(Number firstSummand, Number secondSummand) {
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADDITION_FUNCTION);
+            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_NUMBERS_FUNCTION);
         Result<Number> result = function.calculate(firstSummand, secondSummand);
 
         return result.result();
@@ -155,7 +156,7 @@ public final class Math {
     public static Number subtract(Number minuend, Number subtrahend) {
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.SUBTRACTION_FUNCTION);
+            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.SUBTRACT_NUMBERS_FUNCTION);
         Result<Number> result = function.calculate(minuend, subtrahend);
 
         return result.result();
@@ -312,23 +313,46 @@ public final class Math {
     }
 
     /**
-     * Compares the specified numbers and returns <code>1</code> if this number is greater then the specified
-     * number, <code>0</code> if this number is equal to the specified number and <code>-1</code> if this number
-     * is smaller than the specified number.
+     * Compares the specified numbers and returns <code>1</code> if the first number is greater than the second
+     * number, <code>0</code> if the first number is equal to the second number and <code>-1</code> if the first number
+     * is smaller than the second number.
      *
      * @param n1
      *        a nuber
      * @param n2
      *        a number
      *
-     * @return <code>1</code> if this number is greater then the specified number, <code>0</code> if this number
-     *         is equal to the specified number and <code>-1</code> if this number is smaller than the specified
+     * @return <code>1</code> if the first number is greater than the second number, <code>0</code> if the first
+     *         number is equal to the second number and <code>-1</code> if the first number is smaller than the second
      *         number
      */
     public static int compare(Number n1, Number n2) {
 
         Comparator<Number> function =
             (Comparator<Number>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_COMPARATOR_FUNCTION);
+        int result = function.compare(n1, n2);
+
+        return result;
+    }
+
+    /**
+     * Compares the specified fractions and returns <code>1</code> if the first fraction is greater than the second
+     * fraction, <code>0</code> if the first fraction is equal to the second fraction and <code>-1</code> if the first
+     * fraction is smaller than the second fraction.
+     *
+     * @param n1
+     *        a fraction
+     * @param n2
+     *        a fraction
+     *
+     * @return <code>1</code> if the first fraction is greater than the second fraction, <code>0</code> if the first
+     *         fraction is equal to the second fraction and <code>-1</code> if the first fraction is smaller than the
+     *         second fraction
+     */
+    public static int compare(Fraction n1, Fraction n2) {
+
+        Comparator<Fraction> function =
+            (Comparator<Fraction>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_COMPARATOR_FUNCTION);
         int result = function.compare(n1, n2);
 
         return result;
@@ -347,7 +371,7 @@ public final class Math {
     public static Number max(Number n1, Number n2) {
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.MAX_FUNCTION);
+            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.MAX_NUMBER_FUNCTION);
         Result<Number> result = function.calculate(n1, n2);
 
         return result.result();
@@ -366,7 +390,7 @@ public final class Math {
     public static Number min(Number n1, Number n2) {
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.MIN_FUNCTION);
+            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.MIN_NUMBER_FUNCTION);
         Result<Number> result = function.calculate(n1, n2);
 
         return result.result();
@@ -383,7 +407,7 @@ public final class Math {
     public static Number inc(Number number) {
 
         UnaryOperation<Number, Result<Number>> function =
-            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.INCREMENT_FUNCTION);
+            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_INCREMENT_FUNCTION);
         Result<Number> result = function.calculate(number);
 
         return result.result();
@@ -400,7 +424,7 @@ public final class Math {
     public static Number dec(Number number) {
 
         UnaryOperation<Number, Result<Number>> function =
-            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.DECREMENT_FUNCTION);
+            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_DECREMENT_FUNCTION);
         Result<Number> result = function.calculate(number);
 
         return result.result();
@@ -453,65 +477,160 @@ public final class Math {
     public static Number multiply(Number n1, Number n2) {
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.MULTIPLICATION_FUNCTION);
+            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.MULTIPLY_NUMBERS_FUNCTION);
         Result<Number> result = function.calculate(n1, n2);
 
         return result.result();
     }
 
     /**
-     * Checks if this number is greater than the specified number.
+     * Checks if the first number is greater than the second number.
      *
      * @param number1
      *        a number
      * @param number2
      *        a number
      *
-     * @return <code>true</code> if this number is greater than the specified number, else <code>false</code>
+     * @return <code>true</code> if the first number is greater than the second number, else <code>false</code>
      */
     public static boolean isGreater(Number number1, Number number2) {
 
         BinaryOperation<Number, Result<Boolean>> function =
-            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.GREATER_COMPARISON);
+            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_GREATER_COMPARISON);
         Result<Boolean> result = function.calculate(number1, number2);
 
         return result.result();
     }
 
     /**
-     * Checks if this number is greater than or equal to the specified number.
+     * Checks if the first number is greater than or equal to the second number.
      *
      * @param number1
      *        a number
      * @param number2
      *        a number
      *
-     * @return <code>true</code> if this number is greater than or equal to the specified number, else <code>false</code>
+     * @return <code>true</code> if the first number is greater than or equal to the second number, else <code>false</code>
      */
     public static boolean isGreaterOrEqual(Number number1, Number number2) {
 
         BinaryOperation<Number, Result<Boolean>> function =
-            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.GREATER_OR_EQUAL_COMPARISON);
+            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_GREATER_OR_EQUAL_COMPARISON);
         Result<Boolean> result = function.calculate(number1, number2);
 
         return result.result();
     }
 
     /**
-     * Checks if this number is lesser than the specified number.
+     * Checks if the first number is lesser than the second number.
      *
      * @param number1
      *        a number
      * @param number2
      *        a number
      *
-     * @return <code>true</code> if this number is lesser than the specified number, else <code>false</code>
+     * @return <code>true</code> if the first number is lesser than the second number, else <code>false</code>
      */
     public static boolean isLesser(Number number1, Number number2) {
 
         BinaryOperation<Number, Result<Boolean>> function =
-            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.LESSER_COMPARISON);
+            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_LESSER_COMPARISON);
         Result<Boolean> result = function.calculate(number1, number2);
+
+        return result.result();
+    }
+
+    /**
+     * Checks if the first number is lesser than or equal to the second number.
+     *
+     * @param number1
+     *        a number
+     * @param number2
+     *        a number
+     *
+     * @return <code>true</code> if the first number is lesser than or equal to the second number number, else <code>false</code>
+     */
+    public static boolean isLesserOrEqual(Number number1, Number number2) {
+
+        BinaryOperation<Number, Result<Boolean>> function =
+            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_LESSER_OR_EQUAL_COMPARISON);
+        Result<Boolean> result = function.calculate(number1, number2);
+
+        return result.result();
+    }
+
+    /**
+     * Divides this number by the specified number.
+     *
+     * @param number1
+     *        a number
+     * @param number2
+     *        a number
+     *
+     * @return an expression (e.g. a quotient, a mixed fraction or integer)
+     */
+    public static Fraction divide(Number number1, Number number2) {
+
+        BinaryOperation<Number, Result<Fraction>> function =
+            (BinaryOperation<Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIVIDE_NUMBERS_FUNCTION);
+        Result<Fraction> result = function.calculate(number1, number2);
+
+        return result.result();
+    }
+
+    /**
+     * Checks if the first expression is greater than the second expression.
+     *
+     * @param expression1
+     *        an expression
+     * @param expression2
+     *        an expression
+     *
+     * @return <code>true</code> if the first expression is greater than the second expression, else <code>false</code>
+     */
+    public static boolean isGreater(Fraction expression1, Fraction expression2) {
+
+        BinaryOperation<Fraction, Result<Boolean>> function =
+            (BinaryOperation<Fraction, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_GREATER_COMPARISON);
+        Result<Boolean> result = function.calculate(expression1, expression2);
+
+        return result.result();
+    }
+
+    /**
+     * Checks if the first expression is greater than or equal to the second expression.
+     *
+     * @param expression1
+     *        an expression
+     * @param expression2
+     *        an expression
+     *
+     * @return <code>true</code> if the first expression is greater than or equal to the second expression, else <code>false</code>
+     */
+    public static boolean isGreaterOrEqual(Fraction expression1, Fraction expression2) {
+
+        BinaryOperation<Fraction, Result<Boolean>> function =
+            (BinaryOperation<Fraction, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_GREATER_OR_EQUAL_COMPARISON);
+        Result<Boolean> result = function.calculate(expression1, expression2);
+
+        return result.result();
+    }
+
+    /**
+     * Checks if the first expression is lesser than the second expression.
+     *
+     * @param expression1
+     *        an expression
+     * @param expression2
+     *        an expression
+     *
+     * @return <code>true</code> if the first expression is lesser than the second expression, else <code>false</code>
+     */
+    public static boolean isLesser(Fraction expression1, Fraction expression2) {
+
+        BinaryOperation<Fraction, Result<Boolean>> function =
+            (BinaryOperation<Fraction, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_LESSER_COMPARISON);
+        Result<Boolean> result = function.calculate(expression1, expression2);
 
         return result.result();
     }
@@ -519,18 +638,18 @@ public final class Math {
     /**
      * Checks if this number is lesser than or equal to the specified number.
      *
-     * @param number1
-     *        a number
-     * @param number2
-     *        a number
+     * @param expression1
+     *        an expression
+     * @param expression2
+     *        an expression
      *
      * @return <code>true</code> if this number is lesser than or equal to the specified number, else <code>false</code>
      */
-    public static boolean isLesserOrEqual(Number number1, Number number2) {
+    public static boolean isLesserOrEqual(Fraction expression1, Fraction expression2) {
 
-        BinaryOperation<Number, Result<Boolean>> function =
-            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.LESSER_OR_EQUAL_COMPARISON);
-        Result<Boolean> result = function.calculate(number1, number2);
+        BinaryOperation<Fraction, Result<Boolean>> function =
+            (BinaryOperation<Fraction, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_LESSER_OR_EQUAL_COMPARISON);
+        Result<Boolean> result = function.calculate(expression1, expression2);
 
         return result.result();
     }

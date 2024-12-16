@@ -34,6 +34,9 @@
 package jmul.math.numbers;
 
 
+import jmul.math.fraction.Fraction;
+
+
 /**
  * This interface describes various arithmetic operations.<br>
  * <br>
@@ -43,7 +46,7 @@ package jmul.math.numbers;
  *
  * @author Kristian Kutin
  */
-public interface ArithmeticOperations {
+interface ArithmeticOperations {
 
     /*
      * Unary arithmetic operations.
@@ -145,9 +148,9 @@ public interface ArithmeticOperations {
      * @param n
      *        a number
      *
-     * @return a number
+     * @return an expression (e.g. a quotient, a mixed fraction or integer)
      */
-    Number divide(Number n);
+    Fraction divide(Number n);
 
     /**
      * Divides this number by the specified number and returns the remainder of the division.
@@ -194,7 +197,7 @@ public interface ArithmeticOperations {
      * @param n
      *        a number
      *
-     * @return a Number
+     * @return a number
      */
     Number log(Number n);
 

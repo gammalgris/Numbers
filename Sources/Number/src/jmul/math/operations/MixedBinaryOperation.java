@@ -7,7 +7,7 @@
  * JMUL is a central repository for utilities which are used in my
  * other public and private repositories.
  *
- * Copyright (C) 2022  Kristian Kutin
+ * Copyright (C) 2024  Kristian Kutin
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,47 +31,36 @@
  * $Id$
  */
 
-package jmul.math.numbers.functions;
+package jmul.math.operations;
+
+
+import jmul.math.functions.Function;
 
 
 /**
- * A base implementation for a comparator implementation.
+ * This interface describes a binary operation (i.e. an operation that takes two arguments of different types).
  *
  * @author Kristian Kutin
+ *
+ * @param <T>
+ *        the operand type
+ * @param <S>
+ *        the operand type
+ * @param <R>
+ *        the return type
  */
-public class ComparatorBase {
+public interface MixedBinaryOperation<R, T, S extends Result> extends Function {
 
     /**
-     * A constant value indicating that a number is greater than another number.
+     * Performs the binary (i.e. two operands) operation.
+     *
+     * @param operand1
+     *        an operand
+     * @param operand2
+     *        an operand
+     *
+     * @return the result
      */
-    public static final int GREATER_THAN;
-
-    /**
-     * A constanjt indicating that a number is equal to another number.
-     */
-    public static final int EQUALS;
-
-    /**
-     * A constant indicating that a number is lesser than another number.
-     */
-    public static final int LESSER_THAN;
-
-    /*
-     * The static initializer.
-     */
-    static {
-
-        GREATER_THAN = 1;
-        EQUALS = 0;
-        LESSER_THAN = -1;
-    }
-
-    /**
-     * The default constructor.
-     */
-    public ComparatorBase() {
-
-        super();
-    }
+    S calculate(R operand1, T operand2);
 
 }

@@ -34,6 +34,7 @@
 package jmul.math.numbers.exceptions;
 
 
+import jmul.math.fraction.Fraction;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.digits.Digit;
 
@@ -44,6 +45,32 @@ import jmul.math.numbers.digits.Digit;
  * @author Kristian Kutin
  */
 public class DigitBaseMismatchException extends IllegalArgumentException {
+
+    /**
+     * Creates a new exception with the specified parameters.
+     *
+     * @param e1
+     *        an expression
+     * @param e2
+     *        an expression
+     */
+    public DigitBaseMismatchException(Fraction e1, Fraction e2) {
+
+        super(createErrorMessage(e1, e2));
+    }
+
+    /**
+     * Creates a new exception with the specified parameters.
+     *
+     * @param e1
+     *        an expression
+     * @param n2
+     *        a number
+     */
+    public DigitBaseMismatchException(Fraction e1, Number n2) {
+
+        super(createErrorMessage(e1, n2));
+    }
 
     /**
      * Creates a new exception with the specified parameters.
@@ -72,7 +99,39 @@ public class DigitBaseMismatchException extends IllegalArgumentException {
     }
 
     /**
-     * Creates an error messageaccording to the specified parameters.
+     * Creates an error message according to the specified parameters.
+     *
+     * @param e1
+     *        an expression
+     * @param e2
+     *        an expression
+     *
+     * @return an error message
+     */
+    private static String createErrorMessage(Fraction e1, Fraction e2) {
+
+        return String.format("Unable to compare expression %s (base %d) and %s (base %d)!", e1.toString(), e1.base(),
+                             e2.toString(), e2.base());
+    }
+
+    /**
+     * Creates an error message according to the specified parameters.
+     *
+     * @param e1
+     *        an expression
+     * @param n2
+     *        a number
+     *
+     * @return an error message
+     */
+    private static String createErrorMessage(Fraction e1, Number n2) {
+
+        return String.format("Unable to compare expression %s (base %d) and %s (base %d)!", e1.toString(), e1.base(),
+                             n2.toString(), n2.base());
+    }
+
+    /**
+     * Creates an error message according to the specified parameters.
      *
      * @param n1
      *        a number
@@ -88,7 +147,7 @@ public class DigitBaseMismatchException extends IllegalArgumentException {
     }
 
     /**
-     * Creates an error messageaccording to the specified parameters.
+     * Creates an error message according to the specified parameters.
      *
      * @param d1
      *        a digit

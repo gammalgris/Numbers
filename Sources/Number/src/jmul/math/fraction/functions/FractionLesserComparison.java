@@ -31,51 +31,51 @@
  * $Id$
  */
 
-package jmul.math.numbers.functions;
+package jmul.math.fraction.functions;
 
 
 import java.util.Comparator;
 
+import jmul.math.fraction.Fraction;
 import jmul.math.functions.FunctionSingletons;
 import jmul.math.numbers.FunctionIdentifiers;
-import jmul.math.numbers.Number;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.Result;
 
 
 /**
- * An implementation of a number comparison.
+ * An implementation of an expression comparison.
  *
  * @author Kristian Kutin
  */
-public class GreaterComparison implements BinaryOperation<Number, Result<Boolean>> {
+public class FractionLesserComparison implements BinaryOperation<Fraction, Result<Boolean>> {
 
     /**
      * The default constructor.
      */
-    public GreaterComparison() {
+    public FractionLesserComparison() {
 
         super();
     }
 
     /**
-     * Checks if the first operand number is greater than the second operand.
+     * Checks if the first expression is lesser than the second expression.
      *
      * @param operand1
      *        a number
      * @param operand2
      *        a number
      *
-     * @return <code>true</code> if the first operand is greater than the second operand, else <code>false</code>
+     * @return <code>true</code> if the first expression is lesser than the second expression, else <code>false</code>
      */
     @Override
-    public Result<Boolean> calculate(Number operand1, Number operand2) {
+    public Result<Boolean> calculate(Fraction operand1, Fraction operand2) {
 
-        Comparator<Number> function =
-            (Comparator<Number>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_COMPARATOR_FUNCTION);
+        Comparator<Fraction> function =
+            (Comparator<Fraction>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_COMPARATOR_FUNCTION);
         int comparisonResult = function.compare(operand1, operand2);
 
-        boolean result = comparisonResult > 0;
+        boolean result = comparisonResult < 0;
 
         return new Result<Boolean>(result);
     }

@@ -151,4 +151,40 @@ public enum Signs implements Sign {
         return NEGATIVE.equals(aSign);
     }
 
+    /**
+     * A sequence of signs that represetns a sequence of multiplications and divisions is evaluated
+     * and the resulting sign is returned.
+     *
+     * @param signs
+     *        a sequence of signs
+     *
+     * @return a sign
+     */
+    public static Sign evaluateSignSequence(Sign... signs) {
+
+        if (signs == null) {
+
+            throw new IllegalArgumentException("No sign sequence (null) was specified!");
+        }
+
+        int result = 1;
+
+        for (int index = 0; index < signs.length; index++) {
+
+            Sign sign = signs[index];
+
+            if (isNegative(sign)) {
+
+                result = result * -1;
+            }
+        }
+
+        if (result < 0) {
+
+            return NEGATIVE;
+        }
+
+        return POSITIVE;
+    }
+
 }

@@ -69,7 +69,7 @@ public class DoublingNumber implements UnaryOperation<Number, Result<Number>> {
     public Result<Number> calculate(Number operand) {
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADDITION_FUNCTION);
+            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_NUMBERS_FUNCTION);
         Result<Number> result = function.calculate(operand, operand);
 
         return result;

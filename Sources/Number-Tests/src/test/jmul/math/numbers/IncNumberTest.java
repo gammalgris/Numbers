@@ -57,7 +57,7 @@ import org.junit.runners.Parameterized;
 
 /**
  * This test suite tests incrementing a number.
- * 
+ *
  * @author Kristian Kutin
  */
 @UnitTest
@@ -180,9 +180,23 @@ public class IncNumberTest {
                 Digit operand = PositionalNumeralSystems.ordinalToDigit(base, base - 1);
                 Digit result = PositionalNumeralSystems.ordinalToDigit(base, 1);
 
-                parameters.add(new Object[] { base, "" + operand, "" + result + "0"});
+                parameters.add(new Object[] { base, "" + operand, "" + result + "0" });
+            }
+
+            {
+                Digit highestDigit =  PositionalNumeralSystems.ordinalToDigit(base, base - 1);
+                Digit oneDigit =   PositionalNumeralSystems.ordinalToDigit(base, 1);
+                
+                parameters.add(new Object[] { base, "" + highestDigit + highestDigit, "" + oneDigit + "00" });
             }
         }
+
+        parameters.add(new Object[] { 2, "11", "100" });
+        parameters.add(new Object[] { 8, "77", "100" });
+        parameters.add(new Object[] { 10, "99", "100" });
+        parameters.add(new Object[] { 10, "199", "200" });
+        parameters.add(new Object[] { 10, "999", "1000" });
+        parameters.add(new Object[] { 16, "FF", "100" });
 
         return parameters;
     }

@@ -117,6 +117,21 @@ final class ParameterCheckHelper {
     /**
      * Checks the specifiecd parameters.
      *
+     * @param integer
+     *        an integer
+     */
+    public static void checkIntegerIgnoreNull(Number integer) {
+
+        if (integer.isFraction()) {
+
+            String message = "An integer is requred!";
+            throw new IllegalArgumentException(message);
+        }
+    }
+
+    /**
+     * Checks the specifiecd parameters.
+     *
      * @param operand1
      *        an operand
      * @param operand2

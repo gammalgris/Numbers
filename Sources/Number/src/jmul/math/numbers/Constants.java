@@ -95,7 +95,7 @@ public final class Constants {
         EXPONENT_ABBREVIATION = "E";
 
         BASE_MIN_LIMIT = 2;
-        BASE_MAX_LIMIT = 65;
+        BASE_MAX_LIMIT = 62;
 
         DECIMAL_COMMA = ',';
         DECIMAL_POINT = '.';

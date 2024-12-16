@@ -67,7 +67,7 @@ public class FunctionRepositoryTest {
      * Preparatory steps before a test.
      */
     @Before
-    public void setuUp() {
+    public void setUp() {
 
         repository = new FunctionRepositoryImpl();
     }
@@ -87,7 +87,7 @@ public class FunctionRepositoryTest {
     @Test(expected = FunctionDoesntExistException.class)
     public void testQueryEmptyRepository() {
 
-        repository.getFunction(FunctionIdentifiers.ADDITION_FUNCTION);
+        repository.getFunction(FunctionIdentifiers.ADD_NUMBERS_FUNCTION);
     }
 
     /**
@@ -97,7 +97,7 @@ public class FunctionRepositoryTest {
     @Test
     public void testAddFunction() {
 
-        repository.registerFunction(FunctionIdentifiers.ADDITION_FUNCTION, DummyFunction.class);
+        repository.registerFunction(FunctionIdentifiers.ADD_NUMBERS_FUNCTION, DummyFunction.class);
     }
 
     /**
@@ -106,9 +106,9 @@ public class FunctionRepositoryTest {
     @Test
     public void testAddAndRetrieveFunction() {
 
-        repository.registerFunction(FunctionIdentifiers.ADDITION_FUNCTION, DummyFunction.class);
+        repository.registerFunction(FunctionIdentifiers.ADD_NUMBERS_FUNCTION, DummyFunction.class);
 
-        Function function = repository.getFunction(FunctionIdentifiers.ADDITION_FUNCTION);
+        Function function = repository.getFunction(FunctionIdentifiers.ADD_NUMBERS_FUNCTION);
         assertNotNull(function);
     }
 
@@ -118,8 +118,8 @@ public class FunctionRepositoryTest {
     @Test(expected = FunctionExistsException.class)
     public void testOverrideFunction() {
 
-        repository.registerFunction(FunctionIdentifiers.ADDITION_FUNCTION, DummyFunction.class);
-        repository.registerFunction(FunctionIdentifiers.ADDITION_FUNCTION, DummyFunction.class);
+        repository.registerFunction(FunctionIdentifiers.ADD_NUMBERS_FUNCTION, DummyFunction.class);
+        repository.registerFunction(FunctionIdentifiers.ADD_NUMBERS_FUNCTION, DummyFunction.class);
     }
 
     /**
@@ -128,7 +128,7 @@ public class FunctionRepositoryTest {
     @Test(expected = FunctionDoesntExistException.class)
     public void testRemoveFunctionFromEmptyRepository() {
 
-        repository.removeFunction(FunctionIdentifiers.ADDITION_FUNCTION);
+        repository.removeFunction(FunctionIdentifiers.ADD_NUMBERS_FUNCTION);
     }
 
     /**
@@ -138,8 +138,8 @@ public class FunctionRepositoryTest {
     @Test
     public void testRemoveFunction() {
 
-        repository.registerFunction(FunctionIdentifiers.ADDITION_FUNCTION, DummyFunction.class);
-        repository.removeFunction(FunctionIdentifiers.ADDITION_FUNCTION);
+        repository.registerFunction(FunctionIdentifiers.ADD_NUMBERS_FUNCTION, DummyFunction.class);
+        repository.removeFunction(FunctionIdentifiers.ADD_NUMBERS_FUNCTION);
     }
 
     /**
@@ -148,10 +148,10 @@ public class FunctionRepositoryTest {
     @Test(expected = FunctionDoesntExistException.class)
     public void testRemoveAndRetrieveFunction() {
 
-        repository.registerFunction(FunctionIdentifiers.ADDITION_FUNCTION, DummyFunction.class);
-        repository.removeFunction(FunctionIdentifiers.ADDITION_FUNCTION);
+        repository.registerFunction(FunctionIdentifiers.ADD_NUMBERS_FUNCTION, DummyFunction.class);
+        repository.removeFunction(FunctionIdentifiers.ADD_NUMBERS_FUNCTION);
 
-        repository.getFunction(FunctionIdentifiers.ADDITION_FUNCTION);
+        repository.getFunction(FunctionIdentifiers.ADD_NUMBERS_FUNCTION);
     }
 
 }

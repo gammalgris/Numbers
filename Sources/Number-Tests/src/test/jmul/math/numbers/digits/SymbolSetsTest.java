@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.xml.stream.events.Characters;
 
+import jmul.math.numbers.Constants;
 import jmul.math.numbers.NumberImpl;
 
 import static org.junit.Assert.fail;
@@ -133,11 +134,11 @@ public class SymbolSetsTest {
 
         for (int base = -1; base < 100; base++) {
 
-            if (base < 2) {
+            if (base < Constants.BASE_MIN_LIMIT) {
                 
                 parameters.add(new Object[] { base, IllegalArgumentException.class });
 
-            } else if (base >= 66) {
+            } else if (base >= Constants.BASE_MAX_LIMIT) {
 
                 parameters.add(new Object[] { base, IllegalArgumentException.class });
 

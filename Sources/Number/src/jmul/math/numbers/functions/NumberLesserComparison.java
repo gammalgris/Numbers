@@ -48,26 +48,25 @@ import jmul.math.operations.Result;
  *
  * @author Kristian Kutin
  */
-public class GreaterOrEqualComparison implements BinaryOperation<Number, Result<Boolean>> {
+public class NumberLesserComparison implements BinaryOperation<Number, Result<Boolean>> {
 
     /**
      * The default constructor.
      */
-    public GreaterOrEqualComparison() {
+    public NumberLesserComparison() {
 
         super();
     }
 
     /**
-     * Checks if the first operand number is greater than or equal to the second operand.
+     * Checks if the first operand number is lesser than the second operand.
      *
      * @param operand1
      *        a number
      * @param operand2
      *        a number
      *
-     * @return <code>true</code> if the first operand is greater than or equal to the second operand,
-     *         else <code>false</code>
+     * @return <code>true</code> if the first operand is lesser than the second operand, else <code>false</code>
      */
     @Override
     public Result<Boolean> calculate(Number operand1, Number operand2) {
@@ -76,7 +75,7 @@ public class GreaterOrEqualComparison implements BinaryOperation<Number, Result<
             (Comparator<Number>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_COMPARATOR_FUNCTION);
         int comparisonResult = function.compare(operand1, operand2);
 
-        boolean result = comparisonResult >= 0;
+        boolean result = comparisonResult < 0;
 
         return new Result<Boolean>(result);
     }

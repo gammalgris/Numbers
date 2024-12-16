@@ -335,6 +335,20 @@ public class AddNumbersTest {
 
         parameters.add(new Object[] { 16, "FF", "11", "110" });
 
+        parameters.add(new Object[] { 2, "11", "1", "100" });
+        parameters.add(new Object[] { 8, "77", "1", "100" });
+        parameters.add(new Object[] { 10, "99", "1", "100" });
+        parameters.add(new Object[] { 10, "199", "1", "200" });
+        parameters.add(new Object[] { 10, "999", "1", "1000" });
+        parameters.add(new Object[] { 16, "FF", "1", "100" });
+
+        parameters.add(new Object[] { 2, "111", "1", "1000" });
+        parameters.add(new Object[] { 8, "777", "1", "1000" });
+        parameters.add(new Object[] { 10, "999", "1", "1000" });
+        parameters.add(new Object[] { 10, "1999", "1", "2000" });
+        parameters.add(new Object[] { 10, "9999", "1", "10000" });
+        parameters.add(new Object[] { 16, "FFF", "1", "1000" });
+
         return parameters;
     }
 

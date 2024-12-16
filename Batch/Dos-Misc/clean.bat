@@ -82,14 +82,12 @@
 
 	set projectDir=%~dp0..\..\Sources\
 
-	set directory.length=6
+	set directory.length=4
 
-	set directory[1]=%~dp0..\Gradle-Build\aaaa.gradle\
-	set directory[2]=%~dp0..\Gradle-Build\temp\
-	set directory[3]=%projectDir%.data\
-	set directory[4]=%projectDir%Number\classes\
-	set directory[5]=%projectDir%Number-Tests\classes\
-	set directory[6]=%projectDir%Version\classes\
+	set directory[1]=%projectDir%.data\
+	set directory[2]=%projectDir%Number\classes\
+	set directory[3]=%projectDir%Number-Tests\classes\
+	set directory[4]=%projectDir%Version\classes\
 
 %return%
 

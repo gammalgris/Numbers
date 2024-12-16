@@ -40,6 +40,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import jmul.math.Math;
+import jmul.math.fraction.Fraction;
 import jmul.math.functions.FunctionIdentifier;
 import jmul.math.functions.FunctionSingletons;
 import jmul.math.hash.HashHelper;
@@ -571,9 +572,10 @@ public class NumberImpl implements Number {
 
         if (o instanceof Number) {
 
+            Number other = (Number) o;
             EqualityFunction<Number> function =
                 (EqualityFunction<Number>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_EQUALITY_FUNCTION);
-            boolean result = function.equals(this, (Number) o);
+            boolean result = function.equals(this, other);
 
             return result;
         }
@@ -754,7 +756,7 @@ public class NumberImpl implements Number {
     public Number add(Number n) {
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADDITION_FUNCTION);
+            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_NUMBERS_FUNCTION);
         Result<Number> result = function.calculate(this, n);
 
         return result.result();
@@ -772,7 +774,7 @@ public class NumberImpl implements Number {
     public Number subtract(Number n) {
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.SUBTRACTION_FUNCTION);
+            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.SUBTRACT_NUMBERS_FUNCTION);
         Result<Number> result = function.calculate(this, n);
 
         return result.result();
@@ -790,7 +792,7 @@ public class NumberImpl implements Number {
     public Number multiply(Number n) {
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.MULTIPLICATION_FUNCTION);
+            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.MULTIPLY_NUMBERS_FUNCTION);
         Result<Number> result = function.calculate(this, n);
 
         return result.result();
@@ -802,13 +804,16 @@ public class NumberImpl implements Number {
      * @param n
      *        a number
      *
-     * @return a number
+     * @return an expression (e.g. a quotient, a mixed fraction or integer)
      */
     @Override
-    public Number divide(Number n) {
+    public Fraction divide(Number n) {
 
-        // TODO
-        throw new UnsupportedOperationException();
+        BinaryOperation<Number, Result<Fraction>> function =
+            (BinaryOperation<Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIVIDE_NUMBERS_FUNCTION);
+        Result<Fraction> result = function.calculate(this, n);
+
+        return result.result();
     }
 
     /**
@@ -838,7 +843,7 @@ public class NumberImpl implements Number {
     public Number max(Number n) {
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.MAX_FUNCTION);
+            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.MAX_NUMBER_FUNCTION);
         Result<Number> result = function.calculate(this, n);
 
         return result.result();
@@ -855,7 +860,7 @@ public class NumberImpl implements Number {
     public Number min(Number n) {
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.MIN_FUNCTION);
+            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.MIN_NUMBER_FUNCTION);
         Result<Number> result = function.calculate(this, n);
 
         return result.result();
@@ -1007,7 +1012,7 @@ public class NumberImpl implements Number {
     public Number inc() {
 
         UnaryOperation<Number, Result<Number>> function =
-            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.INCREMENT_FUNCTION);
+            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_INCREMENT_FUNCTION);
         Result<Number> result = function.calculate(this);
 
         return result.result();
@@ -1022,7 +1027,7 @@ public class NumberImpl implements Number {
     public Number dec() {
 
         UnaryOperation<Number, Result<Number>> function =
-            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.DECREMENT_FUNCTION);
+            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_DECREMENT_FUNCTION);
         Result<Number> result = function.calculate(this);
 
         return result.result();
@@ -1070,7 +1075,7 @@ public class NumberImpl implements Number {
     public boolean isGreater(Number number) {
 
         BinaryOperation<Number, Result<Boolean>> function =
-            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.GREATER_COMPARISON);
+            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_GREATER_COMPARISON);
         Result<Boolean> result = function.calculate(this, number);
 
         return result.result();
@@ -1088,7 +1093,7 @@ public class NumberImpl implements Number {
     public boolean isGreaterOrEqual(Number number) {
 
         BinaryOperation<Number, Result<Boolean>> function =
-            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.GREATER_OR_EQUAL_COMPARISON);
+            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_GREATER_OR_EQUAL_COMPARISON);
         Result<Boolean> result = function.calculate(this, number);
 
         return result.result();
@@ -1106,7 +1111,7 @@ public class NumberImpl implements Number {
     public boolean isLesser(Number number) {
 
         BinaryOperation<Number, Result<Boolean>> function =
-            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.LESSER_COMPARISON);
+            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_LESSER_COMPARISON);
         Result<Boolean> result = function.calculate(this, number);
 
         return result.result();
@@ -1124,7 +1129,7 @@ public class NumberImpl implements Number {
     public boolean isLesserOrEqual(Number number) {
 
         BinaryOperation<Number, Result<Boolean>> function =
-            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.LESSER_OR_EQUAL_COMPARISON);
+            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_LESSER_OR_EQUAL_COMPARISON);
         Result<Boolean> result = function.calculate(this, number);
 
         return result.result();

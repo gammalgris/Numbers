@@ -74,7 +74,7 @@ public class IncrementNumber implements UnaryOperation<Number, Result<Number>> {
         final Number ONE = new NumberImpl(operand.base(), "1");
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADDITION_FUNCTION);
+            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_NUMBERS_FUNCTION);
         Result<Number> result = function.calculate(operand, ONE);
 
         return result;

@@ -31,53 +31,68 @@
  * $Id$
  */
 
-package jmul.math.numbers.functions;
+package jmul.math.fraction.functions;
 
 
+import java.util.Comparator;
+
+import jmul.math.fraction.Fraction;
+import jmul.math.functions.Function;
 import jmul.math.functions.FunctionSingletons;
 import jmul.math.numbers.FunctionIdentifiers;
-import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
-import jmul.math.operations.BinaryOperation;
-import jmul.math.operations.Result;
-import jmul.math.operations.UnaryOperation;
+import jmul.math.numbers.functions.EqualityFunction;
 
 
 /**
- * This function implements the decrement function.
+ * An implementation of an equality comparator for expressions.
  *
  * @author Kristian Kutin
  */
-public class DecrementNumber implements UnaryOperation<Number, Result<Number>> {
+public class FractionEquality implements Function, EqualityFunction<Fraction> {
 
     /**
      * The default constructor.
      */
-    public DecrementNumber() {
+    public FractionEquality() {
 
         super();
     }
 
     /**
-     * Decrements the specified operand by one.
+     * Compares the two specified expressions regarding equality.
      *
-     * @param operand
+     * @param e1
+     *        a number
+     * @param e2
      *        a number
      *
-     * @return a number
+     * @return <code>true</code> if both numbers are considered equal, else <code>false</code>
      */
     @Override
-    public Result<Number> calculate(Number operand) {
+    public boolean equals(Fraction e1, Fraction e2) {
 
-        ParameterCheckHelper.checkParameter(operand);
+        // Check the references
 
-        final Number ONE = new NumberImpl(operand.base(), "1");
+        if ((e1 == null) && (e2 == null)) {
 
-        BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.SUBTRACT_NUMBERS_FUNCTION);
-        Result<Number> result = function.calculate(operand, ONE);
+            return true;
+        }
 
-        return result;
+        if ((e1 == null) || (e2 == null)) {
+
+            return false;
+        }
+
+        if (e1 == e2) {
+
+            return true;
+        }
+
+        Comparator<Fraction> function =
+            (Comparator<Fraction>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_COMPARATOR_FUNCTION);
+        int result = function.compare(e1, e2);
+
+        return result == 0;
     }
 
 }

@@ -31,53 +31,53 @@
  * $Id$
  */
 
-package jmul.math.numbers.functions;
+package jmul.math.fraction.functions;
 
 
+import java.util.Comparator;
+
+import jmul.math.fraction.Fraction;
 import jmul.math.functions.FunctionSingletons;
 import jmul.math.numbers.FunctionIdentifiers;
-import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.Result;
-import jmul.math.operations.UnaryOperation;
 
 
 /**
- * This function implements the decrement function.
+ * An implementation of an expression comparison.
  *
  * @author Kristian Kutin
  */
-public class DecrementNumber implements UnaryOperation<Number, Result<Number>> {
+public class FractionGreaterComparison implements BinaryOperation<Fraction, Result<Boolean>> {
 
     /**
      * The default constructor.
      */
-    public DecrementNumber() {
+    public FractionGreaterComparison() {
 
         super();
     }
 
     /**
-     * Decrements the specified operand by one.
+     * Checks if the first expression is greater than the second expression.
      *
-     * @param operand
+     * @param operand1
+     *        a number
+     * @param operand2
      *        a number
      *
-     * @return a number
+     * @return <code>true</code> if the first expression is greater than the second expression, else <code>false</code>
      */
     @Override
-    public Result<Number> calculate(Number operand) {
+    public Result<Boolean> calculate(Fraction operand1, Fraction operand2) {
 
-        ParameterCheckHelper.checkParameter(operand);
+        Comparator<Fraction> function =
+            (Comparator<Fraction>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_COMPARATOR_FUNCTION);
+        int comparisonResult = function.compare(operand1, operand2);
 
-        final Number ONE = new NumberImpl(operand.base(), "1");
+        boolean result = comparisonResult > 0;
 
-        BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.SUBTRACT_NUMBERS_FUNCTION);
-        Result<Number> result = function.calculate(operand, ONE);
-
-        return result;
+        return new Result<Boolean>(result);
     }
 
 }

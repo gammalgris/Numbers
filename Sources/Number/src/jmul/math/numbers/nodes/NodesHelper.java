@@ -351,6 +351,36 @@ public final class NodesHelper {
     }
 
     /**
+     * Moves the reference to the last node to the right.
+     *
+     * @param node
+     *        a reference to a node
+     *
+     * @return a reference to a node
+     */
+    public static DigitNode moveRight(DigitNode node) {
+
+        DigitNode currentNode = node;
+
+        if (currentNode == null) {
+
+            return currentNode;
+        }
+
+        while (true) {
+
+            if (currentNode.rightNode() == null) {
+
+                break;
+            }
+
+            currentNode = currentNode.rightNode();
+        }
+
+        return currentNode;
+    }
+
+    /**
      * Removes leading zeros in the linked list.
      *
      * @param centerNode

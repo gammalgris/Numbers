@@ -41,6 +41,7 @@ import jmul.math.numbers.NumberImpl;
 import jmul.math.numbers.Sign;
 import jmul.math.numbers.Signs;
 import jmul.math.numbers.digits.Digit;
+import jmul.math.numbers.digits.PositionalNumeralSystems;
 import jmul.math.numbers.exceptions.UndefinedOperationException;
 import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.NodesHelper;
@@ -236,110 +237,98 @@ public class AddNumbers implements BinaryOperation<Number, Result<Number>> {
         BinaryOperation<Digit, ResultWithCarry<Digit>> addDigitsFunction =
             (BinaryOperation<Digit, ResultWithCarry<Digit>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_DIGITS_FUNCTION);
 
-        DigitNode resultNode = null;
         DigitNode previousResultNode = null;
-        DigitNode resultCenter = null;
-        DigitNode resultRightEndWithoutTail = null;
-        Digit previousCarry = null;
+        DigitNode resultCenterNode = null;
+        ResultWithCarry<Digit> previousResultWrapper = null;
+
+        final Digit ZERO = PositionalNumeralSystems.ordinalToDigit(base, 0);
 
         while (true) {
 
-            if ((node1 == null) || (node2 == null)) {
+            if ((node1 == null) && (node2 == null)) {
 
                 break;
             }
 
-            ResultWithCarry<Digit> resultWrapper = addDigitsFunction.calculate(node1.digit(), node2.digit());
-            Digit result = resultWrapper.result();
-            Digit carry = resultWrapper.carry();
+            // Add the digits
+            ResultWithCarry<Digit> resultWrapper;
+            if (node1 == null) {
 
-            if ((previousCarry != null) && !previousCarry.isZero()) {
+                resultWrapper = addDigitsFunction.calculate(ZERO, node2.digit());
 
-                ResultWithCarry<Digit> resultWrapperWithAddedCarry = addDigitsFunction.calculate(result, previousCarry);
-                result = resultWrapperWithAddedCarry.result();
+            } else if (node2 == null) {
 
-                if ((resultWrapperWithAddedCarry.carry() != null) && !resultWrapperWithAddedCarry.carry().isZero()) {
-
-                    // In this case the first addition produced no carry (i.e. zero) and we have to keep the new carry.
-                    carry = resultWrapperWithAddedCarry.carry();
-                }
-            }
-
-            if (resultNode == null) {
-
-                resultNode = NodesHelper.createNode(result);
-                resultRightEndWithoutTail = resultNode;
+                resultWrapper = addDigitsFunction.calculate(node1.digit(), ZERO);
 
             } else {
 
-                resultNode = NodesHelper.createNode(result);
-                NodesHelper.linkNodes(resultNode, previousResultNode);
+                resultWrapper = addDigitsFunction.calculate(node1.digit(), node2.digit());
             }
 
-            if (node1 == operand1.centerNode()) {
+            // Handle the carry
+            if (previousResultWrapper != null) {
 
-                resultCenter = resultNode;
-            }
-
-            previousCarry = carry;
-            previousResultNode = resultNode;
-            node1 = node1.leftNode();
-            node2 = node2.leftNode();
-        }
-
-
-        // Check which number has more digits to the left.
-        DigitNode leftTail = null;
-        if (node1 != null) {
-
-            leftTail = node1;
-
-        } else if (node2 != null) {
-
-            leftTail = node2;
-        }
-
-
-        if (leftTail == null) {
-
-            if (!previousCarry.isZero()) {
-
-                resultNode = NodesHelper.createNode(previousCarry);
-                NodesHelper.linkNodes(resultNode, previousResultNode);
-            }
-
-        } else {
-
-            while (true) {
-
-                if (leftTail == null) {
-
-                    break;
-                }
-
-                ResultWithCarry<Digit> resultWrapper = addDigitsFunction.calculate(leftTail.digit(), previousCarry);
                 Digit result = resultWrapper.result();
                 Digit carry = resultWrapper.carry();
+                Digit previousCarry = previousResultWrapper.carry();
 
-                resultNode = NodesHelper.createNode(result);
-                NodesHelper.linkNodes(resultNode, previousResultNode);
+                resultWrapper = addDigitsFunction.calculate(result, previousCarry);
+                Digit newResult = resultWrapper.result();
 
-                previousCarry = carry;
-                previousResultNode = resultNode;
-                leftTail = leftTail.leftNode();
+                resultWrapper = addDigitsFunction.calculate(carry, resultWrapper.carry());
+                Digit newCarry = resultWrapper.result();
+
+                previousResultWrapper = new ResultWithCarry<Digit>(newResult, newCarry);
+
+            } else {
+
+                previousResultWrapper = resultWrapper;
+            }
+
+            // Create the new digit node and link it with the existing list
+            Digit result = previousResultWrapper.result();
+            DigitNode resultNode = NodesHelper.createNode(result);
+            NodesHelper.linkNodes(resultNode, previousResultNode);
+            previousResultNode = resultNode;
+
+            // Identify the center node of the result (i.e. by identifying the center node of one summand).
+            if (node1 == operand1.centerNode()) {
+
+                resultCenterNode = resultNode;
+            }
+
+            // Move one position to the left.
+            if (node1 != null) {
+
+                node1 = node1.leftNode();
+            }
+
+            if (node2 != null) {
+
+                node2 = node2.leftNode();
             }
         }
 
+        // Apply the remaining carry
+        if (previousResultWrapper != null) {
+
+            Digit carry = previousResultWrapper.carry();
+            if (!carry.isZero()) {
+
+                DigitNode resultNode = NodesHelper.createNode(carry);
+                NodesHelper.linkNodes(resultNode, previousResultNode);
+            }
+        }
 
         // clone and append the right tail if there is any
         if (rightTail != null) {
 
+            DigitNode resultRightEndWithoutTail = NodesHelper.moveRight(resultCenterNode);
             DigitNode clonedRightTail = NodesHelper.cloneRightTail(rightTail);
             NodesHelper.linkNodes(resultRightEndWithoutTail, clonedRightTail);
         }
 
-
-        Number result = new NumberImpl(base, sign, resultCenter);
+        Number result = new NumberImpl(base, sign, resultCenterNode);
 
         return new Result<Number>(result);
     }
