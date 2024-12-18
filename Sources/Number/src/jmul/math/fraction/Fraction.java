@@ -35,6 +35,7 @@ package jmul.math.fraction;
 
 
 import jmul.math.numbers.Number;
+import jmul.math.numbers.NumberComparisons;
 import jmul.math.numbers.NumberProperties;
 
 
@@ -44,7 +45,8 @@ import jmul.math.numbers.NumberProperties;
  *
  * @author Kristian Kutin
  */
-public interface Fraction extends Comparable<Fraction>, ExpressionComparisons, NumberProperties, ArithmeticOperations {
+public interface Fraction extends Comparable, NumberComparisons, FractionComparisons, NumberProperties,
+                                  ArithmeticOperations {
 
     /**
      * Evaluates this fraction and returns a number which is equivalent to the fraction.

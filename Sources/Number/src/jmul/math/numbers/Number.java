@@ -34,6 +34,7 @@
 package jmul.math.numbers;
 
 
+import jmul.math.fraction.FractionComparisons;
 import jmul.math.numbers.nodes.LinkedDigitList;
 
 
@@ -54,7 +55,7 @@ import jmul.math.numbers.nodes.LinkedDigitList;
  * @author Kristian Kutin
  */
 public interface Number extends LinkedDigitList, NumberProperties, ArithmeticOperations, NumberComparisons,
-                                Comparable<Number> {
+                                FractionComparisons, Comparable {
 
     /**
      * Returns a scientific notation for this number. The default decimal separator is used.

@@ -54,6 +54,7 @@ import jmul.math.numbers.notations.NotationFunction;
 import jmul.math.numbers.notations.NotationParser;
 import jmul.math.numbers.notations.ParsingResult;
 import jmul.math.operations.BinaryOperation;
+import jmul.math.operations.MixedComparator;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
 
@@ -536,22 +537,46 @@ public class NumberImpl implements Number {
     }
 
     /**
-     * Compares this number with the specified number. Returns <code>-1</code>, <code>-1</code> or <code>-1</code>
-     * as this number is lesser than, euqal or greater than the specified number.
+     * Compares this number to the specified object.
      *
-     * @param n
-     *        a number
+     * @param o
+     *        an object
      *
-     * @return an integer value
+     * @return <code>1</code> if this number is greater than the specified object, <code>0</code> if this
+     *         number is equal to the specified object or <code>-1</code> if this number is lesser than the
+     *         specified object
+     *
+     * @throws NullPointerException
+     *         if the specified object is null
+     * @throws ClassCastException
+     *         if the specified object's type prevents it from being compared to this object.
      */
     @Override
-    public int compareTo(Number n) {
+    public int compareTo(Object o) {
 
-        Comparator<Number> function =
-            (Comparator<Number>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_COMPARATOR_FUNCTION);
-        int result = function.compare(this, n);
+        if (o == null) {
 
-        return result;
+            throw new NullPointerException();
+        }
+
+        if (o instanceof Fraction) {
+
+            Fraction other = (Fraction) o;
+
+            MixedComparator<Number, Fraction> comparator =
+                (MixedComparator<Number, Fraction>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_FRACTION_COMPARATOR_FUNCTION);
+            return comparator.compare(this, other);
+
+        } else if (o instanceof Number) {
+
+            Number other = (Number) o;
+
+            Comparator<Number> comparator =
+                (Comparator<Number>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_COMPARATOR_FUNCTION);
+            return comparator.compare(this, other);
+        }
+
+        throw new ClassCastException();
     }
 
     /**
@@ -763,6 +788,21 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Adds this number and the specified fraction.
+     *
+     * @param f
+     *        a fraction
+     *
+     * @return a fraction
+     */
+    @Override
+    public Fraction add(Fraction f) {
+
+        //TODO
+        throw new UnsupportedOperationException();
+    }
+
+    /**
      * Substracts the specified number from this number.
      *
      * @param n
@@ -778,6 +818,21 @@ public class NumberImpl implements Number {
         Result<Number> result = function.calculate(this, n);
 
         return result.result();
+    }
+
+    /**
+     * Substracts the specified fraction from this number.
+     *
+     * @param f
+     *        a fraction
+     *
+     * @return a fraction
+     */
+    @Override
+    public Fraction subtract(Fraction f) {
+
+        //TODO
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -799,6 +854,21 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Multiplies this number with the specified fraction.
+     *
+     * @param f
+     *        a fraction
+     *
+     * @return a number
+     */
+    @Override
+    public Fraction multiply(Fraction f) {
+
+        //TODO
+        throw new UnsupportedOperationException();
+    }
+
+    /**
      * Divides this number by the specified number.
      *
      * @param n
@@ -814,6 +884,21 @@ public class NumberImpl implements Number {
         Result<Fraction> result = function.calculate(this, n);
 
         return result.result();
+    }
+
+    /**
+     * Divides this number by the specified fraction.
+     *
+     * @param f
+     *        a fraction
+     *
+     * @return a fraction
+     */
+    @Override
+    public Fraction divide(Fraction f) {
+
+        //TODO
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -1082,6 +1167,21 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Checks if this expression is greater than the specified expression.
+     *
+     * @param expression
+     *        an expression
+     *
+     * @return <code>true</code> if this expression is greater than the specified expression, else <code>false</code>
+     */
+    @Override
+    public boolean isGreater(Fraction expression) {
+
+        //TODO
+        throw new UnsupportedOperationException();
+    }
+
+    /**
      * Checks if this number is greater than or equal to the specified number.
      *
      * @param number
@@ -1097,6 +1197,21 @@ public class NumberImpl implements Number {
         Result<Boolean> result = function.calculate(this, number);
 
         return result.result();
+    }
+
+    /**
+     * Checks if this expression is greater than or equal to the specified expression.
+     *
+     * @param expression
+     *        an expression
+     *
+     * @return <code>true</code> if this expression is greater than or equal to the specified expression, else <code>false</code>
+     */
+    @Override
+    public boolean isGreaterOrEqual(Fraction expression) {
+
+        //TODO
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -1118,6 +1233,21 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Checks if this expression is lesser than the specified expression.
+     *
+     * @param expression
+     *        an expression
+     *
+     * @return <code>true</code> if this expression is lesser than the specified expression, else <code>false</code>
+     */
+    @Override
+    public boolean isLesser(Fraction expression) {
+
+        //TODO
+        throw new UnsupportedOperationException();
+    }
+
+    /**
      * Checks if this number is lesser than or equal to the specified number.
      *
      * @param number
@@ -1133,6 +1263,21 @@ public class NumberImpl implements Number {
         Result<Boolean> result = function.calculate(this, number);
 
         return result.result();
+    }
+
+    /**
+     * Checks if this expression is lesser than or equal to the specified expression.
+     *
+     * @param expression
+     *        an expression
+     *
+     * @return <code>true</code> if this expression is lesser than or equal to the specified expression, else <code>false</code>
+     */
+    @Override
+    public boolean isLesserOrEqual(Fraction expression) {
+
+        //TODO
+        throw new UnsupportedOperationException();
     }
 
 }

@@ -123,6 +123,16 @@ interface ArithmeticOperations {
     Number add(Number n);
 
     /**
+     * Adds this number and the specified fraction.
+     *
+     * @param f
+     *        a fraction
+     *
+     * @return a fraction
+     */
+    Fraction add(Fraction f);
+
+    /**
      * Substracts the specified number from this number.
      *
      * @param n
@@ -131,6 +141,16 @@ interface ArithmeticOperations {
      * @return a number
      */
     Number subtract(Number n);
+
+    /**
+     * Substracts the specified fraction from this number.
+     *
+     * @param f
+     *        a fraction
+     *
+     * @return a fraction
+     */
+    Fraction subtract(Fraction f);
 
     /**
      * Multiplies this number with the specified number.
@@ -143,6 +163,16 @@ interface ArithmeticOperations {
     Number multiply(Number n);
 
     /**
+     * Multiplies this number with the specified fraction.
+     *
+     * @param f
+     *        a fraction
+     *
+     * @return a number
+     */
+    Fraction multiply(Fraction f);
+
+    /**
      * Divides this number by the specified number.
      *
      * @param n
@@ -151,6 +181,16 @@ interface ArithmeticOperations {
      * @return an expression (e.g. a quotient, a mixed fraction or integer)
      */
     Fraction divide(Number n);
+
+    /**
+     * Divides this number by the specified fraction.
+     *
+     * @param f
+     *        a fraction
+     *
+     * @return a fraction
+     */
+    Fraction divide(Fraction f);
 
     /**
      * Divides this number by the specified number and returns the remainder of the division.

@@ -278,7 +278,7 @@ public class OperationsWithInvalidParametersTest {
     /**
      * Tests comapring two operands where one operand is <code>null</code>.
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void testCompareNumberAndNull() {
 
         Number n1 = new NumberImpl("1");

@@ -39,7 +39,7 @@ package jmul.math.fraction;
  *
  * @author Kristian Kutin
  */
-public interface ExpressionComparisons {
+public interface FractionComparisons {
 
     /**
      * Checks if this expression is greater than the specified expression.
