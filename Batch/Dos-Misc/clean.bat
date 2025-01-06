@@ -19,11 +19,20 @@
 	echo project dir .... %projectDir%
 	echo.
 
-	for /L %%i in (1, 1, %directory.length%) do (
+	for /L %%i in (1, 1, %directories.length%) do (
 
 		setlocal EnableDelayedExpansion
 
-			call:deleteDirectory !directory[%%i]!
+			call:deleteDirectory !directories[%%i]!
+
+		endlocal
+	)
+
+	for /L %%i in (1, 1, %files.length%) do (
+
+		setlocal EnableDelayedExpansion
+
+			call:deleteFile !files[%%i]!
 
 		endlocal
 	)
@@ -80,14 +89,23 @@
 
 :setUp
 
-	set projectDir=%~dp0..\..\Sources\
+	set rootDir=%~dp0..\..\
+	set projectDir=%rootDir%Sources\
 
-	set directory.length=4
+	set directories.length=5
 
-	set directory[1]=%projectDir%.data\
-	set directory[2]=%projectDir%Number\classes\
-	set directory[3]=%projectDir%Number-Tests\classes\
-	set directory[4]=%projectDir%Version\classes\
+	set directories[1]=%projectDir%.data\
+	set directories[2]=%projectDir%Numbers\classes\
+	set directories[3]=%projectDir%Numbers-Tests\classes\
+	set directories[4]=%projectDir%Version\classes\
+	set directories[5]=%rootDir%tmp\
+
+	set files.length=4
+
+	set files[1]=%rootDir%Batch\Ant-Build\build.log
+	set files[2]=%rootDir%Batch\Ant-Common\build.log
+	set files[3]=%rootDir%Batch\Ant-Execute\build.log
+	set files[4]=%rootDir%Batch\Ant-Deploy\build.log
 
 %return%
 
@@ -101,15 +119,25 @@
 
 :tearDown
 
-	for /L %%i in (1, 1, %directory.length%) do (
+	for /L %%i in (1, 1, %directories.length%) do (
 
-		set directory[%%i]=
+		set directories[%%i]=
 	)
 
-	set directory.length=
+	set directories.length=
+
+
+	for /L %%i in (1, 1, %files.length%) do (
+
+		set files[%%i]=
+	)
+
+	set files.length=
+
 
 	set projectDir=
-
+	set rootDir=
+	
 %return%
 
 
@@ -129,7 +157,7 @@
 	set "_path=%1"
 	if '%_path%'=='' (
 
-		echo No directory has been specified! >&2
+		echo No directory path has been specified! >&2
 		%return% 2
 	)
 	set "_path=%_path:"=%"
@@ -139,6 +167,43 @@
 
 		echo deleting %_path%
 		rmdir /S /Q %_path%
+
+	) else (
+
+		echo %_path% doesn't exist.
+	)
+
+
+	set _path=
+
+%return%
+
+@rem --------------------------------------------------------------------------------
+@rem ---
+@rem ---   void deleteFile(String _path)
+@rem ---
+@rem ---   Deletes the specified file.
+@rem ---
+@rem ---
+@rem ---   @param _path
+@rem ---          the specified path represents a file
+@rem ---
+
+:deleteFile
+
+	set "_path=%1"
+	if '%_path%'=='' (
+
+		echo No file path has been specified! >&2
+		%return% 2
+	)
+	set "_path=%_path:"=%"
+
+
+	if exist %_path% (
+
+		echo deleting %_path%
+		del /S /Q %_path%
 
 	) else (
 

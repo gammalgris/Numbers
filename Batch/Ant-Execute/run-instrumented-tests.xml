@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project xmlns="antlib:org.apache.tools.ant" name="run-instrumented-tests" default="coverage">
+
+
+    <include file="${basedir}\..\Ant-Common\common.xml" />
+    <include file="${basedir}\..\Ant-Common\temp.xml" />
+    <include file="${basedir}\..\Ant-Common\classpath.xml" />
+    <include file="${basedir}\..\Ant-Build\build.xml" />
+    <include file="${basedir}\..\Ant-Build\build-tests.xml" />
+    <include file="${basedir}\..\Ant-Build\build-javadoc.xml" />
+    <include file="${basedir}\..\Ant-Build\build-instrumented.xml" />
+
+
+    <target name="runTests" depends="build-tests.build, build-instrumented.instrument">
+
+        <record name="${build.log}" action="start" />
+
+        <echo />
+        <echo message="-----= run-instrumented-tests.runTests =-----" />
+        <echo />
+
+        <junit printsummary="yes" showoutput="true" fork="yes" dir="${project.tmp.dir}">
+
+            <sysproperty key="net.sourceforge.cobertura.datafile" file="${project.tmp.coverage.file}" />
+
+            <classpath location="${project.tmp.instrumented.dir}" />
+            <classpath refid="numbers-tests.execution.classpath" />
+            <classpath refid="cobertura.execution.classpath" />
+
+            <batchtest todir="${project.tmp.tests-results.dir}">
+                <fileset dir="${project.tmp.tests-src.dir}">
+                  <include name="**/*Test.java" />
+                </fileset>
+            </batchtest>
+
+            <formatter type="xml" usefile="yes" />
+
+        </junit>
+
+
+        <junitreport todir="${project.tmp.tests-report.dir}">
+            <fileset dir="${project.tmp.tests-results.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${project.tmp.tests-report.dir}\html" />
+        </junitreport>
+
+        <record name="${build.log}" action="stop" />
+
+    </target>
+
+
+    <target name="coverage-report">
+
+        <record name="${build.log}" action="start" />
+
+        <echo />
+        <echo message="-----= run-instrumented-tests.coverage-report =-----" />
+        <echo />
+
+        <cobertura-report srcdir="${project.tmp.src.dir}" destdir="${project.tmp.coverage-report.dir}" format="xml" datafile="${project.tmp.coverage.file}" />
+
+        <record name="${build.log}" action="stop" />
+
+    </target>
+
+
+    <target name="summary-coverage-report">
+
+        <record name="${build.log}" action="start" />
+        <cobertura-report srcdir="${project.tmp.src.dir}" destdir="${project.tmp.coverage-summary-report.dir}" format="summaryXml" datafile="${project.tmp.coverage.file}" />
+        <record name="${build.log}" action="stop" />
+
+    </target>
+
+
+    <target name="alternate-coverage-report">
+
+        <record name="${build.log}" action="start" />
+        <cobertura-report destdir="${project.tmp.coverage-alternate-report.dir}" datafile="${project.tmp.coverage.file}">
+            <fileset dir="${project.tmp.src.dir}">
+                <include name="**/*.java"/>
+            </fileset>
+        </cobertura-report>
+        <record name="${build.log}" action="stop" />
+
+    </target>
+
+
+    <target name="coverage" depends="runTests, coverage-report, summary-coverage-report, alternate-coverage-report">
+
+        <record name="${build.log}" action="start" />
+        <echo message="See HTML summary of code coverage: ./tmp/coverage-alternate-report/index.html" />
+        <record name="${build.log}" action="stop" />
+
+	</target>
+
+</project>

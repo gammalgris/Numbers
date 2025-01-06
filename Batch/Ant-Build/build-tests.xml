@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project xmlns="antlib:org.apache.tools.ant" name="build-tests" default="build">
+
+
+    <include file="${basedir}\..\Ant-Common\common.xml" />
+    <include file="${basedir}\..\Ant-Common\temp.xml" />
+    <include file="${basedir}\..\Ant-Common\classpath.xml" />
+    <include file="${basedir}\..\Ant-Build\build.xml" />
+
+
+    <target name="copySources">
+
+        <record name="${build.log}" action="start" />
+
+        <echo />
+        <echo message="-----= build-tests.copySources =-----" />
+        <echo />
+
+        <copy todir="${project.tmp.tests-src.dir}" overwrite="true">
+            <fileset dir="${package.numbers-tests.src.dir}">
+                <include name="**/*.java" />
+            </fileset>
+        </copy>
+
+        <record name="${build.log}" action="stop" />
+
+    </target>
+
+
+    <target name="copyResources">
+
+        <record name="${build.log}" action="start" />
+
+        <echo />
+        <echo message="-----= build-tests.copyResources =-----" />
+        <echo />
+
+        <!-- Currently there exist no configuration files for the tests. -->
+
+        <record name="${build.log}" action="stop" />
+
+    </target>
+
+
+    <target name="build" depends="build.build, copySources, copyResources">
+
+        <record name="${build.log}" action="start" />
+
+        <echo />
+        <echo message="-----= build-tests.build =-----" />
+        <echo />
+
+        <javac includeantruntime="false" target="${project.java.version}" srcdir="${project.tmp.tests-src.dir}" destdir="${project.tmp.tests-build.dir}" verbose="true" classpathref="numbers-tests.build.classpath" debug="on" />
+
+        <record name="${build.log}" action="stop" />
+
+    </target>
+
+
+</project>

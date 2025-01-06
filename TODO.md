@@ -13,3 +13,9 @@
    number and fraction paramaters).
 
 5) Consider allowing different algorithms for some arithmetic operations (e.g. division).
+
+6) Review unit tests and implement the toString method with a test description.
+
+7) Consolidate package structure. Remove superfluous packages.
+
+8) Add a clean script for bash.

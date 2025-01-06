@@ -1,66 +1,35 @@
 
 # Overview
 
-This project experiments with a new number implementation which combines integers and
-floating point numbers into one data type. Additionally numerical systems with different
-number bases are supported.
+The project goal is to create a math library with a custom number type. The
+main motivation is to refresh math skills.
 
-At the same time this is a math exercise to refresh math skills.
+The central component of this library is a custom number type which is similar
+to a string but consists of a linked list of digits.
 
-# Programming Language
+In order to avoid duplicate implementations of functions, functions are stored
+as objects and are used when a calculation needs to be done.
 
-Java is used as programming language (Version 8+).
+Implemented requirements:
 
-# Directory Structure
+* A custom number implementation with higher precision and which represents
+  both integers and floating point numbers.
+* The current algorithm for determining digit sets is resticted to digits,
+  lower case letters and upper case letters.
+* Working with numbers with different number bases (i.e. base 2 and upwards).
+* Implemented arithmetic operations: addition, subtraction, multiplication,
+  division (simple division with a fraction type result)
+* A custom fraction type.
 
-The project cotnains following sub directories:
+Future Requirements:
 
-* Batch
-* Docs
-* Libraries
-* Sources
-
-## Batch
-
-Contains build, deployment and utility scripts. Scripts are provided for various operating systems.
-
-TODO - work in progres -
-
-## Docs
-
-Contains some project documentation.
-
-TODO - work in progres -
-
-## Libraries
-
-Contains libraries that are statically included.
-
-## Sources
-
-Contains the source code, unit tests and a small web documentation and tutorial for this project.
-
-TODO - work in progres -
-
-
-# Development Environment
-
-## My Setup
-
-I use following tools for development:
-
-* SmartGit
-* Oracle JDeveloper
-* JUnit
-* Ant
-* SonarQube
-
-I use following operating systems for development:
-
-* Windows
-* Solaris
-
-## Alternative Setups
-
-The source code is divided into different sub projects (source, test, version, web documentation, etc.).
-Look at the dependency files for dependencies regarding subprojects and libraries.
+* Specifying custom symbol sets for digits of a specific number base.
+* Negative number bases
+* Arithmetic operations: division (various algorithms), exponentiation
+* Logarithmic operations
+* Trigonimetric operations
+* vector arithmetic
+* matrix arithmetic
+* formula parsing (see jmul library submodule formula)
+* a composite type of a number with a measurement unit (see jmul library
+  submodule measurement units)

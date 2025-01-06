@@ -25,7 +25,8 @@
    </list>
    <list n="listOfChildren">
       <hash><url n="URL" path="../Batch/Batch.jpr"/></hash>
-      <hash><url n="URL" path="Number/Number.jpr"/></hash>
-      <hash><url n="URL" path="Number-Tests/Number-Tests.jpr"/></hash>
+      <hash><url n="URL" path="Numbers/Numbers.jpr"/></hash>
+      <hash><url n="URL" path="Numbers-Tests/Numbers-Tests.jpr"/></hash>
+      <hash><url n="URL" path="Version/Version.jpr"/></hash>
    </list>
 </jws:workspace>
