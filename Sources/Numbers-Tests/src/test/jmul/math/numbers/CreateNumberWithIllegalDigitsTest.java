@@ -39,9 +39,9 @@ import java.util.Collection;
 
 import static jmul.math.Constants.MAX_BASE;
 import static jmul.math.Constants.MIN_BASE;
+import jmul.math.digits.Digit;
+import jmul.math.digits.PositionalNumeralSystems;
 import jmul.math.numbers.NumberImpl;
-import jmul.math.numbers.digits.Digit;
-import jmul.math.numbers.digits.PositionalNumeralSystems;
 import jmul.math.numbers.exceptions.NumberParsingException;
 
 import jmul.test.classification.UnitTest;

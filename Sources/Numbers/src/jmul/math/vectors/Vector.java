@@ -35,6 +35,7 @@ package jmul.math.vectors;
 
 
 import jmul.math.numbers.Number;
+import jmul.math.operations.VectorOperations;
 
 
 /**

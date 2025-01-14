@@ -35,7 +35,7 @@ package jmul.math.functions;
 
 
 /**
- * This is a marker interface marking a function implementation (see strategy pattern).
+ * This is a marker interface marking a function class.
  *
  * @author Kristian Kutin
  */

@@ -34,13 +34,12 @@
 package test.jmul.math.functions;
 
 
-import jmul.math.numbers.FunctionIdentifiers;
-
 import jmul.math.functions.Function;
-import jmul.math.functions.FunctionDoesntExistException;
-import jmul.math.functions.FunctionExistsException;
-import jmul.math.functions.FunctionRepository;
-import jmul.math.functions.FunctionRepositoryImpl;
+import jmul.math.functions.repository.FunctionDoesntExistException;
+import jmul.math.functions.repository.FunctionExistsException;
+import jmul.math.functions.repository.FunctionIdentifiers;
+import jmul.math.functions.repository.FunctionRepository;
+import jmul.math.functions.repository.FunctionRepositoryImpl;
 
 import jmul.test.classification.UnitTest;
 

@@ -38,8 +38,8 @@ import java.util.regex.Pattern;
 
 import jmul.math.numbers.Sign;
 import jmul.math.numbers.Signs;
-import jmul.math.numbers.digits.Digit;
-import jmul.math.numbers.digits.PositionalNumeralSystems;
+import jmul.math.digits.Digit;
+import jmul.math.digits.PositionalNumeralSystems;
 import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.NodesHelper;
 

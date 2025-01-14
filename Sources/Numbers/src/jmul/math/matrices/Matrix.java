@@ -35,6 +35,7 @@ package jmul.math.matrices;
 
 
 import jmul.math.numbers.Number;
+import jmul.math.operations.MatrixOperations;
 import jmul.math.vectors.Vector;
 
 

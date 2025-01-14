@@ -36,9 +36,9 @@ package jmul.math;
 
 import java.util.Comparator;
 
-import jmul.math.fraction.Fraction;
+import jmul.math.fractions.Fraction;
 import jmul.math.functions.FunctionSingletons;
-import jmul.math.numbers.FunctionIdentifiers;
+import jmul.math.functions.repository.FunctionIdentifiers;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
 import jmul.math.operations.BinaryOperation;

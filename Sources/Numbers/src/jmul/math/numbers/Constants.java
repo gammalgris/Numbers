@@ -83,6 +83,7 @@ public final class Constants {
     /**
      * A character representing zero.
      */
+    @Deprecated
     public static final char ZERO;
 
     /*

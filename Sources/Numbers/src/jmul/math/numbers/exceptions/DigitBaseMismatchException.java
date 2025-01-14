@@ -34,9 +34,9 @@
 package jmul.math.numbers.exceptions;
 
 
-import jmul.math.fraction.Fraction;
+import jmul.math.fractions.Fraction;
 import jmul.math.numbers.Number;
-import jmul.math.numbers.digits.Digit;
+import jmul.math.digits.Digit;
 
 
 /**

@@ -34,8 +34,8 @@
 package jmul.math.numbers.nodes;
 
 
-import jmul.math.numbers.digits.Digit;
-import jmul.math.numbers.digits.PositionalNumeralSystems;
+import jmul.math.digits.Digit;
+import jmul.math.digits.PositionalNumeralSystems;
 
 import jmul.metainfo.annotations.Modified;
 

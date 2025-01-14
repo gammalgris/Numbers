@@ -39,13 +39,10 @@ import java.util.Collection;
 
 import static jmul.math.Constants.MAX_BASE;
 import static jmul.math.Constants.MIN_BASE;
-import jmul.math.fraction.Fraction;
-import jmul.math.numbers.Number;
-
+import static jmul.math.fractions.FractionHelper.DONT_CLONE;
+import static jmul.math.fractions.FractionHelper.createFraction;
 import jmul.math.numbers.NumberImpl;
 import static jmul.math.numbers.Signs.NEGATIVE;
-import static jmul.math.fraction.FractionHelper.DONT_CLONE;
-import static jmul.math.fraction.FractionHelper.createFraction;
 
 import jmul.test.classification.UnitTest;
 

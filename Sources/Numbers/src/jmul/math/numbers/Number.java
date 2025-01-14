@@ -34,8 +34,10 @@
 package jmul.math.numbers;
 
 
-import jmul.math.fraction.FractionComparisons;
 import jmul.math.numbers.nodes.LinkedDigitList;
+import jmul.math.operations.ArithmeticNumberOperations;
+import jmul.math.operations.FractionComparisons;
+import jmul.math.operations.NumberComparisons;
 
 
 /**
@@ -54,7 +56,7 @@ import jmul.math.numbers.nodes.LinkedDigitList;
  *
  * @author Kristian Kutin
  */
-public interface Number extends LinkedDigitList, NumberProperties, ArithmeticOperations, NumberComparisons,
+public interface Number extends LinkedDigitList, NumberProperties, ArithmeticNumberOperations, NumberComparisons,
                                 FractionComparisons, Comparable {
 
     /**

@@ -36,6 +36,10 @@ package jmul.math.functions;
 
 import java.util.ResourceBundle;
 
+import jmul.math.functions.repository.FunctionIdentifier;
+import jmul.math.functions.repository.FunctionRepository;
+import jmul.math.functions.repository.FunctionRepositoryInitializer;
+
 
 /**
  * This class manages function singletons (i.e. instances of classes that implement a strategy pattern) and shouldn't

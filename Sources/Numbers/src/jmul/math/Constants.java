@@ -38,7 +38,10 @@ package jmul.math;
  * This class contains various constants.
  *
  * @author Kristian Kutin
+ * 
+ * @deprecated Conflicts with jmul.math.Constants from library jmul
  */
+@Deprecated
 public final class Constants {
 
     /**

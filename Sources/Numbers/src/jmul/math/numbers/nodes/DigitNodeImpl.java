@@ -36,11 +36,9 @@ package jmul.math.numbers.nodes;
 
 import java.util.List;
 
-import jmul.math.MathHelper;
 import jmul.math.bool.BooleanHelper;
+import jmul.math.digits.Digit;
 import jmul.math.hash.HashHelper;
-import jmul.math.numbers.Number;
-import jmul.math.numbers.digits.Digit;
 
 
 /**
@@ -169,10 +167,10 @@ class DigitNodeImpl implements DigitNode {
 
     /**
      * Checks the equality of this node with the speicified object.
-     * 
+     *
      * @param o
      *        another object
-     * 
+     *
      * @return <code>true</code> if this node and the specified object are the same or represent the same number,
      *         else <code>false</code>
      */
@@ -183,18 +181,18 @@ class DigitNodeImpl implements DigitNode {
 
             return false;
         }
-        
+
         if (this == o) {
 
             return true;
         }
 
         if (!(o instanceof DigitNode)) {
-            
+
             return false;
         }
 
-        DigitNode other = (DigitNode)o;
+        DigitNode other = (DigitNode) o;
 
         if (this.digit() != other.digit()) {
 
@@ -254,7 +252,7 @@ class DigitNodeImpl implements DigitNode {
 
     /**
      * Calculates a hash code for this node (i.e. and the whole linked list).
-     * 
+     *
      * @return a hash code
      */
     @Override
@@ -289,7 +287,7 @@ class DigitNodeImpl implements DigitNode {
         node = rightNode();
 
         while (node != null) {
-            
+
             n = digit().hashCode();
             hash = secondPrime * hash + n;
 

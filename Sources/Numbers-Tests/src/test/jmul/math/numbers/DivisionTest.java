@@ -39,8 +39,8 @@ import java.util.Collection;
 
 import jmul.math.Constants;
 import jmul.math.Math;
-import jmul.math.fraction.Fraction;
-import static jmul.math.fraction.FractionHelper.createFraction;
+import jmul.math.fractions.Fraction;
+import static jmul.math.fractions.FractionHelper.createFraction;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
 
