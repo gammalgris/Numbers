@@ -36,6 +36,8 @@ package jmul.math.numbers;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
+import java.util.ResourceBundle;
+
 
 /**
  * This class contains various constant values.
@@ -43,6 +45,8 @@ import java.text.DecimalFormatSymbols;
  * @author Kristian Kutin
  */
 public final class Constants {
+
+    public static final int DEFAULT_BASE;
 
     /**
      * Theabbreviation for an exponent in a scientific notation.
@@ -91,6 +95,8 @@ public final class Constants {
      */
     static {
 
+        DEFAULT_BASE = PropertiesLookup.defaultBase();
+
         ZERO = '0';
 
         EXPONENT_ABBREVIATION = "E";
@@ -106,7 +112,7 @@ public final class Constants {
 
         DECIMAL_SEPARATOR = symbols.getDecimalSeparator();
 
-        INFINITY_REPRESENTATION = "infinity";
+        INFINITY_REPRESENTATION = PropertiesLookup.infinityRepresentation();
     }
 
     /**
@@ -115,6 +121,86 @@ public final class Constants {
     private Constants() {
 
         throw new UnsupportedOperationException();
+    }
+
+}
+
+/**
+ * A utility class to look up certain properties.
+ *
+ * @author Kristian Kutin
+ */
+final class PropertiesLookup {
+
+    /**
+     * Constains the name of the resource bundle.
+     */
+    private static final String BUNDLE_NAME;
+
+    /**
+     * Contains the key for a property.
+     */
+    private static final String DEFAULT_BASE_KEY;
+
+    /**
+     * Contains the key for a property.
+     */
+    private static final String INFINITY_REPRESENTATION_KEY;
+
+    /*
+     * The static initializer.
+     */
+    static {
+
+        BUNDLE_NAME = Number.class.getName();
+
+        DEFAULT_BASE_KEY = "default-base";
+        INFINITY_REPRESENTATION_KEY = "infinity-representation";
+    }
+
+    /**
+     * The default constructor.
+     */
+    private PropertiesLookup() {
+
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * Returns a resource bundle.
+     *
+     * @return a resource bundle
+     */
+    private static ResourceBundle getBundle() {
+
+        return ResourceBundle.getBundle(BUNDLE_NAME);
+    }
+
+    /**
+     * Returns the default base for new numbers.
+     *
+     * @return a number base
+     */
+    public static int defaultBase() {
+
+        ResourceBundle bundle = getBundle();
+        String value = bundle.getString(DEFAULT_BASE_KEY);
+        int base = Integer.parseInt(value);
+
+        return base;
+    }
+
+    /**
+     * Returns a represenration for infinity.
+     *
+     * @return a string representation for infinity
+     */
+    public static String infinityRepresentation() {
+
+        ResourceBundle bundle = getBundle();
+        String value = bundle.getString(INFINITY_REPRESENTATION_KEY);
+
+        return value;
     }
 
 }

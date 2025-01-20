@@ -45,6 +45,7 @@ import jmul.math.functions.FunctionSingletons;
 import jmul.math.functions.repository.FunctionIdentifier;
 import jmul.math.functions.repository.FunctionIdentifiers;
 import jmul.math.hash.HashHelper;
+import static jmul.math.numbers.Constants.DEFAULT_BASE;
 import static jmul.math.numbers.ParameterHelper.checkBase;
 import static jmul.math.numbers.ParameterHelper.checkSign;
 import jmul.math.numbers.exceptions.NumberParsingException;
@@ -77,11 +78,6 @@ import jmul.math.operations.UnaryOperation;
 public class NumberImpl implements Number {
 
     /**
-     * The default base if none is specified.
-     */
-    private static final int DEFAULT_BASE;
-
-    /**
      * A list of parser functions.
      */
     private static final List<FunctionIdentifier> PARSER_FUNCTION_LIST;
@@ -90,8 +86,6 @@ public class NumberImpl implements Number {
      * The static initializer.
      */
     static {
-
-        DEFAULT_BASE = 10;
 
         List<FunctionIdentifiers> tmpList = new ArrayList<>();
 
