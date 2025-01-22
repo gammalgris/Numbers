@@ -41,7 +41,10 @@ import java.util.List;
  * This interface describes an entity which represents a number notation.
  *
  * @author Kristian Kutin
+ * 
+ * @deprecated The regex currently ignores the various number bases. Needs Rework.
  */
+@Deprecated
 public interface Notation {
 
     /**
