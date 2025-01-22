@@ -31,7 +31,7 @@
  * $Id$
  */
 
-package test.jmul.math.digits;
+package test.jmul.math.numbers;
 
 
 import java.lang.reflect.InvocationTargetException;

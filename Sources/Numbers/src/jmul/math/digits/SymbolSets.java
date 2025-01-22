@@ -38,8 +38,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static jmul.math.Constants.MAX_BASE;
-import static jmul.math.Constants.MIN_BASE;
+import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
+import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 
 
 /**
@@ -76,7 +76,7 @@ public class SymbolSets {
 
         List<Character> symbols = new ArrayList<>();
 
-        for (int a = 0; a <= MAX_BASE; a++) {
+        for (int a = 0; a <= BASE_MAX_LIMIT; a++) {
 
             if (a < 10) {
 
@@ -108,7 +108,7 @@ public class SymbolSets {
      */
     public char[] subset(int base) {
 
-        if ((base < MIN_BASE) || (base > MAX_BASE)) {
+        if ((base < BASE_MIN_LIMIT) || (base > BASE_MAX_LIMIT)) {
 
             String message = String.format("Unsuported base %d!", base);
             throw new IllegalArgumentException(message);

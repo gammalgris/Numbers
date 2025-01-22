@@ -34,15 +34,11 @@
 package jmul.math.digits;
 
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
 
 
 /**
@@ -96,7 +92,7 @@ class GenericPositionalNumeralSystem implements PositionalNumeralSystem {
             }
             processedSymbols.add(symbol);
 
-            Digit digit = new GenericDigit(symbol, base, ordinalNumber);
+            Digit digit = new GenericDigit(base, ordinalNumber, symbol);
 
             charMap.put(symbol, digit);
             ordinalMap.put(ordinalNumber, digit);
@@ -168,6 +164,23 @@ class GenericPositionalNumeralSystem implements PositionalNumeralSystem {
 
         String message = String.format("positional numeral System : base %d", base());
         return message;
+    }
+
+    /**
+     * Find a digit that corresponds to the specified ordinal number and returns
+     * the associated symbol.
+     *
+     * @param ordinal
+     *        an ordinal number
+     *
+     * @return a symbol
+     */
+    @Override
+    public char ordinalToSymbol(int ordinal) {
+
+        Digit digit = ordinalToDigit(ordinal);
+
+        return digit.symbol();
     }
 
 }

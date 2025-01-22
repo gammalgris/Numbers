@@ -37,11 +37,11 @@ package test.jmul.math.numbers;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import static jmul.math.Constants.MAX_BASE;
-import static jmul.math.Constants.MIN_BASE;
 import jmul.math.Math;
 import jmul.math.digits.Digit;
 import jmul.math.digits.PositionalNumeralSystems;
+import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
+import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
 
@@ -223,7 +223,7 @@ public class HalvingNumberTest {
         parameters.add(new Object[] { 2, "100", "10" });
         parameters.add(new Object[] { 2, "-100", "-10" });
 
-        for (int base = MIN_BASE + 1; base <= MAX_BASE; base++) {
+        for (int base = BASE_MIN_LIMIT + 1; base <= BASE_MAX_LIMIT; base++) {
 
             parameters.add(new Object[] { base, "0", "0" });
             parameters.add(new Object[] { base, "-0", "0" });

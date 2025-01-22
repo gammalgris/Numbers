@@ -39,7 +39,6 @@ import java.util.regex.Pattern;
 
 import jmul.math.digits.Digit;
 import jmul.math.digits.PositionalNumeralSystems;
-import static jmul.math.numbers.Constants.ZERO;
 import jmul.math.numbers.Sign;
 import jmul.math.numbers.Signs;
 import jmul.math.numbers.nodes.DigitNode;
@@ -110,12 +109,13 @@ public class StandardNotationParserImpl implements NotationParser {
             sign = Signs.findBySymbol(symbol);
         }
 
-        String trimmedLeftString = trimLeftString(leftString);
+        char zeroSymbol = PositionalNumeralSystems.ordinalToSymbol(base, 0);
+        String trimmedLeftString = trimLeftString(leftString, zeroSymbol);
         DigitNode nodeLeft = parseLeftString(base, trimmedLeftString);
 
         if (rightString != null) {
 
-            String trimmedRightString = trimRightString(rightString);
+            String trimmedRightString = trimRightString(rightString, zeroSymbol);
             DigitNode nodeRight = parseRightString(base, trimmedRightString);
             NodesHelper.linkNodes(nodeLeft, nodeRight);
         }
@@ -129,10 +129,12 @@ public class StandardNotationParserImpl implements NotationParser {
      *
      * @param string
      *        a string
+     * @param zeroSymbol
+     *        a symbol for zero (i.e. the digit with the ordinal value of 0)
      *
      * @return a trimmed string
      */
-    private String trimLeftString(String string) {
+    private String trimLeftString(String string, char zeroSymbol) {
 
         int lastIndex = string.length() - 1;
         int index = 0;
@@ -141,7 +143,7 @@ public class StandardNotationParserImpl implements NotationParser {
 
             char c = string.charAt(i);
 
-            if (c != ZERO) {
+            if (c != zeroSymbol) {
 
                 index = i;
                 break;
@@ -194,10 +196,12 @@ public class StandardNotationParserImpl implements NotationParser {
      *
      * @param string
      *        a string
+     * @param zeroSymbol
+     *        a symbol for zero (i.e. the digit with the ordinal value of 0)
      *
      * @return a trimmed string
      */
-    private String trimRightString(String string) {
+    private String trimRightString(String string, char zeroSymbol) {
 
         int length = string.length();
 
@@ -206,7 +210,7 @@ public class StandardNotationParserImpl implements NotationParser {
             int startIndex = 0;
             char c = string.charAt(startIndex);
 
-            if (c == ZERO) {
+            if (c == zeroSymbol) {
 
                 return "";
 
@@ -224,7 +228,7 @@ public class StandardNotationParserImpl implements NotationParser {
 
             char c = string.charAt(i);
 
-            if (c != ZERO) {
+            if (c != zeroSymbol) {
 
                 index = i;
                 break;

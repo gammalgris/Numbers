@@ -68,4 +68,15 @@ public interface PositionalNumeralSystem {
      */
     Digit charToDigit(char symbol);
 
+    /**
+     * Find a digit that corresponds to the specified ordinal number and returns
+     * the associated symbol.
+     *
+     * @param ordinal
+     *        an ordinal number
+     *
+     * @return a symbol
+     */
+    char ordinalToSymbol(int ordinal);
+
 }

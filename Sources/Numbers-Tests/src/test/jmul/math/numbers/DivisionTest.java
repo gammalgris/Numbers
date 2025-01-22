@@ -37,10 +37,11 @@ package test.jmul.math.numbers;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import jmul.math.Constants;
 import jmul.math.Math;
 import jmul.math.fractions.Fraction;
 import static jmul.math.fractions.FractionHelper.createFraction;
+import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
+import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
 
@@ -218,7 +219,7 @@ public class DivisionTest {
 
         parameters.add(new Object[] { 10, "10", "3", createFraction(10, "3", "1", "3") });
 
-        for (int base = Constants.MIN_BASE; base <= Constants.MAX_BASE; base++) {
+        for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
 
             //TODO
         }

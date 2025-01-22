@@ -34,7 +34,9 @@
 package jmul.math.digits;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -48,7 +50,7 @@ public class PositionalNumeralSystems {
     /**
      * A singleton containing all allowed symbols.
      */
-    private static SymbolSets SYMBOL_SETS;
+    private static SymbolSets DEFAULT_SYMBOL_SETS;
 
     /**
      * A singleton containing all currently used positional numeral systems.
@@ -60,7 +62,7 @@ public class PositionalNumeralSystems {
      */
     static {
 
-        SYMBOL_SETS = new SymbolSets();
+        DEFAULT_SYMBOL_SETS = new SymbolSets();
         POSITIONAL_NUMERAL_SYSTEMS_MAP = new HashMap<>();
     }
 
@@ -81,12 +83,78 @@ public class PositionalNumeralSystems {
 
         } else {
 
-            char[] symbols = SYMBOL_SETS.subset(base);
+            char[] symbols = DEFAULT_SYMBOL_SETS.subset(base);
             system = new GenericPositionalNumeralSystem(symbols);
             POSITIONAL_NUMERAL_SYSTEMS_MAP.put(base, system);
         }
 
         return system;
+    }
+
+    /**
+     * Adds a positional numeral system with the specified symbol set. A symbol set should not contain
+     * duplicate symbols in order to avoid ambiguities.
+     * The method doesn't override an already existing positional numeral system with the same number
+     * base.
+     *
+     * @param symbols
+     *        a symbol set. The size of the set defines the number base.
+     */
+    public static void addPositionalNumeralSystemWithCustomSymbols(char... symbols) {
+
+        checkCustomSymbolSet(symbols);
+
+        int base = symbols.length;
+
+        if (!POSITIONAL_NUMERAL_SYSTEMS_MAP.containsKey(base)) {
+
+            PositionalNumeralSystem system = new GenericPositionalNumeralSystem(symbols);
+            POSITIONAL_NUMERAL_SYSTEMS_MAP.put(base, system);
+        }
+    }
+
+    /**
+     * Checks the specified symbol set.
+     *
+     * @param symbols
+     *        a symbol set
+     *
+     * @return the specified symbol set
+     */
+    private static char[] checkCustomSymbolSet(char[] symbols) {
+
+        if (symbols == null) {
+
+            throw new IllegalArgumentException("No symbols (null) were specified!");
+        }
+
+        if (symbols.length == 0) {
+
+            throw new IllegalArgumentException("No symbols (empty array) were specified!");
+        }
+
+        List<Character> uniqueSymbols = new ArrayList<>();
+        List<Character> duplicateSymbols = new ArrayList<>();
+
+        for (char symbol : symbols) {
+
+            if (uniqueSymbols.contains(symbol)) {
+
+                duplicateSymbols.add(symbol);
+
+            } else {
+
+                uniqueSymbols.add(symbol);
+            }
+        }
+
+        if (!duplicateSymbols.isEmpty()) {
+
+            String message = String.format("Duplicate symbols: %s", duplicateSymbols);
+            throw new IllegalArgumentException(message);
+        }
+
+        return symbols;
     }
 
     /**
@@ -106,6 +174,24 @@ public class PositionalNumeralSystems {
     }
 
     /**
+     * Retrieves the digit for the specified ordinal number with the specified number
+     * base and returns the associated symbol.
+     *
+     * @param base
+     *        the base of a numeral system
+     * @param ordinal
+     *        an ordinal number representing the digit within the numeral system
+     *
+     * @return a symbol
+     */
+    public static char ordinalToSymbol(int base, int ordinal) {
+
+        PositionalNumeralSystem numeralSystem = getPositionalNumeralSystem(base);
+
+        return numeralSystem.ordinalToSymbol(ordinal);
+    }
+
+    /**
      * Translates the specified character to a digit with the specified base.
      *
      * @param base
@@ -119,6 +205,29 @@ public class PositionalNumeralSystems {
 
         PositionalNumeralSystem numeralSystem = getPositionalNumeralSystem(base);
         return numeralSystem.charToDigit(symbol);
+    }
+
+    /**
+     * Returns a list of symbols which can be used within a regex. The symbols
+     * are ordered from left to right in ascending order (see ordinal value).
+     *
+     * @param base
+     *        the base of a numeral system
+     *
+     * @return a string containg all symbols in ascending order (see ordinal values)
+     */
+    public static String baseToRegex(int base) {
+
+        PositionalNumeralSystem numeralSystem = getPositionalNumeralSystem(base);
+
+        StringBuilder buffer = new StringBuilder();
+        for (int ordinal = 0; ordinal < base; ordinal++) {
+
+            char symbol = numeralSystem.ordinalToSymbol(ordinal);
+            buffer.append(symbol);
+        }
+
+        return buffer.toString();
     }
 
 }

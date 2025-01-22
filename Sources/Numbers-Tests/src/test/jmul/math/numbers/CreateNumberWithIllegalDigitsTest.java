@@ -37,10 +37,10 @@ package test.jmul.math.numbers;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import static jmul.math.Constants.MAX_BASE;
-import static jmul.math.Constants.MIN_BASE;
 import jmul.math.digits.Digit;
 import jmul.math.digits.PositionalNumeralSystems;
+import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
+import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.NumberImpl;
 import jmul.math.numbers.exceptions.NumberParsingException;
 
@@ -166,21 +166,21 @@ public class CreateNumberWithIllegalDigitsTest {
 
         // Test boundaries
         parameters.add(new Object[] { NumberParsingException.class, 1, "1" });
-        parameters.add(new Object[] { NumberParsingException.class, MAX_BASE + 1, "1" });
+        parameters.add(new Object[] { NumberParsingException.class, BASE_MAX_LIMIT + 1, "1" });
 
         // Test text input
-        parameters.add(new Object[] { NumberParsingException.class, MAX_BASE, "Hello World!" });
+        parameters.add(new Object[] { NumberParsingException.class, BASE_MAX_LIMIT, "Hello World!" });
 
         // Test mixed input (i.e. number and text)
         parameters.add(new Object[] { NumberParsingException.class, 10, "Hello 10" });
         parameters.add(new Object[] { NumberParsingException.class, 10, "10 World" });
 
-        String numberString = buildNumberString(MAX_BASE);
+        String numberString = buildNumberString(BASE_MAX_LIMIT);
         numberString = numberString + "!";
-        parameters.add(new Object[] { NumberParsingException.class, MAX_BASE, numberString });
+        parameters.add(new Object[] { NumberParsingException.class, BASE_MAX_LIMIT, numberString });
 
         // Test input with digits from a higher base
-        for (int base = MIN_BASE; base <= MAX_BASE - 1; base++) {
+        for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT - 1; base++) {
 
             parameters.add(new Object[] { NumberParsingException.class, base, buildNumberString(base + 1) });
         }

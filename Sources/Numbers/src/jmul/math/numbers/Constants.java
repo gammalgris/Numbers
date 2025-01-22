@@ -84,20 +84,12 @@ public final class Constants {
      */
     public static final String INFINITY_REPRESENTATION;
 
-    /**
-     * A character representing zero.
-     */
-    @Deprecated
-    public static final char ZERO;
-
     /*
      * The static initializer,.
      */
     static {
 
         DEFAULT_BASE = PropertiesLookup.defaultBase();
-
-        ZERO = '0';
 
         EXPONENT_ABBREVIATION = "E";
 

@@ -20,11 +20,12 @@
 
 8) Add a clean script for bash.
 
-9) Multiple classes of jmul.math.Constants cause a conflict.
-	marked the class as deprecated
-	the allowed number bases have to be moved to the positional numeral systems
 
 # Done
 
 7) Consolidate package structure. Remove superfluous packages.
 	Reorganized the package structure.
+
+9) Multiple classes of jmul.math.Constants cause a conflict.
+	marked the class as deprecated
+	the allowed number bases have to be moved to the positional numeral systems

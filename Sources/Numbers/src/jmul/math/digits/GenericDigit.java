@@ -85,20 +85,20 @@ class GenericDigit implements Digit {
     /**
      * Creates a new digit according to the specified parameters.
      *
-     * @param symbol
-     *        the symbol for this digit
      * @param base
      *        the base of a positional numeral system
      * @param ordinal
      *        the corresponding ordinal number
+     * @param symbol
+     *        the symbol for this digit
      */
-    public GenericDigit(char symbol, int base, int ordinal) {
+    public GenericDigit(int base, int ordinal, char symbol) {
 
         super();
 
-        this.symbol = symbol;
         this.base = base;
         this.ordinal = ordinal;
+        this.symbol = symbol;
     }
 
     /**
@@ -167,16 +167,12 @@ class GenericDigit implements Digit {
     @Override
     public boolean equals(Object o) {
 
-        if (o == null) {
-
-            return false;
-        }
-
         if (o instanceof Digit) {
 
+            Digit other = (Digit) o;
             EqualityFunction<Digit> function =
                 (EqualityFunction<Digit>) FunctionSingletons.getFunction(FunctionIdentifiers.DIGIT_EQUALITY_FUNCTION);
-            boolean result = function.equals(this, (Digit) o);
+            boolean result = function.equals(this, other);
 
             return result;
         }

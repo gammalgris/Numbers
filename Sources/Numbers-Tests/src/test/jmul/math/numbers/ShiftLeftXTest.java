@@ -37,9 +37,9 @@ package test.jmul.math.numbers;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import static jmul.math.Constants.MAX_BASE;
-import static jmul.math.Constants.MIN_BASE;
 import jmul.math.Math;
+import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
+import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
 
@@ -227,7 +227,7 @@ public class ShiftLeftXTest {
 
         Collection<Object[]> parameters = new ArrayList<Object[]>();
 
-        for (int base = MIN_BASE; base <= MAX_BASE; base++) {
+        for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
 
             parameters.add(new Object[] { base, "0", "1", "0" });
             parameters.add(new Object[] { base, "-0", "1", "-0" });
@@ -251,7 +251,7 @@ public class ShiftLeftXTest {
             parameters.add(new Object[] { base, "-1.1010101", "1", "-0.11010101" });
         }
 
-        for (int base = MIN_BASE + 1; base <= MAX_BASE; base++) {
+        for (int base = BASE_MIN_LIMIT + 1; base <= BASE_MAX_LIMIT; base++) {
 
             parameters.add(new Object[] { base, "0", "2", "0" });
             parameters.add(new Object[] { base, "-0", "2", "-0" });
@@ -269,7 +269,7 @@ public class ShiftLeftXTest {
             parameters.add(new Object[] { base, "-2.1212", "2", "-0.021212" });
         }
 
-        for (int base = MIN_BASE + 2; base <= MAX_BASE; base++) {
+        for (int base = BASE_MIN_LIMIT + 2; base <= BASE_MAX_LIMIT; base++) {
 
             parameters.add(new Object[] { base, "0", "3", "0" });
             parameters.add(new Object[] { base, "-0", "3", "-0" });

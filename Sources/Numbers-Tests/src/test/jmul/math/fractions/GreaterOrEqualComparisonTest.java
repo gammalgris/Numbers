@@ -37,11 +37,11 @@ package test.jmul.math.fractions;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import static jmul.math.Constants.MAX_BASE;
-import static jmul.math.Constants.MIN_BASE;
 import jmul.math.Math;
 import jmul.math.fractions.Fraction;
 import static jmul.math.fractions.FractionHelper.createFraction;
+import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
+import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 
 import jmul.test.classification.UnitTest;
 
@@ -137,7 +137,7 @@ public class GreaterOrEqualComparisonTest {
 
         Collection<Object[]> parameters = new ArrayList<Object[]>();
 
-        for (int base = MIN_BASE; base <= MAX_BASE; base++) {
+        for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
 
             parameters.add(new Object[] { createFraction(base, "1", "10"), createFraction(base, "1", "100"), true });
             parameters.add(new Object[] { createFraction(base, "1", "10"), createFraction(base, "1", "10"), true });

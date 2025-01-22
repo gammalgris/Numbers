@@ -34,10 +34,10 @@
 package jmul.math.numbers.notations;
 
 
+import jmul.math.digits.PositionalNumeralSystems;
 import jmul.math.numbers.Constants;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.nodes.DigitNode;
-import static jmul.math.numbers.Constants.ZERO;
 
 
 /**
@@ -80,6 +80,9 @@ public class ScientificNotationFunctionImpl implements NotationFunction {
 
         } else {
 
+            int base = number.base();
+            char zeroSymbol = PositionalNumeralSystems.ordinalToSymbol(base, 0);
+
             TraversalResult result = traverseNumber(number.centerNode());
 
             DigitNode relativeCenter = result.relativeCenter();
@@ -98,7 +101,7 @@ public class ScientificNotationFunctionImpl implements NotationFunction {
                 nextNode = nextNode.rightNode();
             }
 
-            CharSequence trimmedRight = trimRightSide(buffer);
+            CharSequence trimmedRight = trimRightSide(buffer, zeroSymbol);
             buffer = new StringBuilder(trimmedRight);
 
             buffer.append(Constants.EXPONENT_ABBREVIATION);
@@ -171,10 +174,12 @@ public class ScientificNotationFunctionImpl implements NotationFunction {
      *
      * @param string
      *        a string
+     * @param zeroSymbol
+     *        a symbol for zero (i.e. the digit with the ordinal value of 0)
      *
      * @return a trimmed string
      */
-    private CharSequence trimRightSide(CharSequence string) {
+    private CharSequence trimRightSide(CharSequence string, char zeroSymbol) {
 
         int lastIndex = string.length() - 1;
         int index = 0;
@@ -183,7 +188,7 @@ public class ScientificNotationFunctionImpl implements NotationFunction {
 
             char c = string.charAt(i);
 
-            if (c != ZERO) {
+            if (c != zeroSymbol) {
 
                 index = i;
                 break;
@@ -199,12 +204,12 @@ class TraversalResult {
 
     private final int exponent;
 
-    private final DigitNode relatvieCenter;
+    private final DigitNode relativeCenter;
 
     public TraversalResult(int exponent, DigitNode relativeCenter) {
 
         this.exponent = exponent;
-        this.relatvieCenter = relativeCenter;
+        this.relativeCenter = relativeCenter;
     }
 
     public int exponent() {
@@ -214,7 +219,7 @@ class TraversalResult {
 
     public DigitNode relativeCenter() {
 
-        return relatvieCenter;
+        return relativeCenter;
     }
 
 }

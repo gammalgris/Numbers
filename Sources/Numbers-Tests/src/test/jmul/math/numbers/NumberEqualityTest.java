@@ -37,8 +37,8 @@ package test.jmul.math.numbers;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import static jmul.math.Constants.MAX_BASE;
-import static jmul.math.Constants.MIN_BASE;
+import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
+import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
 import static jmul.math.numbers.Signs.NEGATIVE;
@@ -141,7 +141,7 @@ public class NumberEqualityTest {
 
         Collection<Object[]> parameters = new ArrayList<Object[]>();
 
-        for (int base = MIN_BASE; base <= MAX_BASE; base++) {
+        for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
 
             Number n = new NumberImpl(base, "1");
             parameters.add(new Object[] { n, n, true });
