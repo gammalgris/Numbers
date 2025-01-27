@@ -56,7 +56,9 @@ import jmul.math.numbers.notations.NotationParser;
 import jmul.math.numbers.notations.ParsingResult;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.EqualityFunction;
+import jmul.math.operations.MixedBinaryOperation;
 import jmul.math.operations.MixedComparator;
+import jmul.math.operations.MixedEqualityFunction;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
 
@@ -585,16 +587,22 @@ public class NumberImpl implements Number {
     @Override
     public boolean equals(Object o) {
 
-        if (o == null) {
-
-            return false;
-        }
-
         if (o instanceof Number) {
 
             Number other = (Number) o;
+
             EqualityFunction<Number> function =
                 (EqualityFunction<Number>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_EQUALITY_FUNCTION);
+            boolean result = function.equals(this, other);
+
+            return result;
+
+        } else if (o instanceof Fraction) {
+
+            Fraction other = (Fraction) o;
+
+            MixedEqualityFunction<Number, Fraction> function =
+                (MixedEqualityFunction<Number, Fraction>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_FRACTION_EQUALITY_FUNCTION);
             boolean result = function.equals(this, other);
 
             return result;
@@ -1155,25 +1163,28 @@ public class NumberImpl implements Number {
     public boolean isGreater(Number number) {
 
         BinaryOperation<Number, Result<Boolean>> function =
-            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_GREATER_COMPARISON);
+            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_GREATER_THAN_COMPARISON_FUNCTION);
         Result<Boolean> result = function.calculate(this, number);
 
         return result.result();
     }
 
     /**
-     * Checks if this expression is greater than the specified expression.
+     * Checks if this number is greater than the specified fraction.
      *
-     * @param expression
-     *        an expression
+     * @param fraction
+     *        a fraction
      *
-     * @return <code>true</code> if this expression is greater than the specified expression, else <code>false</code>
+     * @return <code>true</code> if this number is greater than the specified fraction, else <code>false</code>
      */
     @Override
-    public boolean isGreater(Fraction expression) {
+    public boolean isGreater(Fraction fraction) {
 
-        //TODO
-        throw new UnsupportedOperationException();
+        MixedBinaryOperation<Number, Fraction, Result<Boolean>> function =
+            (MixedBinaryOperation<Number, Fraction, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_GREATER_THAN_FRACTION_COMPARISON_FUNCTION);
+        Result<Boolean> result = function.calculate(this, fraction);
+
+        return result.result();
     }
 
     /**
@@ -1188,25 +1199,28 @@ public class NumberImpl implements Number {
     public boolean isGreaterOrEqual(Number number) {
 
         BinaryOperation<Number, Result<Boolean>> function =
-            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_GREATER_OR_EQUAL_COMPARISON);
+            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_GREATER_THAN_OR_EQUAL_COMPARISON_FUNCTION);
         Result<Boolean> result = function.calculate(this, number);
 
         return result.result();
     }
 
     /**
-     * Checks if this expression is greater than or equal to the specified expression.
+     * Checks if this number is greater than or equal to the specified fraction.
      *
-     * @param expression
-     *        an expression
+     * @param fraction
+     *        a fraction
      *
-     * @return <code>true</code> if this expression is greater than or equal to the specified expression, else <code>false</code>
+     * @return <code>true</code> if this number is greater than or equal to the specified fraction, else <code>false</code>
      */
     @Override
-    public boolean isGreaterOrEqual(Fraction expression) {
+    public boolean isGreaterOrEqual(Fraction fraction) {
 
-        //TODO
-        throw new UnsupportedOperationException();
+        MixedBinaryOperation<Number, Fraction, Result<Boolean>> function =
+            (MixedBinaryOperation<Number, Fraction, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_GREATER_THAN_OR_EQUAL_FRACTION_COMPARISON_FUNCTION);
+        Result<Boolean> result = function.calculate(this, fraction);
+
+        return result.result();
     }
 
     /**
@@ -1221,25 +1235,28 @@ public class NumberImpl implements Number {
     public boolean isLesser(Number number) {
 
         BinaryOperation<Number, Result<Boolean>> function =
-            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_LESSER_COMPARISON);
+            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_LESSER_THAN_COMPARISON_FUNCTION);
         Result<Boolean> result = function.calculate(this, number);
 
         return result.result();
     }
 
     /**
-     * Checks if this expression is lesser than the specified expression.
+     * Checks if this number is lesser than the specified fraction.
      *
-     * @param expression
-     *        an expression
+     * @param fraction
+     *        a fraction
      *
-     * @return <code>true</code> if this expression is lesser than the specified expression, else <code>false</code>
+     * @return <code>true</code> if this number is lesser than the specified fraction, else <code>false</code>
      */
     @Override
-    public boolean isLesser(Fraction expression) {
+    public boolean isLesser(Fraction fraction) {
 
-        //TODO
-        throw new UnsupportedOperationException();
+        MixedBinaryOperation<Number, Fraction, Result<Boolean>> function =
+            (MixedBinaryOperation<Number, Fraction, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_LESSER_THAN_FRACTION_COMPARISON_FUNCTION);
+        Result<Boolean> result = function.calculate(this, fraction);
+
+        return result.result();
     }
 
     /**
@@ -1254,25 +1271,28 @@ public class NumberImpl implements Number {
     public boolean isLesserOrEqual(Number number) {
 
         BinaryOperation<Number, Result<Boolean>> function =
-            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_LESSER_OR_EQUAL_COMPARISON);
+            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_LESSER_THAN_OR_EQUAL_COMPARISON_FUNCTION);
         Result<Boolean> result = function.calculate(this, number);
 
         return result.result();
     }
 
     /**
-     * Checks if this expression is lesser than or equal to the specified expression.
+     * Checks if this number is lesser than or equal to the specified fraction.
      *
-     * @param expression
-     *        an expression
+     * @param fraction
+     *        a fraction
      *
-     * @return <code>true</code> if this expression is lesser than or equal to the specified expression, else <code>false</code>
+     * @return <code>true</code> if this number is lesser than or equal to the specified fraction, else <code>false</code>
      */
     @Override
-    public boolean isLesserOrEqual(Fraction expression) {
+    public boolean isLesserOrEqual(Fraction fraction) {
 
-        //TODO
-        throw new UnsupportedOperationException();
+        MixedBinaryOperation<Number, Fraction, Result<Boolean>> function =
+            (MixedBinaryOperation<Number, Fraction, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_LESSER_THAN_OR_EQUAL_FRACTION_COMPARISON_FUNCTION);
+        Result<Boolean> result = function.calculate(this, fraction);
+
+        return result.result();
     }
 
 }

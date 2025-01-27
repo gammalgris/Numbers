@@ -38,14 +38,18 @@ import java.util.Comparator;
 
 import static jmul.math.fractions.FractionHelper.DONT_CLONE;
 import jmul.math.functions.FunctionSingletons;
-import jmul.math.hash.HashHelper;
 import jmul.math.functions.repository.FunctionIdentifiers;
+import jmul.math.hash.HashHelper;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
 import jmul.math.numbers.Sign;
 import jmul.math.numbers.Signs;
+import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.EqualityFunction;
+import jmul.math.operations.MixedBinaryOperation;
 import jmul.math.operations.MixedComparator;
+import jmul.math.operations.MixedEqualityFunction;
+import jmul.math.operations.Result;
 
 
 /**
@@ -424,22 +428,29 @@ class MixedFraction implements Fraction {
     @Override
     public boolean isGreater(Fraction fraction) {
 
-        return compareTo(fraction) > 0;
+        BinaryOperation<Fraction, Result<Boolean>> function =
+            (BinaryOperation<Fraction, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_GREATER_THAN_COMPARISON_FUNCTION);
+        Result<Boolean> result = function.calculate(this, fraction);
+
+        return result.result();
     }
 
     /**
-     * Checks if this number is greater than the specified number.
+     * Checks if this fraction is greater than the specified number.
      *
      * @param number
      *        a number
      *
-     * @return <code>true</code> if this number is greater than the specified number, else <code>false</code>
+     * @return <code>true</code> if this fraction is greater than the specified number, else <code>false</code>
      */
     @Override
     public boolean isGreater(Number number) {
 
-        //TODO
-        throw new UnsupportedOperationException();
+        MixedBinaryOperation<Fraction, Number, Result<Boolean>> function =
+            (MixedBinaryOperation<Fraction, Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_GREATER_THAN_NUMBER_COMPARISON_FUNCTION);
+        Result<Boolean> result = function.calculate(this, number);
+
+        return result.result();
     }
 
     /**
@@ -448,27 +459,36 @@ class MixedFraction implements Fraction {
      * @param fraction
      *        a fraction
      *
-     * @return <code>true</code> if this fraction is greater than or equal to the specified fraction, else <code>false</code>
+     * @return <code>true</code> if this fraction is greater than or equal to the specified fraction,
+     *         else <code>false</code>
      */
     @Override
     public boolean isGreaterOrEqual(Fraction fraction) {
 
-        return compareTo(fraction) >= 0;
+        BinaryOperation<Fraction, Result<Boolean>> function =
+            (BinaryOperation<Fraction, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_GREATER_THAN_OR_EQUAL_COMPARISON_FUNCTION);
+        Result<Boolean> result = function.calculate(this, fraction);
+
+        return result.result();
     }
 
     /**
-     * Checks if this number is greater than or equal to the specified number.
+     * Checks if this fraction is greater than or equal to the specified number.
      *
      * @param number
      *        a number
      *
-     * @return <code>true</code> if this number is greater than or equal to the specified number, else <code>false</code>
+     * @return <code>true</code> if this fraction is greater than or equal to the specified number,
+     *         else <code>false</code>
      */
     @Override
     public boolean isGreaterOrEqual(Number number) {
 
-        //TODO
-        throw new UnsupportedOperationException();
+        MixedBinaryOperation<Fraction, Number, Result<Boolean>> function =
+            (MixedBinaryOperation<Fraction, Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_GREATER_THAN_OR_EQUAL_NUMBER_COMPARISON_FUNCTION);
+        Result<Boolean> result = function.calculate(this, number);
+
+        return result.result();
     }
 
     /**
@@ -482,22 +502,29 @@ class MixedFraction implements Fraction {
     @Override
     public boolean isLesser(Fraction fraction) {
 
-        return compareTo(fraction) < 0;
+        BinaryOperation<Fraction, Result<Boolean>> function =
+            (BinaryOperation<Fraction, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_LESSER_THAN_COMPARISON_FUNCTION);
+        Result<Boolean> result = function.calculate(this, fraction);
+
+        return result.result();
     }
 
     /**
-     * Checks if this number is lesser than the specified number.
+     * Checks if this fraction is lesser than the specified number.
      *
      * @param number
      *        a number
      *
-     * @return <code>true</code> if this number is lesser than the specified number, else <code>false</code>
+     * @return <code>true</code> if this fraction is lesser than the specified number, else <code>false</code>
      */
     @Override
     public boolean isLesser(Number number) {
 
-        //TODO
-        throw new UnsupportedOperationException();
+        MixedBinaryOperation<Fraction, Number, Result<Boolean>> function =
+            (MixedBinaryOperation<Fraction, Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_LESSER_THAN_NUMBER_COMPARISON_FUNCTION);
+        Result<Boolean> result = function.calculate(this, number);
+
+        return result.result();
     }
 
     /**
@@ -511,22 +538,29 @@ class MixedFraction implements Fraction {
     @Override
     public boolean isLesserOrEqual(Fraction fraction) {
 
-        return compareTo(fraction) <= 0;
+        BinaryOperation<Fraction, Result<Boolean>> function =
+            (BinaryOperation<Fraction, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_LESSER_THAN_OR_EQUAL_COMPARISON_FUNCTION);
+        Result<Boolean> result = function.calculate(this, fraction);
+
+        return result.result();
     }
 
     /**
-     * Checks if this number is lesser than or equal to the specified number.
+     * Checks if this fraction is lesser than or equal to the specified number.
      *
      * @param number
      *        a number
      *
-     * @return <code>true</code> if this number is lesser than or equal to the specified number, else <code>false</code>
+     * @return <code>true</code> if this fraction is lesser than or equal to the specified number, else <code>false</code>
      */
     @Override
     public boolean isLesserOrEqual(Number number) {
 
-        //TODO
-        throw new UnsupportedOperationException();
+        MixedBinaryOperation<Fraction, Number, Result<Boolean>> function =
+            (MixedBinaryOperation<Fraction, Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_LESSER_THAN_OR_EQUAL_NUMBER_COMPARISON_FUNCTION);
+        Result<Boolean> result = function.calculate(this, number);
+
+        return result.result();
     }
 
     /**
@@ -584,17 +618,22 @@ class MixedFraction implements Fraction {
     @Override
     public boolean equals(Object o) {
 
-        if (o == null) {
-
-            return false;
-        }
-
         if (o instanceof Fraction) {
 
             Fraction other = (Fraction) o;
 
             EqualityFunction<Fraction> function =
                 (EqualityFunction<Fraction>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_EQUALITY_FUNCTION);
+            boolean result = function.equals(this, other);
+
+            return result;
+
+        } else if (o instanceof Number) {
+
+            Number other = (Number) o;
+
+            MixedEqualityFunction<Fraction, Number> function =
+                (MixedEqualityFunction<Fraction, Number>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_NUMBER_EQUALITY_FUNCTION);
             boolean result = function.equals(this, other);
 
             return result;

@@ -53,6 +53,36 @@ public final class NumberHelper {
     }
 
     /**
+     * Creates a new number according to the specified parameters.
+     *
+     * @param base
+     *        a number base
+     * @param sign
+     *        the sign of the number
+     *
+     * @return a number
+     */
+    public static Number createNumber(int base, Sign sign) {
+
+        return new NumberImpl(base, sign);
+    }
+
+    /**
+     * Creates a new number according to the specified parameters.
+     *
+     * @param base
+     *        the number base
+     * @param string
+     *        a sequence of digits
+     *
+     * @return a number
+     */
+    public static Number createNumber(int base, String string) {
+
+        return new NumberImpl(base, string);
+    }
+
+    /**
      * Counts digits left of a decimal separator.<br>
      * <br>
      * <i>Note:<br>
@@ -62,7 +92,10 @@ public final class NumberHelper {
      *        a number
      *
      * @return a digit count
+     * 
+     * @deprecated integrate into number implementation and replace counter type.
      */
+    @Deprecated
     public static int countLeftDigits(Number number) {
 
         int count = 0;
@@ -100,7 +133,10 @@ public final class NumberHelper {
      *        a number
      *
      * @return a digit count
+     * 
+     * @deprecated integrate into number implementation and replace counter type.
      */
+    @Deprecated
     public static int countRightDigit(Number number) {
 
         int count = -1;

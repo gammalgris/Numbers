@@ -43,7 +43,10 @@ import java.util.List;
  * This enumeration contains various number notations.
  *
  * @author Kristian Kutin
+ *
+ * @deprecated Replace the digits with placeholders. The caller should resolve the placeholders.
  */
+@Deprecated
 public enum Notations implements Notation {
 
 

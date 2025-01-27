@@ -37,19 +37,10 @@ package jmul.math.functions.repository;
 import jmul.math.functions.implementations.AddDigits;
 import jmul.math.functions.implementations.AddNumbers;
 import jmul.math.functions.implementations.DecrementNumber;
-import jmul.math.functions.implementations.DigitComparator;
 import jmul.math.functions.implementations.DigitComplement;
-import jmul.math.functions.implementations.DigitEquality;
 import jmul.math.functions.implementations.DivisionBySubtraction;
 import jmul.math.functions.implementations.DoublingNumber;
 import jmul.math.functions.implementations.EvenNumberFunction;
-import jmul.math.functions.implementations.FractionComparator;
-import jmul.math.functions.implementations.FractionEquality;
-import jmul.math.functions.implementations.FractionGreaterComparison;
-import jmul.math.functions.implementations.FractionGreaterOrEqualComparison;
-import jmul.math.functions.implementations.FractionLesserComparison;
-import jmul.math.functions.implementations.FractionLesserOrEqualComparison;
-import jmul.math.functions.implementations.FractionNumberComparator;
 import jmul.math.functions.implementations.HalvingDigit;
 import jmul.math.functions.implementations.HalvingNumber;
 import jmul.math.functions.implementations.IncrementNumber;
@@ -57,19 +48,38 @@ import jmul.math.functions.implementations.MaxFunction;
 import jmul.math.functions.implementations.MinFunction;
 import jmul.math.functions.implementations.MultiplyNumbers;
 import jmul.math.functions.implementations.NegateNumber;
-import jmul.math.functions.implementations.NumberComparator;
 import jmul.math.functions.implementations.NumberComplement;
-import jmul.math.functions.implementations.NumberEquality;
-import jmul.math.functions.implementations.NumberFractionComparator;
-import jmul.math.functions.implementations.NumberGreaterComparison;
-import jmul.math.functions.implementations.NumberGreaterOrEqualComparison;
-import jmul.math.functions.implementations.NumberLesserComparison;
-import jmul.math.functions.implementations.NumberLesserOrEqualComparison;
 import jmul.math.functions.implementations.OddNumberFunction;
 import jmul.math.functions.implementations.ShiftLeft;
 import jmul.math.functions.implementations.ShiftRight;
 import jmul.math.functions.implementations.SubtractNumbers;
 import jmul.math.functions.implementations.TruncateNumber;
+import jmul.math.functions.implementations.comparisons.DigitComparator;
+import jmul.math.functions.implementations.comparisons.FractionComparator;
+import jmul.math.functions.implementations.comparisons.FractionGreaterThanComparison;
+import jmul.math.functions.implementations.comparisons.FractionGreaterThanNumberComparison;
+import jmul.math.functions.implementations.comparisons.FractionGreaterThanOrEqualComparison;
+import jmul.math.functions.implementations.comparisons.FractionGreaterThanOrEqualNumberComparison;
+import jmul.math.functions.implementations.comparisons.FractionLesserThanComparison;
+import jmul.math.functions.implementations.comparisons.FractionLesserThanNumberComparison;
+import jmul.math.functions.implementations.comparisons.FractionLesserThanOrEqualComparison;
+import jmul.math.functions.implementations.comparisons.FractionLesserThanOrEqualNumberComparison;
+import jmul.math.functions.implementations.comparisons.FractionNumberComparator;
+import jmul.math.functions.implementations.comparisons.NumberComparator;
+import jmul.math.functions.implementations.comparisons.NumberFractionComparator;
+import jmul.math.functions.implementations.comparisons.NumberGreaterThanComparison;
+import jmul.math.functions.implementations.comparisons.NumberGreaterThanFractionComparison;
+import jmul.math.functions.implementations.comparisons.NumberGreaterThanOrEqualComparison;
+import jmul.math.functions.implementations.comparisons.NumberGreaterThanOrEqualFractionComparison;
+import jmul.math.functions.implementations.comparisons.NumberLesserThanComparison;
+import jmul.math.functions.implementations.comparisons.NumberLesserThanFractionComparison;
+import jmul.math.functions.implementations.comparisons.NumberLesserThanOrEqualComparison;
+import jmul.math.functions.implementations.comparisons.NumberLesserThanOrEqualFractionComparison;
+import jmul.math.functions.implementations.equality.DigitEquality;
+import jmul.math.functions.implementations.equality.FractionEquality;
+import jmul.math.functions.implementations.equality.FractionNumberEquality;
+import jmul.math.functions.implementations.equality.NumberEquality;
+import jmul.math.functions.implementations.equality.NumberFractionEquality;
 import jmul.math.numbers.notations.ScientificNotationFunctionImpl;
 import jmul.math.numbers.notations.ScientificNotationParserImpl;
 import jmul.math.numbers.notations.StandardNotationFunctionImpl;
@@ -117,11 +127,15 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
         repository.registerFunction(FunctionIdentifiers.NUMBER_FRACTION_COMPARATOR_FUNCTION,
                                     NumberFractionComparator.class);
         repository.registerFunction(FunctionIdentifiers.NUMBER_EQUALITY_FUNCTION, NumberEquality.class);
+        repository.registerFunction(FunctionIdentifiers.NUMBER_FRACTION_EQUALITY_FUNCTION,
+                                    NumberFractionEquality.class);
 
         repository.registerFunction(FunctionIdentifiers.FRACTION_COMPARATOR_FUNCTION, FractionComparator.class);
         repository.registerFunction(FunctionIdentifiers.FRACTION_NUMBER_COMPARATOR_FUNCTION,
                                     FractionNumberComparator.class);
         repository.registerFunction(FunctionIdentifiers.FRACTION_EQUALITY_FUNCTION, FractionEquality.class);
+        repository.registerFunction(FunctionIdentifiers.FRACTION_NUMBER_EQUALITY_FUNCTION,
+                                    FractionNumberEquality.class);
 
         repository.registerFunction(FunctionIdentifiers.ADD_DIGITS_FUNCTION, AddDigits.class);
         repository.registerFunction(FunctionIdentifiers.DIGIT_COMPLEMENT_FUNCTION, DigitComplement.class);
@@ -146,19 +160,39 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
         repository.registerFunction(FunctionIdentifiers.EVEN_NUMBER_FUNCTION, EvenNumberFunction.class);
         repository.registerFunction(FunctionIdentifiers.ODD_NUMBER_FUNCTION, OddNumberFunction.class);
 
-        repository.registerFunction(FunctionIdentifiers.NUMBER_GREATER_COMPARISON, NumberGreaterComparison.class);
-        repository.registerFunction(FunctionIdentifiers.NUMBER_GREATER_OR_EQUAL_COMPARISON,
-                                    NumberGreaterOrEqualComparison.class);
-        repository.registerFunction(FunctionIdentifiers.NUMBER_LESSER_COMPARISON, NumberLesserComparison.class);
-        repository.registerFunction(FunctionIdentifiers.NUMBER_LESSER_OR_EQUAL_COMPARISON,
-                                    NumberLesserOrEqualComparison.class);
+        repository.registerFunction(FunctionIdentifiers.NUMBER_GREATER_THAN_COMPARISON_FUNCTION,
+                                    NumberGreaterThanComparison.class);
+        repository.registerFunction(FunctionIdentifiers.NUMBER_GREATER_THAN_FRACTION_COMPARISON_FUNCTION,
+                                    NumberGreaterThanFractionComparison.class);
+        repository.registerFunction(FunctionIdentifiers.NUMBER_GREATER_THAN_OR_EQUAL_COMPARISON_FUNCTION,
+                                    NumberGreaterThanOrEqualComparison.class);
+        repository.registerFunction(FunctionIdentifiers.NUMBER_GREATER_THAN_OR_EQUAL_FRACTION_COMPARISON_FUNCTION,
+                                    NumberGreaterThanOrEqualFractionComparison.class);
+        repository.registerFunction(FunctionIdentifiers.NUMBER_LESSER_THAN_COMPARISON_FUNCTION,
+                                    NumberLesserThanComparison.class);
+        repository.registerFunction(FunctionIdentifiers.NUMBER_LESSER_THAN_FRACTION_COMPARISON_FUNCTION,
+                                    NumberLesserThanFractionComparison.class);
+        repository.registerFunction(FunctionIdentifiers.NUMBER_LESSER_THAN_OR_EQUAL_COMPARISON_FUNCTION,
+                                    NumberLesserThanOrEqualComparison.class);
+        repository.registerFunction(FunctionIdentifiers.NUMBER_LESSER_THAN_OR_EQUAL_FRACTION_COMPARISON_FUNCTION,
+                                    NumberLesserThanOrEqualFractionComparison.class);
 
-        repository.registerFunction(FunctionIdentifiers.FRACTION_GREATER_COMPARISON, FractionGreaterComparison.class);
-        repository.registerFunction(FunctionIdentifiers.FRACTION_GREATER_OR_EQUAL_COMPARISON,
-                                    FractionGreaterOrEqualComparison.class);
-        repository.registerFunction(FunctionIdentifiers.FRACTION_LESSER_COMPARISON, FractionLesserComparison.class);
-        repository.registerFunction(FunctionIdentifiers.FRACTION_LESSER_OR_EQUAL_COMPARISON,
-                                    FractionLesserOrEqualComparison.class);
+        repository.registerFunction(FunctionIdentifiers.FRACTION_GREATER_THAN_COMPARISON_FUNCTION,
+                                    FractionGreaterThanComparison.class);
+        repository.registerFunction(FunctionIdentifiers.FRACTION_GREATER_THAN_NUMBER_COMPARISON_FUNCTION,
+                                    FractionGreaterThanNumberComparison.class);
+        repository.registerFunction(FunctionIdentifiers.FRACTION_GREATER_THAN_OR_EQUAL_COMPARISON_FUNCTION,
+                                    FractionGreaterThanOrEqualComparison.class);
+        repository.registerFunction(FunctionIdentifiers.FRACTION_GREATER_THAN_OR_EQUAL_NUMBER_COMPARISON_FUNCTION,
+                                    FractionGreaterThanOrEqualNumberComparison.class);
+        repository.registerFunction(FunctionIdentifiers.FRACTION_LESSER_THAN_COMPARISON_FUNCTION,
+                                    FractionLesserThanComparison.class);
+        repository.registerFunction(FunctionIdentifiers.FRACTION_LESSER_THAN_NUMBER_COMPARISON_FUNCTION,
+                                    FractionLesserThanNumberComparison.class);
+        repository.registerFunction(FunctionIdentifiers.FRACTION_LESSER_THAN_OR_EQUAL_COMPARISON_FUNCTION,
+                                    FractionLesserThanOrEqualComparison.class);
+        repository.registerFunction(FunctionIdentifiers.FRACTION_LESSER_THAN_OR_EQUAL_NUMBER_COMPARISON_FUNCTION,
+                                    FractionLesserThanOrEqualNumberComparison.class);
 
         repository.registerFunction(FunctionIdentifiers.MULTIPLY_NUMBERS_FUNCTION, MultiplyNumbers.class);
         repository.registerFunction(FunctionIdentifiers.DIVIDE_NUMBERS_FUNCTION, DivisionBySubtraction.class);

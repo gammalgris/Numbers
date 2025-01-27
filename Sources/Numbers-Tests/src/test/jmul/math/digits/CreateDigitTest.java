@@ -74,4 +74,21 @@ public class CreateDigitTest {
         }
     }
 
+    /**
+     * Tests the regex for a specific positional numeral system.
+     */
+    @Test
+    public void testRegex() {
+
+        char[] symbols = { '0', '1' };
+        PositionalNumeralSystems.addPositionalNumeralSystemWithCustomSymbols(symbols);
+
+        int base = symbols.length;
+
+        String actualRegex = PositionalNumeralSystems.baseToDigitRegex(base);
+        String expectedRegex = String.format("%c%c", symbols[0], symbols[1]);
+
+        assertEquals("Regex mismath", expectedRegex, actualRegex);
+    }
+
 }

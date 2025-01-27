@@ -7,7 +7,7 @@
  * JMUL is a central repository for utilities which are used in my
  * other public and private repositories.
  *
- * Copyright (C) 2024  Kristian Kutin
+ * Copyright (C) 2025  Kristian Kutin
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@
  * $Id$
  */
 
-package test.jmul.math.numbers;
+package test.jmul.math.fractions;
 
 
 import java.util.ArrayList;
@@ -51,6 +51,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import test.jmul.math.numbers.NumberFractionEqualityTest;
+
 
 /**
  * This test suite contains tests for testing the equals method.
@@ -59,7 +61,7 @@ import org.junit.runners.Parameterized;
  */
 @UnitTest
 @RunWith(Parameterized.class)
-public class NumberFractionEqualityTest {
+public class FractionNumberEqualityTest {
 
     /**
      * A number or fraction.
@@ -86,7 +88,7 @@ public class NumberFractionEqualityTest {
      * @param expectedResult
      *        the expected comparison result
      */
-    public NumberFractionEqualityTest(Object operand1, Object operand2, boolean expectedResult) {
+    public FractionNumberEqualityTest(Object operand1, Object operand2, boolean expectedResult) {
 
         super();
 
@@ -144,28 +146,28 @@ public class NumberFractionEqualityTest {
 
         for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
 
-            parameters.add(new Object[] { new NumberImpl(base), createFraction(DONT_CLONE, new NumberImpl(base)),
+            parameters.add(new Object[] { createFraction(DONT_CLONE, new NumberImpl(base)), new NumberImpl(base),
                                           true });
-            parameters.add(new Object[] { new NumberImpl(base),
-                                          createFraction(DONT_CLONE, new NumberImpl(base, NEGATIVE)), false });
+            parameters.add(new Object[] { createFraction(DONT_CLONE, new NumberImpl(base, NEGATIVE)),
+                                          new NumberImpl(base), false });
             parameters.add(new Object[] { createFraction(DONT_CLONE, new NumberImpl(base, NEGATIVE)),
                                           new NumberImpl(base), false });
             parameters.add(new Object[] { createFraction(DONT_CLONE, new NumberImpl(base, NEGATIVE)),
                                           new NumberImpl(base, NEGATIVE), true });
 
-            parameters.add(new Object[] { new NumberImpl(base, "0"), createFraction(base, "0"), true });
-            parameters.add(new Object[] { new NumberImpl(base, "1"), createFraction(base, "0"), false });
-            parameters.add(new Object[] { new NumberImpl(base, "0"), createFraction(base, "1"), false });
-            parameters.add(new Object[] { new NumberImpl(base, "-1"), createFraction(base, "0"), false });
-            parameters.add(new Object[] { new NumberImpl(base, "0"), createFraction(base, "-1"), false });
+            parameters.add(new Object[] { createFraction(base, "0"), new NumberImpl(base, "0"), true });
+            parameters.add(new Object[] { createFraction(base, "0"), new NumberImpl(base, "1"), false });
+            parameters.add(new Object[] { createFraction(base, "1"), new NumberImpl(base, "0"), false });
+            parameters.add(new Object[] { createFraction(base, "0"), new NumberImpl(base, "-1"), false });
+            parameters.add(new Object[] { createFraction(base, "-1"), new NumberImpl(base, "0"), false });
 
-            parameters.add(new Object[] { new NumberImpl(base, "11"), createFraction(base, "11", "1"), true });
-            parameters.add(new Object[] { new NumberImpl(base, "10"), createFraction(base, "11", "1"), false });
-            parameters.add(new Object[] { new NumberImpl(base, "100"), createFraction(base, "11", "1"), false });
+            parameters.add(new Object[] { createFraction(base, "11", "1"), new NumberImpl(base, "11"), true });
+            parameters.add(new Object[] { createFraction(base, "11", "1"), new NumberImpl(base, "10"), false });
+            parameters.add(new Object[] { createFraction(base, "11", "1"), new NumberImpl(base, "100"), false });
 
-            parameters.add(new Object[] { new NumberImpl(base, "11"), createFraction(base, "1", "10", "1"), true });
-            parameters.add(new Object[] { new NumberImpl(base, "10"), createFraction(base, "1", "10", "1"), false });
-            parameters.add(new Object[] { new NumberImpl(base, "100"), createFraction(base, "1", "10", "1"), false });
+            parameters.add(new Object[] { createFraction(base, "1", "10", "1"), new NumberImpl(base, "11"), true });
+            parameters.add(new Object[] { createFraction(base, "1", "10", "1"), new NumberImpl(base, "10"), false });
+            parameters.add(new Object[] { createFraction(base, "1", "10", "1"), new NumberImpl(base, "100"), false });
         }
 
         return parameters;

@@ -45,42 +45,45 @@ import jmul.math.numbers.Number;
 public interface NumberComparisons {
 
     /**
-     * Checks if this number is greater than the specified number.
+     * Checks if this object (i.e. operand) is greater than the specified number.
      *
      * @param number
      *        a number
      *
-     * @return <code>true</code> if this number is greater than the specified number, else <code>false</code>
+     * @return <code>true</code> if this object (i.e. operand) is greater than the specified number,
+     *         else <code>false</code>
      */
     boolean isGreater(Number number);
 
     /**
-     * Checks if this number is greater than or equal to the specified number.
+     * Checks if this object (i.e. operand) is greater than or equal to the specified number.
      *
      * @param number
      *        a number
      *
-     * @return <code>true</code> if this number is greater than or equal to the specified number, else <code>false</code>
+     * @return <code>true</code> if this object (i.e. operand) is greater than or equal to the specified number,
+     *         else <code>false</code>
      */
     boolean isGreaterOrEqual(Number number);
 
     /**
-     * Checks if this number is lesser than the specified number.
+     * Checks if this object (i.e. operand) is lesser than the specified number.
      *
      * @param number
      *        a number
      *
-     * @return <code>true</code> if this number is lesser than the specified number, else <code>false</code>
+     * @return <code>true</code> if this object (i.e. operand) is lesser than the specified number,
+     *         else <code>false</code>
      */
     boolean isLesser(Number number);
 
     /**
-     * Checks if this number is lesser than or equal to the specified number.
+     * Checks if this object (i.e. operand) is lesser than or equal to the specified number.
      *
      * @param number
      *        a number
      *
-     * @return <code>true</code> if this number is lesser than or equal to the specified number, else <code>false</code>
+     * @return <code>true</code> if this object (i.e. operand) is lesser than or equal to the specified number, else <code>false</code>
      */
     boolean isLesserOrEqual(Number number);
 

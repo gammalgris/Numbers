@@ -98,7 +98,8 @@ public class PositionalNumeralSystems {
      * base.
      *
      * @param symbols
-     *        a symbol set. The size of the set defines the number base.
+     *        a symbol set. The size of the set defines the number base. The sequence of the symbols
+     *        defines the natural order.
      */
     public static void addPositionalNumeralSystemWithCustomSymbols(char... symbols) {
 
@@ -216,7 +217,7 @@ public class PositionalNumeralSystems {
      *
      * @return a string containg all symbols in ascending order (see ordinal values)
      */
-    public static String baseToRegex(int base) {
+    public static String baseToDigitRegex(int base) {
 
         PositionalNumeralSystem numeralSystem = getPositionalNumeralSystem(base);
 

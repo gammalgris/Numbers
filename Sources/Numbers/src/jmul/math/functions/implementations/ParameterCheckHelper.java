@@ -45,7 +45,7 @@ import jmul.math.numbers.exceptions.DigitBaseMismatchException;
  *
  * @author Kristian Kutin
  */
-final class ParameterCheckHelper {
+public final class ParameterCheckHelper {
 
     /**
      * The default constructor.

@@ -38,50 +38,54 @@ import jmul.math.fractions.Fraction;
 
 
 /**
- * This interface describes various expression comparisons.
+ * This interface describes various fraction comparisons.
  *
  * @author Kristian Kutin
  */
 public interface FractionComparisons {
 
     /**
-     * Checks if this expression is greater than the specified expression.
+     * Checks if this object (i.e. operand) is greater than the specified fraction.
      *
-     * @param expression
-     *        an expression
+     * @param fraction
+     *        a fraction
      *
-     * @return <code>true</code> if this expression is greater than the specified expression, else <code>false</code>
+     * @return <code>true</code> if this object (i.e. operand) is greater than the specified fraction,
+     *         else <code>false</code>
      */
-    boolean isGreater(Fraction expression);
+    boolean isGreater(Fraction fraction);
 
     /**
-     * Checks if this expression is greater than or equal to the specified expression.
+     * Checks if this object (i.e. operand) is greater than or equal to the specified expression.
      *
-     * @param expression
-     *        an expression
+     * @param fraction
+     *        a fraction
      *
-     * @return <code>true</code> if this expression is greater than or equal to the specified expression, else <code>false</code>
+     * @return <code>true</code> if this object (i.e. operand) is greater than or equal to the specified fraction,
+     *         else <code>false</code>
      */
-    boolean isGreaterOrEqual(Fraction expression);
+    boolean isGreaterOrEqual(Fraction fraction);
 
     /**
-     * Checks if this expression is lesser than the specified expression.
+     * Checks if this object (i.e. operand) is lesser than the specified fraction.
      *
-     * @param expression
-     *        an expression
+     * @param fraction
+     *        a fraction
      *
-     * @return <code>true</code> if this expression is lesser than the specified expression, else <code>false</code>
+     * @return <code>true</code> if this object (i.e. operand) is lesser than the specified fraction,
+     *         else <code>false</code>
      */
-    boolean isLesser(Fraction expression);
+    boolean isLesser(Fraction fraction);
 
     /**
-     * Checks if this expression is lesser than or equal to the specified expression.
+     * Checks if this object (i.e. operand) is lesser than or equal to the specified fraction.
      *
-     * @param expression
-     *        an expression
+     * @param fraction
+     *        a fraction
      *
-     * @return <code>true</code> if this expression is lesser than or equal to the specified expression, else <code>false</code>
+     * @return <code>true</code> if this object (i.e. operand) is lesser than or equal to the specified fraction,
+     *         else <code>false</code>
      */
-    boolean isLesserOrEqual(Fraction expression);
+    boolean isLesserOrEqual(Fraction fraction);
 
 }
