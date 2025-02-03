@@ -36,6 +36,8 @@ package jmul.math.functions.repository;
 
 import jmul.math.functions.implementations.AddDigits;
 import jmul.math.functions.implementations.AddNumbers;
+import jmul.math.functions.implementations.AddNumbersTrimResult;
+import jmul.math.functions.implementations.DecrementFraction;
 import jmul.math.functions.implementations.DecrementNumber;
 import jmul.math.functions.implementations.DigitComplement;
 import jmul.math.functions.implementations.DivisionBySubtraction;
@@ -43,6 +45,7 @@ import jmul.math.functions.implementations.DoublingNumber;
 import jmul.math.functions.implementations.EvenNumberFunction;
 import jmul.math.functions.implementations.HalvingDigit;
 import jmul.math.functions.implementations.HalvingNumber;
+import jmul.math.functions.implementations.IncrementFraction;
 import jmul.math.functions.implementations.IncrementNumber;
 import jmul.math.functions.implementations.MaxFunction;
 import jmul.math.functions.implementations.MinFunction;
@@ -142,6 +145,7 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
         repository.registerFunction(FunctionIdentifiers.HALVING_DIGIT_FUNCTION, HalvingDigit.class);
 
         repository.registerFunction(FunctionIdentifiers.ADD_NUMBERS_FUNCTION, AddNumbers.class);
+        repository.registerFunction(FunctionIdentifiers.ADD_NUMBERS_TRIM_RESULT_FUNCTION, AddNumbersTrimResult.class);
         repository.registerFunction(FunctionIdentifiers.SUBTRACT_NUMBERS_FUNCTION, SubtractNumbers.class);
 
         repository.registerFunction(FunctionIdentifiers.SHIFT_LEFT_FUNCTION, ShiftLeft.class);
@@ -155,7 +159,9 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
         repository.registerFunction(FunctionIdentifiers.MIN_NUMBER_FUNCTION, MinFunction.class);
 
         repository.registerFunction(FunctionIdentifiers.NUMBER_INCREMENT_FUNCTION, IncrementNumber.class);
+        repository.registerFunction(FunctionIdentifiers.FRACTION_INCREMENT_FUNCTION, IncrementFraction.class);
         repository.registerFunction(FunctionIdentifiers.NUMBER_DECREMENT_FUNCTION, DecrementNumber.class);
+        repository.registerFunction(FunctionIdentifiers.FRACTION_DECREMENT_FUNCTION, DecrementFraction.class);
 
         repository.registerFunction(FunctionIdentifiers.EVEN_NUMBER_FUNCTION, EvenNumberFunction.class);
         repository.registerFunction(FunctionIdentifiers.ODD_NUMBER_FUNCTION, OddNumberFunction.class);

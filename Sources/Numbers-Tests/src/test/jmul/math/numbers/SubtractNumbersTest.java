@@ -161,7 +161,7 @@ public class SubtractNumbersTest {
             // check the operation
             Number actualDifference = minuend.subtract(subtrahend);
 
-            String message = String.format("%s - %s = %s", minuendString, subtrahendString, differenceString);
+            String message = String.format(toString(), minuendString, subtrahendString, differenceString);
             assertEquals(message, difference, actualDifference);
 
             // check the number instances
@@ -193,7 +193,7 @@ public class SubtractNumbersTest {
             // check the operation
             Number actualDifference = Math.subtract(minuend, subtrahend);
 
-            String message = String.format("%s - %s = %s", minuendString, subtrahendString, differenceString);
+            String message = String.format(toString(), base, minuendString, subtrahendString, differenceString);
             assertEquals(message, difference, actualDifference);
 
             // check the number instances
@@ -217,8 +217,7 @@ public class SubtractNumbersTest {
     @Override
     public String toString() {
 
-        String summary = String.format("[base:%d] %s - %s", base, minuendString, subtrahendString);
-        return summary;
+        return String.format("[base:%d] %s - %s = %s", base, minuendString, subtrahendString, differenceString);
     }
 
     /**
@@ -248,6 +247,8 @@ public class SubtractNumbersTest {
             parameters.add(new Object[] { base, "0", "-100", "100" });
         }
 
+        parameters.add(new Object[] { 2, "11", "1", "10" });
+        parameters.add(new Object[] { 3, "11", "1", "10" });
 
         parameters.add(new Object[] { 2, "1.1111", "0", "1.1111" });
         parameters.add(new Object[] { 2, "0", "1.1111", "-1.1111" });
@@ -325,13 +326,13 @@ public class SubtractNumbersTest {
         parameters.add(new Object[] { 10, "-1", "-11", "10" });
 
         parameters.add(new Object[] { 10, "1234567890.0123456789", "0.012345678987654321",
-                                      "1234567889.99999999991234567" });
+                                      "1234567889.999999999912345679" });
         parameters.add(new Object[] { 10, "-1234567890.0123456789", "0.012345678987654321",
                                       "-1234567890.024691357887654321" });
         parameters.add(new Object[] { 10, "1234567890.0123456789", "-0.012345678987654321",
                                       "1234567890.024691357887654321" });
         parameters.add(new Object[] { 10, "-1234567890.0123456789", "-0.012345678987654321",
-                                      "-1234567889.99999999991234567" });
+                                      "-1234567889.999999999912345679" });
 
         parameters.add(new Object[] { 16, "FF", "11", "EE" });
 

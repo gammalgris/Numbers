@@ -38,8 +38,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import jmul.math.Math;
+import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
+import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
+import static jmul.math.numbers.NumberHelper.createNumber;
 
 import jmul.test.classification.UnitTest;
 import jmul.test.exceptions.FailedTestException;
@@ -128,9 +130,32 @@ public class MultiplyNumbersTest {
     @Before
     public void setUp() {
 
-        firstOperand = new NumberImpl(base, firstOperandString);
-        secondOperand = new NumberImpl(base, secondOperandString);
-        expectedProduct = new NumberImpl(base, expectedProductString);
+        if (firstOperandString == null) {
+
+            firstOperand = createNumber(base);
+
+        } else {
+
+            firstOperand = createNumber(base, firstOperandString);
+        }
+
+        if (secondOperandString == null) {
+
+            secondOperand = createNumber(base);
+
+        } else {
+
+            secondOperand = createNumber(base, secondOperandString);
+        }
+
+        if (expectedProductString == null) {
+
+            expectedProduct = createNumber(base);
+
+        } else {
+
+            expectedProduct = createNumber(base, expectedProductString);
+        }
     }
 
     /**
@@ -142,6 +167,34 @@ public class MultiplyNumbersTest {
         firstOperand = null;
         secondOperand = null;
         expectedProduct = null;
+    }
+
+    @Override
+    public String toString() {
+
+        String infinity = "infinity";
+
+        String operand1 = firstOperandString;
+        String operand2 = secondOperandString;
+        String result = expectedProductString;
+
+        if (firstOperandString == null) {
+
+            operand1 = infinity;
+        }
+        if (secondOperandString == null) {
+
+            operand2 = infinity;
+        }
+        if (expectedProductString == null) {
+
+            result = infinity;
+        }
+
+
+        String representation = String.format("[base:%d]: %s * %s = %s", base, operand1, operand2, result);
+
+        return representation;
     }
 
     /**
@@ -160,9 +213,7 @@ public class MultiplyNumbersTest {
             // check the operation
             Number actualProduct = firstOperand.multiply(secondOperand);
 
-            String message =
-                String.format("%s + %s = %s", firstOperandString, secondOperandString, expectedProductString);
-            assertEquals(message, expectedProduct, actualProduct);
+            assertEquals(toString(), expectedProduct, actualProduct);
 
             // check the number instances
             checkNumbersAreUniqueInstances(firstOperand, secondOperand, actualProduct);
@@ -191,15 +242,12 @@ public class MultiplyNumbersTest {
             checkNumberEqualsStringRepresentation(expectedProduct, expectedProductString);
 
             // check the operation
-            Number actualProduct = firstOperand.add(secondOperand);
-            Number actualResult = Math.multiply(firstOperand, secondOperand);
+            Number actualProduct = Math.multiply(firstOperand, secondOperand);
 
-            String message =
-                String.format("%s + %s = %s", firstOperandString, secondOperandString, expectedProductString);
-            assertEquals(message, expectedProduct, actualResult);
+            assertEquals(toString(), expectedProduct, actualProduct);
 
             // check the number instances
-            checkNumbersAreUniqueInstances(firstOperand, secondOperand, actualResult);
+            checkNumbersAreUniqueInstances(firstOperand, secondOperand, actualProduct);
 
             // check that the operands didn't change
             checkNumberEqualsStringRepresentation(firstOperand, firstOperandString);
@@ -212,15 +260,15 @@ public class MultiplyNumbersTest {
     }
 
     /**
-     * Returns a summary of this test case (i.e. the operation with its operands)
-     *
-     * @return a summary
+     * Tests the number properties.
      */
-    @Override
-    public String toString() {
+    @Test
+    public void testProperties() {
 
-        String summary = String.format("[base:%d] %s * %s", base, firstOperand, secondOperand);
-        return summary;
+        // check that the operands and the expected result are built correctly
+        checkNumberEqualsStringRepresentation(firstOperand, firstOperandString);
+        checkNumberEqualsStringRepresentation(secondOperand, secondOperandString);
+        checkNumberEqualsStringRepresentation(expectedProduct, expectedProductString);
     }
 
     /**
@@ -233,6 +281,38 @@ public class MultiplyNumbersTest {
 
         Collection<Object[]> parameters = new ArrayList<Object[]>();
 
+        for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
+
+            parameters.add(new Object[] { base, "1", null, null });
+            parameters.add(new Object[] { base, null, "1", null });
+
+            parameters.add(new Object[] { base, "1", "1", "1" });
+            parameters.add(new Object[] { base, "1", "0", "0" });
+            parameters.add(new Object[] { base, "0", "1", "0" });
+            parameters.add(new Object[] { base, "1", "-1", "-1" });
+            parameters.add(new Object[] { base, "-1", "1", "-1" });
+            parameters.add(new Object[] { base, "-1", "-1", "1" });
+        }
+
+        for (int base = BASE_MIN_LIMIT + 1; base <= BASE_MAX_LIMIT; base++) {
+
+            parameters.add(new Object[] { base, "2", null, null });
+            parameters.add(new Object[] { base, null, "1", null });
+
+            parameters.add(new Object[] { base, "2", "1", "2" });
+            parameters.add(new Object[] { base, "1", "2", "2" });
+            parameters.add(new Object[] { base, "2", "0", "0" });
+            parameters.add(new Object[] { base, "0", "2", "0" });
+            parameters.add(new Object[] { base, "0", "1", "0" });
+            parameters.add(new Object[] { base, "1", "0", "0" });
+            parameters.add(new Object[] { base, "2", "-1", "-2" });
+            parameters.add(new Object[] { base, "-1", "2", "-2" });
+            parameters.add(new Object[] { base, "-2", "1", "-2" });
+            parameters.add(new Object[] { base, "1", "-2", "-2" });
+            parameters.add(new Object[] { base, "-2", "-1", "2" });
+            parameters.add(new Object[] { base, "-1", "-2", "2" });
+        }
+
         parameters.add(new Object[] { 10, "11", "0", "0" });
         parameters.add(new Object[] { 10, "0", "6", "0" });
 
@@ -241,7 +321,14 @@ public class MultiplyNumbersTest {
         parameters.add(new Object[] { 10, "11", "0.06", "0.66" });
         parameters.add(new Object[] { 10, "11", "0.006", "0.066" });
 
-        //TODO more test cases needed
+        for (int a = -10; a <= 10; a++) {
+
+            for (int b = -10; b <= 10; b++) {
+
+                int result = a * b;
+                parameters.add(new Object[] { 10, "" + a, "" + b, "" + result });
+            }
+        }
 
         return parameters;
     }

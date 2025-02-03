@@ -40,6 +40,8 @@ import java.util.Collection;
 import static jmul.math.fractions.FractionHelper.createFraction;
 import jmul.math.numbers.Constants;
 
+import jmul.math.numbers.exceptions.NumberParsingException;
+
 import jmul.test.classification.UnitTest;
 import jmul.test.exceptions.FailedTestException;
 
@@ -140,8 +142,8 @@ public class CreateFractionWithInvalidParameters2Test {
 
         for (int base = Constants.BASE_MIN_LIMIT; base <= Constants.BASE_MAX_LIMIT; base++) {
 
-            parameters.add(new Object[] { base, "-1", "-1", IllegalArgumentException.class });
-            parameters.add(new Object[] { base, "-0", "-0", IllegalArgumentException.class });
+            parameters.add(new Object[] { base, "--1", "1", NumberParsingException.class });
+            parameters.add(new Object[] { base, "1", "--1", NumberParsingException.class });
         }
 
         return parameters;

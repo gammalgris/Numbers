@@ -386,9 +386,15 @@ public final class NodesHelper {
      * @param centerNode
      *        the center node of a linked list
      */
-    public static void trimLeft(DigitNode centerNode) {
+    public static void trimLeft(@Modified DigitNode centerNode) {
 
         DigitNode left = centerNode;
+
+        // infinity needs no trimming
+        if (left == null) {
+
+            return;
+        }
 
         while (left.leftNode() != null) {
 
@@ -423,9 +429,15 @@ public final class NodesHelper {
      * @param centerNode
      *        the center node of a linked list
      */
-    public static void trimRight(DigitNode centerNode) {
+    public static void trimRight(@Modified DigitNode centerNode) {
 
         DigitNode right = centerNode;
+
+        // infinity needs no trimming
+        if (right == null) {
+
+            return;
+        }
 
         while (right.rightNode() != null) {
 

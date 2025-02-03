@@ -61,6 +61,8 @@ import jmul.math.operations.MixedComparator;
 import jmul.math.operations.MixedEqualityFunction;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
+import jmul.math.signs.Sign;
+import jmul.math.signs.Signs;
 
 
 /**
@@ -784,7 +786,7 @@ public class NumberImpl implements Number {
     public Number add(Number n) {
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_NUMBERS_FUNCTION);
+            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_NUMBERS_TRIM_RESULT_FUNCTION);
         Result<Number> result = function.calculate(this, n);
 
         return result.result();

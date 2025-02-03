@@ -38,8 +38,8 @@ import jmul.math.functions.FunctionSingletons;
 import jmul.math.functions.repository.FunctionIdentifiers;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
-import jmul.math.numbers.Sign;
-import jmul.math.numbers.Signs;
+import jmul.math.signs.Sign;
+import jmul.math.signs.Signs;
 import jmul.math.digits.Digit;
 import jmul.math.digits.PositionalNumeralSystems;
 import jmul.math.numbers.exceptions.UndefinedOperationException;
@@ -520,10 +520,6 @@ public class AddNumbers implements BinaryOperation<Number, Result<Number>> {
              */
             result = addOperandsWithDifferentSigns(operand1, operand2);
         }
-
-        DigitNode resultCenter = result.result().centerNode();
-        NodesHelper.trimLeft(resultCenter);
-        NodesHelper.trimRight(resultCenter);
 
         return result;
     }

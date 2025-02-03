@@ -178,14 +178,37 @@ public final class ParameterCheckHelper {
      *
      * @param number
      *        a number
+     *
+     * @return the specified number
      */
-    public static void checkParameter(Number number) {
+    public static Number checkParameter(Number number) {
 
         if (number == null) {
 
             String message = "No number (null) was specified!";
             throw new IllegalArgumentException(message);
         }
+
+        return number;
+    }
+
+    /**
+     * Checks the specified parameter.
+     *
+     * @param fraction
+     *        a fraction
+     *
+     * @return the specified fraction
+     */
+    public static Fraction checkParameter(Fraction fraction) {
+
+        if (fraction == null) {
+
+            String message = "No fraction (null) was specified!";
+            throw new IllegalArgumentException(message);
+        }
+
+        return fraction;
     }
 
     /**

@@ -40,6 +40,7 @@ import java.util.Collection;
 import jmul.math.fractions.Fraction;
 import static jmul.math.fractions.FractionHelper.createFraction;
 import jmul.math.numbers.Constants;
+import jmul.math.signs.Signs;
 
 import jmul.test.classification.UnitTest;
 
@@ -116,9 +117,11 @@ public class FractionEqualityTest {
 
         for (int base = Constants.BASE_MIN_LIMIT; base <= Constants.BASE_MAX_LIMIT; base++) {
 
-            parameters.add(new Object[] { createFraction(base, null), createFraction(base, null), true });
-            parameters.add(new Object[] { createFraction(base, "0"), createFraction(base, null), false });
-            parameters.add(new Object[] { createFraction(base, null), createFraction(base, "0"), false });
+            parameters.add(new Object[] { createFraction(base), createFraction(base), true });
+            parameters.add(new Object[] { createFraction(Signs.NEGATIVE, base), createFraction(Signs.NEGATIVE, base),
+                                          true });
+            parameters.add(new Object[] { createFraction(base, "0"), createFraction(base), false });
+            parameters.add(new Object[] { createFraction(base), createFraction(base, "0"), false });
 
             parameters.add(new Object[] { createFraction(base, "1"), createFraction(base, "1"), true });
             parameters.add(new Object[] { createFraction(base, "0"), createFraction(base, "1"), false });

@@ -40,7 +40,7 @@ import java.util.Collection;
 import jmul.math.Math;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
-import static jmul.math.numbers.Signs.NEGATIVE;
+import static jmul.math.signs.Signs.NEGATIVE;
 
 import jmul.test.classification.UnitTest;
 

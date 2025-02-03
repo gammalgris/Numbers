@@ -7,7 +7,7 @@
  * JMUL is a central repository for utilities which are used in my
  * other public and private repositories.
  *
- * Copyright (C) 2022  Kristian Kutin
+ * Copyright (C) 2025  Kristian Kutin
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,21 +31,33 @@
  * $Id$
  */
 
-package jmul.math.numbers;
+package test.jmul.math.fractions;
 
 
-/**
- * This interface represents a sign of a real number.
- *
- * @author Kristian Kutin
- */
-public interface Sign {
+import jmul.math.fractions.Fraction;
+
+import jmul.test.classification.UnitTest;
+
+
+@UnitTest
+public class NormalizeMixedFractionTest {
 
     /**
-     * Returns the symbol associated with this sign.
-     *
-     * @return a symbol
+     * The first operand parsed from the specified number string.
      */
-    char symbol();
+    private final Fraction operand;
+
+    /**
+     * The expected result parsed from the specified number string.
+     */
+    private final Fraction expectedResult;
+    
+    public NormalizeMixedFractionTest(Fraction operand, Fraction expectedResult) {
+
+        super();
+
+        this.operand = operand;
+        this.expectedResult = expectedResult;
+    }
 
 }

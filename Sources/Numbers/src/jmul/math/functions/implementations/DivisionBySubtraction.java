@@ -39,8 +39,8 @@ import static jmul.math.fractions.FractionHelper.createFraction;
 import jmul.math.fractions.Fraction;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
-import jmul.math.numbers.Sign;
-import jmul.math.numbers.Signs;
+import jmul.math.signs.Sign;
+import jmul.math.signs.Signs;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.Result;
 
@@ -77,7 +77,8 @@ public class DivisionBySubtraction implements BinaryOperation<Number, Result<Fra
         ParameterCheckHelper.checkIntegerIgnoreNull(divisor);
 
         int base = dividend.base();
-        Sign sign = Signs.evaluateSignSequence(dividend.sign(), divisor.sign());
+        Sign sign = Signs.negate(Signs.xor(dividend.sign(), divisor.sign()));
+        //Sign sign = Signs.evaluateSignSequence(dividend.sign(), divisor.sign());
 
         Number remainder = dividend.absoluteValue();
         Number subtrahend = divisor.absoluteValue();

@@ -7,7 +7,7 @@
  * JMUL is a central repository for utilities which are used in my
  * other public and private repositories.
  *
- * Copyright (C) 2024  Kristian Kutin
+ * Copyright (C) 2025  Kristian Kutin
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,51 +34,52 @@
 package jmul.math.functions.implementations;
 
 
-import jmul.math.digits.PositionalNumeralSystems;
 import jmul.math.functions.FunctionSingletons;
 import jmul.math.functions.repository.FunctionIdentifiers;
 import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberHelper;
+import jmul.math.numbers.nodes.DigitNode;
+import jmul.math.numbers.nodes.NodesHelper;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.Result;
-import jmul.math.operations.UnaryOperation;
 
 
 /**
- * This function implements the increment function.
+ * This implementation of an addition calls the default algorithm. In some cases the result
+ * has to be trimmed. In other cases the result should not be trimmed (i.e. when calculating
+ * with complements). A caller who needs the result to be trimmed calls this implementation.
  *
  * @author Kristian Kutin
  */
-public class IncrementNumber implements UnaryOperation<Number, Result<Number>> {
+public class AddNumbersTrimResult implements BinaryOperation<Number, Result<Number>> {
 
     /**
      * The default constructor.
      */
-    public IncrementNumber() {
+    public AddNumbersTrimResult() {
 
         super();
     }
 
     /**
-     * Increments the specified operand by one.
+     * Calls the addition function and trims the result.
      *
-     * @param operand
+     * @param operand1
+     *        a number
+     * @param operand2
      *        a number
      *
      * @return a number
      */
     @Override
-    public Result<Number> calculate(Number operand) {
-
-        ParameterCheckHelper.checkParameter(operand);
-
-        int base = operand.base();
-        String symbol = PositionalNumeralSystems.toString(base, 1);
-        final Number ONE = NumberHelper.createNumber(base, symbol);
+    public Result<Number> calculate(Number operand1, Number operand2) {
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_NUMBERS_TRIM_RESULT_FUNCTION);
-        Result<Number> result = function.calculate(operand, ONE);
+            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_NUMBERS_FUNCTION);
+        Result<Number> result = function.calculate(operand1, operand2);
+
+        DigitNode resultCenter = result.result().centerNode();
+        NodesHelper.trimLeft(resultCenter);
+        NodesHelper.trimRight(resultCenter);
 
         return result;
     }

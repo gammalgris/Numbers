@@ -33,6 +33,8 @@
 
 package jmul.math.numbers;
 
+import jmul.math.signs.Sign;
+
 
 /**
  * This interface defines some common number properties.

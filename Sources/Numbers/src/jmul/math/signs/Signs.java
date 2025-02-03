@@ -31,7 +31,7 @@
  * $Id$
  */
 
-package jmul.math.numbers;
+package jmul.math.signs;
 
 
 /**
@@ -152,39 +152,68 @@ public enum Signs implements Sign {
     }
 
     /**
-     * A sequence of signs that represetns a sequence of multiplications and divisions is evaluated
-     * and the resulting sign is returned.
+     * Evaluates the specified signs similar to the logical operator or.
      *
-     * @param signs
-     *        a sequence of signs
+     * @param sign1
+     *        a sign
+     * @param sign2
+     *        a sign
      *
-     * @return a sign
+     * @return returns a positive sign if both specified signs are positive, else returns a negative sign.
      */
-    public static Sign evaluateSignSequence(Sign... signs) {
+    public static Sign or(Sign sign1, Sign sign2) {
 
-        if (signs == null) {
-
-            throw new IllegalArgumentException("No sign sequence (null) was specified!");
-        }
-
-        int result = 1;
-
-        for (int index = 0; index < signs.length; index++) {
-
-            Sign sign = signs[index];
-
-            if (isNegative(sign)) {
-
-                result = result * -1;
-            }
-        }
-
-        if (result < 0) {
+        if (isNegative(sign1) && isNegative(sign2)) {
 
             return NEGATIVE;
         }
 
         return POSITIVE;
+    }
+
+    /**
+     * Evaluates the specified signs similar to the logical operator and.
+     *
+     * @param sign1
+     *        a sign
+     * @param sign2
+     *        a sign
+     *
+     * @return returns a positive sign if both specified signs are negative or positive, else returns a positive sign.
+     */
+    public static Sign and(Sign sign1, Sign sign2) {
+
+        if (isNegative(sign1) || isNegative(sign2)) {
+
+            return NEGATIVE;
+        }
+
+        return POSITIVE;
+    }
+
+    /**
+     * Evaluates the specified signs similar to the logical operator xor.
+     *
+     * @param sign1
+     *        a sign
+     * @param sign2
+     *        a sign
+     *
+     * @return returns a negative sign if one of the specified signs is negative, else returns a positive sign.
+     */
+    public static Sign xor(Sign sign1, Sign sign2) {
+
+        if (isNegative(sign1) && isPositive(sign2)) {
+
+            return POSITIVE;
+        }
+
+        if (isPositive(sign1) && isNegative(sign2)) {
+
+            return POSITIVE;
+        }
+
+        return NEGATIVE;
     }
 
 }

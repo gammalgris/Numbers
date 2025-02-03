@@ -231,4 +231,21 @@ public class PositionalNumeralSystems {
         return buffer.toString();
     }
 
+    /**
+     * Returns a string which represents the ordinal value for the specified number base.
+     *
+     * @param base
+     *        the base of a numeral system
+     * @param ordinal
+     *        the ordinal value of a digit
+     *
+     * @return
+     */
+    public static String toString(int base, int ordinal) {
+
+        char symbol = PositionalNumeralSystems.ordinalToSymbol(base, ordinal);
+
+        return String.format("%c", symbol);
+    }
+
 }

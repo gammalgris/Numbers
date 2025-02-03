@@ -20,6 +20,20 @@
 
 8) Add a clean script for bash.
 
+10) Replace expressions like "final Number ONE = new NumberImpl(operand.base(), "1");"
+   Hard number creation with a hard coded symbol may cause errors later. Instead use a way by specifying
+   the ordinal number instead of the symbol.
+
+11) Check that the results are disjunct from input parameters (use test.jmul.math.numbers.NumberCheckHelper#checkNumbersAreUniqueInstances).
+   Add this check to tests that don't have it.
+
+12) Input parameters should by default not be modified unless marked as such.
+   Add such a check to existing tests.
+
+13) Resolve conflict jmul.math.notation.Sign <-> 
+
+14)
+
 
 # Done
 

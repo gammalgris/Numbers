@@ -129,9 +129,9 @@ public class FractionComparisonTest {
 
         for (int base = Constants.BASE_MIN_LIMIT; base <= Constants.BASE_MAX_LIMIT; base++) {
 
-            parameters.add(new Object[] { createFraction(base, null), createFraction(base, null), 0 });
-            parameters.add(new Object[] { createFraction(base, "0"), createFraction(base, null), -1 });
-            parameters.add(new Object[] { createFraction(base, null), createFraction(base, "0"), 1 });
+            parameters.add(new Object[] { createFraction(base), createFraction(base), 0 });
+            parameters.add(new Object[] { createFraction(base, "0"), createFraction(base), -1 });
+            parameters.add(new Object[] { createFraction(base), createFraction(base, "0"), 1 });
 
             parameters.add(new Object[] { createFraction(base, "1"), createFraction(base, "1"), 0 });
             parameters.add(new Object[] { createFraction(base, "0"), createFraction(base, "1"), -1 });

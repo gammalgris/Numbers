@@ -34,7 +34,7 @@
 package jmul.math.numbers.notations;
 
 
-import jmul.math.numbers.Sign;
+import jmul.math.signs.Sign;
 import jmul.math.numbers.nodes.DigitNode;
 
 

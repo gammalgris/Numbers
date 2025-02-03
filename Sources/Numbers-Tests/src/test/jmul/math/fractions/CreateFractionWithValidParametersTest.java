@@ -40,8 +40,8 @@ import java.util.Collection;
 import jmul.math.fractions.Fraction;
 import static jmul.math.fractions.FractionHelper.createFraction;
 import jmul.math.numbers.Constants;
-import jmul.math.numbers.Sign;
-import jmul.math.numbers.Signs;
+import jmul.math.signs.Sign;
+import jmul.math.signs.Signs;
 
 import jmul.test.classification.UnitTest;
 
@@ -102,8 +102,10 @@ public class CreateFractionWithValidParametersTest {
     @Test
     public void testToString() {
 
+        String message = String.format("%s -> %s", fraction, expectedString);
+
         String string = fraction.toString();
-        assertEquals(expectedString, string);
+        assertEquals(message, expectedString, string);
     }
 
     /**
@@ -112,12 +114,12 @@ public class CreateFractionWithValidParametersTest {
     @Test
     public void testSign() {
 
-        String message = String.format("fraction=%s", fraction);
+        String message = String.format("%s -> %s", fraction, expectedString);
 
-        Sign sign = fraction.sign();
-        assertEquals(message, expectedSign, sign);
+        Sign actualSign = fraction.sign();
+        assertEquals(message, expectedSign, actualSign);
 
-        if (Signs.isPositive(fraction.sign())) {
+        if (Signs.isPositive(actualSign)) {
 
             assertTrue(message, fraction.isPositive());
             assertFalse(message, fraction.isNegative());
@@ -141,21 +143,36 @@ public class CreateFractionWithValidParametersTest {
 
         for (int base = Constants.BASE_MIN_LIMIT; base <= Constants.BASE_MAX_LIMIT; base++) {
 
-            parameters.add(new Object[] { createFraction(base, null), "infinity", Signs.POSITIVE });
+            parameters.add(new Object[] { createFraction(base), "infinity", Signs.POSITIVE });
+            parameters.add(new Object[] { createFraction(Signs.NEGATIVE, base), "-infinity", Signs.NEGATIVE });
+
             parameters.add(new Object[] { createFraction(base, "0"), "0", Signs.POSITIVE });
+            parameters.add(new Object[] { createFraction(base, "-0"), "-0", Signs.NEGATIVE });
             parameters.add(new Object[] { createFraction(base, "1"), "1", Signs.POSITIVE });
             parameters.add(new Object[] { createFraction(base, "-1"), "-1", Signs.NEGATIVE });
 
             parameters.add(new Object[] { createFraction(base, "0", "0"), "0", Signs.POSITIVE });
             parameters.add(new Object[] { createFraction(base, null, "0"), "infinity/0", Signs.POSITIVE });
+            parameters.add(new Object[] { createFraction(base, "0", null), "0", Signs.POSITIVE });
             parameters.add(new Object[] { createFraction(base, "1", "10"), "1/10", Signs.POSITIVE });
             parameters.add(new Object[] { createFraction(base, "-1", "10"), "-1/10", Signs.NEGATIVE });
+            parameters.add(new Object[] { createFraction(base, "1", "-10"), "-1/10", Signs.NEGATIVE });
 
             parameters.add(new Object[] { createFraction(base, "0", "0", "0"), "0", Signs.POSITIVE });
+            parameters.add(new Object[] { createFraction(base, null, "1", "0"), "infinity 1/0", Signs.POSITIVE });
             parameters.add(new Object[] { createFraction(base, "1", null, "0"), "1 infinity/0", Signs.POSITIVE });
             parameters.add(new Object[] { createFraction(base, "1", "1", "10"), "1 1/10", Signs.POSITIVE });
             parameters.add(new Object[] { createFraction(base, "1", "1", null), "1 1/infinity", Signs.POSITIVE });
             parameters.add(new Object[] { createFraction(base, "-1", "1", null), "-1 1/infinity", Signs.NEGATIVE });
+
+            parameters.add(new Object[] { createFraction(base, "1", "1", "1"), "1 1/1", Signs.POSITIVE });
+            parameters.add(new Object[] { createFraction(base, "-1", "1", "1"), "-1 1/1", Signs.NEGATIVE });
+            parameters.add(new Object[] { createFraction(base, "1", "-1", "1"), "-1 1/1", Signs.NEGATIVE });
+            parameters.add(new Object[] { createFraction(base, "1", "1", "-1"), "-1 1/1", Signs.NEGATIVE });
+            parameters.add(new Object[] { createFraction(base, "1", "-1", "-1"), "1 1/1", Signs.POSITIVE });
+            parameters.add(new Object[] { createFraction(base, "-1", "-1", "1"), "1 1/1", Signs.POSITIVE });
+            parameters.add(new Object[] { createFraction(base, "-1", "1", "-1"), "1 1/1", Signs.POSITIVE });
+            parameters.add(new Object[] { createFraction(base, "-1", "-1", "-1"), "-1 1/1", Signs.NEGATIVE });
         }
 
         return parameters;

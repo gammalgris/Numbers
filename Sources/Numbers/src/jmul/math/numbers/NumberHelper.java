@@ -34,7 +34,10 @@
 package jmul.math.numbers;
 
 
+import jmul.math.digits.PositionalNumeralSystems;
 import jmul.math.numbers.nodes.DigitNode;
+import jmul.math.signs.Sign;
+import jmul.math.signs.Signs;
 
 
 /**
@@ -55,16 +58,29 @@ public final class NumberHelper {
     /**
      * Creates a new number according to the specified parameters.
      *
-     * @param base
-     *        a number base
      * @param sign
      *        the sign of the number
+     * @param base
+     *        a number base
      *
      * @return a number
      */
-    public static Number createNumber(int base, Sign sign) {
+    public static Number createNumber(Sign sign, int base) {
 
         return new NumberImpl(base, sign);
+    }
+
+    /**
+     * Creates a new number according to the specified parameters.
+     *
+     * @param base
+     *        the number base
+     *
+     * @return a number
+     */
+    public static Number createNumber(int base) {
+
+        return new NumberImpl(base);
     }
 
     /**
@@ -79,7 +95,54 @@ public final class NumberHelper {
      */
     public static Number createNumber(int base, String string) {
 
+        if (string == null) {
+
+            return new NumberImpl(base);
+        }
+
         return new NumberImpl(base, string);
+    }
+
+    /**
+     * Creates a new number according to the specified parameters.
+     *
+     * @param number
+     *        a number
+     *
+     * @return a clone of the specified number
+     */
+    public static Number createNumber(Number number) {
+
+        return new NumberImpl(number);
+    }
+
+    /**
+     * Creates a new number according to the specified parameters. The number consists of a single digit.
+     *
+     * @param sign
+     *        the sign of the number
+     * @param base
+     *        the number base
+     * @param ordinal
+     *        the ordinal value of the number (i.e. digit)
+     *
+     * @return a number
+     */
+    public static Number createNumber(Sign sign, int base, int ordinal) {
+
+        String symbol = PositionalNumeralSystems.toString(base, ordinal);
+
+        Number number;
+        if (Signs.isNegative(sign)) {
+
+            number = createNumber(base, Signs.NEGATIVE.toString() + symbol);
+
+        } else {
+
+            number = createNumber(base, symbol);
+        }
+
+        return number;
     }
 
     /**
@@ -92,7 +155,7 @@ public final class NumberHelper {
      *        a number
      *
      * @return a digit count
-     * 
+     *
      * @deprecated integrate into number implementation and replace counter type.
      */
     @Deprecated
@@ -133,7 +196,7 @@ public final class NumberHelper {
      *        a number
      *
      * @return a digit count
-     * 
+     *
      * @deprecated integrate into number implementation and replace counter type.
      */
     @Deprecated

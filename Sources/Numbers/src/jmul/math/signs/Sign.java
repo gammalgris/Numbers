@@ -31,41 +31,21 @@
  * $Id$
  */
 
-package jmul.math.numbers;
+package jmul.math.signs;
 
 
-import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
-import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
-import jmul.math.numbers.exceptions.UnsupportedBaseException;
-import jmul.math.signs.Sign;
+/**
+ * This interface represents a sign of a real number.
+ *
+ * @author Kristian Kutin
+ */
+public interface Sign {
 
-
-public final class ParameterHelper {
-
-    private ParameterHelper() {
-
-        throw new UnsupportedOperationException();
-    }
-
-    public static int checkBase(int base) {
-
-        if ((base < BASE_MIN_LIMIT) || (base > BASE_MAX_LIMIT)) {
-
-            throw new UnsupportedBaseException(base);
-        }
-
-        return base;
-    }
-
-    public static Sign checkSign(Sign sign) {
-
-        if (sign == null) {
-
-            String message = "No valid sign was specified (null)!";
-            throw new IllegalArgumentException(message);
-        }
-
-        return sign;
-    }
+    /**
+     * Returns the symbol associated with this sign.
+     *
+     * @return a symbol
+     */
+    char symbol();
 
 }

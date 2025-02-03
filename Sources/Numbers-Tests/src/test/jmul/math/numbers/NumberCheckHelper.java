@@ -82,13 +82,26 @@ public final class NumberCheckHelper {
      */
     public static void checkNumbersAreUniqueInstances(Number operand1, Number operand2, Number result) {
 
-        assertFalse(operand1 == operand2);
-        assertFalse(operand1 == result);
-        assertFalse(operand2 == result);
+        String message;
 
-        assertFalse(operand1.centerNode() == operand2.centerNode());
-        assertFalse(operand1.centerNode() == result.centerNode());
-        assertFalse(operand2.centerNode() == result.centerNode());
+        message = "Number instances are not unique!";
+        assertFalse(message, operand1 == operand2);
+        assertFalse(message, operand1 == result);
+        assertFalse(message, operand2 == result);
+
+        message = "Linked lists are not disjunct!";
+        if ((operand1.centerNode() != null) && (operand2.centerNode() != null)) {
+
+            assertFalse(message, operand1.centerNode() == operand2.centerNode());
+        }
+        if ((operand1.centerNode() != null) && (result.centerNode() != null)) {
+
+            assertFalse(message, operand1.centerNode() == result.centerNode());
+        }
+        if ((operand2.centerNode() != null) && (result.centerNode() != null)) {
+
+            assertFalse(message, operand2.centerNode() == result.centerNode());
+        }
     }
 
     /**
@@ -102,7 +115,14 @@ public final class NumberCheckHelper {
      */
     public static void checkNumberEqualsStringRepresentation(Number number, String stringRepresentation) {
 
-        assertEquals(stringRepresentation, number.toString());
+        if (stringRepresentation == null) {
+
+            assertEquals("infinity", number.toString());
+
+        } else {
+
+            assertEquals(stringRepresentation, number.toString());
+        }
     }
 
 }

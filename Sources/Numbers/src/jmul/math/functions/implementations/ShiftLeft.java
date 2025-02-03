@@ -36,8 +36,8 @@ package jmul.math.functions.implementations;
 
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
-import jmul.math.numbers.Sign;
-import jmul.math.numbers.Signs;
+import jmul.math.signs.Sign;
+import jmul.math.signs.Signs;
 import jmul.math.numbers.exceptions.UndefinedOperationException;
 import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.NodesHelper;

@@ -36,7 +36,7 @@ package test.jmul.math.numbers;
 
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
-import jmul.math.numbers.Signs;
+import jmul.math.signs.Signs;
 
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;

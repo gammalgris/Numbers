@@ -36,20 +36,25 @@ package jmul.math.fractions;
 
 import java.util.Comparator;
 
+import jmul.math.digits.PositionalNumeralSystems;
+import static jmul.math.fractions.FractionHelper.CLONE;
 import static jmul.math.fractions.FractionHelper.DONT_CLONE;
+import static jmul.math.fractions.FractionHelper.createFraction;
 import jmul.math.functions.FunctionSingletons;
 import jmul.math.functions.repository.FunctionIdentifiers;
 import jmul.math.hash.HashHelper;
 import jmul.math.numbers.Number;
+import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.numbers.NumberImpl;
-import jmul.math.numbers.Sign;
-import jmul.math.numbers.Signs;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.EqualityFunction;
 import jmul.math.operations.MixedBinaryOperation;
 import jmul.math.operations.MixedComparator;
 import jmul.math.operations.MixedEqualityFunction;
 import jmul.math.operations.Result;
+import jmul.math.operations.UnaryOperation;
+import jmul.math.signs.Sign;
+import jmul.math.signs.Signs;
 
 
 /**
@@ -158,40 +163,6 @@ class MixedFraction implements Fraction {
         if (denominator.isFraction()) {
 
             String message = "The specified denominator is no integer!";
-            throw new IllegalArgumentException(message);
-        }
-
-        // Check the signs. Certain sign combinations are not allowed.
-
-        if (integerPart.isZero()) {
-
-            if (integerPart.isNegative()) {
-
-                String message = "The integer part must not be negative when zero!";
-                throw new IllegalArgumentException(message);
-            }
-
-        } else {
-
-            if (numerator.isNegative()) {
-
-                String message = "The numerator must not be negative!";
-                throw new IllegalArgumentException(message);
-            }
-        }
-
-        if (numerator.isZero()) {
-
-            if (numerator.isNegative()) {
-
-                String message = "The numerator must not be negative when zero!";
-                throw new IllegalArgumentException(message);
-            }
-        }
-
-        if (denominator.isNegative()) {
-
-            String message = "The denominator must not be negative!";
             throw new IllegalArgumentException(message);
         }
     }
@@ -362,12 +333,33 @@ class MixedFraction implements Fraction {
     @Override
     public Fraction normalizedFraction() {
 
-        Number newNumerator = integerPart().multiply(denominator()).add(numerator());
-        Number newDenominator = new NumberImpl(denominator());
+        if (hasIntegerPart() && hasNumerator()) {
 
-        Fraction newFraction = FractionHelper.createFraction(DONT_CLONE, newNumerator, newDenominator);
+            Number newNumerator = integerPart().absoluteValue();
+            newNumerator = newNumerator.multiply(denominator());
+            newNumerator = newNumerator.add(numerator());
+            Number newDenominator = denominator();
+            if (Signs.isNegative(sign())) {
 
-        return newFraction;
+                newNumerator = newNumerator.negate();
+            }
+            return createFraction(DONT_CLONE, newNumerator, newDenominator);
+
+        } else if (hasIntegerPart() && !hasNumerator()) {
+
+            Number newNumerator = integerPart().multiply(denominator());
+            Number newDenominator = createNumber(Signs.POSITIVE, base(), 1);
+            return createFraction(DONT_CLONE, newNumerator, newDenominator);
+
+        } else if (!hasIntegerPart() && hasNumerator()) {
+
+            return createFraction(CLONE, numerator(), denominator());
+
+        } else {
+
+            String symbol = PositionalNumeralSystems.toString(base(), 0);
+            return createFraction(base(), symbol);
+        }
     }
 
     /**
@@ -737,7 +729,11 @@ class MixedFraction implements Fraction {
     @Override
     public Fraction inc() {
 
-        throw new UnsupportedOperationException();
+        UnaryOperation<Fraction, Result<Fraction>> function =
+            (UnaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_INCREMENT_FUNCTION);
+        Result<Fraction> result = function.calculate(this);
+
+        return result.result();
     }
 
     /**
@@ -748,7 +744,11 @@ class MixedFraction implements Fraction {
     @Override
     public Fraction dec() {
 
-        throw new UnsupportedOperationException();
+        UnaryOperation<Fraction, Result<Fraction>> function =
+            (UnaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_DECREMENT_FUNCTION);
+        Result<Fraction> result = function.calculate(this);
+
+        return result.result();
     }
 
     /**

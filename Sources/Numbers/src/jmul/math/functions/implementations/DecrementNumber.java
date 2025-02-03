@@ -34,10 +34,11 @@
 package jmul.math.functions.implementations;
 
 
+import jmul.math.digits.PositionalNumeralSystems;
 import jmul.math.functions.FunctionSingletons;
 import jmul.math.functions.repository.FunctionIdentifiers;
 import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
+import jmul.math.numbers.NumberHelper;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
@@ -71,7 +72,9 @@ public class DecrementNumber implements UnaryOperation<Number, Result<Number>> {
 
         ParameterCheckHelper.checkParameter(operand);
 
-        final Number ONE = new NumberImpl(operand.base(), "1");
+        int base = operand.base();
+        String symbol = PositionalNumeralSystems.toString(base, 1);
+        final Number ONE = NumberHelper.createNumber(base, symbol);
 
         BinaryOperation<Number, Result<Number>> function =
             (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.SUBTRACT_NUMBERS_FUNCTION);

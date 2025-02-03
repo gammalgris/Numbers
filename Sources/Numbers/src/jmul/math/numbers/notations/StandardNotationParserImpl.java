@@ -39,8 +39,8 @@ import java.util.regex.Pattern;
 
 import jmul.math.digits.Digit;
 import jmul.math.digits.PositionalNumeralSystems;
-import jmul.math.numbers.Sign;
-import jmul.math.numbers.Signs;
+import jmul.math.signs.Sign;
+import jmul.math.signs.Signs;
 import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.NodesHelper;
 

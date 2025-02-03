@@ -93,7 +93,7 @@ public final class Math {
     public static Number add(Number firstSummand, Number secondSummand) {
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_NUMBERS_FUNCTION);
+            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_NUMBERS_TRIM_RESULT_FUNCTION);
         Result<Number> result = function.calculate(firstSummand, secondSummand);
 
         return result.result();
@@ -415,6 +415,23 @@ public final class Math {
     }
 
     /**
+     * Increments the specified fraction by one.
+     *
+     * @param fraction
+     *        a fraction
+     *
+     * @return a fraction
+     */
+    public static Fraction inc(Fraction fraction) {
+
+        UnaryOperation<Fraction, Result<Fraction>> function =
+            (UnaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_INCREMENT_FUNCTION);
+        Result<Fraction> result = function.calculate(fraction);
+
+        return result.result();
+    }
+
+    /**
      * Decrements the specified number by one.
      *
      * @param number
@@ -427,6 +444,23 @@ public final class Math {
         UnaryOperation<Number, Result<Number>> function =
             (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_DECREMENT_FUNCTION);
         Result<Number> result = function.calculate(number);
+
+        return result.result();
+    }
+
+    /**
+     * Decrements the specified fraction by one.
+     *
+     * @param fraction
+     *        a fraction
+     *
+     * @return a fraction
+     */
+    public static Fraction dec(Fraction fraction) {
+
+        UnaryOperation<Fraction, Result<Fraction>> function =
+            (UnaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_DECREMENT_FUNCTION);
+        Result<Fraction> result = function.calculate(fraction);
 
         return result.result();
     }

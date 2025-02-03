@@ -42,7 +42,7 @@ import static jmul.math.fractions.FractionHelper.createFraction;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.NumberImpl;
-import static jmul.math.numbers.Signs.NEGATIVE;
+import static jmul.math.signs.Signs.NEGATIVE;
 
 import jmul.test.classification.UnitTest;
 

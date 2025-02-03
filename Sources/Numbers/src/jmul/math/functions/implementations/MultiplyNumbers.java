@@ -38,14 +38,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
-import jmul.math.numbers.Sign;
-import jmul.math.numbers.Signs;
+import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.numbers.exceptions.UndefinedOperationException;
 import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.NodesHelper;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.Result;
+import jmul.math.signs.Sign;
+import jmul.math.signs.Signs;
 
 
 /**
@@ -90,45 +90,71 @@ public class MultiplyNumbers implements BinaryOperation<Number, Result<Number>> 
         // Handle special cases which can be resolved without computation.
         if (operand1.isInfinity() && operand2.isZero()) {
 
-            throw new UndefinedOperationException("*", operand1, operand2);
+            String operation = String.format("%s * %s", operand1, operand2);
+            throw new UndefinedOperationException(operation, operand1, operand2);
 
         } else if (operand1.isZero() && operand2.isInfinity()) {
 
-            throw new UndefinedOperationException("*", operand1, operand2);
+            String operation = String.format("%s * %s", operand1, operand2);
+            throw new UndefinedOperationException(operation, operand1, operand2);
 
         } else if (operand1.isInfinity() || operand2.isInfinity()) {
 
             if (operand1.isNegative() || operand2.isNegative()) {
 
-                Number result = new NumberImpl(base, Signs.NEGATIVE);
+                Number result = createNumber(Signs.NEGATIVE, base);
                 return new Result<Number>(result);
 
             } else {
 
-                Number result = new NumberImpl(base);
+                Number result = createNumber(base);
                 return new Result<Number>(result);
             }
 
         } else if (operand1.isZero() || operand2.isZero()) {
 
-            Number result = new NumberImpl(base, "0");
+            Number result = createNumber(Signs.POSITIVE, base, 0);
             return new Result<Number>(result);
-        }
-
-        // Determine the sign of the result.
-        Sign sign;
-        if (operand1.isNegative()) {
-
-            sign = operand1.sign();
-
-        } else if (operand2.isNegative()) {
-
-            sign = operand2.sign();
 
         } else {
 
-            sign = operand1.sign();
+            final Number ONE = createNumber(Signs.POSITIVE, base, 1);
+            final Number MINUS_ONE = createNumber(Signs.NEGATIVE, base, 1);
+
+            if (operand1.equals(ONE)) {
+
+                Number result = createNumber(operand2);
+                return new Result<Number>(result);
+
+            } else if (operand2.equals(ONE)) {
+
+                Number result = createNumber(operand1);
+                return new Result<Number>(result);
+
+            } else if (operand1.equals(MINUS_ONE)) {
+
+                Sign newSign = Signs.negate(Signs.xor(operand1.sign(), operand2.sign()));
+                Number result = createNumber(operand2);
+                if (newSign != result.sign()) {
+
+                    result = result.negate();
+                }
+                return new Result<Number>(result);
+
+            } else if (operand2.equals(MINUS_ONE)) {
+
+                Sign newSign = Signs.negate(Signs.xor(operand1.sign(), operand2.sign()));
+                Number result = createNumber(operand1);
+                if (newSign != result.sign()) {
+
+                    result = result.negate();
+                }
+                return new Result<Number>(result);
+            }
         }
+
+        // Determine the sign of the result.
+        Sign newSign = Signs.negate(Signs.xor(operand1.sign(), operand2.sign()));
 
         // Remove the sign on both operands.
         Number clone1 = operand1.absoluteValue();
@@ -136,7 +162,7 @@ public class MultiplyNumbers implements BinaryOperation<Number, Result<Number>> 
 
         // Determine how many shifts are requiremed to transform both operands into
         // integers.
-        Number shifts = new NumberImpl(base, "-1");
+        Number shifts = createNumber(Signs.NEGATIVE, base, 1);
 
         DigitNode currentNode1 = operand1.centerNode();
         DigitNode currentNode2 = operand2.centerNode();
@@ -162,14 +188,14 @@ public class MultiplyNumbers implements BinaryOperation<Number, Result<Number>> 
         }
 
         // Transform the operands into integers.
-        clone1 = operand1.shiftRight(shifts);
-        clone2 = operand2.shiftRight(shifts);
+        clone1 = clone1.shiftRight(shifts);
+        clone2 = clone2.shiftRight(shifts);
 
         // Multiply the operands, i.e. write the second operand to the left and the first operand to the right.
         // Keep halving the number on the left and doubling the number on the right until the number on the
         // left is down to one. Add all numbers on the right where the corresponding number on the left is odd.
         // The result is the product of the multiplication.
-        final Number ONE = new NumberImpl(base, "1");
+        final Number ONE = createNumber(Signs.POSITIVE, base, 1);
         Map<Number, Number> remainderSummandMap = new HashMap<>();
 
         while (true) {
@@ -189,7 +215,7 @@ public class MultiplyNumbers implements BinaryOperation<Number, Result<Number>> 
             clone1 = clone1.doubling();
         }
 
-        Number sum = new NumberImpl(base, "0");
+        Number sum = createNumber(Signs.POSITIVE, base, 0);
 
         for (Map.Entry<Number, Number> entry : remainderSummandMap.entrySet()) {
 
@@ -203,7 +229,7 @@ public class MultiplyNumbers implements BinaryOperation<Number, Result<Number>> 
         Number result = sum.shiftLeft(shifts);
 
         // Apply the sign to the result.
-        if (Signs.isNegative(sign)) {
+        if (Signs.isNegative(newSign)) {
 
             result = result.negate();
         }
