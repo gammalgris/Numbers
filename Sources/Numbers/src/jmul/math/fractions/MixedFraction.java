@@ -226,6 +226,10 @@ class MixedFraction implements Fraction {
         // Add the integer part and the fraction.
 
         // TODO Implement this method
+        // A different number division function is needed. An additional evaluate 
+        // function is needed which require the specification of a division algorithm and
+        // an arbitrary precision.
+
         throw new UnsupportedOperationException();
     }
 
@@ -727,6 +731,7 @@ class MixedFraction implements Fraction {
     @Override
     public Fraction halving() {
 
+        // TODO Implement this method
         throw new UnsupportedOperationException();
     }
 
@@ -738,6 +743,7 @@ class MixedFraction implements Fraction {
     @Override
     public Fraction doubling() {
 
+        // TODO Implement this method
         throw new UnsupportedOperationException();
     }
 
@@ -782,6 +788,7 @@ class MixedFraction implements Fraction {
     @Override
     public Fraction add(Number n) {
 
+        // TODO Implement this method
         throw new UnsupportedOperationException();
     }
 
@@ -796,6 +803,7 @@ class MixedFraction implements Fraction {
     @Override
     public Fraction add(Fraction f) {
 
+        // TODO Implement this method
         throw new UnsupportedOperationException();
     }
 
@@ -810,6 +818,7 @@ class MixedFraction implements Fraction {
     @Override
     public Fraction subtract(Number n) {
 
+        // TODO Implement this method
         throw new UnsupportedOperationException();
     }
 
@@ -824,6 +833,7 @@ class MixedFraction implements Fraction {
     @Override
     public Fraction subtract(Fraction f) {
 
+        // TODO Implement this method
         throw new UnsupportedOperationException();
     }
 
@@ -838,6 +848,7 @@ class MixedFraction implements Fraction {
     @Override
     public Fraction multiply(Number n) {
 
+        // TODO Implement this method
         throw new UnsupportedOperationException();
     }
 
@@ -852,6 +863,7 @@ class MixedFraction implements Fraction {
     @Override
     public Fraction multiply(Fraction f) {
 
+        // TODO Implement this method
         throw new UnsupportedOperationException();
     }
 
@@ -866,6 +878,7 @@ class MixedFraction implements Fraction {
     @Override
     public Fraction divide(Number n) {
 
+        // TODO Implement this method
         throw new UnsupportedOperationException();
     }
 
@@ -880,6 +893,7 @@ class MixedFraction implements Fraction {
     @Override
     public Fraction divide(Fraction f) {
 
+        // TODO Implement this method
         throw new UnsupportedOperationException();
     }
 
@@ -894,6 +908,7 @@ class MixedFraction implements Fraction {
     @Override
     public Fraction modulo(Number n) {
 
+        // TODO Implement this method
         throw new UnsupportedOperationException();
     }
 
@@ -908,6 +923,7 @@ class MixedFraction implements Fraction {
     @Override
     public Fraction max(Number n) {
 
+        // TODO Implement this method
         throw new UnsupportedOperationException();
     }
 
@@ -922,6 +938,7 @@ class MixedFraction implements Fraction {
     @Override
     public Fraction max(Fraction f) {
 
+        // TODO Implement this method
         throw new UnsupportedOperationException();
     }
 
@@ -936,6 +953,7 @@ class MixedFraction implements Fraction {
     @Override
     public Fraction min(Number n) {
 
+        // TODO Implement this method
         throw new UnsupportedOperationException();
     }
 
@@ -950,6 +968,7 @@ class MixedFraction implements Fraction {
     @Override
     public Fraction min(Fraction f) {
 
+        // TODO Implement this method
         throw new UnsupportedOperationException();
     }
 
@@ -964,6 +983,7 @@ class MixedFraction implements Fraction {
     @Override
     public Fraction exponentiate(Number n) {
 
+        // TODO Implement this method
         throw new UnsupportedOperationException();
     }
 
@@ -978,6 +998,7 @@ class MixedFraction implements Fraction {
     @Override
     public Fraction log(Number n) {
 
+        // TODO Implement this method
         throw new UnsupportedOperationException();
     }
 
