@@ -88,15 +88,18 @@ public class ManyConcurrentAdditionsTest {
         Thread thread6 = ThreadStartHelper.startThread(monitor3);
         Thread thread7 = ThreadStartHelper.startThread(monitor4);
 
-        try {
-            thread5.join();
-        } catch (InterruptedException e) {
+        boolean running = true;
+        while (running) {
+            
+            running = !monitor2.done();
+            
+            ThreadHelper.sleep(1000L);
         }
 
-        monitor1.stop();
         testDesigner.stop();
         testExecutor1.stop();
         testExecutor2.stop();
+        monitor1.stop();
         monitor2.stop();
         monitor3.stop();
         monitor4.stop();
@@ -339,6 +342,11 @@ class TestDesigner implements Runnable, StoppableRunnable {
 
                 sleepUntilAvailableResources();
 
+                if (!running) {
+                    
+                    return;
+                }
+
                 int expectedResult = a + b;
                 TestCaseParameters parameters = new TestCaseParameters(10, "" + a, "" + b, "" + expectedResult);
                 testQueue.add(parameters);
@@ -353,7 +361,7 @@ class TestDesigner implements Runnable, StoppableRunnable {
      */
     private void sleepUntilAvailableResources() {
 
-        while (monitor.stopMassMemoryAllocation()) {
+        while (running && monitor.stopMassMemoryAllocation()) {
 
             ThreadHelper.sleep(1000L);
         }

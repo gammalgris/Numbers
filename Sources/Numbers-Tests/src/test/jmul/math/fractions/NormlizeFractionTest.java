@@ -70,7 +70,12 @@ public class NormlizeFractionTest {
     private final Fraction expectedResult;
 
     /**
+     * Creates a new test case according to the specified parameters.
      *
+     * @param operand
+     *        a fraction
+     * @param expectedResult
+     *        a normalized fraction
      */
     public NormlizeFractionTest(Fraction operand, Fraction expectedResult) {
 
@@ -99,6 +104,7 @@ public class NormlizeFractionTest {
 
         Fraction actualResult = operand.normalizedFraction();
         assertEquals(toString(), expectedResult, actualResult);
+        assertEquals(toString(), expectedResult.toString(), actualResult.toString());
     }
 
     /**

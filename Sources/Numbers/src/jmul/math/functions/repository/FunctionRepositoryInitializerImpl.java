@@ -50,6 +50,7 @@ import jmul.math.functions.implementations.IncrementNumber;
 import jmul.math.functions.implementations.MaxFunction;
 import jmul.math.functions.implementations.MinFunction;
 import jmul.math.functions.implementations.MultiplyNumbers;
+import jmul.math.functions.implementations.NegateFraction;
 import jmul.math.functions.implementations.NegateNumber;
 import jmul.math.functions.implementations.NumberComplement;
 import jmul.math.functions.implementations.OddNumberFunction;
@@ -124,6 +125,7 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
         repository.registerFunction(FunctionIdentifiers.STANDARD_NOTATION_FUNCTION, StandardNotationFunctionImpl.class);
 
         repository.registerFunction(FunctionIdentifiers.NEGATE_NUMBER_FUNCTION, NegateNumber.class);
+        repository.registerFunction(FunctionIdentifiers.NEGATE_FRACTION_FUNCTION, NegateFraction.class);
         repository.registerFunction(FunctionIdentifiers.NUMBER_COMPLEMENT_FUNCTION, NumberComplement.class);
 
         repository.registerFunction(FunctionIdentifiers.NUMBER_COMPARATOR_FUNCTION, NumberComparator.class);

@@ -44,6 +44,7 @@ import jmul.math.functions.FunctionSingletons;
 import jmul.math.functions.repository.FunctionIdentifiers;
 import jmul.math.hash.HashHelper;
 import jmul.math.numbers.Number;
+import jmul.math.numbers.NumberHelper;
 import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.numbers.NumberImpl;
 import jmul.math.operations.BinaryOperation;
@@ -370,17 +371,32 @@ class MixedFraction implements Fraction {
     @Override
     public Fraction normalizedMixedFraction() {
 
-        Number extractedIntegerPart = new NumberImpl(base(), "0");
-        Number newNumerator = new NumberImpl(numerator());
+        String zeroString = PositionalNumeralSystems.toString(base(), 0);
+        Number newIntegerPart = NumberHelper.createNumber(base(), zeroString);
+
+        Number newNumerator = numerator().absoluteValue();
         Number newDenominator = new NumberImpl(denominator());
 
-        while (newNumerator.isGreater(denominator())) {
+        while (newNumerator.isGreaterOrEqual(denominator())) {
 
-            extractedIntegerPart = extractedIntegerPart.inc();
+            newIntegerPart = newIntegerPart.inc();
             newNumerator = newNumerator.subtract(denominator());
         }
 
-        Number newIntegerPart = integerPart().add(extractedIntegerPart);
+        if (newNumerator.isZero()) {
+
+            String oneString = PositionalNumeralSystems.toString(base(), 1);
+            newDenominator = NumberHelper.createNumber(base(), oneString);
+        }
+
+        if (this.isNegative()) {
+
+            newIntegerPart = integerPart().subtract(newIntegerPart);
+
+        } else {
+
+            newIntegerPart = integerPart().add(newIntegerPart);
+        }
 
         Fraction newFraction = FractionHelper.createFraction(DONT_CLONE, newIntegerPart, newNumerator, newDenominator);
 
@@ -685,7 +701,11 @@ class MixedFraction implements Fraction {
     @Override
     public Fraction negate() {
 
-        throw new UnsupportedOperationException();
+        UnaryOperation<Fraction, Result<Fraction>> function =
+            (UnaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.NEGATE_FRACTION_FUNCTION);
+        Result<Fraction> result = function.calculate(this);
+
+        return result.result();
     }
 
     /**

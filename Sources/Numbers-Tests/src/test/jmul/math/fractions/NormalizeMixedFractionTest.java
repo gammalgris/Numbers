@@ -34,12 +34,29 @@
 package test.jmul.math.fractions;
 
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import jmul.math.fractions.Fraction;
+import static jmul.math.fractions.FractionHelper.createFraction;
+import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
+import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 
 import jmul.test.classification.UnitTest;
 
+import static org.junit.Assert.assertEquals;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
+
+/**
+ * This test suite tests normalizing a fraction.
+ *
+ * @author Kristian Kutin
+ */
 @UnitTest
+@RunWith(Parameterized.class)
 public class NormalizeMixedFractionTest {
 
     /**
@@ -51,13 +68,107 @@ public class NormalizeMixedFractionTest {
      * The expected result parsed from the specified number string.
      */
     private final Fraction expectedResult;
-    
+
+    /**
+     * Creates a new test case according to the specified parameters.
+     *
+     * @param operand
+     *        a fraction
+     * @param expectedResult
+     *        a normalized fraction
+     */
     public NormalizeMixedFractionTest(Fraction operand, Fraction expectedResult) {
 
         super();
 
         this.operand = operand;
         this.expectedResult = expectedResult;
+    }
+
+    /**
+     * Returns a string representation for this test case.
+     *
+     * @return a string representation
+     */
+    @Override
+    public String toString() {
+
+        return String.format("[base:%d]: (%s) -> %s", operand.base(), operand, expectedResult);
+    }
+
+    /**
+     * Tests decrementing a number.
+     */
+    @Test
+    public void testNormalization() {
+
+        Fraction actualResult = operand.normalizedMixedFraction();
+        assertEquals(toString(), expectedResult, actualResult);
+        assertEquals(toString(), expectedResult.toString(), actualResult.toString());
+    }
+
+    /**
+     * Returns a matrix of test data and expected results.
+     *
+     * @return a matrix of test data and expected results
+     */
+    @Parameterized.Parameters
+    public static Collection<Object[]> data() {
+
+        Collection<Object[]> parameters = new ArrayList<Object[]>();
+
+        parameters.add(new Object[] { createFraction(2, "0"), createFraction(2, "0", "1") });
+        parameters.add(new Object[] { createFraction(2, "1"), createFraction(2, "1") });
+        parameters.add(new Object[] { createFraction(2, "-1"), createFraction(2, "-1") });
+
+        parameters.add(new Object[] { createFraction(2, "0", "1"), createFraction(2, "0") });
+        parameters.add(new Object[] { createFraction(2, "1", "1"), createFraction(2, "1") });
+        parameters.add(new Object[] { createFraction(2, "-1", "1"), createFraction(2, "-1") });
+
+        parameters.add(new Object[] { createFraction(2, "1", "1", "1"), createFraction(2, "10") });
+        parameters.add(new Object[] { createFraction(2, "-1", "1", "1"), createFraction(2, "-10") });
+
+        parameters.add(new Object[] { createFraction(3, "2", "2", "2"), createFraction(3, "10") });
+        parameters.add(new Object[] { createFraction(3, "-2", "2", "2"), createFraction(3, "-10") });
+
+        parameters.add(new Object[] { createFraction(4, "2", "2", "2"), createFraction(4, "3") });
+        parameters.add(new Object[] { createFraction(4, "-2", "2", "2"), createFraction(4, "-3") });
+
+        parameters.add(new Object[] { createFraction(5, "2", "2", "2"), createFraction(5, "3") });
+        parameters.add(new Object[] { createFraction(5, "-2", "2", "2"), createFraction(5, "-3") });
+
+        parameters.add(new Object[] { createFraction(6, "2", "2", "2"), createFraction(6, "3") });
+        parameters.add(new Object[] { createFraction(6, "-2", "2", "2"), createFraction(6, "-3") });
+
+        parameters.add(new Object[] { createFraction(6, "2", "1", "2"), createFraction(6, "2", "1", "2") });
+        parameters.add(new Object[] { createFraction(6, "-2", "1", "2"), createFraction(6, "-2", "1", "2") });
+
+        for (int base = BASE_MIN_LIMIT + 1; base <= BASE_MAX_LIMIT; base++) {
+
+            parameters.add(new Object[] { createFraction(base, "0"), createFraction(base, "0") });
+            parameters.add(new Object[] { createFraction(base, "1"), createFraction(base, "1") });
+            parameters.add(new Object[] { createFraction(base, "-1"), createFraction(base, "-1") });
+
+            parameters.add(new Object[] { createFraction(base, "0", "1"), createFraction(base, "0") });
+            parameters.add(new Object[] { createFraction(base, "1", "1"), createFraction(base, "1") });
+            parameters.add(new Object[] { createFraction(base, "-1", "1"), createFraction(base, "-1") });
+
+            parameters.add(new Object[] { createFraction(base, "1", "1", "1"), createFraction(base, "2") });
+            parameters.add(new Object[] { createFraction(base, "-1", "1", "1"), createFraction(base, "-2") });
+        }
+
+        for (int base = BASE_MIN_LIMIT + 5; base <= BASE_MAX_LIMIT; base++) {
+
+            parameters.add(new Object[] { createFraction(base, "2", "2", "2"), createFraction(base, "3") });
+            parameters.add(new Object[] { createFraction(base, "-2", "2", "2"), createFraction(base, "-3") });
+        }
+
+        parameters.add(new Object[] { createFraction(10, "5", "2"), createFraction(10, "2", "1", "2") });
+        parameters.add(new Object[] { createFraction(10, "-5", "2"), createFraction(10, "-2", "1", "2") });
+        parameters.add(new Object[] { createFraction(10, "2", "5", "3"), createFraction(10, "3", "2", "3") });
+        parameters.add(new Object[] { createFraction(10, "-2", "5", "3"), createFraction(10, "-3", "2", "3") });
+
+        return parameters;
     }
 
 }

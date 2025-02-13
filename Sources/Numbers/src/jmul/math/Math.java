@@ -117,6 +117,23 @@ public final class Math {
     }
 
     /**
+     * Negates the specified fraction (i.e. changes the sign).
+     *
+     * @param f
+     *        a fraction
+     *
+     * @return a fraction
+     */
+    public static Fraction negate(Fraction f) {
+
+        UnaryOperation<Fraction, Result<Fraction>> function =
+            (UnaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.NEGATE_FRACTION_FUNCTION);
+        Result<Fraction> result = function.calculate(f);
+
+        return result.result();
+    }
+
+    /**
      * Parses the specified string and returns a number. The number base is 10.
      *
      * @param s
