@@ -47,12 +47,15 @@ import jmul.math.functions.implementations.HalvingDigit;
 import jmul.math.functions.implementations.HalvingNumber;
 import jmul.math.functions.implementations.IncrementFraction;
 import jmul.math.functions.implementations.IncrementNumber;
-import jmul.math.functions.implementations.MaxFunction;
-import jmul.math.functions.implementations.MinFunction;
+import jmul.math.functions.implementations.MaxFraction;
+import jmul.math.functions.implementations.MaxNumber;
+import jmul.math.functions.implementations.MinFraction;
+import jmul.math.functions.implementations.MinNumber;
 import jmul.math.functions.implementations.MultiplyNumbers;
 import jmul.math.functions.implementations.NegateFraction;
 import jmul.math.functions.implementations.NegateNumber;
 import jmul.math.functions.implementations.NumberComplement;
+import jmul.math.functions.implementations.NumberToFraction;
 import jmul.math.functions.implementations.OddNumberFunction;
 import jmul.math.functions.implementations.ShiftLeft;
 import jmul.math.functions.implementations.ShiftRight;
@@ -114,6 +117,8 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
 
         FunctionRepository repository = new FunctionRepositoryImpl();
 
+        repository.registerFunction(FunctionIdentifiers.NUMBER_TO_FRACTION_FUNCTION, NumberToFraction.class);
+
         repository.registerFunction(FunctionIdentifiers.DIGIT_COMPARATOR_FUNCTION, DigitComparator.class);
         repository.registerFunction(FunctionIdentifiers.DIGIT_EQUALITY_FUNCTION, DigitEquality.class);
 
@@ -157,8 +162,10 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
         repository.registerFunction(FunctionIdentifiers.DOUBLING_NUMBER_FUNCTION, DoublingNumber.class);
         repository.registerFunction(FunctionIdentifiers.HALVING_NUMBER_FUNCTION, HalvingNumber.class);
 
-        repository.registerFunction(FunctionIdentifiers.MAX_NUMBER_FUNCTION, MaxFunction.class);
-        repository.registerFunction(FunctionIdentifiers.MIN_NUMBER_FUNCTION, MinFunction.class);
+        repository.registerFunction(FunctionIdentifiers.MAX_NUMBER_FUNCTION, MaxNumber.class);
+        repository.registerFunction(FunctionIdentifiers.MAX_FRACTION_FUNCTION, MaxFraction.class);
+        repository.registerFunction(FunctionIdentifiers.MIN_NUMBER_FUNCTION, MinNumber.class);
+        repository.registerFunction(FunctionIdentifiers.MIN_FRACTION_FUNCTION, MinFraction.class);
 
         repository.registerFunction(FunctionIdentifiers.NUMBER_INCREMENT_FUNCTION, IncrementNumber.class);
         repository.registerFunction(FunctionIdentifiers.FRACTION_INCREMENT_FUNCTION, IncrementFraction.class);

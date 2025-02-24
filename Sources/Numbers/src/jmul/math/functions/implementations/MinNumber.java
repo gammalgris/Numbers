@@ -44,22 +44,22 @@ import jmul.math.operations.Result;
 
 
 /**
- * This function implementation compares two numbers and returns the bigger number.
+ * This function implementation compares two numbers and returns the lesser number.
  *
  * @author Kristian Kutin
  */
-public class MaxFunction implements BinaryOperation<Number, Result<Number>> {
+public class MinNumber implements BinaryOperation<Number, Result<Number>> {
 
     /**
      * The default constructor.
      */
-    public MaxFunction() {
+    public MinNumber() {
 
         super();
     }
 
     /**
-     * Compares the specified numbers and returns the bigger number.
+     * Compares the specified numbers and returns the lesser number.
      *
      * @param operand1
      *        a number
@@ -77,7 +77,7 @@ public class MaxFunction implements BinaryOperation<Number, Result<Number>> {
             (Comparator<Number>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_COMPARATOR_FUNCTION);
         int result = function.compare(operand1, operand2);
 
-        if (result >= 0) {
+        if (result <= 0) {
 
             return new Result<Number>(operand1);
 

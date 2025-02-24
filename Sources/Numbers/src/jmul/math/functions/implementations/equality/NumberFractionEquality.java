@@ -34,15 +34,15 @@
 package jmul.math.functions.implementations.equality;
 
 
-import static jmul.math.fractions.FractionHelper.DONT_CLONE;
 import jmul.math.fractions.Fraction;
-import jmul.math.fractions.FractionHelper;
 import jmul.math.functions.Function;
 import jmul.math.functions.FunctionSingletons;
 import jmul.math.functions.repository.FunctionIdentifiers;
 import jmul.math.numbers.Number;
 import jmul.math.operations.EqualityFunction;
 import jmul.math.operations.MixedEqualityFunction;
+import jmul.math.operations.Result;
+import jmul.math.operations.UnaryOperation;
 
 
 /**
@@ -85,11 +85,14 @@ public class NumberFractionEquality implements Function, MixedEqualityFunction<N
             return false;
         }
 
-        Fraction f1 = FractionHelper.createFraction(DONT_CLONE, t1);
+        UnaryOperation<Number, Result<Fraction>> conversionFunction =
+            (UnaryOperation<Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_TO_FRACTION_FUNCTION);
+        Result<Fraction> wrappedResult = conversionFunction.calculate(t1);
+        Fraction f1 = wrappedResult.result();
 
-        EqualityFunction<Fraction> function =
+        EqualityFunction<Fraction> equalityFunction =
             (EqualityFunction<Fraction>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_EQUALITY_FUNCTION);
-        boolean result = function.equals(f1, t2);
+        boolean result = equalityFunction.equals(f1, t2);
 
         return result;
     }

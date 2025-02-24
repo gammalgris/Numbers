@@ -57,7 +57,7 @@ import org.junit.runners.Parameterized;
  */
 @UnitTest
 @RunWith(Parameterized.class)
-public class NormlizeFractionTest {
+public class NormalizeFractionTest {
 
     /**
      * The first operand parsed from the specified number string.
@@ -77,7 +77,7 @@ public class NormlizeFractionTest {
      * @param expectedResult
      *        a normalized fraction
      */
-    public NormlizeFractionTest(Fraction operand, Fraction expectedResult) {
+    public NormalizeFractionTest(Fraction operand, Fraction expectedResult) {
 
         super();
 
@@ -97,7 +97,7 @@ public class NormlizeFractionTest {
     }
 
     /**
-     * Tests decrementing a number.
+     * Tests normalizing a fraction.
      */
     @Test
     public void testNormalization() {

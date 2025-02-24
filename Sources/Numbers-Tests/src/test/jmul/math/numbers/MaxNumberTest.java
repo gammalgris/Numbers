@@ -56,13 +56,13 @@ import org.junit.runners.Parameterized;
 
 
 /**
- * This test suite tests comparing two numbers and getting the higher number.
+ * This test suite tests comparing two numbers and getting the greater number.
  *
  * @author Kristian Kutin
  */
 @UnitTest
 @RunWith(Parameterized.class)
-public class MaxTest {
+public class MaxNumberTest {
 
     /**
      * The base for all operands.
@@ -111,7 +111,7 @@ public class MaxTest {
      * @param expectedResultString
      *        the expected result as number string
      */
-    public MaxTest(int base, String firstOperandString, String secondOperandString, String expectedResultString) {
+    public MaxNumberTest(int base, String firstOperandString, String secondOperandString, String expectedResultString) {
 
         super();
 

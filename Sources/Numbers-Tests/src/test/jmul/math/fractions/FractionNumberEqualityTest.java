@@ -41,7 +41,7 @@ import static jmul.math.fractions.FractionHelper.DONT_CLONE;
 import static jmul.math.fractions.FractionHelper.createFraction;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
-import jmul.math.numbers.NumberImpl;
+import static jmul.math.numbers.NumberHelper.createNumber;
 import static jmul.math.signs.Signs.NEGATIVE;
 
 import jmul.test.classification.UnitTest;
@@ -50,8 +50,6 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-
-import test.jmul.math.numbers.NumberFractionEqualityTest;
 
 
 /**
@@ -146,28 +144,31 @@ public class FractionNumberEqualityTest {
 
         for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
 
-            parameters.add(new Object[] { createFraction(DONT_CLONE, new NumberImpl(base)), new NumberImpl(base),
-                                          true });
-            parameters.add(new Object[] { createFraction(DONT_CLONE, new NumberImpl(base, NEGATIVE)),
-                                          new NumberImpl(base), false });
-            parameters.add(new Object[] { createFraction(DONT_CLONE, new NumberImpl(base, NEGATIVE)),
-                                          new NumberImpl(base), false });
-            parameters.add(new Object[] { createFraction(DONT_CLONE, new NumberImpl(base, NEGATIVE)),
-                                          new NumberImpl(base, NEGATIVE), true });
+            parameters.add(new Object[] { createFraction(DONT_CLONE, createNumber(base)), createNumber(base), true });
+            parameters.add(new Object[] { createFraction(DONT_CLONE, createNumber(NEGATIVE, base)), createNumber(base),
+                                          false });
+            parameters.add(new Object[] { createFraction(DONT_CLONE, createNumber(NEGATIVE, base)), createNumber(base),
+                                          false });
+            parameters.add(new Object[] { createFraction(DONT_CLONE, createNumber(NEGATIVE, base)),
+                                          createNumber(NEGATIVE, base), true });
 
-            parameters.add(new Object[] { createFraction(base, "0"), new NumberImpl(base, "0"), true });
-            parameters.add(new Object[] { createFraction(base, "0"), new NumberImpl(base, "1"), false });
-            parameters.add(new Object[] { createFraction(base, "1"), new NumberImpl(base, "0"), false });
-            parameters.add(new Object[] { createFraction(base, "0"), new NumberImpl(base, "-1"), false });
-            parameters.add(new Object[] { createFraction(base, "-1"), new NumberImpl(base, "0"), false });
+            parameters.add(new Object[] { createFraction(base, "0"), createNumber(base, "0"), true });
+            parameters.add(new Object[] { createFraction(base, "0"), createNumber(base, "1"), false });
+            parameters.add(new Object[] { createFraction(base, "1"), createNumber(base, "0"), false });
+            parameters.add(new Object[] { createFraction(base, "0"), createNumber(base, "-1"), false });
+            parameters.add(new Object[] { createFraction(base, "-1"), createNumber(base, "0"), false });
 
-            parameters.add(new Object[] { createFraction(base, "11", "1"), new NumberImpl(base, "11"), true });
-            parameters.add(new Object[] { createFraction(base, "11", "1"), new NumberImpl(base, "10"), false });
-            parameters.add(new Object[] { createFraction(base, "11", "1"), new NumberImpl(base, "100"), false });
+            parameters.add(new Object[] { createFraction(base, "11", "1"), createNumber(base, "11"), true });
+            parameters.add(new Object[] { createFraction(base, "11", "1"), createNumber(base, "10"), false });
+            parameters.add(new Object[] { createFraction(base, "11", "1"), createNumber(base, "100"), false });
 
-            parameters.add(new Object[] { createFraction(base, "1", "10", "1"), new NumberImpl(base, "11"), true });
-            parameters.add(new Object[] { createFraction(base, "1", "10", "1"), new NumberImpl(base, "10"), false });
-            parameters.add(new Object[] { createFraction(base, "1", "10", "1"), new NumberImpl(base, "100"), false });
+            parameters.add(new Object[] { createFraction(base, "1", "10", "1"), createNumber(base, "11"), true });
+            parameters.add(new Object[] { createFraction(base, "1", "10", "1"), createNumber(base, "10"), false });
+            parameters.add(new Object[] { createFraction(base, "1", "10", "1"), createNumber(base, "100"), false });
+
+            parameters.add(new Object[] { createFraction(base, "0"), createNumber(base, "0.1"), false });
+            parameters.add(new Object[] { createFraction(base, "1", "10"), createNumber(base, "0.1"), true });
+
         }
 
         return parameters;

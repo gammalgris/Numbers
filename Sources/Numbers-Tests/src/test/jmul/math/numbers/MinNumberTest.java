@@ -62,7 +62,7 @@ import org.junit.runners.Parameterized;
  */
 @UnitTest
 @RunWith(Parameterized.class)
-public class MinTest {
+public class MinNumberTest {
 
     /**
      * The base for all operands.
@@ -111,7 +111,7 @@ public class MinTest {
      * @param expectedResultString
      *        the expected result as number string
      */
-    public MinTest(int base, String firstOperandString, String secondOperandString, String expectedResultString) {
+    public MinNumberTest(int base, String firstOperandString, String secondOperandString, String expectedResultString) {
 
         super();
 

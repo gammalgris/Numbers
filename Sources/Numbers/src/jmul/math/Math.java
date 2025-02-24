@@ -377,7 +377,7 @@ public final class Math {
     }
 
     /**
-     * Compares the specified numbers and returns the bigger number.
+     * Compares the specified numbers and returns the greater number.
      *
      * @param n1
      *        a number
@@ -391,6 +391,25 @@ public final class Math {
         BinaryOperation<Number, Result<Number>> function =
             (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.MAX_NUMBER_FUNCTION);
         Result<Number> result = function.calculate(n1, n2);
+
+        return result.result();
+    }
+
+    /**
+     * Compares the specified fractions and returns the greater fraction.
+     *
+     * @param f1
+     *        a fraction
+     * @param f2
+     *        a fraction
+     *
+     * @return a fraction
+     */
+    public static Fraction max(Fraction f1, Fraction f2) {
+
+        BinaryOperation<Fraction, Result<Fraction>> function =
+            (BinaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.MAX_FRACTION_FUNCTION);
+        Result<Fraction> result = function.calculate(f1, f2);
 
         return result.result();
     }
@@ -410,6 +429,25 @@ public final class Math {
         BinaryOperation<Number, Result<Number>> function =
             (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.MIN_NUMBER_FUNCTION);
         Result<Number> result = function.calculate(n1, n2);
+
+        return result.result();
+    }
+
+    /**
+     * Compares the specified fractions and returns the lesser fraction.
+     *
+     * @param f1
+     *        a fraction
+     * @param f2
+     *        a fraction
+     *
+     * @return a fraction
+     */
+    public static Fraction min(Fraction f1, Fraction f2) {
+
+        BinaryOperation<Fraction, Result<Fraction>> function =
+            (BinaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.MIN_FRACTION_FUNCTION);
+        Result<Fraction> result = function.calculate(f1, f2);
 
         return result.result();
     }

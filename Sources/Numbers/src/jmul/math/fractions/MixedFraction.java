@@ -226,7 +226,7 @@ class MixedFraction implements Fraction {
         // Add the integer part and the fraction.
 
         // TODO Implement this method
-        // A different number division function is needed. An additional evaluate 
+        // A different number division function is needed. An additional evaluate
         // function is needed which require the specification of a division algorithm and
         // an arbitrary precision.
 
@@ -720,6 +720,7 @@ class MixedFraction implements Fraction {
     @Override
     public Fraction squareRoot() {
 
+        // TODO Implement this method
         throw new UnsupportedOperationException();
     }
 
@@ -938,8 +939,11 @@ class MixedFraction implements Fraction {
     @Override
     public Fraction max(Fraction f) {
 
-        // TODO Implement this method
-        throw new UnsupportedOperationException();
+        BinaryOperation<Fraction, Result<Fraction>> function =
+            (BinaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.MAX_FRACTION_FUNCTION);
+        Result<Fraction> result = function.calculate(this, f);
+
+        return result.result();
     }
 
     /**
@@ -968,8 +972,11 @@ class MixedFraction implements Fraction {
     @Override
     public Fraction min(Fraction f) {
 
-        // TODO Implement this method
-        throw new UnsupportedOperationException();
+        BinaryOperation<Fraction, Result<Fraction>> function =
+            (BinaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.MIN_FRACTION_FUNCTION);
+        Result<Fraction> result = function.calculate(this, f);
+
+        return result.result();
     }
 
     /**

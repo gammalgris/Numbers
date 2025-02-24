@@ -57,7 +57,7 @@ import jmul.math.operations.NumberComparisons;
  * @author Kristian Kutin
  */
 public interface Number extends LinkedDigitList, NumberProperties, ArithmeticNumberOperations, NumberComparisons,
-                                FractionComparisons, Comparable {
+                                FractionComparisons, Comparable, AbstractNumber {
 
     /**
      * Returns a scientific notation for this number. The default decimal separator is used.

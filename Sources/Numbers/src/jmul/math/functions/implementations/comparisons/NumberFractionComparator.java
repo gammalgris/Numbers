@@ -35,12 +35,14 @@ package jmul.math.functions.implementations.comparisons;
 
 
 import jmul.math.fractions.Fraction;
-import static jmul.math.fractions.FractionHelper.DONT_CLONE;
-import static jmul.math.fractions.FractionHelper.createFraction;
 import jmul.math.functions.Function;
+import jmul.math.functions.FunctionSingletons;
 import jmul.math.functions.implementations.ComparatorBase;
+import jmul.math.functions.repository.FunctionIdentifiers;
 import jmul.math.numbers.Number;
 import jmul.math.operations.MixedComparator;
+import jmul.math.operations.Result;
+import jmul.math.operations.UnaryOperation;
 
 
 /**
@@ -75,9 +77,10 @@ public class NumberFractionComparator extends ComparatorBase implements Function
 
         checkParameters(n, f);
 
-        Number numerator = f.denominator().multiply(n);
-        Number denominator = f.denominator();
-        Fraction normalizedNumber = createFraction(DONT_CLONE, numerator, denominator);
+        UnaryOperation<Number, Result<Fraction>> function =
+            (UnaryOperation<Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_TO_FRACTION_FUNCTION);
+        Result<Fraction> wrappedResult = function.calculate(n);
+        Fraction normalizedNumber = wrappedResult.result();
 
         return normalizedNumber.compareTo(f);
     }

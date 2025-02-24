@@ -75,3 +75,34 @@ When changing an implementation consider the dependencies to avoid endless loops
 + vector operations
 
 + matrix operations
+
+
+## important packages
+
++ jmul.math.digits
+  Provides implementations for digits and numeral systems.
+
++ jmul.math.fractions
+  Provides implementations for fractions.
+  
++ jmul.math.functions.implementation
+  Contains all function implementations
+
++ jmul.math.functions.repository
+  Contaisn the implementation for the function repository.
+
++ jmul.math.matrices
+  Contains implementations for matrices.
+
++ jmul.math.numbers
+  Contains implementations for numbers.
+
++ jmul.math.operations
+  Contains operation definitions.
+
++ jmul.math.signs
+  Contains implementations for signs.
+
++ jmul.math.vectors
+  Contains implementations for vecors.
+

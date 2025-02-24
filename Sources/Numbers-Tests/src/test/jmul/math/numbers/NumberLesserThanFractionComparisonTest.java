@@ -151,6 +151,9 @@ public class NumberLesserThanFractionComparisonTest {
 
             parameters.add(new Object[] { createNumber(base, "10"), createFraction(base, "10", "1", "10"), true });
             parameters.add(new Object[] { createNumber(base, "100"), createFraction(base, "10", "1", "100"), false });
+
+            parameters.add(new Object[] { createNumber(base, "0.1"), createFraction(base, "0"), false });
+            parameters.add(new Object[] { createNumber(base, "0.1"), createFraction(base, "1", "10"), false });
         }
 
         parameters.add(new Object[] { createNumber(10, "1"), createFraction(10, "11", "10"), true });
