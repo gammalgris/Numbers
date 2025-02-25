@@ -924,8 +924,11 @@ class MixedFraction implements Fraction {
     @Override
     public Fraction max(Number n) {
 
-        // TODO Implement this method
-        throw new UnsupportedOperationException();
+        MixedBinaryOperation<Fraction, Number, Result<Fraction>> function =
+            (MixedBinaryOperation<Fraction, Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.MAX_FRACTION_NUMBER_FUNCTION);
+        Result<Fraction> result = function.calculate(this, n);
+
+        return result.result();
     }
 
     /**
@@ -957,8 +960,11 @@ class MixedFraction implements Fraction {
     @Override
     public Fraction min(Number n) {
 
-        // TODO Implement this method
-        throw new UnsupportedOperationException();
+        MixedBinaryOperation<Fraction, Number, Result<Fraction>> function =
+            (MixedBinaryOperation<Fraction, Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.MIN_FRACTION_NUMBER_FUNCTION);
+        Result<Fraction> result = function.calculate(this, n);
+
+        return result.result();
     }
 
     /**

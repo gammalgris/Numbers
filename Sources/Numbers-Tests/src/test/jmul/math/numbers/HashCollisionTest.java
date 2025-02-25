@@ -43,6 +43,8 @@ import jmul.math.numbers.nodes.DigitNode;
 
 import jmul.test.classification.ManualTest;
 
+import org.junit.Ignore;
+
 
 /**
  * This test suite tests the occurrence of hash collisions.<br>
@@ -54,6 +56,7 @@ import jmul.test.classification.ManualTest;
  *
  * @author Kristian Kutin
  */
+@Ignore
 @ManualTest
 public class HashCollisionTest {
 

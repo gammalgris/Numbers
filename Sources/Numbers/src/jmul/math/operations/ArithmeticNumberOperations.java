@@ -204,6 +204,16 @@ public interface ArithmeticNumberOperations {
     Number modulo(Number n);
 
     /**
+     * Compares this number and the specified fraction and returns the greater number (as fraction).
+     *
+     * @param f
+     *        a number
+     *
+     * @return a fraction
+     */
+    Fraction max(Fraction f);
+
+    /**
      * Compares this number and the specified number and returns the greater number.
      *
      * @param n
@@ -214,9 +224,20 @@ public interface ArithmeticNumberOperations {
     Number max(Number n);
 
     /**
+     * Compares this number and the specified fraction and returns the smaller number (as fraction).
+     *
+     * @param f
+     *        a fraction
+     *
+     * @return a fraction
+     */
+    Fraction min(Fraction f);
+
+    /**
      * Compares this number and the specified number and returns the smaller number.
      *
      * @param n
+     *        a number
      *
      * @return a number
      */

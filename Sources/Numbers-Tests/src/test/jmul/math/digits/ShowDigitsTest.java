@@ -39,12 +39,15 @@ import jmul.math.digits.PositionalNumeralSystems;
 
 import jmul.test.classification.ManualTest;
 
+import org.junit.Ignore;
+
 
 /**
  * This test suite contains manual tests for looking up digits.
  *
  * @author Kristian Kutin
  */
+@Ignore
 @ManualTest
 public class ShowDigitsTest {
 

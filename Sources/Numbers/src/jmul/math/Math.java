@@ -415,6 +415,44 @@ public final class Math {
     }
 
     /**
+     * Compares this fraction and the specified number and returns the greater number (as fraction).
+     *
+     * @param f
+     *        a fraction
+     * @param n
+     *        a number
+     *
+     * @return a fraction
+     */
+    public static Fraction max(Fraction f, Number n) {
+
+        MixedBinaryOperation<Fraction, Number, Result<Fraction>> function =
+            (MixedBinaryOperation<Fraction, Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.MAX_FRACTION_NUMBER_FUNCTION);
+        Result<Fraction> result = function.calculate(f, n);
+
+        return result.result();
+    }
+
+    /**
+     * Compares this number and the specified fraction and returns the greater number (as fraction).
+     *
+     * @param n
+     *        a number
+     * @param f
+     *        a fraction
+     *
+     * @return a fraction
+     */
+    public static Fraction max(Number n, Fraction f) {
+
+        MixedBinaryOperation<Number, Fraction, Result<Fraction>> function =
+            (MixedBinaryOperation<Number, Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.MAX_NUMBER_FRACTION_FUNCTION);
+        Result<Fraction> result = function.calculate(n, f);
+
+        return result.result();
+    }
+
+    /**
      * Compares the specified numbers and returns the lesser number.
      *
      * @param n1
@@ -448,6 +486,44 @@ public final class Math {
         BinaryOperation<Fraction, Result<Fraction>> function =
             (BinaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.MIN_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(f1, f2);
+
+        return result.result();
+    }
+
+    /**
+     * Compares this fraction and the specified number and returns the smaller number (as fraction).
+     *
+     * @param f
+     *        a fraction
+     * @param n
+     *        a number
+     *
+     * @return an expression
+     */
+    public static Fraction min(Fraction f, Number n) {
+
+        MixedBinaryOperation<Fraction, Number, Result<Fraction>> function =
+            (MixedBinaryOperation<Fraction, Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.MIN_FRACTION_NUMBER_FUNCTION);
+        Result<Fraction> result = function.calculate(f, n);
+
+        return result.result();
+    }
+
+    /**
+     * Compares this number and the specified fraction and returns the smaller number (as fraction).
+     *
+     * @param n
+     *        a number
+     * @param f
+     *        a fraction
+     *
+     * @return a fraction
+     */
+    public static Fraction min(Number n, Fraction f) {
+
+        MixedBinaryOperation<Number, Fraction, Result<Fraction>> function =
+            (MixedBinaryOperation<Number, Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.MIN_NUMBER_FRACTION_FUNCTION);
+        Result<Fraction> result = function.calculate(n, f);
 
         return result.result();
     }

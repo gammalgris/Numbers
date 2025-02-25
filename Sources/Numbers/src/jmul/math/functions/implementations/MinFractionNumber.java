@@ -33,8 +33,54 @@
 
 package jmul.math.functions.implementations;
 
-public class MinFractionNumber {
+
+import jmul.math.fractions.Fraction;
+import jmul.math.functions.FunctionSingletons;
+import static jmul.math.functions.implementations.ParameterCheckHelper.checkParameters;
+import jmul.math.functions.repository.FunctionIdentifiers;
+import jmul.math.numbers.Number;
+import jmul.math.operations.MixedBinaryOperation;
+import jmul.math.operations.Result;
+import jmul.math.operations.UnaryOperation;
+
+
+/**
+ * An implementation of a min function.
+ *
+ * @author Kristian Kutin
+ */
+public class MinFractionNumber implements MixedBinaryOperation<Fraction, Number, Result<Fraction>> {
+
+    /**
+     * The default constructor.
+     */
     public MinFractionNumber() {
+
         super();
     }
+
+    /**
+     * Returns the lesser of the two parameters. The specified number is converted into a fraction.
+     *
+     * @param operand1
+     *        a fraction
+     * @param operand2
+     *        a number
+     *
+     * @return the higher of the two parameters
+     */
+    @Override
+    public Result<Fraction> calculate(Fraction operand1, Number operand2) {
+
+        checkParameters(operand1, operand2);
+
+        UnaryOperation<Number, Result<Fraction>> conversionFunction =
+            (UnaryOperation<Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_TO_FRACTION_FUNCTION);
+        Result<Fraction> wrappedResult = conversionFunction.calculate(operand2);
+        Fraction normalizedNumber = wrappedResult.result();
+
+        Fraction result = operand1.min(normalizedNumber);
+        return new Result<Fraction>(result);
+    }
+
 }

@@ -66,12 +66,12 @@ import org.junit.runners.Parameterized;
 public class NumberToFractionTest {
 
     /**
-     * The first operand parsed from the specified number string.
+     * The first operand.
      */
     private final Number operand;
 
     /**
-     * The expected result parsed from the specified number string.
+     * The expected result.
      */
     private final Fraction expectedResult;
 

@@ -54,12 +54,15 @@ import jmul.test.classification.ManualTest;
 
 import jmul.time.TimestampHelper;
 
+import org.junit.Ignore;
+
 
 /**
  * An implementation of a long running tests with many operations.
  *
  * @author Kristian Kutin
  */
+@Ignore
 @ManualTest
 public class ManyConcurrentAdditionsTest {
 
@@ -90,9 +93,9 @@ public class ManyConcurrentAdditionsTest {
 
         boolean running = true;
         while (running) {
-            
+
             running = !monitor2.done();
-            
+
             ThreadHelper.sleep(1000L);
         }
 
@@ -343,7 +346,7 @@ class TestDesigner implements Runnable, StoppableRunnable {
                 sleepUntilAvailableResources();
 
                 if (!running) {
-                    
+
                     return;
                 }
 

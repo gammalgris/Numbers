@@ -48,9 +48,13 @@ import jmul.math.functions.implementations.HalvingNumber;
 import jmul.math.functions.implementations.IncrementFraction;
 import jmul.math.functions.implementations.IncrementNumber;
 import jmul.math.functions.implementations.MaxFraction;
+import jmul.math.functions.implementations.MaxFractionNumber;
 import jmul.math.functions.implementations.MaxNumber;
+import jmul.math.functions.implementations.MaxNumberFraction;
 import jmul.math.functions.implementations.MinFraction;
+import jmul.math.functions.implementations.MinFractionNumber;
 import jmul.math.functions.implementations.MinNumber;
+import jmul.math.functions.implementations.MinNumberFraction;
 import jmul.math.functions.implementations.MultiplyNumbers;
 import jmul.math.functions.implementations.NegateFraction;
 import jmul.math.functions.implementations.NegateNumber;
@@ -163,9 +167,13 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
         repository.registerFunction(FunctionIdentifiers.HALVING_NUMBER_FUNCTION, HalvingNumber.class);
 
         repository.registerFunction(FunctionIdentifiers.MAX_NUMBER_FUNCTION, MaxNumber.class);
+        repository.registerFunction(FunctionIdentifiers.MAX_NUMBER_FRACTION_FUNCTION, MaxNumberFraction.class);
         repository.registerFunction(FunctionIdentifiers.MAX_FRACTION_FUNCTION, MaxFraction.class);
+        repository.registerFunction(FunctionIdentifiers.MAX_FRACTION_NUMBER_FUNCTION, MaxFractionNumber.class);
         repository.registerFunction(FunctionIdentifiers.MIN_NUMBER_FUNCTION, MinNumber.class);
+        repository.registerFunction(FunctionIdentifiers.MIN_NUMBER_FRACTION_FUNCTION, MinNumberFraction.class);
         repository.registerFunction(FunctionIdentifiers.MIN_FRACTION_FUNCTION, MinFraction.class);
+        repository.registerFunction(FunctionIdentifiers.MIN_FRACTION_NUMBER_FUNCTION, MinFractionNumber.class);
 
         repository.registerFunction(FunctionIdentifiers.NUMBER_INCREMENT_FUNCTION, IncrementNumber.class);
         repository.registerFunction(FunctionIdentifiers.FRACTION_INCREMENT_FUNCTION, IncrementFraction.class);

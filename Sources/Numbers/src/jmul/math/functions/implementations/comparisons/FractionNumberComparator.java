@@ -38,6 +38,7 @@ import jmul.math.fractions.Fraction;
 import jmul.math.functions.Function;
 import jmul.math.functions.FunctionSingletons;
 import jmul.math.functions.implementations.ComparatorBase;
+import static jmul.math.functions.implementations.ParameterCheckHelper.checkParameters;
 import jmul.math.functions.repository.FunctionIdentifiers;
 import jmul.math.numbers.Number;
 import jmul.math.operations.MixedComparator;
@@ -83,32 +84,6 @@ public class FractionNumberComparator extends ComparatorBase implements Function
         Fraction normalizedNumber = wrappedResult.result();
 
         return f.compareTo(normalizedNumber);
-    }
-
-    /**
-     * Checks the specified parameters.
-     *
-     * @param f
-     *        a fraction
-     * @param n
-     *        a number
-     */
-    private static void checkParameters(Fraction f, Number n) {
-
-        if (f == null) {
-
-            throw new IllegalArgumentException("No fraction (null) was specified!");
-        }
-
-        if (n == null) {
-
-            throw new IllegalArgumentException("No number (null) was specified!");
-        }
-
-        if (f.base() != n.base()) {
-
-            throw new IllegalArgumentException("The fraction and the number don't have the same number base!");
-        }
     }
 
 }

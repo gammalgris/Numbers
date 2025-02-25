@@ -46,12 +46,15 @@ import jmul.test.ConcurrentTestExecutionMonitor;
 import jmul.test.TestExecutionMonitor;
 import jmul.test.classification.ManualTest;
 
+import org.junit.Ignore;
+
 
 /**
  * An implementation of a long running tests with many operations.
  *
  * @author Kristian Kutin
  */
+@Ignore
 @ManualTest
 public class ManySequentialAdditionsTest {
 

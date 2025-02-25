@@ -922,6 +922,24 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Compares this number and the specified fraction and returns the greater number (as fraction).
+     *
+     * @param f
+     *        a fraction
+     *
+     * @return a fraction
+     */
+    @Override
+    public Fraction max(Fraction f) {
+
+        MixedBinaryOperation<Number, Fraction, Result<Fraction>> function =
+            (MixedBinaryOperation<Number, Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.MAX_NUMBER_FRACTION_FUNCTION);
+        Result<Fraction> result = function.calculate(this, f);
+
+        return result.result();
+    }
+
+    /**
      * Compares this number and the specified number and returns the greater number.
      *
      * @param n
@@ -940,9 +958,28 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Compares this number and the specified fraction and returns the smaller number (as fraction).
+     *
+     * @param f
+     *        a fraction
+     *
+     * @return a fraction
+     */
+    @Override
+    public Fraction min(Fraction f) {
+
+        MixedBinaryOperation<Number, Fraction, Result<Fraction>> function =
+            (MixedBinaryOperation<Number, Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.MIN_NUMBER_FRACTION_FUNCTION);
+        Result<Fraction> result = function.calculate(this, f);
+
+        return result.result();
+    }
+
+    /**
      * Compares this number and the specified number and returns the smaller number.
      *
      * @param n
+     *        a number
      *
      * @return a number
      */

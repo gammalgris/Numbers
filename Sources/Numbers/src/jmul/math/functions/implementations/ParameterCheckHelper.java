@@ -270,7 +270,7 @@ public final class ParameterCheckHelper {
 
         if (operand1 == null) {
 
-            throw new IllegalArgumentException("No expression (null) was specified!");
+            throw new IllegalArgumentException("No fraction (null) was specified!");
         }
 
         if (operand2 == null) {
@@ -280,7 +280,7 @@ public final class ParameterCheckHelper {
 
         if (operand1.base() != operand2.base()) {
 
-            throw new DigitBaseMismatchException(operand1, operand2);
+            throw new IllegalArgumentException("The fraction and the number don't have the same number base!");
         }
     }
 
