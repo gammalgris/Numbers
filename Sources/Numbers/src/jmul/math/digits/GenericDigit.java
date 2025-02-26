@@ -142,7 +142,18 @@ class GenericDigit implements Digit {
     @Override
     public boolean isZero() {
 
-        return ordinal == ZERO;
+        return isOrdinal(ZERO);
+    }
+
+    /**
+     * Checks if this digit matches the specified ordinal value.
+     *
+     * @return <code>true</code> if this digit matches the ordinal value, else <code>false</code>
+     */
+    @Override
+    public boolean isOrdinal(int ordinal) {
+
+        return this.ordinal == ordinal;
     }
 
     /**

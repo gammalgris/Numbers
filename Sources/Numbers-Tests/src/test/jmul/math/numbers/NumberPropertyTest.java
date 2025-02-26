@@ -35,7 +35,7 @@ package test.jmul.math.numbers;
 
 
 import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
+import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.signs.Signs;
 
 import static org.junit.Assert.assertEquals;
@@ -55,7 +55,7 @@ public class NumberPropertyTest {
     @Test
     public void testUnsignedZero() {
 
-        Number number = new NumberImpl("0");
+        Number number = createNumber(10, "0");
 
         assertEquals(false, number.isFraction());
         assertEquals(false, number.isInfinity());
@@ -65,6 +65,7 @@ public class NumberPropertyTest {
         assertEquals(false, number.isNegative());
         assertEquals(true, number.isPositive());
         assertEquals(true, number.isZero());
+        assertEquals(false, number.isOne());
     }
 
     /**
@@ -73,7 +74,7 @@ public class NumberPropertyTest {
     @Test
     public void testPositiveZero() {
 
-        Number number = new NumberImpl("+0");
+        Number number = createNumber(10, "+0");
 
         assertEquals(false, number.isFraction());
         assertEquals(false, number.isInfinity());
@@ -83,6 +84,7 @@ public class NumberPropertyTest {
         assertEquals(false, number.isNegative());
         assertEquals(true, number.isPositive());
         assertEquals(true, number.isZero());
+        assertEquals(false, number.isOne());
     }
 
     /**
@@ -91,7 +93,7 @@ public class NumberPropertyTest {
     @Test
     public void testNegativeZero() {
 
-        Number number = new NumberImpl("-0");
+        Number number = createNumber(10, "-0");
 
         assertEquals(false, number.isFraction());
         assertEquals(false, number.isInfinity());
@@ -101,6 +103,7 @@ public class NumberPropertyTest {
         assertEquals(true, number.isNegative());
         assertEquals(false, number.isPositive());
         assertEquals(true, number.isZero());
+        assertEquals(false, number.isOne());
     }
 
     /**
@@ -109,7 +112,7 @@ public class NumberPropertyTest {
     @Test
     public void testUnsignednfinity() {
 
-        Number number = new NumberImpl();
+        Number number = createNumber(10);
 
         assertEquals(false, number.isFraction());
         assertEquals(true, number.isInfinity());
@@ -119,6 +122,7 @@ public class NumberPropertyTest {
         assertEquals(false, number.isNegative());
         assertEquals(true, number.isPositive());
         assertEquals(false, number.isZero());
+        assertEquals(false, number.isOne());
     }
 
     /**
@@ -127,7 +131,7 @@ public class NumberPropertyTest {
     @Test
     public void testPositiveInfinity() {
 
-        Number number = new NumberImpl(Signs.POSITIVE);
+        Number number = createNumber(Signs.POSITIVE, 10);
 
         assertEquals(false, number.isFraction());
         assertEquals(true, number.isInfinity());
@@ -137,6 +141,7 @@ public class NumberPropertyTest {
         assertEquals(false, number.isNegative());
         assertEquals(true, number.isPositive());
         assertEquals(false, number.isZero());
+        assertEquals(false, number.isOne());
     }
 
     /**
@@ -145,7 +150,7 @@ public class NumberPropertyTest {
     @Test
     public void testNegativeInfinity() {
 
-        Number number = new NumberImpl(Signs.NEGATIVE);
+        Number number = createNumber(Signs.NEGATIVE, 10);
 
         assertEquals(false, number.isFraction());
         assertEquals(true, number.isInfinity());
@@ -155,6 +160,7 @@ public class NumberPropertyTest {
         assertEquals(true, number.isNegative());
         assertEquals(false, number.isPositive());
         assertEquals(false, number.isZero());
+        assertEquals(false, number.isOne());
     }
 
     /**
@@ -163,7 +169,7 @@ public class NumberPropertyTest {
     @Test
     public void testUnsignedOne() {
 
-        Number number = new NumberImpl("1");
+        Number number = createNumber(10, "1");
 
         assertEquals(false, number.isFraction());
         assertEquals(false, number.isInfinity());
@@ -173,6 +179,7 @@ public class NumberPropertyTest {
         assertEquals(false, number.isNegative());
         assertEquals(true, number.isPositive());
         assertEquals(false, number.isZero());
+        assertEquals(true, number.isOne());
     }
 
     /**
@@ -181,7 +188,7 @@ public class NumberPropertyTest {
     @Test
     public void testPositiveOne() {
 
-        Number number = new NumberImpl("+1");
+        Number number = createNumber(10, "+1");
 
         assertEquals(false, number.isFraction());
         assertEquals(false, number.isInfinity());
@@ -191,6 +198,7 @@ public class NumberPropertyTest {
         assertEquals(false, number.isNegative());
         assertEquals(true, number.isPositive());
         assertEquals(false, number.isZero());
+        assertEquals(true, number.isOne());
     }
 
     /**
@@ -199,7 +207,7 @@ public class NumberPropertyTest {
     @Test
     public void testNegativeOne() {
 
-        Number number = new NumberImpl("-1");
+        Number number = createNumber(10, "-1");
 
         assertEquals(false, number.isFraction());
         assertEquals(false, number.isInfinity());
@@ -209,6 +217,7 @@ public class NumberPropertyTest {
         assertEquals(true, number.isNegative());
         assertEquals(false, number.isPositive());
         assertEquals(false, number.isZero());
+        assertEquals(true, number.isOne());
     }
 
     /**
@@ -217,7 +226,7 @@ public class NumberPropertyTest {
     @Test
     public void testUnsignedDecimal() {
 
-        Number number = new NumberImpl("1.1");
+        Number number = createNumber(10, "1.1");
 
         assertEquals(true, number.isFraction());
         assertEquals(false, number.isInfinity());
@@ -227,6 +236,7 @@ public class NumberPropertyTest {
         assertEquals(false, number.isNegative());
         assertEquals(true, number.isPositive());
         assertEquals(false, number.isZero());
+        assertEquals(false, number.isOne());
     }
 
     /**
@@ -235,7 +245,7 @@ public class NumberPropertyTest {
     @Test
     public void testPositiveDecimal() {
 
-        Number number = new NumberImpl("+1.1");
+        Number number = createNumber(10, "+1.1");
 
         assertEquals(true, number.isFraction());
         assertEquals(false, number.isInfinity());
@@ -245,6 +255,7 @@ public class NumberPropertyTest {
         assertEquals(false, number.isNegative());
         assertEquals(true, number.isPositive());
         assertEquals(false, number.isZero());
+        assertEquals(false, number.isOne());
     }
 
     /**
@@ -253,7 +264,7 @@ public class NumberPropertyTest {
     @Test
     public void testNegativeDecimal() {
 
-        Number number = new NumberImpl("-1.1");
+        Number number = createNumber(10, "-1.1");
 
         assertEquals(true, number.isFraction());
         assertEquals(false, number.isInfinity());
@@ -263,6 +274,7 @@ public class NumberPropertyTest {
         assertEquals(true, number.isNegative());
         assertEquals(false, number.isPositive());
         assertEquals(false, number.isZero());
+        assertEquals(false, number.isOne());
     }
 
 }

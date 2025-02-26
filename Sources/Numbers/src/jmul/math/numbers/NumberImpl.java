@@ -521,6 +521,18 @@ public class NumberImpl implements Number {
     }
 
     /**
+     * Checks if this number represents one.
+     *
+     * @return <code>true</code> if this number represents one, else <code>false</code>
+     */
+    @Override
+    public boolean isOne() {
+
+        return (centerNode() != null) && (centerNode().leftNode() == null) && (centerNode().rightNode() == null) &&
+               centerNode.digit().isOrdinal(1);
+    }
+
+    /**
      * Returns the node which represents the zeroth position (i.e. <code>base^0</code>) within a number.
      * To the left are the digits which represent the positions 1 (<code>base^1</code>), 2 (<code>base^2</code>),
      * 3 (<code>base^3</code>), etc..
@@ -864,13 +876,16 @@ public class NumberImpl implements Number {
      * @param f
      *        a fraction
      *
-     * @return a number
+     * @return a fraction
      */
     @Override
     public Fraction multiply(Fraction f) {
 
-        //TODO
-        throw new UnsupportedOperationException();
+        MixedBinaryOperation<Number, Fraction, Result<Fraction>> function =
+            (MixedBinaryOperation<Number, Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.MULTIPLY_NUMBER_AND_FRACTION_FUNCTION);
+        Result<Fraction> result = function.calculate(this, f);
+
+        return result.result();
     }
 
     /**

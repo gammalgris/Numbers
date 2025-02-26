@@ -118,11 +118,18 @@ public interface Number extends LinkedDigitList, NumberProperties, ArithmeticNum
     boolean isInfinity();
 
     /**
-     * Checks if this number represents zero.
+     * Checks if this number represents zero. The sign is ignored.
      *
      * @return <code>true</code> if this number represents zero, else <code>false</code>
      */
     boolean isZero();
+
+    /**
+     * Checks if this number represents one. The sign is ignored.
+     *
+     * @return <code>true</code> if this number represents one, else <code>false</code>
+     */
+    boolean isOne();
 
     /**
      * Checks if this number is a fraction.

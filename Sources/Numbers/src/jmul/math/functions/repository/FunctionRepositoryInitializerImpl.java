@@ -55,6 +55,9 @@ import jmul.math.functions.implementations.MinFraction;
 import jmul.math.functions.implementations.MinFractionNumber;
 import jmul.math.functions.implementations.MinNumber;
 import jmul.math.functions.implementations.MinNumberFraction;
+import jmul.math.functions.implementations.MultiplyFractionAndNumber;
+import jmul.math.functions.implementations.MultiplyFractions;
+import jmul.math.functions.implementations.MultiplyNumberAndFraction;
 import jmul.math.functions.implementations.MultiplyNumbers;
 import jmul.math.functions.implementations.NegateFraction;
 import jmul.math.functions.implementations.NegateNumber;
@@ -218,6 +221,11 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
                                     FractionLesserThanOrEqualNumberComparison.class);
 
         repository.registerFunction(FunctionIdentifiers.MULTIPLY_NUMBERS_FUNCTION, MultiplyNumbers.class);
+        repository.registerFunction(FunctionIdentifiers.MULTIPLY_FRACTIONS_FUNCTION, MultiplyFractions.class);
+        repository.registerFunction(FunctionIdentifiers.MULTIPLY_NUMBER_AND_FRACTION_FUNCTION,
+                                    MultiplyNumberAndFraction.class);
+        repository.registerFunction(FunctionIdentifiers.MULTIPLY_FRACTION_AND_NUMBER_FUNCTION,
+                                    MultiplyFractionAndNumber.class);
         repository.registerFunction(FunctionIdentifiers.DIVIDE_NUMBERS_FUNCTION, DivisionBySubtraction.class);
 
         return repository;

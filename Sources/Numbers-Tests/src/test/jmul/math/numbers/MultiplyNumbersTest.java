@@ -169,6 +169,11 @@ public class MultiplyNumbersTest {
         expectedProduct = null;
     }
 
+    /**
+     * Returns a test summary.
+     *
+     * @return a test summary
+     */
     @Override
     public String toString() {
 
@@ -198,10 +203,10 @@ public class MultiplyNumbersTest {
     }
 
     /**
-     * Tests adding the summands and checks the result.
+     * Tests multiplying the operands and checks the result.
      */
     @Test
-    public void testAddition() {
+    public void testMultiplaction() {
 
         try {
 
@@ -229,10 +234,10 @@ public class MultiplyNumbersTest {
     }
 
     /**
-     * Tests adding the summands and checks the result.
+     * Tests multiplying the operands and checks the result.
      */
     @Test
-    public void testAdditionVariant2() {
+    public void testMultiplicationVariant2() {
 
         try {
 

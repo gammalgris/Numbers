@@ -284,4 +284,17 @@ public final class ParameterCheckHelper {
         }
     }
 
+    /**
+     * Checks the specified parameters.
+     *
+     * @param operand1
+     *        an operand
+     * @param operand2
+     *        an operand
+     */
+    public static void checkParameters(Number operand1, Fraction operand2) {
+
+        checkParameters(operand2, operand1);
+    }
+
 }

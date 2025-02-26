@@ -447,7 +447,7 @@ public final class FractionHelper {
     }
 
     /**
-     * Creates an expression according to the specified numbers.
+     * Creates a fraction according to the specified numbers.
      *
      * @param cloneFlag
      *        <code>true</code> indicates the specified numbers are to be cloned, else <code>false</code>
@@ -552,6 +552,30 @@ public final class FractionHelper {
                                                                          Number denominator) {
 
         return new MixedFraction(integerPart, numerator, denominator);
+    }
+
+    /**
+     * Creates a clone of the specified fraction.
+     *
+     * @param fraction
+     *        a fraction
+     *
+     * @return a fraction
+     */
+    public static Fraction cloneFraction(Fraction fraction) {
+
+        if (fraction.hasIntegerPart() && !fraction.hasNumerator()) {
+
+            return createFraction(CLONE, fraction.integerPart());
+
+        } else if (!fraction.hasIntegerPart() && fraction.hasNumerator()) {
+
+            return createFraction(CLONE, fraction.numerator(), fraction.denominator());
+
+        } else {
+
+            return createFraction(CLONE, fraction.integerPart(), fraction.numerator(), fraction.denominator());
+        }
     }
 
 }

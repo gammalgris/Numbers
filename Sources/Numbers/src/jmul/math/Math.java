@@ -650,6 +650,63 @@ public final class Math {
     }
 
     /**
+     * Multiplies the specified fractions.
+     *
+     * @param f1
+     *        a fraction
+     * @param f2
+     *        a fraction
+     *
+     * @return a fraction
+     */
+    public static Fraction multiply(Fraction f1, Fraction f2) {
+
+        BinaryOperation<Fraction, Result<Fraction>> function =
+            (BinaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.MULTIPLY_FRACTIONS_FUNCTION);
+        Result<Fraction> result = function.calculate(f1, f2);
+
+        return result.result();
+    }
+
+    /**
+     * Multiplies the specified operands.
+     *
+     * @param operand1
+     *        a number
+     * @param operand2
+     *        a fraction
+     *
+     * @return a fraction
+     */
+    public static Fraction multiply(Number operand1, Fraction operand2) {
+
+        MixedBinaryOperation<Number, Fraction, Result<Fraction>> function =
+            (MixedBinaryOperation<Number, Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.MULTIPLY_NUMBER_AND_FRACTION_FUNCTION);
+        Result<Fraction> result = function.calculate(operand1, operand2);
+
+        return result.result();
+    }
+
+    /**
+     * Multiplies the specified operands.
+     *
+     * @param operand1
+     *        a fraction
+     * @param operand2
+     *        a number
+     *
+     * @return a fraction
+     */
+    public static Fraction multiply(Fraction operand1, Number operand2) {
+
+        MixedBinaryOperation<Fraction, Number, Result<Fraction>> function =
+            (MixedBinaryOperation<Fraction, Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.MULTIPLY_FRACTION_AND_NUMBER_FUNCTION);
+        Result<Fraction> result = function.calculate(operand1, operand2);
+
+        return result.result();
+    }
+
+    /**
      * Divides this number by the specified number.
      *
      * @param number1

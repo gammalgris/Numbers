@@ -78,4 +78,11 @@ public interface Digit extends Comparable<Digit> {
      */
     boolean isZero();
 
+    /**
+     * Checks if this digit matches the specified ordinal value.
+     *
+     * @return <code>true</code> if this digit matches the ordinal value, else <code>false</code>
+     */
+    boolean isOrdinal(int ordinal);
+
 }
