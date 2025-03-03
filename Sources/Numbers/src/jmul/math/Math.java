@@ -238,6 +238,63 @@ public final class Math {
     }
 
     /**
+     * Substracts the specified subtrahend from the specified minuend and returns the difference.
+     *
+     * @param minuend
+     *        a fraction
+     * @param subtrahend
+     *        a fraction
+     *
+     * @return a fraction
+     */
+    public static Fraction subtract(Fraction minuend, Fraction subtrahend) {
+
+        BinaryOperation<Fraction, Result<Fraction>> function =
+            (BinaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.SUBTRACT_FRACTIONS_FUNCTION);
+        Result<Fraction> result = function.calculate(minuend, subtrahend);
+
+        return result.result();
+    }
+
+    /**
+     * Substracts the specified subtrahend from the specified minuend and returns the difference.
+     *
+     * @param minuend
+     *        a fraction
+     * @param subtrahend
+     *        a number
+     *
+     * @return a fraction
+     */
+    public static Fraction subtract(Fraction minuend, Number subtrahend) {
+
+        MixedBinaryOperation<Fraction, Number, Result<Fraction>> function =
+            (MixedBinaryOperation<Fraction, Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.SUBTRACT_FRACTION_AND_NUMBER_FUNCTION);
+        Result<Fraction> result = function.calculate(minuend, subtrahend);
+
+        return result.result();
+    }
+
+    /**
+     * Substracts the specified subtrahend from the specified minuend and returns the difference.
+     *
+     * @param minuend
+     *        a number
+     * @param subtrahend
+     *        a fraction
+     *
+     * @return a fraction
+     */
+    public static Fraction subtract(Number minuend, Fraction subtrahend) {
+
+        MixedBinaryOperation<Number, Fraction, Result<Fraction>> function =
+            (MixedBinaryOperation<Number, Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.SUBTRACT_NUMBER_AND_FRACTION_FUNCTION);
+        Result<Fraction> result = function.calculate(minuend, subtrahend);
+
+        return result.result();
+    }
+
+    /**
      * Halves the specified number.
      *
      * @param n

@@ -39,7 +39,6 @@ import java.util.Collection;
 
 import jmul.math.Math;
 import jmul.math.fractions.Fraction;
-
 import static jmul.math.fractions.FractionHelper.createFraction;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
@@ -54,13 +53,13 @@ import org.junit.runners.Parameterized;
 
 
 /**
- * This test suite tests adding two fractions with various combinations of operands.
+ * This test suite tests subtracting two fractions with various combinations of operands.
  *
  * @author Kristian Kutin
  */
 @UnitTest
 @RunWith(Parameterized.class)
-public class AddFractionsTest {
+public class SubtractFractionsTest {
 
     /**
      * The first operand.
@@ -87,7 +86,7 @@ public class AddFractionsTest {
      * @param expectedResult
      *        a fraction
      */
-    public AddFractionsTest(Fraction operand1, Fraction operand2, Fraction expectedResult) {
+    public SubtractFractionsTest(Fraction operand1, Fraction operand2, Fraction expectedResult) {
 
         super();
 
@@ -104,28 +103,28 @@ public class AddFractionsTest {
     @Override
     public String toString() {
 
-        return String.format("[base:%d]: %s + %s = %s", operand1.base(), operand1, operand2, expectedResult);
+        return String.format("[base:%d]: %s - %s = %s", operand1.base(), operand1, operand2, expectedResult);
     }
 
     /**
-     * Tests adding the operands and checks the result.
+     * Tests subtracting the operands and checks the result.
      */
     @Test
-    public void testAddition() {
+    public void testSubtraction() {
 
-        Fraction actualResult = operand1.add(operand2);
+        Fraction actualResult = operand1.subtract(operand2);
 
         assertEquals(toString(), expectedResult, actualResult);
         assertEquals(toString(), expectedResult.toString(), actualResult.toString());
     }
 
     /**
-     * Tests adding the operands and checks the result.
+     * Tests subtracting the operands and checks the result.
      */
     @Test
-    public void testAdditionVariant2() {
+    public void testSubtractionVariant2() {
 
-        Fraction actualResult = Math.add(operand1, operand2);
+        Fraction actualResult = Math.subtract(operand1, operand2);
 
         assertEquals(toString(), expectedResult, actualResult);
         assertEquals(toString(), expectedResult.toString(), actualResult.toString());
@@ -144,54 +143,53 @@ public class AddFractionsTest {
         for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
 
             parameters.add(new Object[] { createFraction(base), createFraction(base, "1"), createFraction(base) });
-            parameters.add(new Object[] { createFraction(base, "1"), createFraction(base), createFraction(base) });
+            parameters.add(new Object[] { createFraction(base, "1"), createFraction(base),
+                                          createFraction(Signs.NEGATIVE, base) });
             parameters.add(new Object[] { createFraction(Signs.NEGATIVE, base), createFraction(base, "1"),
                                           createFraction(Signs.NEGATIVE, base) });
             parameters.add(new Object[] { createFraction(base, "1"), createFraction(Signs.NEGATIVE, base),
-                                          createFraction(Signs.NEGATIVE, base) });
+                                          createFraction(base) });
 
             parameters.add(new Object[] { createFraction(base, "0"), createFraction(base, "10"),
-                                          createFraction(base, "10") });
+                                          createFraction(base, "-10") });
             parameters.add(new Object[] { createFraction(base, "10"), createFraction(base, "0"),
                                           createFraction(base, "10") });
 
-            parameters.add(new Object[] { createFraction(base, "1"), createFraction(base, "10"),
-                                          createFraction(base, "11") });
-            parameters.add(new Object[] { createFraction(base, "10"), createFraction(base, "1"),
-                                          createFraction(base, "11") });
-            parameters.add(new Object[] { createFraction(base, "11"), createFraction(base, "-1"),
-                                          createFraction(base, "10") });
+            parameters.add(new Object[] { createFraction(base, "11"), createFraction(base, "10"),
+                                          createFraction(base, "1") });
+            parameters.add(new Object[] { createFraction(base, "10"), createFraction(base, "11"),
+                                          createFraction(base, "-1") });
         }
 
-        parameters.add(new Object[] { createFraction(10, "5"), createFraction(10, "9"), createFraction(10, "14") });
-        parameters.add(new Object[] { createFraction(10, "-5"), createFraction(10, "9"), createFraction(10, "4") });
-        parameters.add(new Object[] { createFraction(10, "9"), createFraction(10, "-5"), createFraction(10, "4") });
-        parameters.add(new Object[] { createFraction(10, "-9"), createFraction(10, "5"), createFraction(10, "-4") });
+        parameters.add(new Object[] { createFraction(10, "5"), createFraction(10, "9"), createFraction(10, "-4") });
+        parameters.add(new Object[] { createFraction(10, "-5"), createFraction(10, "9"), createFraction(10, "-14") });
+        parameters.add(new Object[] { createFraction(10, "9"), createFraction(10, "-5"), createFraction(10, "14") });
+        parameters.add(new Object[] { createFraction(10, "-9"), createFraction(10, "5"), createFraction(10, "-14") });
 
         parameters.add(new Object[] { createFraction(10, "5"), createFraction(10, "9", "3"),
-                                      createFraction(10, "24", "3") });
+                                      createFraction(10, "6", "3") });
         parameters.add(new Object[] { createFraction(10, "-5"), createFraction(10, "9", "3"),
-                                      createFraction(10, "-6", "3") });
+                                      createFraction(10, "-24", "3") });
 
         parameters.add(new Object[] { createFraction(10, "5"), createFraction(10, "2", "9", "3"),
-                                      createFraction(10, "30", "3") });
-        parameters.add(new Object[] { createFraction(10, "-5"), createFraction(10, "2", "9", "3"),
                                       createFraction(10, "0") });
+        parameters.add(new Object[] { createFraction(10, "-5"), createFraction(10, "2", "9", "3"),
+                                      createFraction(10, "-30", "3") });
 
         parameters.add(new Object[] { createFraction(10, "5", "2"), createFraction(10, "2", "9", "3"),
-                                      createFraction(10, "45", "6") });
+                                      createFraction(10, "-15", "6") });
         parameters.add(new Object[] { createFraction(10, "-5", "2"), createFraction(10, "2", "9", "3"),
-                                      createFraction(10, "15", "6") });
+                                      createFraction(10, "-45", "6") });
 
         parameters.add(new Object[] { createFraction(10, "5", "3"), createFraction(10, "2", "9", "3"),
-                                      createFraction(10, "20", "3") });
+                                      createFraction(10, "-10", "3") });
         parameters.add(new Object[] { createFraction(10, "-5", "3"), createFraction(10, "2", "9", "3"),
-                                      createFraction(10, "10", "3") });
+                                      createFraction(10, "-20", "3") });
 
         parameters.add(new Object[] { createFraction(10, "1", "5", "2"), createFraction(10, "2", "9", "3"),
-                                      createFraction(10, "51", "6") });
-        parameters.add(new Object[] { createFraction(10, "1", "-5", "2"), createFraction(10, "2", "9", "3"),
-                                      createFraction(10, "9", "6") });
+                                      createFraction(10, "-9", "6") });
+        parameters.add(new Object[] { createFraction(10, "-1", "5", "2"), createFraction(10, "2", "9", "3"),
+                                      createFraction(10, "-51", "6") });
 
         return parameters;
     }

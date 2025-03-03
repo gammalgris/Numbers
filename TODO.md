@@ -32,7 +32,13 @@
 
 13) Resolve conflict jmul.math.notation.Sign <-> 
 
-14)
+14) Consider changing the function singleton into maps.
+    UnaryFunctionMap<Class, Function>, BinaryFunctionMap<Class, Map<Class, Function>>
+	Null Checks of parameters would have to be moved out of the functions into the framework
+
+15) Check comments in test cases, including spelling errors.
+
+16)
 
 
 # Done

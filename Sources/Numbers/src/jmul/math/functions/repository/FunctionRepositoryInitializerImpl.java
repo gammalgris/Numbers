@@ -69,6 +69,9 @@ import jmul.math.functions.implementations.NumberToFraction;
 import jmul.math.functions.implementations.OddNumberFunction;
 import jmul.math.functions.implementations.ShiftLeft;
 import jmul.math.functions.implementations.ShiftRight;
+import jmul.math.functions.implementations.SubtractFractionAndNumber;
+import jmul.math.functions.implementations.SubtractFractions;
+import jmul.math.functions.implementations.SubtractNumberAndFraction;
 import jmul.math.functions.implementations.SubtractNumbers;
 import jmul.math.functions.implementations.TruncateNumber;
 import jmul.math.functions.implementations.comparisons.DigitComparator;
@@ -168,6 +171,11 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
         repository.registerFunction(FunctionIdentifiers.ADD_NUMBER_AND_FRACTION_FUNCTION, AddNumberAndFraction.class);
 
         repository.registerFunction(FunctionIdentifiers.SUBTRACT_NUMBERS_FUNCTION, SubtractNumbers.class);
+        repository.registerFunction(FunctionIdentifiers.SUBTRACT_FRACTIONS_FUNCTION, SubtractFractions.class);
+        repository.registerFunction(FunctionIdentifiers.SUBTRACT_NUMBER_AND_FRACTION_FUNCTION,
+                                    SubtractNumberAndFraction.class);
+        repository.registerFunction(FunctionIdentifiers.SUBTRACT_FRACTION_AND_NUMBER_FUNCTION,
+                                    SubtractFractionAndNumber.class);
 
         repository.registerFunction(FunctionIdentifiers.SHIFT_LEFT_FUNCTION, ShiftLeft.class);
         repository.registerFunction(FunctionIdentifiers.SHIFT_RIGHT_FUNCTION, ShiftRight.class);
