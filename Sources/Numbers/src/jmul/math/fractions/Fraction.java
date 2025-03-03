@@ -36,7 +36,6 @@ package jmul.math.fractions;
 
 import jmul.math.numbers.AbstractNumber;
 import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberProperties;
 import jmul.math.operations.ArithmeticFractionOperations;
 import jmul.math.operations.FractionComparisons;
 import jmul.math.operations.NumberComparisons;
@@ -48,8 +47,8 @@ import jmul.math.operations.NumberComparisons;
  *
  * @author Kristian Kutin
  */
-public interface Fraction extends Comparable, NumberComparisons, FractionComparisons, NumberProperties,
-                                  ArithmeticFractionOperations, AbstractNumber {
+public interface Fraction extends Comparable, NumberComparisons, FractionComparisons, ArithmeticFractionOperations,
+                                  AbstractNumber {
 
     /**
      * Evaluates this fraction and returns a number which is equivalent to the fraction.
@@ -113,5 +112,12 @@ public interface Fraction extends Comparable, NumberComparisons, FractionCompari
      * @return a number
      */
     Number denominator();
+
+    /**
+     * Reduce fraction.
+     *
+     * @return a fraction
+     */
+    public Fraction reduce();
 
 }

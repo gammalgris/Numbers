@@ -39,6 +39,6 @@ package jmul.math.numbers;
  *
  * @author Kristian Kutin
  */
-public interface AbstractNumber {
+public interface AbstractNumber extends NumberProperties {
 
 }

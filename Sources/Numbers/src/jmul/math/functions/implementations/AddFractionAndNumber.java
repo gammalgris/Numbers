@@ -46,43 +46,43 @@ import jmul.math.operations.UnaryOperation;
 
 
 /**
- * Implements the multiplication of a number with a fraction.
+ * An implementation of a function which adds a fraction and a number.
  *
  * @author Kristian Kutin
  */
-public class MultiplyNumberAndFraction implements MixedBinaryOperation<Number, Fraction, Result<Fraction>> {
+public class AddFractionAndNumber implements MixedBinaryOperation<Fraction, Number, Result<Fraction>> {
 
     /**
      * The default constructor.
      */
-    public MultiplyNumberAndFraction() {
+    public AddFractionAndNumber() {
 
         super();
     }
 
     /**
-     * Multiplies the specified number with the specified fraction.
+     * Adds the specified fraction and number.
      *
      * @param operand1
-     *        a number
-     * @param operand2
      *        a fraction
+     * @param operand2
+     *        a number
      *
      * @return a fraction
      */
     @Override
-    public Result<Fraction> calculate(Number operand1, Fraction operand2) {
+    public Result<Fraction> calculate(Fraction operand1, Number operand2) {
 
         checkParameters(operand1, operand2);
 
         UnaryOperation<Number, Result<Fraction>> conversionFunction =
             (UnaryOperation<Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_TO_FRACTION_FUNCTION);
-        Result<Fraction> wrappedResult = conversionFunction.calculate(operand1);
+        Result<Fraction> wrappedResult = conversionFunction.calculate(operand2);
         Fraction normalizedNumber = wrappedResult.result();
 
         BinaryOperation<Fraction, Result<Fraction>> multiplicationFunction =
-            (BinaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.MULTIPLY_FRACTIONS_FUNCTION);
-        Result<Fraction> result = multiplicationFunction.calculate(normalizedNumber, operand2);
+            (BinaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_FRACTIONS_FUNCTION);
+        Result<Fraction> result = multiplicationFunction.calculate(operand1, normalizedNumber);
 
         return result;
     }

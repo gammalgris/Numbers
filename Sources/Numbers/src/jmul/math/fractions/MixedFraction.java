@@ -789,8 +789,11 @@ class MixedFraction implements Fraction {
     @Override
     public Fraction add(Number n) {
 
-        // TODO Implement this method
-        throw new UnsupportedOperationException();
+        MixedBinaryOperation<Fraction, Number, Result<Fraction>> function =
+            (MixedBinaryOperation<Fraction, Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_FRACTION_AND_NUMBER_FUNCTION);
+        Result<Fraction> result = function.calculate(this, n);
+
+        return result.result();
     }
 
     /**
@@ -804,8 +807,11 @@ class MixedFraction implements Fraction {
     @Override
     public Fraction add(Fraction f) {
 
-        // TODO Implement this method
-        throw new UnsupportedOperationException();
+        BinaryOperation<Fraction, Result<Fraction>> function =
+            (BinaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_FRACTIONS_FUNCTION);
+        Result<Fraction> result = function.calculate(this, f);
+
+        return result.result();
     }
 
     /**
@@ -1016,6 +1022,18 @@ class MixedFraction implements Fraction {
      */
     @Override
     public Fraction log(Number n) {
+
+        // TODO Implement this method
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * Reduce fraction.
+     *
+     * @return a fraction
+     */
+    @Override
+    public Fraction reduce() {
 
         // TODO Implement this method
         throw new UnsupportedOperationException();

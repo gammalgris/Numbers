@@ -46,22 +46,22 @@ import jmul.math.operations.UnaryOperation;
 
 
 /**
- * Implements the multiplication of a number with a fraction.
+ * An implementation of a function which adds a number and a fraction.
  *
  * @author Kristian Kutin
  */
-public class MultiplyNumberAndFraction implements MixedBinaryOperation<Number, Fraction, Result<Fraction>> {
+public class AddNumberAndFraction implements MixedBinaryOperation<Number, Fraction, Result<Fraction>> {
 
     /**
      * The default constructor.
      */
-    public MultiplyNumberAndFraction() {
+    public AddNumberAndFraction() {
 
         super();
     }
 
     /**
-     * Multiplies the specified number with the specified fraction.
+     * Adds the specified number and fraction.
      *
      * @param operand1
      *        a number
@@ -81,7 +81,7 @@ public class MultiplyNumberAndFraction implements MixedBinaryOperation<Number, F
         Fraction normalizedNumber = wrappedResult.result();
 
         BinaryOperation<Fraction, Result<Fraction>> multiplicationFunction =
-            (BinaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.MULTIPLY_FRACTIONS_FUNCTION);
+            (BinaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_FRACTIONS_FUNCTION);
         Result<Fraction> result = multiplicationFunction.calculate(normalizedNumber, operand2);
 
         return result;

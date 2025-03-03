@@ -100,6 +100,63 @@ public final class Math {
     }
 
     /**
+     * Adds the specified summands and returns the sum.
+     *
+     * @param firstSummand
+     *        a fraction
+     * @param secondSummand
+     *        a fraction
+     *
+     * @return a fraction
+     */
+    public static Fraction add(Fraction firstSummand, Fraction secondSummand) {
+
+        BinaryOperation<Fraction, Result<Fraction>> function =
+            (BinaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_FRACTIONS_FUNCTION);
+        Result<Fraction> result = function.calculate(firstSummand, secondSummand);
+
+        return result.result();
+    }
+
+    /**
+     * Adds the specified summands and returns the sum.
+     *
+     * @param firstSummand
+     *        a number
+     * @param secondSummand
+     *        a fraction
+     *
+     * @return a fraction
+     */
+    public static Fraction add(Number firstSummand, Fraction secondSummand) {
+
+        MixedBinaryOperation<Number, Fraction, Result<Fraction>> function =
+            (MixedBinaryOperation<Number, Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_NUMBER_AND_FRACTION_FUNCTION);
+        Result<Fraction> result = function.calculate(firstSummand, secondSummand);
+
+        return result.result();
+    }
+
+    /**
+     * Adds the specified summands and returns the sum.
+     *
+     * @param firstSummand
+     *        a fraction
+     * @param secondSummand
+     *        a number
+     *
+     * @return a fraction
+     */
+    public static Fraction add(Fraction firstSummand, Number secondSummand) {
+
+        MixedBinaryOperation<Fraction, Number, Result<Fraction>> function =
+            (MixedBinaryOperation<Fraction, Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_FRACTION_AND_NUMBER_FUNCTION);
+        Result<Fraction> result = function.calculate(firstSummand, secondSummand);
+
+        return result.result();
+    }
+
+    /**
      * Negates the specified number (i.e. changes the sign).
      *
      * @param n

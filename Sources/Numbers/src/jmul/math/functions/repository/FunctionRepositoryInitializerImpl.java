@@ -35,6 +35,9 @@ package jmul.math.functions.repository;
 
 
 import jmul.math.functions.implementations.AddDigits;
+import jmul.math.functions.implementations.AddFractionAndNumber;
+import jmul.math.functions.implementations.AddFractions;
+import jmul.math.functions.implementations.AddNumberAndFraction;
 import jmul.math.functions.implementations.AddNumbers;
 import jmul.math.functions.implementations.AddNumbersTrimResult;
 import jmul.math.functions.implementations.DecrementFraction;
@@ -160,6 +163,10 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
 
         repository.registerFunction(FunctionIdentifiers.ADD_NUMBERS_FUNCTION, AddNumbers.class);
         repository.registerFunction(FunctionIdentifiers.ADD_NUMBERS_TRIM_RESULT_FUNCTION, AddNumbersTrimResult.class);
+        repository.registerFunction(FunctionIdentifiers.ADD_FRACTIONS_FUNCTION, AddFractions.class);
+        repository.registerFunction(FunctionIdentifiers.ADD_FRACTION_AND_NUMBER_FUNCTION, AddFractionAndNumber.class);
+        repository.registerFunction(FunctionIdentifiers.ADD_NUMBER_AND_FRACTION_FUNCTION, AddNumberAndFraction.class);
+
         repository.registerFunction(FunctionIdentifiers.SUBTRACT_NUMBERS_FUNCTION, SubtractNumbers.class);
 
         repository.registerFunction(FunctionIdentifiers.SHIFT_LEFT_FUNCTION, ShiftLeft.class);

@@ -815,8 +815,11 @@ public class NumberImpl implements Number {
     @Override
     public Fraction add(Fraction f) {
 
-        //TODO
-        throw new UnsupportedOperationException();
+        MixedBinaryOperation<Number, Fraction, Result<Fraction>> function =
+            (MixedBinaryOperation<Number, Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_NUMBER_AND_FRACTION_FUNCTION);
+        Result<Fraction> result = function.calculate(this, f);
+
+        return result.result();
     }
 
     /**
