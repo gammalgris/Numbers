@@ -34,15 +34,16 @@
 package jmul.math.functions.implementations;
 
 
+import jmul.math.fractions.Fraction;
 import static jmul.math.fractions.FractionHelper.DONT_CLONE;
 import static jmul.math.fractions.FractionHelper.createFraction;
-import jmul.math.fractions.Fraction;
+import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
-import jmul.math.signs.Sign;
-import jmul.math.signs.Signs;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.Result;
+import jmul.math.signs.Sign;
+import jmul.math.signs.Signs;
 
 
 /**
@@ -78,11 +79,37 @@ public class DivisionBySubtraction implements BinaryOperation<Number, Result<Fra
 
         int base = dividend.base();
         Sign sign = Signs.negate(Signs.xor(dividend.sign(), divisor.sign()));
-        //Sign sign = Signs.evaluateSignSequence(dividend.sign(), divisor.sign());
 
-        Number remainder = dividend.absoluteValue();
-        Number subtrahend = divisor.absoluteValue();
-        Number multiple = new NumberImpl(base, "0");
+        Number absoluteDividend = dividend.absoluteValue();
+        Number absoluteDivisor = divisor.absoluteValue();
+
+        if (absoluteDivisor.isOne()) {
+
+            Number newDividend = absoluteDividend;
+            if (Signs.isNegative(sign)) {
+                
+                newDividend = newDividend.negate();
+            }
+
+            Fraction result = createFraction(DONT_CLONE, newDividend);
+            return new Result<Fraction>(result);
+            
+        } else if (absoluteDividend.isInfinity() || absoluteDivisor.isZero() || absoluteDivisor.isInfinity()) {
+            
+            Number newDividend = absoluteDividend;
+            Number newDivisor = absoluteDivisor;
+            if (Signs.isNegative(sign)) {
+                
+                newDividend = newDividend.negate();
+            }
+
+            Fraction result = createFraction(DONT_CLONE, newDividend, newDivisor);
+            return new Result<Fraction>(result);
+        } 
+
+        Number remainder = absoluteDividend;
+        Number subtrahend = absoluteDivisor;
+        Number multiple = createNumber(base, "0");
 
         while (true) {
 

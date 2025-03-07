@@ -923,8 +923,11 @@ public class NumberImpl implements Number {
     @Override
     public Fraction divide(Fraction f) {
 
-        //TODO
-        throw new UnsupportedOperationException();
+        MixedBinaryOperation<Number, Fraction, Result<Fraction>> function =
+            (MixedBinaryOperation<Number, Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIVIDE_NUMBER_BY_FRACTION_FUNCTION);
+        Result<Fraction> result = function.calculate(this, f);
+
+        return result.result();
     }
 
     /**

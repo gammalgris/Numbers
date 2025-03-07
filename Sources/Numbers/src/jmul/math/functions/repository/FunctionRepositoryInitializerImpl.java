@@ -43,6 +43,9 @@ import jmul.math.functions.implementations.AddNumbersTrimResult;
 import jmul.math.functions.implementations.DecrementFraction;
 import jmul.math.functions.implementations.DecrementNumber;
 import jmul.math.functions.implementations.DigitComplement;
+import jmul.math.functions.implementations.DivideFractionByNumber;
+import jmul.math.functions.implementations.DivideFractions;
+import jmul.math.functions.implementations.DivideNumberByFraction;
 import jmul.math.functions.implementations.DivisionBySubtraction;
 import jmul.math.functions.implementations.DoublingNumber;
 import jmul.math.functions.implementations.EvenNumberFunction;
@@ -241,7 +244,13 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
                                     MultiplyNumberAndFraction.class);
         repository.registerFunction(FunctionIdentifiers.MULTIPLY_FRACTION_AND_NUMBER_FUNCTION,
                                     MultiplyFractionAndNumber.class);
+
         repository.registerFunction(FunctionIdentifiers.DIVIDE_NUMBERS_FUNCTION, DivisionBySubtraction.class);
+        repository.registerFunction(FunctionIdentifiers.DIVIDE_FRACTIONS_FUNCTION, DivideFractions.class);
+        repository.registerFunction(FunctionIdentifiers.DIVIDE_NUMBER_BY_FRACTION_FUNCTION,
+                                    DivideNumberByFraction.class);
+        repository.registerFunction(FunctionIdentifiers.DIVIDE_FRACTION_BY_NUMBER_FUNCTION,
+                                    DivideFractionByNumber.class);
 
         return repository;
     }

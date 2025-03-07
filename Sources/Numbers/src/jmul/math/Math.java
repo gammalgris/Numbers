@@ -821,20 +821,77 @@ public final class Math {
     }
 
     /**
-     * Divides this number by the specified number.
+     * Divides the specified first operand by the specified second operand.
      *
-     * @param number1
+     * @param operand1
      *        a number
-     * @param number2
+     * @param operand2
      *        a number
      *
-     * @return an expression (e.g. a quotient, a mixed fraction or integer)
+     * @return a fraction
      */
-    public static Fraction divide(Number number1, Number number2) {
+    public static Fraction divide(Number operand1, Number operand2) {
 
         BinaryOperation<Number, Result<Fraction>> function =
             (BinaryOperation<Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIVIDE_NUMBERS_FUNCTION);
-        Result<Fraction> result = function.calculate(number1, number2);
+        Result<Fraction> result = function.calculate(operand1, operand2);
+
+        return result.result();
+    }
+
+    /**
+     * Divides the specified first operand by the specified second operand.
+     *
+     * @param operand1
+     *        a fraction
+     * @param operand2
+     *        a fraction
+     *
+     * @return a fraction
+     */
+    public static Fraction divide(Fraction operand1, Fraction operand2) {
+
+        BinaryOperation<Fraction, Result<Fraction>> function =
+            (BinaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIVIDE_NUMBERS_FUNCTION);
+        Result<Fraction> result = function.calculate(operand1, operand2);
+
+        return result.result();
+    }
+
+    /**
+     * Divides the specified first operand by the specified second operand.
+     *
+     * @param operand1
+     *        a fraction
+     * @param operand2
+     *        a number
+     *
+     * @return a fraction
+     */
+    public static Fraction divide(Fraction operand1, Number operand2) {
+
+        MixedBinaryOperation<Fraction, Number, Result<Fraction>> function =
+            (MixedBinaryOperation<Fraction, Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIVIDE_NUMBERS_FUNCTION);
+        Result<Fraction> result = function.calculate(operand1, operand2);
+
+        return result.result();
+    }
+
+    /**
+     * Divides the specified first operand by the specified second operand.
+     *
+     * @param operand1
+     *        a number
+     * @param operand2
+     *        a fraction
+     *
+     * @return a fraction
+     */
+    public static Fraction divide(Number operand1, Fraction operand2) {
+
+        MixedBinaryOperation<Number, Fraction, Result<Fraction>> function =
+            (MixedBinaryOperation<Number, Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIVIDE_NUMBERS_FUNCTION);
+        Result<Fraction> result = function.calculate(operand1, operand2);
 
         return result.result();
     }

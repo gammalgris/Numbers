@@ -112,7 +112,10 @@ public final class NumberCheckHelper {
      *        a number
      * @param stringRepresentation
      *        the string representation which should match the specified number
+     * 
+     * @deprecated This check is obsolete
      */
+    @Deprecated
     public static void checkNumberEqualsStringRepresentation(Number number, String stringRepresentation) {
 
         if (stringRepresentation == null) {

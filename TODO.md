@@ -30,7 +30,7 @@
 12) Input parameters should by default not be modified unless marked as such.
    Add such a check to existing tests.
 
-13) Resolve conflict jmul.math.notation.Sign <-> 
+13) Resolve conflict jmul.math.notation.Sign <-> jmul.math.signs.Sign
 
 14) Consider changing the function singleton into maps.
     UnaryFunctionMap<Class, Function>, BinaryFunctionMap<Class, Map<Class, Function>>
@@ -38,7 +38,9 @@
 
 15) Check comments in test cases, including spelling errors.
 
-16)
+16) Check while(true) { ... } constructs. Try to replace with a limited loop.
+
+17)
 
 
 # Done
