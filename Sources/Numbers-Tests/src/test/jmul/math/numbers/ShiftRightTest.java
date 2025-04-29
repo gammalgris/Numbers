@@ -48,6 +48,7 @@ import jmul.test.exceptions.FailedTestException;
 
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -138,8 +139,7 @@ public class ShiftRightTest {
     @Override
     public String toString() {
 
-        String summary = String.format("[base:%d] shift right %s", base, operandString);
-        return summary;
+        return String.format("[base:%d] shift right %s = %s", base, operandString, resultString);
     }
 
     /**
@@ -151,20 +151,33 @@ public class ShiftRightTest {
         try {
 
             // check that the operands and the expected result are built correctly
-            checkNumberEqualsStringRepresentation(operand, operandString);
+            if (operand.isZero()) {
+
+                assertTrue("Zero cannot be negative!", operand.isPositive());
+
+            } else {
+
+                checkNumberEqualsStringRepresentation(operand, operandString);
+            }
             checkNumberEqualsStringRepresentation(result, resultString);
 
             // check the operation
             Number actualResult = operand.shiftRight();
 
-            String message = String.format("shift right %s => %s", operandString, resultString);
-            assertEquals(message, result, actualResult);
+            assertEquals(toString(), result, actualResult);
 
             // check the number instances
             checkNumbersAreUniqueInstances(operand, actualResult);
 
             // check that the operands didn't change
-            checkNumberEqualsStringRepresentation(operand, operandString);
+            if (operand.isZero()) {
+
+                assertTrue("Zero cannot be negative!", operand.isPositive());
+
+            } else {
+
+                checkNumberEqualsStringRepresentation(operand, operandString);
+            }
 
         } catch (Exception e) {
 
@@ -181,20 +194,33 @@ public class ShiftRightTest {
         try {
 
             // check that the operands and the expected result are built correctly
-            checkNumberEqualsStringRepresentation(operand, operandString);
+            if (operand.isZero()) {
+
+                assertTrue("Zero cannot be negative!", operand.isPositive());
+
+            } else {
+
+                checkNumberEqualsStringRepresentation(operand, operandString);
+            }
             checkNumberEqualsStringRepresentation(result, resultString);
 
             // check the operation
             Number actualResult = Math.shiftRight(operand);
 
-            String message = String.format("shift right %s => %s", operandString, resultString);
-            assertEquals(message, result, actualResult);
+            assertEquals(toString(), result, actualResult);
 
             // check the number instances
             checkNumbersAreUniqueInstances(operand, actualResult);
 
             // check that the operands didn't change
-            checkNumberEqualsStringRepresentation(operand, operandString);
+            if (operand.isZero()) {
+
+                assertTrue("Zero cannot be negative!", operand.isPositive());
+
+            } else {
+
+                checkNumberEqualsStringRepresentation(operand, operandString);
+            }
 
         } catch (Exception e) {
 
@@ -215,7 +241,7 @@ public class ShiftRightTest {
         for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
 
             parameters.add(new Object[] { base, "0", "0" });
-            parameters.add(new Object[] { base, "-0", "-0" });
+            parameters.add(new Object[] { base, "-0", "0" });
 
             parameters.add(new Object[] { base, "1", "10" });
             parameters.add(new Object[] { base, "-1", "-10" });

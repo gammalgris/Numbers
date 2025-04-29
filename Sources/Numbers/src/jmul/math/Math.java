@@ -833,7 +833,7 @@ public final class Math {
     public static Fraction divide(Number operand1, Number operand2) {
 
         BinaryOperation<Number, Result<Fraction>> function =
-            (BinaryOperation<Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIVIDE_NUMBERS_FUNCTION);
+            (BinaryOperation<Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIVIDE_NUMBERS_RETURN_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(operand1, operand2);
 
         return result.result();
@@ -852,7 +852,7 @@ public final class Math {
     public static Fraction divide(Fraction operand1, Fraction operand2) {
 
         BinaryOperation<Fraction, Result<Fraction>> function =
-            (BinaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIVIDE_NUMBERS_FUNCTION);
+            (BinaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIVIDE_FRACTIONS_FUNCTION);
         Result<Fraction> result = function.calculate(operand1, operand2);
 
         return result.result();
@@ -871,7 +871,7 @@ public final class Math {
     public static Fraction divide(Fraction operand1, Number operand2) {
 
         MixedBinaryOperation<Fraction, Number, Result<Fraction>> function =
-            (MixedBinaryOperation<Fraction, Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIVIDE_NUMBERS_FUNCTION);
+            (MixedBinaryOperation<Fraction, Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIVIDE_FRACTION_BY_NUMBER_FUNCTION);
         Result<Fraction> result = function.calculate(operand1, operand2);
 
         return result.result();
@@ -890,7 +890,7 @@ public final class Math {
     public static Fraction divide(Number operand1, Fraction operand2) {
 
         MixedBinaryOperation<Number, Fraction, Result<Fraction>> function =
-            (MixedBinaryOperation<Number, Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIVIDE_NUMBERS_FUNCTION);
+            (MixedBinaryOperation<Number, Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIVIDE_NUMBER_BY_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(operand1, operand2);
 
         return result.result();
@@ -1196,6 +1196,40 @@ public final class Math {
         MixedBinaryOperation<Number, Fraction, Result<Boolean>> function =
             (MixedBinaryOperation<Number, Fraction, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_LESSER_THAN_OR_EQUAL_FRACTION_COMPARISON_FUNCTION);
         Result<Boolean> result = function.calculate(operand1, operand2);
+
+        return result.result();
+    }
+
+    /**
+     * Returns the reciprocal of this fraction.
+     *
+     * @param operand
+     *        a fraction
+     *
+     * @return a fraction
+     */
+    public static Fraction reciprocal(Fraction operand) {
+
+        UnaryOperation<Fraction, Result<Fraction>> function =
+            (UnaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.RECIPROCAL_OF_FRACTION_FUNCTION);
+        Result<Fraction> result = function.calculate(operand);
+
+        return result.result();
+    }
+
+    /**
+     * Returns the reciprocal of this number.
+     *
+     * @param operand
+     *        a number
+     *
+     * @return a fraction
+     */
+    public static Fraction reciprocal(Number operand) {
+
+        UnaryOperation<Number, Result<Fraction>> function =
+            (UnaryOperation<Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.RECIPROCAL_OF_NUMBER_FUNCTION);
+        Result<Fraction> result = function.calculate(operand);
 
         return result.result();
     }

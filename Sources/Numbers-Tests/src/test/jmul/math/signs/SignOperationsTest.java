@@ -47,12 +47,40 @@ import org.junit.Test;
 
 
 /**
- * Checks the logical operations for signs.
+ * Checks the operations for signs.
  *
  * @author Kristian Kutin
  */
 @UnitTest
-public class LogicalSignOperationTest {
+public class SignOperationsTest {
+
+    /**
+     * Tests the negate operation for signs.
+     */
+    @Test
+    public void testNegate() {
+
+        Sign[] operands = { Signs.POSITIVE, Signs.NEGATIVE };
+        Sign[] expectedResults = { Signs.NEGATIVE, Signs.POSITIVE };
+
+        List<String> errors = new ArrayList<>();
+
+        int maxIndex = operands.length - 1;
+        for (int a = 0; a < maxIndex; a++) {
+
+            Sign operand = operands[a];
+            Sign expectedResult = expectedResults[a];
+            Sign actualResult = Signs.negate(operand);
+
+            String message = String.format("negate(%s)=%s but is %s", operand, expectedResult, actualResult);
+            if (expectedResult != actualResult) {
+
+                errors.add(message);
+            }
+        }
+
+        assertTrue(errors.toString(), errors.isEmpty());
+    }
 
     /**
      * Tests the logical and operation for signs (i.e. POSITIVE represents true and NEGATIVE represents
@@ -121,7 +149,7 @@ public class LogicalSignOperationTest {
      * Tests the logical xor operation for signs (i.e. POSITIVE represents true and NEGATIVE represents
      * false).
      */
-   @Test
+    @Test
     public void testXor() {
 
         Sign[] operands1 = { Signs.POSITIVE, Signs.POSITIVE, Signs.NEGATIVE, Signs.NEGATIVE };
@@ -140,6 +168,99 @@ public class LogicalSignOperationTest {
 
             String message =
                 String.format("xor(%s, %s)=%s but is %s", operand1, operand2, expectedResult, actualResult);
+            if (expectedResult != actualResult) {
+
+                errors.add(message);
+            }
+        }
+
+        assertTrue(errors.toString(), errors.isEmpty());
+    }
+
+    /**
+     * Tests the multiplication operation for signs.
+     */
+    @Test
+    public void testMultiplication() {
+
+        Sign[] operands1 = { Signs.POSITIVE, Signs.POSITIVE, Signs.NEGATIVE, Signs.NEGATIVE };
+        Sign[] operands2 = { Signs.POSITIVE, Signs.NEGATIVE, Signs.POSITIVE, Signs.NEGATIVE };
+        Sign[] expectedResults = { Signs.POSITIVE, Signs.NEGATIVE, Signs.NEGATIVE, Signs.POSITIVE };
+
+        List<String> errors = new ArrayList<>();
+
+        int maxIndex = operands1.length - 1;
+        for (int a = 0; a < maxIndex; a++) {
+
+            Sign operand1 = operands1[a];
+            Sign operand2 = operands2[a];
+            Sign expectedResult = expectedResults[a];
+            Sign actualResult = Signs.multiply(operand1, operand2);
+
+            String message =
+                String.format("multiply(%s, %s)=%s but is %s", operand1, operand2, expectedResult, actualResult);
+            if (expectedResult != actualResult) {
+
+                errors.add(message);
+            }
+        }
+
+        assertTrue(errors.toString(), errors.isEmpty());
+    }
+
+    /**
+     * Tests the division operation for signs (i.e. result).
+     */
+    @Test
+    public void testDivisionAndResultSign() {
+
+        Sign[] operands1 = { Signs.POSITIVE, Signs.POSITIVE, Signs.NEGATIVE, Signs.NEGATIVE };
+        Sign[] operands2 = { Signs.POSITIVE, Signs.NEGATIVE, Signs.POSITIVE, Signs.NEGATIVE };
+        Sign[] expectedResults = { Signs.POSITIVE, Signs.POSITIVE, Signs.NEGATIVE, Signs.POSITIVE };
+
+        List<String> errors = new ArrayList<>();
+
+        int maxIndex = operands1.length - 1;
+        for (int a = 0; a < maxIndex; a++) {
+
+            Sign operand1 = operands1[a];
+            Sign operand2 = operands2[a];
+            Sign expectedResult = expectedResults[a];
+            Sign actualResult = Signs.divideAndDetermineResultSign(operand1, operand2);
+
+            String message =
+                String.format("divide(%s, %s)=%s but is %s", operand1, operand2, expectedResult, actualResult);
+            if (expectedResult != actualResult) {
+
+                errors.add(message);
+            }
+        }
+
+        assertTrue(errors.toString(), errors.isEmpty());
+    }
+
+    /**
+     * Tests the division operation for signs (i.e. remainder).
+     */
+    @Test
+    public void testDivisionAndRemainderSign() {
+
+        Sign[] operands1 = { Signs.POSITIVE, Signs.POSITIVE, Signs.NEGATIVE, Signs.NEGATIVE };
+        Sign[] operands2 = { Signs.POSITIVE, Signs.NEGATIVE, Signs.POSITIVE, Signs.NEGATIVE };
+        Sign[] expectedResults = { Signs.POSITIVE, Signs.NEGATIVE, Signs.NEGATIVE, Signs.NEGATIVE };
+
+        List<String> errors = new ArrayList<>();
+
+        int maxIndex = operands1.length - 1;
+        for (int a = 0; a < maxIndex; a++) {
+
+            Sign operand1 = operands1[a];
+            Sign operand2 = operands2[a];
+            Sign expectedResult = expectedResults[a];
+            Sign actualResult = Signs.divideAndDetermineRemainderSign(operand1, operand2);
+
+            String message =
+                String.format("divide(%s, %s)=%s but is %s", operand1, operand2, expectedResult, actualResult);
             if (expectedResult != actualResult) {
 
                 errors.add(message);

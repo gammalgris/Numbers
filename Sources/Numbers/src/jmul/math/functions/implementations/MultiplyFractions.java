@@ -109,26 +109,8 @@ public class MultiplyFractions implements BinaryOperation<Fraction, Result<Fract
         Fraction normalizedFraction1 = operand1.normalizedFraction();
         Fraction normalizedFraction2 = operand2.normalizedFraction();
 
-        Number leftNumerator;
-        Number rightNumerator;
-        Number newNumerator;
-        Number newDenominator;
-        if (normalizedFraction1.denominator().equals(normalizedFraction2.denominator())) {
-
-            leftNumerator = normalizedFraction1.numerator();
-            rightNumerator = normalizedFraction2.numerator();
-
-            newNumerator = leftNumerator.multiply(rightNumerator);
-            newDenominator = normalizedFraction1.denominator();
-
-        } else {
-
-            leftNumerator = normalizedFraction1.numerator().multiply(normalizedFraction2.denominator());
-            rightNumerator = normalizedFraction2.numerator().multiply(normalizedFraction1.denominator());
-
-            newNumerator = leftNumerator.multiply(rightNumerator);
-            newDenominator = normalizedFraction1.denominator().multiply(normalizedFraction2.denominator());
-        }
+        Number newNumerator = normalizedFraction1.numerator().multiply(normalizedFraction2.numerator());
+        Number newDenominator = normalizedFraction1.denominator().multiply(normalizedFraction2.denominator());
 
         if (newNumerator.isInfinity() && newDenominator.isInfinity()) {
 

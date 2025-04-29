@@ -37,9 +37,8 @@ package jmul.math.functions.implementations;
 import jmul.math.fractions.Fraction;
 import static jmul.math.fractions.FractionHelper.DONT_CLONE;
 import static jmul.math.fractions.FractionHelper.createFraction;
-import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
+import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.Result;
 import jmul.math.signs.Sign;
@@ -51,12 +50,12 @@ import jmul.math.signs.Signs;
  *
  * @author Kristian Kutin
  */
-public class DivisionBySubtraction implements BinaryOperation<Number, Result<Fraction>> {
+public class DivisionBySubtractionReturnFraction implements BinaryOperation<Number, Result<Fraction>> {
 
     /**
      * The default constructor.
      */
-    public DivisionBySubtraction() {
+    public DivisionBySubtractionReturnFraction() {
 
         super();
     }
@@ -66,9 +65,11 @@ public class DivisionBySubtraction implements BinaryOperation<Number, Result<Fra
      * a quotient, a mixed fraction or integer).
      *
      * @param dividend
+     *        a number
      * @param divisor
+     *        a number
      *
-     * @return
+     * @return a fraction
      */
     @Override
     public Result<Fraction> calculate(Number dividend, Number divisor) {
@@ -87,25 +88,25 @@ public class DivisionBySubtraction implements BinaryOperation<Number, Result<Fra
 
             Number newDividend = absoluteDividend;
             if (Signs.isNegative(sign)) {
-                
+
                 newDividend = newDividend.negate();
             }
 
             Fraction result = createFraction(DONT_CLONE, newDividend);
             return new Result<Fraction>(result);
-            
+
         } else if (absoluteDividend.isInfinity() || absoluteDivisor.isZero() || absoluteDivisor.isInfinity()) {
-            
+
             Number newDividend = absoluteDividend;
             Number newDivisor = absoluteDivisor;
             if (Signs.isNegative(sign)) {
-                
+
                 newDividend = newDividend.negate();
             }
 
             Fraction result = createFraction(DONT_CLONE, newDividend, newDivisor);
             return new Result<Fraction>(result);
-        } 
+        }
 
         Number remainder = absoluteDividend;
         Number subtrahend = absoluteDivisor;

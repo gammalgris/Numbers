@@ -67,7 +67,7 @@ public class NegateNumberTest {
     private final Number number;
 
     /**
-     * The result of the equals comparison.
+     * The expected result.
      */
     private final Number expectedResult;
 
@@ -119,9 +119,7 @@ public class NegateNumberTest {
     @Override
     public String toString() {
 
-        String summary = String.format("[%d] -(%s) -> %s", number.base(), number, expectedResult);
-
-        return summary;
+        return String.format("[%d] -(%s) -> %s", number.base(), number, expectedResult);
     }
 
     /**
@@ -139,7 +137,7 @@ public class NegateNumberTest {
             parameters.add(new Object[] { createNumber(base), createNumber(Signs.NEGATIVE, base) });
             parameters.add(new Object[] { createNumber(Signs.NEGATIVE, base), createNumber(base) });
 
-            parameters.add(new Object[] { createNumber(base, "0"), createNumber(base, "-0") });
+            parameters.add(new Object[] { createNumber(base, "0"), createNumber(base, "0") });
             parameters.add(new Object[] { createNumber(base, "-0"), createNumber(base, "0") });
 
             parameters.add(new Object[] { createNumber(base, "1"), createNumber(base, "-1") });

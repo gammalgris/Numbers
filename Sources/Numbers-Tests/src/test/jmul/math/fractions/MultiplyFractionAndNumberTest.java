@@ -188,29 +188,29 @@ public class MultiplyFractionAndNumberTest {
         parameters.add(new Object[] { createFraction(10, "-5"), createNumber(10, "9"), createFraction(10, "-45") });
 
         parameters.add(new Object[] { createFraction(10, "5"), createNumber(10, "9.2"),
-                                      createFraction(10, "4600", "10") });
+                                      createFraction(10, "460", "10") });
         parameters.add(new Object[] { createFraction(10, "-5"), createNumber(10, "9.2"),
-                                      createFraction(10, "-4600", "10") });
+                                      createFraction(10, "-460", "10") });
 
         parameters.add(new Object[] { createFraction(10, "5", "2"), createNumber(10, "9"),
-                                      createFraction(10, "90", "2") });
+                                      createFraction(10, "45", "2") });
         parameters.add(new Object[] { createFraction(10, "-5", "2"), createNumber(10, "9"),
-                                      createFraction(10, "-90", "2") });
+                                      createFraction(10, "-45", "2") });
 
         parameters.add(new Object[] { createFraction(10, "5", "2"), createNumber(10, "2.41"),
-                                      createFraction(10, "241000", "200") });
+                                      createFraction(10, "1205", "200") });
         parameters.add(new Object[] { createFraction(10, "-5", "2"), createNumber(10, "2.41"),
-                                      createFraction(10, "-241000", "200") });
+                                      createFraction(10, "-1205", "200") });
 
         parameters.add(new Object[] { createFraction(10, "5", "3"), createNumber(10, "9"),
-                                      createFraction(10, "135", "3") });
+                                      createFraction(10, "45", "3") });
         parameters.add(new Object[] { createFraction(10, "-5", "3"), createNumber(10, "9"),
-                                      createFraction(10, "-135", "3") });
+                                      createFraction(10, "-45", "3") });
 
         parameters.add(new Object[] { createFraction(10, "1", "5", "2"), createNumber(10, "9"),
-                                      createFraction(10, "126", "2") });
+                                      createFraction(10, "63", "2") });
         parameters.add(new Object[] { createFraction(10, "1", "-5", "2"), createNumber(10, "9"),
-                                      createFraction(10, "-126", "2") });
+                                      createFraction(10, "-63", "2") });
 
         return parameters;
     }

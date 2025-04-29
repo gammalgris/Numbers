@@ -7,7 +7,7 @@
  * JMUL is a central repository for utilities which are used in my
  * other public and private repositories.
  *
- * Copyright (C) 2022  Kristian Kutin
+ * Copyright (C) 2025  Kristian Kutin
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,62 +34,58 @@
 package jmul.math.functions.implementations;
 
 
+import jmul.math.fractions.Fraction;
+import static jmul.math.fractions.FractionHelper.DONT_CLONE;
+import static jmul.math.fractions.FractionHelper.createFraction;
 import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
-import jmul.math.signs.Sign;
-import jmul.math.signs.Signs;
-import jmul.math.numbers.nodes.DigitNode;
-import jmul.math.numbers.nodes.NodesHelper;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
 
 
 /**
- * This function implementation negates a number.
+ * Calculates the reciprocal of a fraction.
  *
  * @author Kristian Kutin
  */
-public class NegateNumber implements UnaryOperation<Number, Result<Number>> {
+public class ReciprocalOfFraction implements UnaryOperation<Fraction, Result<Fraction>> {
 
     /**
      * The default constructor.
      */
-    public NegateNumber() {
+    public ReciprocalOfFraction() {
 
         super();
     }
 
     /**
-     * Negates the specified number.
+     * Calculates the reciprocal of the specified fraction and returns a fraction.
      *
-     * @param n
-     *        a number
+     * @param operand
+     *        a fraction
      *
-     * @return a number
+     * @return a fraction
      */
     @Override
-    public Result<Number> calculate(Number n) {
+    public Result<Fraction> calculate(Fraction operand) {
 
-        if (n == null) {
+        ParameterCheckHelper.checkParameter(operand);
 
-            throw new IllegalArgumentException("The specified number is null!");
+        Fraction normalizedOperand = operand.normalizedFraction();
+
+        Number absoluteNumerator = normalizedOperand.numerator().absoluteValue();
+        Number absoluteDenominator = normalizedOperand.denominator().absoluteValue();
+
+        Number newNumerator = absoluteDenominator;
+        if (operand.isNegative()) {
+
+            newNumerator = newNumerator.negate();
         }
 
-        Sign sign;
-        if (n.isZero()) {
+        Number newDenominator = absoluteNumerator;
 
-            sign = n.sign();
+        Fraction result = createFraction(DONT_CLONE, newNumerator, newDenominator);
 
-        } else {
-
-            sign = Signs.negate(n.sign());
-        }
-
-        int base = n.base();
-        DigitNode clonedCenterNode = NodesHelper.cloneLinkedList(n.centerNode());
-        Number newNumber = new NumberImpl(base, sign, clonedCenterNode);
-
-        return new Result<Number>(newNumber);
+        return new Result<Fraction>(result);
     }
 
 }

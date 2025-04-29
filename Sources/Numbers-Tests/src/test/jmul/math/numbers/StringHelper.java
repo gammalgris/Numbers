@@ -33,6 +33,9 @@
 
 package test.jmul.math.numbers;
 
+import jmul.math.signs.Sign;
+import jmul.math.signs.Signs;
+
 
 /**
  * A utility class for manipulating strings.
@@ -50,19 +53,21 @@ public final class StringHelper {
     }
 
     /**
-     * Returns a copy of the specified string where a leading plus character is removed.
+     * Returns a copy of the specified string where a leading sign (i.e. a plus or minus character) is removed.
      *
      * @param string
      *        a string containing a number
      *
-     * @return a normalized string
+     * @return an unsigned number string
      */
     public static String removeSign(String string) {
 
-        String sign = "+";
-        if (string.startsWith(string)) {
+        for (Sign sign : Signs.values()) {
 
-            return string.replace(sign, "");
+            if (string.startsWith(sign.toString())) {
+
+                return string.replace(sign.toString(), "");
+            }
         }
 
         return string;

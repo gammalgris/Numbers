@@ -144,6 +144,8 @@ public class CreateFractionWithInvalidParameters2Test {
 
             parameters.add(new Object[] { base, "--1", "1", NumberParsingException.class });
             parameters.add(new Object[] { base, "1", "--1", NumberParsingException.class });
+            parameters.add(new Object[] { base, "1.1", "1", IllegalArgumentException.class });
+            parameters.add(new Object[] { base, "1", "1.1", IllegalArgumentException.class });
         }
 
         return parameters;

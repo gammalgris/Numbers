@@ -7,7 +7,7 @@
  * JMUL is a central repository for utilities which are used in my
  * other public and private repositories.
  *
- * Copyright (C) 2022  Kristian Kutin
+ * Copyright (C) 2025  Kristian Kutin
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,62 +34,62 @@
 package jmul.math.functions.implementations;
 
 
+import jmul.math.fractions.Fraction;
+import static jmul.math.fractions.FractionHelper.DONT_CLONE;
+import static jmul.math.fractions.FractionHelper.createFraction;
 import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
-import jmul.math.signs.Sign;
-import jmul.math.signs.Signs;
-import jmul.math.numbers.nodes.DigitNode;
-import jmul.math.numbers.nodes.NodesHelper;
+import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
+import jmul.math.signs.Signs;
 
 
 /**
- * This function implementation negates a number.
+ * Calculates the reciprocal of a number.
  *
  * @author Kristian Kutin
  */
-public class NegateNumber implements UnaryOperation<Number, Result<Number>> {
+public class ReciprocalOfNumber implements UnaryOperation<Number, Result<Fraction>> {
 
     /**
      * The default constructor.
      */
-    public NegateNumber() {
+    public ReciprocalOfNumber() {
 
         super();
     }
 
     /**
-     * Negates the specified number.
+     * Calculates the reciprocal of the specified number and returns a fraction.
      *
-     * @param n
+     * @param operand
      *        a number
      *
-     * @return a number
+     * @return a fraction
      */
     @Override
-    public Result<Number> calculate(Number n) {
+    public Result<Fraction> calculate(Number operand) {
 
-        if (n == null) {
+        ParameterCheckHelper.checkParameter(operand);
 
-            throw new IllegalArgumentException("The specified number is null!");
+        if (!operand.isInfinity()) {
+
+            ParameterCheckHelper.checkInteger(operand);
         }
 
-        Sign sign;
-        if (n.isZero()) {
+        int base = operand.base();
 
-            sign = n.sign();
+        Number newNumerator = createNumber(Signs.POSITIVE, base, 1);
+        if (operand.isNegative()) {
 
-        } else {
-
-            sign = Signs.negate(n.sign());
+            newNumerator = newNumerator.negate();
         }
 
-        int base = n.base();
-        DigitNode clonedCenterNode = NodesHelper.cloneLinkedList(n.centerNode());
-        Number newNumber = new NumberImpl(base, sign, clonedCenterNode);
+        Number newDenominator = operand.absoluteValue();
 
-        return new Result<Number>(newNumber);
+        Fraction result = createFraction(DONT_CLONE, newNumerator, newDenominator);
+
+        return new Result<Fraction>(result);
     }
 
 }

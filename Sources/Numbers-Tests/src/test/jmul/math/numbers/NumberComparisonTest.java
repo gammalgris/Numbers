@@ -70,7 +70,7 @@ public class NumberComparisonTest {
     private final Number number2;
 
     /**
-     * The result of the equals comparison.
+     * The expected result.
      */
     private final int expectedResult;
 

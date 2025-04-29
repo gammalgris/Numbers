@@ -37,12 +37,10 @@ package test.jmul.math.numbers;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import static jmul.math.fractions.FractionHelper.DONT_CLONE;
 import static jmul.math.fractions.FractionHelper.createFraction;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import static jmul.math.numbers.NumberHelper.createNumber;
-import static jmul.math.signs.Signs.NEGATIVE;
 
 import jmul.test.classification.UnitTest;
 
@@ -72,7 +70,7 @@ public class NumberFractionEqualityTest {
     private final Object operand2;
 
     /**
-     * The result of the equals comparison.
+     * The expected result.
      */
     private final boolean expectedResult;
 

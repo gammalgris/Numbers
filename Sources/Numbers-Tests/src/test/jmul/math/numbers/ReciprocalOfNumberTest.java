@@ -31,7 +31,7 @@
  * $Id$
  */
 
-package test.jmul.math.fractions;
+package test.jmul.math.numbers;
 
 
 import java.util.ArrayList;
@@ -42,6 +42,8 @@ import jmul.math.fractions.Fraction;
 import static jmul.math.fractions.FractionHelper.createFraction;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
+import jmul.math.numbers.Number;
+import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.signs.Signs;
 
 import jmul.test.classification.UnitTest;
@@ -53,18 +55,18 @@ import org.junit.runners.Parameterized;
 
 
 /**
- * This test suite tests negating a fraction.
+ * This test suite tests claculating the reciprocal of a number.
  *
  * @author Kristian Kutin
  */
 @UnitTest
 @RunWith(Parameterized.class)
-public class NegateFractionTest {
+public class ReciprocalOfNumberTest {
 
     /**
      * A number.
      */
-    private final Fraction fraction;
+    private final Number operand;
 
     /**
      * The expected result.
@@ -74,41 +76,17 @@ public class NegateFractionTest {
     /**
      * Creates a new test case according to the specified parameters.
      *
-     * @param fraction
-     *        a fraction
+     * @param operand
+     *        a number
      * @param expectedResult
-     *        the expected result
+     *        a fraction
      */
-    public NegateFractionTest(Fraction fraction, Fraction expectedResult) {
+    public ReciprocalOfNumberTest(Number operand, Fraction expectedResult) {
 
         super();
 
-        this.fraction = fraction;
+        this.operand = operand;
         this.expectedResult = expectedResult;
-    }
-
-    /**
-     * Tests negating a fraction and checks the result.
-     */
-    @Test
-    public void testNegateFraction() {
-
-        Fraction actualResult = fraction.negate();
-
-        assertEquals(toString(), expectedResult, actualResult);
-        assertEquals(toString(), expectedResult.toString(), actualResult.toString());
-    }
-
-    /**
-     * Tests negating a fraction and checks the result.
-     */
-    @Test
-    public void testNegateNumberFraction2() {
-
-        Fraction actualResult = Math.negate(fraction);
-
-        assertEquals(toString(), expectedResult, actualResult);
-        assertEquals(toString(), expectedResult.toString(), actualResult.toString());
     }
 
     /**
@@ -119,9 +97,33 @@ public class NegateFractionTest {
     @Override
     public String toString() {
 
-        String summary = String.format("[%d] -(%s) -> %s", fraction.base(), fraction, expectedResult);
+        String summary = String.format("[%d] %s -> %s", operand.base(), operand, expectedResult);
 
         return summary;
+    }
+
+    /**
+     * Calculates the reciprocal of a fraction and checks the result.
+     */
+    @Test
+    public void testCalculatingReciprocal() {
+
+        Fraction actualResult = operand.reciprocal();
+
+        assertEquals(toString(), expectedResult, actualResult);
+        assertEquals(toString(), expectedResult.toString(), actualResult.toString());
+    }
+
+    /**
+     * Calculates the reciprocal of a fraction and checks the result.
+     */
+    @Test
+    public void testCalculatingReciprocalVariant2() {
+
+        Fraction actualResult = Math.reciprocal(operand);
+
+        assertEquals(toString(), expectedResult, actualResult);
+        assertEquals(toString(), expectedResult.toString(), actualResult.toString());
     }
 
     /**
@@ -136,22 +138,17 @@ public class NegateFractionTest {
 
         for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
 
-            parameters.add(new Object[] { createFraction(base), createFraction(Signs.NEGATIVE, base) });
-            parameters.add(new Object[] { createFraction(Signs.NEGATIVE, base), createFraction(base) });
+            parameters.add(new Object[] { createNumber(base), createFraction(base, "1", null) });
+            parameters.add(new Object[] { createNumber(Signs.NEGATIVE, base), createFraction(base, "-1", null) });
 
-            parameters.add(new Object[] { createFraction(base, "0"), createFraction(base, "-0") });
-            parameters.add(new Object[] { createFraction(base, "-0"), createFraction(base, "0") });
+            parameters.add(new Object[] { createNumber(base, "0"), createFraction(base, "1", "0") });
+            parameters.add(new Object[] { createNumber(base, "-0"), createFraction(base, "1", "0") });
 
-            parameters.add(new Object[] { createFraction(base, "1"), createFraction(base, "-1") });
-            parameters.add(new Object[] { createFraction(base, "-1"), createFraction(base, "1") });
+            parameters.add(new Object[] { createNumber(base, "1"), createFraction(base, "1", "1") });
+            parameters.add(new Object[] { createNumber(base, "-1"), createFraction(base, "-1", "1") });
 
-            parameters.add(new Object[] { createFraction(base, "1", "10"), createFraction(base, "-1", "10") });
-            parameters.add(new Object[] { createFraction(base, "-1", "10"), createFraction(base, "1", "10") });
-
-            parameters.add(new Object[] { createFraction(base, "1", "1", "10"),
-                                          createFraction(base, "-1", "1", "10") });
-            parameters.add(new Object[] { createFraction(base, "-1", "1", "10"),
-                                          createFraction(base, "1", "1", "10") });
+            parameters.add(new Object[] { createNumber(base, "11"), createFraction(base, "1", "11") });
+            parameters.add(new Object[] { createNumber(base, "-11"), createFraction(base, "-1", "11") });
         }
 
         return parameters;

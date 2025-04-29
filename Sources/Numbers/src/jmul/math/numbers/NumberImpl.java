@@ -906,7 +906,7 @@ public class NumberImpl implements Number {
     public Fraction divide(Number n) {
 
         BinaryOperation<Number, Result<Fraction>> function =
-            (BinaryOperation<Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIVIDE_NUMBERS_FUNCTION);
+            (BinaryOperation<Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIVIDE_NUMBERS_RETURN_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(this, n);
 
         return result.result();
@@ -1354,6 +1354,21 @@ public class NumberImpl implements Number {
         MixedBinaryOperation<Number, Fraction, Result<Boolean>> function =
             (MixedBinaryOperation<Number, Fraction, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_LESSER_THAN_OR_EQUAL_FRACTION_COMPARISON_FUNCTION);
         Result<Boolean> result = function.calculate(this, fraction);
+
+        return result.result();
+    }
+
+    /**
+     * Returns the reciprocal of this number.
+     *
+     * @return a fraction
+     */
+    @Override
+    public Fraction reciprocal() {
+
+        UnaryOperation<Number, Result<Fraction>> function =
+            (UnaryOperation<Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.RECIPROCAL_OF_NUMBER_FUNCTION);
+        Result<Fraction> result = function.calculate(this);
 
         return result.result();
     }

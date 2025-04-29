@@ -1051,4 +1051,19 @@ class MixedFraction implements Fraction {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Returns the reciprocal of this fraction.
+     *
+     * @return a fraction
+     */
+    @Override
+    public Fraction reciprocal() {
+
+        UnaryOperation<Fraction, Result<Fraction>> function =
+            (UnaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.RECIPROCAL_OF_FRACTION_FUNCTION);
+        Result<Fraction> result = function.calculate(this);
+
+        return result.result();
+    }
+
 }

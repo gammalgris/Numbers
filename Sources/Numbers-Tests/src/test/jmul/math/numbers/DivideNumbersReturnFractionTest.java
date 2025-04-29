@@ -56,13 +56,13 @@ import org.junit.runners.Parameterized;
 
 
 /**
- * This test suite tests the division of numbers.
+ * This test suite tests the division of numbers. The result is a fraction.
  *
  * @author Kristian Kutin
  */
 @UnitTest
 @RunWith(Parameterized.class)
-public class DivideNumbersTest {
+public class DivideNumbersReturnFractionTest {
 
     /**
      * The dividend.
@@ -83,13 +83,13 @@ public class DivideNumbersTest {
      * Creates a new test case accordign to the specified parameters.
      *
      * @param dividend
-     *        the dividend
+     *        a number
      * @param divisor
-     *        the divisor
+     *        a number
      * @param expectedResult
-     *        the expected result
+     *        a fraction
      */
-    public DivideNumbersTest(Number dividend, Number divisor, Fraction expectedResult) {
+    public DivideNumbersReturnFractionTest(Number dividend, Number divisor, Fraction expectedResult) {
 
         super();
 
@@ -170,6 +170,8 @@ public class DivideNumbersTest {
                                           createFraction(base, "-1") });
             parameters.add(new Object[] { createNumber(base, "1"), createNumber(base, "-1"),
                                           createFraction(base, "-1") });
+            parameters.add(new Object[] { createNumber(base, "-1"), createNumber(base, "-1"),
+                                          createFraction(base, "1") });
 
             parameters.add(new Object[] { createNumber(base, "1"), createNumber(base, "10"),
                                           createFraction(base, "1", "10") });
@@ -177,12 +179,18 @@ public class DivideNumbersTest {
 
         parameters.add(new Object[] { createNumber(10, "10"), createNumber(10, "3"),
                                       createFraction(10, "3", "1", "3") });
+        parameters.add(new Object[] { createNumber(10, "100"), createNumber(10, "25"),
+                                      createFraction(10, "4") });
+
         parameters.add(new Object[] { createNumber(10, "100"), createNumber(10, "7"),
                                       createFraction(10, "14", "2", "7") });
         parameters.add(new Object[] { createNumber(10, "-100"), createNumber(10, "7"),
                                       createFraction(10, "-14", "2", "7") });
-        parameters.add(new Object[] { createNumber(10, "100"), createNumber(10, "25"),
-                                      createFraction(10, "4") });
+        parameters.add(new Object[] { createNumber(10, "-100"), createNumber(10, "-7"),
+                                      createFraction(10, "14", "2", "7") });
+        parameters.add(new Object[] { createNumber(10, "100"), createNumber(10, "-7"),
+                                      createFraction(10, "-14", "2", "7") });
+
 
         return parameters;
     }

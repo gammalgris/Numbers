@@ -133,6 +133,7 @@ public class CreateFractionWithInvalidParameters1Test {
         for (int base = Constants.BASE_MIN_LIMIT; base <= Constants.BASE_MAX_LIMIT; base++) {
 
             parameters.add(new Object[] { base, "--1", NumberParsingException.class });
+            parameters.add(new Object[] { base, "1.1", IllegalArgumentException.class });
         }
 
         return parameters;

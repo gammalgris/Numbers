@@ -39,7 +39,6 @@ import jmul.math.functions.FunctionSingletons;
 import static jmul.math.functions.implementations.ParameterCheckHelper.checkParameters;
 import jmul.math.functions.repository.FunctionIdentifiers;
 import jmul.math.numbers.Number;
-import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.MixedBinaryOperation;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
@@ -80,11 +79,10 @@ public class DivideNumberByFraction implements MixedBinaryOperation<Number, Frac
         Result<Fraction> wrappedResult = conversionFunction.calculate(operand1);
         Fraction normalizedNumber = wrappedResult.result();
 
-        BinaryOperation<Fraction, Result<Fraction>> multiplicationFunction =
-            (BinaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIVIDE_FRACTIONS_FUNCTION);
-        Result<Fraction> result = multiplicationFunction.calculate(normalizedNumber, operand2);
+        Fraction reciprocal = operand2.reciprocal();
+        Fraction result = normalizedNumber.multiply(reciprocal);
 
-        return result;
+        return new Result<Fraction>(result);
     }
 
 }

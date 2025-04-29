@@ -99,9 +99,9 @@ public class NumberPropertyTest {
         assertEquals(false, number.isInfinity());
         assertEquals(true, number.isInteger());
         assertEquals(false, number.isNaturalNumber());
-        assertEquals(false, number.isNaturalNumberIncludingZero());
-        assertEquals(true, number.isNegative());
-        assertEquals(false, number.isPositive());
+        assertEquals(true, number.isNaturalNumberIncludingZero());
+        assertEquals(false, number.isNegative());
+        assertEquals(true, number.isPositive());
         assertEquals(true, number.isZero());
         assertEquals(false, number.isOne());
     }

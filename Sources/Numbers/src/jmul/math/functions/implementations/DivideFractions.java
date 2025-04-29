@@ -34,13 +34,7 @@
 package jmul.math.functions.implementations;
 
 
-import jmul.math.digits.PositionalNumeralSystems;
 import jmul.math.fractions.Fraction;
-import static jmul.math.fractions.FractionHelper.DONT_CLONE;
-import static jmul.math.fractions.FractionHelper.cloneFraction;
-import static jmul.math.fractions.FractionHelper.createFraction;
-import jmul.math.numbers.Number;
-import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.Result;
 
@@ -75,83 +69,10 @@ public class DivideFractions implements BinaryOperation<Fraction, Result<Fractio
 
         ParameterCheckHelper.checkParameters(operand1, operand2);
 
-        int base = operand1.base();
+        Fraction reciprocal = operand2.reciprocal();
+        Fraction product = operand1.multiply(reciprocal);
 
-        String symbol = PositionalNumeralSystems.toString(base, 1);
-        final Number ONE = createNumber(base, symbol);
-        final Number MINUS_ONE = ONE.negate();
-
-        Fraction result;
-        if (ONE.equals(operand1)) {
-
-            result = cloneFraction(operand2);
-            return new Result<Fraction>(result);
-
-        } else if (MINUS_ONE.equals(operand1)) {
-
-            result = cloneFraction(operand2);
-            result = result.negate();
-            return new Result<Fraction>(result);
-
-
-        } else if (ONE.equals(operand2)) {
-
-            result = cloneFraction(operand1);
-            return new Result<Fraction>(result);
-
-        } else if (MINUS_ONE.equals(operand2)) {
-
-            result = cloneFraction(operand1);
-            result = result.negate();
-            return new Result<Fraction>(result);
-        }
-
-        Fraction normalizedFraction1 = operand1.normalizedFraction();
-        Fraction normalizedFraction2 = operand2.normalizedFraction();
-
-        Number leftNumerator;
-        Number rightNumerator;
-        Number newNumerator;
-        Number newDenominator;
-        if (normalizedFraction1.denominator().equals(normalizedFraction2.denominator())) {
-
-            leftNumerator = normalizedFraction1.numerator();
-            rightNumerator = normalizedFraction2.numerator();
-
-            newNumerator = leftNumerator.multiply(rightNumerator);
-            newDenominator = normalizedFraction1.denominator();
-
-        } else {
-
-            leftNumerator = normalizedFraction1.numerator().multiply(normalizedFraction2.denominator());
-            rightNumerator = normalizedFraction2.numerator().multiply(normalizedFraction1.denominator());
-
-            newNumerator = leftNumerator.multiply(rightNumerator);
-            newDenominator = normalizedFraction1.denominator().multiply(normalizedFraction2.denominator());
-        }
-
-        if (newNumerator.isInfinity() && newDenominator.isInfinity()) {
-
-            result = createFraction(DONT_CLONE, newNumerator, newDenominator);
-
-        } else if (newNumerator.isInfinity()) {
-
-            result = createFraction(DONT_CLONE, newNumerator);
-
-        } else if (newNumerator.isZero()) {
-
-            result = createFraction(DONT_CLONE, newNumerator);
-
-        } else if (newDenominator.isOne()) {
-
-            result = createFraction(DONT_CLONE, newNumerator);
-
-        } else {
-
-            result = createFraction(DONT_CLONE, newNumerator, newDenominator);
-        }
-
-        return new Result<Fraction>(result);
+        return new Result<Fraction>(product);
     }
 
 }

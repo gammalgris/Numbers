@@ -34,8 +34,22 @@
 package test.jmul.math.numbers;
 
 
+import java.util.ArrayList;
+import java.util.Collection;
+
+import jmul.math.Math;
+import jmul.math.fractions.Fraction;
+import static jmul.math.fractions.FractionHelper.createFraction;
+import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
+import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
+import jmul.math.numbers.Number;
+import static jmul.math.numbers.NumberHelper.createNumber;
+import jmul.math.signs.Signs;
+
 import jmul.test.classification.UnitTest;
 
+import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
@@ -48,7 +62,140 @@ import org.junit.runners.Parameterized;
 @UnitTest
 @RunWith(Parameterized.class)
 public class DivideNumberByFractionTest {
-    public DivideNumberByFractionTest() {
+
+    /**
+     * The dividend.
+     */
+    private final Number dividend;
+
+    /**
+     * The divisor,
+     */
+    private final Fraction divisor;
+
+    /**
+     * The expected result.
+     */
+    private final Fraction expectedResult;
+
+    /**
+     * Creates a new test case according to the specified parameters.
+     *
+     * @param dividend
+     *        the dividend
+     * @param divisor
+     *        the divisor
+     * @param expectedResult
+     *        the expected result
+     */
+    public DivideNumberByFractionTest(Number dividend, Fraction divisor, Fraction expectedResult) {
+
         super();
+
+        this.dividend = dividend;
+        this.divisor = divisor;
+        this.expectedResult = expectedResult;
     }
+
+    /**
+     * Returns a summary of this test case (i.e. the operation with its operands)
+     *
+     * @return a summary
+     */
+    @Override
+    public String toString() {
+
+        return String.format("[base:%d] %s / %s = %s", dividend.base(), dividend, divisor, expectedResult);
+    }
+
+    /**
+     * Performs a division and checks the result.
+     */
+    @Test
+    public void testDivision() {
+
+        Fraction actualResult = dividend.divide(divisor);
+
+        assertEquals(toString(), expectedResult, actualResult);
+        assertEquals(toString(), expectedResult.toString(), actualResult.toString());
+    }
+
+    /**
+     * Performs a division and checks the result.
+     */
+    @Test
+    public void testDivisionVariant2() {
+
+        Fraction actualResult = Math.divide(dividend, divisor);
+
+        assertEquals(toString(), expectedResult, actualResult);
+        assertEquals(toString(), expectedResult.toString(), actualResult.toString());
+    }
+
+    /**
+     * Returns a matrix of test data and expected results.
+     *
+     * @return a matrix of test data and expected results
+     */
+    @Parameterized.Parameters
+    public static Collection<Object[]> data() {
+
+        Collection<Object[]> parameters = new ArrayList<Object[]>();
+
+        for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
+
+            parameters.add(new Object[] { createNumber(base, "1"), createFraction(base),
+                                          createFraction(base, "1", null) });
+            parameters.add(new Object[] { createNumber(base, "1"), createFraction(Signs.NEGATIVE, base),
+                                          createFraction(base, "-1", null) });
+
+            parameters.add(new Object[] { createNumber(base), createFraction(base, "1"), createFraction(base) });
+            parameters.add(new Object[] { createNumber(Signs.NEGATIVE, base), createFraction(base, "1"),
+                                          createFraction(Signs.NEGATIVE, base) });
+
+            parameters.add(new Object[] { createNumber(base, "1"), createFraction(base, "1"),
+                                          createFraction(base, "1", "1") });
+            parameters.add(new Object[] { createNumber(base, "1"), createFraction(base, "-1"),
+                                          createFraction(base, "-1", "1") });
+            parameters.add(new Object[] { createNumber(base, "-1"), createFraction(base, "1"),
+                                          createFraction(base, "-1", "1") });
+            parameters.add(new Object[] { createNumber(base, "-1"), createFraction(base, "-1"),
+                                          createFraction(base, "1", "1") });
+
+            parameters.add(new Object[] { createNumber(base, "1"), createFraction(base, "0"),
+                                          createFraction(base, "1", "0") });
+            parameters.add(new Object[] { createNumber(base, "-1"), createFraction(base, "0"),
+                                          createFraction(base, "-1", "0") });
+
+            parameters.add(new Object[] { createNumber(base, "1"), createFraction(base, "10"),
+                                          createFraction(base, "1", "10") });
+            parameters.add(new Object[] { createNumber(base, "1"), createFraction(base, "-10"),
+                                          createFraction(base, "-1", "10") });
+            parameters.add(new Object[] { createNumber(base, "-1"), createFraction(base, "10"),
+                                          createFraction(base, "-1", "10") });
+            parameters.add(new Object[] { createNumber(base, "-1"), createFraction(base, "-10"),
+                                          createFraction(base, "1", "10") });
+
+            parameters.add(new Object[] { createNumber(base, "10"), createFraction(base, "1"),
+                                          createFraction(base, "10") });
+            parameters.add(new Object[] { createNumber(base, "10"), createFraction(base, "-1"),
+                                          createFraction(base, "-10") });
+            parameters.add(new Object[] { createNumber(base, "-10"), createFraction(base, "1"),
+                                          createFraction(base, "-10") });
+            parameters.add(new Object[] { createNumber(base, "-10"), createFraction(base, "-1"),
+                                          createFraction(base, "10") });
+        }
+
+        parameters.add(new Object[] { createNumber(10, "4"), createFraction(10, "5", "2"),
+                                      createFraction(10, "8", "5") });
+        parameters.add(new Object[] { createNumber(10, "4"), createFraction(10, "-5", "2"),
+                                      createFraction(10, "-8", "5") });
+        parameters.add(new Object[] { createNumber(10, "-4"), createFraction(10, "5", "2"),
+                                      createFraction(10, "-8", "5") });
+        parameters.add(new Object[] { createNumber(10, "-4"), createFraction(10, "-5", "2"),
+                                      createFraction(10, "8", "5") });
+
+        return parameters;
+    }
+
 }

@@ -4,6 +4,15 @@
 The subdirectory 'Batch' contains various automation scripts. For windows
 environments a script is provided to create a clean batch environment.
 
+## Requirement(s)
+
+A summary of requirements regarding build and test automation:
+
+1) The automation should run independently of an IDE.
+
+2) The automation should run isolated from an IDE so you can continue working
+   with the IDE while the automation runs.
+
 ## Clean batch/ shell environment
 
 ### Windows environment

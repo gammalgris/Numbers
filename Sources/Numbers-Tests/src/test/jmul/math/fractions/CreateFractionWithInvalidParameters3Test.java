@@ -150,13 +150,12 @@ public class CreateFractionWithInvalidParameters3Test {
 
         for (int base = Constants.BASE_MIN_LIMIT; base <= Constants.BASE_MAX_LIMIT; base++) {
 
-            parameters.add(new Object[] { base, "-0", "1", "1", IllegalArgumentException.class });
-            parameters.add(new Object[] { base, "1", "-0", "1", IllegalArgumentException.class });
-            parameters.add(new Object[] { base, "1", "1", "-0", IllegalArgumentException.class });
-
             parameters.add(new Object[] { base, "--1", "1", "1", NumberParsingException.class });
             parameters.add(new Object[] { base, "1", "--1", "1", NumberParsingException.class });
             parameters.add(new Object[] { base, "1", "1", "--1", NumberParsingException.class });
+            parameters.add(new Object[] { base, "1.1", "1", "1", IllegalArgumentException.class });
+            parameters.add(new Object[] { base, "1", "1.1", "1", IllegalArgumentException.class });
+            parameters.add(new Object[] { base, "1", "1", "1.1", IllegalArgumentException.class });
         }
 
         return parameters;

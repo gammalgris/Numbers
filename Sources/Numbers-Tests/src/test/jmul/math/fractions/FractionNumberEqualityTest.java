@@ -72,7 +72,7 @@ public class FractionNumberEqualityTest {
     private final Object operand2;
 
     /**
-     * The result of the equals comparison.
+     * The expected result.
      */
     private final boolean expectedResult;
 

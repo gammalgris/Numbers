@@ -37,6 +37,8 @@ package test.jmul.math.numbers;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import static org.junit.Assert.assertTrue;
+
 import jmul.math.Math;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
@@ -139,20 +141,33 @@ public class DoublingNumberTest {
         try {
 
             // check that the operands and the expected result are built correctly
-            checkNumberEqualsStringRepresentation(operand, operandString);
+            if (operand.isZero()) {
+
+                assertTrue("Zero cannot be negative!", operand.isPositive());
+
+            } else {
+
+                checkNumberEqualsStringRepresentation(operand, operandString);
+            }
             checkNumberEqualsStringRepresentation(result, resultString);
 
             // check the operation
             Number actualResult = operand.doubling();
 
-            String message = String.format("doubling %s => %s", operandString, resultString);
-            assertEquals(message, result, actualResult);
+            assertEquals(toString(), result, actualResult);
 
             // check the number instances
             checkNumbersAreUniqueInstances(operand, actualResult);
 
             // check that the operands didn't change
-            checkNumberEqualsStringRepresentation(operand, operandString);
+            if (operand.isZero()) {
+
+                assertTrue("Zero cannot be negative!", operand.isPositive());
+
+            } else {
+
+                checkNumberEqualsStringRepresentation(operand, operandString);
+            }
 
         } catch (Exception e) {
 
@@ -169,20 +184,33 @@ public class DoublingNumberTest {
         try {
 
             // check that the operands and the expected result are built correctly
-            checkNumberEqualsStringRepresentation(operand, operandString);
+            if (operand.isZero()) {
+
+                assertTrue("Zero cannot be negative!", operand.isPositive());
+
+            } else {
+
+                checkNumberEqualsStringRepresentation(operand, operandString);
+            }
             checkNumberEqualsStringRepresentation(result, resultString);
 
             // check the operation
             Number actualResult = Math.doubling(operand);
 
-            String message = String.format("doubling %s => %s", operandString, resultString);
-            assertEquals(message, result, actualResult);
+            assertEquals(toString(), result, actualResult);
 
             // check the number instances
             checkNumbersAreUniqueInstances(operand, actualResult);
 
             // check that the operands didn't change
-            checkNumberEqualsStringRepresentation(operand, operandString);
+            if (operand.isZero()) {
+
+                assertTrue("Zero cannot be negative!", operand.isPositive());
+
+            } else {
+
+                checkNumberEqualsStringRepresentation(operand, operandString);
+            }
 
         } catch (Exception e) {
 
@@ -198,8 +226,7 @@ public class DoublingNumberTest {
     @Override
     public String toString() {
 
-        String summary = String.format("[base:%d] doubling %s", base, operandString);
-        return summary;
+        return String.format("[base:%d] doubling %s = %s", base, operandString, resultString);
     }
 
     /**

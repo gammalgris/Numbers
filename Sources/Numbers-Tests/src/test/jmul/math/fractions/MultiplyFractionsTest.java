@@ -168,29 +168,38 @@ public class MultiplyFractionsTest {
         parameters.add(new Object[] { createFraction(10, "-5"), createFraction(10, "9"), createFraction(10, "-45") });
 
         parameters.add(new Object[] { createFraction(10, "5"), createFraction(10, "9", "3"),
-                                      createFraction(10, "135", "3") });
+                                      createFraction(10, "45", "3") });
         parameters.add(new Object[] { createFraction(10, "-5"), createFraction(10, "9", "3"),
-                                      createFraction(10, "-135", "3") });
+                                      createFraction(10, "-45", "3") });
 
         parameters.add(new Object[] { createFraction(10, "5"), createFraction(10, "2", "9", "3"),
-                                      createFraction(10, "225", "3") });
-        parameters.add(new Object[] { createFraction(10, "-5"), createFraction(10, "2", "9", "3"),
-                                      createFraction(10, "-225", "3") });
-
-        parameters.add(new Object[] { createFraction(10, "5", "2"), createFraction(10, "2", "9", "3"),
-                                      createFraction(10, "450", "6") });
-        parameters.add(new Object[] { createFraction(10, "-5", "2"), createFraction(10, "2", "9", "3"),
-                                      createFraction(10, "-450", "6") });
-
-        parameters.add(new Object[] { createFraction(10, "5", "3"), createFraction(10, "2", "9", "3"),
                                       createFraction(10, "75", "3") });
-        parameters.add(new Object[] { createFraction(10, "-5", "3"), createFraction(10, "2", "9", "3"),
+        parameters.add(new Object[] { createFraction(10, "-5"), createFraction(10, "2", "9", "3"),
                                       createFraction(10, "-75", "3") });
 
+        parameters.add(new Object[] { createFraction(10, "5", "2"), createFraction(10, "2", "9", "3"),
+                                      createFraction(10, "75", "6") });
+        parameters.add(new Object[] { createFraction(10, "-5", "2"), createFraction(10, "2", "9", "3"),
+                                      createFraction(10, "-75", "6") });
+
+        parameters.add(new Object[] { createFraction(10, "5", "3"), createFraction(10, "2", "9", "3"),
+                                      createFraction(10, "75", "9") });
+        parameters.add(new Object[] { createFraction(10, "-5", "3"), createFraction(10, "2", "9", "3"),
+                                      createFraction(10, "-75", "9") });
+
         parameters.add(new Object[] { createFraction(10, "1", "5", "2"), createFraction(10, "2", "9", "3"),
-                                      createFraction(10, "630", "6") });
+                                      createFraction(10, "105", "6") });
         parameters.add(new Object[] { createFraction(10, "1", "-5", "2"), createFraction(10, "2", "9", "3"),
-                                      createFraction(10, "-630", "6") });
+                                      createFraction(10, "-105", "6") });
+
+        parameters.add(new Object[] { createFraction(10, "5", "2"), createFraction(10, "9", "3"),
+                                      createFraction(10, "45", "6") });
+        parameters.add(new Object[] { createFraction(10, "-5", "2"), createFraction(10, "9", "3"),
+                                      createFraction(10, "-45", "6") });
+        parameters.add(new Object[] { createFraction(10, "5", "2"), createFraction(10, "-9", "3"),
+                                      createFraction(10, "-45", "6") });
+        parameters.add(new Object[] { createFraction(10, "-5", "2"), createFraction(10, "-9", "3"),
+                                      createFraction(10, "45", "6") });
 
         return parameters;
     }

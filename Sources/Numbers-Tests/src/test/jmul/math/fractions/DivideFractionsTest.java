@@ -43,7 +43,7 @@ import static jmul.math.fractions.FractionHelper.createFraction;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
-
+import static jmul.math.fractions.FractionHelper.DONT_CLONE;
 import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.signs.Signs;
 
@@ -80,7 +80,7 @@ public class DivideFractionsTest {
     private final Fraction expectedResult;
 
     /**
-     * Creates a new test case accordign to the specified parameters.
+     * Creates a new test case according to the specified parameters.
      *
      * @param dividend
      *        the dividend
@@ -145,7 +145,74 @@ public class DivideFractionsTest {
 
         for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
 
+            parameters.add(new Object[] { createFraction(base), createFraction(base, "1"), createFraction(base) });
+            parameters.add(new Object[] { createFraction(Signs.NEGATIVE, base), createFraction(base, "1"),
+                                          createFraction(Signs.NEGATIVE, base) });
+
+            parameters.add(new Object[] { createFraction(base, "1"), createFraction(base),
+                                          createFraction(base, "1", null) });
+            parameters.add(new Object[] { createFraction(base, "1"), createFraction(Signs.NEGATIVE, base),
+                                          createFraction(DONT_CLONE, createNumber(base, "-1"), createNumber(base)) });
+
+            parameters.add(new Object[] { createFraction(base, "1"), createFraction(base, "1"),
+                                          createFraction(base, "1", "1") });
+            parameters.add(new Object[] { createFraction(base, "-1"), createFraction(base, "1"),
+                                          createFraction(base, "-1", "1") });
+            parameters.add(new Object[] { createFraction(base, "1"), createFraction(base, "-1"),
+                                          createFraction(base, "-1", "1") });
+            parameters.add(new Object[] { createFraction(base, "-1"), createFraction(base, "-1"),
+                                          createFraction(base, "1", "1") });
+
+            parameters.add(new Object[] { createFraction(base, "0"), createFraction(base, "1"),
+                                          createFraction(base, "0") });
+            parameters.add(new Object[] { createFraction(base, "0"), createFraction(base, "-1"),
+                                          createFraction(base, "0") });
+
+            parameters.add(new Object[] { createFraction(base, "10"), createFraction(base, "1"),
+                                          createFraction(base, "10") });
+            parameters.add(new Object[] { createFraction(base, "-10"), createFraction(base, "1"),
+                                          createFraction(base, "-10") });
+            parameters.add(new Object[] { createFraction(base, "10"), createFraction(base, "-1"),
+                                          createFraction(base, "-10") });
+            parameters.add(new Object[] { createFraction(base, "-10"), createFraction(base, "-1"),
+                                          createFraction(base, "10") });
+
+            parameters.add(new Object[] { createFraction(base, "1"), createFraction(base, "10"),
+                                          createFraction(base, "1", "10") });
+            parameters.add(new Object[] { createFraction(base, "-1"), createFraction(base, "10"),
+                                          createFraction(base, "-1", "10") });
+            parameters.add(new Object[] { createFraction(base, "1"), createFraction(base, "-10"),
+                                          createFraction(base, "-1", "10") });
+            parameters.add(new Object[] { createFraction(base, "-1"), createFraction(base, "-10"),
+                                          createFraction(base, "1", "10") });
+
+            parameters.add(new Object[] { createFraction(base, "10"), createFraction(base, "11"),
+                                          createFraction(base, "10", "11") });
+            parameters.add(new Object[] { createFraction(base, "-10"), createFraction(base, "11"),
+                                          createFraction(base, "-10", "11") });
+            parameters.add(new Object[] { createFraction(base, "10"), createFraction(base, "-11"),
+                                          createFraction(base, "-10", "11") });
+            parameters.add(new Object[] { createFraction(base, "-10"), createFraction(base, "-11"),
+                                          createFraction(base, "10", "11") });
+
+            parameters.add(new Object[] { createFraction(base, "11"), createFraction(base, "10"),
+                                          createFraction(base, "11", "10") });
+            parameters.add(new Object[] { createFraction(base, "-11"), createFraction(base, "10"),
+                                          createFraction(base, "-11", "10") });
+            parameters.add(new Object[] { createFraction(base, "11"), createFraction(base, "-10"),
+                                          createFraction(base, "-11", "10") });
+            parameters.add(new Object[] { createFraction(base, "-11"), createFraction(base, "-10"),
+                                          createFraction(base, "11", "10") });
         }
+
+        parameters.add(new Object[] { createFraction(10, "5", "2"), createFraction(10, "4", "3"),
+                                      createFraction(10, "15", "8") });
+        parameters.add(new Object[] { createFraction(10, "-5", "2"), createFraction(10, "4", "3"),
+                                      createFraction(10, "-15", "8") });
+        parameters.add(new Object[] { createFraction(10, "5", "2"), createFraction(10, "-4", "3"),
+                                      createFraction(10, "-15", "8") });
+        parameters.add(new Object[] { createFraction(10, "-5", "2"), createFraction(10, "-4", "3"),
+                                      createFraction(10, "15", "8") });
 
         return parameters;
     }

@@ -163,12 +163,12 @@ public enum Signs implements Sign {
      */
     public static Sign or(Sign sign1, Sign sign2) {
 
-        if (isNegative(sign1) && isNegative(sign2)) {
+        if (isPositive(sign1) || isPositive(sign2)) {
 
-            return NEGATIVE;
+            return POSITIVE;
         }
 
-        return POSITIVE;
+        return NEGATIVE;
     }
 
     /**
@@ -179,16 +179,16 @@ public enum Signs implements Sign {
      * @param sign2
      *        a sign
      *
-     * @return returns a positive sign if both specified signs are negative or positive, else returns a positive sign.
+     * @return returns a positive sign if both specified signs are positive, else returns a negative sign.
      */
     public static Sign and(Sign sign1, Sign sign2) {
 
-        if (isNegative(sign1) || isNegative(sign2)) {
+        if (isPositive(sign1) && isPositive(sign2)) {
 
-            return NEGATIVE;
+            return POSITIVE;
         }
 
-        return POSITIVE;
+        return NEGATIVE;
     }
 
     /**
@@ -199,7 +199,7 @@ public enum Signs implements Sign {
      * @param sign2
      *        a sign
      *
-     * @return returns a negative sign if one of the specified signs is negative, else returns a positive sign.
+     * @return returns a positive sign if one specified sign is positive and the other specified sign is negative, else returns a negative sign.
      */
     public static Sign xor(Sign sign1, Sign sign2) {
 
@@ -214,6 +214,66 @@ public enum Signs implements Sign {
         }
 
         return NEGATIVE;
+    }
+
+    /**
+     * Evaluates the specified signs as if a multiplication is done.
+     *
+     * @param sign1
+     *        a sign
+     * @param sign2
+     *        a sign
+     *
+     * @return returns a positive sign if both signs are positive or negative, else returns a negative sign.
+     */
+    public static Sign multiply(Sign sign1, Sign sign2) {
+
+        if (isPositive(sign1) && isPositive(sign2)) {
+
+            return POSITIVE;
+        }
+
+        if (isNegative(sign1) && isNegative(sign2)) {
+
+            return POSITIVE;
+        }
+
+        return NEGATIVE;
+    }
+
+    /**
+     * Evaluates the specified signs as if a division is done and determines the sign of the result.
+     *
+     * @param sign1
+     *        a sign
+     * @param sign2
+     *        a sign
+     *
+     * @return returns a negative sign if the first sign is negative and the second sign is positive, else returns a positive sign.
+     */
+    public static Sign divideAndDetermineResultSign(Sign sign1, Sign sign2) {
+
+        if (isNegative(sign1) && isPositive(sign2)) {
+
+            return NEGATIVE;
+        }
+
+        return POSITIVE;
+    }
+
+    /**
+     * Evaluates the specified signs as if a division is done and determines the sign of the remainder.
+     *
+     * @param sign1
+     *        a sign
+     * @param sign2
+     *        a sign
+     *
+     * @return returns a positive sign if both signs are positive, else returns a negative sign.
+     */
+    public static Sign divideAndDetermineRemainderSign(Sign sign1, Sign sign2) {
+
+        return and(sign1, sign2);
     }
 
 }

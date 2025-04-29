@@ -56,7 +56,10 @@ import static test.jmul.math.numbers.NumberCreationHelper.createNumber;
  * This test suite tests creating special numbers with various input parameters.
  *
  * @author Kristian Kutin
+ *
+ * @deprecated This test became redundant. Integrat the test cases with test.jmul.math.numbers.CreateNumberTest
  */
+@Deprecated
 @UnitTest
 @RunWith(Parameterized.class)
 public class CreateSpecialNumberTest {

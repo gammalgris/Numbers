@@ -248,6 +248,13 @@ public interface ArithmeticFractionOperations {
      */
     Fraction log(Number n);
 
+    /**
+     * Returns the reciprocal of this fraction.
+     *
+     * @return a fraction
+     */
+    Fraction reciprocal();
+
     /*
      * Ternary arithmetic operations.
      */

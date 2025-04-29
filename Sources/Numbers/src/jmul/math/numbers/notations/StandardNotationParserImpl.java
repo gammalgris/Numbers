@@ -120,6 +120,11 @@ public class StandardNotationParserImpl implements NotationParser {
             NodesHelper.linkNodes(nodeLeft, nodeRight);
         }
 
+        if ((nodeLeft.leftNode() == null) && (nodeLeft.rightNode() == null) && nodeLeft.digit().isZero()) {
+
+            sign = Signs.POSITIVE;
+        }
+
         return new ParsingResult(sign, base, nodeLeft);
     }
 

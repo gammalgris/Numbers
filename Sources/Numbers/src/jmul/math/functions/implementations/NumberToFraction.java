@@ -36,8 +36,8 @@ package jmul.math.functions.implementations;
 
 import jmul.math.digits.PositionalNumeralSystems;
 import jmul.math.fractions.Fraction;
-import static jmul.math.fractions.FractionHelper.DONT_CLONE;
 import static jmul.math.fractions.FractionHelper.CLONE;
+import static jmul.math.fractions.FractionHelper.DONT_CLONE;
 import static jmul.math.fractions.FractionHelper.createFraction;
 import static jmul.math.functions.implementations.ParameterCheckHelper.checkParameter;
 import jmul.math.numbers.Number;
@@ -109,6 +109,11 @@ public class NumberToFraction implements UnaryOperation<Number, Result<Fraction>
      * @return a fraction
      */
     private static Fraction numberToFraction(Number number) {
+
+        //TODO Consider where this function is needed
+        //TODO Consider adding a corresponding function to the number interface
+
+        ParameterCheckHelper.checkParameter(number);
 
         int base = number.base();
 
