@@ -48,6 +48,7 @@ import jmul.math.functions.implementations.DivideFractions;
 import jmul.math.functions.implementations.DivideNumberByFraction;
 import jmul.math.functions.implementations.DivisionBySubtractionReturnFraction;
 import jmul.math.functions.implementations.DivisionBySubtractionReturnResultAndRemainder;
+import jmul.math.functions.implementations.DivisoFunction;
 import jmul.math.functions.implementations.DoublingNumber;
 import jmul.math.functions.implementations.EvenNumberFunction;
 import jmul.math.functions.implementations.HalvingDigit;
@@ -62,6 +63,7 @@ import jmul.math.functions.implementations.MinFraction;
 import jmul.math.functions.implementations.MinFractionNumber;
 import jmul.math.functions.implementations.MinNumber;
 import jmul.math.functions.implementations.MinNumberFraction;
+import jmul.math.functions.implementations.ModuloFunction;
 import jmul.math.functions.implementations.MultiplyFractionAndNumber;
 import jmul.math.functions.implementations.MultiplyFractions;
 import jmul.math.functions.implementations.MultiplyNumberAndFraction;
@@ -264,6 +266,9 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
                                     DivideNumberByFraction.class);
         repository.registerFunction(FunctionIdentifiers.DIVIDE_FRACTION_BY_NUMBER_FUNCTION,
                                     DivideFractionByNumber.class);
+
+        repository.registerFunction(FunctionIdentifiers.MODULO_FUNCTION, ModuloFunction.class);
+        repository.registerFunction(FunctionIdentifiers.DIVISO_FUNCTION, DivisoFunction.class);
 
         repository.registerFunction(FunctionIdentifiers.RECIPROCAL_OF_NUMBER_FUNCTION, ReciprocalOfNumber.class);
         repository.registerFunction(FunctionIdentifiers.RECIPROCAL_OF_FRACTION_FUNCTION, ReciprocalOfFraction.class);

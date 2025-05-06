@@ -934,15 +934,36 @@ public class NumberImpl implements Number {
      * Divides this number by the specified number and returns the remainder of the division.
      *
      * @param n
-     *        a number
+     *        an integer
      *
-     * @return a number
+     * @return the remainder of the division
      */
     @Override
     public Number modulo(Number n) {
 
-        // TODO
-        throw new UnsupportedOperationException();
+        BinaryOperation<Number, Result<Number>> function =
+            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.MODULO_FUNCTION);
+        Result<Number> result = function.calculate(this, n);
+
+        return result.result();
+    }
+
+    /**
+     * Divides this number by the specified number and returns the result of the division.
+     *
+     * @param n
+     *        an integer
+     *
+     * @return the result of the division
+     */
+    @Override
+    public Number diviso(Number n) {
+
+        BinaryOperation<Number, Result<Number>> function =
+            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIVISO_FUNCTION);
+        Result<Number> result = function.calculate(this, n);
+
+        return result.result();
     }
 
     /**

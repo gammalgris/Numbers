@@ -197,11 +197,21 @@ public interface ArithmeticNumberOperations {
      * Divides this number by the specified number and returns the remainder of the division.
      *
      * @param n
-     *        a number
+     *        an integer
      *
-     * @return a number
+     * @return the remainder of the division
      */
     Number modulo(Number n);
+
+    /**
+     * Divides this number by the specified number and returns the result of the division.
+     *
+     * @param n
+     *        an integer
+     *
+     * @return the result of the division
+     */
+    Number diviso(Number n);
 
     /**
      * Compares this number and the specified fraction and returns the greater number (as fraction).

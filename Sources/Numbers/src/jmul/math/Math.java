@@ -764,6 +764,44 @@ public final class Math {
     }
 
     /**
+     * Divides the first specified number by the second specified number and returns the remainder of the division.
+     *
+     * @param n1
+     *        an integer
+     * @param n2
+     *        an integer
+     *
+     * @return the remainder of the division
+     */
+    public static Number modulo(Number n1, Number n2) {
+
+        BinaryOperation<Number, Result<Number>> function =
+            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.MODULO_FUNCTION);
+        Result<Number> result = function.calculate(n1, n2);
+
+        return result.result();
+    }
+
+    /**
+     * Divides the first specified number by the second specified number and returns the result of the division.
+     *
+     * @param n1
+     *        an integer
+     * @param n2
+     *        an integer
+     *
+     * @return the result of the division
+     */
+    public static Number diviso(Number n1, Number n2) {
+
+        BinaryOperation<Number, Result<Number>> function =
+            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIVISO_FUNCTION);
+        Result<Number> result = function.calculate(n1, n2);
+
+        return result.result();
+    }
+
+    /**
      * Multiplies the specified fractions.
      *
      * @param f1

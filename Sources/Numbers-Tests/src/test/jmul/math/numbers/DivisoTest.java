@@ -7,7 +7,7 @@
  * JMUL is a central repository for utilities which are used in my
  * other public and private repositories.
  *
- * Copyright (C) 2024  Kristian Kutin
+ * Copyright (C) 2025  Kristian Kutin
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -38,13 +38,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import jmul.math.Math;
-import jmul.math.fractions.Fraction;
-import static jmul.math.fractions.FractionHelper.createFraction;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
-
 import jmul.math.signs.Signs;
 
 import jmul.test.classification.UnitTest;
@@ -56,13 +53,13 @@ import org.junit.runners.Parameterized;
 
 
 /**
- * This test suite tests the division of numbers. The result is a fraction.
+ * This test suite tests the diviso function (i.e. division of integers with an integer result).
  *
  * @author Kristian Kutin
  */
 @UnitTest
 @RunWith(Parameterized.class)
-public class DivideNumbersReturnFractionTest {
+public class DivisoTest {
 
     /**
      * The dividend.
@@ -77,7 +74,7 @@ public class DivideNumbersReturnFractionTest {
     /**
      * The expected result.
      */
-    private final Fraction expectedResult;
+    private final Number expectedResult;
 
     /**
      * Creates a new test case according to the specified parameters.
@@ -89,7 +86,7 @@ public class DivideNumbersReturnFractionTest {
      * @param expectedResult
      *        a fraction
      */
-    public DivideNumbersReturnFractionTest(Number dividend, Number divisor, Fraction expectedResult) {
+    public DivisoTest(Number dividend, Number divisor, Number expectedResult) {
 
         super();
 
@@ -110,24 +107,24 @@ public class DivideNumbersReturnFractionTest {
     }
 
     /**
-     * Performs a division and checks the result.
+     * Calls the diviso function and checks the result.
      */
     @Test
-    public void testDivision() {
+    public void testDiviso() {
 
-        Fraction actualResult = dividend.divide(divisor);
+        Number actualResult = dividend.diviso(divisor);
 
         assertEquals(toString(), expectedResult, actualResult);
         assertEquals(toString(), expectedResult.toString(), actualResult.toString());
     }
 
     /**
-     * Performs a division and checks the result.
+     * Calls the diviso function and checks the result.
      */
     @Test
-    public void testDivisionVariant2() {
+    public void testDivisoVariant2() {
 
-        Fraction actualResult = Math.divide(dividend, divisor);
+        Number actualResult = Math.diviso(dividend, divisor);
 
         assertEquals(toString(), expectedResult, actualResult);
         assertEquals(toString(), expectedResult.toString(), actualResult.toString());
@@ -145,51 +142,40 @@ public class DivideNumbersReturnFractionTest {
 
         for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
 
-            parameters.add(new Object[] { createNumber(base), createNumber(base, "1"), createFraction(base) });
-            parameters.add(new Object[] { createNumber(base, "1"), createNumber(base),
-                                          createFraction(base, "1", null) });
+            parameters.add(new Object[] { createNumber(base), createNumber(base, "1"), createNumber(base) });
             parameters.add(new Object[] { createNumber(base), createNumber(base, "-1"),
-                                          createFraction(Signs.NEGATIVE, base) });
+                                          createNumber(Signs.NEGATIVE, base) });
             parameters.add(new Object[] { createNumber(Signs.NEGATIVE, base), createNumber(base, "1"),
-                                          createFraction(Signs.NEGATIVE, base) });
-            parameters.add(new Object[] { createNumber(base, "1"), createNumber(Signs.NEGATIVE, base),
-                                          createFraction(base, "-1", null) });
-            parameters.add(new Object[] { createNumber(base, "-1"), createNumber(base),
-                                          createFraction(base, "-1", null) });
+                                          createNumber(Signs.NEGATIVE, base) });
 
-            parameters.add(new Object[] { createNumber(base, "1"), createNumber(base, "0"),
-                                          createFraction(base, "1", "0") });
-            parameters.add(new Object[] { createNumber(base, "0"), createNumber(base, "1"),
-                                          createFraction(base, "0", "1") });
-            parameters.add(new Object[] { createNumber(base, "0"), createNumber(base, "1"),
-                                          createFraction(base, "0") });
+            // move tests
+            //parameters.add(new Object[] { createNumber(base, "1"), createNumber(base), createNumber(base, "1") });
+            /*parameters.add(new Object[] { createNumber(base, "1"), createNumber(Signs.NEGATIVE, base),
+                                          createNumber(base, "-1") });*/
+            //parameters.add(new Object[] { createNumber(base, "-1"), createNumber(base), createNumber(base, "-1") });
+            //parameters.add(new Object[] { createNumber(base, "1"), createNumber(base, "0"), createNumber(base, "1") });
 
-            parameters.add(new Object[] { createNumber(base, "1"), createNumber(base, "1"),
-                                          createFraction(base, "1") });
+            parameters.add(new Object[] { createNumber(base, "0"), createNumber(base, "1"), createNumber(base, "0") });
+            parameters.add(new Object[] { createNumber(base, "0"), createNumber(base, "1"), createNumber(base, "0") });
+
+            parameters.add(new Object[] { createNumber(base, "1"), createNumber(base, "1"), createNumber(base, "1") });
             parameters.add(new Object[] { createNumber(base, "-1"), createNumber(base, "1"),
-                                          createFraction(base, "-1") });
+                                          createNumber(base, "-1") });
             parameters.add(new Object[] { createNumber(base, "1"), createNumber(base, "-1"),
-                                          createFraction(base, "-1") });
+                                          createNumber(base, "-1") });
             parameters.add(new Object[] { createNumber(base, "-1"), createNumber(base, "-1"),
-                                          createFraction(base, "1") });
+                                          createNumber(base, "1") });
 
-            parameters.add(new Object[] { createNumber(base, "1"), createNumber(base, "10"),
-                                          createFraction(base, "1", "10") });
+            parameters.add(new Object[] { createNumber(base, "1"), createNumber(base, "10"), createNumber(base, "0") });
         }
 
-        parameters.add(new Object[] { createNumber(10, "10"), createNumber(10, "3"),
-                                      createFraction(10, "3", "1", "3") });
-        parameters.add(new Object[] { createNumber(10, "100"), createNumber(10, "25"),
-                                      createFraction(10, "4") });
+        parameters.add(new Object[] { createNumber(10, "10"), createNumber(10, "3"), createNumber(10, "3") });
+        parameters.add(new Object[] { createNumber(10, "100"), createNumber(10, "25"), createNumber(10, "4") });
 
-        parameters.add(new Object[] { createNumber(10, "100"), createNumber(10, "7"),
-                                      createFraction(10, "14", "2", "7") });
-        parameters.add(new Object[] { createNumber(10, "-100"), createNumber(10, "7"),
-                                      createFraction(10, "-14", "2", "7") });
-        parameters.add(new Object[] { createNumber(10, "-100"), createNumber(10, "-7"),
-                                      createFraction(10, "14", "2", "7") });
-        parameters.add(new Object[] { createNumber(10, "100"), createNumber(10, "-7"),
-                                      createFraction(10, "-14", "2", "7") });
+        parameters.add(new Object[] { createNumber(10, "100"), createNumber(10, "7"), createNumber(10, "14") });
+        parameters.add(new Object[] { createNumber(10, "-100"), createNumber(10, "7"), createNumber(10, "-14") });
+        parameters.add(new Object[] { createNumber(10, "-100"), createNumber(10, "-7"), createNumber(10, "14") });
+        parameters.add(new Object[] { createNumber(10, "100"), createNumber(10, "-7"), createNumber(10, "-14") });
 
 
         return parameters;

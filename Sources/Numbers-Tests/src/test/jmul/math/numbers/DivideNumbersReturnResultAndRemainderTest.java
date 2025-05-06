@@ -151,7 +151,7 @@ public class DivideNumbersReturnResultAndRemainderTest {
                                           new ResultWithRemainder<Number>(createNumber(base, "1"),
                                                                           createNumber(base, "0")) });
             parameters.add(new Object[] { createNumber(base, "1"), createNumber(base, "-1"),
-                                          new ResultWithRemainder<Number>(createNumber(base, "1"),
+                                          new ResultWithRemainder<Number>(createNumber(base, "-1"),
                                                                           createNumber(base, "0")) });
         }
 
@@ -164,7 +164,7 @@ public class DivideNumbersReturnResultAndRemainderTest {
         parameters.add(new Object[] { createNumber(10, "100"), createNumber(10, "24"),
                                       new ResultWithRemainder<Number>(createNumber(10, "4"), createNumber(10, "4")) });
         parameters.add(new Object[] { createNumber(10, "100"), createNumber(10, "-24"),
-                                      new ResultWithRemainder<Number>(createNumber(10, "4"), createNumber(10, "-4")) });
+                                      new ResultWithRemainder<Number>(createNumber(10, "-4"), createNumber(10, "4")) });
 
 
         return parameters;

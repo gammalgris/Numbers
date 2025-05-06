@@ -249,16 +249,21 @@ public enum Signs implements Sign {
      * @param sign2
      *        a sign
      *
-     * @return returns a negative sign if the first sign is negative and the second sign is positive, else returns a positive sign.
+     * @return returns a positive sign if the both operands are either positive or negative, else returns a negative sign.
      */
     public static Sign divideAndDetermineResultSign(Sign sign1, Sign sign2) {
 
-        if (isNegative(sign1) && isPositive(sign2)) {
+        if (isNegative(sign1) && isNegative(sign2)) {
 
-            return NEGATIVE;
+            return POSITIVE;
         }
 
-        return POSITIVE;
+        if (isPositive(sign1) && isPositive(sign2)) {
+
+            return POSITIVE;
+        }
+
+        return NEGATIVE;
     }
 
     /**
@@ -269,11 +274,21 @@ public enum Signs implements Sign {
      * @param sign2
      *        a sign
      *
-     * @return returns a positive sign if both signs are positive, else returns a negative sign.
+     * @return returns a negative sign if both operands are negative or of the first operand is negative and the second operand is positive, else returns a positive sign.
      */
     public static Sign divideAndDetermineRemainderSign(Sign sign1, Sign sign2) {
 
-        return and(sign1, sign2);
+        if (isNegative(sign1) && isNegative(sign2)) {
+
+            return NEGATIVE;
+        }
+
+        if (isNegative(sign1) && isPositive(sign2)) {
+
+            return NEGATIVE;
+        }
+
+        return POSITIVE;
     }
 
 }

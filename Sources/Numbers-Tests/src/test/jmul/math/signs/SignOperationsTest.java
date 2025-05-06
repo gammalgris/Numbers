@@ -216,7 +216,7 @@ public class SignOperationsTest {
 
         Sign[] operands1 = { Signs.POSITIVE, Signs.POSITIVE, Signs.NEGATIVE, Signs.NEGATIVE };
         Sign[] operands2 = { Signs.POSITIVE, Signs.NEGATIVE, Signs.POSITIVE, Signs.NEGATIVE };
-        Sign[] expectedResults = { Signs.POSITIVE, Signs.POSITIVE, Signs.NEGATIVE, Signs.POSITIVE };
+        Sign[] expectedResults = { Signs.POSITIVE, Signs.NEGATIVE, Signs.NEGATIVE, Signs.POSITIVE };
 
         List<String> errors = new ArrayList<>();
 
@@ -247,7 +247,7 @@ public class SignOperationsTest {
 
         Sign[] operands1 = { Signs.POSITIVE, Signs.POSITIVE, Signs.NEGATIVE, Signs.NEGATIVE };
         Sign[] operands2 = { Signs.POSITIVE, Signs.NEGATIVE, Signs.POSITIVE, Signs.NEGATIVE };
-        Sign[] expectedResults = { Signs.POSITIVE, Signs.NEGATIVE, Signs.NEGATIVE, Signs.NEGATIVE };
+        Sign[] expectedResults = { Signs.POSITIVE, Signs.POSITIVE, Signs.NEGATIVE, Signs.NEGATIVE };
 
         List<String> errors = new ArrayList<>();
 
