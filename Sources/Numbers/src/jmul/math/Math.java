@@ -40,6 +40,7 @@ import jmul.math.fractions.Fraction;
 import jmul.math.functions.FunctionSingletons;
 import jmul.math.functions.repository.FunctionIdentifiers;
 import jmul.math.numbers.Number;
+import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.numbers.NumberImpl;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.MixedBinaryOperation;
@@ -53,6 +54,22 @@ import jmul.math.operations.UnaryOperation;
  * @author Kristian Kutin
  */
 public final class Math {
+
+    /**
+     * A default length for the fractional part.<br>
+     * <br>
+     * <i>Note:<br>
+     * In several cases it is useful to cut the fractional part instead of running through end endless loop.</i>
+     */
+    public static Number DEFAULT_MAXIMUM_FRACTION_LENGTH;
+
+    /*
+     * The static initializer.
+     */
+    static {
+
+        DEFAULT_MAXIMUM_FRACTION_LENGTH = createNumber(10, "10");
+    }
 
     /**
      * The default constructor.
@@ -334,12 +351,29 @@ public final class Math {
      * @param n
      *        a number
      *
-     * @return a number
+     * @return a truncated number
      */
-    public static Number truncate(Number n) {
+    public static Number removeFractionPart(Number n) {
 
         UnaryOperation<Number, Result<Number>> function =
-            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.TRUNCATE_NUMBER_FUNCTION);
+            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.REMOVE_FRACTION_PART_FUNCTION);
+        Result<Number> result = function.calculate(n);
+
+        return result.result();
+    }
+
+    /**
+     * Returns a truncated number (i.e. where the integer part is removed).
+     *
+     * @param n
+     *        a number
+     *
+     * @return a truncated number
+     */
+    public static Number removeIntegerPart(Number n) {
+
+        UnaryOperation<Number, Result<Number>> function =
+            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.REMOVE_INTEGER_PART_FUNCTION);
         Result<Number> result = function.calculate(n);
 
         return result.result();
@@ -1268,6 +1302,44 @@ public final class Math {
         UnaryOperation<Number, Result<Fraction>> function =
             (UnaryOperation<Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.RECIPROCAL_OF_NUMBER_FUNCTION);
         Result<Fraction> result = function.calculate(operand);
+
+        return result.result();
+    }
+
+    /**
+     * Translates this number into a number of the specified base.
+     *
+     * @param number
+     *        a number
+     * @param base
+     *        the new base
+     *
+     * @return a number
+     */
+    public static Number rebase(Number number, int base) {
+
+        MixedBinaryOperation<Number, Integer, Result<Number>> function =
+            (MixedBinaryOperation<Number, Integer, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.REBASE_NUMBER_FUNCTION);
+        Result<Number> result = function.calculate(number, base);
+
+        return result.result();
+    }
+
+    /**
+     * Translates this fraction into a number of the specified base.
+     *
+     * @param fraction
+     *        a fraction
+     * @param base
+     *        the new base
+     *
+     * @return a fraction
+     */
+    public static Fraction rebase(Fraction fraction, int base) {
+
+        MixedBinaryOperation<Fraction, Integer, Result<Fraction>> function =
+            (MixedBinaryOperation<Fraction, Integer, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.REBASE_FRACTION_FUNCTION);
+        Result<Fraction> result = function.calculate(fraction, base);
 
         return result.result();
     }

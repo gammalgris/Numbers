@@ -118,6 +118,16 @@ public interface Fraction extends Comparable, NumberComparisons, FractionCompari
      *
      * @return a fraction
      */
-    public Fraction reduce();
+    Fraction reduce();
+
+    /**
+     * Translates this fraction into a number of the specified base.
+     *
+     * @param base
+     *        the new base
+     *
+     * @return a fraction
+     */
+    Fraction rebase(int base);
 
 }

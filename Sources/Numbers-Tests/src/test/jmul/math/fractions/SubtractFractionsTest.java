@@ -77,7 +77,7 @@ public class SubtractFractionsTest {
     private Fraction expectedResult;
 
     /**
-     * Creates a new test case accordign to the specified parameters.
+     * Creates a new test case according to the specified parameters.
      *
      * @param operand1
      *        a fraction

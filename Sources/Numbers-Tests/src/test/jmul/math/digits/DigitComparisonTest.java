@@ -73,7 +73,7 @@ public class DigitComparisonTest {
     private final int expectedResult;
 
     /**
-     * Creates a new test case accordign to the specified parameters.
+     * Creates a new test case according to the specified parameters.
      *
      * @param d1
      *        a digit

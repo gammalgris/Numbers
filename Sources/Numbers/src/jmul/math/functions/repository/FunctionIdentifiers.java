@@ -50,6 +50,10 @@ import static jmul.math.operations.OperationClassifiers.SUBTRACTION;
 public enum FunctionIdentifiers implements FunctionIdentifier {
 
 
+    BASE_TO_NUMBER_FUNCTION(NONE),
+    NUMBER_TO_ORDINAL_FUNCTION(NONE),
+    NUMBER_TO_DIGIT_FUNCTION(NONE),
+
     NUMBER_TO_FRACTION_FUNCTION(NONE),
 
     STANDARD_NOTATION_FUNCTION(NONE),
@@ -76,7 +80,9 @@ public enum FunctionIdentifiers implements FunctionIdentifier {
 
     DOUBLING_NUMBER_FUNCTION(NONE),
     HALVING_NUMBER_FUNCTION(NONE),
-    TRUNCATE_NUMBER_FUNCTION(NONE),
+
+    REMOVE_FRACTION_PART_FUNCTION(NONE),
+    REMOVE_INTEGER_PART_FUNCTION(NONE),
 
     DIGIT_EQUALITY_FUNCTION(NONE),
     DIGIT_COMPARATOR_FUNCTION(NONE),
@@ -150,7 +156,8 @@ public enum FunctionIdentifiers implements FunctionIdentifier {
     RECIPROCAL_OF_NUMBER_FUNCTION(NONE),
     RECIPROCAL_OF_FRACTION_FUNCTION(NONE),
 
-    REBASE_FUNCTION(NONE);
+    REBASE_NUMBER_FUNCTION(NONE),
+    REBASE_FRACTION_FUNCTION(NONE);
 
 
     /**

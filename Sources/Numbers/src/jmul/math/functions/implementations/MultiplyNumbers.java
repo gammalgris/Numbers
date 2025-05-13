@@ -211,7 +211,7 @@ public class MultiplyNumbers implements BinaryOperation<Number, Result<Number>> 
             }
 
             clone2 = clone2.halving();
-            clone2 = clone2.truncate();
+            clone2 = clone2.removeFractionPart();
             clone1 = clone1.doubling();
         }
 

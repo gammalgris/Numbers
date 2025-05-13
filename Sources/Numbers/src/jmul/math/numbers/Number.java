@@ -183,9 +183,16 @@ public interface Number extends LinkedDigitList, ArithmeticNumberOperations, Num
     /**
      * Returns a truncated number (i.e. where the fractional part is removed).
      *
-     * @return a number
+     * @return a truncated number
      */
-    Number truncate();
+    Number removeFractionPart();
+
+    /**
+     * Returns a truncated number (i.e. where the integer part is removed).
+     *
+     * @return a truncated number
+     */
+    Number removeIntegerPart();
 
     /**
      * Returns a number where the decimal point is shifted to the left by one digit.

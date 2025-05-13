@@ -7,7 +7,7 @@
  * JMUL is a central repository for utilities which are used in my
  * other public and private repositories.
  *
- * Copyright (C) 2024  Kristian Kutin
+ * Copyright (C) 2025  Kristian Kutin
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,6 +31,7 @@
  * $Id$
  */
 
+
 package test.jmul.math.numbers;
 
 
@@ -41,10 +42,12 @@ import jmul.math.Math;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
+import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.numbers.NumberImpl;
 import jmul.math.signs.Signs;
 
 import jmul.test.classification.UnitTest;
+
 import jmul.test.exceptions.SetUpException;
 
 import static org.junit.Assert.assertEquals;
@@ -60,7 +63,7 @@ import org.junit.runners.Parameterized;
  */
 @UnitTest
 @RunWith(Parameterized.class)
-public class TruncateWithInfinityTest {
+public class RemoveIntegerPartWithInfinityTest {
 
     /**
      * The operand.
@@ -80,7 +83,7 @@ public class TruncateWithInfinityTest {
      * @param expectedResult
      *        the expected result of the calculation
      */
-    public TruncateWithInfinityTest(Number operand, Number expectedResult) {
+    public RemoveIntegerPartWithInfinityTest(Number operand, Number expectedResult) {
 
         super();
 
@@ -125,7 +128,7 @@ public class TruncateWithInfinityTest {
             throw new SetUpException();
         }
 
-        Number actualResult = operand.truncate();
+        Number actualResult = operand.removeIntegerPart();
 
         String message = String.format("truncate %s", operand.toString());
         assertEquals(message, expectedResult, actualResult);
@@ -142,7 +145,7 @@ public class TruncateWithInfinityTest {
             throw new SetUpException();
         }
 
-        Number actualResult = Math.truncate(operand);
+        Number actualResult = Math.removeIntegerPart(operand);
 
         String message = String.format("truncate %s", operand.toString());
         assertEquals(message, expectedResult, actualResult);
@@ -160,8 +163,8 @@ public class TruncateWithInfinityTest {
 
         for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
 
-            parameters.add(new Object[] { createInfinity(base), createInfinity(base) });
-            parameters.add(new Object[] { createNegativeInfinity(base), createNegativeInfinity(base) });
+            parameters.add(new Object[] { createInfinity(base), createNumber(base, "0") });
+            parameters.add(new Object[] { createNegativeInfinity(base), createNumber(base, "0") });
         }
 
         return parameters;

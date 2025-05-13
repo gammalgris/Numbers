@@ -166,7 +166,7 @@ class TestCaseParameters {
     public final String expectedResultRepresentation;
 
     /**
-     * Creates a new instance accordign to the specified parameters.
+     * Creates a new instance according to the specified parameters.
      *
      * @param base
      *        a number base

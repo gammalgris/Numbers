@@ -148,13 +148,6 @@ public class DivisoTest {
             parameters.add(new Object[] { createNumber(Signs.NEGATIVE, base), createNumber(base, "1"),
                                           createNumber(Signs.NEGATIVE, base) });
 
-            // move tests
-            //parameters.add(new Object[] { createNumber(base, "1"), createNumber(base), createNumber(base, "1") });
-            /*parameters.add(new Object[] { createNumber(base, "1"), createNumber(Signs.NEGATIVE, base),
-                                          createNumber(base, "-1") });*/
-            //parameters.add(new Object[] { createNumber(base, "-1"), createNumber(base), createNumber(base, "-1") });
-            //parameters.add(new Object[] { createNumber(base, "1"), createNumber(base, "0"), createNumber(base, "1") });
-
             parameters.add(new Object[] { createNumber(base, "0"), createNumber(base, "1"), createNumber(base, "0") });
             parameters.add(new Object[] { createNumber(base, "0"), createNumber(base, "1"), createNumber(base, "0") });
 

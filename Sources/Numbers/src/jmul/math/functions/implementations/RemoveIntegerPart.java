@@ -7,7 +7,7 @@
  * JMUL is a central repository for utilities which are used in my
  * other public and private repositories.
  *
- * Copyright (C) 2024  Kristian Kutin
+ * Copyright (C) 2025  Kristian Kutin
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,78 +34,74 @@
 package jmul.math.functions.implementations;
 
 
-import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
-import jmul.math.signs.Sign;
 import jmul.math.digits.Digit;
+import jmul.math.digits.PositionalNumeralSystems;
+import static jmul.math.functions.implementations.ParameterCheckHelper.checkParameter;
+import jmul.math.numbers.Number;
+import static jmul.math.numbers.NumberHelper.createNumber;
+import jmul.math.numbers.NumberImpl;
 import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.NodesHelper;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
+import jmul.math.signs.Sign;
+import jmul.math.signs.Signs;
 
 
 /**
- * This is an implementation of a function that truncates the fractional part of a number.
+ * This is an implementation of a function that removes the integer part from a number.
  *
  * @author Kristian Kutin
  */
-public class TruncateNumber implements UnaryOperation<Number, Result<Number>> {
+public class RemoveIntegerPart implements UnaryOperation<Number, Result<Number>> {
 
     /**
      * The default constructor.
      */
-    public TruncateNumber() {
+    public RemoveIntegerPart() {
 
         super();
     }
 
-
     /**
-     * Returns a copy of the specified number which is truncated (i.e. the fractional part is removed).
+     * Returns a copy of the specified number which is truncated (i.e. the fraction part is removed).
      *
      * @param operand
      *        a number
      *
-     * @return a number
+     * @return a truncated number
      */
     @Override
     public Result<Number> calculate(Number operand) {
 
-        checkParameters(operand);
+        checkParameter(operand);
+
+        int base = operand.base();
 
         if (operand.isInfinity()) {
 
-            Number clone = new NumberImpl(operand);
+            String symbol = PositionalNumeralSystems.toString(base, 0);
+            Number clone = createNumber(base, symbol);
             return new Result<Number>(clone);
         }
 
-        int base = operand.base();
         Sign sign = operand.sign();
 
         DigitNode center = operand.centerNode();
-        Digit digit = center.digit();
+        Digit zeroDigit = PositionalNumeralSystems.ordinalToDigit(base, 0);
 
-        DigitNode clonedCenter = NodesHelper.createNode(digit);
-        DigitNode clonedLeftTail = NodesHelper.cloneLeftTail(center.leftNode());
-        NodesHelper.linkNodes(clonedLeftTail, clonedCenter);
+        DigitNode clonedCenter = NodesHelper.createNode(zeroDigit);
+
+        DigitNode clonedRightTail = NodesHelper.cloneRightTail(center.rightNode());
+        NodesHelper.linkNodes(clonedCenter, clonedRightTail);
+
+        if ((clonedCenter.leftNode() == null) && (clonedCenter.rightNode() == null) && clonedCenter.digit().isZero()) {
+
+            sign = Signs.POSITIVE;
+        }
 
         Number clone = new NumberImpl(base, sign, clonedCenter);
         return new Result<Number>(clone);
-    }
-
-    /**
-     * Checks the specifiecd parameters.
-     *
-     * @param number
-     *        an oeprand
-     */
-    private void checkParameters(Number number) {
-
-        if (number == null) {
-
-            String message = "No number (null) was specified!";
-            throw new IllegalArgumentException(message);
-        }
     }
 
 }

@@ -7,7 +7,7 @@
  * JMUL is a central repository for utilities which are used in my
  * other public and private repositories.
  *
- * Copyright (C) 2024  Kristian Kutin
+ * Copyright (C) 2025  Kristian Kutin
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -59,13 +59,13 @@ import static test.jmul.math.numbers.NumberCheckHelper.checkNumbersAreUniqueInst
 
 
 /**
- * This test suite tests truncating numbers.
+ * This test suite tests truncating numbers (i.e. removing the integer part).
  *
  * @author Kristian Kutin
  */
 @UnitTest
 @RunWith(Parameterized.class)
-public class TruncateNumberTest {
+public class RemoveIntegerPartTest {
 
     /**
      * The base for all summands.
@@ -102,7 +102,7 @@ public class TruncateNumberTest {
      * @param resultString
      *        the expected result as number string
      */
-    public TruncateNumberTest(int base, String operandString, String resultString) {
+    public RemoveIntegerPartTest(int base, String operandString, String resultString) {
 
         super();
 
@@ -159,10 +159,17 @@ public class TruncateNumberTest {
 
                 checkNumberEqualsStringRepresentation(operand, operandString);
             }
-            checkNumberEqualsStringRepresentation(result, resultString);
+            if (result.isZero()) {
+
+                assertTrue("Zero cannot be negative!", result.isPositive());
+
+            } else {
+
+                checkNumberEqualsStringRepresentation(result, resultString);
+            }
 
             // check the operation
-            Number actualResult = operand.truncate();
+            Number actualResult = operand.removeIntegerPart();
 
             assertEquals(toString(), result, actualResult);
 
@@ -202,10 +209,17 @@ public class TruncateNumberTest {
 
                 checkNumberEqualsStringRepresentation(operand, operandString);
             }
-            checkNumberEqualsStringRepresentation(result, resultString);
+            if (result.isZero()) {
+
+                assertTrue("Zero cannot be negative!", result.isPositive());
+
+            } else {
+
+                checkNumberEqualsStringRepresentation(result, resultString);
+            }
 
             // check the operation
-            Number actualResult = Math.truncate(operand);
+            Number actualResult = Math.removeIntegerPart(operand);
 
             assertEquals(toString(), result, actualResult);
 
@@ -243,26 +257,26 @@ public class TruncateNumberTest {
             parameters.add(new Object[] { base, "0", "0" });
             parameters.add(new Object[] { base, "-0", "0" });
 
-            parameters.add(new Object[] { base, "1", "1" });
-            parameters.add(new Object[] { base, "-1", "-1" });
+            parameters.add(new Object[] { base, "1", "0" });
+            parameters.add(new Object[] { base, "-1", "0" });
 
-            parameters.add(new Object[] { base, "1.1", "1" });
-            parameters.add(new Object[] { base, "-1.1", "-1" });
+            parameters.add(new Object[] { base, "1.1", "0.1" });
+            parameters.add(new Object[] { base, "-1.1", "-0.1" });
 
-            parameters.add(new Object[] { base, "11.1", "11" });
-            parameters.add(new Object[] { base, "-11.1", "-11" });
+            parameters.add(new Object[] { base, "11.1", "0.1" });
+            parameters.add(new Object[] { base, "-11.1", "-0.1" });
 
-            parameters.add(new Object[] { base, "1.1010101", "1" });
-            parameters.add(new Object[] { base, "-1.1010101", "-1" });
+            parameters.add(new Object[] { base, "1.1010101", "0.1010101" });
+            parameters.add(new Object[] { base, "-1.1010101", "-0.1010101" });
         }
 
         for (int base = BASE_MIN_LIMIT + 1; base <= BASE_MAX_LIMIT; base++) {
 
-            parameters.add(new Object[] { base, "2", "2" });
-            parameters.add(new Object[] { base, "-2", "-2" });
+            parameters.add(new Object[] { base, "2", "0" });
+            parameters.add(new Object[] { base, "-2", "-0" });
 
-            parameters.add(new Object[] { base, "2.1212", "2" });
-            parameters.add(new Object[] { base, "-2.1212", "-2" });
+            parameters.add(new Object[] { base, "2.1212", "0.1212" });
+            parameters.add(new Object[] { base, "-2.1212", "-0.1212" });
         }
 
         return parameters;

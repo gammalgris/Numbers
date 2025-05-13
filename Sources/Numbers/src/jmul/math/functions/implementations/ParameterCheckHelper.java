@@ -36,6 +36,8 @@ package jmul.math.functions.implementations;
 
 import jmul.math.digits.Digit;
 import jmul.math.fractions.Fraction;
+import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
+import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.exceptions.DigitBaseMismatchException;
 
@@ -65,7 +67,28 @@ public final class ParameterCheckHelper {
 
         if (d == null) {
 
-            String message = "The specified digit is null!";
+            String message = "No digit (null) was specified!";
+            throw new IllegalArgumentException(message);
+        }
+    }
+
+    /**
+     * Checks the specified parameters and throws an exception if invalid.
+     *
+     * @param i
+     *        a parameter
+     */
+    public static void checkNumberBase(Integer i) {
+
+        if (i == null) {
+
+            String message = "No integer (null) was specified!";
+            throw new IllegalArgumentException(message);
+        }
+
+        if ((i < BASE_MIN_LIMIT) && (i > BASE_MAX_LIMIT)) {
+
+            String message = String.format("An invalid number base was specified (%d)!", i);
             throw new IllegalArgumentException(message);
         }
     }

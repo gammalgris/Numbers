@@ -40,6 +40,7 @@ import jmul.math.functions.implementations.AddFractions;
 import jmul.math.functions.implementations.AddNumberAndFraction;
 import jmul.math.functions.implementations.AddNumbers;
 import jmul.math.functions.implementations.AddNumbersTrimResult;
+import jmul.math.functions.implementations.BaseToNumber;
 import jmul.math.functions.implementations.DecrementFraction;
 import jmul.math.functions.implementations.DecrementNumber;
 import jmul.math.functions.implementations.DigitComplement;
@@ -71,17 +72,22 @@ import jmul.math.functions.implementations.MultiplyNumbers;
 import jmul.math.functions.implementations.NegateFraction;
 import jmul.math.functions.implementations.NegateNumber;
 import jmul.math.functions.implementations.NumberComplement;
+import jmul.math.functions.implementations.NumberToDigit;
 import jmul.math.functions.implementations.NumberToFraction;
+import jmul.math.functions.implementations.NumberToOrdinal;
 import jmul.math.functions.implementations.OddNumberFunction;
+import jmul.math.functions.implementations.RebaseFraction;
+import jmul.math.functions.implementations.RebaseNumber;
 import jmul.math.functions.implementations.ReciprocalOfFraction;
 import jmul.math.functions.implementations.ReciprocalOfNumber;
+import jmul.math.functions.implementations.RemoveFractionPart;
+import jmul.math.functions.implementations.RemoveIntegerPart;
 import jmul.math.functions.implementations.ShiftLeft;
 import jmul.math.functions.implementations.ShiftRight;
 import jmul.math.functions.implementations.SubtractFractionAndNumber;
 import jmul.math.functions.implementations.SubtractFractions;
 import jmul.math.functions.implementations.SubtractNumberAndFraction;
 import jmul.math.functions.implementations.SubtractNumbers;
-import jmul.math.functions.implementations.TruncateNumber;
 import jmul.math.functions.implementations.comparisons.DigitComparator;
 import jmul.math.functions.implementations.comparisons.FractionComparator;
 import jmul.math.functions.implementations.comparisons.FractionGreaterThanComparison;
@@ -147,6 +153,10 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
 
         repository.registerFunction(FunctionIdentifiers.NUMBER_TO_FRACTION_FUNCTION, NumberToFraction.class);
 
+        repository.registerFunction(FunctionIdentifiers.BASE_TO_NUMBER_FUNCTION, BaseToNumber.class);
+        repository.registerFunction(FunctionIdentifiers.NUMBER_TO_ORDINAL_FUNCTION, NumberToOrdinal.class);
+        repository.registerFunction(FunctionIdentifiers.NUMBER_TO_DIGIT_FUNCTION, NumberToDigit.class);
+
         repository.registerFunction(FunctionIdentifiers.DIGIT_COMPARATOR_FUNCTION, DigitComparator.class);
         repository.registerFunction(FunctionIdentifiers.DIGIT_EQUALITY_FUNCTION, DigitEquality.class);
 
@@ -194,7 +204,9 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
 
         repository.registerFunction(FunctionIdentifiers.SHIFT_LEFT_FUNCTION, ShiftLeft.class);
         repository.registerFunction(FunctionIdentifiers.SHIFT_RIGHT_FUNCTION, ShiftRight.class);
-        repository.registerFunction(FunctionIdentifiers.TRUNCATE_NUMBER_FUNCTION, TruncateNumber.class);
+
+        repository.registerFunction(FunctionIdentifiers.REMOVE_FRACTION_PART_FUNCTION, RemoveFractionPart.class);
+        repository.registerFunction(FunctionIdentifiers.REMOVE_INTEGER_PART_FUNCTION, RemoveIntegerPart.class);
 
         repository.registerFunction(FunctionIdentifiers.DOUBLING_NUMBER_FUNCTION, DoublingNumber.class);
         repository.registerFunction(FunctionIdentifiers.HALVING_NUMBER_FUNCTION, HalvingNumber.class);
@@ -272,6 +284,9 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
 
         repository.registerFunction(FunctionIdentifiers.RECIPROCAL_OF_NUMBER_FUNCTION, ReciprocalOfNumber.class);
         repository.registerFunction(FunctionIdentifiers.RECIPROCAL_OF_FRACTION_FUNCTION, ReciprocalOfFraction.class);
+
+        repository.registerFunction(FunctionIdentifiers.REBASE_NUMBER_FUNCTION, RebaseNumber.class);
+        repository.registerFunction(FunctionIdentifiers.REBASE_FRACTION_FUNCTION, RebaseFraction.class);
 
         return repository;
     }

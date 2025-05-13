@@ -1082,13 +1082,28 @@ public class NumberImpl implements Number {
     /**
      * Returns a truncated number (i.e. where the fractional part is removed).
      *
-     * @return a number
+     * @return a truncated number
      */
     @Override
-    public Number truncate() {
+    public Number removeFractionPart() {
 
         UnaryOperation<Number, Result<Number>> function =
-            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.TRUNCATE_NUMBER_FUNCTION);
+            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.REMOVE_FRACTION_PART_FUNCTION);
+        Result<Number> result = function.calculate(this);
+
+        return result.result();
+    }
+
+    /**
+     * Returns a truncated number (i.e. where the integer part is removed).
+     *
+     * @return a truncated number
+     */
+    @Override
+    public Number removeIntegerPart() {
+
+        UnaryOperation<Number, Result<Number>> function =
+            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.REMOVE_INTEGER_PART_FUNCTION);
         Result<Number> result = function.calculate(this);
 
         return result.result();
@@ -1171,8 +1186,11 @@ public class NumberImpl implements Number {
     @Override
     public Number rebase(int base) {
 
-        //TODO 2 cases : (1) rebase to smaller base and (2) rebase to greater base
-        throw new UnsupportedOperationException();
+        MixedBinaryOperation<Number, Integer, Result<Number>> function =
+            (MixedBinaryOperation<Number, Integer, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.REBASE_NUMBER_FUNCTION);
+        Result<Number> result = function.calculate(this, base);
+
+        return result.result();
     }
 
     /**

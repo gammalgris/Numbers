@@ -1066,4 +1066,22 @@ class MixedFraction implements Fraction {
         return result.result();
     }
 
+    /**
+     * Translates this fraction into a number of the specified base.
+     *
+     * @param base
+     *        the new base
+     *
+     * @return a fraction
+     */
+    @Override
+    public Fraction rebase(int base) {
+
+        MixedBinaryOperation<Fraction, Integer, Result<Fraction>> function =
+            (MixedBinaryOperation<Fraction, Integer, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.REBASE_FRACTION_FUNCTION);
+        Result<Fraction> result = function.calculate(this, base);
+
+        return result.result();
+    }
+
 }

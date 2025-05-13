@@ -272,7 +272,7 @@ public class OperationsWithInvalidParametersTest {
 
         Number n = null;
 
-        Math.truncate(n);
+        Math.removeFractionPart(n);
     }
 
     /**

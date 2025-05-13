@@ -83,7 +83,7 @@ public class DivideNumbersReturnResultAndRemainderTest {
     private final BinaryOperation<Number, ResultWithRemainder<Number>> function;
 
     /**
-     * Creates a new test case accordign to the specified parameters.
+     * Creates a new test case according to the specified parameters.
      *
      * @param dividend
      *        a number
