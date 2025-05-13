@@ -733,15 +733,18 @@ public class NumberImpl implements Number {
     }
 
     /**
-     * Calculates the faculty for this number.
+     * Calculates the factorial for this number.
      *
-     * @return a number
+     * @return the factorial for this number
      */
     @Override
     public Number factorial() {
 
-        // TODO
-        throw new UnsupportedOperationException();
+        UnaryOperation<Number, Result<Number>> function =
+            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.FACTORIAL_FUNCTION);
+        Result<Number> result = function.calculate(this);
+
+        return result.result();
     }
 
     /**

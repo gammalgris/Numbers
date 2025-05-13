@@ -157,7 +157,9 @@ public enum FunctionIdentifiers implements FunctionIdentifier {
     RECIPROCAL_OF_FRACTION_FUNCTION(NONE),
 
     REBASE_NUMBER_FUNCTION(NONE),
-    REBASE_FRACTION_FUNCTION(NONE);
+    REBASE_FRACTION_FUNCTION(NONE),
+    
+    FACTORIAL_FUNCTION(NONE);
 
 
     /**

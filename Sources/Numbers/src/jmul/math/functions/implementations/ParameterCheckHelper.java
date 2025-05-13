@@ -256,6 +256,33 @@ public final class ParameterCheckHelper {
     }
 
     /**
+     * Checks the specified parameter.
+     *
+     * @param number
+     *        a number
+     */
+    public static void checkPositiveInteger(Number number) {
+
+        if (number == null) {
+
+            String message = "No number (null) was specified!";
+            throw new IllegalArgumentException(message);
+        }
+
+        if (!number.isInteger()) {
+
+            String message = "The specified number is not an integer!";
+            throw new IllegalArgumentException(message);
+        }
+
+        if (number.isNegative()) {
+
+            String message = "The specified number is negative!";
+            throw new IllegalArgumentException(message);
+        }
+    }
+
+    /**
      * Checks the specified parameters.
      *
      * @param operand1

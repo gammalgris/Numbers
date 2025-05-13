@@ -146,7 +146,9 @@ public class IncNumberTest {
     public void testInc() {
 
         Number actualResult = operand.inc();
+
         assertEquals(toString(), expectedResult, actualResult);
+        assertEquals(toString(), expectedResult.toString(), actualResult.toString());
     }
 
     /**
@@ -156,7 +158,9 @@ public class IncNumberTest {
     public void testIncVariant2() {
 
         Number actualResult = Math.inc(operand);
+
         assertEquals(toString(), expectedResult, actualResult);
+        assertEquals(toString(), expectedResult.toString(), actualResult.toString());
     }
 
     /**
@@ -250,7 +254,7 @@ public class IncNumberTest {
         parameters.add(new Object[] { 10, "-0.09", "0.91" });
         parameters.add(new Object[] { 10, "-0.10", "0.90" });
         parameters.add(new Object[] { 10, "-0.11", "0.89" });
-    
+
 
         parameters.add(new Object[] { 2, "0", "1" });
         parameters.add(new Object[] { 2, "1", "10" });

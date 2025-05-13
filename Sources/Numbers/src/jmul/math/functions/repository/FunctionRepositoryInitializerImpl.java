@@ -52,6 +52,7 @@ import jmul.math.functions.implementations.DivisionBySubtractionReturnResultAndR
 import jmul.math.functions.implementations.DivisoFunction;
 import jmul.math.functions.implementations.DoublingNumber;
 import jmul.math.functions.implementations.EvenNumberFunction;
+import jmul.math.functions.implementations.Factorial;
 import jmul.math.functions.implementations.HalvingDigit;
 import jmul.math.functions.implementations.HalvingNumber;
 import jmul.math.functions.implementations.IncrementFraction;
@@ -287,6 +288,8 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
 
         repository.registerFunction(FunctionIdentifiers.REBASE_NUMBER_FUNCTION, RebaseNumber.class);
         repository.registerFunction(FunctionIdentifiers.REBASE_FRACTION_FUNCTION, RebaseFraction.class);
+
+        repository.registerFunction(FunctionIdentifiers.FACTORIAL_FUNCTION, Factorial.class);
 
         return repository;
     }

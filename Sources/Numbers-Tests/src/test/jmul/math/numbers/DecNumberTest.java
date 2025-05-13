@@ -147,6 +147,7 @@ public class DecNumberTest {
 
         Number actualResult = operand.dec();
         assertEquals(toString(), expectedResult, actualResult);
+        assertEquals(toString(), expectedResult.toString(), actualResult.toString());
     }
 
     /**
@@ -157,6 +158,7 @@ public class DecNumberTest {
 
         Number actualResult = Math.dec(operand);
         assertEquals(toString(), expectedResult, actualResult);
+        assertEquals(toString(), expectedResult.toString(), actualResult.toString());
     }
 
     /**

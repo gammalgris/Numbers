@@ -70,7 +70,7 @@ public interface ArithmeticNumberOperations {
     /**
      * Calculates the faculty for this number.
      *
-     * @return a number
+     * @return the factorial for this number
      */
     Number factorial();
 

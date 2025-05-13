@@ -1344,4 +1344,21 @@ public final class Math {
         return result.result();
     }
 
+    /**
+     * Calculates the factorial for the specified number.
+     *
+     * @param number
+     *        a positive integer
+     *
+     * @return the factorial for the specified number
+     */
+    public static Number factorial(Number number) {
+
+        UnaryOperation<Number, Result<Number>> function =
+            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.FACTORIAL_FUNCTION);
+        Result<Number> result = function.calculate(number);
+
+        return result.result();
+    }
+
 }
