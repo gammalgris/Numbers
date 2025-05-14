@@ -50,10 +50,12 @@ import jmul.math.functions.implementations.DivideNumberByFraction;
 import jmul.math.functions.implementations.DivisionBySubtractionReturnFraction;
 import jmul.math.functions.implementations.DivisionBySubtractionReturnResultAndRemainder;
 import jmul.math.functions.implementations.DivisoFunction;
+import jmul.math.functions.implementations.DoublingFraction;
 import jmul.math.functions.implementations.DoublingNumber;
 import jmul.math.functions.implementations.EvenNumberFunction;
 import jmul.math.functions.implementations.Factorial;
 import jmul.math.functions.implementations.HalvingDigit;
+import jmul.math.functions.implementations.HalvingFraction;
 import jmul.math.functions.implementations.HalvingNumber;
 import jmul.math.functions.implementations.IncrementFraction;
 import jmul.math.functions.implementations.IncrementNumber;
@@ -211,6 +213,8 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
 
         repository.registerFunction(FunctionIdentifiers.DOUBLING_NUMBER_FUNCTION, DoublingNumber.class);
         repository.registerFunction(FunctionIdentifiers.HALVING_NUMBER_FUNCTION, HalvingNumber.class);
+        repository.registerFunction(FunctionIdentifiers.DOUBLING_FRACTION_FUNCTION, DoublingFraction.class);
+        repository.registerFunction(FunctionIdentifiers.HALVING_FRACTION_FUNCTION, HalvingFraction.class);
 
         repository.registerFunction(FunctionIdentifiers.MAX_NUMBER_FUNCTION, MaxNumber.class);
         repository.registerFunction(FunctionIdentifiers.MAX_NUMBER_FRACTION_FUNCTION, MaxNumberFraction.class);

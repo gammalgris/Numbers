@@ -7,7 +7,7 @@
  * JMUL is a central repository for utilities which are used in my
  * other public and private repositories.
  *
- * Copyright (C) 2024  Kristian Kutin
+ * Copyright (C) 2025  Kristian Kutin
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,45 +34,57 @@
 package jmul.math.functions.implementations;
 
 
-import jmul.math.functions.FunctionSingletons;
-import jmul.math.functions.repository.FunctionIdentifiers;
+import jmul.math.fractions.Fraction;
+import static jmul.math.fractions.FractionHelper.CLONE;
+import static jmul.math.fractions.FractionHelper.createFraction;
 import jmul.math.numbers.Number;
-import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
 
 
 /**
- * Implements a function that doubles a number.
+ * Implements a function that halves a fraction.
  *
  * @author Kristian Kutin
  */
-public class DoublingNumber implements UnaryOperation<Number, Result<Number>> {
+public class HalvingFraction implements UnaryOperation<Fraction, Result<Fraction>> {
 
     /**
      * The default constructor.
      */
-    public DoublingNumber() {
+    public HalvingFraction() {
 
         super();
     }
 
     /**
-     * Doubles the specified number.
+     * Halves the specified fraction.
      *
-     * @param operand
-     *        a number
+     * @param fraction
+     *        a fraction
      *
-     * @return double the number
+     * @return a halved fraction
      */
     @Override
-    public Result<Number> calculate(Number operand) {
+    public Result<Fraction> calculate(Fraction fraction) {
 
-        BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_NUMBERS_TRIM_RESULT_FUNCTION);
-        Result<Number> result = function.calculate(operand, operand);
+        ParameterCheckHelper.checkParameter(fraction);
 
-        return result;
+        Fraction normalizedFraction = fraction.normalizedFraction();
+        Number numerator = normalizedFraction.numerator();
+        Number denominator = normalizedFraction.denominator();
+
+        if (numerator.isInfinity() || numerator.isOdd()) {
+
+            Fraction clone =
+                createFraction(CLONE, fraction.integerPart(), fraction.numerator(), fraction.denominator());
+            return new Result<Fraction>(clone);
+        }
+
+        numerator = numerator.halving();
+        Fraction result = createFraction(CLONE, numerator, denominator);
+
+        return new Result<Fraction>(result);
     }
 
 }

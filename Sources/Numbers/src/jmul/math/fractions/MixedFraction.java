@@ -732,8 +732,11 @@ class MixedFraction implements Fraction {
     @Override
     public Fraction halving() {
 
-        // TODO Implement this method
-        throw new UnsupportedOperationException();
+        UnaryOperation<Fraction, Result<Fraction>> function =
+            (UnaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.HALVING_FRACTION_FUNCTION);
+        Result<Fraction> result = function.calculate(this);
+
+        return result.result();
     }
 
     /**
@@ -744,8 +747,11 @@ class MixedFraction implements Fraction {
     @Override
     public Fraction doubling() {
 
-        // TODO Implement this method
-        throw new UnsupportedOperationException();
+        UnaryOperation<Fraction, Result<Fraction>> function =
+            (UnaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.DOUBLING_FRACTION_FUNCTION);
+        Result<Fraction> result = function.calculate(this);
+
+        return result.result();
     }
 
     /**

@@ -69,7 +69,7 @@ import jmul.math.signs.Signs;
  * An implementation of a real number. This implementation requires memory depending on the number of digits
  * the number consists of. Even very large or very small numbers can be represented without rounding. Since the
  * underlying data structure is a linked list numbers can exceed the array size limitations in java.<br>
- * It might not be possible to create a string representation for every number (see array size limitations).<br>
+ * Thus it might not be possible to create a string representation for every number (see array size limitations).<br>
  * <br>
  * <i>Note:<br>
  * Consider implementing a stream mechanism to serialize/ deserialize very large or very small numbers.</i><br>

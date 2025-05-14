@@ -1361,4 +1361,38 @@ public final class Math {
         return result.result();
     }
 
+    /**
+     * Halves the specified fraction.
+     *
+     * @param fraction
+     *        a fraction
+     *
+     * @return a fraction
+     */
+    public static Fraction halving(Fraction fraction) {
+
+        UnaryOperation<Fraction, Result<Fraction>> function =
+            (UnaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.HALVING_FRACTION_FUNCTION);
+        Result<Fraction> result = function.calculate(fraction);
+
+        return result.result();
+    }
+
+    /**
+     * Doubles the specified fraction.
+     *
+     * @param fraction
+     *        a fraction
+     *
+     * @return a fraction
+     */
+    public static Fraction doubling(Fraction fraction) {
+
+        UnaryOperation<Fraction, Result<Fraction>> function =
+            (UnaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.DOUBLING_FRACTION_FUNCTION);
+        Result<Fraction> result = function.calculate(fraction);
+
+        return result.result();
+    }
+
 }
