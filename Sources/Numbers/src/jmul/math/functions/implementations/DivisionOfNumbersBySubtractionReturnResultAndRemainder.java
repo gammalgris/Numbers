@@ -45,16 +45,16 @@ import jmul.math.signs.Signs;
 
 
 /**
- * An implementation of a division (i.e. division by subtraction).
+ * An implementation of a division (i.e. division by subtraction) for numbers.
  *
  * @author Kristian Kutin
  */
-public class DivisionBySubtractionReturnResultAndRemainder implements BinaryOperation<Number, ResultWithRemainder<Number>> {
+public class DivisionOfNumbersBySubtractionReturnResultAndRemainder implements BinaryOperation<Number, ResultWithRemainder<Number>> {
 
     /**
      * The default constructor.
      */
-    public DivisionBySubtractionReturnResultAndRemainder() {
+    public DivisionOfNumbersBySubtractionReturnResultAndRemainder() {
 
         super();
     }

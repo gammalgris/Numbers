@@ -929,21 +929,6 @@ class MixedFraction implements Fraction {
     }
 
     /**
-     * Divides this fraction by the specified number and returns the remainder of the division.
-     *
-     * @param n
-     *        a number
-     *
-     * @return a fraction
-     */
-    @Override
-    public Fraction modulo(Number n) {
-
-        // TODO Implement this method
-        throw new UnsupportedOperationException();
-    }
-
-    /**
      * Compares this fraction and the specified number and returns the greater number (as fraction).
      *
      * @param n
@@ -1086,6 +1071,21 @@ class MixedFraction implements Fraction {
         MixedBinaryOperation<Fraction, Integer, Result<Fraction>> function =
             (MixedBinaryOperation<Fraction, Integer, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.REBASE_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(this, base);
+
+        return result.result();
+    }
+
+    /**
+     * Returns the absolute value of this fraction.
+     *
+     * @return the absolute value
+     */
+    @Override
+    public Fraction absoluteValue() {
+
+        UnaryOperation<Fraction, Result<Fraction>> function =
+            (UnaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_TO_ABSOLUTE_VALUE_FUNCTION);
+        Result<Fraction> result = function.calculate(this);
 
         return result.result();
     }

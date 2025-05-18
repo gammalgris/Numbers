@@ -130,4 +130,11 @@ public interface Fraction extends Comparable, NumberComparisons, FractionCompari
      */
     Fraction rebase(int base);
 
+    /**
+     * Returns the absolute value of this fraction.
+     *
+     * @return the absolute value
+     */
+    Fraction absoluteValue();
+
 }

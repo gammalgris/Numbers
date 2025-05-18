@@ -179,16 +179,6 @@ public interface ArithmeticFractionOperations {
     Fraction divide(Fraction f);
 
     /**
-     * Divides this fraction by the specified number and returns the remainder of the division.
-     *
-     * @param n
-     *        a number
-     *
-     * @return a fraction
-     */
-    Fraction modulo(Number n);
-
-    /**
      * Compares this fraction and the specified number and returns the greater number (as fraction).
      *
      * @param n

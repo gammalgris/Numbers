@@ -1079,7 +1079,11 @@ public class NumberImpl implements Number {
     @Override
     public Number absoluteValue() {
 
-        return new NumberImpl(base(), Signs.POSITIVE, NodesHelper.cloneLinkedList(centerNode()));
+        UnaryOperation<Number, Result<Number>> function =
+            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_TO_ABSOLUTE_VALUE_FUNCTION);
+        Result<Number> result = function.calculate(this);
+
+        return result.result();
     }
 
     /**

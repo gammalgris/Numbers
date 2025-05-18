@@ -89,12 +89,28 @@ public final class Math {
      */
     public static Number absoluteValue(Number n) {
 
-        if (n == null) {
+        UnaryOperation<Number, Result<Number>> function =
+            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_TO_ABSOLUTE_VALUE_FUNCTION);
+        Result<Number> result = function.calculate(n);
 
-            throw new IllegalArgumentException("No number (null) was specified!");
-        }
+        return result.result();
+    }
 
-        return n.absoluteValue();
+    /**
+     * Returns the absolute value of this fraction.
+     *
+     * @param f
+     *        a fraction
+     *
+     * @return the absolute value
+     */
+    public static Fraction absoluteValue(Fraction f) {
+
+        UnaryOperation<Fraction, Result<Fraction>> function =
+            (UnaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_TO_ABSOLUTE_VALUE_FUNCTION);
+        Result<Fraction> result = function.calculate(f);
+
+        return result.result();
     }
 
     /**

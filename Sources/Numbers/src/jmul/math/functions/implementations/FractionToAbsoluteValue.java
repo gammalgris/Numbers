@@ -34,47 +34,49 @@
 package jmul.math.functions.implementations;
 
 
-import jmul.math.functions.FunctionSingletons;
-import jmul.math.functions.repository.FunctionIdentifiers;
+import jmul.math.fractions.Fraction;
+import static jmul.math.fractions.FractionHelper.DONT_CLONE;
+import static jmul.math.fractions.FractionHelper.createFraction;
 import jmul.math.numbers.Number;
-import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.Result;
-import jmul.math.operations.ResultWithRemainder;
+import jmul.math.operations.UnaryOperation;
 
 
 /**
- * An implementation of a division (i.e. division of two integers) which returns the result.
+ * A function to compute the absolute value of a fraction.
  *
  * @author Kristian Kutin
  */
-public class DivisoFunction implements BinaryOperation<Number, Result<Number>> {
+public class FractionToAbsoluteValue implements UnaryOperation<Fraction, Result<Fraction>> {
 
     /**
      * The default constructor.
      */
-    public DivisoFunction() {
+    public FractionToAbsoluteValue() {
 
         super();
     }
 
     /**
-     * Divides the first operand by the second operand and returns the result.
+     * Calculates and returns the absolute value of the specified fraction.
      *
-     * @param operand1
-     *        an integer
-     * @param operand2
-     *        an integer
+     * @param operand
+     *        a number
      *
-     * @return the result of the division as integer
+     * @return the absolute value of the fraction
      */
     @Override
-    public Result<Number> calculate(Number operand1, Number operand2) {
+    public Result<Fraction> calculate(Fraction operand) {
 
-        BinaryOperation<Number, ResultWithRemainder<Number>> function =
-            (BinaryOperation<Number, ResultWithRemainder<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIVIDE_NUMBERS_RETURN_RESULT_AND_REMAINDER_FUNCTION);
-        ResultWithRemainder<Number> result = function.calculate(operand1, operand2);
+        ParameterCheckHelper.checkParameter(operand);
 
-        return new Result<Number>(result.result());
+        Number absoluteIntegerPart = operand.integerPart().absoluteValue();
+        Number absoluteNumerator = operand.numerator().absoluteValue();
+        Number absoluteDenominator = operand.denominator().absoluteValue();
+        Fraction absoluteValue =
+            createFraction(DONT_CLONE, absoluteIntegerPart, absoluteNumerator, absoluteDenominator);
+
+        return new Result<Fraction>(absoluteValue);
     }
 
 }

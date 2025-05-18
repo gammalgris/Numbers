@@ -48,12 +48,13 @@ import jmul.math.functions.implementations.DivideFractionByNumber;
 import jmul.math.functions.implementations.DivideFractions;
 import jmul.math.functions.implementations.DivideNumberByFraction;
 import jmul.math.functions.implementations.DivisionBySubtractionReturnFraction;
-import jmul.math.functions.implementations.DivisionBySubtractionReturnResultAndRemainder;
-import jmul.math.functions.implementations.DivisoFunction;
+import jmul.math.functions.implementations.DivisionOfNumbersBySubtractionReturnResultAndRemainder;
+import jmul.math.functions.implementations.DivisoWithIntegersFunction;
 import jmul.math.functions.implementations.DoublingFraction;
 import jmul.math.functions.implementations.DoublingNumber;
 import jmul.math.functions.implementations.EvenNumberFunction;
 import jmul.math.functions.implementations.Factorial;
+import jmul.math.functions.implementations.FractionToAbsoluteValue;
 import jmul.math.functions.implementations.HalvingDigit;
 import jmul.math.functions.implementations.HalvingFraction;
 import jmul.math.functions.implementations.HalvingNumber;
@@ -67,7 +68,7 @@ import jmul.math.functions.implementations.MinFraction;
 import jmul.math.functions.implementations.MinFractionNumber;
 import jmul.math.functions.implementations.MinNumber;
 import jmul.math.functions.implementations.MinNumberFraction;
-import jmul.math.functions.implementations.ModuloFunction;
+import jmul.math.functions.implementations.ModuloWithIntegersFunction;
 import jmul.math.functions.implementations.MultiplyFractionAndNumber;
 import jmul.math.functions.implementations.MultiplyFractions;
 import jmul.math.functions.implementations.MultiplyNumberAndFraction;
@@ -75,6 +76,7 @@ import jmul.math.functions.implementations.MultiplyNumbers;
 import jmul.math.functions.implementations.NegateFraction;
 import jmul.math.functions.implementations.NegateNumber;
 import jmul.math.functions.implementations.NumberComplement;
+import jmul.math.functions.implementations.NumberToAbsoluteValue;
 import jmul.math.functions.implementations.NumberToDigit;
 import jmul.math.functions.implementations.NumberToFraction;
 import jmul.math.functions.implementations.NumberToOrdinal;
@@ -153,6 +155,10 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
     public FunctionRepository init() {
 
         FunctionRepository repository = new FunctionRepositoryImpl();
+
+        repository.registerFunction(FunctionIdentifiers.NUMBER_TO_ABSOLUTE_VALUE_FUNCTION, NumberToAbsoluteValue.class);
+        repository.registerFunction(FunctionIdentifiers.FRACTION_TO_ABSOLUTE_VALUE_FUNCTION,
+                                    FractionToAbsoluteValue.class);
 
         repository.registerFunction(FunctionIdentifiers.NUMBER_TO_FRACTION_FUNCTION, NumberToFraction.class);
 
@@ -275,7 +281,7 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
                                     MultiplyFractionAndNumber.class);
 
         repository.registerFunction(FunctionIdentifiers.DIVIDE_NUMBERS_RETURN_RESULT_AND_REMAINDER_FUNCTION,
-                                    DivisionBySubtractionReturnResultAndRemainder.class);
+                                    DivisionOfNumbersBySubtractionReturnResultAndRemainder.class);
         repository.registerFunction(FunctionIdentifiers.DIVIDE_NUMBERS_RETURN_FRACTION_FUNCTION,
                                     DivisionBySubtractionReturnFraction.class);
         repository.registerFunction(FunctionIdentifiers.DIVIDE_FRACTIONS_FUNCTION, DivideFractions.class);
@@ -284,8 +290,8 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
         repository.registerFunction(FunctionIdentifiers.DIVIDE_FRACTION_BY_NUMBER_FUNCTION,
                                     DivideFractionByNumber.class);
 
-        repository.registerFunction(FunctionIdentifiers.MODULO_FUNCTION, ModuloFunction.class);
-        repository.registerFunction(FunctionIdentifiers.DIVISO_FUNCTION, DivisoFunction.class);
+        repository.registerFunction(FunctionIdentifiers.MODULO_FUNCTION, ModuloWithIntegersFunction.class);
+        repository.registerFunction(FunctionIdentifiers.DIVISO_FUNCTION, DivisoWithIntegersFunction.class);
 
         repository.registerFunction(FunctionIdentifiers.RECIPROCAL_OF_NUMBER_FUNCTION, ReciprocalOfNumber.class);
         repository.registerFunction(FunctionIdentifiers.RECIPROCAL_OF_FRACTION_FUNCTION, ReciprocalOfFraction.class);

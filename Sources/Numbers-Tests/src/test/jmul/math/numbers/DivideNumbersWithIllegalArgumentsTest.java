@@ -34,7 +34,7 @@
 package test.jmul.math.numbers;
 
 
-import jmul.math.functions.implementations.DivisionBySubtractionReturnResultAndRemainder;
+import jmul.math.functions.implementations.DivisionOfNumbersBySubtractionReturnResultAndRemainder;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.operations.BinaryOperation;
@@ -60,7 +60,7 @@ public class DivideNumbersWithIllegalArgumentsTest {
     public void divideNullByNumber() {
 
         BinaryOperation<Number, ResultWithRemainder<Number>> function =
-            new DivisionBySubtractionReturnResultAndRemainder();
+            new DivisionOfNumbersBySubtractionReturnResultAndRemainder();
 
         Number operand1 = null;
         Number operand2 = createNumber(10, "1");
@@ -75,7 +75,7 @@ public class DivideNumbersWithIllegalArgumentsTest {
     public void divideByNull() {
 
         BinaryOperation<Number, ResultWithRemainder<Number>> function =
-            new DivisionBySubtractionReturnResultAndRemainder();
+            new DivisionOfNumbersBySubtractionReturnResultAndRemainder();
 
         Number operand1 = createNumber(10, "1");
         Number operand2 = null;
@@ -90,7 +90,7 @@ public class DivideNumbersWithIllegalArgumentsTest {
     public void divideNonInteger() {
 
         BinaryOperation<Number, ResultWithRemainder<Number>> function =
-            new DivisionBySubtractionReturnResultAndRemainder();
+            new DivisionOfNumbersBySubtractionReturnResultAndRemainder();
 
         Number operand1 = createNumber(10, "1.1");
         Number operand2 = createNumber(10, "1");
@@ -105,7 +105,7 @@ public class DivideNumbersWithIllegalArgumentsTest {
     public void divideByNonInteger() {
 
         BinaryOperation<Number, ResultWithRemainder<Number>> function =
-            new DivisionBySubtractionReturnResultAndRemainder();
+            new DivisionOfNumbersBySubtractionReturnResultAndRemainder();
 
         Number operand1 = createNumber(10, "1");
         Number operand2 = createNumber(10, "1.1");

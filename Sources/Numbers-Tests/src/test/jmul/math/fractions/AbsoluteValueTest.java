@@ -7,7 +7,7 @@
  * JMUL is a central repository for utilities which are used in my
  * other public and private repositories.
  *
- * Copyright (C) 2022  Kristian Kutin
+ * Copyright (C) 2025  Kristian Kutin
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,18 +31,17 @@
  * $Id$
  */
 
-package test.jmul.math.numbers;
+package test.jmul.math.fractions;
 
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 import jmul.math.Math;
+import jmul.math.fractions.Fraction;
+import static jmul.math.fractions.FractionHelper.createFraction;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
-import jmul.math.numbers.Number;
-import static jmul.math.numbers.NumberHelper.createNumber;
-import jmul.math.numbers.NumberImpl;
 import static jmul.math.signs.Signs.NEGATIVE;
 
 import jmul.test.classification.UnitTest;
@@ -54,7 +53,7 @@ import org.junit.runners.Parameterized;
 
 
 /**
- * This tests suite checks the calculation of absolute number values.
+ * This tests suite checks the calculation of absolute fraction values.
  *
  * @author Kristian Kutin
  */
@@ -65,39 +64,27 @@ public class AbsoluteValueTest {
     /**
      * A number.
      */
-    private final Number number;
+    private final Fraction fraction;
 
     /**
      * The expected result.
      */
-    private final Number expectedAbsoluteValue;
+    private final Fraction expectedAbsoluteValue;
 
     /**
      * Creates a test according to the specified parameters.
      *
-     * @param number
-     *        a number.
+     * @param fraction
+     *        a fraction
      * @param expectedAbsoluteValue
      *        the expected result.
      */
-    public AbsoluteValueTest(Number number, Number expectedAbsoluteValue) {
+    public AbsoluteValueTest(Fraction fraction, Fraction expectedAbsoluteValue) {
 
         super();
 
-        this.number = number;
+        this.fraction = fraction;
         this.expectedAbsoluteValue = expectedAbsoluteValue;
-    }
-
-    /**
-     * Returns a summary of the test case.
-     *
-     * @return a summary of the test case
-     */
-    @Override
-    public String toString() {
-
-        return String.format("(%d) %s -> (%d) %s", number.base(), number, expectedAbsoluteValue.base(),
-                             expectedAbsoluteValue);
     }
 
     /**
@@ -106,7 +93,7 @@ public class AbsoluteValueTest {
     @Test
     public void testAbsoluteValue() {
 
-        Number absoluteValue = number.absoluteValue();
+        Fraction absoluteValue = fraction.absoluteValue();
 
         assertEquals(toString(), expectedAbsoluteValue, absoluteValue);
         assertEquals(toString(), expectedAbsoluteValue.toString(), absoluteValue.toString());
@@ -118,7 +105,7 @@ public class AbsoluteValueTest {
     @Test
     public void testAbsoluteValueVariant2() {
 
-        Number absoluteValue = Math.absoluteValue(number);
+        Fraction absoluteValue = Math.absoluteValue(fraction);
 
         assertEquals(toString(), expectedAbsoluteValue, absoluteValue);
         assertEquals(toString(), expectedAbsoluteValue.toString(), absoluteValue.toString());
@@ -136,25 +123,21 @@ public class AbsoluteValueTest {
 
         for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
 
-            parameters.add(new Object[] { createNumber(base), createNumber(base) });
-            parameters.add(new Object[] { createNumber(NEGATIVE, base), createNumber(base) });
+            parameters.add(new Object[] { createFraction(base), createFraction(base) });
+            parameters.add(new Object[] { createFraction(NEGATIVE, base), createFraction(base) });
 
-            parameters.add(new Object[] { createNumber(base, "0"), createNumber(base, "0") });
-            parameters.add(new Object[] { createNumber(base, "-0"), createNumber(base, "0") });
+            parameters.add(new Object[] { createFraction(base, "0"), createFraction(base, "0") });
+            parameters.add(new Object[] { createFraction(base, "-0"), createFraction(base, "0") });
 
-            parameters.add(new Object[] { createNumber(base, "1"), createNumber(base, "1") });
-            parameters.add(new Object[] { createNumber(base, "-1"), createNumber(base, "1") });
+            parameters.add(new Object[] { createFraction(base, "1"), createFraction(base, "1") });
+            parameters.add(new Object[] { createFraction(base, "-1"), createFraction(base, "1") });
+
+            parameters.add(new Object[] { createFraction(base, "1", "1"), createFraction(base, "1", "1") });
+            parameters.add(new Object[] { createFraction(base, "-1", "1"), createFraction(base, "1", "1") });
+
+            parameters.add(new Object[] { createFraction(base, "1", "1", "1"), createFraction(base, "1", "1", "1") });
+            parameters.add(new Object[] { createFraction(base, "-1", "1", "1"), createFraction(base, "1", "1", "1") });
         }
-
-        parameters.add(new Object[] { new NumberImpl("1234567890"), new NumberImpl("1234567890") });
-        parameters.add(new Object[] { new NumberImpl("-1234567890"), new NumberImpl("1234567890") });
-
-        parameters.add(new Object[] { new NumberImpl("0.123456789"), new NumberImpl("0.123456789") });
-        parameters.add(new Object[] { new NumberImpl("-0.123456789"), new NumberImpl("0.123456789") });
-
-        parameters.add(new Object[] { new NumberImpl("1234567890.123456789"), new NumberImpl("1234567890.123456789") });
-        parameters.add(new Object[] { new NumberImpl("-1234567890.123456789"),
-                                      new NumberImpl("1234567890.123456789") });
 
         return parameters;
     }

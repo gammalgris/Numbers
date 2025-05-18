@@ -34,47 +34,48 @@
 package jmul.math.functions.implementations;
 
 
-import jmul.math.functions.FunctionSingletons;
-import jmul.math.functions.repository.FunctionIdentifiers;
 import jmul.math.numbers.Number;
-import jmul.math.operations.BinaryOperation;
+import jmul.math.numbers.NumberImpl;
+import jmul.math.numbers.nodes.DigitNode;
+import jmul.math.numbers.nodes.NodesHelper;
 import jmul.math.operations.Result;
-import jmul.math.operations.ResultWithRemainder;
+import jmul.math.operations.UnaryOperation;
+import jmul.math.signs.Signs;
 
 
 /**
- * An implementation of a division (i.e. division of two integers) which returns the remainder.
+ * A function to compute the absolute value of a number.
  *
  * @author Kristian Kutin
  */
-public class ModuloFunction implements BinaryOperation<Number, Result<Number>> {
+public class NumberToAbsoluteValue implements UnaryOperation<Number, Result<Number>> {
 
     /**
      * The default constructor.
      */
-    public ModuloFunction() {
+    public NumberToAbsoluteValue() {
 
         super();
     }
 
     /**
-     * Divides the first operand by the second operand and returns the remainder.
+     * Calculates and returns the absolute value of the specified number.
      *
-     * @param operand1
-     *        an integer
-     * @param operand2
-     *        an integer
+     * @param operand
+     *        a number
      *
-     * @return the remainder of the division as integer
+     * @return the absolute value of the number
      */
     @Override
-    public Result<Number> calculate(Number operand1, Number operand2) {
+    public Result<Number> calculate(Number operand) {
 
-        BinaryOperation<Number, ResultWithRemainder<Number>> function =
-            (BinaryOperation<Number, ResultWithRemainder<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIVIDE_NUMBERS_RETURN_RESULT_AND_REMAINDER_FUNCTION);
-        ResultWithRemainder<Number> result = function.calculate(operand1, operand2);
+        ParameterCheckHelper.checkParameter(operand);
 
-        return new Result<Number>(result.remainder());
+        int base = operand.base();
+        DigitNode centerNode = operand.centerNode();
+        Number absoluteValue = new NumberImpl(base, Signs.POSITIVE, NodesHelper.cloneLinkedList(centerNode));
+
+        return new Result<Number>(absoluteValue);
     }
 
 }

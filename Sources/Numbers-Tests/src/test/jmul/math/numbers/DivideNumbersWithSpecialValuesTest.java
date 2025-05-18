@@ -34,7 +34,7 @@
 package test.jmul.math.numbers;
 
 
-import jmul.math.functions.implementations.DivisionBySubtractionReturnResultAndRemainder;
+import jmul.math.functions.implementations.DivisionOfNumbersBySubtractionReturnResultAndRemainder;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.numbers.exceptions.NoResultButLimitException;
@@ -63,7 +63,7 @@ public class DivideNumbersWithSpecialValuesTest {
     public void divideByInfinity() {
 
         BinaryOperation<Number, ResultWithRemainder<Number>> function =
-            new DivisionBySubtractionReturnResultAndRemainder();
+            new DivisionOfNumbersBySubtractionReturnResultAndRemainder();
 
         Number operand1 = createNumber(10, "10");
         Number operand2 = createNumber(10);
@@ -90,7 +90,7 @@ public class DivideNumbersWithSpecialValuesTest {
     public void divideInfinityByInfinity() {
 
         BinaryOperation<Number, ResultWithRemainder<Number>> function =
-            new DivisionBySubtractionReturnResultAndRemainder();
+            new DivisionOfNumbersBySubtractionReturnResultAndRemainder();
 
         Number operand1 = createNumber(10);
         Number operand2 = createNumber(10);
@@ -117,7 +117,7 @@ public class DivideNumbersWithSpecialValuesTest {
     public void divideByZero() {
 
         BinaryOperation<Number, ResultWithRemainder<Number>> function =
-            new DivisionBySubtractionReturnResultAndRemainder();
+            new DivisionOfNumbersBySubtractionReturnResultAndRemainder();
 
         Number operand1 = createNumber(10, "10");
         Number operand2 = createNumber(10, "0");
@@ -132,7 +132,7 @@ public class DivideNumbersWithSpecialValuesTest {
     public void divideInfinityByNumber() {
 
         BinaryOperation<Number, ResultWithRemainder<Number>> function =
-            new DivisionBySubtractionReturnResultAndRemainder();
+            new DivisionOfNumbersBySubtractionReturnResultAndRemainder();
 
         Number operand1 = createNumber(10);
         Number operand2 = createNumber(10, "10");
@@ -155,7 +155,7 @@ public class DivideNumbersWithSpecialValuesTest {
     public void divideZeroyByNumber() {
 
         BinaryOperation<Number, ResultWithRemainder<Number>> function =
-            new DivisionBySubtractionReturnResultAndRemainder();
+            new DivisionOfNumbersBySubtractionReturnResultAndRemainder();
 
         Number operand1 = createNumber(10, "0");
         Number operand2 = createNumber(10, "10");
@@ -178,7 +178,7 @@ public class DivideNumbersWithSpecialValuesTest {
     public void divideZeroByZero() {
 
         BinaryOperation<Number, ResultWithRemainder<Number>> function =
-            new DivisionBySubtractionReturnResultAndRemainder();
+            new DivisionOfNumbersBySubtractionReturnResultAndRemainder();
 
         Number operand1 = createNumber(10, "0");
         Number operand2 = createNumber(10, "0");
