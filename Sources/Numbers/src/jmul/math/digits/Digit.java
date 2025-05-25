@@ -85,4 +85,18 @@ public interface Digit extends Comparable<Digit> {
      */
     boolean isOrdinal(int ordinal);
 
+    /**
+     * Checks if this digit is odd.
+     *
+     * @return <code>true</code> if this digit is odd, else <code>even</code>
+     */
+    boolean isOdd();
+
+    /**
+     * Checks if this digit is even.
+     *
+     * @return <code>true</code> if this digit is even, else <code>even</code>
+     */
+    boolean isEven();
+
 }

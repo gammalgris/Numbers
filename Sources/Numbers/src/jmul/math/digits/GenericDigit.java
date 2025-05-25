@@ -221,4 +221,26 @@ class GenericDigit implements Digit {
         return result;
     }
 
+    /**
+     * Checks if this digit is odd.
+     *
+     * @return <code>true</code> if this digit is odd, else <code>even</code>
+     */
+    @Override
+    public boolean isOdd() {
+
+        return (ordinal() % 2) != 0;
+    }
+
+    /**
+     * Checks if this digit is even.
+     *
+     * @return <code>true</code> if this digit is even, else <code>even</code>
+     */
+    @Override
+    public boolean isEven() {
+
+        return !isOdd();
+    }
+
 }

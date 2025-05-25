@@ -45,7 +45,7 @@ public interface LinkedDigitList {
      * Returns the node which represents the zeroth position (i.e. <code>base^0</code>) within a number.
      * To the left are the digits which represent the positions 1 (<code>base^1</code>), 2 (<code>base^2</code>),
      * 3 (<code>base^3</code>), etc..
-     * To the left are the digits which represent the fraction and positions -1 (<code>base^-1</code>),
+     * To the right are the digits which represent the fraction and positions -1 (<code>base^-1</code>),
      * -2 (<code>base^-2</code>), 3 (<code>base^-3</code>), etc..
      *
      * @return the center node

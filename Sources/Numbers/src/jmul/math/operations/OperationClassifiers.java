@@ -46,6 +46,7 @@ public enum OperationClassifiers implements OperationClassifier {
     ADDITION,
     SUBTRACTION,
     MULTIPLICATION,
-    DIVISION, ;
+    DIVISION,
+    ROUNDING;
 
 }

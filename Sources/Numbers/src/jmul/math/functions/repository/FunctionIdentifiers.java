@@ -39,6 +39,7 @@ import static jmul.math.operations.OperationClassifiers.ADDITION;
 import static jmul.math.operations.OperationClassifiers.DIVISION;
 import static jmul.math.operations.OperationClassifiers.MULTIPLICATION;
 import static jmul.math.operations.OperationClassifiers.NONE;
+import static jmul.math.operations.OperationClassifiers.ROUNDING;
 import static jmul.math.operations.OperationClassifiers.SUBTRACTION;
 
 
@@ -165,7 +166,14 @@ public enum FunctionIdentifiers implements FunctionIdentifier {
     REBASE_NUMBER_FUNCTION(NONE),
     REBASE_FRACTION_FUNCTION(NONE),
 
-    FACTORIAL_FUNCTION(NONE);
+    FACTORIAL_FUNCTION(NONE),
+
+    ROUND_DIGIT_TO_ODD_FUNCTION(ROUNDING),
+    ROUND_DIGIT_TO_EVEN_FUNCTION(ROUNDING),
+    ROUND_NUMBER_TO_ODD_FUNCTION(ROUNDING),
+    ROUND_NUMBER_TO_EVEN_FUNCTION(ROUNDING),
+    ROUND_UP_NUMBER_FUNCTION(ROUNDING),
+    ROUND_DOWN_NUMBER_FUNCTION(ROUNDING);
 
 
     /**

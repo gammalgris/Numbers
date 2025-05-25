@@ -243,6 +243,9 @@ public class RemoveFractionPartTest {
             parameters.add(new Object[] { base, "0", "0" });
             parameters.add(new Object[] { base, "-0", "0" });
 
+            parameters.add(new Object[] { base, "0.1", "0" });
+            parameters.add(new Object[] { base, "-0.1", "0" });
+
             parameters.add(new Object[] { base, "1", "1" });
             parameters.add(new Object[] { base, "-1", "-1" });
 

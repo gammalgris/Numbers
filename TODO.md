@@ -52,7 +52,9 @@
 
 22) Use a profiler to identify bottlenecks which can be optimized
 
-23)
+23) Update wiki
+
+24)
 
 
 # Done

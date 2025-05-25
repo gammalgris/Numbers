@@ -38,6 +38,8 @@ import java.util.Comparator;
 
 import jmul.math.fractions.Fraction;
 import jmul.math.functions.FunctionSingletons;
+import jmul.math.functions.repository.FunctionIdentifier;
+import jmul.math.functions.repository.FunctionIdentifierHelper;
 import jmul.math.functions.repository.FunctionIdentifiers;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
@@ -1407,6 +1409,117 @@ public final class Math {
         UnaryOperation<Fraction, Result<Fraction>> function =
             (UnaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.DOUBLING_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(fraction);
+
+        return result.result();
+    }
+
+    /**
+     * Round this number down to the nearest integer that doesn't exceed this number.
+     *
+     * @param number
+     *        a number
+     *
+     * @return the nearest integer that doesn't exceed this number
+     */
+    public static Number roundDown(Number number) {
+
+        UnaryOperation<Number, Result<Number>> function =
+            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.ROUND_DOWN_NUMBER_FUNCTION);
+        Result<Number> result = function.calculate(number);
+
+        return result.result();
+    }
+
+    /**
+     * Round this number up to the nearest integer that is not less than this number.
+     *
+     * @param number
+     *        a number
+     *
+     * @return the nearest integer that is not less than this number
+     */
+    public static Number roundUp(Number number) {
+
+        UnaryOperation<Number, Result<Number>> function =
+            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.ROUND_UP_NUMBER_FUNCTION);
+        Result<Number> result = function.calculate(number);
+
+        return result.result();
+    }
+
+    /**
+     * Shorten the precision of this number according to the specified decimal places.
+     *
+     * @param number
+     *        a number
+     * @param decimalPlaces
+     *        the number of decimal places remainign after rounding
+     *
+     * @return a rounded number
+     */
+    public static Number round(Number number, int decimalPlaces) {
+
+        Number convertedParameter = new NumberImpl(decimalPlaces);
+
+        return round(FunctionIdentifiers.ROUND_NUMBER_TO_EVEN_FUNCTION, number, convertedParameter);
+    }
+
+    /**
+     * Shorten the precision of this number according to the specified decimal places.
+     *
+     * @param number
+     *        a number
+     * @param decimalPlaces
+     *        the number of decimal places remainign after rounding
+     *
+     * @return a rounded number
+     */
+    public static Number round(Number number, Number decimalPlaces) {
+
+        return round(FunctionIdentifiers.ROUND_NUMBER_TO_EVEN_FUNCTION, number, decimalPlaces);
+    }
+
+    /**
+     * Shorten the precision of this number according to the specified decimal places.
+     *
+     * @param algorithm
+     *        the identifier for an algorithm
+     * @param number
+     *        a number
+     * @param decimalPlaces
+     *        the number of decimal places remaining after rounding
+     *
+     * @return a shortened number according to the specified precision
+     */
+    public static Number round(FunctionIdentifier algorithm, Number number, int decimalPlaces) {
+
+        Number convertedParameter = new NumberImpl(decimalPlaces);
+
+        return round(algorithm, number, convertedParameter);
+    }
+
+    /**
+     * Shorten the precision of this number according to the specified decimal places.
+     *
+     * @param algorithm
+     *        the identifier for an algorithm
+     * @param number
+     *        a number
+     * @param decimalPlaces
+     *        the number of decimal places remaining after rounding
+     *
+     * @return a shortened number according to the specified precision
+     */
+    public static Number round(FunctionIdentifier algorithm, Number number, Number decimalPlaces) {
+
+        final FunctionIdentifier[] ALLOWED_ALGORITHMS = new FunctionIdentifier[] {
+            FunctionIdentifiers.ROUND_NUMBER_TO_ODD_FUNCTION, FunctionIdentifiers.ROUND_NUMBER_TO_EVEN_FUNCTION
+        };
+        FunctionIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, algorithm);
+
+        BinaryOperation<Number, Result<Number>> function =
+            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(algorithm);
+        Result<Number> result = function.calculate(number, decimalPlaces);
 
         return result.result();
     }

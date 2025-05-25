@@ -524,4 +524,34 @@ public final class NodesHelper {
         }
     }
 
+    /**
+     * Replaces the specified digit nodes in the linked list.
+     *
+     * @param oldNode
+     *        the digit node which is to be replaced
+     * @param newNode
+     *        the replacement node
+     */
+    public static void replaceNode(@Modified DigitNode oldNode, @Modified DigitNode newNode) {
+
+        if (oldNode == null) {
+
+            return;
+        }
+
+        if (newNode == null) {
+
+            return;
+        }
+
+        DigitNode leftNode = oldNode.leftNode();
+        DigitNode rightNode = oldNode.rightNode();
+
+        removeLeftTail(oldNode);
+        removeRightTail(oldNode);
+
+        linkNodes(leftNode, newNode);
+        linkNodes(newNode, rightNode);
+    }
+
 }

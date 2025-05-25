@@ -35,6 +35,7 @@ package jmul.math.operations;
 
 
 import jmul.math.fractions.Fraction;
+import jmul.math.functions.repository.FunctionIdentifier;
 import jmul.math.numbers.Number;
 
 
@@ -279,6 +280,64 @@ public interface ArithmeticNumberOperations {
      * @return a fraction
      */
     Fraction reciprocal();
+
+    /**
+     * Round this number down to the nearest integer that doesn't exceed this number.
+     *
+     * @return the nearest integer that doesn't exceed this number
+     */
+    Number roundDown();
+
+    /**
+     * Round this number up to the nearest integer that is not less than this number.
+     *
+     * @return the nearest integer that is not less than this number
+     */
+    Number roundUp();
+
+    /**
+     * Shorten the precision of this number according to the specified decimal places.
+     *
+     * @param decimalPlaces
+     *        the number of decimal places remainign after rounding
+     *
+     * @return a rounded number
+     */
+    Number round(Number decimalPlaces);
+
+    /**
+     * Shorten the precision of this number according to the specified decimal places.
+     *
+     * @param decimalPlaces
+     *        the number of decimal places remaining after rounding
+     *
+     * @return a shortened number according to the specified precision
+     */
+    Number round(int decimalPlaces);
+
+    /**
+     * Shorten the precision of this number according to the specified decimal places.
+     *
+     * @param algorithm
+     *        the identifier for an algorithm
+     * @param decimalPlaces
+     *        the number of decimal places remaining after rounding
+     *
+     * @return a shortened number according to the specified precision
+     */
+    Number round(FunctionIdentifier algorithm, int decimalPlaces);
+
+    /**
+     * Shorten the precision of this number according to the specified decimal places.
+     *
+     * @param algorithm
+     *        the identifier for an algorithm
+     * @param decimalPlaces
+     *        the number of decimal places remaining after rounding
+     *
+     * @return a shortened number according to the specified precision
+     */
+    Number round(FunctionIdentifier algorithm, Number decimalPlaces);
 
     /*
      * Ternary arithmetic operations.

@@ -43,6 +43,7 @@ import jmul.math.Math;
 import jmul.math.fractions.Fraction;
 import jmul.math.functions.FunctionSingletons;
 import jmul.math.functions.repository.FunctionIdentifier;
+import jmul.math.functions.repository.FunctionIdentifierHelper;
 import jmul.math.functions.repository.FunctionIdentifiers;
 import jmul.math.hash.HashHelper;
 import static jmul.math.numbers.Constants.DEFAULT_BASE;
@@ -536,7 +537,7 @@ public class NumberImpl implements Number {
      * Returns the node which represents the zeroth position (i.e. <code>base^0</code>) within a number.
      * To the left are the digits which represent the positions 1 (<code>base^1</code>), 2 (<code>base^2</code>),
      * 3 (<code>base^3</code>), etc..
-     * To the left are the digits which represent the fraction and positions -1 (<code>base^-1</code>),
+     * To the right are the digits which represent the fraction and positions -1 (<code>base^-1</code>),
      * -2 (<code>base^-2</code>), 3 (<code>base^-3</code>), etc..
      *
      * @return the center node
@@ -1415,6 +1416,109 @@ public class NumberImpl implements Number {
         UnaryOperation<Number, Result<Fraction>> function =
             (UnaryOperation<Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.RECIPROCAL_OF_NUMBER_FUNCTION);
         Result<Fraction> result = function.calculate(this);
+
+        return result.result();
+    }
+
+    /**
+     * Round this number down to the nearest integer that doesn't exceed this number.
+     *
+     * @return the nearest integer that doesn't exceed this number
+     */
+    @Override
+    public Number roundDown() {
+
+        UnaryOperation<Number, Result<Number>> function =
+            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.ROUND_DOWN_NUMBER_FUNCTION);
+        Result<Number> result = function.calculate(this);
+
+        return result.result();
+    }
+
+    /**
+     * Round this number up to the nearest integer that is not less than this number.
+     *
+     * @return the nearest integer that is not less than this number
+     */
+    @Override
+    public Number roundUp() {
+
+        UnaryOperation<Number, Result<Number>> function =
+            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.ROUND_UP_NUMBER_FUNCTION);
+        Result<Number> result = function.calculate(this);
+
+        return result.result();
+    }
+
+    /**
+     * Shorten the precision of this number according to the specified decimal places.
+     *
+     * @param decimalPlaces
+     *        the number of decimal places remainign after rounding
+     *
+     * @return a rounded number
+     */
+    @Override
+    public Number round(int decimalPlaces) {
+
+        Number convertedParameter = new NumberImpl(decimalPlaces);
+
+        return round(FunctionIdentifiers.ROUND_NUMBER_TO_ODD_FUNCTION, convertedParameter);
+    }
+
+    /**
+     * Shorten the precision of this number according to the specified decimal places.
+     *
+     * @param decimalPlaces
+     *        the number of decimal places remainign after rounding
+     *
+     * @return a rounded number
+     */
+    @Override
+    public Number round(Number decimalPlaces) {
+
+        return round(FunctionIdentifiers.ROUND_NUMBER_TO_ODD_FUNCTION, decimalPlaces);
+    }
+
+    /**
+     * Shorten the precision of this number according to the specified decimal places.
+     *
+     * @param algorithm
+     *        the identifier for an algorithm
+     * @param decimalPlaces
+     *        the number of decimal places remaining after rounding
+     *
+     * @return a shortened number according to the specified precision
+     */
+    @Override
+    public Number round(FunctionIdentifier algorithm, int decimalPlaces) {
+
+        Number convertedParameter = new NumberImpl(decimalPlaces);
+
+        return round(algorithm, convertedParameter);
+    }
+
+    /**
+     * Shorten the precision of this number according to the specified decimal places.
+     *
+     * @param algorithm
+     *        the identifier for an algorithm
+     * @param decimalPlaces
+     *        the number of decimal places remaining after rounding
+     *
+     * @return a shortened number according to the specified precision
+     */
+    @Override
+    public Number round(FunctionIdentifier algorithm, Number decimalPlaces) {
+
+        final FunctionIdentifier[] ALLOWED_ALGORITHMS = new FunctionIdentifier[] {
+            FunctionIdentifiers.ROUND_NUMBER_TO_ODD_FUNCTION, FunctionIdentifiers.ROUND_NUMBER_TO_EVEN_FUNCTION
+        };
+        FunctionIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, algorithm);
+
+        BinaryOperation<Number, Result<Number>> function =
+            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(algorithm);
+        Result<Number> result = function.calculate(this, decimalPlaces);
 
         return result.result();
     }

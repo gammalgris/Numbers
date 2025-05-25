@@ -7,7 +7,7 @@
  * JMUL is a central repository for utilities which are used in my
  * other public and private repositories.
  *
- * Copyright (C) 2024  Kristian Kutin
+ * Copyright (C) 2025  Kristian Kutin
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,12 +34,8 @@
 package jmul.math.functions.implementations;
 
 
-import jmul.math.digits.Digit;
-import static jmul.math.functions.implementations.ParameterCheckHelper.checkParameter;
 import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
-import jmul.math.numbers.nodes.DigitNode;
-import jmul.math.numbers.nodes.NodesHelper;
+import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
 import jmul.math.signs.Sign;
@@ -47,56 +43,48 @@ import jmul.math.signs.Signs;
 
 
 /**
- * This is an implementation of a function that removes the fraction part from a number.
+ * A function that rounds a number up (i.e. the nearest integer that is not less than this number).
  *
  * @author Kristian Kutin
  */
-public class RemoveFractionPart implements UnaryOperation<Number, Result<Number>> {
+public class RoundUpFunction implements UnaryOperation<Number, Result<Number>> {
 
     /**
      * The default constructor.
      */
-    public RemoveFractionPart() {
+    public RoundUpFunction() {
 
         super();
     }
 
     /**
-     * Returns a copy of the specified number which is truncated (i.e. the integer part is removed).
+     * Rounds the specified number up (i.e.  the nearest integer that is not less than this number).
      *
-     * @param operand
+     * @param number
      *        a number
      *
-     * @return a truncated number
+     * @return  the nearest integer that is not less than this number
      */
     @Override
-    public Result<Number> calculate(Number operand) {
+    public Result<Number> calculate(Number number) {
 
-        checkParameter(operand);
+        ParameterCheckHelper.checkParameter(number);
 
-        if (operand.isInfinity()) {
+        if (number.isInteger() || number.isInfinity()) {
 
-            Number clone = new NumberImpl(operand);
+            Number clone = createNumber(number);
             return new Result<Number>(clone);
         }
 
-        int base = operand.base();
-        Sign sign = operand.sign();
+        Sign originalSign = number.sign();
+        Number result = number.removeFractionPart();
 
-        DigitNode center = operand.centerNode();
-        Digit digit = center.digit();
+        if (Signs.isPositive(originalSign)) {
 
-        DigitNode clonedCenter = NodesHelper.createNode(digit);
-        DigitNode clonedLeftTail = NodesHelper.cloneLeftTail(center.leftNode());
-        NodesHelper.linkNodes(clonedLeftTail, clonedCenter);
-
-        if ((clonedLeftTail == null) && digit.isZero()) {
-
-            sign = Signs.POSITIVE;
+            result = result.inc();
         }
 
-        Number clone = new NumberImpl(base, sign, clonedCenter);
-        return new Result<Number>(clone);
+        return new Result<Number>(result);
     }
 
 }
