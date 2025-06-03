@@ -46,17 +46,16 @@ import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
  * This class contains all allowed symbols for digits and provides
  * subsets for various positional numeral systems.<br>
  * <br>
- * <i>Note:<br>
+ * <i>Note:</i><br>
  * <ol>
- * <li>Base 1 is not supported. Integers would be represented by zeroes and
+ * <li><i>Base 1 is not supported. Integers would be represented by zeroes and
  * the zero count would define the integer. It's unclear how to interpret
- * a fraction of zeroes.</li>
- * <li>Minimum is base 2 which represents binary.</li>
- * <li>Maximum base is currently 62. If you allow greater bases then check which symbols
+ * a fraction of zeroes.</i></li>
+ * <li><i>Minimum is base 2 which represents binary.</i></li>
+ * <li><i>Maximum base is currently 62. If you allow greater bases then check which symbols
  * should be used for digits. These characters should not be conflict with operators (e.g. +, -, etc.).
- * Accordingly the regular expressions for parsing numbers should be expanded.</li>
+ * Accordingly the regular expressions for parsing numbers should be expanded.</i></li>
  * </ol>
- * </i>
  *
  * @author Kristian Kutin
  */

@@ -51,6 +51,8 @@ public class NumberParsingException extends RuntimeException {
     /**
      * Creates a new exception according to the specified parameters.
      *
+     * @param base
+     *        a number base
      * @param numberString
      *        the number string which couldn't be parsed
      * @param parsingExceptions

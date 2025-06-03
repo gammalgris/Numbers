@@ -116,11 +116,12 @@ public final class NodesHelper {
     }
 
     /**
-     * Clones the list to the left of this node.
+     * Clones the linked list (i.e. nodes) to the left of this node.
      *
      * @param node
+     *        a node in a linked list
      *
-     * @return a clone
+     * @return a clone of the left tail (i.e. linked list)
      */
     public static DigitNode cloneLeftTail(DigitNode node) {
 
@@ -188,11 +189,12 @@ public final class NodesHelper {
     }
 
     /**
-     * Clones the list to the right of this node.
+     * Clones the linked list (i.e. nodes) to the right of this node.
      *
      * @param node
+     *        a node in a linked list
      *
-     * @return a clone
+     * @return a clone of the right tail (i.e. linked list)
      */
     public static DigitNode cloneRightTail(DigitNode node) {
 
@@ -263,12 +265,15 @@ public final class NodesHelper {
     }
 
     /**
-     * Moves the references to the most a common node to the right.
+     * Moves the same number of steps to the right in both specified linked lists until both or one linked list reaches
+     * the last node.
      *
      * @param firstNode
      *        a reference to a node in the first linked list
      * @param secondNode
      *        a reference to a node in the second linked list
+     *
+     * @return references to each linked list in the specified order of linked lists
      */
     public static NodesResult moveRightSynchronously(DigitNode firstNode, DigitNode secondNode) {
 
@@ -292,12 +297,15 @@ public final class NodesHelper {
     }
 
     /**
-     * Moves the references to the most common node to the left.
+     * Moves the same number of steps to the left in both specified linked lists until both or one linked list reaches
+     * the last node.
      *
      * @param firstNode
      *        a reference to a node in the first linked list
      * @param secondNode
      *        a reference to a node in the second linked list
+     *
+     * @return references to each linked list in the specified order of linked lists
      */
     public static NodesResult moveLeftSynchronously(DigitNode firstNode, DigitNode secondNode) {
 

@@ -137,4 +137,14 @@ public interface Fraction extends Comparable, NumberComparisons, FractionCompari
      */
     Fraction absoluteValue();
 
+    /**
+     * Checks if the specified number is a common divisor of this numerator and denominator.
+     *
+     * @param number
+     *        a number
+     *
+     * @return <code>true</code> if this number common divisor of this numerator and denominator, else <code>false</code>
+     */
+    boolean isCommonDivisor(Number number);
+
 }

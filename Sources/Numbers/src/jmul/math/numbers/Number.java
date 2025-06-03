@@ -44,15 +44,14 @@ import jmul.math.operations.NumberComparisons;
  * The interface represents a number (i.e. natural numbers, integers and real numbers, but no irrational
  * numbers) and describes operations to access its digits and properties (e.g. sign).<br>
  * <br>
- * <i>Note:<br>
+ * <i>Note:</i><br>
  * <ul>
- * <li>The linked list data model is exposed as it is required for accessing digits and is a
- * requirement for performing arithmetic operations.</li>
- * <li>Numbers should not be modifiable.</li>
- * <li>Operations should return a modified copy of a number</li>
- * <li>Periodic decimal number can only be approximated (i.e. the decimal places must be truncated).</li>
+ * <li><i>The linked list data model is exposed as it is required for accessing digits and is a
+ * requirement for performing arithmetic operations.</i></li>
+ * <li><i>Numbers should not be modifiable.</i></li>
+ * <li><i>Operations should return a modified copy of a number</i></li>
+ * <li><i>Periodic decimal number can only be approximated (i.e. the decimal places must be truncated).</i></li>
  * </ul>
- * </i>
  *
  * @author Kristian Kutin
  */
@@ -241,5 +240,22 @@ public interface Number extends LinkedDigitList, ArithmeticNumberOperations, Num
      * @return a number
      */
     Number rebase(int base);
+
+    /**
+     * Checks if this number is a multiple of the specified number.
+     *
+     * @param number
+     *        a number
+     *
+     * @return <code>true</code> if this number is a multiple of the specified number, else <code>false</code>
+     */
+    boolean isMultipleOf(Number number);
+
+    /**
+     * Checks if this number is a prime number.
+     *
+     * @return <code>true</code> if this number is a prime number, else <code>false</code>
+     */
+    boolean isPrime();
 
 }

@@ -47,6 +47,7 @@ import jmul.math.numbers.NumberImpl;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.MixedBinaryOperation;
 import jmul.math.operations.Result;
+import jmul.math.operations.TernaryOperation;
 import jmul.math.operations.UnaryOperation;
 
 
@@ -63,7 +64,7 @@ public final class Math {
      * <i>Note:<br>
      * In several cases it is useful to cut the fractional part instead of running through end endless loop.</i>
      */
-    public static Number DEFAULT_MAXIMUM_FRACTION_LENGTH;
+    public static final Number DEFAULT_MAXIMUM_FRACTION_LENGTH;
 
     /*
      * The static initializer.
@@ -1520,6 +1521,81 @@ public final class Math {
         BinaryOperation<Number, Result<Number>> function =
             (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(algorithm);
         Result<Number> result = function.calculate(number, decimalPlaces);
+
+        return result.result();
+    }
+
+    /**
+     * Checks if the specified number is a common divisor of the specified fraction (i.e. numerator and denominator).
+     *
+     * @param fraction
+     *        a fraction
+     * @param number
+     *        a number
+     *
+     * @return <code>true</code> if the specified number is a common divisor of the specified fraction (i.e.
+     *         numerator and denominator), else <code>false</code>
+     */
+    public static boolean isCommonDivisor(Fraction fraction, Number number) {
+
+        //TODO
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * Checks if this number is a multiple of the specified number.
+     *
+     * @param number
+     *        a number
+     *
+     * @return <code>true</code> if this number is a multiple of the specified number, else <code>false</code>
+     */
+    public static boolean isMultipleOf(Number number) {
+
+        //TODO
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * Divides the first specified number by the second specified number.
+     *
+     * @param algorithm
+     *        the identifier for an algorithm
+     * @param n1
+     *        a number
+     * @param n2
+     *        a number
+     *
+     * @return the quotient
+     */
+    public static Number divide(FunctionIdentifier algorithm, Number n1, Number n2) {
+
+        return divide(algorithm, n1, n2, Math.DEFAULT_MAXIMUM_FRACTION_LENGTH);
+    }
+
+    /**
+     * Divides this number by the specified number.
+     *
+     * @param algorithm
+     *        the identifier for an algorithm
+     * @param n1
+     *        a number
+     * @param n2
+     *        a number
+     * @param decimalPlaces
+     *        the number of decimal places retained after cutting the fraction part
+     *
+     * @return the quotient
+     */
+    public static Number divide(FunctionIdentifier algorithm, Number n1, Number n2, Number decimalPlaces) {
+
+        final FunctionIdentifier[] ALLOWED_ALGORITHMS = new FunctionIdentifier[] {
+            FunctionIdentifiers.RUSSIAN_DIVISION_FUNCTION };
+        FunctionIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, algorithm);
+
+        TernaryOperation<Number, Result<Number>> function =
+            (TernaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(algorithm);
+        Result<Number> result = function.calculate(n1, n2, decimalPlaces);
 
         return result.result();
     }

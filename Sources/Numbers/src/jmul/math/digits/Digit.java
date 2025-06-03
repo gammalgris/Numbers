@@ -81,6 +81,9 @@ public interface Digit extends Comparable<Digit> {
     /**
      * Checks if this digit matches the specified ordinal value.
      *
+     * @param ordinal
+     *        an ordinal value
+     *
      * @return <code>true</code> if this digit matches the ordinal value, else <code>false</code>
      */
     boolean isOrdinal(int ordinal);

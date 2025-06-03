@@ -1090,4 +1090,19 @@ class MixedFraction implements Fraction {
         return result.result();
     }
 
+    /**
+     * Checks if the specified number is a common divisor of this numerator and denominator.
+     *
+     * @param number
+     *        a number
+     *
+     * @return <code>true</code> if this number common divisor of this numerator and denominator, else <code>false</code>
+     */
+    @Override
+    public boolean isCommonDivisor(Number number) {
+
+        //TODO
+        throw new UnsupportedOperationException();
+    }
+
 }

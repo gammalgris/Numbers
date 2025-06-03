@@ -159,7 +159,7 @@ public enum Signs implements Sign {
      * @param sign2
      *        a sign
      *
-     * @return returns a positive sign if both specified signs are positive, else returns a negative sign.
+     * @return returns a positive sign if one sign is positive or both signs are positive, else returns a negative sign.
      */
     public static Sign or(Sign sign1, Sign sign2) {
 

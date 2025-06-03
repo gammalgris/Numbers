@@ -203,22 +203,21 @@ public class RebaseNumber implements MixedBinaryOperation<Number, Integer, Resul
      * rebased fraction part. The new number base is specified in decimal and needs to be translated
      * to a number of the current number base for further calculations.<br>
      * <br>
-     * Rebasing the integer part:<br>
+     * Rebasing the integer part:</i><br>
      * <br>
      * <ol>
-     * <li>Divide the number by the new number base and keep the result and remainder.</li>
-     * <li>The result is divided by the new number base and repeated until the result is zero. Keep the remainders.</li>
-     * <li>The remainders of each division are taken to build the rebased integer part.</li>
+     * <li><i>Divide the number by the new number base and keep the result and remainder.</i></li>
+     * <li><i>The result is divided by the new number base and repeated until the result is zero. Keep the remainders.</i></li>
+     * <li><i>The remainders of each division are taken to build the rebased integer part.</i></li>
      * </ol>
      * <br>
-     * Rebasing the fraction part:<br>
+     * <i>Rebasing the fraction part:</i><br>
      * <ol>
-     * <li>Multiply the number with the new number base.</li>
-     * <li>The integer part of the result is taken to determine the next digit of the rebased fraction part.</li>
-     * <li>If the result is greater than one then keep the fractional part. The integer part represents the next digit of the rebased fraction.</li>
-     * <li>Take the result and go to step one. Repat this until the result is zero.</li>
+     * <li><i>Multiply the number with the new number base.</i></li>
+     * <li><i>The integer part of the result is taken to determine the next digit of the rebased fraction part.</i></li>
+     * <li><i>If the result is greater than one then keep the fractional part. The integer part represents the next digit of the rebased fraction.</i></li>
+     * <li><i>Take the result and go to step one. Repat this until the result is zero.</i></li>
      * </ol>
-     * </i>
      *
      * @param operand
      *        a number

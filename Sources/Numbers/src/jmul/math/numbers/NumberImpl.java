@@ -61,6 +61,7 @@ import jmul.math.operations.MixedBinaryOperation;
 import jmul.math.operations.MixedComparator;
 import jmul.math.operations.MixedEqualityFunction;
 import jmul.math.operations.Result;
+import jmul.math.operations.TernaryOperation;
 import jmul.math.operations.UnaryOperation;
 import jmul.math.signs.Sign;
 import jmul.math.signs.Signs;
@@ -1521,6 +1522,75 @@ public class NumberImpl implements Number {
         Result<Number> result = function.calculate(this, decimalPlaces);
 
         return result.result();
+    }
+
+    /**
+     * Checks if this number is a multiple of the specified number.
+     *
+     * @param number
+     *        a number
+     *
+     * @return <code>true</code> if this number is a multiple of the specified number, else <code>false</code>
+     */
+    @Override
+    public boolean isMultipleOf(Number number) {
+
+        //TODO
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * Divides this number by the specified number.
+     *
+     * @param algorithm
+     *        the identifier for an algorithm
+     * @param n
+     *        a number
+     *
+     * @return the quotient
+     */
+    @Override
+    public Number divide(FunctionIdentifier algorithm, Number n) {
+
+        return divide(algorithm, n, Math.DEFAULT_MAXIMUM_FRACTION_LENGTH);
+    }
+
+    /**
+     * Divides this number by the specified number.
+     *
+     * @param algorithm
+     *        the identifier for an algorithm
+     * @param n
+     *        a number
+     * @param decimalPlaces
+     *        the number of decimal places retained after cutting the fraction part
+     *
+     * @return the quotient
+     */
+    @Override
+    public Number divide(FunctionIdentifier algorithm, Number n, Number decimalPlaces) {
+
+        final FunctionIdentifier[] ALLOWED_ALGORITHMS = new FunctionIdentifier[] {
+            FunctionIdentifiers.RUSSIAN_DIVISION_FUNCTION };
+        FunctionIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, algorithm);
+
+        TernaryOperation<Number, Result<Number>> function =
+            (TernaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(algorithm);
+        Result<Number> result = function.calculate(this, n, decimalPlaces);
+
+        return result.result();
+    }
+
+    /**
+     * Checks if this number is a prime number.
+     *
+     * @return <code>true</code> if this number is a prime number, else <code>false</code>
+     */
+    @Override
+    public boolean isPrime() {
+
+        //TODO
+        throw new UnsupportedOperationException();
     }
 
 }

@@ -239,7 +239,7 @@ public class PositionalNumeralSystems {
      * @param ordinal
      *        the ordinal value of a digit
      *
-     * @return
+     * @return a string representation of the specified ordinal number
      */
     public static String toString(int base, int ordinal) {
 

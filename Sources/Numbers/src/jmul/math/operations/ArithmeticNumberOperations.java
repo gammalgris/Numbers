@@ -180,9 +180,35 @@ public interface ArithmeticNumberOperations {
      * @param n
      *        a number
      *
-     * @return an expression (e.g. a quotient, a mixed fraction or integer)
+     * @return a fraction (e.g. a quotient, a mixed fraction or integer)
      */
     Fraction divide(Number n);
+
+    /**
+     * Divides this number by the specified number.
+     *
+     * @param algorithm
+     *        the identifier for an algorithm
+     * @param n
+     *        a number
+     *
+     * @return the quotient
+     */
+    Number divide(FunctionIdentifier algorithm, Number n);
+
+    /**
+     * Divides this number by the specified number.
+     *
+     * @param algorithm
+     *        the identifier for an algorithm
+     * @param n
+     *        a number
+     * @param decimalPlaces
+     *        the number of decimal places retained after cutting fraction part
+     *
+     * @return the quotient
+     */
+    Number divide(FunctionIdentifier algorithm, Number n, Number decimalPlaces);
 
     /**
      * Divides this number by the specified fraction.
@@ -190,7 +216,7 @@ public interface ArithmeticNumberOperations {
      * @param f
      *        a fraction
      *
-     * @return a fraction
+     * @return a fraction (e.g. a quotient, a mixed fraction or integer)
      */
     Fraction divide(Fraction f);
 

@@ -94,6 +94,7 @@ import jmul.math.functions.implementations.RoundDownFunction;
 import jmul.math.functions.implementations.RoundNumberToOddFunction;
 import jmul.math.functions.implementations.RoundNumberToEvenFunction;
 import jmul.math.functions.implementations.RoundUpFunction;
+import jmul.math.functions.implementations.RussianDivisionFunction;
 import jmul.math.functions.implementations.ShiftLeft;
 import jmul.math.functions.implementations.ShiftRight;
 import jmul.math.functions.implementations.SubtractFractionAndNumber;
@@ -296,6 +297,7 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
                                     DivideNumberByFraction.class);
         repository.registerFunction(FunctionIdentifiers.DIVIDE_FRACTION_BY_NUMBER_FUNCTION,
                                     DivideFractionByNumber.class);
+        repository.registerFunction(FunctionIdentifiers.RUSSIAN_DIVISION_FUNCTION, RussianDivisionFunction.class);
 
         repository.registerFunction(FunctionIdentifiers.MODULO_FUNCTION, ModuloWithIntegersFunction.class);
         repository.registerFunction(FunctionIdentifiers.DIVISO_FUNCTION, DivisoWithIntegersFunction.class);

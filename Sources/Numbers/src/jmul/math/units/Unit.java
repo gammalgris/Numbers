@@ -30,7 +30,8 @@
  *
  * $Id$
  */
-package jmul.math.numbers;
+
+package jmul.math.units;
 
 
 /**
