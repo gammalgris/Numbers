@@ -36,6 +36,7 @@ package jmul.math.fractions;
 
 import java.util.Comparator;
 
+import jmul.math.Math;
 import jmul.math.digits.PositionalNumeralSystems;
 import static jmul.math.fractions.FractionHelper.CLONE;
 import static jmul.math.fractions.FractionHelper.DONT_CLONE;
@@ -223,14 +224,25 @@ class MixedFraction implements Fraction {
     @Override
     public Number evaluate() {
 
-        // Add the integer part and the fraction.
+        return evaluate(Math.DEFAULT_MAXIMUM_FRACTION_LENGTH);
+    }
 
-        // TODO Implement this method
-        // A different number division function is needed. An additional evaluate
-        // function is needed which require the specification of a division algorithm and
-        // an arbitrary precision.
+    /**
+     * Evaluates this fraction and returns a number which is equivalent to the fraction.
+     *
+     * @param decimalPlaces
+     *        the number of decimal places retained after cutting fraction part
+     *
+     * @return a number
+     */
+    @Override
+    public Number evaluate(Number decimalPlaces) {
 
-        throw new UnsupportedOperationException();
+        MixedBinaryOperation<Fraction, Number, Result<Number>> function =
+            (MixedBinaryOperation<Fraction, Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.EVALUATE_FRACTION_FUNCTION);
+        Result<Number> result = function.calculate(this, decimalPlaces);
+
+        return result.result();
     }
 
     /**

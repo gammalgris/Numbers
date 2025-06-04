@@ -58,6 +58,16 @@ public interface Fraction extends Comparable, NumberComparisons, FractionCompari
     Number evaluate();
 
     /**
+     * Evaluates this fraction and returns a number which is equivalent to the fraction.
+     *
+     * @param decimalPlaces
+     *        the number of decimal places retained after cutting the fraction part
+     *
+     * @return a number
+     */
+    Number evaluate(Number decimalPlaces);
+
+    /**
      * Normalizes this fraction (i.e. integrates an integer part into the numerator).
      *
      * @return a fraction

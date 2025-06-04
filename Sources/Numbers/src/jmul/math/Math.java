@@ -1600,4 +1600,36 @@ public final class Math {
         return result.result();
     }
 
+    /**
+     * Evaluates this mathematical expression and returns a calculation result.
+     *
+     * @param fraction
+     *        a fraction
+     *
+     * @return a number
+     */
+    public static Number evaluate(Fraction fraction) {
+
+        return evaluate(fraction, Math.DEFAULT_MAXIMUM_FRACTION_LENGTH);
+    }
+
+    /**
+     * Evaluates this fraction and returns a number which is equivalent to the fraction.
+     *
+     * @param fraction
+     *        a fraction
+     * @param decimalPlaces
+     *        the number of decimal places retained after cutting the fraction part
+     *
+     * @return a number
+     */
+    public static Number evaluate(Fraction fraction, Number decimalPlaces) {
+
+        MixedBinaryOperation<Fraction, Number, Result<Number>> function =
+            (MixedBinaryOperation<Fraction, Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.EVALUATE_FRACTION_FUNCTION);
+        Result<Number> result = function.calculate(fraction, decimalPlaces);
+
+        return result.result();
+    }
+
 }

@@ -52,6 +52,7 @@ import jmul.math.functions.implementations.DivisionOfNumbersBySubtractionReturnR
 import jmul.math.functions.implementations.DivisoWithIntegersFunction;
 import jmul.math.functions.implementations.DoublingFraction;
 import jmul.math.functions.implementations.DoublingNumber;
+import jmul.math.functions.implementations.EvaluateFraction;
 import jmul.math.functions.implementations.EvenNumberFunction;
 import jmul.math.functions.implementations.Factorial;
 import jmul.math.functions.implementations.FractionToAbsoluteValue;
@@ -87,12 +88,11 @@ import jmul.math.functions.implementations.ReciprocalOfFraction;
 import jmul.math.functions.implementations.ReciprocalOfNumber;
 import jmul.math.functions.implementations.RemoveFractionPart;
 import jmul.math.functions.implementations.RemoveIntegerPart;
-import jmul.math.functions.implementations.RoundDigitHalfUpFunction;
 import jmul.math.functions.implementations.RoundDigitToEvenFunction;
 import jmul.math.functions.implementations.RoundDigitToOddFunction;
 import jmul.math.functions.implementations.RoundDownFunction;
-import jmul.math.functions.implementations.RoundNumberToOddFunction;
 import jmul.math.functions.implementations.RoundNumberToEvenFunction;
+import jmul.math.functions.implementations.RoundNumberToOddFunction;
 import jmul.math.functions.implementations.RoundUpFunction;
 import jmul.math.functions.implementations.RussianDivisionFunction;
 import jmul.math.functions.implementations.ShiftLeft;
@@ -316,6 +316,8 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
         repository.registerFunction(FunctionIdentifiers.ROUND_NUMBER_TO_EVEN_FUNCTION, RoundNumberToEvenFunction.class);
         repository.registerFunction(FunctionIdentifiers.ROUND_UP_NUMBER_FUNCTION, RoundUpFunction.class);
         repository.registerFunction(FunctionIdentifiers.ROUND_DOWN_NUMBER_FUNCTION, RoundDownFunction.class);
+
+        repository.registerFunction(FunctionIdentifiers.EVALUATE_FRACTION_FUNCTION, EvaluateFraction.class);
 
         return repository;
     }

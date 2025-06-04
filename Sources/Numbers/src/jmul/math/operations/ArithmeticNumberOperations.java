@@ -204,7 +204,7 @@ public interface ArithmeticNumberOperations {
      * @param n
      *        a number
      * @param decimalPlaces
-     *        the number of decimal places retained after cutting fraction part
+     *        the number of decimal places retained after cutting the fraction part
      *
      * @return the quotient
      */
