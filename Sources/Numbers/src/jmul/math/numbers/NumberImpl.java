@@ -1535,8 +1535,11 @@ public class NumberImpl implements Number {
     @Override
     public boolean isMultipleOf(Number number) {
 
-        //TODO
-        throw new UnsupportedOperationException();
+        BinaryOperation<Number, Result<Boolean>> function =
+            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.IS_MULTIPLE_FUNCTION);
+        Result<Boolean> result = function.calculate(this, number);
+
+        return result.result();
     }
 
     /**

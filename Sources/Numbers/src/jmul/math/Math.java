@@ -1632,4 +1632,23 @@ public final class Math {
         return result.result();
     }
 
+    /**
+     * Checks if this number is a multiple of the specified number.
+     *
+     * @param number1
+     *        a number
+     * @param number2
+     *        a number
+     *
+     * @return <code>true</code> if this number is a multiple of the specified number, else <code>false</code>
+     */
+    public static boolean isMultipleOf(Number number1, Number number2) {
+
+        BinaryOperation<Number, Result<Boolean>> function =
+            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.IS_MULTIPLE_FUNCTION);
+        Result<Boolean> result = function.calculate(number1, number2);
+
+        return result.result();
+    }
+
 }

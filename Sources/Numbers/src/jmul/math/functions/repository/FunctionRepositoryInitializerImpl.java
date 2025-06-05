@@ -61,6 +61,7 @@ import jmul.math.functions.implementations.HalvingFraction;
 import jmul.math.functions.implementations.HalvingNumber;
 import jmul.math.functions.implementations.IncrementFraction;
 import jmul.math.functions.implementations.IncrementNumber;
+import jmul.math.functions.implementations.IsMultipleFunction;
 import jmul.math.functions.implementations.MaxFraction;
 import jmul.math.functions.implementations.MaxFractionNumber;
 import jmul.math.functions.implementations.MaxNumber;
@@ -318,6 +319,7 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
         repository.registerFunction(FunctionIdentifiers.ROUND_DOWN_NUMBER_FUNCTION, RoundDownFunction.class);
 
         repository.registerFunction(FunctionIdentifiers.EVALUATE_FRACTION_FUNCTION, EvaluateFraction.class);
+        repository.registerFunction(FunctionIdentifiers.IS_MULTIPLE_FUNCTION, IsMultipleFunction.class);
 
         return repository;
     }

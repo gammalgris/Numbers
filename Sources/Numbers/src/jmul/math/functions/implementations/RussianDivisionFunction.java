@@ -148,17 +148,29 @@ public class RussianDivisionFunction implements TernaryOperation<Number, Result<
         Number remainder = absoluteDividend;
 
         {
+            // Fill an inversely sorted map with multiples. The hash map should not be empty and must have at least
+            // one entry. Having too few entries might result in too many loops.
+
             Number factor = ONE;
             Number multiple = absoluteDivisor;
 
-            while (absoluteDividend.isGreater(multiple)) {
+            Number max = absoluteDividend;
+
+            while (max.isLesserOrEqual(multiple)) {
+
+                max = max.shiftRight();
+            }
+
+            while (max.isGreater(multiple)) {
 
                 multiples.put(factor, multiple);
 
                 factor = factor.doubling();
                 multiple = multiple.doubling();
             }
+        }
 
+        {
             while (true) {
 
                 if (remainder.isLesser(absoluteDivisor)) {
@@ -216,8 +228,8 @@ public class RussianDivisionFunction implements TernaryOperation<Number, Result<
 
                     remainder = remainder.shiftRight();
                     digits = digits.inc();
-                    
-                    if(remainder.isLesser(absoluteDivisor)) {
+
+                    if (remainder.isLesser(absoluteDivisor)) {
 
                         fractionPart = fractionPart.add(factor);
                         fractionPart = fractionPart.shiftRight();

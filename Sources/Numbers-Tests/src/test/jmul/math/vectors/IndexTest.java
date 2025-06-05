@@ -39,6 +39,8 @@ import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.signs.Signs;
 import jmul.math.vectors.IndexSingletons;
 
+import jmul.test.classification.UnitTest;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -50,6 +52,7 @@ import org.junit.Test;
  *
  * @author Kristian Kutin
  */
+@UnitTest
 public class IndexTest {
 
     /**
