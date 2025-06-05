@@ -36,6 +36,7 @@ package jmul.math.operations;
 
 import jmul.math.matrices.Matrix;
 import jmul.math.vectors.Vector;
+import jmul.math.numbers.Number;
 
 
 /**
@@ -52,20 +53,84 @@ import jmul.math.vectors.Vector;
  */
 public interface VectorOperations {
 
-    Number length(Vector vector);
+    /**
+     * Calculates the length of this vector.
+     *
+     * @return the length of this vector
+     */
+    Number length();
 
+    /**
+     * Adds this vector and the specified vector.
+     *
+     * @param vector
+     *        another vector
+     *
+     * @return the result of the addition
+     */
     Vector add(Vector vector);
 
+    /**
+     * Subtracts the specified vector form this vector.
+     *
+     * @param vector
+     *        another vector
+     *
+     * @return the result of the subtraction
+     */
     Vector subtract(Vector vector);
 
+    /**
+     * Multiply this vector with the specified number (i.e. perform a scalar multiplication).
+     *
+     * @param number
+     *        a number
+     *
+     * @return the result of the multiplication
+     */
     Vector multiply(Number number);
 
+    /**
+     * Multiplies this vector with the specified vector (i.e. calculates the inner product of two vectors).
+     *
+     * @param vector
+     *        another vector
+     *
+     * @return the result of the multiplication
+     */
     Number scalarProduct(Vector vector);
 
+    /**
+     * Calculates the cross product of this vector and the specified vector.
+     *
+     * @param vector
+     *        another vector
+     *
+     * @return the cross product
+     */
     Vector crossProduct(Vector vector);
 
+    /**
+     * Calculates the triple product of this vector and the two specified vectors.
+     *
+     * @param vector1
+     *        another vector
+     * @param vector2
+     *        another vector
+     *
+     * @return the triple product
+     */
     Vector tripleProduct(Vector vector1, Vector vector2);
 
+    /**
+     * Calculates the dyadic product of this vector and the specified vector. The underlying assumption ist that this
+     * first vector is interpreted as a column vector and the specified vector is interpreted as a row vector.
+     *
+     * @param vector
+     *        another vector
+     *
+     * @return the dyadic product
+     */
     Matrix dyadicProduct(Vector vector);
 
 }

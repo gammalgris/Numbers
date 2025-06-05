@@ -7,7 +7,7 @@
  * JMUL is a central repository for utilities which are used in my
  * other public and private repositories.
  *
- * Copyright (C) 2024  Kristian Kutin
+ * Copyright (C) 2025  Kristian Kutin
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,27 +31,62 @@
  * $Id$
  */
 
-package jmul.math.vectors;
+package jmul.math.vectors.nodes;
 
 
 import jmul.math.numbers.Number;
-import jmul.math.operations.VectorOperations;
 
 
 /**
- * This interface defines a vector.
+ * A helper class which contains various utility functions.
  *
  * @author Kristian Kutin
  */
-public interface Vector extends VectorOperations {
+public class NodesHelper {
 
     /**
-     * The dimensions of this vector.
-     * 
-     * @return the dimensions of this vector.
+     * The default constructor.
      */
-    Number dimensions();
+    private NodesHelper() {
 
-    Number component(Number dimension);
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * Creates a new node.
+     *
+     * @param index
+     *        an index number
+     *
+     * @return an index node
+     */
+    public static IndexNode createNode(Number index) {
+
+        return new IndexNodeImpl(index);
+    }
+
+    /**
+     * Links the two nodes.
+     *
+     * @param left
+     *        the left node
+     * @param right
+     *        the right node
+     */
+    public static void linkNodes(IndexNode left, IndexNode right) {
+
+        IndexNodeImpl leftNode = (IndexNodeImpl) left;
+        IndexNodeImpl rightNode = (IndexNodeImpl) right;
+
+        if (leftNode != null) {
+
+            leftNode.setRightNode(rightNode);
+        }
+
+        if (rightNode != null) {
+
+            rightNode.setLeftNode(leftNode);
+        }
+    }
 
 }

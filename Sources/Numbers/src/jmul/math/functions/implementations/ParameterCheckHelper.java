@@ -34,6 +34,8 @@
 package jmul.math.functions.implementations;
 
 
+import java.util.stream.Stream;
+
 import jmul.math.digits.Digit;
 import jmul.math.fractions.Fraction;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
@@ -345,6 +347,63 @@ public final class ParameterCheckHelper {
     public static void checkParameters(Number operand1, Fraction operand2) {
 
         checkParameters(operand2, operand1);
+    }
+
+    /**
+     * Checks the specified parameter.
+     *
+     * @param numbers
+     *        an array of numbers
+     *
+     * @return the specified array
+     */
+    public static Number[] checkParameter(Number[] numbers) {
+
+        if (numbers == null) {
+
+            String message = "No numbers (null) were specified!";
+            throw new IllegalArgumentException(message);
+        }
+
+        return numbers;
+    }
+
+    /**
+     * Checks the specified parameter.
+     *
+     * @param numbers
+     *        an iterable list or set of numbers
+     *
+     * @return the specified parameter
+     */
+    public static Iterable<Number> checkParameter(Iterable<Number> numbers) {
+
+        if (numbers == null) {
+
+            String message = "No numbers (null) were specified!";
+            throw new IllegalArgumentException(message);
+        }
+
+        return numbers;
+    }
+
+    /**
+     * Checks the specified parameter.
+     *
+     * @param numbers
+     *        a stream of numbers
+     *
+     * @return the specified parameter
+     */
+    public static Stream<Number> checkParameter(Stream<Number> numbers) {
+
+        if (numbers == null) {
+
+            String message = "No numbers (null) were specified!";
+            throw new IllegalArgumentException(message);
+        }
+
+        return numbers;
     }
 
 }

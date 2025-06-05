@@ -7,7 +7,7 @@
  * JMUL is a central repository for utilities which are used in my
  * other public and private repositories.
  *
- * Copyright (C) 2024  Kristian Kutin
+ * Copyright (C) 2025  Kristian Kutin
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,24 +34,19 @@
 package jmul.math.vectors;
 
 
-import jmul.math.numbers.Number;
-import jmul.math.operations.VectorOperations;
-
-
 /**
- * This interface defines a vector.
+ * A utility class for vector.
  *
  * @author Kristian Kutin
  */
-public interface Vector extends VectorOperations {
+public class VectorHelper {
 
     /**
-     * The dimensions of this vector.
-     * 
-     * @return the dimensions of this vector.
+     * The default constructor.
      */
-    Number dimensions();
+    private VectorHelper() {
 
-    Number component(Number dimension);
+        throw new UnsupportedOperationException();
+    }
 
 }

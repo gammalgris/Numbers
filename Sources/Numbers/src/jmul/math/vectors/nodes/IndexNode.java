@@ -7,7 +7,7 @@
  * JMUL is a central repository for utilities which are used in my
  * other public and private repositories.
  *
- * Copyright (C) 2024  Kristian Kutin
+ * Copyright (C) 2025  Kristian Kutin
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,27 +31,45 @@
  * $Id$
  */
 
-package jmul.math.vectors;
+package jmul.math.vectors.nodes;
 
 
 import jmul.math.numbers.Number;
-import jmul.math.operations.VectorOperations;
 
 
 /**
- * This interface defines a vector.
+ * This interface describes a special node type for a linked list of index numbers.
  *
  * @author Kristian Kutin
  */
-public interface Vector extends VectorOperations {
+public interface IndexNode {
 
     /**
-     * The dimensions of this vector.
-     * 
-     * @return the dimensions of this vector.
+     * Returns the index stored in this node.
+     *
+     * @return a digit
      */
-    Number dimensions();
+    Number index();
 
-    Number component(Number dimension);
+    /**
+     * Returns the node to the left of this node or <code>null</code> if there is no node.
+     *
+     * @return a node or <code>null</code> if there is no node to the left
+     */
+    IndexNode leftNode();
+
+    /**
+     * Returns the node to the right of this node or <code>null</code> if there is no node.
+     *
+     * @return a node or <code>null</code> if there is no node to the right
+     */
+    IndexNode rightNode();
+
+    /**
+     * Returns a string representation for this node.
+     *
+     * @return a string representation
+     */
+    String toString();
 
 }
