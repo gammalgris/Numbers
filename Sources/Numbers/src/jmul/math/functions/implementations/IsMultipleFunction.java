@@ -34,17 +34,28 @@
 package jmul.math.functions.implementations;
 
 
-import jmul.math.Math;
-import jmul.math.functions.FunctionSingletons;
-import jmul.math.functions.repository.FunctionIdentifiers;
+import java.util.Collections;
+import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
+
 import jmul.math.numbers.Number;
+import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.Result;
-import jmul.math.operations.TernaryOperation;
+import jmul.math.signs.Sign;
+import jmul.math.signs.Signs;
 
 
 /**
- * This function tests if a number is the multiple of a specified number.
+ * This function tests if a number is the multiple of a specified number.<br>
+ * <br>
+ * <i>Note:</i><br>
+ * <i>This implementation doesn't need a full division. A full division entails calculating the fraction part which is
+ * superfluous compuation in this scenario. It's enough to see if the first part of the division results in a remaidner
+ * or not. The fraction part and the default precision might in some cases be interpreted wrongly and lead to a wrong
+ * result.</i><br>
+ * <i> The russian division is used instead of division by subtraction.</i>
  *
  * @author Kristian Kutin
  */
@@ -61,28 +72,104 @@ public class IsMultipleFunction implements BinaryOperation<Number, Result<Boolea
     /**
      * Checks if the first specified number is a multiple of the second specified number.
      *
-     * @param number1
+     * @param operand1
      *        a number
-     * @param number2
+     * @param operand2
      *        a number
      *
      * @return <code>true</code> if the first specified number is a multiple of the second specified number,
      *         else <code>false</code>
      */
     @Override
-    public Result<Boolean> calculate(Number number1, Number number2) {
+    public Result<Boolean> calculate(Number operand1, Number operand2) {
 
-        ParameterCheckHelper.checkParameters(number1, number2);
+        ParameterCheckHelper.checkParameters(operand1, operand2);
 
-        TernaryOperation<Number, Result<Number>> divisionFunction =
-            (TernaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.RUSSIAN_DIVISION_FUNCTION);
-        Result<Number> divisionResult =
-            divisionFunction.calculate(number1, number2, Math.DEFAULT_MAXIMUM_FRACTION_LENGTH);
+        int base = operand1.base();
+        Sign sign = Signs.divideAndDetermineResultSign(operand1.sign(), operand2.sign());
 
-        Number quotient = divisionResult.result();
-        boolean result = quotient.isInteger();
+        final Number ZERO = createNumber(Signs.POSITIVE, base, 0);
 
-        return new Result<Boolean>(result);
+
+        // Handle special cases which can be resolved without computation.
+
+        if (operand1.isZero() || operand2.isZero()) {
+
+            return new Result<Boolean>(false);
+        }
+
+        if (operand1.isInfinity() || operand2.isInfinity()) {
+
+            return new Result<Boolean>(false);
+        }
+
+        if (operand1.isOne() && !operand2.isOne()) {
+
+            return new Result<Boolean>(false);
+        }
+
+        if (operand2.isOne()) {
+
+            return new Result<Boolean>(true);
+        }
+
+
+        // Determine the integer parts (result and remainder)
+
+        final Number ONE = createNumber(Signs.POSITIVE, base, 1);
+
+        SortedMap<Number, Number> multiples = new TreeMap<Number, Number>(Collections.reverseOrder());
+
+        Number absoluteDividend = operand1.absoluteValue();
+        Number absoluteDivisor = operand2.absoluteValue();
+
+        Number integerPart = ZERO;
+        Number remainder = absoluteDividend;
+
+        {
+            Number factor = ONE;
+            Number multiple = absoluteDivisor;
+
+            Number max = absoluteDividend;
+
+            while (max.isGreater(multiple)) {
+
+                multiples.put(factor, multiple);
+
+                factor = factor.doubling();
+                multiple = multiple.doubling();
+            }
+        }
+
+        {
+            while (true) {
+
+                if (remainder.isLesser(absoluteDivisor)) {
+
+                    break;
+                }
+
+                for (Map.Entry<Number, Number> entry : multiples.entrySet()) {
+
+                    Number key = entry.getKey();
+                    Number value = entry.getValue();
+
+                    if (remainder.isGreaterOrEqual(value)) {
+
+                        integerPart = integerPart.add(key);
+                        remainder = remainder.subtract(value);
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (remainder.isZero()) {
+
+            return new Result<Boolean>(true);
+        }
+
+        return new Result<Boolean>(false);
     }
 
 }

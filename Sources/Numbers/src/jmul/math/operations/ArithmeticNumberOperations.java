@@ -76,6 +76,13 @@ public interface ArithmeticNumberOperations {
     Number factorial();
 
     /**
+     * Calculates the square for this number.
+     *
+     * @return a number
+     */
+    Number square();
+
+    /**
      * Calculates the square root for this number.
      *
      * @return a number

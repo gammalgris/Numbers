@@ -34,6 +34,8 @@
 package jmul.math.numbers;
 
 
+import java.util.Set;
+
 import jmul.math.numbers.nodes.LinkedDigitList;
 import jmul.math.operations.ArithmeticNumberOperations;
 import jmul.math.operations.FractionComparisons;
@@ -257,5 +259,19 @@ public interface Number extends LinkedDigitList, ArithmeticNumberOperations, Num
      * @return <code>true</code> if this number is a prime number, else <code>false</code>
      */
     boolean isPrime();
+
+    /**
+     * Determines the divisor set for this number.
+     *
+     * @return a set of divisors
+     */
+    Set<Number> divisorSet();
+
+    /**
+     * Determines the prime factors for this number.
+     *
+     * @return a set of prime factors
+     */
+    Set<Number> primeFactors();
 
 }

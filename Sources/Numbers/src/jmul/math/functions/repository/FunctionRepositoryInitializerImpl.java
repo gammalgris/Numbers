@@ -98,6 +98,8 @@ import jmul.math.functions.implementations.RoundUpFunction;
 import jmul.math.functions.implementations.RussianDivisionFunction;
 import jmul.math.functions.implementations.ShiftLeft;
 import jmul.math.functions.implementations.ShiftRight;
+import jmul.math.functions.implementations.SquareFractionFunction;
+import jmul.math.functions.implementations.SquareNumberFunction;
 import jmul.math.functions.implementations.SubtractFractionAndNumber;
 import jmul.math.functions.implementations.SubtractFractions;
 import jmul.math.functions.implementations.SubtractNumberAndFraction;
@@ -320,6 +322,9 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
 
         repository.registerFunction(FunctionIdentifiers.EVALUATE_FRACTION_FUNCTION, EvaluateFraction.class);
         repository.registerFunction(FunctionIdentifiers.IS_MULTIPLE_FUNCTION, IsMultipleFunction.class);
+
+        repository.registerFunction(FunctionIdentifiers.SQUARE_NUMBER_FUNCTION, SquareNumberFunction.class);
+        repository.registerFunction(FunctionIdentifiers.SQUARE_FRACTION_FUNCTION, SquareFractionFunction.class);
 
         return repository;
     }

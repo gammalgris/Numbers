@@ -38,6 +38,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 import jmul.math.Math;
 import jmul.math.fractions.Fraction;
@@ -1591,6 +1592,45 @@ public class NumberImpl implements Number {
      */
     @Override
     public boolean isPrime() {
+
+        //TODO
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * Calculates the square for this number.
+     *
+     * @return a number
+     */
+    @Override
+    public Number square() {
+
+        UnaryOperation<Number, Result<Number>> function =
+            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.SQUARE_NUMBER_FUNCTION);
+        Result<Number> result = function.calculate(this);
+
+        return result.result();
+    }
+
+    /**
+     * Determines the divisor set for this number.
+     *
+     * @return a set of divisors
+     */
+    @Override
+    public Set<Number> divisorSet() {
+
+        //TODO
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * Determines the prime factors for this number.
+     *
+     * @return a set of prime factors
+     */
+    @Override
+    public Set<Number> primeFactors() {
 
         //TODO
         throw new UnsupportedOperationException();

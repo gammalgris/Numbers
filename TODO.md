@@ -54,7 +54,9 @@
 
 23) Update wiki
 
-24)
+24) Consolidate the division functions (i.e. diviso, modulo, division by subtraction, russion division, etc.).
+
+25)
 
 
 # Done

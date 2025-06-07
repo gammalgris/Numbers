@@ -60,6 +60,13 @@ public interface ArithmeticFractionOperations {
     Fraction negate();
 
     /**
+     * Calculates the square for this fraction.
+     *
+     * @return a fraction
+     */
+    Fraction square();
+
+    /**
      * Calculates the square root for this fraction.
      *
      * @return a fraction

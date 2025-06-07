@@ -35,6 +35,7 @@ package jmul.math;
 
 
 import java.util.Comparator;
+import java.util.Set;
 
 import jmul.math.fractions.Fraction;
 import jmul.math.functions.FunctionSingletons;
@@ -1649,6 +1650,68 @@ public final class Math {
         Result<Boolean> result = function.calculate(number1, number2);
 
         return result.result();
+    }
+
+    /**
+     * Calculates the square for the specified number.
+     *
+     * @param number
+     *        a number
+     *
+     * @return a number
+     */
+    public static Number square(Number number) {
+
+        UnaryOperation<Number, Result<Number>> function =
+            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.SQUARE_NUMBER_FUNCTION);
+        Result<Number> result = function.calculate(number);
+
+        return result.result();
+    }
+
+    /**
+     * Calculates the square for the specified fraction.
+     *
+     * @param fraction
+     *        a fraction
+     *
+     * @return a fraction
+     */
+    public static Fraction square(Fraction fraction) {
+
+        UnaryOperation<Fraction, Result<Fraction>> function =
+            (UnaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.SQUARE_FRACTION_FUNCTION);
+        Result<Fraction> result = function.calculate(fraction);
+
+        return result.result();
+    }
+
+    /**
+     * Determines the divisors for the specified number.
+     *
+     * @param number
+     *        a number
+     *
+     * @return a set of divisors
+     */
+    public static Set<Number> divisorSet(Number number) {
+
+        //TODO
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * Determines the prime factors for the specified number.
+     * 
+     * @param number
+     *        a number
+     * 
+     * @return a set of prime factors
+     */
+    public static Set<Number> primeFactors(Number number) {
+        
+        //TODO
+        throw new UnsupportedOperationException();
     }
 
 }

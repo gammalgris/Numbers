@@ -1117,4 +1117,19 @@ class MixedFraction implements Fraction {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Calculates the square for this fraction.
+     *
+     * @return a fraction
+     */
+    @Override
+    public Fraction square() {
+
+        UnaryOperation<Fraction, Result<Fraction>> function =
+            (UnaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.SQUARE_FRACTION_FUNCTION);
+        Result<Fraction> result = function.calculate(this);
+
+        return result.result();
+    }
+
 }
