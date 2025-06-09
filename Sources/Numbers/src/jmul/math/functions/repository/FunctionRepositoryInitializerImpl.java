@@ -34,6 +34,7 @@
 package jmul.math.functions.repository;
 
 
+import jmul.math.functions.implementations.IsPrimeFunction;
 import jmul.math.functions.implementations.AddDigits;
 import jmul.math.functions.implementations.AddFractionAndNumber;
 import jmul.math.functions.implementations.AddFractions;
@@ -43,6 +44,8 @@ import jmul.math.functions.implementations.AddNumbersTrimResult;
 import jmul.math.functions.implementations.BaseToNumber;
 import jmul.math.functions.implementations.DecrementFraction;
 import jmul.math.functions.implementations.DecrementNumber;
+import jmul.math.functions.implementations.DetermineDivisorsFunction;
+import jmul.math.functions.implementations.DeterminePrimeFactorsFunction;
 import jmul.math.functions.implementations.DigitComplement;
 import jmul.math.functions.implementations.DivideFractionByNumber;
 import jmul.math.functions.implementations.DivideFractions;
@@ -325,6 +328,11 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
 
         repository.registerFunction(FunctionIdentifiers.SQUARE_NUMBER_FUNCTION, SquareNumberFunction.class);
         repository.registerFunction(FunctionIdentifiers.SQUARE_FRACTION_FUNCTION, SquareFractionFunction.class);
+
+        repository.registerFunction(FunctionIdentifiers.DETERMINE_DIVISORS_FUNCTION, DetermineDivisorsFunction.class);
+        repository.registerFunction(FunctionIdentifiers.DETERMINE_PRIME_FACTORS_NUMBER,
+                                    DeterminePrimeFactorsFunction.class);
+        repository.registerFunction(FunctionIdentifiers.IS_PRIME_FUNCTION, IsPrimeFunction.class);
 
         return repository;
     }

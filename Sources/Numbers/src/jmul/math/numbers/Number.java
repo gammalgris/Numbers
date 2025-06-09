@@ -34,7 +34,7 @@
 package jmul.math.numbers;
 
 
-import java.util.Set;
+import java.util.SortedSet;
 
 import jmul.math.numbers.nodes.LinkedDigitList;
 import jmul.math.operations.ArithmeticNumberOperations;
@@ -261,17 +261,17 @@ public interface Number extends LinkedDigitList, ArithmeticNumberOperations, Num
     boolean isPrime();
 
     /**
-     * Determines the divisor set for this number.
+     * Determines the divisor set for this number. The result set contains divisors greater than one.
      *
      * @return a set of divisors
      */
-    Set<Number> divisorSet();
+    SortedSet<Number> divisorSet();
 
     /**
-     * Determines the prime factors for this number.
+     * Determines the prime factors for this number. The result set contains the prime factors.
      *
      * @return a set of prime factors
      */
-    Set<Number> primeFactors();
+    SortedSet<Number> primeFactors();
 
 }

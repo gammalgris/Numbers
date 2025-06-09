@@ -38,7 +38,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
+import java.util.SortedSet;
 
 import jmul.math.Math;
 import jmul.math.fractions.Fraction;
@@ -1593,8 +1593,11 @@ public class NumberImpl implements Number {
     @Override
     public boolean isPrime() {
 
-        //TODO
-        throw new UnsupportedOperationException();
+        UnaryOperation<Number, Result<Boolean>> function =
+            (UnaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.IS_PRIME_FUNCTION);
+        Result<Boolean> result = function.calculate(this);
+
+        return result.result();
     }
 
     /**
@@ -1613,27 +1616,33 @@ public class NumberImpl implements Number {
     }
 
     /**
-     * Determines the divisor set for this number.
+     * Determines the divisor set for this number. The result set contains divisors greater than one.
      *
      * @return a set of divisors
      */
     @Override
-    public Set<Number> divisorSet() {
+    public SortedSet<Number> divisorSet() {
 
-        //TODO
-        throw new UnsupportedOperationException();
+        UnaryOperation<Number, Result<SortedSet<Number>>> function =
+            (UnaryOperation<Number, Result<SortedSet<Number>>>) FunctionSingletons.getFunction(FunctionIdentifiers.DETERMINE_DIVISORS_FUNCTION);
+        Result<SortedSet<Number>> result = function.calculate(this);
+
+        return result.result();
     }
 
     /**
-     * Determines the prime factors for this number.
+     * Determines the prime factors for this number. The result set contains the prime factors.
      *
      * @return a set of prime factors
      */
     @Override
-    public Set<Number> primeFactors() {
+    public SortedSet<Number> primeFactors() {
 
-        //TODO
-        throw new UnsupportedOperationException();
+        UnaryOperation<Number, Result<SortedSet<Number>>> function =
+            (UnaryOperation<Number, Result<SortedSet<Number>>>) FunctionSingletons.getFunction(FunctionIdentifiers.DETERMINE_PRIME_FACTORS_NUMBER);
+        Result<SortedSet<Number>> result = function.calculate(this);
+
+        return result.result();
     }
 
 }

@@ -35,7 +35,7 @@ package jmul.math;
 
 
 import java.util.Comparator;
-import java.util.Set;
+import java.util.SortedSet;
 
 import jmul.math.fractions.Fraction;
 import jmul.math.functions.FunctionSingletons;
@@ -1694,24 +1694,47 @@ public final class Math {
      *
      * @return a set of divisors
      */
-    public static Set<Number> divisorSet(Number number) {
+    public static SortedSet<Number> divisorSet(Number number) {
 
-        //TODO
-        throw new UnsupportedOperationException();
+        UnaryOperation<Number, Result<SortedSet<Number>>> function =
+            (UnaryOperation<Number, Result<SortedSet<Number>>>) FunctionSingletons.getFunction(FunctionIdentifiers.DETERMINE_DIVISORS_FUNCTION);
+        Result<SortedSet<Number>> result = function.calculate(number);
+
+        return result.result();
     }
 
     /**
      * Determines the prime factors for the specified number.
-     * 
+     *
      * @param number
      *        a number
-     * 
+     *
      * @return a set of prime factors
      */
-    public static Set<Number> primeFactors(Number number) {
-        
-        //TODO
-        throw new UnsupportedOperationException();
+    public static SortedSet<Number> primeFactors(Number number) {
+
+        UnaryOperation<Number, Result<SortedSet<Number>>> function =
+            (UnaryOperation<Number, Result<SortedSet<Number>>>) FunctionSingletons.getFunction(FunctionIdentifiers.DETERMINE_PRIME_FACTORS_NUMBER);
+        Result<SortedSet<Number>> result = function.calculate(number);
+
+        return result.result();
+    }
+
+    /**
+     * Checks if this number is a prime number.
+     *
+     * @param number
+     *        a number
+     *
+     * @return <code>true</code> if this number is a prime number, else <code>false</code>
+     */
+    public static boolean isPrime(Number number) {
+
+        UnaryOperation<Number, Result<Boolean>> function =
+            (UnaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.IS_PRIME_FUNCTION);
+        Result<Boolean> result = function.calculate(number);
+
+        return result.result();
     }
 
 }
