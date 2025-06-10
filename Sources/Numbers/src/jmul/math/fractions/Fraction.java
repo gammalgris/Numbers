@@ -34,6 +34,8 @@
 package jmul.math.fractions;
 
 
+import java.util.SortedSet;
+
 import jmul.math.numbers.AbstractNumber;
 import jmul.math.numbers.Number;
 import jmul.math.operations.ArithmeticFractionOperations;
@@ -148,13 +150,19 @@ public interface Fraction extends Comparable, NumberComparisons, FractionCompari
     Fraction absoluteValue();
 
     /**
-     * Checks if the specified number is a common divisor of this numerator and denominator.
+     * Determines the common divisors for this fraction (i.e. numerator and denominator). The result set contains
+     * divisors greater than one.
      *
-     * @param number
-     *        a number
-     *
-     * @return <code>true</code> if this number common divisor of this numerator and denominator, else <code>false</code>
+     * @return a set of divisors or an empty set if there are no common divisors
      */
-    boolean isCommonDivisor(Number number);
+    SortedSet<Number> commonDivisorSet();
+
+    /**
+     * Determines the common prime factors for this fraction (i.e. numerator and denominator). The result set contains
+     * the prime factors.
+     *
+     * @return a set of prime factors or an empty set if there are no common prime factors
+     */
+    SortedSet<Number> commonPrimeFactors();
 
 }

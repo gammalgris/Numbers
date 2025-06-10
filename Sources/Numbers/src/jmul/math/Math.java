@@ -1737,4 +1737,57 @@ public final class Math {
         return result.result();
     }
 
+    /**
+     * Reduces the specified fraction.
+     *
+     * @param fraction
+     *        a fraction
+     *
+     * @return a fraction
+     */
+    public static Fraction reduce(Fraction fraction) {
+
+        UnaryOperation<Fraction, Result<Fraction>> function =
+            (UnaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.REDUCE_FRACTION_FUNCTION);
+        Result<Fraction> result = function.calculate(fraction);
+
+        return result.result();
+    }
+
+    /**
+     * Determines the common divisors for the specified fraction (i.e. numerator and denominator). The result set
+     * contains divisors greater than one.
+     *
+     * @param fraction
+     *        a fraction
+     *
+     * @return a set of divisors or an empty set if there are no common divisors
+     */
+    public static SortedSet<Number> commonDivisorSet(Fraction fraction) {
+
+        UnaryOperation<Fraction, Result<SortedSet<Number>>> function =
+            (UnaryOperation<Fraction, Result<SortedSet<Number>>>) FunctionSingletons.getFunction(FunctionIdentifiers.DETERMINE_COMMON_DIVISORS_FUNCTION);
+        Result<SortedSet<Number>> result = function.calculate(fraction);
+
+        return result.result();
+    }
+
+    /**
+     * Determines the common prime factors for the specified fraction (i.e. numerator and denominator). The result set
+     * contains the prime factors.
+     *
+     * @param fraction
+     *        a fraction
+     *
+     * @return a set of prime factors or an empty set if there are no common prime factors
+     */
+    public static SortedSet<Number> commonPrimeFactors(Fraction fraction) {
+
+        UnaryOperation<Fraction, Result<SortedSet<Number>>> function =
+            (UnaryOperation<Fraction, Result<SortedSet<Number>>>) FunctionSingletons.getFunction(FunctionIdentifiers.DETERMINE_COMMON_PRIME_FACTORS_FUNCTION);
+        Result<SortedSet<Number>> result = function.calculate(fraction);
+
+        return result.result();
+    }
+
 }

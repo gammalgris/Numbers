@@ -263,14 +263,14 @@ public interface Number extends LinkedDigitList, ArithmeticNumberOperations, Num
     /**
      * Determines the divisor set for this number. The result set contains divisors greater than one.
      *
-     * @return a set of divisors
+     * @return a set of divisors or an empty set if there are no divisors
      */
     SortedSet<Number> divisorSet();
 
     /**
      * Determines the prime factors for this number. The result set contains the prime factors.
      *
-     * @return a set of prime factors
+     * @return a set of prime factors or an empty set if there are no prime factors
      */
     SortedSet<Number> primeFactors();
 

@@ -34,7 +34,6 @@
 package jmul.math.functions.repository;
 
 
-import jmul.math.functions.implementations.IsPrimeFunction;
 import jmul.math.functions.implementations.AddDigits;
 import jmul.math.functions.implementations.AddFractionAndNumber;
 import jmul.math.functions.implementations.AddFractions;
@@ -44,6 +43,8 @@ import jmul.math.functions.implementations.AddNumbersTrimResult;
 import jmul.math.functions.implementations.BaseToNumber;
 import jmul.math.functions.implementations.DecrementFraction;
 import jmul.math.functions.implementations.DecrementNumber;
+import jmul.math.functions.implementations.DetermineCommonDivisorsFunction;
+import jmul.math.functions.implementations.DetermineCommonPrimeFactorsFunction;
 import jmul.math.functions.implementations.DetermineDivisorsFunction;
 import jmul.math.functions.implementations.DeterminePrimeFactorsFunction;
 import jmul.math.functions.implementations.DigitComplement;
@@ -65,6 +66,7 @@ import jmul.math.functions.implementations.HalvingNumber;
 import jmul.math.functions.implementations.IncrementFraction;
 import jmul.math.functions.implementations.IncrementNumber;
 import jmul.math.functions.implementations.IsMultipleFunction;
+import jmul.math.functions.implementations.IsPrimeFunction;
 import jmul.math.functions.implementations.MaxFraction;
 import jmul.math.functions.implementations.MaxFractionNumber;
 import jmul.math.functions.implementations.MaxNumber;
@@ -90,6 +92,7 @@ import jmul.math.functions.implementations.RebaseFraction;
 import jmul.math.functions.implementations.RebaseNumber;
 import jmul.math.functions.implementations.ReciprocalOfFraction;
 import jmul.math.functions.implementations.ReciprocalOfNumber;
+import jmul.math.functions.implementations.ReduceFraction;
 import jmul.math.functions.implementations.RemoveFractionPart;
 import jmul.math.functions.implementations.RemoveIntegerPart;
 import jmul.math.functions.implementations.RoundDigitToEvenFunction;
@@ -332,6 +335,11 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
         repository.registerFunction(FunctionIdentifiers.DETERMINE_DIVISORS_FUNCTION, DetermineDivisorsFunction.class);
         repository.registerFunction(FunctionIdentifiers.DETERMINE_PRIME_FACTORS_NUMBER,
                                     DeterminePrimeFactorsFunction.class);
+        repository.registerFunction(FunctionIdentifiers.DETERMINE_COMMON_DIVISORS_FUNCTION,
+                                    DetermineCommonDivisorsFunction.class);
+        repository.registerFunction(FunctionIdentifiers.DETERMINE_COMMON_PRIME_FACTORS_FUNCTION,
+                                    DetermineCommonPrimeFactorsFunction.class);
+        repository.registerFunction(FunctionIdentifiers.REDUCE_FRACTION_FUNCTION, ReduceFraction.class);
         repository.registerFunction(FunctionIdentifiers.IS_PRIME_FUNCTION, IsPrimeFunction.class);
 
         return repository;

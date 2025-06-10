@@ -35,6 +35,7 @@ package jmul.math.fractions;
 
 
 import java.util.Comparator;
+import java.util.SortedSet;
 
 import jmul.math.Math;
 import jmul.math.digits.PositionalNumeralSystems;
@@ -1050,8 +1051,11 @@ class MixedFraction implements Fraction {
     @Override
     public Fraction reduce() {
 
-        // TODO Implement this method
-        throw new UnsupportedOperationException();
+        UnaryOperation<Fraction, Result<Fraction>> function =
+            (UnaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.REDUCE_FRACTION_FUNCTION);
+        Result<Fraction> result = function.calculate(this);
+
+        return result.result();
     }
 
     /**
@@ -1103,21 +1107,6 @@ class MixedFraction implements Fraction {
     }
 
     /**
-     * Checks if the specified number is a common divisor of this numerator and denominator.
-     *
-     * @param number
-     *        a number
-     *
-     * @return <code>true</code> if this number common divisor of this numerator and denominator, else <code>false</code>
-     */
-    @Override
-    public boolean isCommonDivisor(Number number) {
-
-        //TODO
-        throw new UnsupportedOperationException();
-    }
-
-    /**
      * Calculates the square for this fraction.
      *
      * @return a fraction
@@ -1128,6 +1117,38 @@ class MixedFraction implements Fraction {
         UnaryOperation<Fraction, Result<Fraction>> function =
             (UnaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.SQUARE_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(this);
+
+        return result.result();
+    }
+
+    /**
+     * Determines the common divisors for this fraction (i.e. numerator and denominator). The result set contains
+     * divisors greater than one.
+     *
+     * @return a set of divisors
+     */
+    @Override
+    public SortedSet<Number> commonDivisorSet() {
+
+        UnaryOperation<Fraction, Result<SortedSet<Number>>> function =
+            (UnaryOperation<Fraction, Result<SortedSet<Number>>>) FunctionSingletons.getFunction(FunctionIdentifiers.DETERMINE_COMMON_DIVISORS_FUNCTION);
+        Result<SortedSet<Number>> result = function.calculate(this);
+
+        return result.result();
+    }
+
+    /**
+     * Determines the common prime factors for this fraction (i.e. numerator and denominator). The result set contains
+     * the prime factors.
+     *
+     * @return a set of prime factors
+     */
+    @Override
+    public SortedSet<Number> commonPrimeFactors() {
+
+        UnaryOperation<Fraction, Result<SortedSet<Number>>> function =
+            (UnaryOperation<Fraction, Result<SortedSet<Number>>>) FunctionSingletons.getFunction(FunctionIdentifiers.DETERMINE_COMMON_PRIME_FACTORS_FUNCTION);
+        Result<SortedSet<Number>> result = function.calculate(this);
 
         return result.result();
     }
