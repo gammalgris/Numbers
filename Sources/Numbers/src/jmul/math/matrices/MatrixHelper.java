@@ -7,7 +7,7 @@
  * JMUL is a central repository for utilities which are used in my
  * other public and private repositories.
  *
- * Copyright (C) 2024  Kristian Kutin
+ * Copyright (C) 2025  Kristian Kutin
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,49 +34,19 @@
 package jmul.math.matrices;
 
 
-import jmul.math.numbers.Number;
-import jmul.math.operations.MatrixOperations;
-import jmul.math.vectors.Vector;
-
-
 /**
- * This interface defines a matrix.
+ * A utility class for matrices.
  *
  * @author Kristian Kutin
  */
-public interface Matrix extends MatrixOperations {
+public final class MatrixHelper {
 
     /**
-     * Returns the component at the specified index positions.
-     * 
-     * @param columnIndex
-     *        a column index
-     * @param rowIndex
-     *        a row index
-     * 
-     * @return a number
+     * The default constructor.
      */
-    Number component(Number columnIndex, Number rowIndex);
+    private MatrixHelper() {
 
-    /**
-     * Returns the number base of this matrix.
-     * 
-     * @return a number base
-     */
-    int base();
-
-    /**
-     * Returns the number of columns of this matrix.
-     * 
-     * @return the number of columns
-     */
-    Number columns();
-
-    /**
-     * Returns the number of rows of this matrix.
-     * 
-     * @return the number of rows
-     */
-    Number rows();
+        throw new UnsupportedOperationException();
+    }
 
 }

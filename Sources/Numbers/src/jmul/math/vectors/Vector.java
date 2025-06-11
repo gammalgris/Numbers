@@ -43,15 +43,30 @@ import jmul.math.operations.VectorOperations;
  *
  * @author Kristian Kutin
  */
-public interface Vector extends VectorOperations {
+public interface Vector extends VectorOperations, Iterable<Number> {
 
     /**
      * The dimensions of this vector.
-     * 
+     *
      * @return the dimensions of this vector.
      */
     Number dimensions();
 
+    /**
+     * Returns the component of this vector for the specified dimension.
+     *
+     * @param dimension
+     *        a dimension
+     *
+     * @return a component (i.e. number)
+     */
     Number component(Number dimension);
+
+    /**
+     * Returns the number base for this vector.
+     *
+     * @return a base
+     */
+    int base();
 
 }

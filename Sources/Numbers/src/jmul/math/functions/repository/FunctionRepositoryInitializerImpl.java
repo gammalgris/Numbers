@@ -40,7 +40,9 @@ import jmul.math.functions.implementations.AddFractions;
 import jmul.math.functions.implementations.AddNumberAndFraction;
 import jmul.math.functions.implementations.AddNumbers;
 import jmul.math.functions.implementations.AddNumbersTrimResult;
+import jmul.math.functions.implementations.AddVectors;
 import jmul.math.functions.implementations.BaseToNumber;
+import jmul.math.functions.implementations.CrossProductFunction;
 import jmul.math.functions.implementations.DecrementFraction;
 import jmul.math.functions.implementations.DecrementNumber;
 import jmul.math.functions.implementations.DetermineCommonDivisorsFunction;
@@ -80,6 +82,7 @@ import jmul.math.functions.implementations.MultiplyFractionAndNumber;
 import jmul.math.functions.implementations.MultiplyFractions;
 import jmul.math.functions.implementations.MultiplyNumberAndFraction;
 import jmul.math.functions.implementations.MultiplyNumbers;
+import jmul.math.functions.implementations.MultiplyVectorWithNumber;
 import jmul.math.functions.implementations.NegateFraction;
 import jmul.math.functions.implementations.NegateNumber;
 import jmul.math.functions.implementations.NumberComplement;
@@ -102,6 +105,7 @@ import jmul.math.functions.implementations.RoundNumberToEvenFunction;
 import jmul.math.functions.implementations.RoundNumberToOddFunction;
 import jmul.math.functions.implementations.RoundUpFunction;
 import jmul.math.functions.implementations.RussianDivisionFunction;
+import jmul.math.functions.implementations.ScalarProductFunction;
 import jmul.math.functions.implementations.ShiftLeft;
 import jmul.math.functions.implementations.ShiftRight;
 import jmul.math.functions.implementations.SquareFractionFunction;
@@ -110,6 +114,8 @@ import jmul.math.functions.implementations.SubtractFractionAndNumber;
 import jmul.math.functions.implementations.SubtractFractions;
 import jmul.math.functions.implementations.SubtractNumberAndFraction;
 import jmul.math.functions.implementations.SubtractNumbers;
+import jmul.math.functions.implementations.SubtractVectors;
+import jmul.math.functions.implementations.TripleProductFunction;
 import jmul.math.functions.implementations.comparisons.DigitComparator;
 import jmul.math.functions.implementations.comparisons.FractionComparator;
 import jmul.math.functions.implementations.comparisons.FractionGreaterThanComparison;
@@ -136,6 +142,7 @@ import jmul.math.functions.implementations.equality.FractionEquality;
 import jmul.math.functions.implementations.equality.FractionNumberEquality;
 import jmul.math.functions.implementations.equality.NumberEquality;
 import jmul.math.functions.implementations.equality.NumberFractionEquality;
+import jmul.math.functions.implementations.equality.VectorEquality;
 import jmul.math.numbers.notations.ScientificNotationFunctionImpl;
 import jmul.math.numbers.notations.ScientificNotationParserImpl;
 import jmul.math.numbers.notations.StandardNotationFunctionImpl;
@@ -341,6 +348,16 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
                                     DetermineCommonPrimeFactorsFunction.class);
         repository.registerFunction(FunctionIdentifiers.REDUCE_FRACTION_FUNCTION, ReduceFraction.class);
         repository.registerFunction(FunctionIdentifiers.IS_PRIME_FUNCTION, IsPrimeFunction.class);
+
+        repository.registerFunction(FunctionIdentifiers.VECTOR_EQUALITY_FUNCTION, VectorEquality.class);
+
+        repository.registerFunction(FunctionIdentifiers.ADD_VECTORS_FUNCTION, AddVectors.class);
+        repository.registerFunction(FunctionIdentifiers.SUBTRACT_VECTORS_FUNCTION, SubtractVectors.class);
+        repository.registerFunction(FunctionIdentifiers.MULTIPLY_VECTOR_WITH_NUMBER_FUNCTION,
+                                    MultiplyVectorWithNumber.class);
+        repository.registerFunction(FunctionIdentifiers.SCALAR_PRODUCT_FUNCTION, ScalarProductFunction.class);
+        repository.registerFunction(FunctionIdentifiers.CROSS_PRODUCT_FUNCTION, CrossProductFunction.class);
+        repository.registerFunction(FunctionIdentifiers.TRIPLE_PRODUCT_FUNCTION, TripleProductFunction.class);
 
         return repository;
     }

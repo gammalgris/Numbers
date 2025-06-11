@@ -39,9 +39,17 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.stream.Stream;
 
+import jmul.math.functions.FunctionSingletons;
 import jmul.math.functions.implementations.ParameterCheckHelper;
+import jmul.math.functions.repository.FunctionIdentifiers;
+import jmul.math.hash.HashHelper;
 import jmul.math.matrices.Matrix;
 import jmul.math.numbers.Number;
+import jmul.math.operations.BinaryOperation;
+import jmul.math.operations.EqualityFunction;
+import jmul.math.operations.MixedBinaryOperation;
+import jmul.math.operations.Result;
+import jmul.math.operations.TernaryOperation;
 
 
 /**
@@ -51,6 +59,14 @@ import jmul.math.numbers.Number;
  */
 public class VectorImpl implements Vector {
 
+    /**
+     * The number base of this vector.
+     */
+    private final int base;
+
+    /**
+     * The dimensions of this vector.
+     */
     private final Number dimensions;
 
     /**
@@ -64,8 +80,20 @@ public class VectorImpl implements Vector {
      */
     public VectorImpl() {
 
+        this(10);
+    }
+
+    /**
+     * Creates a zero dimension vector.
+     *
+     * @param base
+     *        a number base
+     */
+    public VectorImpl(int base) {
+
         super();
 
+        this.base = ParameterCheckHelper.checkNumberBase(base);
         this.dimensions = IndexSingletons.firstIndex().dec();
         this.components = new TreeMap<Number, Number>();
     }
@@ -73,15 +101,18 @@ public class VectorImpl implements Vector {
     /**
      * Creates a vector according to the specified components.
      *
+     * @param base
+     *        a number base
      * @param components
      *        an array of components
      */
-    public VectorImpl(Number... components) {
+    public VectorImpl(int base, Number... components) {
 
         super();
 
         ParameterCheckHelper.checkParameter(components);
 
+        this.base = ParameterCheckHelper.checkNumberBase(base);
         this.components = new TreeMap<Number, Number>();
 
         Number dimension = IndexSingletons.firstIndex().dec();
@@ -89,6 +120,7 @@ public class VectorImpl implements Vector {
         for (Number component : components) {
 
             ParameterCheckHelper.checkParameter(component);
+            ParameterCheckHelper.checkNumberBase(base, component);
 
             dimension = dimension.inc();
             addComponent(dimension, component);
@@ -100,15 +132,18 @@ public class VectorImpl implements Vector {
     /**
      * Creates a vector according to the specified components.
      *
+     * @param base
+     *        a number base
      * @param components
      *        an iterable list or set of components
      */
-    public VectorImpl(Iterable<Number> components) {
+    public VectorImpl(int base, Iterable<Number> components) {
 
         super();
 
         ParameterCheckHelper.checkParameter(components);
 
+        this.base = ParameterCheckHelper.checkNumberBase(base);
         this.components = new TreeMap<Number, Number>();
 
         Number dimension = IndexSingletons.firstIndex().dec();
@@ -118,6 +153,10 @@ public class VectorImpl implements Vector {
 
             dimension = dimension.inc();
             Number component = iterator.next();
+
+            ParameterCheckHelper.checkParameter(component);
+            ParameterCheckHelper.checkNumberBase(base, component);
+
             addComponent(dimension, component);
         }
 
@@ -127,15 +166,18 @@ public class VectorImpl implements Vector {
     /**
      * Creates a vector according to the specified components.
      *
+     * @param base
+     *        a number base
      * @param components
      *        a stream which provides all components
      */
-    public VectorImpl(Stream<Number> components) {
+    public VectorImpl(int base, Stream<Number> components) {
 
         super();
 
         ParameterCheckHelper.checkParameter(components);
 
+        this.base = ParameterCheckHelper.checkNumberBase(base);
         this.components = new TreeMap<Number, Number>();
 
         Number dimension = IndexSingletons.firstIndex().dec();
@@ -145,6 +187,10 @@ public class VectorImpl implements Vector {
 
             dimension = dimension.inc();
             Number component = iterator.next();
+
+            ParameterCheckHelper.checkParameter(component);
+            ParameterCheckHelper.checkNumberBase(base, component);
+
             addComponent(dimension, component);
         }
 
@@ -176,12 +222,12 @@ public class VectorImpl implements Vector {
     }
 
     /**
-     * Returns the component for the specified dimension.
+     * Returns the component of this vector for the specified dimension.
      *
      * @param dimension
      *        a dimension
      *
-     * @return the component for the specified dimension
+     * @return a component (i.e. number)
      */
     @Override
     public Number component(Number dimension) {
@@ -222,8 +268,11 @@ public class VectorImpl implements Vector {
     @Override
     public Vector add(Vector vector) {
 
-        // TODO Implement this method
-        throw new UnsupportedOperationException();
+        BinaryOperation<Vector, Result<Vector>> function =
+            (BinaryOperation<Vector, Result<Vector>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_VECTORS_FUNCTION);
+        Result<Vector> result = function.calculate(this, vector);
+
+        return result.result();
     }
 
     /**
@@ -237,8 +286,11 @@ public class VectorImpl implements Vector {
     @Override
     public Vector subtract(Vector vector) {
 
-        // TODO Implement this method
-        throw new UnsupportedOperationException();
+        BinaryOperation<Vector, Result<Vector>> function =
+            (BinaryOperation<Vector, Result<Vector>>) FunctionSingletons.getFunction(FunctionIdentifiers.SUBTRACT_VECTORS_FUNCTION);
+        Result<Vector> result = function.calculate(this, vector);
+
+        return result.result();
     }
 
     /**
@@ -252,8 +304,11 @@ public class VectorImpl implements Vector {
     @Override
     public Vector multiply(Number number) {
 
-        // TODO Implement this method
-        throw new UnsupportedOperationException();
+        MixedBinaryOperation<Vector, Number, Result<Vector>> function =
+            (MixedBinaryOperation<Vector, Number, Result<Vector>>) FunctionSingletons.getFunction(FunctionIdentifiers.MULTIPLY_VECTOR_WITH_NUMBER_FUNCTION);
+        Result<Vector> result = function.calculate(this, number);
+
+        return result.result();
     }
 
     /**
@@ -267,8 +322,11 @@ public class VectorImpl implements Vector {
     @Override
     public Number scalarProduct(Vector vector) {
 
-        // TODO Implement this method
-        throw new UnsupportedOperationException();
+        BinaryOperation<Vector, Result<Number>> function =
+            (BinaryOperation<Vector, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.SCALAR_PRODUCT_FUNCTION);
+        Result<Number> result = function.calculate(this, vector);
+
+        return result.result();
     }
 
     /**
@@ -282,25 +340,31 @@ public class VectorImpl implements Vector {
     @Override
     public Vector crossProduct(Vector vector) {
 
-        // TODO Implement this method
-        throw new UnsupportedOperationException();
+        BinaryOperation<Vector, Result<Vector>> function =
+            (BinaryOperation<Vector, Result<Vector>>) FunctionSingletons.getFunction(FunctionIdentifiers.CROSS_PRODUCT_FUNCTION);
+        Result<Vector> result = function.calculate(this, vector);
+
+        return result.result();
     }
 
     /**
-     * Calculates the triple product of this vector and the two specified vectors.
+     * Calculates the triple product of this vector and the two specified vectors (i.e. <code>(vector1 x vector2) * vector3</code>)
      *
      * @param vector1
-     *        another vector
+     *        a vector
      * @param vector2
-     *        another vector
+     *        a vector
      *
      * @return the triple product
      */
     @Override
-    public Vector tripleProduct(Vector vector1, Vector vector2) {
+    public Number tripleProduct(Vector vector1, Vector vector2) {
 
-        // TODO Implement this method
-        throw new UnsupportedOperationException();
+        TernaryOperation<Vector, Result<Number>> function =
+            (TernaryOperation<Vector, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.TRIPLE_PRODUCT_FUNCTION);
+        Result<Number> result = function.calculate(this, vector1, vector2);
+
+        return result.result();
     }
 
     /**
@@ -317,6 +381,102 @@ public class VectorImpl implements Vector {
 
         // TODO Implement this method
         throw new UnsupportedOperationException();
+    }
+
+    /**
+     * Returns the number base for this vector.
+     *
+     * @return a base
+     */
+    @Override
+    public int base() {
+
+        return base;
+    }
+
+    /**
+     * Returns an iterator for this vector.
+     *
+     * @return an iterator
+     */
+    @Override
+    public Iterator<Number> iterator() {
+
+        return this.components
+                   .values()
+                   .iterator();
+    }
+
+    /**
+     * Calculates a hash code for this vector.
+     *
+     * @return a hash code
+     */
+    @Override
+    public int hashCode() {
+
+        return HashHelper.calculateHashCode(Vector.class, base, dimensions, components);
+    }
+
+    /**
+     * Checks the equality of this vector and the specified object (i.e. vector).
+     *
+     * @param o
+     *        another object (i.e. vector)
+     *
+     * @return <code>true</code> if this vector is equal to the specified vector, else <code>false</code>
+     */
+    @Override
+    public boolean equals(Object o) {
+
+        if (o instanceof Vector) {
+
+            Vector other = (Vector) o;
+
+            EqualityFunction<Vector> function =
+                (EqualityFunction<Vector>) FunctionSingletons.getFunction(FunctionIdentifiers.VECTOR_EQUALITY_FUNCTION);
+            boolean result = function.equals(this, other);
+
+            return result;
+        }
+
+        return false;
+    }
+
+    /**
+     * Returns a string representation for this vector.
+     *
+     * @return a string representation
+     */
+    @Override
+    public String toString() {
+
+        StringBuffer buffer = new StringBuffer();
+
+        buffer.append("(");
+
+        Iterator<Number> iterator = iterator();
+        boolean first = true;
+
+        while (iterator.hasNext()) {
+
+            if (first) {
+
+                first = false;
+
+            } else {
+
+                buffer.append(",");
+            }
+
+            Number component = iterator.next();
+
+            buffer.append(component);
+        }
+
+        buffer.append(")");
+
+        return buffer.toString();
     }
 
 }

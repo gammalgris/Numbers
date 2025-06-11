@@ -45,6 +45,8 @@ import jmul.math.numbers.NumberImpl;
 
 import jmul.reflection.constructors.ConstructorInvoker;
 
+import jmul.test.classification.UnitTest;
+
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -59,6 +61,7 @@ import org.junit.runners.Parameterized;
  *
  * @author Kristian Kutin
  */
+@UnitTest
 @RunWith(Parameterized.class)
 public class DigitTest {
 

@@ -42,6 +42,7 @@ import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.exceptions.DigitBaseMismatchException;
+import jmul.math.vectors.Vector;
 
 
 /**
@@ -77,20 +78,43 @@ public final class ParameterCheckHelper {
     /**
      * Checks the specified parameters and throws an exception if invalid.
      *
-     * @param i
-     *        a parameter
+     * @param base
+     *        a number base
+     *
+     * @return the specified parameter
      */
-    public static void checkNumberBase(Integer i) {
+    public static Integer checkNumberBase(Integer base) {
 
-        if (i == null) {
+        if (base == null) {
 
-            String message = "No integer (null) was specified!";
+            String message = "No number base (null) was specified!";
             throw new IllegalArgumentException(message);
         }
 
-        if ((i < BASE_MIN_LIMIT) && (i > BASE_MAX_LIMIT)) {
+        if ((base < BASE_MIN_LIMIT) || (base > BASE_MAX_LIMIT)) {
 
-            String message = String.format("An invalid number base was specified (%d)!", i);
+            String message = String.format("An invalid number base was specified (%d)!", base);
+            throw new IllegalArgumentException(message);
+        }
+
+        return base;
+    }
+
+    /**
+     * This operation only checks if the number bases match. Use other operations to check the individual parameters
+     * first.
+     *
+     * @param base
+     *        a number base
+     * @param number
+     *        a number
+     */
+    public static void checkNumberBase(Integer base, Number number) {
+
+        if (base != number.base()) {
+
+            String message =
+                String.format("The number bases don't match (expected=%d;actual=%d)!", base, number.base());
             throw new IllegalArgumentException(message);
         }
     }
@@ -404,6 +428,121 @@ public final class ParameterCheckHelper {
         }
 
         return numbers;
+    }
+
+    /**
+     * Checks the specified vectors.
+     *
+     * @param vector1
+     *        a vector
+     * @param vector2
+     *        a vector
+     */
+    public static void checkParameters(Vector vector1, Vector vector2) {
+
+        if (vector1 == null) {
+
+            String message = "No vector (null) was specified!";
+            throw new IllegalArgumentException(message);
+        }
+
+        if (vector2 == null) {
+
+            String message = "No vector (null) was specified!";
+            throw new IllegalArgumentException(message);
+        }
+
+        if (vector1.base() != vector2.base()) {
+
+            String message =
+                String.format("The vectors are of different number bases (%d & %d)!", vector1.base(), vector2.base());
+            throw new IllegalArgumentException(message);
+        }
+
+        if (!vector1.dimensions().equals(vector2.dimensions())) {
+
+            String message =
+                String.format("The vectors are of different dimensions (%d & %d)!", vector1.dimensions(),
+                              vector2.dimensions());
+            throw new IllegalArgumentException(message);
+        }
+    }
+
+    /**
+     * Checks the specified vectors.
+     *
+     * @param vector
+     *        a vector
+     * @param number
+     *        a number
+     */
+    public static void checkParameters(Vector vector, Number number) {
+
+        if (vector == null) {
+
+            String message = "No vector (null) was specified!";
+            throw new IllegalArgumentException(message);
+        }
+
+        if (number == null) {
+
+            String message = "No number (null) was specified!";
+            throw new IllegalArgumentException(message);
+        }
+
+        if (vector.base() != number.base()) {
+
+            String message =
+                String.format("The vector and the number are of different number bases (%d & %d)!", vector.base(),
+                              number.base());
+            throw new IllegalArgumentException(message);
+        }
+    }
+
+    /**
+     * Checks the specified vectors.
+     *
+     * @param vector1
+     *        a vector
+     * @param vector2
+     *        a vector
+     * @param vector3
+     *        a vector
+     */
+    public static void checkParameters(Vector vector1, Vector vector2, Vector vector3) {
+
+        if (vector1 == null) {
+
+            String message = "No vector (null) was specified!";
+            throw new IllegalArgumentException(message);
+        }
+
+        if (vector2 == null) {
+
+            String message = "No vector (null) was specified!";
+            throw new IllegalArgumentException(message);
+        }
+
+        if (vector3 == null) {
+
+            String message = "No vector (null) was specified!";
+            throw new IllegalArgumentException(message);
+        }
+
+        if (!((vector1.base() == vector2.base()) && (vector2.base() == vector3.base()))) {
+
+            String message =
+                String.format("The vectors are of different number bases (%d & %d)!", vector1.base(), vector2.base());
+            throw new IllegalArgumentException(message);
+        }
+
+        if (!(vector1.dimensions().equals(vector2.dimensions()) && vector2.dimensions().equals(vector3.dimensions()))) {
+
+            String message =
+                String.format("The vectors are of different dimensions (%d & %d)!", vector1.dimensions(),
+                              vector2.dimensions());
+            throw new IllegalArgumentException(message);
+        }
     }
 
 }

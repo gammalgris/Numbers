@@ -111,16 +111,16 @@ public interface VectorOperations {
     Vector crossProduct(Vector vector);
 
     /**
-     * Calculates the triple product of this vector and the two specified vectors.
+     * Calculates the triple product of this vector and the two specified vectors (i.e. <code>(vector1 x vector2) * vector3</code>)
      *
      * @param vector1
-     *        another vector
+     *        a vector
      * @param vector2
-     *        another vector
+     *        a vector
      *
      * @return the triple product
      */
-    Vector tripleProduct(Vector vector1, Vector vector2);
+    Number tripleProduct(Vector vector1, Vector vector2);
 
     /**
      * Calculates the dyadic product of this vector and the specified vector. The underlying assumption ist that this

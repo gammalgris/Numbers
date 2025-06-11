@@ -56,7 +56,13 @@
 
 24) Consolidate the division functions (i.e. diviso, modulo, division by subtraction, russion division, etc.).
 
-25)
+25) Save hash codes in a member variable to minimize calculations. See number, fraction, vector, matrix.
+
+26) Consider how compareTo might fit with vectors and matrices, i.e. what it could mean in each context.
+
+27) Check that tests are annotated accordingly (e.g. @UnitTest, @ManualTest, etc.).
+
+28)
 
 
 # Done

@@ -35,6 +35,7 @@ package jmul.math.operations;
 
 
 import jmul.math.matrices.Matrix;
+import jmul.math.vectors.Vector;
 
 
 /**
@@ -51,12 +52,48 @@ import jmul.math.matrices.Matrix;
  */
 public interface MatrixOperations {
 
+    /**
+     * Performs a matrix addition with this matrix and the specified matrix.
+     *
+     * @param matrix
+     *        a matrix
+     *
+     * @return the result
+     */
     Matrix add(Matrix matrix);
 
+    /**
+     * Performs a matrix subtraction with this matrix and the specified matrix.
+     *
+     * @param matrix
+     *        a matrix
+     *
+     * @return the result
+     */
     Matrix subtract(Matrix matrix);
 
+    /**
+     * Transposes this matrix.
+     *
+     * @return a transposed matrix
+     */
     Matrix transpose();
 
+    /**
+     * Performs a matrix multiplication with this matrix and the specified matrix.
+     *
+     * @param matrix
+     *        a matrix
+     *
+     * @return the result
+     */
     Matrix multiply(Matrix matrix);
+
+    /**
+     * Performs a vetoriazation of this matrix (i.e. transforms the matrix to a vector).
+     *
+     * @return a vector
+     */
+    Vector toVector();
 
 }

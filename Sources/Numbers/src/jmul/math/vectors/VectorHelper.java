@@ -34,6 +34,10 @@
 package jmul.math.vectors;
 
 
+import jmul.math.numbers.Number;
+import static jmul.math.numbers.NumberHelper.createNumber;
+
+
 /**
  * A utility class for vector.
  *
@@ -47,6 +51,46 @@ public class VectorHelper {
     private VectorHelper() {
 
         throw new UnsupportedOperationException();
+    }
+
+    /**
+     * Creates a new Vector.
+     *
+     * @param base
+     *        a number base
+     * @param components
+     *        all components of the new vector
+     *
+     * @return a new vector
+     */
+    protected static Vector createVector(int base, Number... components) {
+
+        return new VectorImpl(base, components);
+    }
+
+    /**
+     * Creates a new vector.
+     *
+     * @param base
+     *        a number base
+     * @param componentStrings
+     *        all components as strings
+     *
+     * @return a new vector
+     */
+    public static Vector createVector(int base, String... componentStrings) {
+
+        int length = componentStrings.length;
+        Number[] components = new Number[length];
+
+        for (int index = 0; index < length; index++) {
+
+            String componentString = componentStrings[index];
+            Number number = createNumber(base, componentString);
+            components[index] = number;
+        }
+
+        return createVector(base, components);
     }
 
 }

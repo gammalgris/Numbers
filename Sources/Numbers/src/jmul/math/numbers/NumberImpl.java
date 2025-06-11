@@ -599,7 +599,7 @@ public class NumberImpl implements Number {
      * @param o
      *        another object (i.e. number)
      *
-     * @return <code>true</code> if this number is euqal to the specified number, else <code>false</code>
+     * @return <code>true</code> if this number is equal to the specified number, else <code>false</code>
      */
     @Override
     public boolean equals(Object o) {

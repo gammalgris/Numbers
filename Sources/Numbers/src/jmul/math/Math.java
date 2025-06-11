@@ -50,6 +50,7 @@ import jmul.math.operations.MixedBinaryOperation;
 import jmul.math.operations.Result;
 import jmul.math.operations.TernaryOperation;
 import jmul.math.operations.UnaryOperation;
+import jmul.math.vectors.Vector;
 
 
 /**
@@ -1786,6 +1787,122 @@ public final class Math {
         UnaryOperation<Fraction, Result<SortedSet<Number>>> function =
             (UnaryOperation<Fraction, Result<SortedSet<Number>>>) FunctionSingletons.getFunction(FunctionIdentifiers.DETERMINE_COMMON_PRIME_FACTORS_FUNCTION);
         Result<SortedSet<Number>> result = function.calculate(fraction);
+
+        return result.result();
+    }
+
+    /**
+     * Adds the specified vectors.
+     *
+     * @param vector1
+     *        a vector
+     * @param vector2
+     *        a vector
+     *
+     * @return the result of the addition
+     */
+    public static Vector add(Vector vector1, Vector vector2) {
+
+        BinaryOperation<Vector, Result<Vector>> function =
+            (BinaryOperation<Vector, Result<Vector>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_VECTORS_FUNCTION);
+        Result<Vector> result = function.calculate(vector1, vector2);
+
+        return result.result();
+    }
+
+    /**
+     * Subtracts the specified vectors.
+     *
+     * @param vector1
+     *        a vector
+     * @param vector2
+     *        a vector
+     *
+     * @return the result of the subtraction
+     */
+    public static Vector subtract(Vector vector1, Vector vector2) {
+
+        BinaryOperation<Vector, Result<Vector>> function =
+            (BinaryOperation<Vector, Result<Vector>>) FunctionSingletons.getFunction(FunctionIdentifiers.SUBTRACT_VECTORS_FUNCTION);
+        Result<Vector> result = function.calculate(vector1, vector2);
+
+        return result.result();
+    }
+
+    /**
+     * Multiplies the specified vector with the specified number (i.e. perform a scalar multiplication).
+     *
+     * @param vector
+     *        a vector
+     * @param number
+     *        a number
+     *
+     * @return the result of the multiplication
+     */
+    public static Vector multiply(Vector vector, Number number) {
+
+        MixedBinaryOperation<Vector, Number, Result<Vector>> function =
+            (MixedBinaryOperation<Vector, Number, Result<Vector>>) FunctionSingletons.getFunction(FunctionIdentifiers.MULTIPLY_VECTOR_WITH_NUMBER_FUNCTION);
+        Result<Vector> result = function.calculate(vector, number);
+
+        return result.result();
+    }
+
+    /**
+     * Multiplies the specified vectors (i.e. calculates the inner product of two vectors).
+     *
+     * @param vector1
+     *        a vector
+     * @param vector2
+     *        a vector
+     *
+     * @return the result of the multiplication
+     */
+    public static Number scalarProduct(Vector vector1, Vector vector2) {
+
+        BinaryOperation<Vector, Result<Number>> function =
+            (BinaryOperation<Vector, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.SCALAR_PRODUCT_FUNCTION);
+        Result<Number> result = function.calculate(vector1, vector2);
+
+        return result.result();
+    }
+
+    /**
+     * Calculates the cross product of the specified vectors.
+     *
+     * @param vector1
+     *        a vector
+     * @param vector2
+     *        a vector
+     *
+     * @return the cross product
+     */
+    public static Vector crossProduct(Vector vector1, Vector vector2) {
+
+        BinaryOperation<Vector, Result<Vector>> function =
+            (BinaryOperation<Vector, Result<Vector>>) FunctionSingletons.getFunction(FunctionIdentifiers.CROSS_PRODUCT_FUNCTION);
+        Result<Vector> result = function.calculate(vector1, vector2);
+
+        return result.result();
+    }
+
+    /**
+     * Calculates the triple product of this vector and the two specified vectors (i.e. <code>(vector1 x vector2) * vector3</code>).
+     *
+     * @param vector1
+     *        a vector
+     * @param vector2
+     *        a vector
+     * @param vector3
+     *        a vector
+     *
+     * @return the triple product
+     */
+    public static Number tripleProduct(Vector vector1, Vector vector2, Vector vector3) {
+
+        TernaryOperation<Vector, Result<Number>> function =
+            (TernaryOperation<Vector, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.TRIPLE_PRODUCT_FUNCTION);
+        Result<Number> result = function.calculate(vector1, vector2, vector3);
 
         return result.result();
     }
