@@ -36,6 +36,7 @@ package jmul.math.numbers;
 
 import java.util.SortedSet;
 
+import jmul.math.fractions.Fraction;
 import jmul.math.numbers.nodes.LinkedDigitList;
 import jmul.math.operations.ArithmeticNumberOperations;
 import jmul.math.operations.FractionComparisons;
@@ -273,5 +274,12 @@ public interface Number extends LinkedDigitList, ArithmeticNumberOperations, Num
      * @return a set of prime factors or an empty set if there are no prime factors
      */
     SortedSet<Number> primeFactors();
+
+    /**
+     * Translates this number into a fraction.
+     *
+     * @return a fraction
+     */
+    Fraction toFraction();
 
 }

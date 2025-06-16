@@ -37,6 +37,7 @@ package jmul.math.functions.repository;
 import jmul.math.functions.implementations.AddDigits;
 import jmul.math.functions.implementations.AddFractionAndNumber;
 import jmul.math.functions.implementations.AddFractions;
+import jmul.math.functions.implementations.AddMatrices;
 import jmul.math.functions.implementations.AddNumberAndFraction;
 import jmul.math.functions.implementations.AddNumbers;
 import jmul.math.functions.implementations.AddNumbersTrimResult;
@@ -112,6 +113,7 @@ import jmul.math.functions.implementations.SquareFractionFunction;
 import jmul.math.functions.implementations.SquareNumberFunction;
 import jmul.math.functions.implementations.SubtractFractionAndNumber;
 import jmul.math.functions.implementations.SubtractFractions;
+import jmul.math.functions.implementations.SubtractMatrices;
 import jmul.math.functions.implementations.SubtractNumberAndFraction;
 import jmul.math.functions.implementations.SubtractNumbers;
 import jmul.math.functions.implementations.SubtractVectors;
@@ -358,6 +360,9 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
         repository.registerFunction(FunctionIdentifiers.SCALAR_PRODUCT_FUNCTION, ScalarProductFunction.class);
         repository.registerFunction(FunctionIdentifiers.CROSS_PRODUCT_FUNCTION, CrossProductFunction.class);
         repository.registerFunction(FunctionIdentifiers.TRIPLE_PRODUCT_FUNCTION, TripleProductFunction.class);
+
+        repository.registerFunction(FunctionIdentifiers.ADD_MATRICES_FUNCTION, AddMatrices.class);
+        repository.registerFunction(FunctionIdentifiers.SUBTRACT_MATRICES_FUNCTION, SubtractMatrices.class);
 
         return repository;
     }

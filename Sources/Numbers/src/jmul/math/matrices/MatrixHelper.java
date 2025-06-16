@@ -34,6 +34,11 @@
 package jmul.math.matrices;
 
 
+import jmul.math.functions.implementations.ParameterCheckHelper;
+import jmul.math.numbers.Number;
+import static jmul.math.numbers.NumberHelper.createNumber;
+
+
 /**
  * A utility class for matrices.
  *
@@ -47,6 +52,56 @@ public final class MatrixHelper {
     private MatrixHelper() {
 
         throw new UnsupportedOperationException();
+    }
+
+    /**
+     * Creates a new matrix.
+     *
+     * @param base
+     *        a number base
+     * @param columns
+     *        a number of columns
+     * @param rows
+     *        a number of rows
+     * @param components
+     *        all components of the new Matrix
+     *
+     * @return a new matrix
+     */
+    protected static Matrix createMatrix(int base, Number columns, Number rows, Number... components) {
+
+        return new MatrixImpl(base, columns, rows, components);
+    }
+
+    /**
+     * Creates a new matrix.
+     *
+     * @param base
+     *        a number base
+     * @param columns
+     *        a number of columns
+     * @param rows
+     *        a number of rows
+     * @param componentStrings
+     *        all components as strings
+     *
+     * @return a new matrix
+     */
+    public static Matrix createMatrix(int base, Number columns, Number rows, String... componentStrings) {
+
+        ParameterCheckHelper.checkParameter(componentStrings);
+
+        int length = componentStrings.length;
+        Number[] components = new Number[length];
+
+        for (int index = 0; index < length; index++) {
+
+            String componentString = componentStrings[index];
+            Number number = createNumber(base, componentString);
+            components[index] = number;
+        }
+
+        return createMatrix(base, columns, rows, components);
     }
 
 }

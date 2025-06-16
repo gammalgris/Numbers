@@ -95,6 +95,16 @@ public class IndexSingletons {
         return SINGLETON.firstIndex();
     }
 
+    /**
+     * Returns the default number base for index values.
+     *
+     * @return a default number base
+     */
+    public static int defaultNumberBase() {
+
+        return SINGLETON.defaultNumberBase();
+    }
+
 }
 
 
@@ -124,6 +134,13 @@ interface IndexRepository {
      * @return the first index
      */
     Number firstIndex();
+
+    /**
+     * Returns the default number base for index values.
+     *
+     * @return a default number base
+     */
+    int defaultNumberBase();
 
 }
 
@@ -312,6 +329,17 @@ class IndexRepositoryImpl implements IndexRepository {
     public Number firstIndex() {
 
         return firstNode.index();
+    }
+
+    /**
+     * Returns the default number base for index values.
+     *
+     * @return a default number base
+     */
+    @Override
+    public int defaultNumberBase() {
+
+        return DEFAULT_NUMBER_BASE;
     }
 
 }

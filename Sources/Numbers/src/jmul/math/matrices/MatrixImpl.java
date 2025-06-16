@@ -35,10 +35,17 @@ package jmul.math.matrices;
 
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.stream.Stream;
 
+import jmul.math.functions.FunctionSingletons;
+import jmul.math.functions.implementations.ParameterCheckHelper;
+import jmul.math.functions.repository.FunctionIdentifiers;
 import jmul.math.hash.HashHelper;
 import jmul.math.numbers.Number;
+import jmul.math.operations.BinaryOperation;
+import jmul.math.operations.Result;
 import jmul.math.vectors.IndexSingletons;
 import jmul.math.vectors.Vector;
 
@@ -88,7 +95,7 @@ public class MatrixImpl implements Matrix {
 
         super();
 
-        this.base = base;
+        this.base = ParameterCheckHelper.checkNumberBase(base);
 
         Number ZERO = IndexSingletons.firstIndex().dec();
 
@@ -113,10 +120,172 @@ public class MatrixImpl implements Matrix {
 
         super();
 
-        this.base = base;
+        ParameterCheckHelper.checkParameter(numbers);
 
-        //TODO
-        throw new UnsupportedOperationException();
+        this.base = ParameterCheckHelper.checkNumberBase(base);
+        ParameterCheckHelper.checkMatrixSize(columns, rows);
+
+
+        this.columns = ParameterCheckHelper.checkIndex(columns);
+        this.rows = ParameterCheckHelper.checkIndex(rows);
+        this.cells = new HashMap<>();
+
+        addElements(numbers);
+    }
+
+    /**
+     * Creates a matrix according to the specified base, size and components.
+     *
+     * @param base
+     *        a number base
+     * @param columns
+     *        a number of columns
+     * @param rows
+     *        a number of rows
+     * @param iterator
+     *        an iterator (i.e. an iterable container)
+     */
+    private MatrixImpl(int base, Number columns, Number rows, Iterator<Number> iterator) {
+
+        super();
+
+        this.base = ParameterCheckHelper.checkNumberBase(base);
+        ParameterCheckHelper.checkMatrixSize(columns, rows);
+
+        this.columns = columns;
+        this.rows = rows;
+        this.cells = new HashMap<>();
+
+        addElements(iterator);
+    }
+
+    /**
+     * Creates a matrix according to the specified base, size and components.
+     *
+     * @param base
+     *        a number base
+     * @param columns
+     *        a number of columns
+     * @param rows
+     *        a number of rows
+     * @param components
+     *        an iterable container
+     */
+    public MatrixImpl(int base, Number columns, Number rows, Iterable<Number> components) {
+
+        this(base, columns, rows, ParameterCheckHelper.checkParameter(components).iterator());
+    }
+
+    /**
+     * Creates a matrix according to the specified base, size and components.
+     *
+     * @param base
+     *        a number base
+     * @param columns
+     *        a number of columns
+     * @param rows
+     *        a number of rows
+     * @param components
+     *        a stream which provides all components
+     */
+    public MatrixImpl(int base, Number columns, Number rows, Stream<Number> components) {
+
+        this(base, columns, rows, ParameterCheckHelper.checkParameter(components).iterator());
+    }
+
+    /**
+     * Adds the specified elements to this matrix.<br>
+     * <br>
+     * <i>Example:<br>
+     * <br>
+     * The array:<br>
+     * <code>{1, 2, 3, 4}</code><br>
+     * <br>
+     * The corresponding matrix:<br>
+     * <code>|1, 3|<br>
+     * |2, 4|</code>
+     * </i>
+     *
+     * @param numbers
+     *        all matrix elements
+     */
+    private void addElements(Number... numbers) {
+
+        final Number firstIndex = IndexSingletons.firstIndex();
+        int index = 0;
+
+        for (Number columnIndex = firstIndex; columnIndex.isLesserOrEqual(columns);
+             columnIndex = IndexSingletons.nextIndex(columnIndex)) {
+
+            for (Number rowIndex = firstIndex; rowIndex.isLesserOrEqual(rows);
+                 rowIndex = IndexSingletons.nextIndex(rowIndex)) {
+
+                if (index >= numbers.length) {
+
+                    String message = "The specified number array has fewer elements than expected!";
+                    throw new IllegalArgumentException(message);
+                }
+
+                Number number = numbers[index];
+
+                Location loacation = new Location(columnIndex, rowIndex);
+                cells.put(loacation, number);
+
+                index++;
+            }
+        }
+
+        if (index < numbers.length) {
+
+            String message = "The specified number array has more elements than expected!";
+            throw new IllegalArgumentException(message);
+        }
+    }
+
+    /**
+     * Adds the specified elements to this matrix.<br>
+     * <br>
+     * <i>Example:<br>
+     * <br>
+     * The array:<br>
+     * <code>{1, 2, 3, 4}</code><br>
+     * <br>
+     * The corresponding matrix:<br>
+     * <code>|1, 3|<br>
+     * |2, 4|</code>
+     * </i>
+     *
+     * @param iterator
+     *        an iterator (i.e. an iterable container)
+     */
+    private void addElements(Iterator<Number> iterator) {
+
+        final Number firstIndex = IndexSingletons.firstIndex();
+
+        for (Number columnIndex = firstIndex; columnIndex.isLesserOrEqual(columns);
+             columnIndex = IndexSingletons.nextIndex(columnIndex)) {
+
+            for (Number rowIndex = firstIndex; rowIndex.isLesserOrEqual(rows);
+                 rowIndex = IndexSingletons.nextIndex(rowIndex)) {
+
+                if (!iterator.hasNext()) {
+
+                    String message = "The specified container has fewer elements than expected!";
+                    throw new IllegalArgumentException(message);
+                }
+
+                Number number = iterator.next();
+
+                Location loacation = new Location(columnIndex, rowIndex);
+                cells.put(loacation, number);
+            }
+        }
+
+        if (iterator.hasNext()) {
+
+            String message = "The specified container has more elements than expected!";
+            throw new IllegalArgumentException(message);
+        }
     }
 
     /**
@@ -132,8 +301,12 @@ public class MatrixImpl implements Matrix {
     @Override
     public Number component(Number columnIndex, Number rowIndex) {
 
-        //TODO not implemented yet
-        throw new UnsupportedOperationException();
+        Number firstIndex = IndexSingletons.firstIndex();
+        ParameterCheckHelper.checkIndex(columnIndex, firstIndex, columns);
+        ParameterCheckHelper.checkIndex(rowIndex, firstIndex, rows);
+
+        Location location = new Location(columnIndex, rowIndex);
+        return cells.get(location);
     }
 
     /**
@@ -180,8 +353,11 @@ public class MatrixImpl implements Matrix {
     @Override
     public Matrix add(Matrix matrix) {
 
-        //TODO not implemented yet
-        throw new UnsupportedOperationException();
+        BinaryOperation<Matrix, Result<Matrix>> function =
+            (BinaryOperation<Matrix, Result<Matrix>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_MATRICES_FUNCTION);
+        Result<Matrix> result = function.calculate(this, matrix);
+
+        return result.result();
     }
 
     /**
@@ -195,8 +371,11 @@ public class MatrixImpl implements Matrix {
     @Override
     public Matrix subtract(Matrix matrix) {
 
-        //TODO not implemented yet
-        throw new UnsupportedOperationException();
+        BinaryOperation<Matrix, Result<Matrix>> function =
+            (BinaryOperation<Matrix, Result<Matrix>>) FunctionSingletons.getFunction(FunctionIdentifiers.SUBTRACT_MATRICES_FUNCTION);
+        Result<Matrix> result = function.calculate(this, matrix);
+
+        return result.result();
     }
 
     /**
@@ -246,8 +425,36 @@ public class MatrixImpl implements Matrix {
     @Override
     public String toString() {
 
-        //TODO not implemented yet
-        throw new UnsupportedOperationException();
+        StringBuffer buffer = new StringBuffer();
+
+        final Number firstIndex = IndexSingletons.firstIndex();
+
+        buffer.append("{");
+
+        for (Number rowIndex = firstIndex; rowIndex.isLesserOrEqual(rows);
+             rowIndex = IndexSingletons.nextIndex(rowIndex)) {
+
+            buffer.append("{");
+
+            for (Number columnIndex = firstIndex; columnIndex.isLesserOrEqual(columns);
+                 columnIndex = IndexSingletons.nextIndex(columnIndex)) {
+
+                Number component = component(columnIndex, rowIndex);
+
+                if (!columnIndex.equals(firstIndex)) {
+
+                    buffer.append(", ");
+                }
+
+                buffer.append(component);
+            }
+
+            buffer.append("}");
+        }
+
+        buffer.append("}");
+
+        return buffer.toString();
     }
 
     /**
@@ -259,6 +466,55 @@ public class MatrixImpl implements Matrix {
     public int hashCode() {
 
         return HashHelper.calculateHashCode(Matrix.class, base, rows, columns, null);
+    }
+
+    /**
+     * Compares this matrix with the specified object.
+     *
+     * @param o
+     *        another object
+     *
+     * @return <code>true</code> if this matrix is considered equals to the specified object, esle <code>false</code>
+     */
+    @Override
+    public boolean equals(Object o) {
+
+        if (o == null) {
+
+            return false;
+        }
+
+        if (this == o) {
+
+            return true;
+        }
+
+        if (o instanceof Matrix) {
+
+            Matrix other = (Matrix) o;
+
+            final Number firstIndex = IndexSingletons.firstIndex();
+
+            for (Number columnIndex = firstIndex; columnIndex.isLesserOrEqual(columns);
+                 columnIndex = IndexSingletons.nextIndex(columnIndex)) {
+
+                for (Number rowIndex = firstIndex; rowIndex.isLesserOrEqual(rows);
+                     rowIndex = IndexSingletons.nextIndex(rowIndex)) {
+
+                    Number component1 = this.component(columnIndex, rowIndex);
+                    Number component2 = other.component(columnIndex, rowIndex);
+
+                    if (!component1.equals(component2)) {
+
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        return false;
     }
 
 }

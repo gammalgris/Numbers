@@ -134,21 +134,20 @@ public class VectorImpl implements Vector {
      *
      * @param base
      *        a number base
-     * @param components
-     *        an iterable list or set of components
+     * @param iterator
+     *        an iterator
      */
-    public VectorImpl(int base, Iterable<Number> components) {
+    private VectorImpl(int base, Iterator<Number> iterator) {
 
         super();
 
-        ParameterCheckHelper.checkParameter(components);
+        ParameterCheckHelper.checkParameter(iterator);
 
         this.base = ParameterCheckHelper.checkNumberBase(base);
         this.components = new TreeMap<Number, Number>();
 
         Number dimension = IndexSingletons.firstIndex().dec();
 
-        Iterator<Number> iterator = components.iterator();
         while (iterator.hasNext()) {
 
             dimension = dimension.inc();
@@ -169,32 +168,24 @@ public class VectorImpl implements Vector {
      * @param base
      *        a number base
      * @param components
+     *        an iterable list or set of components
+     */
+    public VectorImpl(int base, Iterable<Number> components) {
+
+        this(base, ParameterCheckHelper.checkParameter(components).iterator());
+    }
+
+    /**
+     * Creates a vector according to the specified components.
+     *
+     * @param base
+     *        a number base
+     * @param components
      *        a stream which provides all components
      */
     public VectorImpl(int base, Stream<Number> components) {
 
-        super();
-
-        ParameterCheckHelper.checkParameter(components);
-
-        this.base = ParameterCheckHelper.checkNumberBase(base);
-        this.components = new TreeMap<Number, Number>();
-
-        Number dimension = IndexSingletons.firstIndex().dec();
-
-        Iterator<Number> iterator = components.iterator();
-        while (iterator.hasNext()) {
-
-            dimension = dimension.inc();
-            Number component = iterator.next();
-
-            ParameterCheckHelper.checkParameter(component);
-            ParameterCheckHelper.checkNumberBase(base, component);
-
-            addComponent(dimension, component);
-        }
-
-        this.dimensions = dimension;
+        this(base, ParameterCheckHelper.checkParameter(components).iterator());
     }
 
     /**
@@ -232,7 +223,7 @@ public class VectorImpl implements Vector {
     @Override
     public Number component(Number dimension) {
 
-        ParameterCheckHelper.checkInteger(dimension);
+        ParameterCheckHelper.checkIndex(dimension, IndexSingletons.firstIndex(), dimensions);
 
         Number component = components.get(dimension);
 

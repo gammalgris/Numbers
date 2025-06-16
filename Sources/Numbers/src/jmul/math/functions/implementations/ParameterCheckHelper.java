@@ -34,14 +34,17 @@
 package jmul.math.functions.implementations;
 
 
+import java.util.Iterator;
 import java.util.stream.Stream;
 
 import jmul.math.digits.Digit;
 import jmul.math.fractions.Fraction;
+import jmul.math.matrices.Matrix;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.exceptions.DigitBaseMismatchException;
+import jmul.math.vectors.IndexSingletons;
 import jmul.math.vectors.Vector;
 
 
@@ -396,6 +399,25 @@ public final class ParameterCheckHelper {
      * Checks the specified parameter.
      *
      * @param numbers
+     *        a string array of numbers
+     *
+     * @return the specified array
+     */
+    public static String[] checkParameter(String[] numbers) {
+
+        if (numbers == null) {
+
+            String message = "No numbers (null) were specified!";
+            throw new IllegalArgumentException(message);
+        }
+
+        return numbers;
+    }
+
+    /**
+     * Checks the specified parameter.
+     *
+     * @param numbers
      *        an iterable list or set of numbers
      *
      * @return the specified parameter
@@ -543,6 +565,166 @@ public final class ParameterCheckHelper {
                               vector2.dimensions());
             throw new IllegalArgumentException(message);
         }
+    }
+
+    /**
+     * Checks the specified index.
+     *
+     * @param index
+     *        an index
+     *
+     * @return
+     */
+    public static Number checkIndex(Number index) {
+
+        if (index == null) {
+
+            String message = "No index (null) was specified!";
+            throw new IllegalArgumentException(message);
+        }
+
+        if (index.isFraction()) {
+
+            String message = String.format("No valid index (%s) was specified!", index);
+            throw new IllegalArgumentException(message);
+        }
+
+        if (index.isNegative()) {
+
+            String message = String.format("A negative index (%s) was specified!", index);
+            throw new IllegalArgumentException(message);
+        }
+
+        return index;
+    }
+
+    /**
+     * Checks the specified matrix size.
+     *
+     * @param columns
+     *        a number of columnbs
+     * @param rows
+     *        a number of rows
+     */
+    public static void checkMatrixSize(Number columns, Number rows) {
+
+        checkIndex(columns);
+        checkIndex(rows);
+
+        int defaultNumberBase = IndexSingletons.defaultNumberBase();
+        if (columns.base() != defaultNumberBase) {
+
+            String message = String.format("Provide the number of columns in number base %d", defaultNumberBase);
+            throw new IllegalArgumentException(message);
+        }
+
+        if (rows.base() != defaultNumberBase) {
+
+            String message = String.format("Provide the number of rows in number base %d", defaultNumberBase);
+            throw new IllegalArgumentException(message);
+        }
+    }
+
+    /**
+     * Checks the specified index.
+     *
+     * @param index
+     *        an index
+     * @param minIndex
+     *        a minimum index
+     * @param maxIndex
+     *        a maximum index
+     */
+    public static void checkIndex(Number index, Number minIndex, Number maxIndex) {
+
+        checkIndex(index);
+        checkIndex(minIndex);
+        checkIndex(maxIndex);
+
+        int defaultNumberBase = IndexSingletons.defaultNumberBase();
+        if (minIndex.base() != defaultNumberBase) {
+
+            String message = String.format("Provide the minimum index in number base %d", defaultNumberBase);
+            throw new IllegalArgumentException(message);
+        }
+
+        if (maxIndex.base() != defaultNumberBase) {
+
+            String message = String.format("Provide the maximum index in number base %d", defaultNumberBase);
+            throw new IllegalArgumentException(message);
+        }
+
+        if (index.base() != defaultNumberBase) {
+
+            String message = String.format("Provide the index in number base %d", defaultNumberBase);
+            throw new IllegalArgumentException(message);
+        }
+
+        if (index.isLesser(minIndex) || index.isGreater(maxIndex)) {
+
+            String message = String.format("Index is out of bounds (%s < %s < %s)", minIndex, index, maxIndex);
+            throw new IllegalArgumentException(message);
+        }
+    }
+
+    /**
+     *Chjecks the specified matrices.
+     *
+     * @param matrix1
+     *        a matrix
+     * @param matrix2
+     *        a matrix
+     */
+    public static void checkMatrices(Matrix matrix1, Matrix matrix2) {
+
+        if (matrix1 == null) {
+
+            String message = "No matrix (null) was specified!";
+            throw new IllegalArgumentException(message);
+        }
+
+        if (matrix2 == null) {
+
+            String message = "No matrix (null) was specified!";
+            throw new IllegalArgumentException(message);
+        }
+
+        if (matrix1.base() != matrix2.base()) {
+
+            String message = "The specified matrixes are of different number bases!";
+            throw new IllegalArgumentException(message);
+        }
+
+        if (!matrix1.columns().equals(matrix2.columns())) {
+
+            String message = "The specified matrixes are of different columns!";
+            throw new IllegalArgumentException(message);
+        }
+
+        if (!matrix1.rows().equals(matrix2.rows())) {
+
+            String message = "The specified matrixes are of different rows!";
+            throw new IllegalArgumentException(message);
+        }
+    }
+
+    /**
+     * Checks the specified parameter.
+     *
+     * @param iterator
+     *        an iterator
+     *
+     * @return the specified parameter
+     */
+    public static Iterator<Number> checkParameter(Iterator<Number> iterator) {
+
+        if (iterator == null) {
+
+            String message = "No iterator (null) was specified!";
+            throw new IllegalArgumentException(message);
+        }
+
+        return iterator;
     }
 
 }

@@ -1645,4 +1645,19 @@ public class NumberImpl implements Number {
         return result.result();
     }
 
+    /**
+     * Translates this number into a fraction.
+     *
+     * @return a fraction
+     */
+    @Override
+    public Fraction toFraction() {
+
+        UnaryOperation<Number, Result<Fraction>> function =
+            (UnaryOperation<Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_TO_FRACTION_FUNCTION);
+        Result<Fraction> result = function.calculate(this);
+
+        return result.result();
+    }
+
 }

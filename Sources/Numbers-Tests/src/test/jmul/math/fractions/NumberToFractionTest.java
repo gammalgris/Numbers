@@ -37,6 +37,7 @@ package test.jmul.math.fractions;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import jmul.math.Math;
 import jmul.math.fractions.Fraction;
 import static jmul.math.fractions.FractionHelper.createFraction;
 import jmul.math.functions.implementations.NumberToFraction;
@@ -116,6 +117,30 @@ public class NumberToFractionTest {
 
         Result<Fraction> wrappedResult = function.calculate(operand);
         Fraction actualResult = wrappedResult.result();
+
+        assertEquals(toString(), expectedResult, actualResult);
+        assertEquals(toString(), expectedResult.toString(), actualResult.toString());
+    }
+
+    /**
+     * Tests converting a number to a fraction.
+     */
+    @Test
+    public void testConversionVariant2() {
+
+        Fraction actualResult = operand.toFraction();
+
+        assertEquals(toString(), expectedResult, actualResult);
+        assertEquals(toString(), expectedResult.toString(), actualResult.toString());
+    }
+
+    /**
+     * Tests converting a number to a fraction.
+     */
+    @Test
+    public void testConversionVariant3() {
+
+        Fraction actualResult = Math.toFraction(operand);
 
         assertEquals(toString(), expectedResult, actualResult);
         assertEquals(toString(), expectedResult.toString(), actualResult.toString());

@@ -27,7 +27,7 @@
 12) Input parameters should by default not be modified unless marked as such.
    Add such a check to existing tests.
 
-13) Resolve conflict jmul.math.notation.Sign <-> jmul.math.signs.Sign
+13) Resolve conflict jmul.math.numbers.notation.Sign <-> jmul.math.signs.Sign
    Consolidate the class (retain jmul.math.signs.Sign and delete jmul.math.notation.Sign. Merge functionalities.
 
 15) Check comments in test cases, including spelling errors.
@@ -62,7 +62,9 @@
 
 27) Check that tests are annotated accordingly (e.g. @UnitTest, @ManualTest, etc.).
 
-28)
+28) Add some concurrent tests.
+
+29)
 
 
 # Done

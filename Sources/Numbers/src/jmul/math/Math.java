@@ -42,6 +42,7 @@ import jmul.math.functions.FunctionSingletons;
 import jmul.math.functions.repository.FunctionIdentifier;
 import jmul.math.functions.repository.FunctionIdentifierHelper;
 import jmul.math.functions.repository.FunctionIdentifiers;
+import jmul.math.matrices.Matrix;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.numbers.NumberImpl;
@@ -1903,6 +1904,61 @@ public final class Math {
         TernaryOperation<Vector, Result<Number>> function =
             (TernaryOperation<Vector, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.TRIPLE_PRODUCT_FUNCTION);
         Result<Number> result = function.calculate(vector1, vector2, vector3);
+
+        return result.result();
+    }
+
+    /**
+     * Performs a matrix addition with the specified matrices.
+     *
+     * @param matrix1
+     *        a matrix
+     * @param matrix2
+     *        a matrix
+     *
+     * @return the result
+     */
+    public static Matrix add(Matrix matrix1, Matrix matrix2) {
+
+        BinaryOperation<Matrix, Result<Matrix>> function =
+            (BinaryOperation<Matrix, Result<Matrix>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_MATRICES_FUNCTION);
+        Result<Matrix> result = function.calculate(matrix1, matrix2);
+
+        return result.result();
+    }
+
+    /**
+     * Translates this number into a fraction.
+     *
+     * @param number
+     *        a number
+     *
+     * @return a fraction
+     */
+    public static Fraction toFraction(Number number) {
+
+        UnaryOperation<Number, Result<Fraction>> function =
+            (UnaryOperation<Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_TO_FRACTION_FUNCTION);
+        Result<Fraction> result = function.calculate(number);
+
+        return result.result();
+    }
+
+    /**
+     * Performs a matrix subtraction with the specified matrices.
+     *
+     * @param matrix1
+     *        a matrix
+     * @param matrix2
+     *        a matrix
+     *
+     * @return the result
+     */
+    public static Matrix subtract(Matrix matrix1, Matrix matrix2) {
+
+        BinaryOperation<Matrix, Result<Matrix>> function =
+            (BinaryOperation<Matrix, Result<Matrix>>) FunctionSingletons.getFunction(FunctionIdentifiers.SUBTRACT_MATRICES_FUNCTION);
+        Result<Matrix> result = function.calculate(matrix1, matrix2);
 
         return result.result();
     }
