@@ -207,9 +207,9 @@ public class RussianDivisionFunction implements TernaryOperation<Number, Result<
         // Determine the fraction part
 
         Number fractionPart = ZERO;
+        Number digits = NORMALIZED_ZERO;
 
         {
-            Number digits = NORMALIZED_ZERO;
             Number factor = ZERO;
 
             while (true) {
@@ -265,16 +265,12 @@ public class RussianDivisionFunction implements TernaryOperation<Number, Result<
 
         // Correct and trim the fraction part.
 
-        while (true) {
-
-            if (fractionPart.centerNode().leftNode() == null) {
-
-                fractionPart = fractionPart.shiftLeft();
-                break;
-            }
-
+        while (!digits.isZero()) {
+            
             fractionPart = fractionPart.shiftLeft();
+            digits = digits.dec();
         }
+        fractionPart = fractionPart.shiftLeft();
 
         NodesHelper.trimRight(fractionPart.centerNode());
 

@@ -9,9 +9,9 @@
     <include file="${basedir}\..\Ant-Build\build-javadoc.xml" />
 
 
-    <property name="jar.classes.file" location="${project.tmp.deploy.dir}\numbers-${version}.jar" />
-    <property name="jar.sources.file" location="${project.tmp.deploy.dir}\numbers-${version}-sources.jar" />
-    <property name="jar.javadoc.file" location="${project.tmp.deploy.dir}\numbers-${version}-javadoc.jar" />
+    <property name="jar.classes.file" location="${project.tmp.deploy.dir}\jmul-numbers-${version}.jar" />
+    <property name="jar.sources.file" location="${project.tmp.deploy.dir}\jmul-numbers-${version}-sources.jar" />
+    <property name="jar.javadoc.file" location="${project.tmp.deploy.dir}\jmul-numbers-${version}-javadoc.jar" />
 
 
     <target name="info">

@@ -573,7 +573,7 @@ public final class ParameterCheckHelper {
      * @param index
      *        an index
      *
-     * @return
+     * @return the specified parameter
      */
     public static Number checkIndex(Number index) {
 

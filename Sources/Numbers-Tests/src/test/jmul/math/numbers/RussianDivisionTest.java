@@ -281,6 +281,27 @@ public class RussianDivisionTest {
         parameters.add(new Object[] { createNumber(5, "-44.32"), createNumber(5, "-3.1"), createNumber(5, "2"),
                                       createNumber(5, "12.32") });
 
+        parameters.add(new Object[] { createNumber(10, "0.4"), createNumber(10, "5"), createNumber(10, "10"),
+                                      createNumber(10, "0.08") });
+        parameters.add(new Object[] { createNumber(10, "0.04"), createNumber(10, "5"), createNumber(10, "10"),
+                                      createNumber(10, "0.008") });
+        parameters.add(new Object[] { createNumber(10, "0.004"), createNumber(10, "5"), createNumber(10, "10"),
+                                      createNumber(10, "0.0008") });
+        parameters.add(new Object[] { createNumber(10, "0.0004"), createNumber(10, "5"), createNumber(10, "10"),
+                                      createNumber(10, "0.00008") });
+        parameters.add(new Object[] { createNumber(10, "0.00004"), createNumber(10, "5"), createNumber(10, "10"),
+                                      createNumber(10, "0.000008") });
+        parameters.add(new Object[] { createNumber(10, "0.000004"), createNumber(10, "5"), createNumber(10, "10"),
+                                      createNumber(10, "0.0000008") });
+        parameters.add(new Object[] { createNumber(10, "0.0000004"), createNumber(10, "5"), createNumber(10, "10"),
+                                      createNumber(10, "0.00000008") });
+        parameters.add(new Object[] { createNumber(10, "0.00000004"), createNumber(10, "5"), createNumber(10, "10"),
+                                      createNumber(10, "0.000000008") });
+        parameters.add(new Object[] { createNumber(10, "0.000000004"), createNumber(10, "5"), createNumber(10, "10"),
+                                      createNumber(10, "0.0000000008") });
+        parameters.add(new Object[] { createNumber(10, "0.0000000004"), createNumber(10, "5"), createNumber(10, "10"),
+                                      createNumber(10, "0") });
+
         return parameters;
     }
 
