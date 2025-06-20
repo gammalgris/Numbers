@@ -183,26 +183,26 @@ public class EvaluateFractionTest {
         parameters.add(new Object[] { createFraction(2, "10", "1", "10"), createNumber(2, "10.1") });
         parameters.add(new Object[] { createFraction(2, "-10", "1", "10"), createNumber(2, "-10.1") });
 
-        parameters.add(new Object[] { createFraction(2, "10", "1", "11"), createNumber(2, "10.101010101") });
-        parameters.add(new Object[] { createFraction(2, "-10", "1", "11"), createNumber(2, "-10.101010101") });
+        parameters.add(new Object[] { createFraction(2, "10", "1", "11"), createNumber(2, "10.0101010101") });
+        parameters.add(new Object[] { createFraction(2, "-10", "1", "11"), createNumber(2, "-10.0101010101") });
 
         parameters.add(new Object[] { createFraction(10, "10", "1", "10"), createNumber(10, "10.1") });
         parameters.add(new Object[] { createFraction(10, "-10", "1", "10"), createNumber(10, "-10.1") });
 
-        parameters.add(new Object[] { createFraction(10, "10", "1", "11"), createNumber(10, "10.909090909") });
-        parameters.add(new Object[] { createFraction(10, "-10", "1", "11"), createNumber(10, "-10.909090909") });
+        parameters.add(new Object[] { createFraction(10, "10", "1", "11"), createNumber(10, "10.0909090909") });
+        parameters.add(new Object[] { createFraction(10, "-10", "1", "11"), createNumber(10, "-10.0909090909") });
 
         parameters.add(new Object[] { createFraction(8, "10", "1", "10"), createNumber(8, "10.1") });
         parameters.add(new Object[] { createFraction(8, "-10", "1", "10"), createNumber(8, "-10.1") });
 
-        parameters.add(new Object[] { createFraction(8, "10", "1", "11"), createNumber(8, "10.707070707") });
-        parameters.add(new Object[] { createFraction(8, "-10", "1", "11"), createNumber(8, "-10.707070707") });
+        parameters.add(new Object[] { createFraction(8, "10", "1", "11"), createNumber(8, "10.0707070707") });
+        parameters.add(new Object[] { createFraction(8, "-10", "1", "11"), createNumber(8, "-10.0707070707") });
 
         parameters.add(new Object[] { createFraction(16, "10", "1", "10"), createNumber(16, "10.1") });
         parameters.add(new Object[] { createFraction(16, "-10", "1", "10"), createNumber(16, "-10.1") });
 
-        parameters.add(new Object[] { createFraction(16, "10", "1", "11"), createNumber(16, "10.F0F0F0F0F") });
-        parameters.add(new Object[] { createFraction(16, "-10", "1", "11"), createNumber(16, "-10.F0F0F0F0F") });
+        parameters.add(new Object[] { createFraction(16, "10", "1", "11"), createNumber(16, "10.0F0F0F0F0F") });
+        parameters.add(new Object[] { createFraction(16, "-10", "1", "11"), createNumber(16, "-10.0F0F0F0F0F") });
 
         return parameters;
     }

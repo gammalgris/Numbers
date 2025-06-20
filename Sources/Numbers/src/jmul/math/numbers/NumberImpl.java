@@ -1660,4 +1660,24 @@ public class NumberImpl implements Number {
         return result.result();
     }
 
+    /**
+     * Checks if this number is within the specified bounds.
+     *
+     * @param min
+     *        a number (i.e. lower bound of an interval)
+     * @param max
+     *        a number (i.e. upper bound of an interval)
+     *
+     * @return <code>true</code> if this number is within the specified bounds, else <code>false</code>
+     */
+    @Override
+    public boolean isWithinInterval(Number min, Number max) {
+
+        TernaryOperation<Number, Result<Boolean>> function =
+            (TernaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_IS_WITHIN_INTERVAL);
+        Result<Boolean> result = function.calculate(min, this, max);
+
+        return result.result();
+    }
+
 }

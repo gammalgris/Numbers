@@ -1963,4 +1963,46 @@ public final class Math {
         return result.result();
     }
 
+    /**
+     * Checks if the specified number is within the specified bounds (including bounds).
+     *
+     * @param min
+     *        a number (i.e. lower bound of an interval)
+     * @param number
+     *        a number
+     * @param max
+     *        a number (i.e. upper bound of an interval)
+     *
+     * @return <code>true</code> if the specified number is within the specified bounds, else <code>false</code>
+     */
+    public static boolean isWithinInterval(Number min, Number number, Number max) {
+
+        TernaryOperation<Number, Result<Boolean>> function =
+            (TernaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_IS_WITHIN_INTERVAL);
+        Result<Boolean> result = function.calculate(min, number, max);
+
+        return result.result();
+    }
+
+    /**
+     * Checks if the specified fraction is within the specified bounds (including bounds).
+     *
+     * @param min
+     *        a fraction (i.e. lower bound of an interval)
+     * @param fraction
+     *        a fraction
+     * @param max
+     *        a fraction (i.e. upper bound of an interval)
+     *
+     * @return <code>true</code> if the specified fraction is within the specified bounds, else <code>false</code>
+     */
+    public static boolean isWithinInterval(Fraction min, Fraction fraction, Fraction max) {
+
+        TernaryOperation<Fraction, Result<Boolean>> function =
+            (TernaryOperation<Fraction, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_IS_WITHIN_INTERVAL);
+        Result<Boolean> result = function.calculate(min, fraction, max);
+
+        return result.result();
+    }
+
 }

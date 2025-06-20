@@ -165,4 +165,16 @@ public interface Fraction extends Comparable, NumberComparisons, FractionCompari
      */
     SortedSet<Number> commonPrimeFactors();
 
+    /**
+     * Checks if this fraction is within the specified bounds (including bounds).
+     *
+     * @param min
+     *        a fraction (i.e. lower bound of an interval)
+     * @param max
+     *        a fraction (i.e. upper bound of an interval)
+     *
+     * @return <code>true</code> if this fraction is within the specified bounds, else <code>false</code>
+     */
+    boolean isWithinInterval(Fraction min, Fraction max);
+
 }

@@ -63,6 +63,7 @@ import jmul.math.functions.implementations.EvaluateFraction;
 import jmul.math.functions.implementations.EvenNumberFunction;
 import jmul.math.functions.implementations.Factorial;
 import jmul.math.functions.implementations.FractionToAbsoluteValue;
+import jmul.math.functions.implementations.FractionWithinInterval;
 import jmul.math.functions.implementations.HalvingDigit;
 import jmul.math.functions.implementations.HalvingFraction;
 import jmul.math.functions.implementations.HalvingNumber;
@@ -91,6 +92,7 @@ import jmul.math.functions.implementations.NumberToAbsoluteValue;
 import jmul.math.functions.implementations.NumberToDigit;
 import jmul.math.functions.implementations.NumberToFraction;
 import jmul.math.functions.implementations.NumberToOrdinal;
+import jmul.math.functions.implementations.NumberWithinInterval;
 import jmul.math.functions.implementations.OddNumberFunction;
 import jmul.math.functions.implementations.RebaseFraction;
 import jmul.math.functions.implementations.RebaseNumber;
@@ -363,6 +365,9 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
 
         repository.registerFunction(FunctionIdentifiers.ADD_MATRICES_FUNCTION, AddMatrices.class);
         repository.registerFunction(FunctionIdentifiers.SUBTRACT_MATRICES_FUNCTION, SubtractMatrices.class);
+
+        repository.registerFunction(FunctionIdentifiers.NUMBER_IS_WITHIN_INTERVAL, NumberWithinInterval.class);
+        repository.registerFunction(FunctionIdentifiers.FRACTION_IS_WITHIN_INTERVAL, FractionWithinInterval.class);
 
         return repository;
     }
