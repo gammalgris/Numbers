@@ -44,7 +44,7 @@ import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.exceptions.DigitBaseMismatchException;
-import jmul.math.vectors.IndexSingletons;
+import jmul.math.indices.IndexSingletons;
 import jmul.math.vectors.Vector;
 
 

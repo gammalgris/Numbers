@@ -153,7 +153,7 @@ public class RebaseNumber implements MixedBinaryOperation<Number, Integer, Resul
         Number debug = null;
         Number result = operand;
         DigitNode currentNode = centerNode;
-        Number remainingDigits = Math.DEFAULT_MAXIMUM_FRACTION_LENGTH;
+        Number remainingDigits = Math.getDefaultMaximumFractionLength(base);
         while (true) {
 
             result = result.multiply(newBase);

@@ -1556,7 +1556,7 @@ public class NumberImpl implements Number {
     @Override
     public Number divide(FunctionIdentifier algorithm, Number n) {
 
-        return divide(algorithm, n, Math.DEFAULT_MAXIMUM_FRACTION_LENGTH);
+        return divide(algorithm, n, Math.getDefaultMaximumFractionLength(base()));
     }
 
     /**

@@ -226,7 +226,7 @@ class MixedFraction implements Fraction {
     @Override
     public Number evaluate() {
 
-        return evaluate(Math.DEFAULT_MAXIMUM_FRACTION_LENGTH);
+        return evaluate(Math.getDefaultMaximumFractionLength(base()));
     }
 
     /**

@@ -43,6 +43,7 @@ import jmul.math.functions.FunctionSingletons;
 import jmul.math.functions.implementations.ParameterCheckHelper;
 import jmul.math.functions.repository.FunctionIdentifiers;
 import jmul.math.hash.HashHelper;
+import jmul.math.indices.IndexSingletons;
 import jmul.math.matrices.Matrix;
 import jmul.math.numbers.Number;
 import jmul.math.operations.BinaryOperation;

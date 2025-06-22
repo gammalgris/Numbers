@@ -31,7 +31,7 @@
  * $Id$
  */
 
-package jmul.math.vectors;
+package jmul.math.indices;
 
 
 import java.util.HashMap;

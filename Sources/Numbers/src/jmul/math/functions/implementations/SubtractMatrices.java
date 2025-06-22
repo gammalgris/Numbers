@@ -42,7 +42,7 @@ import jmul.math.matrices.MatrixImpl;
 import jmul.math.numbers.Number;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.Result;
-import jmul.math.vectors.IndexSingletons;
+import jmul.math.indices.IndexSingletons;
 
 
 /**

@@ -96,7 +96,7 @@ public class EvaluateFractionTest {
      */
     public Number decimalPlaces() {
 
-        return Math.DEFAULT_MAXIMUM_FRACTION_LENGTH;
+        return Math.getDefaultMaximumFractionLength(fraction.base());
     }
 
     /**

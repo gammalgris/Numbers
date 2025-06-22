@@ -38,7 +38,7 @@ import jmul.math.matrices.Matrix;
 import static jmul.math.matrices.MatrixHelper.createMatrix;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
-import jmul.math.vectors.IndexSingletons;
+import jmul.math.indices.IndexSingletons;
 
 import jmul.test.classification.UnitTest;
 

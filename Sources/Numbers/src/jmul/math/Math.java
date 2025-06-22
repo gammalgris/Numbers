@@ -37,14 +37,16 @@ package jmul.math;
 import java.util.Comparator;
 import java.util.SortedSet;
 
+import jmul.math.constants.Constant;
+import static jmul.math.constants.ConstantHelper.createConstant;
 import jmul.math.fractions.Fraction;
 import jmul.math.functions.FunctionSingletons;
+import jmul.math.functions.implementations.ParameterCheckHelper;
 import jmul.math.functions.repository.FunctionIdentifier;
 import jmul.math.functions.repository.FunctionIdentifierHelper;
 import jmul.math.functions.repository.FunctionIdentifiers;
 import jmul.math.matrices.Matrix;
 import jmul.math.numbers.Number;
-import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.numbers.NumberImpl;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.MixedBinaryOperation;
@@ -67,14 +69,14 @@ public final class Math {
      * <i>Note:<br>
      * In several cases it is useful to cut the fractional part instead of running through end endless loop.</i>
      */
-    public static final Number DEFAULT_MAXIMUM_FRACTION_LENGTH;
+    private static final Constant DEFAULT_MAXIMUM_FRACTION_LENGTH;
 
     /*
      * The static initializer.
      */
     static {
 
-        DEFAULT_MAXIMUM_FRACTION_LENGTH = createNumber(10, "10");
+        DEFAULT_MAXIMUM_FRACTION_LENGTH = createConstant(10, "10");
     }
 
     /**
@@ -83,6 +85,19 @@ public final class Math {
     private Math() {
 
         throw new UnsupportedOperationException();
+    }
+
+    /**
+     * Returns the constant value for the specified base.
+     *
+     * @param base
+     *        a number base
+     *
+     * @return a constant value
+     */
+    public static Number getDefaultMaximumFractionLength(int base) {
+
+        return DEFAULT_MAXIMUM_FRACTION_LENGTH.value(base);
     }
 
     /**
@@ -1573,7 +1588,10 @@ public final class Math {
      */
     public static Number divide(FunctionIdentifier algorithm, Number n1, Number n2) {
 
-        return divide(algorithm, n1, n2, Math.DEFAULT_MAXIMUM_FRACTION_LENGTH);
+        ParameterCheckHelper.checkParameters(n1, n2);
+        Number decimalPlaces = getDefaultMaximumFractionLength(n1.base());
+
+        return divide(algorithm, n1, n2, decimalPlaces);
     }
 
     /**
@@ -1613,7 +1631,9 @@ public final class Math {
      */
     public static Number evaluate(Fraction fraction) {
 
-        return evaluate(fraction, Math.DEFAULT_MAXIMUM_FRACTION_LENGTH);
+        ParameterCheckHelper.checkParameter(fraction);
+
+        return evaluate(fraction, Math.getDefaultMaximumFractionLength(fraction.base()));
     }
 
     /**

@@ -36,7 +36,7 @@ package test.jmul.math.vectors;
 
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
-import jmul.math.vectors.IndexSingletons;
+import jmul.math.indices.IndexSingletons;
 import jmul.math.vectors.Vector;
 import jmul.math.vectors.VectorImpl;
 

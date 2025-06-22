@@ -46,7 +46,7 @@ import jmul.math.hash.HashHelper;
 import jmul.math.numbers.Number;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.Result;
-import jmul.math.vectors.IndexSingletons;
+import jmul.math.indices.IndexSingletons;
 import jmul.math.vectors.Vector;
 
 
