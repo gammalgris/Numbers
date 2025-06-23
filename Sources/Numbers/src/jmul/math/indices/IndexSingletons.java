@@ -37,11 +37,8 @@ package jmul.math.indices;
 import java.util.HashMap;
 import java.util.Map;
 
+import jmul.math.functions.implementations.ParameterCheckHelper;
 import jmul.math.numbers.Number;
-import static jmul.math.numbers.NumberHelper.createNumber;
-import jmul.math.signs.Signs;
-import jmul.math.vectors.nodes.IndexNode;
-import jmul.math.vectors.nodes.NodesHelper;
 
 
 /**
@@ -54,14 +51,14 @@ public class IndexSingletons {
     /**
      * A singleton for managing index numbers.
      */
-    private static IndexRepository SINGLETON;
+    private static Map<Integer, IndexRepository> SINGLETONS;
 
     /*
      * The static initializer.
      */
     static {
 
-        SINGLETON = new IndexRepositoryImpl();
+        SINGLETONS = new HashMap<>();
     }
 
     /**
@@ -82,264 +79,68 @@ public class IndexSingletons {
      */
     public static Number nextIndex(Number index) {
 
-        return SINGLETON.nextIndex(index);
+        Number nextIndex;
+        synchronized (SINGLETONS) {
+
+            ParameterCheckHelper.checkParameter(index);
+
+            int base = index.base();
+
+            IndexRepository indices = SINGLETONS.get(base);
+
+            if (indices == null) {
+
+                indices = createNewIndexRepository(base);
+            }
+
+            nextIndex = indices.nextIndex(index);
+        }
+
+        return nextIndex;
     }
 
     /**
      * Returns the first index.
      *
-     * @return the first index
-     */
-    public static Number firstIndex() {
-
-        return SINGLETON.firstIndex();
-    }
-
-    /**
-     * Returns the default number base for index values.
-     *
-     * @return a default number base
-     */
-    public static int defaultNumberBase() {
-
-        return SINGLETON.defaultNumberBase();
-    }
-
-}
-
-
-/**
- * This itnerface describes a repository which manages index numbers.<br>
- * <br>
- * <i>Note:</i><br>
- * <i>This repository aims at conserving memory by reusing used index numbers.</>
- *
- * @author Kristian Kutin
- */
-interface IndexRepository {
-
-    /**
-     * Returns the next index to the specified index.
-     *
-     * @param index
-     *        an index (i.e. a positive integer which is not zero)
-     *
-     * @return the next index
-     */
-    Number nextIndex(Number index);
-
-    /**
-     * Returns the first index.
+     * @param base
+     *        a number base
      *
      * @return the first index
      */
-    Number firstIndex();
+    public static Number firstIndex(int base) {
 
-    /**
-     * Returns the default number base for index values.
-     *
-     * @return a default number base
-     */
-    int defaultNumberBase();
+        Number firstIndex;
+        synchronized (SINGLETONS) {
 
-}
+            ParameterCheckHelper.checkNumberBase(base);
 
+            IndexRepository indices = SINGLETONS.get(base);
 
-/**
- * An implementation of an index repository.
- *
- * @author Kristian Kutin
- */
-class IndexRepositoryImpl implements IndexRepository {
+            if (indices == null) {
 
-    /**
-     * The constant contains the default number base for index numbers.
-     */
-    private final static int DEFAULT_NUMBER_BASE;
+                indices = createNewIndexRepository(base);
+            }
 
-    /*
-     * The static initializer.
-     */
-    static {
-
-        DEFAULT_NUMBER_BASE = 10;
-    }
-
-    /**
-     * A reference to the first node.
-     */
-    private IndexNode firstNode;
-
-    /**
-     * A reference to the last node.
-     */
-    private IndexNode lastNode;
-
-    /**
-     * A map with shortcuts to existing index numbers.
-     */
-    private Map<Number, IndexNode> shortcuts;
-
-    /**
-     * The default constructor.
-     */
-    public IndexRepositoryImpl() {
-
-        super();
-
-        Number startIndex = createNumber(Signs.POSITIVE, DEFAULT_NUMBER_BASE, 1);
-
-        this.firstNode = NodesHelper.createNode(startIndex);
-
-        this.lastNode = firstNode;
-
-        this.shortcuts = new HashMap<>();
-        shortcuts.put(startIndex, firstNode);
-    }
-
-    /**
-     * Returns the next index to the specified index.
-     *
-     * @param index
-     *        an index (i.e. a positive integer which is not zero)
-     *
-     * @return the next index
-     */
-    @Override
-    public Number nextIndex(Number index) {
-
-        Number firstIndex = firstNode.index();
-
-        if (firstIndex.isGreater(index)) {
-
-            String message = String.format("An illegal index (%s) was specified!", index);
-            throw new IllegalArgumentException(message);
+            firstIndex = indices.firstIndex();
         }
 
-        IndexNode indexNode = findIndexOrEnlargeList(index);
-        return indexNode.index();
+        return firstIndex;
     }
 
     /**
-     * Enlarge the linked list up to the specified index.
+     * Creates a new index repository for the specified number base.
      *
-     * @param index
-     *        an index number
+     * @param base
+     *        a number base
      *
-     * @return returns the index node with the next index
+     * @return the created index repository
      */
-    private IndexNode findIndexOrEnlargeList(Number index) {
+    private static IndexRepository createNewIndexRepository(int base) {
 
-        IndexNode indexNode = shortcuts.get(index);
+        IndexRepository indices = new IndexRepositoryImpl(base);
+        SINGLETONS.put(base, indices);
 
-        if (indexNode == null) {
-
-            Number nextIndex = index.inc();
-            return enlargeList(nextIndex);
-
-        } else {
-
-            return findNextIndexToTheRight(indexNode, index);
-        }
-    }
-
-    /**
-     * looks for the next index to the right or creates a new node to the right if necessary.
-     *
-     * @param indexNode
-     *        the current index node
-     * @param index
-     *        the current index
-     *
-     * @return the next index node
-     */
-    private IndexNode findNextIndexToTheRight(IndexNode indexNode, Number index) {
-
-        IndexNode rightNode = indexNode.rightNode();
-
-        if (rightNode == null) {
-
-            Number nextIndex = index.inc();
-            rightNode = addNodeToTheRight(indexNode, nextIndex);
-        }
-
-        return rightNode;
-    }
-
-    /**
-     * Add a node to the right of the specified node with the specified next index. The new node is linked with the
-     * specified linked list. Updates the last node and the shortcuts accordingly.
-     *
-     * @param currentNode
-     *        a node
-     * @param nextIndex
-     *        an index number
-     *
-     * @return the new node
-     */
-    private IndexNode addNodeToTheRight(IndexNode currentNode, Number nextIndex) {
-
-        IndexNode rightNode = currentNode.rightNode();
-
-        if (rightNode != null) {
-
-            throw new IllegalArgumentException("Trying to append a node to the right although a right node exists!");
-        }
-
-        rightNode = NodesHelper.createNode(nextIndex);
-        NodesHelper.linkNodes(currentNode, rightNode);
-
-        shortcuts.put(nextIndex, rightNode);
-        lastNode = rightNode;
-
-        return rightNode;
-    }
-
-    /**
-     * Enlarges the linked list and fills the gaps up to and including the specified index.
-     *
-     * @param index
-     *        an index
-     *
-     * @return the node correspoding to the specified index
-     */
-    private IndexNode enlargeList(Number index) {
-
-        IndexNode currentNode = lastNode;
-        Number currentIndex = currentNode.index();
-
-        while (currentIndex.isLesser(index)) {
-
-            Number nextIndex = currentIndex.inc();
-            IndexNode rightNode = addNodeToTheRight(currentNode, nextIndex);
-
-            currentNode = rightNode;
-            currentIndex = nextIndex;
-        }
-
-        return currentNode;
-    }
-
-    /**
-     * Returns the first index.
-     *
-     * @return the first index
-     */
-    @Override
-    public Number firstIndex() {
-
-        return firstNode.index();
-    }
-
-    /**
-     * Returns the default number base for index values.
-     *
-     * @return a default number base
-     */
-    @Override
-    public int defaultNumberBase() {
-
-        return DEFAULT_NUMBER_BASE;
+        return indices;
     }
 
 }

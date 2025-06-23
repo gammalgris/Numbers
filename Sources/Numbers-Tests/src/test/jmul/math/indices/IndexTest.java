@@ -34,10 +34,10 @@
 package test.jmul.math.indices;
 
 
+import jmul.math.indices.IndexSingletons;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.signs.Signs;
-import jmul.math.indices.IndexSingletons;
 
 import jmul.test.classification.UnitTest;
 
@@ -72,14 +72,15 @@ public class IndexTest {
     @Test
     public void testFirstIndex() {
 
-        Number ONE = createNumber(Signs.POSITIVE, 10, 1);
+        int base = 10;
+        Number ONE = createNumber(Signs.POSITIVE, base, 1);
 
-        Number newIndex = IndexSingletons.firstIndex();
+        Number newIndex = IndexSingletons.firstIndex(base);
 
         assertEquals(ONE, newIndex);
         assertFalse(ONE == newIndex);
 
-        Number newIndex2 = IndexSingletons.firstIndex();
+        Number newIndex2 = IndexSingletons.firstIndex(base);
 
         assertEquals(ONE, newIndex2);
         assertFalse(ONE == newIndex2);

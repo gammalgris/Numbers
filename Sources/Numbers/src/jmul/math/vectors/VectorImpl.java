@@ -95,7 +95,7 @@ public class VectorImpl implements Vector {
         super();
 
         this.base = ParameterCheckHelper.checkNumberBase(base);
-        this.dimensions = IndexSingletons.firstIndex().dec();
+        this.dimensions = IndexSingletons.firstIndex(base).dec();
         this.components = new TreeMap<Number, Number>();
     }
 
@@ -116,7 +116,7 @@ public class VectorImpl implements Vector {
         this.base = ParameterCheckHelper.checkNumberBase(base);
         this.components = new TreeMap<Number, Number>();
 
-        Number dimension = IndexSingletons.firstIndex().dec();
+        Number dimension = IndexSingletons.firstIndex(base).dec();
 
         for (Number component : components) {
 
@@ -147,7 +147,7 @@ public class VectorImpl implements Vector {
         this.base = ParameterCheckHelper.checkNumberBase(base);
         this.components = new TreeMap<Number, Number>();
 
-        Number dimension = IndexSingletons.firstIndex().dec();
+        Number dimension = IndexSingletons.firstIndex(base).dec();
 
         while (iterator.hasNext()) {
 
@@ -224,7 +224,7 @@ public class VectorImpl implements Vector {
     @Override
     public Number component(Number dimension) {
 
-        ParameterCheckHelper.checkIndex(dimension, IndexSingletons.firstIndex(), dimensions);
+        ParameterCheckHelper.checkIndex(dimension, IndexSingletons.firstIndex(base), dimensions);
 
         Number component = components.get(dimension);
 

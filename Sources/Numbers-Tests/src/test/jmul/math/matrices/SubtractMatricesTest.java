@@ -141,13 +141,20 @@ public class SubtractMatricesTest {
 
         Collection<Object[]> parameters = new ArrayList<Object[]>();
 
-        for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
+        parameters.add(new Object[] { createMatrix(2, createNumber(2, "10"), createNumber(2, "10"),
+                                                   new String[] { "1", "1", "1", "1" }),
+                                      createMatrix(2, createNumber(2, "10"), createNumber(2, "10"),
+                                                   new String[] { "1", "1", "1", "1" }),
+                                      createMatrix(2, createNumber(2, "10"), createNumber(2, "10"),
+                                                   new String[] { "0", "0", "0", "0" }) });
 
-            parameters.add(new Object[] { createMatrix(base, createNumber(10, "2"), createNumber(10, "2"),
+        for (int base = BASE_MIN_LIMIT + 1; base <= BASE_MAX_LIMIT; base++) {
+
+            parameters.add(new Object[] { createMatrix(base, createNumber(base, "2"), createNumber(base, "2"),
                                                        new String[] { "1", "1", "1", "1" }),
-                                          createMatrix(base, createNumber(10, "2"), createNumber(10, "2"),
+                                          createMatrix(base, createNumber(base, "2"), createNumber(base, "2"),
                                                        new String[] { "1", "1", "1", "1" }),
-                                          createMatrix(base, createNumber(10, "2"), createNumber(10, "2"),
+                                          createMatrix(base, createNumber(base, "2"), createNumber(base, "2"),
                                                        new String[] { "0", "0", "0", "0" }) });
         }
 

@@ -77,7 +77,7 @@ public class SubtractMatrices implements BinaryOperation<Matrix, Result<Matrix>>
 
         int base = matrix1.base();
 
-        Number firstIndex = IndexSingletons.firstIndex();
+        Number firstIndex = IndexSingletons.firstIndex(base);
         Number columns = matrix1.columns();
         Number rows = matrix1.rows();
 

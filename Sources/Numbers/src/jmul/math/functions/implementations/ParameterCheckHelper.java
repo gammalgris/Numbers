@@ -44,7 +44,6 @@ import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.exceptions.DigitBaseMismatchException;
-import jmul.math.indices.IndexSingletons;
 import jmul.math.vectors.Vector;
 
 
@@ -654,16 +653,11 @@ public final class ParameterCheckHelper {
         checkIndex(columns);
         checkIndex(rows);
 
-        int defaultNumberBase = IndexSingletons.defaultNumberBase();
-        if (columns.base() != defaultNumberBase) {
+        if (columns.base() != rows.base()) {
 
-            String message = String.format("Provide the number of columns in number base %d", defaultNumberBase);
-            throw new IllegalArgumentException(message);
-        }
-
-        if (rows.base() != defaultNumberBase) {
-
-            String message = String.format("Provide the number of rows in number base %d", defaultNumberBase);
+            String message =
+                String.format("Provide the number of columns and the number of rows in the same number base (coulumns: %d; rows: %d)",
+                              columns.base(), rows.base());
             throw new IllegalArgumentException(message);
         }
     }
@@ -684,22 +678,17 @@ public final class ParameterCheckHelper {
         checkIndex(minIndex);
         checkIndex(maxIndex);
 
-        int defaultNumberBase = IndexSingletons.defaultNumberBase();
-        if (minIndex.base() != defaultNumberBase) {
+        int base = index.base();
 
-            String message = String.format("Provide the minimum index in number base %d", defaultNumberBase);
+        if (minIndex.base() != base) {
+
+            String message = String.format("Provide the minimum index in number base %d", base);
             throw new IllegalArgumentException(message);
         }
 
-        if (maxIndex.base() != defaultNumberBase) {
+        if (maxIndex.base() != base) {
 
-            String message = String.format("Provide the maximum index in number base %d", defaultNumberBase);
-            throw new IllegalArgumentException(message);
-        }
-
-        if (index.base() != defaultNumberBase) {
-
-            String message = String.format("Provide the index in number base %d", defaultNumberBase);
+            String message = String.format("Provide the maximum index in number base %d", base);
             throw new IllegalArgumentException(message);
         }
 

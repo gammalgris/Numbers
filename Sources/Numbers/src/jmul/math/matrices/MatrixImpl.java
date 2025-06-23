@@ -47,6 +47,7 @@ import jmul.math.numbers.Number;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.Result;
 import jmul.math.indices.IndexSingletons;
+import jmul.math.operations.EqualityFunction;
 import jmul.math.vectors.Vector;
 
 
@@ -97,7 +98,7 @@ public class MatrixImpl implements Matrix {
 
         this.base = ParameterCheckHelper.checkNumberBase(base);
 
-        Number ZERO = IndexSingletons.firstIndex().dec();
+        Number ZERO = IndexSingletons.firstIndex(base).dec();
 
         this.columns = ZERO;
         this.rows = ZERO;
@@ -211,7 +212,7 @@ public class MatrixImpl implements Matrix {
      */
     private void addElements(Number... numbers) {
 
-        final Number firstIndex = IndexSingletons.firstIndex();
+        final Number firstIndex = IndexSingletons.firstIndex(base);
         int index = 0;
 
         for (Number columnIndex = firstIndex; columnIndex.isLesserOrEqual(columns);
@@ -260,7 +261,7 @@ public class MatrixImpl implements Matrix {
      */
     private void addElements(Iterator<Number> iterator) {
 
-        final Number firstIndex = IndexSingletons.firstIndex();
+        final Number firstIndex = IndexSingletons.firstIndex(base);
 
         for (Number columnIndex = firstIndex; columnIndex.isLesserOrEqual(columns);
              columnIndex = IndexSingletons.nextIndex(columnIndex)) {
@@ -301,7 +302,7 @@ public class MatrixImpl implements Matrix {
     @Override
     public Number component(Number columnIndex, Number rowIndex) {
 
-        Number firstIndex = IndexSingletons.firstIndex();
+        Number firstIndex = IndexSingletons.firstIndex(base);
         ParameterCheckHelper.checkIndex(columnIndex, firstIndex, columns);
         ParameterCheckHelper.checkIndex(rowIndex, firstIndex, rows);
 
@@ -427,7 +428,7 @@ public class MatrixImpl implements Matrix {
 
         StringBuffer buffer = new StringBuffer();
 
-        final Number firstIndex = IndexSingletons.firstIndex();
+        final Number firstIndex = IndexSingletons.firstIndex(base);
 
         buffer.append("{");
 
@@ -479,39 +480,15 @@ public class MatrixImpl implements Matrix {
     @Override
     public boolean equals(Object o) {
 
-        if (o == null) {
-
-            return false;
-        }
-
-        if (this == o) {
-
-            return true;
-        }
-
         if (o instanceof Matrix) {
 
             Matrix other = (Matrix) o;
 
-            final Number firstIndex = IndexSingletons.firstIndex();
+            EqualityFunction<Matrix> function =
+                (EqualityFunction<Matrix>) FunctionSingletons.getFunction(FunctionIdentifiers.MATRIX_EQUALITY_FUNCTION);
+            boolean result = function.equals(this, other);
 
-            for (Number columnIndex = firstIndex; columnIndex.isLesserOrEqual(columns);
-                 columnIndex = IndexSingletons.nextIndex(columnIndex)) {
-
-                for (Number rowIndex = firstIndex; rowIndex.isLesserOrEqual(rows);
-                     rowIndex = IndexSingletons.nextIndex(rowIndex)) {
-
-                    Number component1 = this.component(columnIndex, rowIndex);
-                    Number component2 = other.component(columnIndex, rowIndex);
-
-                    if (!component1.equals(component2)) {
-
-                        return false;
-                    }
-                }
-            }
-
-            return true;
+            return result;
         }
 
         return false;

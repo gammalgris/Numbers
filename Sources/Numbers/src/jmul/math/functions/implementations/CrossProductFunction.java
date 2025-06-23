@@ -77,7 +77,7 @@ public class CrossProductFunction implements BinaryOperation<Vector, Result<Vect
 
         int base = vector1.base();
 
-        Number firstIndex = IndexSingletons.firstIndex();
+        Number firstIndex = IndexSingletons.firstIndex(base);
         Number lastIndex = vector1.dimensions();
 
         Number currentIndex = firstIndex;

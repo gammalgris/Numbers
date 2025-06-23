@@ -34,11 +34,11 @@
 package test.jmul.math.matrices;
 
 
+import jmul.math.indices.IndexSingletons;
 import jmul.math.matrices.Matrix;
 import static jmul.math.matrices.MatrixHelper.createMatrix;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
-import jmul.math.indices.IndexSingletons;
 
 import jmul.test.classification.UnitTest;
 
@@ -114,10 +114,11 @@ public class CreateMatrixTest {
     @Test
     public void testCreateMatrix() {
 
+        int base = 10;
         Matrix matrix =
-            createMatrix(10, createNumber(10, "2"), createNumber(10, "2"), new String[] { "1", "2", "3", "4" });
+            createMatrix(base, createNumber(base, "2"), createNumber(base, "2"), new String[] { "1", "2", "3", "4" });
 
-        Number firstIndex = IndexSingletons.firstIndex();
+        Number firstIndex = IndexSingletons.firstIndex(base);
 
         Number columnIndex = firstIndex;
         Number rowIndex = firstIndex;
@@ -125,27 +126,27 @@ public class CreateMatrixTest {
         Number expectedComponent;
 
         actualComponent = matrix.component(columnIndex, rowIndex);
-        expectedComponent = createNumber(10, "1");
+        expectedComponent = createNumber(base, "1");
         assertEquals("Failed component check!", expectedComponent, actualComponent);
 
         columnIndex = firstIndex;
         rowIndex = IndexSingletons.nextIndex(rowIndex);
 
         actualComponent = matrix.component(columnIndex, rowIndex);
-        expectedComponent = createNumber(10, "2");
+        expectedComponent = createNumber(base, "2");
         assertEquals("Failed component check!", expectedComponent, actualComponent);
 
         columnIndex = IndexSingletons.nextIndex(columnIndex);
         rowIndex = firstIndex;
 
         actualComponent = matrix.component(columnIndex, rowIndex);
-        expectedComponent = createNumber(10, "3");
+        expectedComponent = createNumber(base, "3");
         assertEquals("Failed component check!", expectedComponent, actualComponent);
 
         rowIndex = IndexSingletons.nextIndex(rowIndex);
 
         actualComponent = matrix.component(columnIndex, rowIndex);
-        expectedComponent = createNumber(10, "4");
+        expectedComponent = createNumber(base, "4");
         assertEquals("Failed component check!", expectedComponent, actualComponent);
     }
 

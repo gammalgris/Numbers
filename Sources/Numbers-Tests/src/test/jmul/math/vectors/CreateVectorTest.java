@@ -34,9 +34,9 @@
 package test.jmul.math.vectors;
 
 
+import jmul.math.indices.IndexSingletons;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
-import jmul.math.indices.IndexSingletons;
 import jmul.math.vectors.Vector;
 import jmul.math.vectors.VectorImpl;
 
@@ -84,12 +84,13 @@ public class CreateVectorTest {
     @Test
     public void testCreateOneDimensionalVector() {
 
-        final Number ONE = createNumber(10, "1");
-        final Number INDEX = IndexSingletons.firstIndex();
+        int base = 10;
+        final Number ONE = createNumber(base, "1");
+        final Number INDEX = IndexSingletons.firstIndex(base);
 
-        Vector vector = new VectorImpl(10, createNumber(10, "1"));
+        Vector vector = new VectorImpl(base, createNumber(base, "1"));
 
-        assertEquals(10, vector.base());
+        assertEquals(base, vector.base());
         assertTrue(vector.dimensions().isOne());
         assertEquals(ONE, vector.dimensions());
         assertEquals(ONE, vector.component(INDEX));
@@ -101,9 +102,10 @@ public class CreateVectorTest {
     @Test
     public void testCreateOneDimensionalVectorWithEmotyArray() {
 
-        Vector vector = new VectorImpl(10, new Number[] { });
+        int base = 10;
+        Vector vector = new VectorImpl(base, new Number[] { });
 
-        assertEquals(10, vector.base());
+        assertEquals(base, vector.base());
         assertTrue(vector.dimensions().isZero());
     }
 
@@ -113,14 +115,15 @@ public class CreateVectorTest {
     @Test
     public void testCreateTwoDimensionalVector() {
 
-        final Number ONE = createNumber(10, "1");
-        final Number TWO = createNumber(10, "2");
-        final Number FIRST_INDEX = IndexSingletons.firstIndex();
+        int base = 10;
+        final Number ONE = createNumber(base, "1");
+        final Number TWO = createNumber(base, "2");
+        final Number FIRST_INDEX = IndexSingletons.firstIndex(base);
         final Number LAST_INDEX = IndexSingletons.nextIndex(FIRST_INDEX);
 
-        Vector vector = new VectorImpl(10, createNumber(10, "1"), createNumber(10, "2"));
+        Vector vector = new VectorImpl(base, createNumber(base, "1"), createNumber(base, "2"));
 
-        assertEquals(10, vector.base());
+        assertEquals(base, vector.base());
         assertEquals(TWO, vector.dimensions());
         assertEquals(ONE, vector.component(FIRST_INDEX));
         assertEquals(TWO, vector.component(LAST_INDEX));

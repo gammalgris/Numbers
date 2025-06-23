@@ -34,10 +34,9 @@
 package jmul.math.numbers.exceptions;
 
 
+import jmul.math.digits.Digit;
 import jmul.math.fractions.Fraction;
 import jmul.math.numbers.Number;
-import jmul.math.digits.Digit;
-import jmul.math.vectors.Vector;
 
 
 /**
@@ -97,19 +96,6 @@ public class DigitBaseMismatchException extends IllegalArgumentException {
     public DigitBaseMismatchException(Digit d1, Digit d2) {
 
         super(createErrorMessage(d1, d2));
-    }
-
-    /**
-     * Creates a new exception with the specified parameters.
-     *
-     * @param v1
-     *        a vector
-     * @param v2
-     *        a vector
-     */
-    public DigitBaseMismatchException(Vector v1, Vector v2) {
-
-        super(createErrorMessage(v1, v2));
     }
 
     /**
@@ -174,22 +160,6 @@ public class DigitBaseMismatchException extends IllegalArgumentException {
 
         return String.format("Unable to compare digits %s (base %d) and %s (base %d)!", d1.toString(), d1.base(),
                              d2.toString(), d2.base());
-    }
-
-    /**
-     * Creates an error message according to the specified parameters.
-     *
-     * @param v1
-     *        a vector
-     * @param v2
-     *        a vector
-     *
-     * @return an error message
-     */
-    private static String createErrorMessage(Vector v1, Vector v2) {
-
-        return String.format("Unable to compare vectors %s (base %d) and %s (base %d)!", v1.toString(), v1.base(),
-                             v2.toString(), v2.base());
     }
 
 }

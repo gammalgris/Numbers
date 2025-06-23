@@ -34,86 +34,98 @@
 package jmul.math.functions.implementations.equality;
 
 
-import java.util.Iterator;
-
 import jmul.math.functions.Function;
+import jmul.math.indices.IndexSingletons;
+import jmul.math.matrices.Matrix;
 import jmul.math.numbers.Number;
 import jmul.math.operations.EqualityFunction;
-import jmul.math.vectors.Vector;
 
 
 /**
- * An implementation of an equality comparator for vectors.
+ * An implementation of an equality comparator for matrices.
  *
  * @author Kristian Kutin
  */
-public class VectorEquality implements Function, EqualityFunction<Vector> {
+public class MatrixEquality implements Function, EqualityFunction<Matrix> {
 
     /**
      * The default constructor.
      */
-    public VectorEquality() {
+    public MatrixEquality() {
 
         super();
     }
 
     /**
-     * Compares the two specified vectors regarding equality.
+     * Compares the two specified matrices regarding equality.
      *
-     * @param v1
-     *        a vector
-     * @param v2
-     *        a vector
+     * @param m1
+     *        a matrix
+     * @param m2
+     *        a matrix
      *
-     * @return <code>true</code> if both vectors are considered equal, else <code>false</code>
+     * @return <code>true</code> if both matrices are considered equal, else <code>false</code>
      */
     @Override
-    public boolean equals(Vector v1, Vector v2) {
+    public boolean equals(Matrix m1, Matrix m2) {
 
         // Check the references
 
-        if ((v1 == null) && (v2 == null)) {
+        if ((m1 == null) && (m2 == null)) {
 
             return true;
         }
 
-        if ((v1 == null) || (v2 == null)) {
+        if ((m1 == null) || (m2 == null)) {
 
             return false;
         }
 
-        if (v1 == v2) {
+        if (m1 == m2) {
 
             return true;
         }
 
         // Check the number bases
 
-        if (v1.base() != v2.base()) {
+        if (m1.base() != m2.base()) {
 
             return false;
         }
 
         // Check the sizes
 
-        if (!v1.dimensions().equals(v2.dimensions())) {
+        if (!m1.columns().equals(m2.columns())) {
+
+            return false;
+        }
+
+        if (!m1.rows().equals(m2.rows())) {
 
             return false;
         }
 
         // check the components
 
-        Iterator<Number> iterator1 = v1.iterator();
-        Iterator<Number> iterator2 = v2.iterator();
+        int base = m1.base();
+        Number columns = m1.columns();
+        Number rows = m1.rows();
 
-        while (iterator1.hasNext() && iterator2.hasNext()) {
+        final Number firstIndex = IndexSingletons.firstIndex(base);
 
-            Number component1 = iterator1.next();
-            Number component2 = iterator2.next();
+        for (Number columnIndex = firstIndex; columnIndex.isLesserOrEqual(columns);
+             columnIndex = IndexSingletons.nextIndex(columnIndex)) {
 
-            if (!component1.equals(component2)) {
+            for (Number rowIndex = firstIndex; rowIndex.isLesserOrEqual(rows);
+                 rowIndex = IndexSingletons.nextIndex(rowIndex)) {
 
-                return false;
+                Number component1 = m1.component(columnIndex, rowIndex);
+                Number component2 = m2.component(columnIndex, rowIndex);
+
+                if (!component1.equals(component2)) {
+
+                    return false;
+                }
             }
         }
 

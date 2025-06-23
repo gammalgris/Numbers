@@ -31,11 +31,12 @@
  * $Id$
  */
 
-package test.jmul.math.vectors;
+package test.jmul.math.matrices;
 
 
-import jmul.math.vectors.Vector;
-import static jmul.math.vectors.VectorHelper.createVector;
+import jmul.math.matrices.Matrix;
+import static jmul.math.matrices.MatrixHelper.createMatrix;
+import static jmul.math.numbers.NumberHelper.createNumber;
 
 import jmul.test.classification.UnitTest;
 
@@ -49,7 +50,7 @@ import org.junit.Test;
  * @author Kristian Kutin
  */
 @UnitTest
-public class VectorEquality2Test {
+public class MatricesEquality2Test {
 
     /**
      * Tests if the reference to the same vector returns the expected result.
@@ -57,10 +58,10 @@ public class VectorEquality2Test {
     @Test
     public void testSameReference() {
 
-        Vector vector1 = createVector(10, "0");
-        Vector vector2 = vector1;
+        Matrix matrix1 = createMatrix(10, createNumber(10, "1"), createNumber(10, "1"), "0");
+        Matrix matrix2 = matrix1;
 
-        boolean actualResult = vector1.equals(vector2);
+        boolean actualResult = matrix1.equals(matrix2);
         boolean expectedResult = true;
 
         assertEquals("Vector equality", expectedResult, actualResult);
@@ -72,10 +73,10 @@ public class VectorEquality2Test {
     @Test
     public void testNullReference() {
 
-        Vector vector1 = createVector(10, "0");
-        Vector vector2 = null;
+        Matrix matrix1 = createMatrix(10, createNumber(10, "1"), createNumber(10, "1"), "0");
+        Matrix matrix2 = null;
 
-        boolean actualResult = vector1.equals(vector2);
+        boolean actualResult = matrix1.equals(matrix2);
         boolean expectedResult = false;
 
         assertEquals("Vector equality", expectedResult, actualResult);
@@ -87,12 +88,12 @@ public class VectorEquality2Test {
     @Test
     public void testDifferentNumberBases() {
 
-        Vector vector1 = createVector(10, "0");
-        Vector vector2 = createVector(11, "0");
+        Matrix matrix1 = createMatrix(10, createNumber(10, "1"), createNumber(10, "1"), "0");
+        Matrix matrix2 = createMatrix(11, createNumber(11, "1"), createNumber(11, "1"), "0");
 
-        boolean actualResult = vector1.equals(vector2);
+        boolean actualResult = matrix1.equals(matrix2);
         boolean expectedResult = false;
-        
+
         assertEquals("Vector equality", expectedResult, actualResult);
     }
 

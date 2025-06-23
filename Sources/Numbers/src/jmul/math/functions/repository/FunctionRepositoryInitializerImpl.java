@@ -144,6 +144,7 @@ import jmul.math.functions.implementations.comparisons.NumberLesserThanOrEqualFr
 import jmul.math.functions.implementations.equality.DigitEquality;
 import jmul.math.functions.implementations.equality.FractionEquality;
 import jmul.math.functions.implementations.equality.FractionNumberEquality;
+import jmul.math.functions.implementations.equality.MatrixEquality;
 import jmul.math.functions.implementations.equality.NumberEquality;
 import jmul.math.functions.implementations.equality.NumberFractionEquality;
 import jmul.math.functions.implementations.equality.VectorEquality;
@@ -354,6 +355,7 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
         repository.registerFunction(FunctionIdentifiers.IS_PRIME_FUNCTION, IsPrimeFunction.class);
 
         repository.registerFunction(FunctionIdentifiers.VECTOR_EQUALITY_FUNCTION, VectorEquality.class);
+        repository.registerFunction(FunctionIdentifiers.MATRIX_EQUALITY_FUNCTION, MatrixEquality.class);
 
         repository.registerFunction(FunctionIdentifiers.ADD_VECTORS_FUNCTION, AddVectors.class);
         repository.registerFunction(FunctionIdentifiers.SUBTRACT_VECTORS_FUNCTION, SubtractVectors.class);
