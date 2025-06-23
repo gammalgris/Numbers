@@ -2045,4 +2045,21 @@ public final class Math {
         return result.result();
     }
 
+    /**
+     * Performs a vetorization of the specified matrix (i.e. transforms the matrix to a vector).
+     *
+     * @param matrix
+     *        a matrix
+     *
+     * @return a vector
+     */
+    public static Vector toVector(Matrix matrix) {
+
+        UnaryOperation<Matrix, Result<Vector>> function =
+            (UnaryOperation<Matrix, Result<Vector>>) FunctionSingletons.getFunction(FunctionIdentifiers.VECTORIZATION_FUNCTION);
+        Result<Vector> result = function.calculate(matrix);
+
+        return result.result();
+    }
+
 }

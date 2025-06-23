@@ -121,6 +121,7 @@ import jmul.math.functions.implementations.SubtractNumberAndFraction;
 import jmul.math.functions.implementations.SubtractNumbers;
 import jmul.math.functions.implementations.SubtractVectors;
 import jmul.math.functions.implementations.TripleProductFunction;
+import jmul.math.functions.implementations.VectorizationFunction;
 import jmul.math.functions.implementations.comparisons.DigitComparator;
 import jmul.math.functions.implementations.comparisons.FractionComparator;
 import jmul.math.functions.implementations.comparisons.FractionGreaterThanComparison;
@@ -373,6 +374,8 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
         repository.registerFunction(FunctionIdentifiers.FRACTION_IS_WITHIN_INTERVAL, FractionWithinInterval.class);
 
         repository.registerFunction(FunctionIdentifiers.DYADIC_PRODUCT_FUNCTION, DyadicProductFunction.class);
+
+        repository.registerFunction(FunctionIdentifiers.VECTORIZATION_FUNCTION, VectorizationFunction.class);
 
         return repository;
     }

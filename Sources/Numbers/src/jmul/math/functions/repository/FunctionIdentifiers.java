@@ -205,7 +205,9 @@ public enum FunctionIdentifiers implements FunctionIdentifier {
     NUMBER_IS_WITHIN_INTERVAL(NONE),
     FRACTION_IS_WITHIN_INTERVAL(NONE),
 
-    DYADIC_PRODUCT_FUNCTION(NONE);
+    DYADIC_PRODUCT_FUNCTION(NONE),
+
+    VECTORIZATION_FUNCTION(NONE);
 
 
     /**

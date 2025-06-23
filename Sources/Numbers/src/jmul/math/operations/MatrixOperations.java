@@ -90,7 +90,7 @@ public interface MatrixOperations {
     Matrix multiply(Matrix matrix);
 
     /**
-     * Performs a vetoriazation of this matrix (i.e. transforms the matrix to a vector).
+     * Performs a vetorization of this matrix (i.e. transforms the matrix to a vector).
      *
      * @return a vector
      */

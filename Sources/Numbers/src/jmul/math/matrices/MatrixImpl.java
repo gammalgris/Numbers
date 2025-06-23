@@ -43,11 +43,12 @@ import jmul.math.functions.FunctionSingletons;
 import jmul.math.functions.implementations.ParameterCheckHelper;
 import jmul.math.functions.repository.FunctionIdentifiers;
 import jmul.math.hash.HashHelper;
+import jmul.math.indices.IndexSingletons;
 import jmul.math.numbers.Number;
 import jmul.math.operations.BinaryOperation;
-import jmul.math.operations.Result;
-import jmul.math.indices.IndexSingletons;
 import jmul.math.operations.EqualityFunction;
+import jmul.math.operations.Result;
+import jmul.math.operations.UnaryOperation;
 import jmul.math.vectors.Vector;
 
 
@@ -407,15 +408,18 @@ public class MatrixImpl implements Matrix {
     }
 
     /**
-     * Performs a vetoriazation of this matrix (i.e. transforms the matrix to a vector).
+     * Performs a vetorization of this matrix (i.e. transforms the matrix to a vector).
      *
      * @return a vector
      */
     @Override
     public Vector toVector() {
 
-        //TODO not implemented yet
-        throw new UnsupportedOperationException();
+        UnaryOperation<Matrix, Result<Vector>> function =
+            (UnaryOperation<Matrix, Result<Vector>>) FunctionSingletons.getFunction(FunctionIdentifiers.VECTORIZATION_FUNCTION);
+        Result<Vector> result = function.calculate(this);
+
+        return result.result();
     }
 
     /**

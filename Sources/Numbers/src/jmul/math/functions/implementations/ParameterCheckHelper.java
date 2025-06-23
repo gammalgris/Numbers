@@ -308,6 +308,25 @@ public final class ParameterCheckHelper {
     /**
      * Checks the specified parameter.
      *
+     * @param matrix
+     *        a matrix
+     *
+     * @return the specified matrix
+     */
+    public static Matrix checkParameter(Matrix matrix) {
+
+        if (matrix == null) {
+
+            String message = "No matrix (null) was specified!";
+            throw new IllegalArgumentException(message);
+        }
+
+        return matrix;
+    }
+
+    /**
+     * Checks the specified parameter.
+     *
      * @param number
      *        a number
      */
