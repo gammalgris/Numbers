@@ -2025,4 +2025,24 @@ public final class Math {
         return result.result();
     }
 
+    /**
+     * Calculates the dyadic product of the specified vectors The underlying assumption ist that the specified
+     * first vector is interpreted as a column vector and the specified vector is interpreted as a row vector.
+     *
+     * @param vector1
+     *        a vector (i.e. column vector)
+     * @param vector2
+     *        a vector (i.e. a row vector)
+     *
+     * @return the dyadic product
+     */
+    public static Matrix dyadicProduct(Vector vector1, Vector vector2) {
+
+        BinaryOperation<Vector, Result<Matrix>> function =
+            (BinaryOperation<Vector, Result<Matrix>>) FunctionSingletons.getFunction(FunctionIdentifiers.DYADIC_PRODUCT_FUNCTION);
+        Result<Matrix> result = function.calculate(vector1, vector2);
+
+        return result.result();
+    }
+
 }

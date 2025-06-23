@@ -59,6 +59,7 @@ import jmul.math.functions.implementations.DivisionOfNumbersBySubtractionReturnR
 import jmul.math.functions.implementations.DivisoWithIntegersFunction;
 import jmul.math.functions.implementations.DoublingFraction;
 import jmul.math.functions.implementations.DoublingNumber;
+import jmul.math.functions.implementations.DyadicProductFunction;
 import jmul.math.functions.implementations.EvaluateFraction;
 import jmul.math.functions.implementations.EvenNumberFunction;
 import jmul.math.functions.implementations.Factorial;
@@ -370,6 +371,8 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
 
         repository.registerFunction(FunctionIdentifiers.NUMBER_IS_WITHIN_INTERVAL, NumberWithinInterval.class);
         repository.registerFunction(FunctionIdentifiers.FRACTION_IS_WITHIN_INTERVAL, FractionWithinInterval.class);
+
+        repository.registerFunction(FunctionIdentifiers.DYADIC_PRODUCT_FUNCTION, DyadicProductFunction.class);
 
         return repository;
     }

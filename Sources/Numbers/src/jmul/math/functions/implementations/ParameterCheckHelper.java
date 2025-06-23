@@ -533,6 +533,36 @@ public final class ParameterCheckHelper {
     }
 
     /**
+     * Checks the specified row and column vectors.
+     *
+     * @param vector1
+     *        a vector
+     * @param vector2
+     *        a vector
+     */
+    public static void checkRowAndColumnVector(Vector vector1, Vector vector2) {
+
+        if (vector1 == null) {
+
+            String message = "No vector (null) was specified!";
+            throw new IllegalArgumentException(message);
+        }
+
+        if (vector2 == null) {
+
+            String message = "No vector (null) was specified!";
+            throw new IllegalArgumentException(message);
+        }
+
+        if (vector1.base() != vector2.base()) {
+
+            String message =
+                String.format("The vectors are of different number bases (%d & %d)!", vector1.base(), vector2.base());
+            throw new IllegalArgumentException(message);
+        }
+    }
+
+    /**
      * Checks the specified vectors.
      *
      * @param vector

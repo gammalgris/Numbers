@@ -371,8 +371,11 @@ public class VectorImpl implements Vector {
     @Override
     public Matrix dyadicProduct(Vector vector) {
 
-        // TODO Implement this method
-        throw new UnsupportedOperationException();
+        BinaryOperation<Vector, Result<Matrix>> function =
+            (BinaryOperation<Vector, Result<Matrix>>) FunctionSingletons.getFunction(FunctionIdentifiers.DYADIC_PRODUCT_FUNCTION);
+        Result<Matrix> result = function.calculate(this, vector);
+
+        return result.result();
     }
 
     /**
