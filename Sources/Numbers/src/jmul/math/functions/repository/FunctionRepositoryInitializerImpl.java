@@ -120,6 +120,7 @@ import jmul.math.functions.implementations.SubtractMatrices;
 import jmul.math.functions.implementations.SubtractNumberAndFraction;
 import jmul.math.functions.implementations.SubtractNumbers;
 import jmul.math.functions.implementations.SubtractVectors;
+import jmul.math.functions.implementations.TransposeMatrixFunction;
 import jmul.math.functions.implementations.TripleProductFunction;
 import jmul.math.functions.implementations.VectorizationFunction;
 import jmul.math.functions.implementations.comparisons.DigitComparator;
@@ -376,6 +377,7 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
         repository.registerFunction(FunctionIdentifiers.DYADIC_PRODUCT_FUNCTION, DyadicProductFunction.class);
 
         repository.registerFunction(FunctionIdentifiers.VECTORIZATION_FUNCTION, VectorizationFunction.class);
+        repository.registerFunction(FunctionIdentifiers.TRANSPOSE_MATRIX_FUNCTION, TransposeMatrixFunction.class);
 
         return repository;
     }

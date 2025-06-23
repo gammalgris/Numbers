@@ -388,8 +388,11 @@ public class MatrixImpl implements Matrix {
     @Override
     public Matrix transpose() {
 
-        //TODO not implemented yet
-        throw new UnsupportedOperationException();
+        UnaryOperation<Matrix, Result<Matrix>> function =
+            (UnaryOperation<Matrix, Result<Matrix>>) FunctionSingletons.getFunction(FunctionIdentifiers.TRANSPOSE_MATRIX_FUNCTION);
+        Result<Matrix> result = function.calculate(this);
+
+        return result.result();
     }
 
     /**

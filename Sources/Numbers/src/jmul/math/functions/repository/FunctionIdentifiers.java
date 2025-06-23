@@ -207,7 +207,8 @@ public enum FunctionIdentifiers implements FunctionIdentifier {
 
     DYADIC_PRODUCT_FUNCTION(NONE),
 
-    VECTORIZATION_FUNCTION(NONE);
+    VECTORIZATION_FUNCTION(NONE),
+    TRANSPOSE_MATRIX_FUNCTION(NONE);
 
 
     /**

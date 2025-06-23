@@ -39,38 +39,37 @@ import java.util.Queue;
 
 import jmul.math.indices.IndexSingletons;
 import jmul.math.matrices.Matrix;
+import jmul.math.matrices.MatrixImpl;
 import jmul.math.numbers.Number;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
-import jmul.math.vectors.Vector;
-import jmul.math.vectors.VectorImpl;
 
 
 /**
- * An implementation of a vectorization function for matrices.
+ * An implementation of a fucntion to transpose a matrix.
  *
  * @author Kristian Kutin
  */
-public class VectorizationFunction implements UnaryOperation<Matrix, Result<Vector>> {
+public class TransposeMatrixFunction implements UnaryOperation<Matrix, Result<Matrix>> {
 
     /**
      * The default constructor.
      */
-    public VectorizationFunction() {
+    public TransposeMatrixFunction() {
 
         super();
     }
 
     /**
-     * Vectorizes the specified matrix.
+     *Calculates the transpose of the specified matrix.
      *
      * @param matrix
      *        a matrix
      *
-     * @return a vector
+     * @return a transposed matrix
      */
     @Override
-    public Result<Vector> calculate(Matrix matrix) {
+    public Result<Matrix> calculate(Matrix matrix) {
 
         ParameterCheckHelper.checkParameter(matrix);
 
@@ -82,11 +81,11 @@ public class VectorizationFunction implements UnaryOperation<Matrix, Result<Vect
 
         Queue<Number> results = new LinkedList<Number>();
 
-        for (Number columnIndex = firstIndex; columnIndex.isLesserOrEqual(columns);
-             columnIndex = IndexSingletons.nextIndex(columnIndex)) {
+        for (Number rowIndex = firstIndex; rowIndex.isLesserOrEqual(rows);
+             rowIndex = IndexSingletons.nextIndex(rowIndex)) {
 
-            for (Number rowIndex = firstIndex; rowIndex.isLesserOrEqual(rows);
-                 rowIndex = IndexSingletons.nextIndex(rowIndex)) {
+            for (Number columnIndex = firstIndex; columnIndex.isLesserOrEqual(columns);
+                 columnIndex = IndexSingletons.nextIndex(columnIndex)) {
 
                 Number component = matrix.component(columnIndex, rowIndex);
 
@@ -94,9 +93,9 @@ public class VectorizationFunction implements UnaryOperation<Matrix, Result<Vect
             }
         }
 
-        Vector result = new VectorImpl(base, results.stream());
+        Matrix result = new MatrixImpl(base, rows, columns, results.stream());
 
-        return new Result<Vector>(result);
+        return new Result<Matrix>(result);
     }
 
 }

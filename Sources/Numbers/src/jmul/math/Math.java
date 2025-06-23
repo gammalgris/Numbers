@@ -2062,4 +2062,21 @@ public final class Math {
         return result.result();
     }
 
+    /**
+     * Transposes the specified matrix.
+     *
+     * @param matrix
+     *        a matrix
+     *
+     * @return a transposed matrix
+     */
+    public static Matrix transpose(Matrix matrix) {
+
+        UnaryOperation<Matrix, Result<Matrix>> function =
+            (UnaryOperation<Matrix, Result<Matrix>>) FunctionSingletons.getFunction(FunctionIdentifiers.TRANSPOSE_MATRIX_FUNCTION);
+        Result<Matrix> result = function.calculate(matrix);
+
+        return result.result();
+    }
+
 }
