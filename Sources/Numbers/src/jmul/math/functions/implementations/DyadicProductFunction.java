@@ -80,15 +80,16 @@ public class DyadicProductFunction implements BinaryOperation<Vector, Result<Mat
 
         Queue<Number> results = new LinkedList<Number>();
 
-        Iterator<Number> iterator2 = vector2.iterator();
-        while (iterator2.hasNext()) {
+        Iterator<Number> iterator1 = vector1.iterator();
+        while (iterator1.hasNext()) {
 
-            Number component2 = iterator2.next();
+            Number component1 = iterator1.next();
 
-            Iterator<Number> iterator1 = vector1.iterator();
-            while (iterator1.hasNext()) {
+            Iterator<Number> iterator2 = vector2.iterator();
+            while (iterator2.hasNext()) {
 
-                Number component1 = iterator1.next();
+                Number component2 = iterator2.next();
+
 
                 Number result = component1.multiply(component2);
                 results.add(result);

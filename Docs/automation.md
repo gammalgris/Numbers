@@ -25,7 +25,7 @@ variables which are needed to check and set up the environment.
 
 Open a DOS console (see link). Set up the environemnt by calling the script
 
-* setEnv.bat
+* setEnv-Java-Ant.bat
 
 The script checks some dependencies and cleans the PATH environment variable.
 You can check if the changes were retained by calling the script

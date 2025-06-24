@@ -104,4 +104,23 @@ public final class MatrixHelper {
         return createMatrix(base, columns, rows, components);
     }
 
+    /**
+     * Creates a new matrix.
+     *
+     * @param base
+     *        a number base
+     * @param columnsString
+     *        a number of columns as string
+     * @param rowsString
+     *        a number of rows as string
+     * @param componentStrings
+     *        all components as strings
+     *
+     * @return a new matrix
+     */
+    public static Matrix createMatrix(int base, String columnsString, String rowsString, String... componentStrings) {
+
+        return createMatrix(base, createNumber(base, columnsString), createNumber(base, rowsString), componentStrings);
+    }
+
 }

@@ -145,6 +145,24 @@ public class DyadicProductTest {
 
         Collection<Object[]> parameters = new ArrayList<Object[]>();
 
+        /*
+         * Vector 1
+         *
+         * |1|
+         * |3|
+         * |2|
+         *
+         * Vector 2
+         *
+         * |2 1 0 3|
+         *
+         * Result Matrix
+         *
+         * |2 1 0 3|
+         * |6 3 0 9|
+         * |4 2 0 6|
+         *
+         */
         parameters.add(new Object[] { createVector(10, "1", "3", "2"), createVector(10, "2", "1", "0", "3"),
                                       createMatrix(10, createNumber(10, "4"), createNumber(10, "3"), "2", "6", "4", "1",
                                                    "3", "2", "0", "0", "0", "3", "9", "6") });

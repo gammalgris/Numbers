@@ -165,6 +165,13 @@ public class SubtractMatricesTest {
                                       createMatrix(10, createNumber(10, "2"), createNumber(10, "2"),
                                                    new String[] { "0", "0", "0", "0" }) });
 
+        parameters.add(new Object[] { createMatrix(10, createNumber(10, "2"), createNumber(10, "2"),
+                                                   new String[] { "2", "4", "6", "8" }),
+                                      createMatrix(10, createNumber(10, "2"), createNumber(10, "2"),
+                                                   new String[] { "1", "2", "3", "4" }),
+                                      createMatrix(10, createNumber(10, "2"), createNumber(10, "2"),
+                                                   new String[] { "1", "2", "3", "4" }) });
+
         return parameters;
     }
 

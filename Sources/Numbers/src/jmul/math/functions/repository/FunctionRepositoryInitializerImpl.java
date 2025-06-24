@@ -72,6 +72,7 @@ import jmul.math.functions.implementations.IncrementFraction;
 import jmul.math.functions.implementations.IncrementNumber;
 import jmul.math.functions.implementations.IsMultipleFunction;
 import jmul.math.functions.implementations.IsPrimeFunction;
+import jmul.math.functions.implementations.MatrixMultiplicationFunction;
 import jmul.math.functions.implementations.MaxFraction;
 import jmul.math.functions.implementations.MaxFractionNumber;
 import jmul.math.functions.implementations.MaxNumber;
@@ -378,6 +379,8 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
 
         repository.registerFunction(FunctionIdentifiers.VECTORIZATION_FUNCTION, VectorizationFunction.class);
         repository.registerFunction(FunctionIdentifiers.TRANSPOSE_MATRIX_FUNCTION, TransposeMatrixFunction.class);
+        repository.registerFunction(FunctionIdentifiers.MATRIX_MULTIPLCIATION_FUNCTION,
+                                    MatrixMultiplicationFunction.class);
 
         return repository;
     }

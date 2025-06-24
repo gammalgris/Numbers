@@ -808,4 +808,42 @@ public final class ParameterCheckHelper {
         return iterator;
     }
 
+    /**
+     * Checks the specified vectors.
+     *
+     * @param matrix1
+     *        a vector
+     * @param matrix2
+     *        a vector
+     */
+    public static void checkMatricesForMultiplication(Matrix matrix1, Matrix matrix2) {
+
+        if (matrix1 == null) {
+
+            String message = "No matrix (null) was specified!";
+            throw new IllegalArgumentException(message);
+        }
+
+        if (matrix2 == null) {
+
+            String message = "No matrix (null) was specified!";
+            throw new IllegalArgumentException(message);
+        }
+
+        if (matrix1.base() != matrix2.base()) {
+
+            String message =
+                String.format("The matrices are of different number bases (%d & %d)!", matrix1.base(), matrix2.base());
+            throw new IllegalArgumentException(message);
+        }
+
+        if (!matrix1.columns().equals(matrix2.rows())) {
+
+            String message =
+                String.format("The number of columns of the first matrix doesn't match the number of rows of the second matrix (%s & %s)!",
+                              matrix1.columns(), matrix2.rows());
+            throw new IllegalArgumentException(message);
+        }
+    }
+
 }

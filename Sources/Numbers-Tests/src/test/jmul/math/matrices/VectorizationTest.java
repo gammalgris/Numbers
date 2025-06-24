@@ -137,6 +137,10 @@ public class VectorizationTest {
                                                    new String[] { "1", "2", "3", "4" }),
                                       createVector(10, new String[] { "1", "2", "3", "4" }) });
 
+        parameters.add(new Object[] { createMatrix(10, createNumber(10, "3"), createNumber(10, "2"),
+                                                   new String[] { "1", "2", "3", "4", "5", "6" }),
+                                      createVector(10, new String[] { "1", "2", "3", "4", "5", "6" }) });
+
         return parameters;
     }
 

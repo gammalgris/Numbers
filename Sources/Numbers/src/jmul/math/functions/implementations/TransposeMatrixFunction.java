@@ -81,11 +81,11 @@ public class TransposeMatrixFunction implements UnaryOperation<Matrix, Result<Ma
 
         Queue<Number> results = new LinkedList<Number>();
 
-        for (Number rowIndex = firstIndex; rowIndex.isLesserOrEqual(rows);
-             rowIndex = IndexSingletons.nextIndex(rowIndex)) {
+        for (Number columnIndex = firstIndex; columnIndex.isLesserOrEqual(columns);
+             columnIndex = IndexSingletons.nextIndex(columnIndex)) {
 
-            for (Number columnIndex = firstIndex; columnIndex.isLesserOrEqual(columns);
-                 columnIndex = IndexSingletons.nextIndex(columnIndex)) {
+            for (Number rowIndex = firstIndex; rowIndex.isLesserOrEqual(rows);
+                 rowIndex = IndexSingletons.nextIndex(rowIndex)) {
 
                 Number component = matrix.component(columnIndex, rowIndex);
 

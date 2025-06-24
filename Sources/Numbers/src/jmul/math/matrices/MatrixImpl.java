@@ -264,11 +264,11 @@ public class MatrixImpl implements Matrix {
 
         final Number firstIndex = IndexSingletons.firstIndex(base);
 
-        for (Number columnIndex = firstIndex; columnIndex.isLesserOrEqual(columns);
-             columnIndex = IndexSingletons.nextIndex(columnIndex)) {
+        for (Number rowIndex = firstIndex; rowIndex.isLesserOrEqual(rows);
+             rowIndex = IndexSingletons.nextIndex(rowIndex)) {
 
-            for (Number rowIndex = firstIndex; rowIndex.isLesserOrEqual(rows);
-                 rowIndex = IndexSingletons.nextIndex(rowIndex)) {
+            for (Number columnIndex = firstIndex; columnIndex.isLesserOrEqual(columns);
+                 columnIndex = IndexSingletons.nextIndex(columnIndex)) {
 
                 if (!iterator.hasNext()) {
 
@@ -406,8 +406,11 @@ public class MatrixImpl implements Matrix {
     @Override
     public Matrix multiply(Matrix matrix) {
 
-        //TODO not implemented yet
-        throw new UnsupportedOperationException();
+        BinaryOperation<Matrix, Result<Matrix>> function =
+            (BinaryOperation<Matrix, Result<Matrix>>) FunctionSingletons.getFunction(FunctionIdentifiers.MATRIX_MULTIPLCIATION_FUNCTION);
+        Result<Matrix> result = function.calculate(this, matrix);
+
+        return result.result();
     }
 
     /**

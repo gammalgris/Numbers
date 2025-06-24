@@ -83,11 +83,11 @@ public class SubtractMatrices implements BinaryOperation<Matrix, Result<Matrix>>
 
         Queue<Number> results = new LinkedList<Number>();
 
-        for (Number columnIndex = firstIndex; columnIndex.isLesserOrEqual(columns);
-             columnIndex = IndexSingletons.nextIndex(columnIndex)) {
+        for (Number rowIndex = firstIndex; rowIndex.isLesserOrEqual(rows);
+             rowIndex = IndexSingletons.nextIndex(rowIndex)) {
 
-            for (Number rowIndex = firstIndex; rowIndex.isLesserOrEqual(rows);
-                 rowIndex = IndexSingletons.nextIndex(rowIndex)) {
+            for (Number columnIndex = firstIndex; columnIndex.isLesserOrEqual(columns);
+                 columnIndex = IndexSingletons.nextIndex(columnIndex)) {
 
                 Number component1 = matrix1.component(columnIndex, rowIndex);
                 Number component2 = matrix2.component(columnIndex, rowIndex);

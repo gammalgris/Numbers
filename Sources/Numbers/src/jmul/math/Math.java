@@ -2079,4 +2079,23 @@ public final class Math {
         return result.result();
     }
 
+    /**
+     * Performs a matrix multiplication with the specified matrices.
+     *
+     * @param matrix1
+     *        a matrix
+     * @param matrix2
+     *        a matrix
+     *
+     * @return the result
+     */
+    public static Matrix multiply(Matrix matrix1, Matrix matrix2) {
+
+        BinaryOperation<Matrix, Result<Matrix>> function =
+            (BinaryOperation<Matrix, Result<Matrix>>) FunctionSingletons.getFunction(FunctionIdentifiers.MATRIX_MULTIPLCIATION_FUNCTION);
+        Result<Matrix> result = function.calculate(matrix1, matrix2);
+
+        return result.result();
+    }
+
 }

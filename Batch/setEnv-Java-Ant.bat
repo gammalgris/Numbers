@@ -39,6 +39,7 @@
 
 call:defineMacros
 call:defineVariables
+call:changeConsoleTitle "Java Environment with Ant"
 
 
 set subroutineCalls.length=5
@@ -57,9 +58,6 @@ for /L %%i in (1,1,%subroutineCalls.length%) do (
 		%return%
 	)
 )
-
-
-call:changeConsoleTitle "Java Environment with Ant"
 
 
 for /L %%i in (1,1,%subroutineCalls.length%) do (
