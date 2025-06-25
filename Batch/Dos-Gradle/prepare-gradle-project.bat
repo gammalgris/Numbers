@@ -32,60 +32,30 @@
 
 	call:createDirectory Numbers %TRUE%
 	cd Numbers
+	call:createDirectory lib %TRUE%
+	cd lib
 	call:createDirectory src %TRUE%
 	cd src
 	call:createDirectory main %TRUE%
 	cd main
 	call:createDirectory java %TRUE%
+	call:createDirectory resources %TRUE%
 	cd ..
 	call:createDirectory test %TRUE%
 	cd test
 	call:createDirectory java %TRUE%
+	call:createDirectory resources %TRUE%
 	cd ..
 	cd ..
 	cd ..
 
-	call:copySources %sources[1]% %gradleDirectories[5]%
-	call:copyResources %sources[2]% %gradleDirectories[5]%
-	call:copyResources %sources[4]% %gradleDirectories[5]%
+	call:copySources %sources[1]% %gradleDirectories[6]%
+	call:copyResources %sources[2]% %gradleDirectories[7]%
+	call:copyResources %sources[4]% %gradleDirectories[7]%
 	
-	call:copySources %sources[3]% %gradleDirectories[7]%
-
-
-	echo initialize gradle settings ^(%gradleSettingsFile%^)
-	(
-		echo include^('Number'^)
-	) > "%gradleSettingsFile%"
-
-
-	@rem https://docs.gradle.org/current/samples/sample_building_java_applications.html
-	@rem https://docs.gradle.org/current/samples/sample_building_java_libraries.html
-	@rem https://discuss.gradle.org/t/how-to-link-a-static-library-in-build-gradle-file-for-a-nativelibraryspec/29205
-
-	echo initialize gradle buildfile ^(%gradleBuildFile%^)
-	(
-		echo apply plugin: 'java'
-		echo sourceCompatibility = 1.8
-		echo.
-		echo plugins {
-		echo     id 'java-library' 
-		echo }
-		echo.
-		echo repositories {
-		echo     mavenCentral^(^) 
-		echo }
-		echo.
-		echo dependencies {
-		echo     testCompile group: 'junit', name: 'junit', version: '4.11'
-		echo }
-		echo.
-		echo tasks.named^('test'^) {
-		echo     useJUnitPlatform^(^) 
-		echo }
-	) > "%gradleBuildFile%"
+	call:copySources %sources[3]% %gradleDirectories[9]%
 
 %return%
-
 
 @rem ================================================================================
 @rem ===
@@ -139,15 +109,18 @@
 
 	set tempDir=%rootDir%tmp\
 
-	set directories.length=7
+	set directories.length=10
 
 	set gradleDirectories[1]=%tempDir%
 	set gradleDirectories[2]=%tempDir%Numbers\
-	set gradleDirectories[3]=%tempDir%Numbers\src\
-	set gradleDirectories[4]=%tempDir%Numbers\src\main\
-	set gradleDirectories[5]=%tempDir%Numbers\src\main\java\
-	set gradleDirectories[6]=%tempDir%Numbers\src\test\
-	set gradleDirectories[7]=%tempDir%Numbers\src\test\java\
+	set gradleDirectories[3]=%tempDir%Numbers\lib\
+	set gradleDirectories[4]=%tempDir%Numbers\lib\src\
+	set gradleDirectories[5]=%tempDir%Numbers\lib\src\main\
+	set gradleDirectories[6]=%tempDir%Numbers\lib\src\main\java\
+	set gradleDirectories[7]=%tempDir%Numbers\lib\src\main\resources\
+	set gradleDirectories[8]=%tempDir%Numbers\lib\src\test\
+	set gradleDirectories[9]=%tempDir%Numbers\lib\src\test\java\
+	set gradleDirectories[10]=%tempDir%Numbers\lib\src\test\resources\
 
 	set sources.length=4
 
@@ -156,8 +129,8 @@
 	set sources[3]=%projectDir%Numbers-Tests\src\
 	set sources[4]=%projectDir%Version\properties\
 
-	set gradleSettingsFile=%tempDir%settings.gradle
-	set gradleBuildFile=%gradleDirectories[2]%build.gradle
+	set gradleSettingsFile=%gradleDirectories[2]%settings.gradle
+	set gradleBuildFile=%gradleDirectories[3]%build.gradle
 
 %return%
 
