@@ -21,6 +21,7 @@ You have to update following batch files first. These declare new environment
 variables which are needed to check and set up the environment.
 
 * properties-java.bat
+* properties-java-21.bat
 * properties-ant.bat
 * properties-gradle.bat
 
@@ -29,7 +30,7 @@ following scripts:
 
 * setEnv-Java-Ant.bat
 * setEnv-Java-Gradle.bat
-
+* setEnv-Java-Maven.bat
 
 The scripts checks some dependencies and cleans the PATH environment variable.
 You can check if the changes were retained by calling the script
@@ -89,3 +90,19 @@ The script creates the required directory structure and copies all required
 files. Gradle project files are genereated. Gradle is used to generate a
 wrapper according to the gradle project files and an initial build is
 triggered.
+
+## Maven - Set up maven project
+
+Following steps describe how to set up a gradle project:
+
+1) Start a batch console and go to the project subdirectory '.\Batch\'
+
+2) Call the script setEnv-Java-Maven.bat
+
+3) Go to the subdirectory '.\Dos-Maven\'
+
+4) Call the script prepare-maven-project.bat
+   When the script is finished the console is in the maven project directory.
+
+The script creates the required directory structure and copies all required
+files. Maven project files are genereated. An initial build is triggered.
