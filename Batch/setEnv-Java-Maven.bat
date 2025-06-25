@@ -251,7 +251,7 @@ call:cleanVariables
 
 :setJava
 
-	set "_settingsFile=%~dp0properties-java.bat"
+	set "_settingsFile=%~dp0properties-java-21.bat"
 
 	call:loadProperties "%_settingsFile%"
 	%ifError% (
