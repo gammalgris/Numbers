@@ -22,12 +22,16 @@ variables which are needed to check and set up the environment.
 
 * properties-java.bat
 * properties-ant.bat
+* properties-gradle.bat
 
-Open a DOS console (see link). Set up the environemnt by calling the script
+Open a DOS console (see link). Set up the environment by calling one of the
+following scripts:
 
 * setEnv-Java-Ant.bat
+* setEnv-Java-Gradle.bat
 
-The script checks some dependencies and cleans the PATH environment variable.
+
+The scripts checks some dependencies and cleans the PATH environment variable.
 You can check if the changes were retained by calling the script
 
 * checkEnv.bat
@@ -48,7 +52,7 @@ Go to './Batch/Dos-Misc' and call the clean script. The script will clean all
 temporary files created by the IDE, compile output, etc.. Cleaning the local
 repository before checking in changes is recommended.
 
-## Build, run tests and deploy
+## ANT - Build, run tests and deploy
 
 Various subdirectories start with the prefix 'Ant-*'. Go to the respective
 subdirectory and invoke an ant script. The ant scripts are interdependent
@@ -67,3 +71,21 @@ There is a hierarchy regarding script execution:
 * Build (i.e. compile sources and tests)
 * Execute (i.e. test execution)
 * Deploy (i.e. generating a jar file)
+
+## Gradle - Set up gradle project
+
+Following steps describe how to set up a gradle project:
+
+1) Start a batch console and go to the project subdirectory '.\Batch\'
+
+2) Call the script setEnv-Java-Gradle.bat
+
+3) Go to the subdirectory '.\Dos-Gradle\'
+
+4) Call the script prepare-gradle-project.bat
+   When the script is finished the console is in the gradle project directory.
+
+The script creates the required directory structure and copies all required
+files. Gradle project files are genereated. Gradle is used to generate a
+wrapper according to the gradle project files and an initial build is
+triggered.
