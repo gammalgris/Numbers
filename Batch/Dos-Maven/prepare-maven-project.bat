@@ -5,7 +5,7 @@
 @rem ---
 @rem ---   void main()
 @rem ---
-@rem ---   Creates a project structiure for gradle.
+@rem ---   Creates a project structiure for maven.
 @rem ---
 
 :main
@@ -64,7 +64,7 @@
 
 	@rem create the maven project files
 
-	echo initialize gradle settings ^(%mavenProjectFile%^)
+	echo initialize maven settings ^(%mavenProjectFile%^)
 	(
 		echo ^<?xml version="1.0" encoding="UTF-8"?^>
 		echo.
