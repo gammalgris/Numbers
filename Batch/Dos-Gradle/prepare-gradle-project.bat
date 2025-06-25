@@ -140,8 +140,16 @@
 	@rem initialize the gradle project
 	
 	call gradle.bat wrapper
+	%ifError% (
+	
+		%return% 5
+	)
 	
 	call gradlew.bat build
+	%ifError% (
+	
+		%return% 6
+	)
 
 %return%
 
@@ -197,7 +205,7 @@
 
 	set tempDir=%rootDir%tmp\
 
-	set directories.length=12
+	set gradleDirectories.length=12
 
 	set gradleDirectories[1]=%tempDir%
 	set gradleDirectories[2]=%tempDir%Numbers\
