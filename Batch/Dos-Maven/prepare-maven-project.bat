@@ -165,7 +165,7 @@
 	call mvn clean install
 	%ifError% (
 	
-		%return% 5
+		%return% 7
 	)
 
 %return%
