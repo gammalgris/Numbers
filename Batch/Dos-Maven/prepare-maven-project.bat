@@ -83,8 +83,7 @@
 		echo   ^<packaging^>jar^</packaging^>
 		echo   ^<properties^>
 		echo     ^<project.build.sourceEncoding^>UTF-8^</project.build.sourceEncoding^>
-		@rem echo     ^<maven.compiler.release^>21^</maven.compiler.release^>
-		echo     ^<maven.compiler.release^>8^</maven.compiler.release^>
+		echo     ^<maven.compiler.release^>21^</maven.compiler.release^>
 		echo     ^<exec.mainClass^>jmul.math.numbers.Numbers^</exec.mainClass^>
 		echo   ^</properties^>
 		echo   ^<dependencies^>
