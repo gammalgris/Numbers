@@ -2098,4 +2098,31 @@ public final class Math {
         return result.result();
     }
 
+    /**
+     * Returns a random value between zero and one (including the boundaries).
+     *
+     * @return a (pseudo) random number
+     */
+    public static Number random() {
+
+        //TODO
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * Returns a random value between the specified boundaries (including  the boundaries).
+     *
+     * @param minimumValue
+     *        a minimum value
+     * @param maximumValue
+     *        a maximum value
+     *
+     * @return a (pseudo) random number
+     */
+    public static Number random(Number minimumValue, Number maximumValue) {
+
+        //TODO
+        throw new UnsupportedOperationException();
+    }
+
 }
