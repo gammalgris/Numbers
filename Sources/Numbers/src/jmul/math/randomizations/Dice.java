@@ -31,40 +31,32 @@
  * $Id$
  */
 
-package jmul.math.random;
+package jmul.math.randomizations;
 
 
 import jmul.math.numbers.Number;
 
 
 /**
- * This interface describes a die with 2 or more sides (i.e. a die with two sides would rather represent
- * a coin). The die result can be modified by a modifier.
+ * This interface describes a set of dice.
  *
  * @author Kristian Kutin
  */
-public interface Die {
+public interface Dice extends Iterable<Die> {
 
     /**
-     * The number of sides of this die.
+     * Returns the number of dice.
      *
-     * @return the number of sides of this die
+     * @return the number of dice
      */
-    Number sides();
+    Number dice();
 
     /**
-     * Rolls this die.
+     * Rolls all dice and adds their individual results.
      *
-     * @return the rolling result
+     * @return the sum of all dice rolls (including modifiers)
      */
     Number roll();
-
-    /**
-     * Returns the modifier which is added to the rolling result.
-     *
-     * @return a modifier
-     */
-    Number modifier();
 
     /**
      * Returns the expected minimum value.

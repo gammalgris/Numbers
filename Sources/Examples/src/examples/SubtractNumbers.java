@@ -31,52 +31,32 @@
  * $Id$
  */
 
-package jmul.math.random;
+package examples;
 
 
 import jmul.math.numbers.Number;
+import static jmul.math.numbers.NumberHelper.createNumber;
 
 
-/**
- * This interface describes a set of dice.
- *
- * @author Kristian Kutin
- */
-public interface Dice extends Iterable<Die> {
+public class SubtractNumbers {
 
-    /**
-     * Returns the number of dice.
-     *
-     * @return the number of dice
-     */
-    Number dice();
+    public static void main(String[] args) {
 
-    /**
-     * Rolls all dice and adds their individual results.
-     *
-     * @return the sum of all dice rolls (including modifiers)
-     */
-    Number roll();
+        Number a = createNumber(10, "1");
+        Number b = createNumber(10, "1");
 
-    /**
-     * Returns the expected minimum value.
-     *
-     * @return the expected minimum value
-     */
-    Number expectedMinimumValue();
+        Number difference = a.subtract(b);
 
-    /**
-     * Returns the expected maximum value.
-     *
-     * @return the expected maximum value
-     */
-    Number expectedMaximumValue();
+        String info =
+            String.format("[base:%d] %s + [base:%d] %s = [base:%d] %s", a.base(), a, b.base(), b, difference.base(), difference);
+        System.out.println(info);
 
-    /**
-     * Returns the expected average value.
-     *
-     * @return the expected average value
-     */
-    Number expectedAverageValue();
+        /*
+         * expected output:
+         *
+         * [base:10] 1 - [base:10] 1 = [base:10] 0
+         *
+         */
+    }
 
 }

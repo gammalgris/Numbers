@@ -16,11 +16,23 @@
 		and include all subprojects. All subprojects contain a text file
 		which describe the dependencies.
 
-# Build Tool
+# Build Tools
 
 * Ant
   Version: 1.10.15
   Source: https://ant.apache.org/
+
+* Maven (optional)
+  Version: 3.9.8
+  Source: https://maven.apache.org/
+  Note: There are scripts to generate a maven project from this project
+        sources.
+
+* Gradle (optional)
+  Version: 8.14.2
+  Source: https://gradle.org/
+  Note: There are scripts to generate a gradle project from this project
+        sources.
 
 # Other Tools
 

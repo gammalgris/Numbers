@@ -11,19 +11,23 @@ a number base of 2 up to 60.
 The next data structure is a fraction type with an integer part, a numerator and a
 denominator.
 
+A vector data structure has been implemented. Some operations still have no implementation.
+
+A matrix data structure has been implemented.
 
 # future data structures
 
 Introducing negative number bases might require a new implementation of a number.
 Signs work differently with these.
 
-A number with the base of 1 would not be a positional numeral system but a set of
-any number of the same symbol (unary numeral system).
+A number with the base of 1 would not be a positional numeral system but a sequence of the same
+symbol (unary numeral system).
 
-A vector data structure will be needed.
+A data structure for exponentiation expressions has been defined but requires an implementation.
 
-A matrix data structure will be needed.
+A data structure for logarithm expressions has been defined but requires an implementation.
 
+Various randomization operations have been defined (e.g. Die & Dice and random) an implementation.
 
 ## dependencies of operations
 
@@ -49,14 +53,17 @@ Operations have been implemented according to following order:
 
 + multiplication of numbers
 
-+ division of numbers (i.e. required a signed fraction type)
++ division of numbers
+
++ factorial
+
++ conversion of a number to a number of a diffferent number base
 
 When changing an implementation consider the dependencies to avoid endless loops.
 
+The implementations of fractions, vectors, matrices depend on the implementations for numbers.
 
 ## future operations
-
-+ converting numbers to a different number base
 
 + various alternative implementations for multiplication
 
@@ -66,21 +73,24 @@ When changing an implementation consider the dependencies to avoid endless loops
 
 + exponentiation
 
-+ factorial
-
 + logarithms
 
 + trigonometric operations
 
-+ vector operations
++ a data structure that combines a number with a unit of measurement (i.e. migrate/ integrate
+  jmul subproject Measures)
 
-+ matrix operations
++ a data structure for formulas (i.e. migrate/ integrate jmul subproject Formula)
 
++ implement/ test persistence of all number datat types (i.e. java serialization)
 
 ## important packages
 
 + jmul.math.digits
   Provides implementations for digits and numeral systems.
+
++ jmul.math.exponentions
+  Contains implementations for exponentiation expressions
 
 + jmul.math.fractions
   Provides implementations for fractions.
@@ -89,7 +99,10 @@ When changing an implementation consider the dependencies to avoid endless loops
   Contains all function implementations
 
 + jmul.math.functions.repository
-  Contaisn the implementation for the function repository.
+  Contains the implementation for the function repository.
+
++ jmul.math.logarithms
+  Contains implementations for logarithm expressions
 
 + jmul.math.matrices
   Contains implementations for matrices.

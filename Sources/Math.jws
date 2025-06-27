@@ -25,6 +25,7 @@
    </list>
    <list n="listOfChildren">
       <hash><url n="URL" path="../Batch/Batch.jpr"/></hash>
+      <hash><url n="URL" path="Examples/Examples.jpr"/></hash>
       <hash><url n="URL" path="Numbers/Numbers.jpr"/></hash>
       <hash><url n="URL" path="Numbers-Tests/Numbers-Tests.jpr"/></hash>
       <hash><url n="URL" path="Version/Version.jpr"/></hash>
