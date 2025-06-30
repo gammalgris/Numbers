@@ -1680,4 +1680,154 @@ public class NumberImpl implements Number {
         return result.result();
     }
 
+    /**
+     * Converts this object to a primitive byte value.
+     *
+     * @return a byte value
+     */
+    @Override
+    public byte toPrimitiveByte() {
+
+        Byte b = toByte();
+
+        return b.byteValue();
+    }
+
+    /**
+     * Converts this object to a primitive short value.
+     *
+     * @return a short value
+     */
+    @Override
+    public short toPrimitiveShort() {
+
+        Short s = toShort();
+
+        return s.shortValue();
+    }
+
+    /**
+     * Converts this object to a primitive int value.
+     *
+     * @return a int value
+     */
+    @Override
+    public int toPrimitiveInt() {
+
+        Integer i = toInteger();
+
+        return i.intValue();
+    }
+
+    /**
+     * Converts this object to a primitive long value.
+     *
+     * @return a long value
+     */
+    @Override
+    public long toPrimitiveLong() {
+
+        Long l = toLong();
+
+        return l.longValue();
+    }
+
+    /**
+     * Converts this object to a primitive float value.
+     *
+     * @return a float value
+     */
+    @Override
+    public float toPrimitiveFloat() {
+
+        Float f = toFloat();
+
+        return f.floatValue();
+    }
+
+    /**
+     * Converts this object to a primitive double value.
+     *
+     * @return a double value
+     */
+    @Override
+    public double toPrimitiveDouble() {
+
+        Double d = toDouble();
+
+        return d.doubleValue();
+    }
+
+    /**
+     * Converts this object to a byte wrapper.
+     *
+     * @return a byte wrapper
+     */
+    @Override
+    public Byte toByte() {
+
+        Number n = rebase(10);
+        return Byte.parseByte(n.toString());
+    }
+
+    /**
+     * Converts this object to a short value.
+     *
+     * @return a short wrapper
+     */
+    @Override
+    public Short toShort() {
+
+        Number n = rebase(10);
+        return Short.parseShort(n.toString());
+    }
+
+    /**
+     * Converts this object to a integer wrapper.
+     *
+     * @return a integer wrapper
+     */
+    @Override
+    public Integer toInteger() {
+
+        Number n = rebase(10);
+        return Integer.parseInt(n.toString());
+    }
+
+    /**
+     * Converts this object to a long wrapper.
+     *
+     * @return a long wrapper
+     */
+    @Override
+    public Long toLong() {
+
+        Number n = rebase(10);
+        return Long.parseLong(n.toString());
+    }
+
+    /**
+     * Converts this object to a float wrapper.
+     *
+     * @return a float wrapper
+     */
+    @Override
+    public Float toFloat() {
+
+        Number n = rebase(10);
+        return Float.parseFloat(n.toString());
+    }
+
+    /**
+     * Converts this object to a double wrapper.
+     *
+     * @return a double wrapper
+     */
+    @Override
+    public Double toDouble() {
+
+        Number n = rebase(10);
+        return Double.parseDouble(n.toString());
+    }
+
 }

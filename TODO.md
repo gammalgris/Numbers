@@ -70,7 +70,21 @@
 31) implement an operation to check if a number or fraction is within a specified interval
 	add a default constant for epsilon (i.e. a small number)
 
-32)
+32) Experiment with surreal numbers (see https://en.wikipedia.org/wiki/Surreal_number)
+
+33) Clarify in the documentation which numbers can be represented (i.e. Natural Numbers, Integers,
+    Rational Numbers, Real Numbers), approximatated (i.e. some Rational Numbers, Real Numbers) and
+	which cannot be represented yet (i.e. complex numbers).
+
+34) Consider changing the operation Fraction divide(Number,Number) to Number divide(Number,Number).
+    There now exists an alternative to the first operation: Fraction Number.toFraction()
+
+35) Consider adding a stream constructor for large numbers (i.e. stream of digits/ characters).
+
+36)Add methods to convert numbers back to primitive types (i.e. int, long, double, etc.) and their
+   respective erapper classes (i.e. Integer, Double, etc.)
+
+37)
 
 
 # Done

@@ -37,6 +37,7 @@ package jmul.math.numbers;
 import java.util.SortedSet;
 
 import jmul.math.fractions.Fraction;
+import jmul.math.numbers.conversions.Conversions;
 import jmul.math.numbers.nodes.LinkedDigitList;
 import jmul.math.operations.ArithmeticNumberOperations;
 import jmul.math.operations.FractionComparisons;
@@ -59,7 +60,7 @@ import jmul.math.operations.NumberComparisons;
  * @author Kristian Kutin
  */
 public interface Number extends LinkedDigitList, ArithmeticNumberOperations, NumberComparisons, FractionComparisons,
-                                Comparable, AbstractNumber {
+                                Comparable, AbstractNumber, Conversions {
 
     /**
      * Returns a scientific notation for this number. The default decimal separator is used.
