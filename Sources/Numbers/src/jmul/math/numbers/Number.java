@@ -295,4 +295,18 @@ public interface Number extends LinkedDigitList, ArithmeticNumberOperations, Num
      */
     boolean isWithinInterval(Number min, Number max);
 
+    /**
+     * Calculates the digit sum for this number.
+     *
+     * @return the digit sum
+     */
+    Number digitSum();
+
+    /**
+     * Checks if this number consists of a single digit.
+     *
+     * @return <code>true</code> if this number consists of a single digit, else <code>false</code>
+     */
+    boolean isSingleDigit();
+
 }

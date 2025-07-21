@@ -51,6 +51,7 @@ import jmul.math.functions.implementations.DetermineCommonPrimeFactorsFunction;
 import jmul.math.functions.implementations.DetermineDivisorsFunction;
 import jmul.math.functions.implementations.DeterminePrimeFactorsFunction;
 import jmul.math.functions.implementations.DigitComplement;
+import jmul.math.functions.implementations.DigitToNumberFunction;
 import jmul.math.functions.implementations.DivideFractionByNumber;
 import jmul.math.functions.implementations.DivideFractions;
 import jmul.math.functions.implementations.DivideNumberByFraction;
@@ -72,6 +73,7 @@ import jmul.math.functions.implementations.IncrementFraction;
 import jmul.math.functions.implementations.IncrementNumber;
 import jmul.math.functions.implementations.IsMultipleFunction;
 import jmul.math.functions.implementations.IsPrimeFunction;
+import jmul.math.functions.implementations.IsSingleDigitFunction;
 import jmul.math.functions.implementations.MatrixMultiplicationFunction;
 import jmul.math.functions.implementations.MaxFraction;
 import jmul.math.functions.implementations.MaxFractionNumber;
@@ -90,6 +92,7 @@ import jmul.math.functions.implementations.MultiplyVectorWithNumber;
 import jmul.math.functions.implementations.NegateFraction;
 import jmul.math.functions.implementations.NegateNumber;
 import jmul.math.functions.implementations.NumberComplement;
+import jmul.math.functions.implementations.NumberDigitSum;
 import jmul.math.functions.implementations.NumberToAbsoluteValue;
 import jmul.math.functions.implementations.NumberToDigit;
 import jmul.math.functions.implementations.NumberToFraction;
@@ -381,6 +384,10 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
         repository.registerFunction(FunctionIdentifiers.TRANSPOSE_MATRIX_FUNCTION, TransposeMatrixFunction.class);
         repository.registerFunction(FunctionIdentifiers.MATRIX_MULTIPLCIATION_FUNCTION,
                                     MatrixMultiplicationFunction.class);
+
+        repository.registerFunction(FunctionIdentifiers.DIGIT_SUM_FUNCTION, NumberDigitSum.class);
+        repository.registerFunction(FunctionIdentifiers.DIGIT_TO_NUMBER_FUNCTION, DigitToNumberFunction.class);
+        repository.registerFunction(FunctionIdentifiers.IS_SINGLE_DIGIT_FUNCTION, IsSingleDigitFunction.class);
 
         return repository;
     }

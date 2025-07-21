@@ -68,7 +68,7 @@ import jmul.math.signs.Signs;
  * Consider an alternative implementation which compresses the linked list in some way in order to save up memory.</i>
  *
  * TODO check if a separate implementation is required or not
- * 
+ *
  * TODO a sign might not be necessary for numbers with a negative base, i.e. a sign might lead to disambiguity with
  *      multiple numbers representing the same number (see number in base -10 compared to a number in base 10):
  *       19 ... -1
@@ -77,7 +77,7 @@ import jmul.math.signs.Signs;
  *       -1 ... -1
  *
  * TODO Set the positive sign as default? Experiment with two different implementations?
- * 
+ *
  * TODO Test how this affects addition, subtraction, etc.). In the default number implementation the operations depend
  *      on addition and/ or subtraction. In this case the dependent operations don't need to change.
  *      Identify the other operations that do low level digit manipulations and need a rework.
@@ -906,4 +906,23 @@ public class NumberNegativeBaseImpl implements Number {
         // TODO Implement this method
         throw new UnsupportedOperationException();
     }
+
+    /**
+     * Calculates the digit sum for this number.
+     *
+     * @return the digit sum
+     */
+    @Override
+    public Number digitSum() {
+
+        // TODO Implement this method
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean isSingleDigit() {
+        // TODO Implement this method
+        return false;
+    }
+
 }

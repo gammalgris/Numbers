@@ -6,3 +6,115 @@ Giornale di Matematiche di Battaglini (1885), 203-221, 367
 
 
 https://www.google.de/books/edition/Giornale_di_matematiche_di_Battaglini/wyQ2AQAAMAAJ?hl=de&gbpv=1&dq=Intorno+all%27aritmetica+dei+sistemi+numerici+a+base+negativa+con+particolare+riguardo+al+sistema+numerico+a+base+negativo-decimale+per+lo+studio+delle+sue+analogie+coll%27aritmetica+ordinaria+(decimale)&pg=PA203&printsec=frontcover
+
+
+
+                                 - 203 -
+
+            Intorno all' aritmetica dei sistemi numerici a base negativa
+con particolare riguardo al sistema numerico a base negativo-decimale per lo studio
+               delle sue analogie coll'arithmetica ordinaria (decimale)
+
+
+                                MONOGRAFIA
+
+                                    DI
+
+                             VITTORIO GRÜNWALD
+
+
+                                INTRODUZIONE
+
+   In una precedente mia pubblicazione (*) trattando della divisibilità per (b+r)
+d'un numero N scritto in base b (intera e positiva), intravidi la possibilità di sistemi
+numrici a base negativa e quella questione stessa, se non altro dimostrava già
+esservi qualche relazione fra i sistemi predetti e quelli a base positiva. Nelle
+presenti pagine mi propongo di studiare tale argomento un po' più addentro,
+indagando in particolare quale aspetto prenderebbe l'aritmetica nelle sue più
+importanti ricerche, se fosse fondata su sistemi numerici a base negativa.
+   Un numero intero N qualunque si può porre sotto la forma seguente:
+
+                        2        3        4              m
+  N = c + c (-b) + c(-b) + c (-b) + c (-b) + ... + c (-b)		(1)
+       0   1        2       3        4              m
+
+in cui tutte le c, e b rappresentano interi positivi, e se inoltre per tutte le e  si
+                                                                                 r
+
+ha e < (b-1), si può brevemente scrivere: N = c  c    c    .. c  c  c  e dire: N è
+    r                                          m  m-1  m-2     3  2  1
+
+scritto in base (-b) colle cifre c , c , c , ...
+                                  0   1   2
+
+                              2         3       4
+  Esempio: 7 + 3(-10) + 9(-10)  + 5(-10)  + (-10)  = (15937) 		(**)
+                                                            -10
+
+
+  (*) Saggio di aritmetica non decimale pubblicato per le nozze Pardo-Ravenna,
+  Verona, 31 gennaio 1884; d'or innanzi sarà brevemente indicato così: Saggio ...
+  (**) Vedi simbolica adottata nell'opuscolo Saggio... succitato.
+
+
+
+                                 - 204 -
+
+   È facile vedere che la (1) rappresenta un numero intero positivo o negativo a
+seconda che m sarà pari o dispari e quindi:
+   1.° Un numero intero scritto in base (-b) è positivo p negativo, a seconda che
+abbia un numero dispari o pari di cifre.
+   Per significare poi un numero radicale (*) qualunque scritto in base (-b),
+avremo
+
+             -r            -r+1                -3          -2          -1                       2               m
+  N = c  (-b)   + c    (-b)     + ... + c  (-b)   + c  (-b)   + c  (-b)   + c  + c (-b) + c (-b)  + ... + c (-b)
+       -r          -r+1                  -3          -2          -1          0    1        2               m
+
+
+o più brevemente:
+
+  N = c  c    c    ... c  c  c  c  c   c   c   ... c   .
+       m  m-1  m-2      3  2  1  0  -1  -2  -3      -r
+
+in cui le c soddisfano tutte alle condizioni anzidette; le c con indice positivo rap-
+presentano la parte intera e quelle con indice negativo la parte radicale di N,
+queste due parti sono separate dalla virgola radicale.
+  II.° Un numero radicale con parte intera scrilla in base (-b) è positivo o
+negativo, a seconda che abbia un numero dispari o pari di cifre nella sua parte
+intera.
+  III.° Un numero radicale senza parte intera scritto in base (-b) è positivo
+o negativeo, a seconda che abbia un numero dispari o pari di zeri radicali a
+sinistra della primera cifra significativa.
+  Si osservino le seguenti particolarità contenute negli esempi qui appreso,
+che facilmente si esprimerebbero quali proprietà dei sistemi numerici a base ne-
+gativo-decimale, come faremo d'or innanzi in tutte ke applicationi, si ha p.e.
+
+  13 < 8; 26 < 23; 7,6 < 7,4; 18,5 < 7,3; 0,18 < 0,07; 1,9 < 0,2 ecc. ecc.
+
+Tutto questo si spiega perchè nei sistemi numerici a base negativa:
+  IV.° Ogni b unità di ordine m concorrono a formare l' unità negativa del-
+l'ordine (m+1).
+  Osservazioni. A) Le cifre del sistema numerico a base b sono pur quelle del si-
+stema a base (-b) e viceversa. B) Un numero N intero qualunque scritto in base
+(-b) ha tante cifre quante ne avrebbe scritto in base (+b), oppure ne ha un di più,
+oppure due di più. C) Per N < M <= (b-1) N, (considerando N ed M interi ed in
+valore assoluto soltanto) se N si scrive in base (-b) con n cifre, M scritto nella
+stessa base avrà pure n cifre, oppure (n+2). D) Un numero N intero che scritto
+in base (+b) ha un numero dispari di cifre ed in cui le cifre di posto pari sono
+zero; si scrive nelle basi (+- b) nello stesso modo. E) Un numero N intero che
+
+
+   (*) Vedi Saggio ... Cap. V.
+
+
+                                   - 205 -
+
+scritto in base (+b) ha un numero pari di cifre ed in cui le cifre di posto dispari
+sono zero, si scrive nelle basi (+- b) nello stesso mode. F) Da quanto precede
+risulta : il maggior numero in senso assoluto che in base (-b) si scriva con m
+cifre è formato dalla successione periodica della massima cifra significativa b - 1
+del sistema collo zero, e quello stesso numero si scrive nello stesso modo anche
+in base (+b); mentre il minor numero in senso assoluto che in base (-b) si scriva
+con m cifre è formato dall'unità seguita dalla successione di cifre anzidette.
+

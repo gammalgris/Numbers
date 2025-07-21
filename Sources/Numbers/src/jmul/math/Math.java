@@ -2125,4 +2125,38 @@ public final class Math {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Calculates the digit sum for this number.
+     *
+     * @param n
+     *        a number (i.e. integer)
+     *
+     * @return the digit sum
+     */
+    public static Number digitSum(Number n) {
+
+        UnaryOperation<Number, Result<Number>> function =
+            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIGIT_SUM_FUNCTION);
+        Result<Number> result = function.calculate(n);
+
+        return result.result();
+    }
+
+    /**
+     * Checks if this number consists of a single digit.
+     *
+     * @param n
+     *        a number
+     *
+     * @return <code>true</code> if this number consists of a single digit, else <code>false</code>
+     */
+    public static boolean isSingleDigit(Number n) {
+
+        UnaryOperation<Number, Result<Boolean>> function =
+            (UnaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.IS_SINGLE_DIGIT_FUNCTION);
+        Result<Boolean> result = function.calculate(n);
+
+        return result.result();
+    }
+
 }

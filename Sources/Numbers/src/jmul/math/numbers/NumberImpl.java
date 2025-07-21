@@ -1830,4 +1830,34 @@ public class NumberImpl implements Number {
         return Double.parseDouble(n.toString());
     }
 
+    /**
+     * Calculates the digit sum for this number.
+     *
+     * @return the digit sum
+     */
+    @Override
+    public Number digitSum() {
+
+        UnaryOperation<Number, Result<Number>> function =
+            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIGIT_SUM_FUNCTION);
+        Result<Number> result = function.calculate(this);
+
+        return result.result();
+    }
+
+    /**
+     * Checks if this number consists of a single digit.
+     *
+     * @return <code>true</code> if this number consists of a single digit, else <code>false</code>
+     */
+    @Override
+    public boolean isSingleDigit() {
+
+        UnaryOperation<Number, Result<Boolean>> function =
+            (UnaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.IS_SINGLE_DIGIT_FUNCTION);
+        Result<Boolean> result = function.calculate(this);
+
+        return result.result();
+    }
+
 }
