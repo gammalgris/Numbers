@@ -255,13 +255,22 @@ public class HalvingNumberTest {
             parameters.add(new Object[] { base, "-0", "0" });
 
             int half = base / 2;
+            boolean odd = (base % 2) != 0;
             Digit digit = PositionalNumeralSystems.ordinalToDigit(base, half);
 
             parameters.add(new Object[] { base, "1", "0." + digit });
             parameters.add(new Object[] { base, "-1", "-0." + digit });
 
-            parameters.add(new Object[] { base, "100", "" + digit + "0" });
-            parameters.add(new Object[] { base, "-100", "-" + digit + "0" });
+            if (odd) {
+
+                parameters.add(new Object[] { base, "100", "" + digit + "" + digit + "." + digit });
+                parameters.add(new Object[] { base, "-100", "-" + digit + "" + digit + "." + digit });
+
+            } else {
+                
+                parameters.add(new Object[] { base, "100", "" + digit + "0" });
+                parameters.add(new Object[] { base, "-100", "-" + digit + "0" });
+            }
         }
 
 
@@ -318,6 +327,79 @@ public class HalvingNumberTest {
 
         parameters.add(new Object[] { 16, "1FE", "FF" });
         parameters.add(new Object[] { 16, "22", "11" });
+
+        parameters.add(new Object[] { 10, "122", "61" });
+
+        parameters.add(new Object[] { 3, "0", "0" });
+        parameters.add(new Object[] { 3, "1", "0.1" });
+        parameters.add(new Object[] { 3, "2", "1" });
+        parameters.add(new Object[] { 3, "10", "1.1" });
+        parameters.add(new Object[] { 3, "11", "2" });
+        parameters.add(new Object[] { 3, "12", "2.1" });
+        parameters.add(new Object[] { 3, "20", "10" });
+        parameters.add(new Object[] { 3, "21", "10.1" });
+        parameters.add(new Object[] { 3, "22", "11" });
+        parameters.add(new Object[] { 3, "100", "11.1" });
+        parameters.add(new Object[] { 3, "101", "12" });
+        parameters.add(new Object[] { 3, "102", "12.1" });
+        parameters.add(new Object[] { 3, "110", "20" });
+        parameters.add(new Object[] { 3, "111", "20.1" });
+        parameters.add(new Object[] { 3, "112", "21" });
+        parameters.add(new Object[] { 3, "120", "21.1" });
+        parameters.add(new Object[] { 3, "121", "22" });
+        parameters.add(new Object[] { 3, "122", "22.1" });
+        parameters.add(new Object[] { 3, "200", "100" });
+        parameters.add(new Object[] { 3, "201", "100.1" });
+        parameters.add(new Object[] { 3, "202", "101" });
+        parameters.add(new Object[] { 3, "210", "101.1" });
+        parameters.add(new Object[] { 3, "211", "102" });
+        parameters.add(new Object[] { 3, "212", "102.1" });
+        parameters.add(new Object[] { 3, "220", "110" });
+        parameters.add(new Object[] { 3, "221", "110.1" });
+        parameters.add(new Object[] { 3, "222", "111" });
+        parameters.add(new Object[] { 3, "1000", "111.1" });
+        parameters.add(new Object[] { 3, "1001", "112" });
+        parameters.add(new Object[] { 3, "1002", "112.1" });
+        parameters.add(new Object[] { 3, "1010", "120" });
+        parameters.add(new Object[] { 3, "1011", "120.1" });
+        parameters.add(new Object[] { 3, "1012", "121" });
+        parameters.add(new Object[] { 3, "1020", "121.1" });
+        parameters.add(new Object[] { 3, "1021", "122" });
+
+        parameters.add(new Object[] { 4, "12", "3" });
+        parameters.add(new Object[] { 4, "13", "3.2" });
+
+        parameters.add(new Object[] { 5, "0", "0" });
+        parameters.add(new Object[] { 5, "1", "0.2" });
+        parameters.add(new Object[] { 5, "2", "1" });
+        parameters.add(new Object[] { 5, "3", "1.2" });
+        parameters.add(new Object[] { 5, "4", "2" });
+        parameters.add(new Object[] { 5, "10", "2.2" });
+        parameters.add(new Object[] { 5, "11", "3" });
+        parameters.add(new Object[] { 5, "12", "3.2" });
+        parameters.add(new Object[] { 5, "13", "4" });
+        parameters.add(new Object[] { 5, "14", "4.2" });
+        parameters.add(new Object[] { 5, "20", "10" });
+        parameters.add(new Object[] { 5, "21", "10.2" });
+        parameters.add(new Object[] { 5, "22", "11" });
+        parameters.add(new Object[] { 5, "23", "11.2" });
+        parameters.add(new Object[] { 5, "24", "12" });
+        parameters.add(new Object[] { 5, "30", "12.2" });
+        parameters.add(new Object[] { 5, "31", "13" });
+        parameters.add(new Object[] { 5, "32", "13.2" });
+        parameters.add(new Object[] { 5, "33", "14" });
+        parameters.add(new Object[] { 5, "34", "14.2" });
+        parameters.add(new Object[] { 5, "40", "20" });
+        parameters.add(new Object[] { 5, "41", "20.2" });
+        parameters.add(new Object[] { 5, "42", "21" });
+        parameters.add(new Object[] { 5, "43", "21.2" });
+        parameters.add(new Object[] { 5, "44", "22" });
+        parameters.add(new Object[] { 5, "100", "22.2" });
+        parameters.add(new Object[] { 5, "101", "23" });
+        parameters.add(new Object[] { 5, "102", "23.2" });
+        parameters.add(new Object[] { 5, "103", "24" });
+        parameters.add(new Object[] { 5, "104", "24.2" });
+        parameters.add(new Object[] { 5, "110", "30" });
 
         return parameters;
     }

@@ -827,8 +827,32 @@ public final class Math {
      */
     public static Number multiply(Number n1, Number n2) {
 
+        return multiply(FunctionIdentifiers.LONG_MULTIPLICATION_FUNCTION, n1, n2);
+    }
+
+    /**
+     * Multiplies the specified numbers.
+     *
+     * @param algorithm
+     *        the identifier for an algorithm
+     * @param n1
+     *        a number
+     * @param n2
+     *        a number
+     *
+     * @return a number
+     */
+    public static Number multiply(FunctionIdentifier algorithm, Number n1, Number n2) {
+
+        final FunctionIdentifier[] ALLOWED_ALGORITHMS = new FunctionIdentifier[] {
+            FunctionIdentifiers.MULTIPLY_NUMBERS_BY_ADDITION_FUNCTION,
+            FunctionIdentifiers.RUSSIAN_PEASANT_MULTIPLICATION_FUNCTION,
+            FunctionIdentifiers.LONG_MULTIPLICATION_FUNCTION
+        };
+        FunctionIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, algorithm);
+
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.MULTIPLY_NUMBERS_FUNCTION);
+            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(algorithm);
         Result<Number> result = function.calculate(n1, n2);
 
         return result.result();
@@ -2099,18 +2123,40 @@ public final class Math {
     }
 
     /**
-     * Returns a random value between zero and one (including the boundaries).
+     * Generates a random number between zero and one (0 =&lt; n &lt; 1).
+     *
+     * @param base
+     *        a number base
      *
      * @return a (pseudo) random number
      */
-    public static Number random() {
+    public static Number random(int base) {
 
-        //TODO
-        throw new UnsupportedOperationException();
+        return random(base, DEFAULT_MAXIMUM_FRACTION_LENGTH.value(base));
     }
 
     /**
-     * Returns a random value between the specified boundaries (including  the boundaries).
+     * Generates a random number between zero and one with the specified number of digits to the right of the decimal
+     * separator (0 =&lt; n &lt; 1).
+     *
+     * @param base
+     *        a number base
+     *
+     * @return a (pseudo) random number
+     */
+    public static Number random(int base, Number digits) {
+
+        MixedBinaryOperation<Integer, Number, Result<Number>> function =
+            (MixedBinaryOperation<Integer, Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.RANDOM_NUMBER_FUNCTION);
+        Result<Number> result = function.calculate(base, digits);
+
+        return result.result();
+    }
+
+    /**
+     * Returns a random value between the specified boundaries (including  the boundaries). Generates a random number
+     * between zero and one. Determines and returns a corresponding number within the specified interval
+     * (min =&lt; n =&lt; max).
      *
      * @param minimumValue
      *        a minimum value
@@ -2121,8 +2167,37 @@ public final class Math {
      */
     public static Number random(Number minimumValue, Number maximumValue) {
 
-        //TODO
-        throw new UnsupportedOperationException();
+        if (minimumValue == null) {
+
+            throw new IllegalArgumentException("No minimum value was specified!");
+        }
+
+        int base = minimumValue.base();
+
+        return random(minimumValue, maximumValue, DEFAULT_MAXIMUM_FRACTION_LENGTH.value(base));
+    }
+
+    /**
+     * Returns a random value between the specified boundaries (including  the boundaries). Generates a random number
+     * between zero and one with the specified number of digits to the right of the decimal separator. Determines and
+     * returns a corresponding number within the specified interval (min =&lt; n =&lt; max).
+     *
+     * @param minimumValue
+     *        a minimum value
+     * @param maximumValue
+     *        a maximum value
+     * @param digits
+     *        the number of digits of the generated random number to the right of the decimal separator
+     *
+     * @return a (pseudo) random number
+     */
+    public static Number random(Number minimumValue, Number maximumValue, Number digits) {
+
+        TernaryOperation<Number, Result<Number>> function =
+            (TernaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.RANDOM_NUMBER_WITHIN_INTERVAL_FUNCTION);
+        Result<Number> result = function.calculate(minimumValue, maximumValue, digits);
+
+        return result.result();
     }
 
     /**

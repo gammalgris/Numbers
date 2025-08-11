@@ -638,6 +638,12 @@ public class NumberNegativeBaseImpl implements Number {
     }
 
     @Override
+    public Number multiply(FunctionIdentifier algorithm, Number n) {
+        // TODO Implement this method
+        return null;
+    }
+
+    @Override
     public Fraction multiply(Fraction f) {
         // TODO Implement this method
         throw new UnsupportedOperationException();

@@ -74,6 +74,7 @@ import jmul.math.functions.implementations.IncrementNumber;
 import jmul.math.functions.implementations.IsMultipleFunction;
 import jmul.math.functions.implementations.IsPrimeFunction;
 import jmul.math.functions.implementations.IsSingleDigitFunction;
+import jmul.math.functions.implementations.LongMultiplication;
 import jmul.math.functions.implementations.MatrixMultiplicationFunction;
 import jmul.math.functions.implementations.MaxFraction;
 import jmul.math.functions.implementations.MaxFractionNumber;
@@ -84,10 +85,11 @@ import jmul.math.functions.implementations.MinFractionNumber;
 import jmul.math.functions.implementations.MinNumber;
 import jmul.math.functions.implementations.MinNumberFraction;
 import jmul.math.functions.implementations.ModuloWithIntegersFunction;
+import jmul.math.functions.implementations.MultiplicationByAddition;
+import jmul.math.functions.implementations.MultiplyDigits;
 import jmul.math.functions.implementations.MultiplyFractionAndNumber;
 import jmul.math.functions.implementations.MultiplyFractions;
 import jmul.math.functions.implementations.MultiplyNumberAndFraction;
-import jmul.math.functions.implementations.MultiplyNumbers;
 import jmul.math.functions.implementations.MultiplyVectorWithNumber;
 import jmul.math.functions.implementations.NegateFraction;
 import jmul.math.functions.implementations.NegateNumber;
@@ -99,6 +101,9 @@ import jmul.math.functions.implementations.NumberToFraction;
 import jmul.math.functions.implementations.NumberToOrdinal;
 import jmul.math.functions.implementations.NumberWithinInterval;
 import jmul.math.functions.implementations.OddNumberFunction;
+import jmul.math.functions.implementations.RandomDigitFunction;
+import jmul.math.functions.implementations.RandomNumberFunction;
+import jmul.math.functions.implementations.RandomNumberWithinInterval;
 import jmul.math.functions.implementations.RebaseFraction;
 import jmul.math.functions.implementations.RebaseNumber;
 import jmul.math.functions.implementations.ReciprocalOfFraction;
@@ -113,6 +118,7 @@ import jmul.math.functions.implementations.RoundNumberToEvenFunction;
 import jmul.math.functions.implementations.RoundNumberToOddFunction;
 import jmul.math.functions.implementations.RoundUpFunction;
 import jmul.math.functions.implementations.RussianDivisionFunction;
+import jmul.math.functions.implementations.RussianPeasantMultiplication;
 import jmul.math.functions.implementations.ScalarProductFunction;
 import jmul.math.functions.implementations.ShiftLeft;
 import jmul.math.functions.implementations.ShiftRight;
@@ -309,7 +315,12 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
         repository.registerFunction(FunctionIdentifiers.FRACTION_LESSER_THAN_OR_EQUAL_NUMBER_COMPARISON_FUNCTION,
                                     FractionLesserThanOrEqualNumberComparison.class);
 
-        repository.registerFunction(FunctionIdentifiers.MULTIPLY_NUMBERS_FUNCTION, MultiplyNumbers.class);
+        repository.registerFunction(FunctionIdentifiers.MULTIPLY_DIGITS_FUNCTION, MultiplyDigits.class);
+        repository.registerFunction(FunctionIdentifiers.MULTIPLY_NUMBERS_BY_ADDITION_FUNCTION,
+                                    MultiplicationByAddition.class);
+        repository.registerFunction(FunctionIdentifiers.RUSSIAN_PEASANT_MULTIPLICATION_FUNCTION,
+                                    RussianPeasantMultiplication.class);
+        repository.registerFunction(FunctionIdentifiers.LONG_MULTIPLICATION_FUNCTION, LongMultiplication.class);
         repository.registerFunction(FunctionIdentifiers.MULTIPLY_FRACTIONS_FUNCTION, MultiplyFractions.class);
         repository.registerFunction(FunctionIdentifiers.MULTIPLY_NUMBER_AND_FRACTION_FUNCTION,
                                     MultiplyNumberAndFraction.class);
@@ -388,6 +399,11 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
         repository.registerFunction(FunctionIdentifiers.DIGIT_SUM_FUNCTION, NumberDigitSum.class);
         repository.registerFunction(FunctionIdentifiers.DIGIT_TO_NUMBER_FUNCTION, DigitToNumberFunction.class);
         repository.registerFunction(FunctionIdentifiers.IS_SINGLE_DIGIT_FUNCTION, IsSingleDigitFunction.class);
+
+        repository.registerFunction(FunctionIdentifiers.RANDOM_DIGIT_FUNCTION, RandomDigitFunction.class);
+        repository.registerFunction(FunctionIdentifiers.RANDOM_NUMBER_FUNCTION, RandomNumberFunction.class);
+        repository.registerFunction(FunctionIdentifiers.RANDOM_NUMBER_WITHIN_INTERVAL_FUNCTION,
+                                    RandomNumberWithinInterval.class);
 
         return repository;
     }

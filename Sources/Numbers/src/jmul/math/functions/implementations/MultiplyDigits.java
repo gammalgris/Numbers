@@ -7,7 +7,7 @@
  * JMUL is a central repository for utilities which are used in my
  * other public and private repositories.
  *
- * Copyright (C) 2024  Kristian Kutin
+ * Copyright (C) 2025  Kristian Kutin
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,59 +33,57 @@
 
 package jmul.math.functions.implementations;
 
-
 import jmul.math.digits.Digit;
 import jmul.math.digits.PositionalNumeralSystems;
 import static jmul.math.functions.implementations.ParameterCheckHelper.checkParameter;
+import static jmul.math.functions.implementations.ParameterCheckHelper.checkParameterBase;
 import jmul.math.operations.BinaryOperation;
-import jmul.math.operations.ResultWithRemainder;
+import jmul.math.operations.ResultWithCarry;
 
 
 /**
- * Implements a function that halves a digit (i.e. divides it by two).
+ * This function adds two digits.
  *
  * @author Kristian Kutin
  */
-public class HalvingDigit implements BinaryOperation<Digit, ResultWithRemainder<Digit>> {
+public class MultiplyDigits implements BinaryOperation<Digit, ResultWithCarry<Digit>> {
 
     /**
      * The default constructor.
      */
-    public HalvingDigit() {
+    public MultiplyDigits() {
 
         super();
     }
 
     /**
-     * Takes the specified digit and halves it (i.e. divides it by 2 in the corresponding number base).<br>
-     * <br>
-     * <i>Note:<br>
-     * With odd number bases it's not always possible to hit the exact half. In this case this algorithm will give you
-     * a number slightly less than the half. Adding the halves will result in a number lesser than the original
-     * number.</i>
+     * Multiplies the specified digits.
      *
-     * @param digit
-     *        a digit
-     * @param carry
-     *        the carry of a previous calculation. The carry can be zero or one.
+     * @param digit1
+     *        an operand
+     * @param digit2
+     *        an operand
      *
-     * @return the result with the remainder
+     * @return the result of the multiplication
      */
     @Override
-    public ResultWithRemainder<Digit> calculate(Digit digit, Digit carry) {
+    public ResultWithCarry<Digit> calculate(Digit digit1, Digit digit2) {
 
-        checkParameter(digit);
+        checkParameter(digit1);
+        checkParameter(digit2);
+        checkParameterBase(digit1, digit2);
 
-        int base = digit.base();
+        int base = digit1.base();
 
-        int total = carry.ordinal() * base + digit.ordinal();
-        int result = total / 2;
-        int remainder = total % 2;
+        int product = digit1.ordinal() * digit2.ordinal();
+
+        int result = product % base;
+        int carry = product / base;
 
         Digit resultDigit = PositionalNumeralSystems.ordinalToDigit(base, result);
-        Digit remainderDigit = PositionalNumeralSystems.ordinalToDigit(base, remainder);
+        Digit carryDigit = PositionalNumeralSystems.ordinalToDigit(base, carry);
 
-        return new ResultWithRemainder<Digit>(resultDigit, remainderDigit);
+        return new ResultWithCarry<Digit>(resultDigit, carryDigit);
     }
 
 }

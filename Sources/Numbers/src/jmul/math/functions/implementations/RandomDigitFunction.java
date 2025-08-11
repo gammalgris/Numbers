@@ -7,7 +7,7 @@
  * JMUL is a central repository for utilities which are used in my
  * other public and private repositories.
  *
- * Copyright (C) 2022  Kristian Kutin
+ * Copyright (C) 2025  Kristian Kutin
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -36,55 +36,45 @@ package jmul.math.functions.implementations;
 
 import jmul.math.digits.Digit;
 import jmul.math.digits.PositionalNumeralSystems;
-import jmul.math.operations.BinaryOperation;
-import jmul.math.operations.ResultWithCarry;
-import static jmul.math.functions.implementations.ParameterCheckHelper.checkParameter;
-import static jmul.math.functions.implementations.ParameterCheckHelper.checkParameterBase;
+import jmul.math.operations.Result;
+import jmul.math.operations.UnaryOperation;
 
 
 /**
- * This function adds two digits.
+ * This function generates a random digit.<br>
+ * <br>
+ * <i>Note:<br>
+ * The performance needs to be improved.</i>
  *
  * @author Kristian Kutin
  */
-public class AddDigits implements BinaryOperation<Digit, ResultWithCarry<Digit>> {
+public class RandomDigitFunction implements UnaryOperation<Integer, Result<Digit>> {
 
     /**
      * The default constructor.
      */
-    public AddDigits() {
+    public RandomDigitFunction() {
 
         super();
     }
 
     /**
-     * Adds the specified digits.
+     * Generates a random digit.
      *
-     * @param digit1
-     *        an operand
-     * @param digit2
-     *        an operand
+     * @param base
+     *        a number base
      *
-     * @return the result of the addition
+     * @return a digit
      */
     @Override
-    public ResultWithCarry<Digit> calculate(Digit digit1, Digit digit2) {
+    public Result<Digit> calculate(Integer base) {
 
-        checkParameter(digit1);
-        checkParameter(digit2);
-        checkParameterBase(digit1, digit2);
+        ParameterCheckHelper.checkNumberBase(base);
 
-        int base = digit1.base();
+        int randomOrdinal = (int) (Math.random() * base);
+        Digit randomDigit = PositionalNumeralSystems.ordinalToDigit(base, randomOrdinal);
 
-        int sum = digit1.ordinal() + digit2.ordinal();
-
-        int result = sum % base;
-        int carry = sum / base;
-
-        Digit resultDigit = PositionalNumeralSystems.ordinalToDigit(base, result);
-        Digit carryDigit = PositionalNumeralSystems.ordinalToDigit(base, carry);
-
-        return new ResultWithCarry<Digit>(resultDigit, carryDigit);
+        return new Result<Digit>(randomDigit);
     }
 
 }

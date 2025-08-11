@@ -7,7 +7,7 @@
  * JMUL is a central repository for utilities which are used in my
  * other public and private repositories.
  *
- * Copyright (C) 2024  Kristian Kutin
+ * Copyright (C) 2025  Kristian Kutin
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -38,6 +38,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import jmul.math.Math;
+import jmul.math.functions.repository.FunctionIdentifiers;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
@@ -64,7 +65,7 @@ import static test.jmul.math.numbers.NumberCheckHelper.checkNumbersAreUniqueInst
  */
 @UnitTest
 @RunWith(Parameterized.class)
-public class MultiplyNumbersTest {
+public class MultiplyNumbers2Test {
 
     /**
      * The base for all summands.
@@ -113,8 +114,8 @@ public class MultiplyNumbersTest {
      * @param expectedProductString
      *        the product as number string
      */
-    public MultiplyNumbersTest(int base, String firstOperandString, String secondOperandString,
-                               String expectedProductString) {
+    public MultiplyNumbers2Test(int base, String firstOperandString, String secondOperandString,
+                                String expectedProductString) {
 
         super();
 
@@ -216,7 +217,8 @@ public class MultiplyNumbersTest {
             checkNumberEqualsStringRepresentation(expectedProduct, expectedProductString);
 
             // check the operation
-            Number actualProduct = firstOperand.multiply(secondOperand);
+            Number actualProduct =
+                firstOperand.multiply(FunctionIdentifiers.MULTIPLY_NUMBERS_BY_ADDITION_FUNCTION, secondOperand);
 
             assertEquals(toString(), expectedProduct, actualProduct);
 
@@ -247,7 +249,8 @@ public class MultiplyNumbersTest {
             checkNumberEqualsStringRepresentation(expectedProduct, expectedProductString);
 
             // check the operation
-            Number actualProduct = Math.multiply(firstOperand, secondOperand);
+            Number actualProduct =
+                Math.multiply(FunctionIdentifiers.MULTIPLY_NUMBERS_BY_ADDITION_FUNCTION, firstOperand, secondOperand);
 
             assertEquals(toString(), expectedProduct, actualProduct);
 

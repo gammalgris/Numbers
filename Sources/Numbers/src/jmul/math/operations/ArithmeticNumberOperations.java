@@ -172,6 +172,18 @@ public interface ArithmeticNumberOperations {
     Number multiply(Number n);
 
     /**
+     * Multiplies this number with the specified number.
+     *
+     * @param algorithm
+     *        the identifier for an algorithm
+     * @param n
+     *        a number
+     *
+     * @return a number
+     */
+    Number multiply(FunctionIdentifier algorithm, Number n);
+
+    /**
      * Multiplies this number with the specified fraction.
      *
      * @param f

@@ -875,8 +875,31 @@ public class NumberImpl implements Number {
     @Override
     public Number multiply(Number n) {
 
+        return multiply(FunctionIdentifiers.LONG_MULTIPLICATION_FUNCTION, n);
+    }
+
+    /**
+     * Multiplies this number with the specified number.
+     *
+     * @param algorithm
+     *        the identifier for an algorithm
+     * @param n
+     *        a number
+     *
+     * @return a number
+     */
+    @Override
+    public Number multiply(FunctionIdentifier algorithm, Number n) {
+
+        final FunctionIdentifier[] ALLOWED_ALGORITHMS = new FunctionIdentifier[] {
+            FunctionIdentifiers.MULTIPLY_NUMBERS_BY_ADDITION_FUNCTION,
+            FunctionIdentifiers.RUSSIAN_PEASANT_MULTIPLICATION_FUNCTION,
+            FunctionIdentifiers.LONG_MULTIPLICATION_FUNCTION
+        };
+        FunctionIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, algorithm);
+
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.MULTIPLY_NUMBERS_FUNCTION);
+            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(algorithm);
         Result<Number> result = function.calculate(this, n);
 
         return result.result();

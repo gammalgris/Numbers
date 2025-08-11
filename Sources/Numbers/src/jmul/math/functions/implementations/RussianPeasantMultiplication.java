@@ -57,15 +57,18 @@ import jmul.math.signs.Signs;
  * <i>Note:<br>
  * For large numbers a different algorithm may be required. Make a statistical
  * analysis with different algorithms.</i>
+ * 
+ * @deprecated There are issues with odd number bases and shifting of the decimal separator.
  *
  * @author Kristian Kutin
  */
-public class MultiplyNumbers implements BinaryOperation<Number, Result<Number>> {
+@Deprecated
+public class RussianPeasantMultiplication implements BinaryOperation<Number, Result<Number>> {
 
     /**
      * The default constructor.
      */
-    public MultiplyNumbers() {
+    public RussianPeasantMultiplication() {
 
         super();
     }
@@ -100,7 +103,12 @@ public class MultiplyNumbers implements BinaryOperation<Number, Result<Number>> 
 
         } else if (operand1.isInfinity() || operand2.isInfinity()) {
 
-            if (operand1.isNegative() || operand2.isNegative()) {
+            if (operand1.isNegative() && !operand2.isNegative()) {
+
+                Number result = createNumber(Signs.NEGATIVE, base);
+                return new Result<Number>(result);
+
+            } else if (!operand1.isNegative() && operand2.isNegative()) {
 
                 Number result = createNumber(Signs.NEGATIVE, base);
                 return new Result<Number>(result);

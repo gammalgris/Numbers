@@ -1,15 +1,13 @@
 
 # TODO
 
-1) Implement feature to specify symbol set for a specific base. The current algorithm uses only
-   digits and letters which limits the possible number bases.
+1) Implement feature to specify symbol sets for a specific number base. The current algorithm uses
+   only digits and letters which limits the possible number bases.
    The symbol set needs to be translated to a regular expression. The number implementation
    uses a regular expression to parse number strings. Currently the regular expression is a
    constant.
 
-2) Various arithmetic operations are not implemented.
-
-3) More tests are needed.
+3) More tests are needed. There are still quite big test gaps.
 
 6) Review unit tests and implement the toString method with a test description.
 
@@ -24,13 +22,16 @@
     -> Rationale: When using a public operation the input number should never be modified and the working instances and result
                   should be unique copies of the input number or unique number instances.
                   This is to avoid unwanted side effects.
+    Seperate the tests for correctness and the tests for checking if the object instances of input parameters and
+	are not the same (i.e. results have always to be unique instances).
 
 12) Input parameters should by default not be modified unless marked as such.
-   Add such a check to existing tests.
-   -> Note: Similar to 11)
+    Add such a check to existing tests.
+    -> Note: Similar to 11)
 
 13) Resolve conflict jmul.math.numbers.notation.Sign <-> jmul.math.signs.Sign
-   Consolidate the class (retain jmul.math.signs.Sign and delete jmul.math.notation.Sign. Merge functionalities.
+    Consolidate the class (retain jmul.math.signs.Sign and delete jmul.math.notation.Sign. Merge functionalities.
+	See 37)
 
 15) Check comments in test cases, including spelling errors.
 
@@ -47,13 +48,16 @@
 20) The test coverage needs improvement.
 
 21) Do a static code review.
-    The automation scripts have to be adapted for the changing in SonarQube.
+    The automation scripts have to be adapted for the changes in SonarQube. The sonar ant runner is probably not
+	maintained. See how the command line tool can use test result and coverage informations.
+	Create a bash and batch script to automate the whole build process.
 
 22) Use a profiler to identify bottlenecks which can be optimized
 
 23) Update wiki/ documentation (i.e. needs more examples)
 
 24) Consolidate the division functions (i.e. diviso, modulo, division by subtraction, russion division, etc.).
+    Add more tests. There might be issues with the current implementation with odd number bases.
 
 25) Save hash codes in a member variable to minimize calculations. See number, fraction, vector, matrix.
 
@@ -63,11 +67,11 @@
 
 28) Add some concurrent tests.
 
-29) repeating digit groups in the fraction part need some kind of mark or identification.
+29) repeating digit groups in the fraction part need some kind of marker or identification.
 
-30) implement a class for numbers with negative bases.
+30) Implement a class for numbers with negative bases. The skeleton has been generated.
 
-31) implement an operation to check if a number or fraction is within a specified interval
+31) Implement an operation to check if a number or fraction is within a specified interval
 	add a default constant for epsilon (i.e. a small number)
 
 32) Experiment with surreal numbers (see https://en.wikipedia.org/wiki/Surreal_number)
@@ -81,13 +85,23 @@
 
 35) Consider adding a stream constructor for large numbers (i.e. stream of digits/ characters).
 
-36)Add methods to convert numbers back to primitive types (i.e. int, long, double, etc.) and their
-   respective erapper classes (i.e. Integer, Double, etc.)
+36) Add methods to convert numbers back to primitive types (i.e. int, long, double, etc.) and their
+    respective erapper classes (i.e. Integer, Double, etc.)
 
-37)
+37) Rework constructors and helper classes (i.e. createNumber methods). Move the logic to parse input
+    parameters out of the constructors into the helper class. The helper class will depending on the
+	number base instantiate a different number implementation.
 
+38) After the constructors are reworked, update tests.
+
+39) Various arithmetic operations need alternative algorithms in order to check the correctness of
+    individual algorithms.
+
+40)
 
 # Done
+
+2) Various arithmetic operations are not implemented.
 
 4) More variations of arithmetic operations which different signatures are needed (i.e.
    number and fraction paramaters).

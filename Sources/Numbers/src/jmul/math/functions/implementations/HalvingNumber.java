@@ -34,19 +34,19 @@
 package jmul.math.functions.implementations;
 
 
+import jmul.math.digits.Digit;
+import jmul.math.digits.PositionalNumeralSystems;
 import jmul.math.functions.FunctionSingletons;
 import jmul.math.functions.repository.FunctionIdentifiers;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberImpl;
-import jmul.math.signs.Sign;
-import jmul.math.digits.Digit;
 import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.NodesHelper;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.Result;
-import jmul.math.operations.ResultWithCarry;
 import jmul.math.operations.ResultWithRemainder;
 import jmul.math.operations.UnaryOperation;
+import jmul.math.signs.Sign;
 
 
 /**
@@ -103,37 +103,21 @@ public class HalvingNumber implements UnaryOperation<Number, Result<Number>> {
         DigitNode clonedCurrentNode = null;
         DigitNode leftTail = null;
 
-        BinaryOperation<Digit, ResultWithCarry<Digit>> addDigitsFunction =
-            (BinaryOperation<Digit, ResultWithCarry<Digit>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_DIGITS_FUNCTION);
+        BinaryOperation<Digit, ResultWithRemainder<Digit>> halveDigitFunction =
+            (BinaryOperation<Digit, ResultWithRemainder<Digit>>) FunctionSingletons.getFunction(FunctionIdentifiers.HALVING_DIGIT_FUNCTION);
 
-        UnaryOperation<Digit, ResultWithRemainder<Digit>> halveDigitFunction =
-            (UnaryOperation<Digit, ResultWithRemainder<Digit>>) FunctionSingletons.getFunction(FunctionIdentifiers.HALVING_DIGIT_FUNCTION);
+        final Digit zeroDigit = PositionalNumeralSystems.ordinalToDigit(base, 0);
+        Digit previousCarry = zeroDigit;
 
-        ResultWithRemainder<Digit> previousResult = null;
-
-        while (true) {
-
-            if (currentNode == null) {
-
-                break;
-            }
+        while (currentNode != null) {
 
             Digit currentDigit = currentNode.digit();
-            ResultWithRemainder<Digit> result = halveDigitFunction.calculate(currentDigit);
+            ResultWithRemainder<Digit> result = halveDigitFunction.calculate(currentDigit, previousCarry);
 
-            if (previousResult == null) {
+            Digit newDigit = result.result();
+            previousCarry = result.remainder();
 
-                Digit newDigit = result.result();
-                clonedCurrentNode = NodesHelper.createNode(newDigit);
-                previousResult = result;
-
-            } else {
-
-                ResultWithCarry<Digit> sum = addDigitsFunction.calculate(result.result(), previousResult.remainder());
-                Digit newDigit = sum.result();
-                clonedCurrentNode = NodesHelper.createNode(newDigit);
-                previousResult = result;
-            }
+            clonedCurrentNode = NodesHelper.createNode(newDigit);
 
             if (currentNode == centerNode) {
 
@@ -146,14 +130,12 @@ public class HalvingNumber implements UnaryOperation<Number, Result<Number>> {
             currentNode = currentNode.rightNode();
         }
 
-        if (previousResult != null) {
+        if (!previousCarry.isZero()) {
 
-            Digit digit = previousResult.remainder();
-            if (!digit.isZero()) {
-
-                clonedCurrentNode = NodesHelper.createNode(digit);
-                NodesHelper.linkNodes(leftTail, clonedCurrentNode);
-            }
+            ResultWithRemainder<Digit> result = halveDigitFunction.calculate(zeroDigit, previousCarry);
+            Digit digit = result.result();
+            clonedCurrentNode = NodesHelper.createNode(digit);
+            NodesHelper.linkNodes(leftTail, clonedCurrentNode);
         }
 
         NodesHelper.trimLeft(clonedCenterNode);

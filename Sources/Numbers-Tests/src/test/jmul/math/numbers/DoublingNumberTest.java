@@ -312,6 +312,16 @@ public class DoublingNumberTest {
         parameters.add(new Object[] { 16, "FF", "1FE" });
         parameters.add(new Object[] { 16, "11", "22" });
 
+        parameters.add(new Object[] { 3, "22", "121" });
+        parameters.add(new Object[] { 3, "11", "22" });
+        parameters.add(new Object[] { 3, "2", "11" });
+        parameters.add(new Object[] { 3, "1", "2" });
+
+        parameters.add(new Object[] { 5, "13", "31" });
+        parameters.add(new Object[] { 5, "4", "13" });
+        parameters.add(new Object[] { 5, "2", "4" });
+        parameters.add(new Object[] { 5, "1", "2" });
+
         return parameters;
     }
 
