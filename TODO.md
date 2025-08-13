@@ -58,6 +58,7 @@
 
 24) Consolidate the division functions (i.e. diviso, modulo, division by subtraction, russion division, etc.).
     Add more tests. There might be issues with the current implementation with odd number bases.
+	Remove obsolete function implementations. Consolidate the function identifiers.
 
 25) Save hash codes in a member variable to minimize calculations. See number, fraction, vector, matrix.
 
@@ -97,7 +98,18 @@
 39) Various arithmetic operations need alternative algorithms in order to check the correctness of
     individual algorithms.
 
-40)
+40) Change the function "Fraction divide(Number)" to "Number divide(Number)" and
+    "Fraction divide(Number, Number)" to "Number divide(Number, Number)"
+    Add "Fraction Math.toFraction(Number)", "Fraction Math.toFraction(Number,Number)" and
+	"Fraction Math.toFraction(Number,Number,Number)". See also 24.
+
+41) The function "Number Fraction.evaluate()" requires an aditional signature.
+    "Number Fraction.evaluate(FunctionIdentifier)" to chose a among available division algorithms.
+
+42) Need speed comparisons between division algorithms.
+
+43)
+
 
 # Done
 

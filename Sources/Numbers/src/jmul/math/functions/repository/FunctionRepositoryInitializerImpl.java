@@ -55,6 +55,7 @@ import jmul.math.functions.implementations.DigitToNumberFunction;
 import jmul.math.functions.implementations.DivideFractionByNumber;
 import jmul.math.functions.implementations.DivideFractions;
 import jmul.math.functions.implementations.DivideNumberByFraction;
+import jmul.math.functions.implementations.DivisionBySubtraction;
 import jmul.math.functions.implementations.DivisionBySubtractionReturnFraction;
 import jmul.math.functions.implementations.DivisionOfNumbersBySubtractionReturnResultAndRemainder;
 import jmul.math.functions.implementations.DivisoWithIntegersFunction;
@@ -337,6 +338,7 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
         repository.registerFunction(FunctionIdentifiers.DIVIDE_FRACTION_BY_NUMBER_FUNCTION,
                                     DivideFractionByNumber.class);
         repository.registerFunction(FunctionIdentifiers.RUSSIAN_DIVISION_FUNCTION, RussianDivisionFunction.class);
+        repository.registerFunction(FunctionIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION, DivisionBySubtraction.class);
 
         repository.registerFunction(FunctionIdentifiers.MODULO_FUNCTION, ModuloWithIntegersFunction.class);
         repository.registerFunction(FunctionIdentifiers.DIVISO_FUNCTION, DivisoWithIntegersFunction.class);

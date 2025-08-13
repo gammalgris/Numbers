@@ -45,10 +45,10 @@ import jmul.math.signs.Signs;
 
 
 /**
- * Implements the multiplication by addition.<br>
+ * Implements multiplication by addition.<br>
  * <br>
  * <i>Note<br>
- * This implementation is slow (i.e. O(n)) but should be useful for checking the correctness of other multiplciation
+ * This implementation is slow (i.e. O(n)) but should be useful for checking the correctness of other multiplication
  * algorithms.</I>
  *
  * @author Kristian Kutin

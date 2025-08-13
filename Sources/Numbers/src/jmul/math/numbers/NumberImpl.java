@@ -1598,7 +1598,8 @@ public class NumberImpl implements Number {
     public Number divide(FunctionIdentifier algorithm, Number n, Number decimalPlaces) {
 
         final FunctionIdentifier[] ALLOWED_ALGORITHMS = new FunctionIdentifier[] {
-            FunctionIdentifiers.RUSSIAN_DIVISION_FUNCTION };
+            FunctionIdentifiers.RUSSIAN_DIVISION_FUNCTION, FunctionIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION
+        };
         FunctionIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, algorithm);
 
         TernaryOperation<Number, Result<Number>> function =
