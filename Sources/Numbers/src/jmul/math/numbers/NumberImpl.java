@@ -1791,6 +1791,7 @@ public class NumberImpl implements Number {
     public Byte toByte() {
 
         Number n = rebase(10);
+        n = n.removeFractionPart();
         return Byte.parseByte(n.toString());
     }
 
@@ -1803,6 +1804,7 @@ public class NumberImpl implements Number {
     public Short toShort() {
 
         Number n = rebase(10);
+        n = n.removeFractionPart();
         return Short.parseShort(n.toString());
     }
 
@@ -1815,6 +1817,7 @@ public class NumberImpl implements Number {
     public Integer toInteger() {
 
         Number n = rebase(10);
+        n = n.removeFractionPart();
         return Integer.parseInt(n.toString());
     }
 
@@ -1827,6 +1830,7 @@ public class NumberImpl implements Number {
     public Long toLong() {
 
         Number n = rebase(10);
+        n = n.removeFractionPart();
         return Long.parseLong(n.toString());
     }
 

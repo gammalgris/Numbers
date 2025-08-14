@@ -108,7 +108,9 @@
 
 42) Need speed comparisons between division algorithms.
 
-43)
+43) The conversion functions need rework. They are missing in the jmul.math.Math class.
+
+44)
 
 
 # Done
