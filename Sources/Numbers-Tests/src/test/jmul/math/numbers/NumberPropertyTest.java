@@ -34,9 +34,11 @@
 package test.jmul.math.numbers;
 
 
+import jmul.math.numbers.Constants;
 import jmul.math.numbers.Number;
+import static jmul.math.numbers.NumberHelper.createInfinity;
+import static jmul.math.numbers.NumberHelper.createNegativeInfinity;
 import static jmul.math.numbers.NumberHelper.createNumber;
-import jmul.math.signs.Signs;
 
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
@@ -55,7 +57,7 @@ public class NumberPropertyTest {
     @Test
     public void testUnsignedZero() {
 
-        Number number = createNumber(10, "0");
+        Number number = createNumber(Constants.DEFAULT_NUMBER_BASE, "0");
 
         assertEquals(false, number.isFraction());
         assertEquals(false, number.isInfinity());
@@ -74,7 +76,7 @@ public class NumberPropertyTest {
     @Test
     public void testPositiveZero() {
 
-        Number number = createNumber(10, "+0");
+        Number number = createNumber(Constants.DEFAULT_NUMBER_BASE, "+0");
 
         assertEquals(false, number.isFraction());
         assertEquals(false, number.isInfinity());
@@ -93,7 +95,7 @@ public class NumberPropertyTest {
     @Test
     public void testNegativeZero() {
 
-        Number number = createNumber(10, "-0");
+        Number number = createNumber(Constants.DEFAULT_NUMBER_BASE, "-0");
 
         assertEquals(false, number.isFraction());
         assertEquals(false, number.isInfinity());
@@ -112,7 +114,7 @@ public class NumberPropertyTest {
     @Test
     public void testUnsignednfinity() {
 
-        Number number = createNumber(10);
+        Number number = createInfinity(Constants.DEFAULT_NUMBER_BASE);
 
         assertEquals(false, number.isFraction());
         assertEquals(true, number.isInfinity());
@@ -131,7 +133,7 @@ public class NumberPropertyTest {
     @Test
     public void testPositiveInfinity() {
 
-        Number number = createNumber(Signs.POSITIVE, 10);
+        Number number = createInfinity(Constants.DEFAULT_NUMBER_BASE);
 
         assertEquals(false, number.isFraction());
         assertEquals(true, number.isInfinity());
@@ -150,7 +152,7 @@ public class NumberPropertyTest {
     @Test
     public void testNegativeInfinity() {
 
-        Number number = createNumber(Signs.NEGATIVE, 10);
+        Number number = createNegativeInfinity(Constants.DEFAULT_NUMBER_BASE);
 
         assertEquals(false, number.isFraction());
         assertEquals(true, number.isInfinity());
@@ -169,7 +171,7 @@ public class NumberPropertyTest {
     @Test
     public void testUnsignedOne() {
 
-        Number number = createNumber(10, "1");
+        Number number = createNumber(Constants.DEFAULT_NUMBER_BASE, "1");
 
         assertEquals(false, number.isFraction());
         assertEquals(false, number.isInfinity());
@@ -188,7 +190,7 @@ public class NumberPropertyTest {
     @Test
     public void testPositiveOne() {
 
-        Number number = createNumber(10, "+1");
+        Number number = createNumber(Constants.DEFAULT_NUMBER_BASE, "+1");
 
         assertEquals(false, number.isFraction());
         assertEquals(false, number.isInfinity());
@@ -207,7 +209,7 @@ public class NumberPropertyTest {
     @Test
     public void testNegativeOne() {
 
-        Number number = createNumber(10, "-1");
+        Number number = createNumber(Constants.DEFAULT_NUMBER_BASE, "-1");
 
         assertEquals(false, number.isFraction());
         assertEquals(false, number.isInfinity());
@@ -226,7 +228,7 @@ public class NumberPropertyTest {
     @Test
     public void testUnsignedDecimal() {
 
-        Number number = createNumber(10, "1.1");
+        Number number = createNumber(Constants.DEFAULT_NUMBER_BASE, "1.1");
 
         assertEquals(true, number.isFraction());
         assertEquals(false, number.isInfinity());
@@ -245,7 +247,7 @@ public class NumberPropertyTest {
     @Test
     public void testPositiveDecimal() {
 
-        Number number = createNumber(10, "+1.1");
+        Number number = createNumber(Constants.DEFAULT_NUMBER_BASE, "+1.1");
 
         assertEquals(true, number.isFraction());
         assertEquals(false, number.isInfinity());
@@ -264,7 +266,7 @@ public class NumberPropertyTest {
     @Test
     public void testNegativeDecimal() {
 
-        Number number = createNumber(10, "-1.1");
+        Number number = createNumber(Constants.DEFAULT_NUMBER_BASE, "-1.1");
 
         assertEquals(true, number.isFraction());
         assertEquals(false, number.isInfinity());

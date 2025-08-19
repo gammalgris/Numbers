@@ -41,20 +41,23 @@ import java.util.Map;
 
 import jmul.math.functions.repository.FunctionIdentifiers;
 import jmul.math.numbers.Number;
+import static jmul.math.numbers.NumberHelper.createNumber;
 
 import jmul.test.classification.ManualTest;
+
+import test.jmul.math.numbers.TestCase;
 
 import org.junit.Ignore;
 
 
 /**
- * This test suite compares the speed of different multiplication algorithms.
+ * This test suite compares the speed of different division algorithms.
  *
  * @author Kristian Kutin
  */
 @Ignore
 @ManualTest
-public class MultiplicationSpeedTest {
+public class DivisionSpeedTest {
 
     /**
      * The main method.
@@ -64,29 +67,29 @@ public class MultiplicationSpeedTest {
      */
     public static void main(String... args) {
 
-        compareLongMultiplicationWithMultiplicationByAddition();
+        compareRussionaDivisionWithDivisionBySubtraction();
     }
 
     /**
-     * Runs a set of test date with different multiplication algorithms.
+     * Runs a set of test date with different division algorithms.
      */
-    public static void compareLongMultiplicationWithMultiplicationByAddition() {
+    public static void compareRussionaDivisionWithDivisionBySubtraction() {
 
         System.out.println("create test data");
         List<TestCase> testCases = createTestdata();
         int testCount = testCases.size();
         System.out.println("created " + testCount + " tests");
 
-        System.out.println("test multiplication by addition");
+        System.out.println("test multiplication by subtraction");
         long start1 = System.currentTimeMillis();
-        float successRate1 = testMultiplicationByAddition(testCases);
+        float successRate1 = testRussianDivision(testCases);
         long end1 = System.currentTimeMillis();
         long duration1 = end1 - start1;
         System.out.println("duration " + duration1 + " ms with a success rate of " + (int) (successRate1 * 100) + "%");
 
         System.out.println("test long multiplication");
         long start2 = System.currentTimeMillis();
-        float successRate2 = testLongMultiplication(testCases);
+        float successRate2 = testDivisionBySubtraction(testCases);
         long end2 = System.currentTimeMillis();
         long duration2 = end2 - start2;
         System.out.println("duration " + duration2 + " ms with a success rate of " + (int) (successRate2 * 100) + "%");
@@ -100,7 +103,7 @@ public class MultiplicationSpeedTest {
      *
      * @return a success rate
      */
-    public static float testMultiplicationByAddition(List<TestCase> testCases) {
+    public static float testDivisionBySubtraction(List<TestCase> testCases) {
 
         Map<TestCase, Number> failedResults = new HashMap<>();
         Map<TestCase, Number> successfulResults = new HashMap<>();
@@ -111,8 +114,7 @@ public class MultiplicationSpeedTest {
             try {
 
                 actualResult =
-                    testCase.operand1.multiply(FunctionIdentifiers.MULTIPLY_NUMBERS_BY_ADDITION_FUNCTION,
-                                               testCase.operand2);
+                    testCase.operand1.multiply(FunctionIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION, testCase.operand2);
 
                 if (testCase.expectedResult.equals(actualResult)) {
 
@@ -144,7 +146,7 @@ public class MultiplicationSpeedTest {
      *
      * @return a success rate
      */
-    public static float testLongMultiplication(List<TestCase> testCases) {
+    public static float testRussianDivision(List<TestCase> testCases) {
 
         Map<TestCase, Number> failedResults = new HashMap<>();
         Map<TestCase, Number> successfulResults = new HashMap<>();
@@ -155,7 +157,7 @@ public class MultiplicationSpeedTest {
             try {
 
                 actualResult =
-                    testCase.operand1.multiply(FunctionIdentifiers.LONG_MULTIPLICATION_FUNCTION, testCase.operand2);
+                    testCase.operand1.divide(FunctionIdentifiers.RUSSIAN_DIVISION_FUNCTION, testCase.operand2);
 
                 if (testCase.expectedResult.equals(actualResult)) {
 
@@ -192,8 +194,13 @@ public class MultiplicationSpeedTest {
 
             for (int b = -100; b <= 100; b++) {
 
-                int result = a * b;
-                TestCase testCase = new TestCase(a, b, result);
+                if (b == 0) {
+
+                    continue;
+                }
+
+                int result = a / b;
+                TestCase testCase = new TestCase(result, b, a);
 
                 testCases.add(testCase);
             }
@@ -203,5 +210,3 @@ public class MultiplicationSpeedTest {
     }
 
 }
-
-

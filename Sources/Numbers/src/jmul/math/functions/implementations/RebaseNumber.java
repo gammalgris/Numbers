@@ -39,8 +39,8 @@ import jmul.math.digits.Digit;
 import jmul.math.functions.FunctionSingletons;
 import jmul.math.functions.repository.FunctionIdentifiers;
 import jmul.math.numbers.Number;
+import static jmul.math.numbers.NumberHelper.createInfinity;
 import static jmul.math.numbers.NumberHelper.createNumber;
-import jmul.math.numbers.NumberImpl;
 import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.NodesHelper;
 import jmul.math.operations.BinaryOperation;
@@ -149,7 +149,7 @@ public class RebaseNumber implements MixedBinaryOperation<Number, Integer, Resul
         Result<Number> translationResult = translateBaseFunction.calculate(newNumberBase, base);
         Number newBase = translationResult.result();
 
-        final Number ONE = createNumber(Signs.POSITIVE, base, 1);
+        final Number ONE = createNumber(base, Signs.POSITIVE, 1);
         Number debug = null;
         Number result = operand;
         DigitNode currentNode = centerNode;
@@ -187,8 +187,6 @@ public class RebaseNumber implements MixedBinaryOperation<Number, Integer, Resul
 
                 break;
             }
-
-            debug = new NumberImpl(newNumberBase, Signs.POSITIVE, centerNode); // delete when done
         }
 
         return centerNode;
@@ -243,7 +241,7 @@ public class RebaseNumber implements MixedBinaryOperation<Number, Integer, Resul
 
         if (operand.isInfinity()) {
 
-            Number infinity = createNumber(sign, newNumberBase);
+            Number infinity = createInfinity(newNumberBase, sign);
             return new Result<Number>(infinity);
         }
 
@@ -255,7 +253,7 @@ public class RebaseNumber implements MixedBinaryOperation<Number, Integer, Resul
         DigitNode translatedResult = translateIntegerPart(integerPart, newNumberBase);
         translatedResult = translateFractionPart(translatedResult, fractionPart, newNumberBase);
 
-        Number result = new NumberImpl(newNumberBase, sign, translatedResult);
+        Number result = createNumber(newNumberBase, sign, translatedResult);
 
         return new Result<Number>(result);
     }

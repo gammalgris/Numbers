@@ -38,7 +38,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
+import static jmul.math.numbers.NumberHelper.createNumber;
 
 import jmul.test.classification.UnitTest;
 
@@ -108,34 +108,34 @@ public class NumberComplementTest {
 
         Collection<Object[]> parameters = new ArrayList<Object[]>();
 
-        parameters.add(new Object[] { new NumberImpl(9, "0"), new NumberImpl(9, "8") });
-        parameters.add(new Object[] { new NumberImpl(9, "1"), new NumberImpl(9, "7") });
-        parameters.add(new Object[] { new NumberImpl(9, "2"), new NumberImpl(9, "6") });
-        parameters.add(new Object[] { new NumberImpl(9, "3"), new NumberImpl(9, "5") });
-        parameters.add(new Object[] { new NumberImpl(9, "4"), new NumberImpl(9, "4") });
-        parameters.add(new Object[] { new NumberImpl(9, "5"), new NumberImpl(9, "3") });
-        parameters.add(new Object[] { new NumberImpl(9, "6"), new NumberImpl(9, "2") });
-        parameters.add(new Object[] { new NumberImpl(9, "7"), new NumberImpl(9, "1") });
+        parameters.add(new Object[] { createNumber(9, "0"), createNumber(9, "8") });
+        parameters.add(new Object[] { createNumber(9, "1"), createNumber(9, "7") });
+        parameters.add(new Object[] { createNumber(9, "2"), createNumber(9, "6") });
+        parameters.add(new Object[] { createNumber(9, "3"), createNumber(9, "5") });
+        parameters.add(new Object[] { createNumber(9, "4"), createNumber(9, "4") });
+        parameters.add(new Object[] { createNumber(9, "5"), createNumber(9, "3") });
+        parameters.add(new Object[] { createNumber(9, "6"), createNumber(9, "2") });
+        parameters.add(new Object[] { createNumber(9, "7"), createNumber(9, "1") });
 
-        parameters.add(new Object[] { new NumberImpl(9, "1234567801"), new NumberImpl(9, "7654321087") });
+        parameters.add(new Object[] { createNumber(9, "1234567801"), createNumber(9, "7654321087") });
 
-        parameters.add(new Object[] { new NumberImpl(9, "0.123456781"), new NumberImpl(9, "8.765432107") });
+        parameters.add(new Object[] { createNumber(9, "0.123456781"), createNumber(9, "8.765432107") });
 
 
-        parameters.add(new Object[] { new NumberImpl("0"), new NumberImpl("9") });
-        parameters.add(new Object[] { new NumberImpl("1"), new NumberImpl("8") });
-        parameters.add(new Object[] { new NumberImpl("2"), new NumberImpl("7") });
-        parameters.add(new Object[] { new NumberImpl("3"), new NumberImpl("6") });
-        parameters.add(new Object[] { new NumberImpl("4"), new NumberImpl("5") });
-        parameters.add(new Object[] { new NumberImpl("5"), new NumberImpl("4") });
-        parameters.add(new Object[] { new NumberImpl("6"), new NumberImpl("3") });
-        parameters.add(new Object[] { new NumberImpl("7"), new NumberImpl("2") });
-        parameters.add(new Object[] { new NumberImpl("8"), new NumberImpl("1") });
-        parameters.add(new Object[] { new NumberImpl("9"), new NumberImpl("0") });
+        parameters.add(new Object[] { createNumber("0"), createNumber("9") });
+        parameters.add(new Object[] { createNumber("1"), createNumber("8") });
+        parameters.add(new Object[] { createNumber("2"), createNumber("7") });
+        parameters.add(new Object[] { createNumber("3"), createNumber("6") });
+        parameters.add(new Object[] { createNumber("4"), createNumber("5") });
+        parameters.add(new Object[] { createNumber("5"), createNumber("4") });
+        parameters.add(new Object[] { createNumber("6"), createNumber("3") });
+        parameters.add(new Object[] { createNumber("7"), createNumber("2") });
+        parameters.add(new Object[] { createNumber("8"), createNumber("1") });
+        parameters.add(new Object[] { createNumber("9"), createNumber("0") });
 
-        parameters.add(new Object[] { new NumberImpl("12345678901"), new NumberImpl("87654321098") });
+        parameters.add(new Object[] { createNumber("12345678901"), createNumber("87654321098") });
 
-        parameters.add(new Object[] { new NumberImpl("0.1234567891"), new NumberImpl("9.8765432108") });
+        parameters.add(new Object[] { createNumber("0.1234567891"), createNumber("9.8765432108") });
 
         return parameters;
     }

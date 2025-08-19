@@ -83,8 +83,8 @@ public class DivisionOfNumbersBySubtractionReturnResultAndRemainder implements B
 
         Number absoluteDividend = dividend.absoluteValue();
         Number absoluteDivisor = divisor.absoluteValue();
-        Number ZERO = createNumber(Signs.POSITIVE, base, 0);
-        Number ONE = createNumber(Signs.POSITIVE, base, 1);
+        Number ZERO = createNumber(base, Signs.POSITIVE, 0);
+        Number ONE = createNumber(base, Signs.POSITIVE, 1);
 
         if (absoluteDivisor.isOne()) {
 

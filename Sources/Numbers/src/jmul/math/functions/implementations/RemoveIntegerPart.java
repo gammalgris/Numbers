@@ -39,7 +39,6 @@ import jmul.math.digits.PositionalNumeralSystems;
 import static jmul.math.functions.implementations.ParameterCheckHelper.checkParameter;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
-import jmul.math.numbers.NumberImpl;
 import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.NodesHelper;
 import jmul.math.operations.Result;
@@ -100,7 +99,7 @@ public class RemoveIntegerPart implements UnaryOperation<Number, Result<Number>>
             sign = Signs.POSITIVE;
         }
 
-        Number clone = new NumberImpl(base, sign, clonedCenter);
+        Number clone = createNumber(base, sign, clonedCenter);
         return new Result<Number>(clone);
     }
 

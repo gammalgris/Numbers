@@ -35,13 +35,13 @@ package jmul.math.functions.implementations;
 
 
 import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
-import jmul.math.signs.Sign;
-import jmul.math.signs.Signs;
+import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.NodesHelper;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
+import jmul.math.signs.Sign;
+import jmul.math.signs.Signs;
 
 
 /**
@@ -87,7 +87,7 @@ public class NegateNumber implements UnaryOperation<Number, Result<Number>> {
 
         int base = n.base();
         DigitNode clonedCenterNode = NodesHelper.cloneLinkedList(n.centerNode());
-        Number newNumber = new NumberImpl(base, sign, clonedCenterNode);
+        Number newNumber = createNumber(base, sign, clonedCenterNode);
 
         return new Result<Number>(newNumber);
     }

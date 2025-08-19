@@ -41,7 +41,7 @@ import jmul.math.Math;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
+import static jmul.math.numbers.NumberHelper.createNumber;
 
 import jmul.test.classification.UnitTest;
 import jmul.test.exceptions.FailedTestException;
@@ -129,9 +129,9 @@ public class SubtractNumbersTest {
     @Before
     public void setUp() {
 
-        minuend = new NumberImpl(base, minuendString);
-        subtrahend = new NumberImpl(base, subtrahendString);
-        difference = new NumberImpl(base, differenceString);
+        minuend = createNumber(base, minuendString);
+        subtrahend = createNumber(base, subtrahendString);
+        difference = createNumber(base, differenceString);
     }
 
     /**

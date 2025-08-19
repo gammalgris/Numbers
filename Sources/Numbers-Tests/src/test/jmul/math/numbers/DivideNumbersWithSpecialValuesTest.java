@@ -36,6 +36,7 @@ package test.jmul.math.numbers;
 
 import jmul.math.functions.implementations.DivisionOfNumbersBySubtractionReturnResultAndRemainder;
 import jmul.math.numbers.Number;
+import static jmul.math.numbers.NumberHelper.createInfinity;
 import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.numbers.exceptions.NoResultButLimitException;
 import jmul.math.numbers.exceptions.UndefinedOperationException;
@@ -66,7 +67,7 @@ public class DivideNumbersWithSpecialValuesTest {
             new DivisionOfNumbersBySubtractionReturnResultAndRemainder();
 
         Number operand1 = createNumber(10, "10");
-        Number operand2 = createNumber(10);
+        Number operand2 = createInfinity(10);
 
         try {
 
@@ -92,8 +93,8 @@ public class DivideNumbersWithSpecialValuesTest {
         BinaryOperation<Number, ResultWithRemainder<Number>> function =
             new DivisionOfNumbersBySubtractionReturnResultAndRemainder();
 
-        Number operand1 = createNumber(10);
-        Number operand2 = createNumber(10);
+        Number operand1 = createInfinity(10);
+        Number operand2 = createInfinity(10);
 
         try {
 
@@ -134,12 +135,12 @@ public class DivideNumbersWithSpecialValuesTest {
         BinaryOperation<Number, ResultWithRemainder<Number>> function =
             new DivisionOfNumbersBySubtractionReturnResultAndRemainder();
 
-        Number operand1 = createNumber(10);
+        Number operand1 = createInfinity(10);
         Number operand2 = createNumber(10, "10");
 
         ResultWithRemainder<Number> result = function.calculate(operand1, operand2);
 
-        Number expectedResult = createNumber(10);
+        Number expectedResult = createInfinity(10);
         Number actualResult = result.result();
         assertEquals(expectedResult, actualResult);
 

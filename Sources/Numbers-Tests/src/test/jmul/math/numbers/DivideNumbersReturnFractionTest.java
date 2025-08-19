@@ -43,8 +43,9 @@ import static jmul.math.fractions.FractionHelper.createFraction;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
+import static jmul.math.numbers.NumberHelper.createInfinity;
+import static jmul.math.numbers.NumberHelper.createNegativeInfinity;
 import static jmul.math.numbers.NumberHelper.createNumber;
-
 import jmul.math.signs.Signs;
 
 import jmul.test.classification.UnitTest;
@@ -145,16 +146,16 @@ public class DivideNumbersReturnFractionTest {
 
         for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
 
-            parameters.add(new Object[] { createNumber(base), createNumber(base, "1"), createFraction(base) });
-            parameters.add(new Object[] { createNumber(base, "1"), createNumber(base),
+            parameters.add(new Object[] { createInfinity(base), createNumber(base, "1"), createFraction(base) });
+            parameters.add(new Object[] { createNumber(base, "1"), createInfinity(base),
                                           createFraction(base, "1", null) });
-            parameters.add(new Object[] { createNumber(base), createNumber(base, "-1"),
+            parameters.add(new Object[] { createInfinity(base), createNumber(base, "-1"),
                                           createFraction(Signs.NEGATIVE, base) });
-            parameters.add(new Object[] { createNumber(Signs.NEGATIVE, base), createNumber(base, "1"),
+            parameters.add(new Object[] { createNegativeInfinity(base), createNumber(base, "1"),
                                           createFraction(Signs.NEGATIVE, base) });
-            parameters.add(new Object[] { createNumber(base, "1"), createNumber(Signs.NEGATIVE, base),
+            parameters.add(new Object[] { createNumber(base, "1"), createNegativeInfinity(base),
                                           createFraction(base, "-1", null) });
-            parameters.add(new Object[] { createNumber(base, "-1"), createNumber(base),
+            parameters.add(new Object[] { createNumber(base, "-1"), createInfinity(base),
                                           createFraction(base, "-1", null) });
 
             parameters.add(new Object[] { createNumber(base, "1"), createNumber(base, "0"),
@@ -179,8 +180,7 @@ public class DivideNumbersReturnFractionTest {
 
         parameters.add(new Object[] { createNumber(10, "10"), createNumber(10, "3"),
                                       createFraction(10, "3", "1", "3") });
-        parameters.add(new Object[] { createNumber(10, "100"), createNumber(10, "25"),
-                                      createFraction(10, "4") });
+        parameters.add(new Object[] { createNumber(10, "100"), createNumber(10, "25"), createFraction(10, "4") });
 
         parameters.add(new Object[] { createNumber(10, "100"), createNumber(10, "7"),
                                       createFraction(10, "14", "2", "7") });

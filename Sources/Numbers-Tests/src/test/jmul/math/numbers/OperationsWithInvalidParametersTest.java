@@ -35,8 +35,9 @@ package test.jmul.math.numbers;
 
 
 import jmul.math.Math;
+import jmul.math.numbers.Constants;
 import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
+import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.numbers.exceptions.UndefinedOperationException;
 
 import jmul.test.classification.UnitTest;
@@ -58,7 +59,7 @@ public class OperationsWithInvalidParametersTest {
     @Test(expected = IllegalArgumentException.class)
     public void testAddNumberAndNull() {
 
-        Number n1 = new NumberImpl("1");
+        Number n1 = createNumber("1");
         Number n2 = null;
 
         n1.add(n2);
@@ -70,7 +71,7 @@ public class OperationsWithInvalidParametersTest {
     @Test(expected = IllegalArgumentException.class)
     public void testAddNumberAndNullVariant2() {
 
-        Number n1 = new NumberImpl("1");
+        Number n1 = createNumber("1");
         Number n2 = null;
 
         Math.add(n1, n2);
@@ -83,7 +84,7 @@ public class OperationsWithInvalidParametersTest {
     public void testAddNullAndNumber() {
 
         Number n1 = null;
-        Number n2 = new NumberImpl("1");
+        Number n2 = createNumber("1");
 
         Math.add(n1, n2);
     }
@@ -138,7 +139,7 @@ public class OperationsWithInvalidParametersTest {
     @Test(expected = IllegalArgumentException.class)
     public void testSubtractNumberAndNull() {
 
-        Number n1 = new NumberImpl("1");
+        Number n1 = createNumber("1");
         Number n2 = null;
 
         n1.subtract(n2);
@@ -150,7 +151,7 @@ public class OperationsWithInvalidParametersTest {
     @Test(expected = IllegalArgumentException.class)
     public void testSubtractAddNumberAndNullVariant2() {
 
-        Number n1 = new NumberImpl("1");
+        Number n1 = createNumber("1");
         Number n2 = null;
 
         Math.subtract(n1, n2);
@@ -163,7 +164,7 @@ public class OperationsWithInvalidParametersTest {
     public void testSubtractNullAndNumber() {
 
         Number n1 = null;
-        Number n2 = new NumberImpl("1");
+        Number n2 = createNumber("1");
 
         Math.subtract(n1, n2);
     }
@@ -174,8 +175,8 @@ public class OperationsWithInvalidParametersTest {
     @Test(expected = UndefinedOperationException.class)
     public void shiftOneLeftByFraction() {
 
-        Number n = new NumberImpl("1");
-        Number shifts = new NumberImpl("1.1");
+        Number n = createNumber("1");
+        Number shifts = createNumber("1.1");
 
         n.shiftLeft(shifts);
     }
@@ -187,7 +188,7 @@ public class OperationsWithInvalidParametersTest {
     public void shiftNullLeftByOne() {
 
         Number n = null;
-        Number shifts = new NumberImpl("1");
+        Number shifts = createNumber("1");
 
         Math.shiftLeft(n, shifts);
     }
@@ -198,7 +199,7 @@ public class OperationsWithInvalidParametersTest {
     @Test(expected = IllegalArgumentException.class)
     public void shiftOneLeftByNull() {
 
-        Number n = new NumberImpl("1");
+        Number n = createNumber("1");
         Number shifts = null;
 
         n.shiftLeft(shifts);
@@ -210,7 +211,7 @@ public class OperationsWithInvalidParametersTest {
     @Test(expected = IllegalArgumentException.class)
     public void shiftOneLeftByNullVariant2() {
 
-        Number n = new NumberImpl("1");
+        Number n = createNumber("1");
         Number shifts = null;
 
         Math.shiftLeft(n, shifts);
@@ -222,8 +223,8 @@ public class OperationsWithInvalidParametersTest {
     @Test(expected = UndefinedOperationException.class)
     public void shiftOneRightByFraction() {
 
-        Number n = new NumberImpl("1");
-        Number shifts = new NumberImpl("1.1");
+        Number n = createNumber("1");
+        Number shifts = createNumber("1.1");
 
         n.shiftRight(shifts);
     }
@@ -235,7 +236,7 @@ public class OperationsWithInvalidParametersTest {
     public void shiftNullRightByOne() {
 
         Number n = null;
-        Number shifts = new NumberImpl("1");
+        Number shifts = createNumber("1");
 
         Math.shiftRight(n, shifts);
     }
@@ -246,7 +247,7 @@ public class OperationsWithInvalidParametersTest {
     @Test(expected = IllegalArgumentException.class)
     public void shiftOneRightByNull() {
 
-        Number n = new NumberImpl("1");
+        Number n = createNumber("1");
         Number shifts = null;
 
         n.shiftRight(shifts);
@@ -258,7 +259,7 @@ public class OperationsWithInvalidParametersTest {
     @Test(expected = IllegalArgumentException.class)
     public void shiftOneRightByNullVariant2() {
 
-        Number n = new NumberImpl("1");
+        Number n = createNumber("1");
         Number shifts = null;
 
         Math.shiftRight(n, shifts);
@@ -281,7 +282,7 @@ public class OperationsWithInvalidParametersTest {
     @Test(expected = NullPointerException.class)
     public void testCompareNumberAndNull() {
 
-        Number n1 = new NumberImpl("1");
+        Number n1 = createNumber("1");
         Number n2 = null;
 
         n1.compareTo(n2);
@@ -293,7 +294,7 @@ public class OperationsWithInvalidParametersTest {
     @Test(expected = IllegalArgumentException.class)
     public void testCompareNumberAndNullVariant2() {
 
-        Number n1 = new NumberImpl("1");
+        Number n1 = createNumber("1");
         Number n2 = null;
 
         Math.compare(n1, n2);
@@ -306,7 +307,7 @@ public class OperationsWithInvalidParametersTest {
     public void testCompareNullAndNumber() {
 
         Number n1 = null;
-        Number n2 = new NumberImpl("1");
+        Number n2 = createNumber("1");
 
         Math.compare(n1, n2);
     }
@@ -317,7 +318,7 @@ public class OperationsWithInvalidParametersTest {
     @Test(expected = IllegalArgumentException.class)
     public void testMaxNumberAndNull() {
 
-        Number n1 = new NumberImpl("1");
+        Number n1 = createNumber("1");
         Number n2 = null;
 
         n1.max(n2);
@@ -329,7 +330,7 @@ public class OperationsWithInvalidParametersTest {
     @Test(expected = IllegalArgumentException.class)
     public void testMaxNumberAndNullVariant2() {
 
-        Number n1 = new NumberImpl("1");
+        Number n1 = createNumber("1");
         Number n2 = null;
 
         Math.max(n1, n2);
@@ -341,7 +342,7 @@ public class OperationsWithInvalidParametersTest {
     @Test(expected = IllegalArgumentException.class)
     public void testMaxNullAndNumber() {
 
-        Number n1 = new NumberImpl("1");
+        Number n1 = createNumber("1");
         Number n2 = null;
 
         Math.max(n1, n2);
@@ -353,7 +354,7 @@ public class OperationsWithInvalidParametersTest {
     @Test(expected = IllegalArgumentException.class)
     public void testMinNumberAndNull() {
 
-        Number n1 = new NumberImpl("1");
+        Number n1 = createNumber("1");
         Number n2 = null;
 
         n1.min(n2);
@@ -365,7 +366,7 @@ public class OperationsWithInvalidParametersTest {
     @Test(expected = IllegalArgumentException.class)
     public void testMinNumberAndNullVariant2() {
 
-        Number n1 = new NumberImpl("1");
+        Number n1 = createNumber("1");
         Number n2 = null;
 
         Math.min(n1, n2);
@@ -377,7 +378,7 @@ public class OperationsWithInvalidParametersTest {
     @Test(expected = IllegalArgumentException.class)
     public void testMinNullAndNumber() {
 
-        Number n1 = new NumberImpl("1");
+        Number n1 = createNumber("1");
         Number n2 = null;
 
         Math.min(n1, n2);
@@ -433,7 +434,7 @@ public class OperationsWithInvalidParametersTest {
     @Test(expected = IllegalArgumentException.class)
     public void testEvenFraction() {
 
-        Number n = new NumberImpl(10, "1.1");
+        Number n = createNumber(Constants.DEFAULT_NUMBER_BASE, "1.1");
 
         Math.isEven(n);
     }
@@ -444,7 +445,7 @@ public class OperationsWithInvalidParametersTest {
     @Test(expected = IllegalArgumentException.class)
     public void testOddFraction() {
 
-        Number n = new NumberImpl(10, "1.1");
+        Number n = createNumber(Constants.DEFAULT_NUMBER_BASE, "1.1");
 
         Math.isOdd(n);
     }

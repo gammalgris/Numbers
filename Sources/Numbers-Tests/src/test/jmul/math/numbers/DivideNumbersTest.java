@@ -272,13 +272,13 @@ public class DivideNumbersTest {
         parameters.add(new Object[] { createNumber(5, "-44.32"), createNumber(5, "-3.1"), null,
                                       createNumber(5, "12.3240124012") });
 
-        parameters.add(new Object[] { createNumber(5, "44.32"), createNumber(5, "3.1"), createNumber(10, "2"),
+        parameters.add(new Object[] { createNumber(5, "44.32"), createNumber(5, "3.1"), createNumber(5, "2"),
                                       createNumber(5, "12.32") });
-        parameters.add(new Object[] { createNumber(5, "-44.32"), createNumber(5, "3.1"), createNumber(10, "2"),
+        parameters.add(new Object[] { createNumber(5, "-44.32"), createNumber(5, "3.1"), createNumber(5, "2"),
                                       createNumber(5, "-12.32") });
-        parameters.add(new Object[] { createNumber(5, "44.32"), createNumber(5, "-3.1"), createNumber(10, "2"),
+        parameters.add(new Object[] { createNumber(5, "44.32"), createNumber(5, "-3.1"), createNumber(5, "2"),
                                       createNumber(5, "-12.32") });
-        parameters.add(new Object[] { createNumber(5, "-44.32"), createNumber(5, "-3.1"), createNumber(10, "2"),
+        parameters.add(new Object[] { createNumber(5, "-44.32"), createNumber(5, "-3.1"), createNumber(5, "2"),
                                       createNumber(5, "12.32") });
 
         parameters.add(new Object[] { createNumber(5, "44.32"), createNumber(5, "3.1"), createNumber(5, "2"),

@@ -35,7 +35,7 @@ package test.jmul.math.numbers;
 
 
 import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
+import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.numbers.nodes.NodesHelper;
 
 import jmul.test.classification.UnitTest;
@@ -62,8 +62,8 @@ public class FillUpWithZeroesTest {
         String expected1 = "0001.2000";
         String expected2 = "1234.5678";
 
-        Number number1 = new NumberImpl("1.2");
-        Number number2 = new NumberImpl("1234.5678");
+        Number number1 = createNumber("1.2");
+        Number number2 = createNumber("1234.5678");
 
         NodesHelper.fillUpWithZeroes(number1.centerNode(), number2.centerNode());
 
@@ -84,8 +84,8 @@ public class FillUpWithZeroesTest {
         String expected1 = "0001.2345";
         String expected2 = "1234.5";
 
-        Number number1 = new NumberImpl("1.2345");
-        Number number2 = new NumberImpl("1234.5");
+        Number number1 = createNumber("1.2345");
+        Number number2 = createNumber("1234.5");
 
         NodesHelper.fillUpWithZeroes(number1.centerNode(), number2.centerNode());
 
@@ -106,8 +106,8 @@ public class FillUpWithZeroesTest {
         String expected1 = "1234.5000";
         String expected2 = "1.2345";
 
-        Number number1 = new NumberImpl("1234.5");
-        Number number2 = new NumberImpl("1.2345");
+        Number number1 = createNumber("1234.5");
+        Number number2 = createNumber("1.2345");
 
         NodesHelper.fillUpWithZeroes(number1.centerNode(), number2.centerNode());
 
@@ -127,8 +127,8 @@ public class FillUpWithZeroesTest {
         String expected1 = "1234.5678";
         String expected2 = "1.2";
 
-        Number number1 = new NumberImpl("1234.5678");
-        Number number2 = new NumberImpl("1.2");
+        Number number1 = createNumber("1234.5678");
+        Number number2 = createNumber("1.2");
 
         NodesHelper.fillUpWithZeroes(number1.centerNode(), number2.centerNode());
 

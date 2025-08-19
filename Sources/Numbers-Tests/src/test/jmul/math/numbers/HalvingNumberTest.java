@@ -43,7 +43,7 @@ import jmul.math.digits.PositionalNumeralSystems;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
+import static jmul.math.numbers.NumberHelper.createNumber;
 
 import jmul.test.classification.UnitTest;
 import jmul.test.exceptions.FailedTestException;
@@ -119,8 +119,8 @@ public class HalvingNumberTest {
     @Before
     public void setUp() {
 
-        operand = new NumberImpl(base, operandString);
-        result = new NumberImpl(base, resultString);
+        operand = createNumber(base, operandString);
+        result = createNumber(base, resultString);
     }
 
     /**
@@ -267,7 +267,7 @@ public class HalvingNumberTest {
                 parameters.add(new Object[] { base, "-100", "-" + digit + "" + digit + "." + digit });
 
             } else {
-                
+
                 parameters.add(new Object[] { base, "100", "" + digit + "0" });
                 parameters.add(new Object[] { base, "-100", "-" + digit + "0" });
             }

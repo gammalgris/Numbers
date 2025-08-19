@@ -40,7 +40,6 @@ import jmul.math.functions.FunctionSingletons;
 import jmul.math.functions.repository.FunctionIdentifiers;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
-import jmul.math.numbers.NumberImpl;
 import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.NodesHelper;
 import jmul.math.operations.BinaryOperation;
@@ -173,7 +172,7 @@ public class RoundNumberToOddFunction implements BinaryOperation<Number, Result<
                 if (currentNode == centerNode) {
 
                     centerNode = newCurrentNode;
-                    clone = new NumberImpl(base, sign, centerNode);
+                    clone = createNumber(base, sign, centerNode);
                 }
 
                 if (currentNode == newRightEnd) {
@@ -216,7 +215,7 @@ public class RoundNumberToOddFunction implements BinaryOperation<Number, Result<
                 if (currentNode == centerNode) {
 
                     centerNode = newCurrentNode;
-                    clone = new NumberImpl(base, sign, centerNode);
+                    clone = createNumber(base, sign, centerNode);
                 }
 
                 if (currentNode == newRightEnd) {

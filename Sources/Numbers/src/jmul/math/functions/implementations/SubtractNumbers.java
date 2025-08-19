@@ -37,15 +37,16 @@ package jmul.math.functions.implementations;
 import jmul.math.functions.FunctionSingletons;
 import jmul.math.functions.repository.FunctionIdentifiers;
 import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
-import jmul.math.signs.Sign;
-import jmul.math.signs.Signs;
+import static jmul.math.numbers.NumberHelper.createInfinity;
+import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.numbers.exceptions.UndefinedOperationException;
 import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.NodesHelper;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
+import jmul.math.signs.Sign;
+import jmul.math.signs.Signs;
 
 import jmul.metainfo.annotations.Modified;
 
@@ -141,7 +142,7 @@ public class SubtractNumbers implements BinaryOperation<Number, Result<Number>> 
              * 11) -n - infinity = -infinity
              * 12) -n - -infinity = -n + infinity = infinity
              */
-            Number result = new NumberImpl(operand2);
+            Number result = createNumber(operand2);
             result = result.negate();
             return new Result<Number>(result);
 
@@ -155,7 +156,7 @@ public class SubtractNumbers implements BinaryOperation<Number, Result<Number>> 
              *  6) -infinity - n = -infinity
              *  8) -infinity - -n = -infinity + n = -infinity
              */
-            Number result = new NumberImpl(operand1);
+            Number result = createNumber(operand1);
             return new Result<Number>(result);
 
         } else {
@@ -179,7 +180,7 @@ public class SubtractNumbers implements BinaryOperation<Number, Result<Number>> 
                  *  3) infinity - -infinity = infinity + infinity = infinity
                  *  5) -infinity - infinity = -infinity
                  */
-                Number result = new NumberImpl(base, operand1.sign());
+                Number result = createInfinity(base, operand1.sign());
                 return new Result<Number>(result);
             }
         }
@@ -226,7 +227,7 @@ public class SubtractNumbers implements BinaryOperation<Number, Result<Number>> 
              * -0 - n = -n
              * -0 - -n = 0 + n = n
              */
-            Number result = new NumberImpl(operand2);
+            Number result = createNumber(operand2);
             result = result.negate();
             return new Result<Number>(result);
 
@@ -240,7 +241,7 @@ public class SubtractNumbers implements BinaryOperation<Number, Result<Number>> 
              * -n - 0 = -n
              * -n - -0 = -n + 0 = -n
              */
-            Number result = new NumberImpl(operand1);
+            Number result = createNumber(operand1);
             return new Result<Number>(result);
 
         } else {
@@ -253,7 +254,7 @@ public class SubtractNumbers implements BinaryOperation<Number, Result<Number>> 
              * -0 - 0 = 0
              * -0 - -0 = 0
              */
-            Number result = new NumberImpl(base, "0");
+            Number result = createNumber(base, "0");
             return new Result<Number>(result);
         }
     }
@@ -295,7 +296,7 @@ public class SubtractNumbers implements BinaryOperation<Number, Result<Number>> 
 
         } else {
 
-            Number result = new NumberImpl(base, "0");
+            Number result = createNumber(base, "0");
             return new Result<Number>(result);
         }
     }

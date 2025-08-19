@@ -44,6 +44,8 @@ import static jmul.math.fractions.FractionHelper.createFraction;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
+import static jmul.math.numbers.NumberHelper.createInfinity;
+import static jmul.math.numbers.NumberHelper.createNegativeInfinity;
 import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.signs.Signs;
 
@@ -145,9 +147,9 @@ public class MultiplyNumberAndFractionTest {
 
         for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
 
-            parameters.add(new Object[] { createNumber(base), createFraction(base, "1"), createFraction(base) });
+            parameters.add(new Object[] { createInfinity(base), createFraction(base, "1"), createFraction(base) });
             parameters.add(new Object[] { createNumber(base, "1"), createFraction(base), createFraction(base) });
-            parameters.add(new Object[] { createNumber(Signs.NEGATIVE, base), createFraction(base, "1"),
+            parameters.add(new Object[] { createNegativeInfinity(base), createFraction(base, "1"),
                                           createFraction(Signs.NEGATIVE, base) });
             parameters.add(new Object[] { createNumber(base, "1"), createFraction(Signs.NEGATIVE, base),
                                           createFraction(Signs.NEGATIVE, base) });

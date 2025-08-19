@@ -38,7 +38,7 @@ import jmul.math.digits.Digit;
 import jmul.math.functions.FunctionSingletons;
 import jmul.math.functions.repository.FunctionIdentifiers;
 import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
+import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.NodesHelper;
 import jmul.math.operations.MixedBinaryOperation;
@@ -103,7 +103,7 @@ public class RandomNumberFunction implements MixedBinaryOperation<Integer, Numbe
         }
 
         NodesHelper.trimRight(centerNode);
-        Number randomNumber = new NumberImpl(base, Signs.POSITIVE, centerNode);
+        Number randomNumber = createNumber(base, Signs.POSITIVE, centerNode);
 
         return new Result<Number>(randomNumber);
     }

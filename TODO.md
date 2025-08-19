@@ -89,12 +89,6 @@
 36) Add methods to convert numbers back to primitive types (i.e. int, long, double, etc.) and their
     respective erapper classes (i.e. Integer, Double, etc.)
 
-37) Rework constructors and helper classes (i.e. createNumber methods). Move the logic to parse input
-    parameters out of the constructors into the helper class. The helper class will depending on the
-	number base instantiate a different number implementation.
-
-38) After the constructors are reworked, update tests.
-
 39) Various arithmetic operations need alternative algorithms in order to check the correctness of
     individual algorithms.
 
@@ -110,7 +104,12 @@
 
 43) The conversion functions need rework. They are missing in the jmul.math.Math class.
 
-44)
+44) Implement optimizations (e.g. right end of the linked list, left end of the linked list) to
+    minimize traversing the linked list.
+
+45) Need to rework constructors of Fraction/ MixedFraction. Update tests.
+
+46)
 
 
 # Done
@@ -141,6 +140,16 @@
     Alternative 2: mark digits in order to identify groups of digits which are repeated
     -> Solution: there remains a constant for a default precision (i.e. the variable has been turned into a constant).
     -> Solution: some operations now have an additional variant where you specify a precision
+
+37) Rework constructors and helper classes (i.e. createNumber methods). Move the logic to parse input
+    parameters out of the constructors into the helper class. The helper class will depending on the
+	number base instantiate a different number implementation.
+    -> Cleaned up constructors in NumberImpl. Remaining Constructors are now protected. Moved the parsing
+	   into NumberHelper.
+
+38) After the constructors are reworked, update tests.
+    -> Updated tests.
+
 
 # Obsolete
 

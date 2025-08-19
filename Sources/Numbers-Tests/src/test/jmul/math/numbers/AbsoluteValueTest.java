@@ -41,9 +41,9 @@ import jmul.math.Math;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
+import static jmul.math.numbers.NumberHelper.createInfinity;
+import static jmul.math.numbers.NumberHelper.createNegativeInfinity;
 import static jmul.math.numbers.NumberHelper.createNumber;
-import jmul.math.numbers.NumberImpl;
-import static jmul.math.signs.Signs.NEGATIVE;
 
 import jmul.test.classification.UnitTest;
 
@@ -136,8 +136,8 @@ public class AbsoluteValueTest {
 
         for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
 
-            parameters.add(new Object[] { createNumber(base), createNumber(base) });
-            parameters.add(new Object[] { createNumber(NEGATIVE, base), createNumber(base) });
+            parameters.add(new Object[] { createInfinity(base), createInfinity(base) });
+            parameters.add(new Object[] { createNegativeInfinity(base), createInfinity(base) });
 
             parameters.add(new Object[] { createNumber(base, "0"), createNumber(base, "0") });
             parameters.add(new Object[] { createNumber(base, "-0"), createNumber(base, "0") });
@@ -146,15 +146,14 @@ public class AbsoluteValueTest {
             parameters.add(new Object[] { createNumber(base, "-1"), createNumber(base, "1") });
         }
 
-        parameters.add(new Object[] { new NumberImpl("1234567890"), new NumberImpl("1234567890") });
-        parameters.add(new Object[] { new NumberImpl("-1234567890"), new NumberImpl("1234567890") });
+        parameters.add(new Object[] { createNumber("1234567890"), createNumber("1234567890") });
+        parameters.add(new Object[] { createNumber("-1234567890"), createNumber("1234567890") });
 
-        parameters.add(new Object[] { new NumberImpl("0.123456789"), new NumberImpl("0.123456789") });
-        parameters.add(new Object[] { new NumberImpl("-0.123456789"), new NumberImpl("0.123456789") });
+        parameters.add(new Object[] { createNumber("0.123456789"), createNumber("0.123456789") });
+        parameters.add(new Object[] { createNumber("-0.123456789"), createNumber("0.123456789") });
 
-        parameters.add(new Object[] { new NumberImpl("1234567890.123456789"), new NumberImpl("1234567890.123456789") });
-        parameters.add(new Object[] { new NumberImpl("-1234567890.123456789"),
-                                      new NumberImpl("1234567890.123456789") });
+        parameters.add(new Object[] { createNumber("1234567890.123456789"), createNumber("1234567890.123456789") });
+        parameters.add(new Object[] { createNumber("-1234567890.123456789"), createNumber("1234567890.123456789") });
 
         return parameters;
     }

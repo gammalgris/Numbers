@@ -39,13 +39,15 @@ import java.util.Collection;
 
 import jmul.math.functions.FunctionSingletons;
 import jmul.math.functions.repository.FunctionIdentifiers;
+import jmul.math.numbers.Constants;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
+import static jmul.math.numbers.NumberHelper.createInfinity;
+import static jmul.math.numbers.NumberHelper.createNegativeInfinity;
 import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.operations.MixedBinaryOperation;
 import jmul.math.operations.Result;
-import jmul.math.signs.Signs;
 
 import jmul.test.classification.UnitTest;
 
@@ -113,8 +115,8 @@ public class NumberToOrdinalWithInvalidArgumentsTest {
 
         for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
 
-            parameters.add(new Object[] { createNumber(Signs.POSITIVE, 10), base });
-            parameters.add(new Object[] { createNumber(Signs.NEGATIVE, 10), base });
+            parameters.add(new Object[] { createInfinity(Constants.DEFAULT_NUMBER_BASE), base });
+            parameters.add(new Object[] { createNegativeInfinity(Constants.DEFAULT_NUMBER_BASE), base });
         }
 
         for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {

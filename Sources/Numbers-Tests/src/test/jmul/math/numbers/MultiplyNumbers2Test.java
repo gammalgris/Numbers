@@ -42,6 +42,7 @@ import jmul.math.functions.repository.FunctionIdentifiers;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
+import static jmul.math.numbers.NumberHelper.createInfinity;
 import static jmul.math.numbers.NumberHelper.createNumber;
 
 import jmul.test.classification.UnitTest;
@@ -133,7 +134,7 @@ public class MultiplyNumbers2Test {
 
         if (firstOperandString == null) {
 
-            firstOperand = createNumber(base);
+            firstOperand = createInfinity(base);
 
         } else {
 
@@ -142,7 +143,7 @@ public class MultiplyNumbers2Test {
 
         if (secondOperandString == null) {
 
-            secondOperand = createNumber(base);
+            secondOperand = createInfinity(base);
 
         } else {
 
@@ -151,7 +152,7 @@ public class MultiplyNumbers2Test {
 
         if (expectedProductString == null) {
 
-            expectedProduct = createNumber(base);
+            expectedProduct = createInfinity(base);
 
         } else {
 

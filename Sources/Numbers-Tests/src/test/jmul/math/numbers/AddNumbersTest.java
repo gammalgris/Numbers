@@ -41,7 +41,7 @@ import jmul.math.Math;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
+import static jmul.math.numbers.NumberHelper.createNumber;
 
 import jmul.test.classification.UnitTest;
 import jmul.test.exceptions.FailedTestException;
@@ -129,9 +129,9 @@ public class AddNumbersTest {
     @Before
     public void setUp() {
 
-        firstSummand = new NumberImpl(base, firstSummandString);
-        secondSummand = new NumberImpl(base, secondSummandString);
-        sum = new NumberImpl(base, sumString);
+        firstSummand = createNumber(base, firstSummandString);
+        secondSummand = createNumber(base, secondSummandString);
+        sum = createNumber(base, sumString);
     }
 
     /**

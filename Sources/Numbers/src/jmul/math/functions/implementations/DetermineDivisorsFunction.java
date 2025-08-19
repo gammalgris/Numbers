@@ -76,7 +76,7 @@ public class DetermineDivisorsFunction implements UnaryOperation<Number, Result<
 
         final Number TWO;
         {
-            final Number ONE = createNumber(Signs.POSITIVE, base, 1);
+            final Number ONE = createNumber(base, Signs.POSITIVE, 1);
             TWO = ONE.inc();
         }
 

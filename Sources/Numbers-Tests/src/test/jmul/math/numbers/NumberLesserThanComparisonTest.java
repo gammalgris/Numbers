@@ -41,7 +41,7 @@ import jmul.math.Math;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
+import static jmul.math.numbers.NumberHelper.createNumber;
 
 import jmul.test.classification.UnitTest;
 import jmul.test.exceptions.FailedTestException;
@@ -108,7 +108,7 @@ public class NumberLesserThanComparisonTest {
      *        the expected comparison result
      */
     public NumberLesserThanComparisonTest(int base, String firstOperandString, String secondOperandString,
-                                boolean expectedResult) {
+                                          boolean expectedResult) {
 
         super();
 
@@ -124,8 +124,8 @@ public class NumberLesserThanComparisonTest {
     @Before
     public void setUp() {
 
-        firstOperand = new NumberImpl(base, firstOperandString);
-        secondOperand = new NumberImpl(base, secondOperandString);
+        firstOperand = createNumber(base, firstOperandString);
+        secondOperand = createNumber(base, secondOperandString);
     }
 
     /**

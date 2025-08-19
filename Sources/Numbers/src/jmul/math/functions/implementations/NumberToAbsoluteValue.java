@@ -35,7 +35,7 @@ package jmul.math.functions.implementations;
 
 
 import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
+import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.NodesHelper;
 import jmul.math.operations.Result;
@@ -73,7 +73,7 @@ public class NumberToAbsoluteValue implements UnaryOperation<Number, Result<Numb
 
         int base = operand.base();
         DigitNode centerNode = operand.centerNode();
-        Number absoluteValue = new NumberImpl(base, Signs.POSITIVE, NodesHelper.cloneLinkedList(centerNode));
+        Number absoluteValue = createNumber(base, Signs.POSITIVE, NodesHelper.cloneLinkedList(centerNode));
 
         return new Result<Number>(absoluteValue);
     }

@@ -37,7 +37,7 @@ package jmul.math.functions.implementations;
 import jmul.math.digits.Digit;
 import static jmul.math.functions.implementations.ParameterCheckHelper.checkParameter;
 import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
+import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.NodesHelper;
 import jmul.math.operations.Result;
@@ -76,7 +76,7 @@ public class RemoveFractionPart implements UnaryOperation<Number, Result<Number>
 
         if (operand.isInfinity()) {
 
-            Number clone = new NumberImpl(operand);
+            Number clone = createNumber(operand);
             return new Result<Number>(clone);
         }
 
@@ -95,7 +95,7 @@ public class RemoveFractionPart implements UnaryOperation<Number, Result<Number>
             sign = Signs.POSITIVE;
         }
 
-        Number clone = new NumberImpl(base, sign, clonedCenter);
+        Number clone = createNumber(base, sign, clonedCenter);
         return new Result<Number>(clone);
     }
 

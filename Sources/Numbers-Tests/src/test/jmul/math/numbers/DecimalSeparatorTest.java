@@ -33,9 +33,10 @@
 
 package test.jmul.math.numbers;
 
+
 import jmul.math.numbers.Constants;
 import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
+import static jmul.math.numbers.NumberHelper.createNumber;
 
 import jmul.test.classification.UnitTest;
 
@@ -58,7 +59,7 @@ public class DecimalSeparatorTest {
         char decimalSeparator = '.';
         String input = String.format("1%s1", decimalSeparator);
 
-        Number n = new NumberImpl(input);
+        Number n = createNumber(input);
 
         String s = n.toStandardNotation(decimalSeparator);
         assertEquals(input, s);
@@ -73,7 +74,7 @@ public class DecimalSeparatorTest {
         char decimalSeparator = Constants.DECIMAL_SEPARATOR;
         String input = String.format("1%s1", decimalSeparator);
 
-        Number n = new NumberImpl(input);
+        Number n = createNumber(input);
 
         String s = n.toStandardNotation();
         assertEquals(input, s);
@@ -88,7 +89,7 @@ public class DecimalSeparatorTest {
         char decimalSeparator = '.';
         String input = String.format("1%s1", decimalSeparator);
 
-        Number n = new NumberImpl(input);
+        Number n = createNumber(input);
 
         String s = n.toString(decimalSeparator);
         assertEquals(input, s);
@@ -103,7 +104,7 @@ public class DecimalSeparatorTest {
         char decimalSeparator = Constants.DECIMAL_SEPARATOR;
         String input = String.format("1%s1", decimalSeparator);
 
-        Number n = new NumberImpl(input);
+        Number n = createNumber(input);
 
         String s = n.toString();
         assertEquals(input, s);
@@ -118,7 +119,7 @@ public class DecimalSeparatorTest {
         char decimalSeparator = '.';
         String input = String.format("1%s1E111", decimalSeparator);
 
-        Number n = new NumberImpl(input);
+        Number n = createNumber(input);
 
         String s = n.toScientificNotation(decimalSeparator);
         assertEquals(input, s);
@@ -133,7 +134,7 @@ public class DecimalSeparatorTest {
         char decimalSeparator = Constants.DECIMAL_SEPARATOR;
         String input = String.format("1%s1E111", decimalSeparator);
 
-        Number n = new NumberImpl(input);
+        Number n = createNumber(input);
 
         String s = n.toScientificNotation();
         assertEquals(input, s);

@@ -34,10 +34,7 @@
 package jmul.math.numbers;
 
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 import java.util.SortedSet;
 
 import jmul.math.Math;
@@ -47,15 +44,10 @@ import jmul.math.functions.repository.FunctionIdentifier;
 import jmul.math.functions.repository.FunctionIdentifierHelper;
 import jmul.math.functions.repository.FunctionIdentifiers;
 import jmul.math.hash.HashHelper;
-import static jmul.math.numbers.Constants.DEFAULT_BASE;
-import static jmul.math.numbers.ParameterHelper.checkBase;
-import static jmul.math.numbers.ParameterHelper.checkSign;
-import jmul.math.numbers.exceptions.NumberParsingException;
+import static jmul.math.numbers.Constants.DEFAULT_NUMBER_BASE;
+import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.numbers.nodes.DigitNode;
-import jmul.math.numbers.nodes.NodesHelper;
 import jmul.math.numbers.notations.NotationFunction;
-import jmul.math.numbers.notations.NotationParser;
-import jmul.math.numbers.notations.ParsingResult;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.EqualityFunction;
 import jmul.math.operations.MixedBinaryOperation;
@@ -85,29 +77,6 @@ import jmul.math.signs.Signs;
 public class NumberImpl implements Number {
 
     /**
-     * A list of parser functions.
-     */
-    private static final List<FunctionIdentifier> PARSER_FUNCTION_LIST;
-
-    /*
-     * The static initializer.
-     */
-    static {
-
-        List<FunctionIdentifiers> tmpList = new ArrayList<>();
-
-        /*
-         * Because of ambiguities we first test if the input matches the scientific notation, i.e. the letter
-         * E or e is used as separator between mantissa and exponent. This letter can also represent a digit.
-         * Thus the order of the parser functions is essential.
-         */
-        tmpList.add(FunctionIdentifiers.SCIENTIFIC_NOTATION_PARSER);
-        tmpList.add(FunctionIdentifiers.STANDARD_NOTATION_PARSER);
-
-        PARSER_FUNCTION_LIST = Collections.unmodifiableList(tmpList);
-    }
-
-    /**
      * The sign of this number.
      */
     private final Sign sign;
@@ -125,9 +94,9 @@ public class NumberImpl implements Number {
     /**
      * Creates a number which represents positive infinity. The default base is <code>10</code>.
      */
-    public NumberImpl() {
+    protected NumberImpl() {
 
-        this(DEFAULT_BASE);
+        this(DEFAULT_NUMBER_BASE);
     }
 
     /**
@@ -136,7 +105,7 @@ public class NumberImpl implements Number {
      * @param base
      *        the base for this number
      */
-    public NumberImpl(int base) {
+    protected NumberImpl(int base) {
 
         this(base, Signs.POSITIVE);
     }
@@ -147,9 +116,9 @@ public class NumberImpl implements Number {
      * @param sign
      *        a sign for this number
      */
-    public NumberImpl(Sign sign) {
+    protected NumberImpl(Sign sign) {
 
-        this(DEFAULT_BASE, sign);
+        this(DEFAULT_NUMBER_BASE, sign, null);
     }
 
     /**
@@ -160,116 +129,9 @@ public class NumberImpl implements Number {
      * @param sign
      *        a sign for this number
      */
-    public NumberImpl(int base, Sign sign) {
+    protected NumberImpl(int base, Sign sign) {
 
-        super();
-
-        this.base = checkBase(base);
-        this.sign = checkSign(sign);
-        centerNode = null;
-    }
-
-    /**
-     * Creates a number according to the specified parameters. The default base is <code>10</code>.
-     *
-     * @param s
-     *        a string containing a number
-     */
-    public NumberImpl(CharSequence s) {
-
-        this(DEFAULT_BASE, s);
-    }
-
-    /**
-     * Creates a number according to the specified parameters.
-     *
-     * @param s
-     *        a string containing a number
-     */
-    public NumberImpl(String s) {
-
-        this((CharSequence) s);
-    }
-
-    /**
-     * Creates a number according to the specified parameters.
-     *
-     * @param base
-     *        the base for this number
-     * @param s
-     *        a string containing a number
-     */
-    public NumberImpl(int base, CharSequence s) {
-
-        this(parseString(base, s));
-    }
-
-    /**
-     * Creates a number according to the specified parameters.
-     *
-     * @param base
-     *        the base for this number
-     * @param s
-     *        a string containing a number
-     */
-    public NumberImpl(int base, String s) {
-
-        this(base, (CharSequence) s);
-    }
-
-    /**
-     * Creates a number according to the specified parameters.
-     *
-     * @param parsingResult
-     *        the result of parsing a string
-     */
-    private NumberImpl(ParsingResult parsingResult) {
-
-        this(parsingResult.base, parsingResult.sign, parsingResult.centerNode);
-    }
-
-    /**
-     * This function wraps parsing a string.
-     *
-     * @param base
-     *        the base for this number
-     * @param s
-     *        a string which represetns a number
-     *
-     * @return the parsing result
-     */
-    private static ParsingResult parseString(int base, CharSequence s) {
-
-        List<Throwable> exceptions = new ArrayList<>();
-
-        for (FunctionIdentifier identifier : PARSER_FUNCTION_LIST) {
-
-            NotationParser parser = (NotationParser) FunctionSingletons.getFunction(identifier);
-
-            try {
-
-                return parser.parseNotation(base, s.toString());
-
-            } catch (IllegalArgumentException e) {
-
-                // Ignore the exception for now because it might not be the matching notation.
-                // Remember the exception for later if needed.
-                exceptions.add(e);
-            }
-        }
-
-        throw new NumberParsingException(base, s, exceptions);
-    }
-
-    /**
-     * A copy constructor.
-     *
-     * @param number
-     *        another number
-     */
-    public NumberImpl(Number number) {
-
-        this(number.base(), number.sign(), NodesHelper.cloneLinkedList(number.centerNode()));
+        this(base, sign, null);
     }
 
     /**
@@ -286,100 +148,13 @@ public class NumberImpl implements Number {
      * @param centerNode
      *        a reference to the center node of the linked list
      */
-    public NumberImpl(int base, Sign sign, DigitNode centerNode) {
+    protected NumberImpl(int base, Sign sign, DigitNode centerNode) {
 
         super();
 
         this.sign = sign;
         this.base = base;
         this.centerNode = centerNode;
-    }
-
-    /**
-     * Creates a new number according to the specified parameter. The default base is <code>10</code>.
-     *
-     * @param b
-     *        a byte value
-     */
-    public NumberImpl(Byte b) {
-
-        this((java.lang.Number) b);
-    }
-
-    /**
-     * Creates a new number according to the specified parameter. The default base is <code>10</code>.
-     *
-     * @param s
-     *        a short value
-     */
-    public NumberImpl(Short s) {
-
-        this((java.lang.Number) s);
-    }
-
-    /**
-     * Creates a new number according to the specified parameter. The default base is <code>10</code>.
-     *
-     * @param i
-     *        an integer value
-     */
-    public NumberImpl(Integer i) {
-
-        this((java.lang.Number) i);
-    }
-
-    /**
-     * Creates a new number according to the specified parameter. The default base is <code>10</code>.
-     *
-     * @param l
-     *        a long value
-     */
-    public NumberImpl(Long l) {
-
-        this((java.lang.Number) l);
-    }
-
-    /**
-     * Creates a new number according to the specified parameter. The default base is <code>10</code>.
-     *
-     * @param f
-     *        a float value
-     */
-    public NumberImpl(Float f) {
-
-        this((java.lang.Number) f);
-    }
-
-    /**
-     * Creates a new number according to the specified parameter. The default base is <code>10</code>.
-     *
-     * @param d
-     *        a double value
-     */
-    public NumberImpl(Double d) {
-
-        this((java.lang.Number) d);
-    }
-
-    /**
-     * Creates a new number according to the specified parameter. The default base is <code>10</code>.
-     *
-     * @param n
-     *        a number
-     */
-    public NumberImpl(java.lang.Number n) {
-
-        this((checkNumberParameter(n)).toString());
-    }
-
-    private static java.lang.Number checkNumberParameter(java.lang.Number n) {
-
-        if (n == null) {
-
-            throw new NullPointerException();
-        }
-
-        return n;
     }
 
     /**
@@ -1150,7 +925,7 @@ public class NumberImpl implements Number {
     @Override
     public Number shiftLeft() {
 
-        final Number ONE = Math.parseNumber(base(), "1");
+        final Number ONE = createNumber(base(), "1");
 
         return shiftLeft(ONE);
     }
@@ -1183,7 +958,7 @@ public class NumberImpl implements Number {
     @Override
     public Number shiftRight() {
 
-        final Number ONE = Math.parseNumber(base(), "1");
+        final Number ONE = createNumber(base(), "1");
 
         return shiftRight(ONE);
     }
@@ -1886,6 +1661,77 @@ public class NumberImpl implements Number {
         Result<Boolean> result = function.calculate(this);
 
         return result.result();
+    }
+
+    /**
+     * Returns the total number of digits.
+     *
+     * @return the total number of digits
+     */
+    @Override
+    public Number digits() {
+
+        Number digitsLeft = digitsLeft();
+        Number digitsRight = digitsRight();
+
+        Number sum = digitsLeft.add(digitsRight);
+
+        return sum;
+    }
+
+    /**
+     * Returns the total number of digits left of the decimal separator.
+     *
+     * @return the total number of digits left of the decimal separator
+     */
+    @Override
+    public Number digitsLeft() {
+
+        Number absoluteNumber = absoluteValue();
+
+        if (absoluteNumber.isInfinity()) {
+
+            return createNumber(absoluteNumber);
+        }
+
+        Number digits = createNumber(base, "0");
+        DigitNode node = absoluteNumber.centerNode();
+
+        while (node != null) {
+
+            digits = digits.inc();
+            node = node.leftNode();
+        }
+
+        return digits;
+    }
+
+    /**
+     * Returns the total number of digits right of the decimal separator.
+     *
+     * @return the total number of digits right of the decimal separator
+     */
+    @Override
+    public Number digitsRight() {
+
+        Number absoluteNumber = absoluteValue();
+
+        if (absoluteNumber.isInfinity()) {
+
+            return createNumber(absoluteNumber);
+        }
+
+        Number digits = createNumber(base, "0");
+        DigitNode node = absoluteNumber.centerNode();
+        node = node.rightNode();
+
+        while (node != null) {
+
+            digits = digits.inc();
+            node = node.rightNode();
+        }
+
+        return digits;
     }
 
 }

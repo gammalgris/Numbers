@@ -43,7 +43,7 @@ import jmul.math.digits.PositionalNumeralSystems;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
+import static jmul.math.numbers.NumberHelper.createNumber;
 
 import jmul.test.classification.UnitTest;
 
@@ -127,9 +127,9 @@ public class MaxNumberTest {
     @Before
     public void setUp() {
 
-        firstOperand = new NumberImpl(base, firstOperandString);
-        secondOperand = new NumberImpl(base, secondOperandString);
-        expectedResult = new NumberImpl(base, expectedResultString);
+        firstOperand = createNumber(base, firstOperandString);
+        secondOperand = createNumber(base, secondOperandString);
+        expectedResult = createNumber(base, expectedResultString);
     }
 
     /**

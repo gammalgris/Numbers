@@ -35,7 +35,8 @@ package test.jmul.math.numbers;
 
 
 import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
+import static jmul.math.numbers.NumberHelper.createInfinity;
+import static jmul.math.numbers.NumberHelper.createNumber;
 
 import jmul.test.classification.UnitTest;
 
@@ -57,8 +58,8 @@ public class ShiftWithInfinityTest {
     @Test
     public void shiftOneLeftByInfinity() {
 
-        Number n = new NumberImpl("1");
-        Number shifts = new NumberImpl();
+        Number n = createNumber("1");
+        Number shifts = createInfinity();
 
         Number result = n.shiftLeft(shifts);
 
@@ -72,8 +73,8 @@ public class ShiftWithInfinityTest {
     @Test
     public void shiftOneRightByInfinity() {
 
-        Number n = new NumberImpl("1");
-        Number shifts = new NumberImpl();
+        Number n = createNumber("1");
+        Number shifts = createInfinity();
 
         Number result = n.shiftRight(shifts);
 
@@ -87,8 +88,8 @@ public class ShiftWithInfinityTest {
     @Test
     public void shiftOneLeftByNegativeInfinity() {
 
-        Number n = new NumberImpl("1");
-        Number shifts = new NumberImpl();
+        Number n = createNumber("1");
+        Number shifts = createInfinity();
 
         Number result = n.shiftLeft(shifts);
 
@@ -102,8 +103,8 @@ public class ShiftWithInfinityTest {
     @Test
     public void shiftOneRightByNegativeInfinity() {
 
-        Number n = new NumberImpl("1");
-        Number shifts = new NumberImpl();
+        Number n = createNumber("1");
+        Number shifts = createInfinity();
 
         Number result = n.shiftRight(shifts);
 

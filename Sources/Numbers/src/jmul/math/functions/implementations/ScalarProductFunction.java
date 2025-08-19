@@ -79,7 +79,7 @@ public class ScalarProductFunction implements BinaryOperation<Vector, Result<Num
         Iterator<Number> iterator1 = vector1.iterator();
         Iterator<Number> iterator2 = vector2.iterator();
 
-        Number sum = createNumber(Signs.POSITIVE, base, 0);
+        Number sum = createNumber(base, Signs.POSITIVE, 0);
 
         while (iterator1.hasNext() && iterator2.hasNext()) {
 

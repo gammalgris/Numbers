@@ -88,7 +88,7 @@ public class IncrementFraction implements UnaryOperation<Fraction, Result<Fracti
         } else {
 
             int base = operand.base();
-            final Number ONE = createNumber(Signs.POSITIVE, base, 1);
+            final Number ONE = createNumber(base, Signs.POSITIVE, 1);
 
             Number normalizedOne = ONE.multiply(operand.denominator());
             if (operand.numerator().isZero()) {

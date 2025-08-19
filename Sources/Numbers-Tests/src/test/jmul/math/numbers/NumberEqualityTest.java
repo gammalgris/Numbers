@@ -40,8 +40,9 @@ import java.util.Collection;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
-import static jmul.math.signs.Signs.NEGATIVE;
+import static jmul.math.numbers.NumberHelper.createInfinity;
+import static jmul.math.numbers.NumberHelper.createNegativeInfinity;
+import static jmul.math.numbers.NumberHelper.createNumber;
 
 import jmul.test.classification.UnitTest;
 
@@ -143,46 +144,43 @@ public class NumberEqualityTest {
 
         for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
 
-            Number n = new NumberImpl(base, "1");
+            Number n = createNumber(base, "1");
             parameters.add(new Object[] { n, n, true });
 
-            parameters.add(new Object[] { new NumberImpl(base, "1"), null, false });
-            parameters.add(new Object[] { null, new NumberImpl(base, "1"), false });
+            parameters.add(new Object[] { createNumber(base, "1"), null, false });
+            parameters.add(new Object[] { null, createNumber(base, "1"), false });
 
-            parameters.add(new Object[] { new NumberImpl(base), new NumberImpl(base), true });
-            parameters.add(new Object[] { new NumberImpl(base), new NumberImpl(base, NEGATIVE), false });
-            parameters.add(new Object[] { new NumberImpl(base, NEGATIVE), new NumberImpl(base), false });
-            parameters.add(new Object[] { new NumberImpl(base, NEGATIVE), new NumberImpl(base, NEGATIVE), true });
+            parameters.add(new Object[] { createInfinity(base), createInfinity(base), true });
+            parameters.add(new Object[] { createInfinity(base), createNegativeInfinity(base), false });
+            parameters.add(new Object[] { createNegativeInfinity(base), createInfinity(base), false });
+            parameters.add(new Object[] { createNegativeInfinity(base), createNegativeInfinity(base), true });
 
-            parameters.add(new Object[] { new NumberImpl(base, "0"), new NumberImpl(base, "0"), true });
-            parameters.add(new Object[] { new NumberImpl(base, "1"), new NumberImpl(base, "0"), false });
-            parameters.add(new Object[] { new NumberImpl(base, "0"), new NumberImpl(base, "1"), false });
-            parameters.add(new Object[] { new NumberImpl(base, "-1"), new NumberImpl(base, "0"), false });
-            parameters.add(new Object[] { new NumberImpl(base, "0"), new NumberImpl(base, "-1"), false });
+            parameters.add(new Object[] { createNumber(base, "0"), createNumber(base, "0"), true });
+            parameters.add(new Object[] { createNumber(base, "1"), createNumber(base, "0"), false });
+            parameters.add(new Object[] { createNumber(base, "0"), createNumber(base, "1"), false });
+            parameters.add(new Object[] { createNumber(base, "-1"), createNumber(base, "0"), false });
+            parameters.add(new Object[] { createNumber(base, "0"), createNumber(base, "-1"), false });
 
-            parameters.add(new Object[] { new NumberImpl(base, "1111111111"), new NumberImpl(base, "1.111111111"),
-                                          false });
-            parameters.add(new Object[] { new NumberImpl(base, "1.111111111"), new NumberImpl(base, "1111111111"),
-                                          false });
+            parameters.add(new Object[] { createNumber(base, "1111111111"), createNumber(base, "1.111111111"), false });
+            parameters.add(new Object[] { createNumber(base, "1.111111111"), createNumber(base, "1111111111"), false });
         }
 
-        parameters.add(new Object[] { new NumberImpl(8, "11"), new NumberImpl(8), false });
+        parameters.add(new Object[] { createNumber(8, "11"), createInfinity(8), false });
 
-        parameters.add(new Object[] { new NumberImpl(8, "3210765432107654321"),
-                                      new NumberImpl(8, "3210765432107654321"), true });
-        parameters.add(new Object[] { new NumberImpl(8, "43210765432107654321"),
-                                      new NumberImpl(8, "3210765432107654321"), false });
-        parameters.add(new Object[] { new NumberImpl(8, "3210765432107654321"),
-                                      new NumberImpl(8, "43210765432107654321"), false });
-        parameters.add(new Object[] { new NumberImpl(8, "3210765432107654321.0123456712345670123"),
-                                      new NumberImpl(8, "3210765432107654321.0123456712345670123"), true });
-        parameters.add(new Object[] { new NumberImpl(8, "3210765432107654321.01234567123456701234"),
-                                      new NumberImpl(8, "3210765432107654321.0123456712345670123"), false });
-        parameters.add(new Object[] { new NumberImpl(8, "3210765432107654321.0123456712345670123"),
-                                      new NumberImpl(8, "3210765432107654321.01234567123456701234"), false });
+        parameters.add(new Object[] { createNumber(8, "3210765432107654321"), createNumber(8, "3210765432107654321"),
+                                      true });
+        parameters.add(new Object[] { createNumber(8, "43210765432107654321"), createNumber(8, "3210765432107654321"),
+                                      false });
+        parameters.add(new Object[] { createNumber(8, "3210765432107654321"), createNumber(8, "43210765432107654321"),
+                                      false });
+        parameters.add(new Object[] { createNumber(8, "3210765432107654321.0123456712345670123"),
+                                      createNumber(8, "3210765432107654321.0123456712345670123"), true });
+        parameters.add(new Object[] { createNumber(8, "3210765432107654321.01234567123456701234"),
+                                      createNumber(8, "3210765432107654321.0123456712345670123"), false });
+        parameters.add(new Object[] { createNumber(8, "3210765432107654321.0123456712345670123"),
+                                      createNumber(8, "3210765432107654321.01234567123456701234"), false });
 
-        parameters.add(new Object[] { new NumberImpl(), new NumberImpl(), true });
-        parameters.add(new Object[] { new NumberImpl(), new NumberImpl(), true });
+        parameters.add(new Object[] { createInfinity(), createInfinity(), true });
 
 
         return parameters;

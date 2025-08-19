@@ -87,7 +87,7 @@ public class MatrixMultiplicationFunction implements BinaryOperation<Matrix, Res
 
         int base = matrix1.base();
         Number firstIndex = IndexSingletons.firstIndex(base);
-        final Number ZERO = createNumber(Signs.POSITIVE, base, 0);
+        final Number ZERO = createNumber(base, Signs.POSITIVE, 0);
 
         Number sum = ZERO;
 

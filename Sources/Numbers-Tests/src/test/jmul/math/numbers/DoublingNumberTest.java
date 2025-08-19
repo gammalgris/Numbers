@@ -37,19 +37,18 @@ package test.jmul.math.numbers;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import static org.junit.Assert.assertTrue;
-
 import jmul.math.Math;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
+import static jmul.math.numbers.NumberHelper.createNumber;
 
 import jmul.test.classification.UnitTest;
 import jmul.test.exceptions.FailedTestException;
 
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -118,8 +117,8 @@ public class DoublingNumberTest {
     @Before
     public void setUp() {
 
-        operand = new NumberImpl(base, operandString);
-        result = new NumberImpl(base, resultString);
+        operand = createNumber(base, operandString);
+        result = createNumber(base, resultString);
     }
 
     /**

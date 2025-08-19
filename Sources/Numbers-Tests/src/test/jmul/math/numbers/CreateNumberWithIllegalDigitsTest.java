@@ -41,7 +41,7 @@ import jmul.math.digits.Digit;
 import jmul.math.digits.PositionalNumeralSystems;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
-import jmul.math.numbers.NumberImpl;
+import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.numbers.exceptions.NumberParsingException;
 
 import jmul.test.classification.UnitTest;
@@ -105,7 +105,7 @@ public class CreateNumberWithIllegalDigitsTest {
 
         try {
 
-            new NumberImpl(base, input);
+            createNumber(base, input);
 
         } catch (Exception e) {
 

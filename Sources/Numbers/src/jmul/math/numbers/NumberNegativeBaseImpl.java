@@ -43,7 +43,7 @@ import jmul.math.fractions.Fraction;
 import jmul.math.functions.FunctionSingletons;
 import jmul.math.functions.repository.FunctionIdentifier;
 import jmul.math.functions.repository.FunctionIdentifiers;
-import static jmul.math.numbers.Constants.DEFAULT_BASE;
+import static jmul.math.numbers.Constants.DEFAULT_NUMBER_BASE;
 import static jmul.math.numbers.ParameterHelper.checkBase;
 import static jmul.math.numbers.ParameterHelper.checkSign;
 import jmul.math.numbers.exceptions.NumberParsingException;
@@ -123,7 +123,7 @@ public class NumberNegativeBaseImpl implements Number {
      */
     public NumberNegativeBaseImpl() {
 
-        this(DEFAULT_BASE);
+        this(DEFAULT_NUMBER_BASE);
     }
 
     /**
@@ -145,7 +145,7 @@ public class NumberNegativeBaseImpl implements Number {
      */
     public NumberNegativeBaseImpl(Sign sign) {
 
-        this(DEFAULT_BASE, sign);
+        this(DEFAULT_NUMBER_BASE, sign);
     }
 
     /**
@@ -173,7 +173,7 @@ public class NumberNegativeBaseImpl implements Number {
      */
     public NumberNegativeBaseImpl(CharSequence s) {
 
-        this(DEFAULT_BASE, s);
+        this(DEFAULT_NUMBER_BASE, s);
     }
 
     /**
@@ -929,6 +929,42 @@ public class NumberNegativeBaseImpl implements Number {
     public boolean isSingleDigit() {
         // TODO Implement this method
         return false;
+    }
+
+    /**
+     * Returns the total number of digits.
+     *
+     * @return the total number of digits
+     */
+    @Override
+    public Number digits() {
+
+        //TODO
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * Returns the total number of digits left of the decimal separator.
+     *
+     * @return the total number of digits left of the decimal separator
+     */
+    @Override
+    public Number digitsLeft() {
+
+        //TODO
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * Returns the total number of digits right of the decimal separator.
+     *
+     * @return the total number of digits right of the decimal separator
+     */
+    @Override
+    public Number digitsRight() {
+
+        //TODO
+        throw new UnsupportedOperationException();
     }
 
 }

@@ -43,6 +43,8 @@ import static jmul.math.fractions.FractionHelper.DONT_CLONE;
 import static jmul.math.fractions.FractionHelper.createFraction;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
+import static jmul.math.numbers.NumberHelper.createInfinity;
+import static jmul.math.numbers.NumberHelper.createNegativeInfinity;
 import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.signs.Signs;
 
@@ -139,11 +141,10 @@ public class ReciprocalOfFractionTest {
         for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
 
             parameters.add(new Object[] { createFraction(base),
-                                          createFraction(DONT_CLONE, createNumber(base, "1"),
-                                                         createNumber(base, null)) });
+                                          createFraction(DONT_CLONE, createNumber(base, "1"), createInfinity(base)) });
             parameters.add(new Object[] { createFraction(Signs.NEGATIVE, base),
                                           createFraction(DONT_CLONE, createNumber(base, "1"),
-                                                         createNumber(Signs.NEGATIVE, base)) });
+                                                         createNegativeInfinity(base)) });
 
             parameters.add(new Object[] { createFraction(base, "0"), createFraction(base, "1", "0") });
             parameters.add(new Object[] { createFraction(base, "-0"), createFraction(base, "1", "0") });

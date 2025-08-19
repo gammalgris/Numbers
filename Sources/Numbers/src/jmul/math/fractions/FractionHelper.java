@@ -36,6 +36,7 @@ package jmul.math.fractions;
 
 import jmul.math.digits.PositionalNumeralSystems;
 import jmul.math.numbers.Number;
+import static jmul.math.numbers.NumberHelper.createInfinity;
 import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.signs.Sign;
 
@@ -208,7 +209,7 @@ public final class FractionHelper {
      */
     public static Fraction createFraction(int base) {
 
-        Number newIntegerPart = createNumber(base);
+        Number newIntegerPart = createInfinity(base);
         Number defaultNumerator = createDefaultNumerator(base);
         Number defaultDenominator = createDefaultDenominator(base);
 
@@ -227,7 +228,7 @@ public final class FractionHelper {
      */
     public static Fraction createFraction(Sign sign, int base) {
 
-        Number newIntegerPart = createNumber(sign, base);
+        Number newIntegerPart = createInfinity(base, sign);
         Number defaultNumerator = createDefaultNumerator(base);
         Number defaultDenominator = createDefaultDenominator(base);
 

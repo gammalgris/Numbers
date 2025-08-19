@@ -42,8 +42,9 @@ import jmul.math.digits.PositionalNumeralSystems;
 import jmul.math.functions.FunctionSingletons;
 import jmul.math.functions.repository.FunctionIdentifiers;
 import jmul.math.numbers.Number;
+import static jmul.math.numbers.NumberHelper.createInfinity;
+import static jmul.math.numbers.NumberHelper.createNegativeInfinity;
 import static jmul.math.numbers.NumberHelper.createNumber;
-import jmul.math.numbers.NumberImpl;
 import jmul.math.numbers.exceptions.UndefinedOperationException;
 import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.NodesHelper;
@@ -91,23 +92,23 @@ public class LongMultiplication implements BinaryOperation<Number, Result<Number
 
             if (operand1.isNegative() && !operand2.isNegative()) {
 
-                Number result = createNumber(Signs.NEGATIVE, base);
+                Number result = createNegativeInfinity(base);
                 return new Result<Number>(result);
 
             } else if (!operand1.isNegative() && operand2.isNegative()) {
 
-                Number result = createNumber(Signs.NEGATIVE, base);
+                Number result = createNegativeInfinity(base);
                 return new Result<Number>(result);
 
             } else {
 
-                Number result = createNumber(base);
+                Number result = createInfinity(base);
                 return new Result<Number>(result);
             }
 
         } else if (operand1.isZero() || operand2.isZero()) {
 
-            Number result = createNumber(Signs.POSITIVE, base, 0);
+            Number result = createNumber(base, Signs.POSITIVE, 0);
             return new Result<Number>(result);
         }
 
@@ -115,7 +116,7 @@ public class LongMultiplication implements BinaryOperation<Number, Result<Number
         Sign newSign = Signs.negate(Signs.xor(operand1.sign(), operand2.sign()));
 
 
-        final Number ZERO = createNumber(Signs.NEGATIVE, base, 0);
+        final Number ZERO = createNumber(base, Signs.NEGATIVE, 0);
 
         Number shifts1 = ZERO;
         Number shifts2 = ZERO;
@@ -213,7 +214,7 @@ public class LongMultiplication implements BinaryOperation<Number, Result<Number
 
             tempNode = NodesHelper.moveRight(tempNode);
 
-            Number tempNumber = new NumberImpl(base, Signs.POSITIVE, tempNode);
+            Number tempNumber = createNumber(base, Signs.POSITIVE, tempNode);
             rowResults.add(tempNumber);
 
             currentNode1 = rightEndNode1;

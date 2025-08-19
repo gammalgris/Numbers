@@ -41,14 +41,19 @@ import java.util.Collection;
 
 import jmul.math.numbers.Constants;
 import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
+import static jmul.math.numbers.NumberHelper.createInfinity;
+import static jmul.math.numbers.NumberHelper.createNumber;
+import static jmul.math.numbers.NumberHelper.parseByte;
+import static jmul.math.numbers.NumberHelper.parseDouble;
+import static jmul.math.numbers.NumberHelper.parseFloat;
+import static jmul.math.numbers.NumberHelper.parseInteger;
+import static jmul.math.numbers.NumberHelper.parseLong;
+import static jmul.math.numbers.NumberHelper.parseShort;
 
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-
-import static test.jmul.math.numbers.NumberCreationHelper.createNumber;
 
 
 /**
@@ -64,17 +69,12 @@ public class CreateNumberTest {
     /**
      * The base for the number.
      */
-    private final Integer base;
-
-    /**
-     * The implementation class for numbers.
-     */
-    private final Class type;
+    private final int base;
 
     /**
      * The input (i.e. a number string in supported notations, a number wrapper or primitive number)
      */
-    private final Object input;
+    private final Number number;
 
     /**
      * The expected standard notation.
@@ -91,8 +91,6 @@ public class CreateNumberTest {
      *
      * @param base
      *        a number base (optional parameter, may be <code>null</code> for the default number base)
-     * @param type
-     *        a number class
      * @param input
      *        an input
      * @param expectedStandardNotation
@@ -100,14 +98,81 @@ public class CreateNumberTest {
      * @param expectedScientificNotation
      *        the expected scientific notation
      */
-    public CreateNumberTest(Integer base, Class type, Object input, String expectedStandardNotation,
+    public CreateNumberTest(Integer base, Object input, String expectedStandardNotation,
                             String expectedScientificNotation) {
 
-        this.base = base;
-        this.type = type;
-        this.input = input;
+        super();
+
+        if (base == null) {
+
+            this.base = Constants.DEFAULT_NUMBER_BASE;
+
+        } else {
+
+            this.base = base;
+        }
+
         this.expectedStandardNotation = expectedStandardNotation;
         this.expectedScientificNotation = expectedScientificNotation;
+
+        this.number = newNumber(this.base, input);
+    }
+
+    /**
+     * Creates a number according to the specified parameters.
+     *
+     * @param base
+     *        a number base
+     * @param input
+     *        some input
+     *
+     * @return a number
+     */
+    private static Number newNumber(int base, Object input) {
+
+        if (input == null) {
+
+            return createInfinity(base);
+
+        } else if (input instanceof String) {
+
+            String inputString = (String) input;
+            return createNumber(base, inputString);
+
+        } else if (input instanceof Byte) {
+
+            byte b = ((Byte) input);
+            return parseByte(b);
+
+        } else if (input instanceof Short) {
+
+            short s = ((Short) input);
+            return parseShort(s);
+
+        } else if (input instanceof Integer) {
+
+            int i = ((Integer) input);
+            return parseInteger(i);
+
+        } else if (input instanceof Long) {
+
+            long l = ((Long) input);
+            return parseLong(l);
+
+        } else if (input instanceof Float) {
+
+            float f = ((Float) input);
+            return parseFloat(f);
+
+        } else if (input instanceof Double) {
+
+            double d = ((Double) input);
+            return parseDouble(d);
+
+        } else {
+
+            throw new RuntimeException("Oops!");
+        }
     }
 
     /**
@@ -127,16 +192,8 @@ public class CreateNumberTest {
     private static String createErrorMessage(Integer base, Object input, String actualNotation,
                                              String expectedNotation) {
 
-        if (base == null) {
-
-            return String.format("The number (input='%s'; actual notation='%s'; expected notation='%s') was not correctly created!",
-                                 input, actualNotation, expectedNotation);
-
-        } else {
-
-            return String.format("The number (base='%s'; input='%s'; actual notation='%s'; expected notation='%s') was not correctly created!",
-                                 base, input, actualNotation, expectedNotation);
-        }
+        return String.format("The number (base='%s'; input='%s'; actual notation='%s'; expected notation='%s') was not correctly created!",
+                             base, input, actualNotation, expectedNotation);
     }
 
     /**
@@ -155,10 +212,9 @@ public class CreateNumberTest {
     public void testNumberCreationAndDefaultNotation() throws NoSuchMethodException, InstantiationException,
                                                               IllegalAccessException, InvocationTargetException {
 
-        Number number = createNumber(base, type, input);
         String actualDefaultNotation = number.toString();
 
-        String message = createErrorMessage(base, input, actualDefaultNotation, expectedStandardNotation);
+        String message = createErrorMessage(base, number, actualDefaultNotation, expectedStandardNotation);
         assertEquals(message, expectedStandardNotation, actualDefaultNotation);
     }
 
@@ -178,10 +234,9 @@ public class CreateNumberTest {
     public void testNumberCreationAndStandardNotation() throws NoSuchMethodException, InstantiationException,
                                                                IllegalAccessException, InvocationTargetException {
 
-        Number number = createNumber(base, type, input);
         String actualStandardNotation = number.toStandardNotation();
 
-        String message = createErrorMessage(base, input, actualStandardNotation, expectedStandardNotation);
+        String message = createErrorMessage(base, number, actualStandardNotation, expectedStandardNotation);
         assertEquals(message, expectedStandardNotation, actualStandardNotation);
     }
 
@@ -201,10 +256,9 @@ public class CreateNumberTest {
     public void testNumberCreationAndScientificNotation() throws NoSuchMethodException, InstantiationException,
                                                                  IllegalAccessException, InvocationTargetException {
 
-        Number number = createNumber(base, type, input);
         String actualScientificNotation = number.toScientificNotation();
 
-        String message = createErrorMessage(base, input, actualScientificNotation, expectedScientificNotation);
+        String message = createErrorMessage(base, number, actualScientificNotation, expectedScientificNotation);
         assertEquals(message, expectedScientificNotation, actualScientificNotation);
     }
 
@@ -220,194 +274,192 @@ public class CreateNumberTest {
 
         for (int base = Constants.BASE_MIN_LIMIT; base <= Constants.BASE_MAX_LIMIT; base++) {
 
-            parameters.add(new Object[] { base, NumberImpl.class, "0", "0", "0" });
-            parameters.add(new Object[] { base, NumberImpl.class, "-0", "0", "0" });
+            parameters.add(new Object[] { base, "0", "0", "0" });
+            parameters.add(new Object[] { base, "-0", "0", "0" });
 
-            parameters.add(new Object[] { base, NumberImpl.class, "0.0", "0", "0" });
-            parameters.add(new Object[] { base, NumberImpl.class, "-0.0", "0", "0" });
+            parameters.add(new Object[] { base, "0.0", "0", "0" });
+            parameters.add(new Object[] { base, "-0.0", "0", "0" });
 
-            parameters.add(new Object[] { base, NumberImpl.class, "1", "1", "1E0" });
-            parameters.add(new Object[] { base, NumberImpl.class, "-1", "-1", "-1E0" });
+            parameters.add(new Object[] { base, "1", "1", "1E0" });
+            parameters.add(new Object[] { base, "-1", "-1", "-1E0" });
 
-            parameters.add(new Object[] { base, NumberImpl.class, "1.1", "1.1", "1.1E0" });
-            parameters.add(new Object[] { base, NumberImpl.class, "+1.1", "1.1", "1.1E0" });
-            parameters.add(new Object[] { base, NumberImpl.class, "-1.1", "-1.1", "-1.1E0" });
+            parameters.add(new Object[] { base, "1.1", "1.1", "1.1E0" });
+            parameters.add(new Object[] { base, "+1.1", "1.1", "1.1E0" });
+            parameters.add(new Object[] { base, "-1.1", "-1.1", "-1.1E0" });
         }
 
-        parameters.add(new Object[] { 10, NumberImpl.class, "1.1E0", "1.1", "1.1E0" });
-        parameters.add(new Object[] { 10, NumberImpl.class, "-1.1E0", "-1.1", "-1.1E0" });
+        parameters.add(new Object[] { 10, "1.1E0", "1.1", "1.1E0" });
+        parameters.add(new Object[] { 10, "-1.1E0", "-1.1", "-1.1E0" });
 
-        parameters.add(new Object[] { 10, NumberImpl.class, "1.1E1", "11", "1.1E1" });
-        parameters.add(new Object[] { 10, NumberImpl.class, "-1.1E1", "-11", "-1.1E1" });
-        parameters.add(new Object[] { 10, NumberImpl.class, "1.1E-1", "0.11", "1.1E-1" });
-        parameters.add(new Object[] { 10, NumberImpl.class, "-1.1E-1", "-0.11", "-1.1E-1" });
+        parameters.add(new Object[] { 10, "1.1E1", "11", "1.1E1" });
+        parameters.add(new Object[] { 10, "-1.1E1", "-11", "-1.1E1" });
+        parameters.add(new Object[] { 10, "1.1E-1", "0.11", "1.1E-1" });
+        parameters.add(new Object[] { 10, "-1.1E-1", "-0.11", "-1.1E-1" });
 
-        parameters.add(new Object[] { 10, NumberImpl.class, "1.1E2", "110", "1.1E2" });
-        parameters.add(new Object[] { 10, NumberImpl.class, "-1.1E2", "-110", "-1.1E2" });
-        parameters.add(new Object[] { 10, NumberImpl.class, "1.1E-2", "0.011", "1.1E-2" });
-        parameters.add(new Object[] { 10, NumberImpl.class, "-1.1E-2", "-0.011", "-1.1E-2" });
+        parameters.add(new Object[] { 10, "1.1E2", "110", "1.1E2" });
+        parameters.add(new Object[] { 10, "-1.1E2", "-110", "-1.1E2" });
+        parameters.add(new Object[] { 10, "1.1E-2", "0.011", "1.1E-2" });
+        parameters.add(new Object[] { 10, "-1.1E-2", "-0.011", "-1.1E-2" });
 
-        parameters.add(new Object[] { 10, NumberImpl.class, "1.1E3", "1100", "1.1E3" });
-        parameters.add(new Object[] { 10, NumberImpl.class, "-1.1E3", "-1100", "-1.1E3" });
-        parameters.add(new Object[] { 10, NumberImpl.class, "1.1E-3", "0.0011", "1.1E-3" });
-        parameters.add(new Object[] { 10, NumberImpl.class, "-1.1E-3", "-0.0011", "-1.1E-3" });
+        parameters.add(new Object[] { 10, "1.1E3", "1100", "1.1E3" });
+        parameters.add(new Object[] { 10, "-1.1E3", "-1100", "-1.1E3" });
+        parameters.add(new Object[] { 10, "1.1E-3", "0.0011", "1.1E-3" });
+        parameters.add(new Object[] { 10, "-1.1E-3", "-0.0011", "-1.1E-3" });
 
-        parameters.add(new Object[] { 10, NumberImpl.class, "1.010", "1.01", "1.01E0" });
+        parameters.add(new Object[] { 10, "1.010", "1.01", "1.01E0" });
 
-        parameters.add(new Object[] { 10, NumberImpl.class, "21.12", "21.12", "2.112E1" });
-        parameters.add(new Object[] { 10, NumberImpl.class, "+21.12", "21.12", "2.112E1" });
-        parameters.add(new Object[] { 10, NumberImpl.class, "-21.12", "-21.12", "-2.112E1" });
+        parameters.add(new Object[] { 10, "21.12", "21.12", "2.112E1" });
+        parameters.add(new Object[] { 10, "+21.12", "21.12", "2.112E1" });
+        parameters.add(new Object[] { 10, "-21.12", "-21.12", "-2.112E1" });
 
-        parameters.add(new Object[] { 10, NumberImpl.class, "321.123", "321.123", "3.21123E2" });
-        parameters.add(new Object[] { 10, NumberImpl.class, "+321.123", "321.123", "3.21123E2" });
-        parameters.add(new Object[] { 10, NumberImpl.class, "-321.123", "-321.123", "-3.21123E2" });
+        parameters.add(new Object[] { 10, "321.123", "321.123", "3.21123E2" });
+        parameters.add(new Object[] { 10, "+321.123", "321.123", "3.21123E2" });
+        parameters.add(new Object[] { 10, "-321.123", "-321.123", "-3.21123E2" });
 
 
-        parameters.add(new Object[] { null, NumberImpl.class, new Byte((byte) 1), "1", "1E0" });
-        parameters.add(new Object[] { null, NumberImpl.class, new Byte((byte) 2), "2", "2E0" });
-        parameters.add(new Object[] { null, NumberImpl.class, Byte.MIN_VALUE, "-128", "-1.28E2" });
-        parameters.add(new Object[] { null, NumberImpl.class, Byte.MAX_VALUE, "127", "1.27E2" });
+        parameters.add(new Object[] { null, new Byte((byte) 1), "1", "1E0" });
+        parameters.add(new Object[] { null, new Byte((byte) 2), "2", "2E0" });
+        parameters.add(new Object[] { null, Byte.MIN_VALUE, "-128", "-1.28E2" });
+        parameters.add(new Object[] { null, Byte.MAX_VALUE, "127", "1.27E2" });
 
-        parameters.add(new Object[] { null, NumberImpl.class, new Short((short) 1), "1", "1E0" });
-        parameters.add(new Object[] { null, NumberImpl.class, new Short((short) 2), "2", "2E0" });
-        parameters.add(new Object[] { null, NumberImpl.class, Short.MIN_VALUE, "-32768", "-3.2768E4" });
-        parameters.add(new Object[] { null, NumberImpl.class, Short.MAX_VALUE, "32767", "3.2767E4" });
+        parameters.add(new Object[] { null, new Short((short) 1), "1", "1E0" });
+        parameters.add(new Object[] { null, new Short((short) 2), "2", "2E0" });
+        parameters.add(new Object[] { null, Short.MIN_VALUE, "-32768", "-3.2768E4" });
+        parameters.add(new Object[] { null, Short.MAX_VALUE, "32767", "3.2767E4" });
 
-        parameters.add(new Object[] { null, NumberImpl.class, new Integer((int) 1), "1", "1E0" });
-        parameters.add(new Object[] { null, NumberImpl.class, new Integer((int) 2), "2", "2E0" });
-        parameters.add(new Object[] { null, NumberImpl.class, Integer.MIN_VALUE, "-2147483648", "-2.147483648E9" });
-        parameters.add(new Object[] { null, NumberImpl.class, Integer.MAX_VALUE, "2147483647", "2.147483647E9" });
+        parameters.add(new Object[] { null, new Integer((int) 1), "1", "1E0" });
+        parameters.add(new Object[] { null, new Integer((int) 2), "2", "2E0" });
+        parameters.add(new Object[] { null, Integer.MIN_VALUE, "-2147483648", "-2.147483648E9" });
+        parameters.add(new Object[] { null, Integer.MAX_VALUE, "2147483647", "2.147483647E9" });
 
-        parameters.add(new Object[] { null, NumberImpl.class, new Long(1L), "1", "1E0" });
-        parameters.add(new Object[] { null, NumberImpl.class, new Long(2L), "2", "2E0" });
-        parameters.add(new Object[] { null, NumberImpl.class, Long.MIN_VALUE, "-9223372036854775808",
-                                      "-9.223372036854775808E18" });
-        parameters.add(new Object[] { null, NumberImpl.class, Long.MAX_VALUE, "9223372036854775807",
-                                      "9.223372036854775807E18" });
+        parameters.add(new Object[] { null, new Long(1L), "1", "1E0" });
+        parameters.add(new Object[] { null, new Long(2L), "2", "2E0" });
+        parameters.add(new Object[] { null, Long.MIN_VALUE, "-9223372036854775808", "-9.223372036854775808E18" });
+        parameters.add(new Object[] { null, Long.MAX_VALUE, "9223372036854775807", "9.223372036854775807E18" });
 
-        parameters.add(new Object[] { null, NumberImpl.class, new Float(1F), "1", "1E0" });
-        parameters.add(new Object[] { null, NumberImpl.class, new Float(2F), "2", "2E0" });
-        parameters.add(new Object[] { null, NumberImpl.class, Float.MIN_VALUE,
-                                      "0.0000000000000000000000000000000000000000000014", "1.4E-45" });
-        parameters.add(new Object[] { null, NumberImpl.class, Float.MAX_VALUE,
-                                      "340282350000000000000000000000000000000", "3.4028235E38" });
+        parameters.add(new Object[] { null, new Float(1F), "1", "1E0" });
+        parameters.add(new Object[] { null, new Float(2F), "2", "2E0" });
+        parameters.add(new Object[] { null, Float.MIN_VALUE, "0.0000000000000000000000000000000000000000000014",
+                                      "1.4E-45" });
+        parameters.add(new Object[] { null, Float.MAX_VALUE, "340282350000000000000000000000000000000",
+                                      "3.4028235E38" });
 
-        parameters.add(new Object[] { null, NumberImpl.class, new Double(1D), "1", "1E0" });
-        parameters.add(new Object[] { null, NumberImpl.class, new Double(2D), "2", "2E0" });
-        parameters.add(new Object[] { null, NumberImpl.class, Double.MIN_VALUE,
+        parameters.add(new Object[] { null, new Double(1D), "1", "1E0" });
+        parameters.add(new Object[] { null, new Double(2D), "2", "2E0" });
+        parameters.add(new Object[] { null, Double.MIN_VALUE,
                                       "0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000049",
                                       "4.9E-324" });
-        parameters.add(new Object[] { null, NumberImpl.class, Double.MAX_VALUE,
+        parameters.add(new Object[] { null, Double.MAX_VALUE,
                                       "179769313486231570000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
                                       "1.7976931348623157E308" });
 
 
-        parameters.add(new Object[] { 16, NumberImpl.class, "1", "1", "1E0" });
-        parameters.add(new Object[] { 16, NumberImpl.class, "-1", "-1", "-1E0" });
+        parameters.add(new Object[] { 16, "1", "1", "1E0" });
+        parameters.add(new Object[] { 16, "-1", "-1", "-1E0" });
 
-        parameters.add(new Object[] { 16, NumberImpl.class, "1.1", "1.1", "1.1E0" });
-        parameters.add(new Object[] { 16, NumberImpl.class, "+1.1", "1.1", "1.1E0" });
-        parameters.add(new Object[] { 16, NumberImpl.class, "-1.1", "-1.1", "-1.1E0" });
+        parameters.add(new Object[] { 16, "1.1", "1.1", "1.1E0" });
+        parameters.add(new Object[] { 16, "+1.1", "1.1", "1.1E0" });
+        parameters.add(new Object[] { 16, "-1.1", "-1.1", "-1.1E0" });
 
-        parameters.add(new Object[] { 16, NumberImpl.class, "1.1E0", "1.1", "1.1E0" });
-        parameters.add(new Object[] { 16, NumberImpl.class, "-1.1E0", "-1.1", "-1.1E0" });
+        parameters.add(new Object[] { 16, "1.1E0", "1.1", "1.1E0" });
+        parameters.add(new Object[] { 16, "-1.1E0", "-1.1", "-1.1E0" });
 
-        parameters.add(new Object[] { 16, NumberImpl.class, "1.1E1", "11", "1.1E1" });
-        parameters.add(new Object[] { 16, NumberImpl.class, "-1.1E1", "-11", "-1.1E1" });
-        parameters.add(new Object[] { 16, NumberImpl.class, "1.1E-1", "0.11", "1.1E-1" });
-        parameters.add(new Object[] { 16, NumberImpl.class, "-1.1E-1", "-0.11", "-1.1E-1" });
+        parameters.add(new Object[] { 16, "1.1E1", "11", "1.1E1" });
+        parameters.add(new Object[] { 16, "-1.1E1", "-11", "-1.1E1" });
+        parameters.add(new Object[] { 16, "1.1E-1", "0.11", "1.1E-1" });
+        parameters.add(new Object[] { 16, "-1.1E-1", "-0.11", "-1.1E-1" });
 
-        parameters.add(new Object[] { 16, NumberImpl.class, "1.1E2", "110", "1.1E2" });
-        parameters.add(new Object[] { 16, NumberImpl.class, "-1.1E2", "-110", "-1.1E2" });
-        parameters.add(new Object[] { 16, NumberImpl.class, "1.1E-2", "0.011", "1.1E-2" });
-        parameters.add(new Object[] { 16, NumberImpl.class, "-1.1E-2", "-0.011", "-1.1E-2" });
+        parameters.add(new Object[] { 16, "1.1E2", "110", "1.1E2" });
+        parameters.add(new Object[] { 16, "-1.1E2", "-110", "-1.1E2" });
+        parameters.add(new Object[] { 16, "1.1E-2", "0.011", "1.1E-2" });
+        parameters.add(new Object[] { 16, "-1.1E-2", "-0.011", "-1.1E-2" });
 
-        parameters.add(new Object[] { 16, NumberImpl.class, "1.1E3", "1100", "1.1E3" });
-        parameters.add(new Object[] { 16, NumberImpl.class, "-1.1E3", "-1100", "-1.1E3" });
-        parameters.add(new Object[] { 16, NumberImpl.class, "1.1E-3", "0.0011", "1.1E-3" });
-        parameters.add(new Object[] { 16, NumberImpl.class, "-1.1E-3", "-0.0011", "-1.1E-3" });
+        parameters.add(new Object[] { 16, "1.1E3", "1100", "1.1E3" });
+        parameters.add(new Object[] { 16, "-1.1E3", "-1100", "-1.1E3" });
+        parameters.add(new Object[] { 16, "1.1E-3", "0.0011", "1.1E-3" });
+        parameters.add(new Object[] { 16, "-1.1E-3", "-0.0011", "-1.1E-3" });
 
-        parameters.add(new Object[] { 16, NumberImpl.class, "1.010", "1.01", "1.01E0" });
+        parameters.add(new Object[] { 16, "1.010", "1.01", "1.01E0" });
 
-        parameters.add(new Object[] { 16, NumberImpl.class, "21.12", "21.12", "2.112E1" });
-        parameters.add(new Object[] { 16, NumberImpl.class, "+21.12", "21.12", "2.112E1" });
-        parameters.add(new Object[] { 16, NumberImpl.class, "-21.12", "-21.12", "-2.112E1" });
+        parameters.add(new Object[] { 16, "21.12", "21.12", "2.112E1" });
+        parameters.add(new Object[] { 16, "+21.12", "21.12", "2.112E1" });
+        parameters.add(new Object[] { 16, "-21.12", "-21.12", "-2.112E1" });
 
-        parameters.add(new Object[] { 16, NumberImpl.class, "321.123", "321.123", "3.21123E2" });
-        parameters.add(new Object[] { 16, NumberImpl.class, "+321.123", "321.123", "3.21123E2" });
-        parameters.add(new Object[] { 16, NumberImpl.class, "-321.123", "-321.123", "-3.21123E2" });
-
-
-        parameters.add(new Object[] { 8, NumberImpl.class, "1", "1", "1E0" });
-        parameters.add(new Object[] { 8, NumberImpl.class, "-1", "-1", "-1E0" });
-
-        parameters.add(new Object[] { 8, NumberImpl.class, "1.1", "1.1", "1.1E0" });
-        parameters.add(new Object[] { 8, NumberImpl.class, "+1.1", "1.1", "1.1E0" });
-        parameters.add(new Object[] { 8, NumberImpl.class, "-1.1", "-1.1", "-1.1E0" });
-
-        parameters.add(new Object[] { 8, NumberImpl.class, "1.1E0", "1.1", "1.1E0" });
-        parameters.add(new Object[] { 8, NumberImpl.class, "-1.1E0", "-1.1", "-1.1E0" });
-
-        parameters.add(new Object[] { 8, NumberImpl.class, "1.1E1", "11", "1.1E1" });
-        parameters.add(new Object[] { 8, NumberImpl.class, "-1.1E1", "-11", "-1.1E1" });
-        parameters.add(new Object[] { 8, NumberImpl.class, "1.1E-1", "0.11", "1.1E-1" });
-        parameters.add(new Object[] { 8, NumberImpl.class, "-1.1E-1", "-0.11", "-1.1E-1" });
-
-        parameters.add(new Object[] { 8, NumberImpl.class, "1.1E2", "110", "1.1E2" });
-        parameters.add(new Object[] { 8, NumberImpl.class, "-1.1E2", "-110", "-1.1E2" });
-        parameters.add(new Object[] { 8, NumberImpl.class, "1.1E-2", "0.011", "1.1E-2" });
-        parameters.add(new Object[] { 8, NumberImpl.class, "-1.1E-2", "-0.011", "-1.1E-2" });
-
-        parameters.add(new Object[] { 8, NumberImpl.class, "1.1E3", "1100", "1.1E3" });
-        parameters.add(new Object[] { 8, NumberImpl.class, "-1.1E3", "-1100", "-1.1E3" });
-        parameters.add(new Object[] { 8, NumberImpl.class, "1.1E-3", "0.0011", "1.1E-3" });
-        parameters.add(new Object[] { 8, NumberImpl.class, "-1.1E-3", "-0.0011", "-1.1E-3" });
-
-        parameters.add(new Object[] { 8, NumberImpl.class, "1.010", "1.01", "1.01E0" });
-
-        parameters.add(new Object[] { 8, NumberImpl.class, "21.12", "21.12", "2.112E1" });
-        parameters.add(new Object[] { 8, NumberImpl.class, "+21.12", "21.12", "2.112E1" });
-        parameters.add(new Object[] { 8, NumberImpl.class, "-21.12", "-21.12", "-2.112E1" });
-
-        parameters.add(new Object[] { 8, NumberImpl.class, "321.123", "321.123", "3.21123E2" });
-        parameters.add(new Object[] { 8, NumberImpl.class, "+321.123", "321.123", "3.21123E2" });
-        parameters.add(new Object[] { 8, NumberImpl.class, "-321.123", "-321.123", "-3.21123E2" });
+        parameters.add(new Object[] { 16, "321.123", "321.123", "3.21123E2" });
+        parameters.add(new Object[] { 16, "+321.123", "321.123", "3.21123E2" });
+        parameters.add(new Object[] { 16, "-321.123", "-321.123", "-3.21123E2" });
 
 
-        parameters.add(new Object[] { 2, NumberImpl.class, "1", "1", "1E0" });
-        parameters.add(new Object[] { 2, NumberImpl.class, "-1", "-1", "-1E0" });
+        parameters.add(new Object[] { 8, "1", "1", "1E0" });
+        parameters.add(new Object[] { 8, "-1", "-1", "-1E0" });
 
-        parameters.add(new Object[] { 2, NumberImpl.class, "1.1", "1.1", "1.1E0" });
-        parameters.add(new Object[] { 2, NumberImpl.class, "+1.1", "1.1", "1.1E0" });
-        parameters.add(new Object[] { 2, NumberImpl.class, "-1.1", "-1.1", "-1.1E0" });
+        parameters.add(new Object[] { 8, "1.1", "1.1", "1.1E0" });
+        parameters.add(new Object[] { 8, "+1.1", "1.1", "1.1E0" });
+        parameters.add(new Object[] { 8, "-1.1", "-1.1", "-1.1E0" });
 
-        parameters.add(new Object[] { 2, NumberImpl.class, "1.1E0", "1.1", "1.1E0" });
-        parameters.add(new Object[] { 2, NumberImpl.class, "-1.1E0", "-1.1", "-1.1E0" });
+        parameters.add(new Object[] { 8, "1.1E0", "1.1", "1.1E0" });
+        parameters.add(new Object[] { 8, "-1.1E0", "-1.1", "-1.1E0" });
 
-        parameters.add(new Object[] { 2, NumberImpl.class, "1.1E1", "11", "1.1E1" });
-        parameters.add(new Object[] { 2, NumberImpl.class, "-1.1E1", "-11", "-1.1E1" });
-        parameters.add(new Object[] { 2, NumberImpl.class, "1.1E-1", "0.11", "1.1E-1" });
-        parameters.add(new Object[] { 2, NumberImpl.class, "-1.1E-1", "-0.11", "-1.1E-1" });
+        parameters.add(new Object[] { 8, "1.1E1", "11", "1.1E1" });
+        parameters.add(new Object[] { 8, "-1.1E1", "-11", "-1.1E1" });
+        parameters.add(new Object[] { 8, "1.1E-1", "0.11", "1.1E-1" });
+        parameters.add(new Object[] { 8, "-1.1E-1", "-0.11", "-1.1E-1" });
 
-        parameters.add(new Object[] { 2, NumberImpl.class, "1.1E2", "110", "1.1E2" });
-        parameters.add(new Object[] { 2, NumberImpl.class, "-1.1E2", "-110", "-1.1E2" });
-        parameters.add(new Object[] { 2, NumberImpl.class, "1.1E-2", "0.011", "1.1E-2" });
-        parameters.add(new Object[] { 2, NumberImpl.class, "-1.1E-2", "-0.011", "-1.1E-2" });
+        parameters.add(new Object[] { 8, "1.1E2", "110", "1.1E2" });
+        parameters.add(new Object[] { 8, "-1.1E2", "-110", "-1.1E2" });
+        parameters.add(new Object[] { 8, "1.1E-2", "0.011", "1.1E-2" });
+        parameters.add(new Object[] { 8, "-1.1E-2", "-0.011", "-1.1E-2" });
 
-        parameters.add(new Object[] { 2, NumberImpl.class, "1.1E3", "1100", "1.1E3" });
-        parameters.add(new Object[] { 2, NumberImpl.class, "-1.1E3", "-1100", "-1.1E3" });
-        parameters.add(new Object[] { 2, NumberImpl.class, "1.1E-3", "0.0011", "1.1E-3" });
-        parameters.add(new Object[] { 2, NumberImpl.class, "-1.1E-3", "-0.0011", "-1.1E-3" });
+        parameters.add(new Object[] { 8, "1.1E3", "1100", "1.1E3" });
+        parameters.add(new Object[] { 8, "-1.1E3", "-1100", "-1.1E3" });
+        parameters.add(new Object[] { 8, "1.1E-3", "0.0011", "1.1E-3" });
+        parameters.add(new Object[] { 8, "-1.1E-3", "-0.0011", "-1.1E-3" });
 
-        parameters.add(new Object[] { 2, NumberImpl.class, "1.010", "1.01", "1.01E0" });
+        parameters.add(new Object[] { 8, "1.010", "1.01", "1.01E0" });
 
-        parameters.add(new Object[] { 2, NumberImpl.class, "11.11", "11.11", "1.111E1" });
-        parameters.add(new Object[] { 2, NumberImpl.class, "+11.11", "11.11", "1.111E1" });
-        parameters.add(new Object[] { 2, NumberImpl.class, "-11.11", "-11.11", "-1.111E1" });
+        parameters.add(new Object[] { 8, "21.12", "21.12", "2.112E1" });
+        parameters.add(new Object[] { 8, "+21.12", "21.12", "2.112E1" });
+        parameters.add(new Object[] { 8, "-21.12", "-21.12", "-2.112E1" });
 
-        parameters.add(new Object[] { 2, NumberImpl.class, "111.111", "111.111", "1.11111E2" });
-        parameters.add(new Object[] { 2, NumberImpl.class, "+111.111", "111.111", "1.11111E2" });
-        parameters.add(new Object[] { 2, NumberImpl.class, "-111.111", "-111.111", "-1.11111E2" });
+        parameters.add(new Object[] { 8, "321.123", "321.123", "3.21123E2" });
+        parameters.add(new Object[] { 8, "+321.123", "321.123", "3.21123E2" });
+        parameters.add(new Object[] { 8, "-321.123", "-321.123", "-3.21123E2" });
+
+
+        parameters.add(new Object[] { 2, "1", "1", "1E0" });
+        parameters.add(new Object[] { 2, "-1", "-1", "-1E0" });
+
+        parameters.add(new Object[] { 2, "1.1", "1.1", "1.1E0" });
+        parameters.add(new Object[] { 2, "+1.1", "1.1", "1.1E0" });
+        parameters.add(new Object[] { 2, "-1.1", "-1.1", "-1.1E0" });
+
+        parameters.add(new Object[] { 2, "1.1E0", "1.1", "1.1E0" });
+        parameters.add(new Object[] { 2, "-1.1E0", "-1.1", "-1.1E0" });
+
+        parameters.add(new Object[] { 2, "1.1E1", "11", "1.1E1" });
+        parameters.add(new Object[] { 2, "-1.1E1", "-11", "-1.1E1" });
+        parameters.add(new Object[] { 2, "1.1E-1", "0.11", "1.1E-1" });
+        parameters.add(new Object[] { 2, "-1.1E-1", "-0.11", "-1.1E-1" });
+
+        parameters.add(new Object[] { 2, "1.1E2", "110", "1.1E2" });
+        parameters.add(new Object[] { 2, "-1.1E2", "-110", "-1.1E2" });
+        parameters.add(new Object[] { 2, "1.1E-2", "0.011", "1.1E-2" });
+        parameters.add(new Object[] { 2, "-1.1E-2", "-0.011", "-1.1E-2" });
+
+        parameters.add(new Object[] { 2, "1.1E3", "1100", "1.1E3" });
+        parameters.add(new Object[] { 2, "-1.1E3", "-1100", "-1.1E3" });
+        parameters.add(new Object[] { 2, "1.1E-3", "0.0011", "1.1E-3" });
+        parameters.add(new Object[] { 2, "-1.1E-3", "-0.0011", "-1.1E-3" });
+
+        parameters.add(new Object[] { 2, "1.010", "1.01", "1.01E0" });
+
+        parameters.add(new Object[] { 2, "11.11", "11.11", "1.111E1" });
+        parameters.add(new Object[] { 2, "+11.11", "11.11", "1.111E1" });
+        parameters.add(new Object[] { 2, "-11.11", "-11.11", "-1.111E1" });
+
+        parameters.add(new Object[] { 2, "111.111", "111.111", "1.11111E2" });
+        parameters.add(new Object[] { 2, "+111.111", "111.111", "1.11111E2" });
+        parameters.add(new Object[] { 2, "-111.111", "-111.111", "-1.11111E2" });
 
         return parameters;
     }

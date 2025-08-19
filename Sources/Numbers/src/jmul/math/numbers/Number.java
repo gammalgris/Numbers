@@ -309,4 +309,25 @@ public interface Number extends LinkedDigitList, ArithmeticNumberOperations, Num
      */
     boolean isSingleDigit();
 
+    /**
+     * Returns the total number of digits.
+     *
+     * @return the total number of digits
+     */
+    Number digits();
+
+    /**
+     * Returns the total number of digits left of the decimal separator.
+     *
+     * @return the total number of digits left of the decimal separator
+     */
+    Number digitsLeft();
+
+    /**
+     * Returns the total number of digits right of the decimal separator.
+     *
+     * @return the total number of digits right of the decimal separator
+     */
+    Number digitsRight();
+
 }

@@ -41,10 +41,11 @@ import jmul.math.Math;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
+import static jmul.math.numbers.NumberHelper.createInfinity;
+import static jmul.math.numbers.NumberHelper.createNegativeInfinity;
 import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.numbers.exceptions.NoResultButLimitException;
 import jmul.math.numbers.exceptions.UndefinedOperationException;
-import jmul.math.signs.Signs;
 
 import jmul.test.classification.UnitTest;
 
@@ -205,12 +206,12 @@ public class DivisoWithSpecialValuesTest {
 
         for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
 
-            parameters.add(new Object[] { createNumber(base, "1"), createNumber(base), NoResultButLimitException.class,
-                                          createNumber(base, "0") });
-            parameters.add(new Object[] { createNumber(base, "1"), createNumber(Signs.NEGATIVE, base),
+            parameters.add(new Object[] { createNumber(base, "1"), createInfinity(base),
                                           NoResultButLimitException.class, createNumber(base, "0") });
-            parameters.add(new Object[] { createNumber(base, "-1"), createNumber(base), NoResultButLimitException.class,
-                                          createNumber(base, "0") });
+            parameters.add(new Object[] { createNumber(base, "1"), createNegativeInfinity(base),
+                                          NoResultButLimitException.class, createNumber(base, "0") });
+            parameters.add(new Object[] { createNumber(base, "-1"), createInfinity(base),
+                                          NoResultButLimitException.class, createNumber(base, "0") });
             parameters.add(new Object[] { createNumber(base, "1"), createNumber(base, "0"),
                                           UndefinedOperationException.class, null });
         }

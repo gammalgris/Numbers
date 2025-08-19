@@ -34,16 +34,14 @@
 package jmul.math.functions.implementations;
 
 
-import jmul.math.digits.PositionalNumeralSystems;
 import jmul.math.fractions.Fraction;
-import static jmul.math.fractions.FractionHelper.createFraction;
 import static jmul.math.fractions.FractionHelper.CLONE;
 import static jmul.math.fractions.FractionHelper.DONT_CLONE;
+import static jmul.math.fractions.FractionHelper.createFraction;
 import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberHelper;
+import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
-import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.signs.Signs;
 
 
@@ -116,7 +114,7 @@ public class DecrementFraction implements UnaryOperation<Fraction, Result<Fracti
         } else {
 
             int base = operand.base();
-            final Number ONE = createNumber(Signs.NEGATIVE, base, 1);
+            final Number ONE = createNumber(base, Signs.NEGATIVE, 1);
 
             Number normalizedOne = ONE.multiply(operand.denominator());
             if (operand.numerator().isZero()) {

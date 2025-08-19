@@ -41,8 +41,9 @@ import static jmul.math.fractions.FractionHelper.DONT_CLONE;
 import static jmul.math.fractions.FractionHelper.createFraction;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
+import static jmul.math.numbers.NumberHelper.createInfinity;
+import static jmul.math.numbers.NumberHelper.createNegativeInfinity;
 import static jmul.math.numbers.NumberHelper.createNumber;
-import static jmul.math.signs.Signs.NEGATIVE;
 
 import jmul.test.classification.UnitTest;
 
@@ -144,13 +145,14 @@ public class FractionNumberEqualityTest {
 
         for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
 
-            parameters.add(new Object[] { createFraction(DONT_CLONE, createNumber(base)), createNumber(base), true });
-            parameters.add(new Object[] { createFraction(DONT_CLONE, createNumber(NEGATIVE, base)), createNumber(base),
-                                          false });
-            parameters.add(new Object[] { createFraction(DONT_CLONE, createNumber(NEGATIVE, base)), createNumber(base),
-                                          false });
-            parameters.add(new Object[] { createFraction(DONT_CLONE, createNumber(NEGATIVE, base)),
-                                          createNumber(NEGATIVE, base), true });
+            parameters.add(new Object[] { createFraction(DONT_CLONE, createInfinity(base)), createInfinity(base),
+                                          true });
+            parameters.add(new Object[] { createFraction(DONT_CLONE, createNegativeInfinity(base)),
+                                          createInfinity(base), false });
+            parameters.add(new Object[] { createFraction(DONT_CLONE, createNegativeInfinity(base)),
+                                          createInfinity(base), false });
+            parameters.add(new Object[] { createFraction(DONT_CLONE, createNegativeInfinity(base)),
+                                          createNegativeInfinity(base), true });
 
             parameters.add(new Object[] { createFraction(base, "0"), createNumber(base, "0"), true });
             parameters.add(new Object[] { createFraction(base, "0"), createNumber(base, "1"), false });
@@ -168,7 +170,6 @@ public class FractionNumberEqualityTest {
 
             parameters.add(new Object[] { createFraction(base, "0"), createNumber(base, "0.1"), false });
             parameters.add(new Object[] { createFraction(base, "1", "10"), createNumber(base, "0.1"), true });
-
         }
 
         return parameters;

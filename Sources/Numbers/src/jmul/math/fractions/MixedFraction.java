@@ -48,7 +48,6 @@ import jmul.math.hash.HashHelper;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberHelper;
 import static jmul.math.numbers.NumberHelper.createNumber;
-import jmul.math.numbers.NumberImpl;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.EqualityFunction;
 import jmul.math.operations.MixedBinaryOperation;
@@ -367,7 +366,7 @@ class MixedFraction implements Fraction {
         } else if (hasIntegerPart() && !hasNumerator()) {
 
             Number newNumerator = integerPart().multiply(denominator());
-            Number newDenominator = createNumber(Signs.POSITIVE, base(), 1);
+            Number newDenominator = createNumber(base(), Signs.POSITIVE, 1);
             return createFraction(DONT_CLONE, newNumerator, newDenominator);
 
         } else if (!hasIntegerPart() && hasNumerator()) {
@@ -393,7 +392,7 @@ class MixedFraction implements Fraction {
         Number newIntegerPart = NumberHelper.createNumber(base(), zeroString);
 
         Number newNumerator = numerator().absoluteValue();
-        Number newDenominator = new NumberImpl(denominator());
+        Number newDenominator = createNumber(denominator());
 
         while (newNumerator.isGreaterOrEqual(denominator())) {
 
@@ -597,8 +596,8 @@ class MixedFraction implements Fraction {
     @Override
     public int hashCode() {
 
-        final Number ZERO = new NumberImpl(base(), "0");
-        final Number ONE = new NumberImpl(base(), "1");
+        final Number ZERO = createNumber(base(), "0");
+        final Number ONE = createNumber(base(), "1");
 
         Number integerPart;
         if (hasIntegerPart()) {

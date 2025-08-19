@@ -38,14 +38,14 @@ import jmul.math.digits.Digit;
 import jmul.math.functions.FunctionSingletons;
 import jmul.math.functions.repository.FunctionIdentifiers;
 import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
-import jmul.math.signs.Sign;
-import static jmul.math.signs.Signs.POSITIVE;
+import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.numbers.exceptions.UndefinedOperationException;
 import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.NodesHelper;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
+import jmul.math.signs.Sign;
+import static jmul.math.signs.Signs.POSITIVE;
 
 
 /**
@@ -148,7 +148,7 @@ public class NumberComplement implements UnaryOperation<Number, Result<Number>> 
         }
 
 
-        Number result = new NumberImpl(base, sign, resultCenterNode);
+        Number result = createNumber(base, sign, resultCenterNode);
 
         return new Result<Number>(result);
     }

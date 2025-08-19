@@ -41,7 +41,7 @@ import jmul.math.Math;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
+import static jmul.math.numbers.NumberHelper.createNumber;
 
 import jmul.test.classification.UnitTest;
 import jmul.test.exceptions.FailedTestException;
@@ -130,9 +130,9 @@ public class ShiftRightXTest {
     @Before
     public void setUp() {
 
-        operand = new NumberImpl(base, operandString);
-        shifts = new NumberImpl(base, shiftsString);
-        result = new NumberImpl(base, resultString);
+        operand = createNumber(base, operandString);
+        shifts = createNumber(base, shiftsString);
+        result = createNumber(base, resultString);
     }
 
     /**

@@ -39,8 +39,9 @@ import java.util.Collection;
 
 import jmul.math.Math;
 import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
-import static jmul.math.signs.Signs.NEGATIVE;
+import static jmul.math.numbers.NumberHelper.createInfinity;
+import static jmul.math.numbers.NumberHelper.createNegativeInfinity;
+import static jmul.math.numbers.NumberHelper.createNumber;
 
 import jmul.test.classification.UnitTest;
 
@@ -183,67 +184,65 @@ public class NumberComparisonTest {
 
         Collection<Object[]> parameters = new ArrayList<Object[]>();
 
-        parameters.add(new Object[] { new NumberImpl(), new NumberImpl(), 0 });
-        parameters.add(new Object[] { new NumberImpl(NEGATIVE), new NumberImpl(NEGATIVE), 0 });
-        parameters.add(new Object[] { new NumberImpl(), new NumberImpl(NEGATIVE), 1 });
+        parameters.add(new Object[] { createInfinity(), createInfinity(), 0 });
+        parameters.add(new Object[] { createNegativeInfinity(), createNegativeInfinity(), 0 });
+        parameters.add(new Object[] { createInfinity(), createNegativeInfinity(), 1 });
 
-        parameters.add(new Object[] { new NumberImpl("0"), new NumberImpl("0"), 0 });
-        parameters.add(new Object[] { new NumberImpl("-0"), new NumberImpl("0"), 0 });
-        parameters.add(new Object[] { new NumberImpl("0"), new NumberImpl("-0"), 0 });
+        parameters.add(new Object[] { createNumber("0"), createNumber("0"), 0 });
+        parameters.add(new Object[] { createNumber("-0"), createNumber("0"), 0 });
+        parameters.add(new Object[] { createNumber("0"), createNumber("-0"), 0 });
 
-        parameters.add(new Object[] { new NumberImpl("1"), new NumberImpl("1"), 0 });
-        parameters.add(new Object[] { new NumberImpl("-1"), new NumberImpl("1"), -1 });
-        parameters.add(new Object[] { new NumberImpl("1"), new NumberImpl("-1"), 1 });
+        parameters.add(new Object[] { createNumber("1"), createNumber("1"), 0 });
+        parameters.add(new Object[] { createNumber("-1"), createNumber("1"), -1 });
+        parameters.add(new Object[] { createNumber("1"), createNumber("-1"), 1 });
 
-        parameters.add(new Object[] { new NumberImpl("123456789012345678901"), new NumberImpl("123456789012345678901"),
+        parameters.add(new Object[] { createNumber("123456789012345678901"), createNumber("123456789012345678901"),
                                       0 });
-        parameters.add(new Object[] { new NumberImpl("123456789012345678901"), new NumberImpl("-123456789012345678901"),
+        parameters.add(new Object[] { createNumber("123456789012345678901"), createNumber("-123456789012345678901"),
                                       1 });
-        parameters.add(new Object[] { new NumberImpl("-123456789012345678901"), new NumberImpl("123456789012345678901"),
+        parameters.add(new Object[] { createNumber("-123456789012345678901"), createNumber("123456789012345678901"),
                                       -1 });
 
-        parameters.add(new Object[] { new NumberImpl("09123456789012345678901"),
-                                      new NumberImpl("123456789012345678901"), 1 });
-        parameters.add(new Object[] { new NumberImpl("09123456789012345678901"),
-                                      new NumberImpl("-123456789012345678901"), 1 });
-        parameters.add(new Object[] { new NumberImpl("-09123456789012345678901"),
-                                      new NumberImpl("123456789012345678901"), -1 });
-
-        parameters.add(new Object[] { new NumberImpl("123456789012345678901"), new NumberImpl("123456789012345678902"),
-                                      -1 });
-        parameters.add(new Object[] { new NumberImpl("-123456789012345678902"),
-                                      new NumberImpl("-123456789012345678901"), -1 });
-
-        parameters.add(new Object[] { new NumberImpl("1.23456789012345678901"),
-                                      new NumberImpl("1.23456789012345678902"), -1 });
-        parameters.add(new Object[] { new NumberImpl("-1.23456789012345678902"),
-                                      new NumberImpl("-1.23456789012345678901"), -1 });
-
-        parameters.add(new Object[] { new NumberImpl("1.2345678901234567890123"),
-                                      new NumberImpl("1.23456789012345678901"), 1 });
-        parameters.add(new Object[] { new NumberImpl("-1.23456789012345678901"),
-                                      new NumberImpl("-1.234567890123456789023"), 1 });
-
-        parameters.add(new Object[] { new NumberImpl("-1.2345"), new NumberImpl("10.98765"), -1 });
-        parameters.add(new Object[] { new NumberImpl("1.2345"), new NumberImpl("-10.98765"), 1 });
-        parameters.add(new Object[] { new NumberImpl("1.2345"), new NumberImpl("10.98765"), -1 });
-
-        parameters.add(new Object[] { new NumberImpl("12345678.9"), new NumberImpl("0.987654321"), 1 });
-        parameters.add(new Object[] { new NumberImpl("-12345678.9"), new NumberImpl("0.987654321"), -1 });
-        parameters.add(new Object[] { new NumberImpl("12345678.9"), new NumberImpl("-0.987654321"), 1 });
-
-        parameters.add(new Object[] { new NumberImpl("1234567890.0123456789"), new NumberImpl("0.012345678987654321"),
+        parameters.add(new Object[] { createNumber("09123456789012345678901"), createNumber("123456789012345678901"),
                                       1 });
-        parameters.add(new Object[] { new NumberImpl("-1234567890.0123456789"), new NumberImpl("0.012345678987654321"),
-                                      -1 });
-        parameters.add(new Object[] { new NumberImpl("1234567890.0123456789"), new NumberImpl("-0.012345678987654321"),
+        parameters.add(new Object[] { createNumber("09123456789012345678901"), createNumber("-123456789012345678901"),
                                       1 });
-        parameters.add(new Object[] { new NumberImpl("-1234567890.0123456789"), new NumberImpl("-0.012345678987654321"),
+        parameters.add(new Object[] { createNumber("-09123456789012345678901"), createNumber("123456789012345678901"),
                                       -1 });
-        parameters.add(new Object[] { new NumberImpl("1234567890.0123456789"), new NumberImpl("1234567890.0123456789"),
+
+        parameters.add(new Object[] { createNumber("123456789012345678901"), createNumber("123456789012345678902"),
+                                      -1 });
+        parameters.add(new Object[] { createNumber("-123456789012345678902"), createNumber("-123456789012345678901"),
+                                      -1 });
+
+        parameters.add(new Object[] { createNumber("1.23456789012345678901"), createNumber("1.23456789012345678902"),
+                                      -1 });
+        parameters.add(new Object[] { createNumber("-1.23456789012345678902"), createNumber("-1.23456789012345678901"),
+                                      -1 });
+
+        parameters.add(new Object[] { createNumber("1.2345678901234567890123"), createNumber("1.23456789012345678901"),
+                                      1 });
+        parameters.add(new Object[] { createNumber("-1.23456789012345678901"), createNumber("-1.234567890123456789023"),
+                                      1 });
+
+        parameters.add(new Object[] { createNumber("-1.2345"), createNumber("10.98765"), -1 });
+        parameters.add(new Object[] { createNumber("1.2345"), createNumber("-10.98765"), 1 });
+        parameters.add(new Object[] { createNumber("1.2345"), createNumber("10.98765"), -1 });
+
+        parameters.add(new Object[] { createNumber("12345678.9"), createNumber("0.987654321"), 1 });
+        parameters.add(new Object[] { createNumber("-12345678.9"), createNumber("0.987654321"), -1 });
+        parameters.add(new Object[] { createNumber("12345678.9"), createNumber("-0.987654321"), 1 });
+
+        parameters.add(new Object[] { createNumber("1234567890.0123456789"), createNumber("0.012345678987654321"), 1 });
+        parameters.add(new Object[] { createNumber("-1234567890.0123456789"), createNumber("0.012345678987654321"),
+                                      -1 });
+        parameters.add(new Object[] { createNumber("1234567890.0123456789"), createNumber("-0.012345678987654321"),
+                                      1 });
+        parameters.add(new Object[] { createNumber("-1234567890.0123456789"), createNumber("-0.012345678987654321"),
+                                      -1 });
+        parameters.add(new Object[] { createNumber("1234567890.0123456789"), createNumber("1234567890.0123456789"),
                                       0 });
-        parameters.add(new Object[] { new NumberImpl("0.012345678987654321"), new NumberImpl("0.012345678987654321"),
-                                      0 });
+        parameters.add(new Object[] { createNumber("0.012345678987654321"), createNumber("0.012345678987654321"), 0 });
 
         return parameters;
     }

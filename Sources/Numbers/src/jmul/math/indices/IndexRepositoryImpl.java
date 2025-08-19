@@ -85,7 +85,7 @@ class IndexRepositoryImpl implements IndexRepository {
         ParameterCheckHelper.checkNumberBase(base);
         this.base = base;
 
-        Number startIndex = createNumber(Signs.POSITIVE, base, 1);
+        Number startIndex = createNumber(base, Signs.POSITIVE, 1);
 
         this.firstNode = NodesHelper.createNode(startIndex);
         this.lastNode = firstNode;

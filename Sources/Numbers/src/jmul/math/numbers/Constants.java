@@ -46,7 +46,10 @@ import java.util.ResourceBundle;
  */
 public final class Constants {
 
-    public static final int DEFAULT_BASE;
+    /**
+     * A default number base,
+     */
+    public static final int DEFAULT_NUMBER_BASE;
 
     /**
      * Theabbreviation for an exponent in a scientific notation.
@@ -89,7 +92,7 @@ public final class Constants {
      */
     static {
 
-        DEFAULT_BASE = PropertiesLookup.defaultBase();
+        DEFAULT_NUMBER_BASE = PropertiesLookup.defaultBase();
 
         EXPONENT_ABBREVIATION = "E";
 

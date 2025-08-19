@@ -47,7 +47,8 @@ import jmul.math.functions.repository.FunctionIdentifierHelper;
 import jmul.math.functions.repository.FunctionIdentifiers;
 import jmul.math.matrices.Matrix;
 import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
+import static jmul.math.numbers.NumberHelper.createNumber;
+import static jmul.math.numbers.NumberHelper.parseInteger;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.MixedBinaryOperation;
 import jmul.math.operations.Result;
@@ -245,34 +246,6 @@ public final class Math {
     }
 
     /**
-     * Parses the specified string and returns a number. The number base is 10.
-     *
-     * @param s
-     *        a string representing a number
-     *
-     * @return a number
-     */
-    public static Number parseNumber(String s) {
-
-        return parseNumber(10, s);
-    }
-
-    /**
-     * Parses the specified string and returns a number.
-     *
-     * @param base
-     *        the number base
-     * @param s
-     *        a string representing a number
-     *
-     * @return a number
-     */
-    public static Number parseNumber(int base, String s) {
-
-        return new NumberImpl(base, s);
-    }
-
-    /**
      * Substracts the specified subtrahend from the specified minuend and returns the difference.
      *
      * @param minuend
@@ -431,7 +404,7 @@ public final class Math {
             throw new IllegalArgumentException("No number (null) was specified!");
         }
 
-        final Number ONE = Math.parseNumber(n.base(), "1");
+        final Number ONE = createNumber(n.base(), "1");
 
         return shiftLeft(n, ONE);
     }
@@ -472,7 +445,7 @@ public final class Math {
             throw new IllegalArgumentException("No number (null) was specified!");
         }
 
-        final Number ONE = Math.parseNumber(n.base(), "1");
+        final Number ONE = createNumber(n.base(), "1");
 
         return shiftRight(n, ONE);
     }
@@ -1493,6 +1466,8 @@ public final class Math {
     /**
      * Shorten the precision of this number according to the specified decimal places.
      *
+     * @deprecated the parameters should be in the same number base
+     *
      * @param number
      *        a number
      * @param decimalPlaces
@@ -1500,9 +1475,10 @@ public final class Math {
      *
      * @return a rounded number
      */
+    @Deprecated
     public static Number round(Number number, int decimalPlaces) {
 
-        Number convertedParameter = new NumberImpl(decimalPlaces);
+        Number convertedParameter = parseInteger(decimalPlaces);
 
         return round(FunctionIdentifiers.ROUND_NUMBER_TO_EVEN_FUNCTION, number, convertedParameter);
     }
@@ -1525,6 +1501,8 @@ public final class Math {
     /**
      * Shorten the precision of this number according to the specified decimal places.
      *
+     * @deprecated the parameters should be in the same number base
+     *
      * @param algorithm
      *        the identifier for an algorithm
      * @param number
@@ -1534,9 +1512,10 @@ public final class Math {
      *
      * @return a shortened number according to the specified precision
      */
+    @Deprecated
     public static Number round(FunctionIdentifier algorithm, Number number, int decimalPlaces) {
 
-        Number convertedParameter = new NumberImpl(decimalPlaces);
+        Number convertedParameter = parseInteger(decimalPlaces);
 
         return round(algorithm, number, convertedParameter);
     }

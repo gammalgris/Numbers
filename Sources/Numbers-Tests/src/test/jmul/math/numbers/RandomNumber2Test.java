@@ -123,8 +123,8 @@ public class RandomNumber2Test {
 
         System.out.println();
 
-        final Number ZERO = createNumber(Signs.POSITIVE, base, 0);
-        final Number ONE = createNumber(Signs.POSITIVE, base, 1);
+        final Number ZERO = createNumber(base, Signs.POSITIVE, 0);
+        final Number ONE = createNumber(base, Signs.POSITIVE, 1);
 
         for (Number number : occurrences.keySet()) {
 

@@ -40,6 +40,7 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 import jmul.math.numbers.Number;
+import static jmul.math.numbers.NumberHelper.createInfinity;
 import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.numbers.exceptions.NoResultButLimitException;
 import jmul.math.numbers.exceptions.UndefinedOperationException;
@@ -80,14 +81,14 @@ public class RussianDivisionFunction implements TernaryOperation<Number, Result<
     @Override
     public Result<Number> calculate(Number operand1, Number operand2, Number decimalPlaces) {
 
-        ParameterCheckHelper.checkParameters(operand1, operand2);
+        ParameterCheckHelper.checkParameters(operand1, operand2, decimalPlaces);
         ParameterCheckHelper.checkInteger(decimalPlaces);
 
         int base = operand1.base();
         Sign sign = Signs.divideAndDetermineResultSign(operand1.sign(), operand2.sign());
 
-        final Number NORMALIZED_ZERO = createNumber(Signs.POSITIVE, decimalPlaces.base(), 0);
-        final Number ZERO = createNumber(Signs.POSITIVE, base, 0);
+        final Number NORMALIZED_ZERO = createNumber(base, Signs.POSITIVE, 0);
+        final Number ZERO = createNumber(base, Signs.POSITIVE, 0);
 
 
         // Handle special cases which can be resolved without computation.
@@ -104,7 +105,7 @@ public class RussianDivisionFunction implements TernaryOperation<Number, Result<
 
         if (operand1.isInfinity() && operand2.isZero()) {
 
-            Number INFINITY = createNumber(sign, base);
+            Number INFINITY = createInfinity(base, sign);
             throw new NoResultButLimitException(INFINITY);
         }
 
@@ -137,7 +138,7 @@ public class RussianDivisionFunction implements TernaryOperation<Number, Result<
 
         // Determine the integer parts (result and remainder)
 
-        final Number ONE = createNumber(Signs.POSITIVE, base, 1);
+        final Number ONE = createNumber(base, Signs.POSITIVE, 1);
 
         SortedMap<Number, Number> multiples = new TreeMap<Number, Number>(Collections.reverseOrder());
 
@@ -266,7 +267,7 @@ public class RussianDivisionFunction implements TernaryOperation<Number, Result<
         // Correct and trim the fraction part.
 
         while (!digits.isZero()) {
-            
+
             fractionPart = fractionPart.shiftLeft();
             digits = digits.dec();
         }

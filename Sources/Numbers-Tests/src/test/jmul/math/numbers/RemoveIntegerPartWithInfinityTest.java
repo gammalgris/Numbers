@@ -42,12 +42,11 @@ import jmul.math.Math;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
+import static jmul.math.numbers.NumberHelper.createInfinity;
+import static jmul.math.numbers.NumberHelper.createNegativeInfinity;
 import static jmul.math.numbers.NumberHelper.createNumber;
-import jmul.math.numbers.NumberImpl;
-import jmul.math.signs.Signs;
 
 import jmul.test.classification.UnitTest;
-
 import jmul.test.exceptions.SetUpException;
 
 import static org.junit.Assert.assertEquals;
@@ -89,32 +88,6 @@ public class RemoveIntegerPartWithInfinityTest {
 
         this.operand = operand;
         this.expectedResult = expectedResult;
-    }
-
-    /**
-     * Creates a number which represents infinity.
-     *
-     * @param base
-     *        the number base
-     *
-     * @return a number
-     */
-    private static Number createInfinity(int base) {
-
-        return new NumberImpl(base);
-    }
-
-    /**
-     * Creates a number which represents negative infinity.
-     *
-     * @param base
-     *        the number base
-     *
-     * @return a number
-     */
-    private static Number createNegativeInfinity(int base) {
-
-        return new NumberImpl(base, Signs.NEGATIVE);
     }
 
     /**

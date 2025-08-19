@@ -71,7 +71,7 @@ public class Factorial implements UnaryOperation<Number, Result<Number>> {
 
         if (operand.isZero()) {
 
-            Number result = createNumber(Signs.POSITIVE, operand.base(), 1);
+            Number result = createNumber(operand.base(), Signs.POSITIVE, 1);
             return new Result<Number>(result);
         }
 

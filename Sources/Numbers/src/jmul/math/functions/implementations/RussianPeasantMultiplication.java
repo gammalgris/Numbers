@@ -38,6 +38,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import jmul.math.numbers.Number;
+import static jmul.math.numbers.NumberHelper.createInfinity;
+import static jmul.math.numbers.NumberHelper.createNegativeInfinity;
 import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.numbers.exceptions.UndefinedOperationException;
 import jmul.math.numbers.nodes.DigitNode;
@@ -57,7 +59,7 @@ import jmul.math.signs.Signs;
  * <i>Note:<br>
  * For large numbers a different algorithm may be required. Make a statistical
  * analysis with different algorithms.</i>
- * 
+ *
  * @deprecated There are issues with odd number bases and shifting of the decimal separator.
  *
  * @author Kristian Kutin
@@ -105,29 +107,29 @@ public class RussianPeasantMultiplication implements BinaryOperation<Number, Res
 
             if (operand1.isNegative() && !operand2.isNegative()) {
 
-                Number result = createNumber(Signs.NEGATIVE, base);
+                Number result = createNegativeInfinity(base);
                 return new Result<Number>(result);
 
             } else if (!operand1.isNegative() && operand2.isNegative()) {
 
-                Number result = createNumber(Signs.NEGATIVE, base);
+                Number result = createNegativeInfinity(base);
                 return new Result<Number>(result);
 
             } else {
 
-                Number result = createNumber(base);
+                Number result = createInfinity(base);
                 return new Result<Number>(result);
             }
 
         } else if (operand1.isZero() || operand2.isZero()) {
 
-            Number result = createNumber(Signs.POSITIVE, base, 0);
+            Number result = createNumber(base, Signs.POSITIVE, 0);
             return new Result<Number>(result);
 
         } else {
 
-            final Number ONE = createNumber(Signs.POSITIVE, base, 1);
-            final Number MINUS_ONE = createNumber(Signs.NEGATIVE, base, 1);
+            final Number ONE = createNumber(base, Signs.POSITIVE, 1);
+            final Number MINUS_ONE = createNumber(base, Signs.NEGATIVE, 1);
 
             if (operand1.equals(ONE)) {
 
@@ -170,7 +172,7 @@ public class RussianPeasantMultiplication implements BinaryOperation<Number, Res
 
         // Determine how many shifts are requiremed to transform both operands into
         // integers.
-        Number shifts = createNumber(Signs.NEGATIVE, base, 1);
+        Number shifts = createNumber(base, Signs.NEGATIVE, 1);
 
         DigitNode currentNode1 = operand1.centerNode();
         DigitNode currentNode2 = operand2.centerNode();
@@ -203,7 +205,7 @@ public class RussianPeasantMultiplication implements BinaryOperation<Number, Res
         // Keep halving the number on the left and doubling the number on the right until the number on the
         // left is down to one. Add all numbers on the right where the corresponding number on the left is odd.
         // The result is the product of the multiplication.
-        final Number ONE = createNumber(Signs.POSITIVE, base, 1);
+        final Number ONE = createNumber(base, Signs.POSITIVE, 1);
         Map<Number, Number> remainderSummandMap = new HashMap<>();
 
         while (true) {
@@ -223,7 +225,7 @@ public class RussianPeasantMultiplication implements BinaryOperation<Number, Res
             clone1 = clone1.doubling();
         }
 
-        Number sum = createNumber(Signs.POSITIVE, base, 0);
+        Number sum = createNumber(base, Signs.POSITIVE, 0);
 
         for (Map.Entry<Number, Number> entry : remainderSummandMap.entrySet()) {
 

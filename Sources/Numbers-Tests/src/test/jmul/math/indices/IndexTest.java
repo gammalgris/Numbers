@@ -35,6 +35,7 @@ package test.jmul.math.indices;
 
 
 import jmul.math.indices.IndexSingletons;
+import jmul.math.numbers.Constants;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.signs.Signs;
@@ -61,7 +62,7 @@ public class IndexTest {
     @Test(expected = IllegalArgumentException.class)
     public void testIndexZero() {
 
-        Number index = createNumber(Signs.POSITIVE, 10, 0);
+        Number index = createNumber(Constants.DEFAULT_NUMBER_BASE, Signs.POSITIVE, 0);
 
         IndexSingletons.nextIndex(index);
     }
@@ -73,7 +74,7 @@ public class IndexTest {
     public void testFirstIndex() {
 
         int base = 10;
-        Number ONE = createNumber(Signs.POSITIVE, base, 1);
+        Number ONE = createNumber(base, Signs.POSITIVE, 1);
 
         Number newIndex = IndexSingletons.firstIndex(base);
 
@@ -93,7 +94,7 @@ public class IndexTest {
     @Test
     public void testOne() {
 
-        Number ONE = createNumber(Signs.POSITIVE, 10, 1);
+        Number ONE = createNumber(Constants.DEFAULT_NUMBER_BASE, Signs.POSITIVE, 1);
         Number TWO = ONE.inc();
 
         Number newIndex = IndexSingletons.nextIndex(ONE);
@@ -114,7 +115,7 @@ public class IndexTest {
     @Test
     public void testTwo() {
 
-        Number TWO = createNumber(Signs.POSITIVE, 10, 2);
+        Number TWO = createNumber(Constants.DEFAULT_NUMBER_BASE, Signs.POSITIVE, 2);
         Number THREE = TWO.inc();
 
         Number newIndex = IndexSingletons.nextIndex(TWO);
@@ -135,7 +136,7 @@ public class IndexTest {
     @Test
     public void testTen() {
 
-        Number TEN = createNumber(10, "10");
+        Number TEN = createNumber(Constants.DEFAULT_NUMBER_BASE, "10");
         Number ELEVEN = TEN.inc();
 
         Number newIndex = IndexSingletons.nextIndex(TEN);

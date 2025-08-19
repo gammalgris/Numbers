@@ -35,14 +35,15 @@ package jmul.math.functions.implementations;
 
 
 import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
-import jmul.math.signs.Sign;
-import jmul.math.signs.Signs;
+import static jmul.math.numbers.NumberHelper.createInfinity;
+import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.numbers.exceptions.UndefinedOperationException;
 import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.NodesHelper;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.Result;
+import jmul.math.signs.Sign;
+import jmul.math.signs.Signs;
 
 
 /**
@@ -80,7 +81,7 @@ public class ShiftLeft implements BinaryOperation<Number, Result<Number>> {
 
         if (number.isInfinity() || number.isZero()) {
 
-            Number shiftedClone = new NumberImpl(number);
+            Number shiftedClone = createNumber(number);
             return new Result<Number>(shiftedClone);
         }
 
@@ -91,21 +92,21 @@ public class ShiftLeft implements BinaryOperation<Number, Result<Number>> {
 
             if (Signs.isPositive(sign)) {
 
-                Number shiftedClone = new NumberImpl(base, "0");
+                Number shiftedClone = createNumber(base, "0");
                 return new Result<Number>(shiftedClone);
 
             } else {
 
-                Number shiftedClone = new NumberImpl(base, number.sign());
+                Number shiftedClone = createInfinity(base, number.sign());
                 return new Result<Number>(shiftedClone);
             }
         }
 
-        Number copy = new NumberImpl(number);
+        Number copy = createNumber(number);
         DigitNode center = copy.centerNode();
 
         Number counter = shifts.absoluteValue();
-        final Number ONE = new NumberImpl(base, "1");
+        final Number ONE = createNumber(base, "1");
 
         while (!counter.isZero()) {
 
@@ -139,7 +140,7 @@ public class ShiftLeft implements BinaryOperation<Number, Result<Number>> {
             counter = counter.subtract(ONE);
         }
 
-        Number shiftedCopy = new NumberImpl(base, number.sign(), center);
+        Number shiftedCopy = createNumber(base, number.sign(), center);
         NodesHelper.trimLeft(shiftedCopy.centerNode());
 
         return new Result<Number>(shiftedCopy);

@@ -146,7 +146,7 @@ public class DivisionBySubtraction implements TernaryOperation<Number, Result<Nu
 
         // Determine the fraction part
 
-        final Number ZERO = createNumber(Signs.POSITIVE, base, 0);
+        final Number ZERO = createNumber(base, Signs.POSITIVE, 0);
         Number fractionPart = ZERO;
         Number digits = ZERO;
 
@@ -164,27 +164,6 @@ public class DivisionBySubtraction implements TernaryOperation<Number, Result<Nu
 
                     break;
                 }
-
-
-                /*while (remainder.isLesser(absoluteDivisor)) {
-
-                    remainder = remainder.shiftRight();
-                    digits = digits.inc();
-                }
-
-                while (remainder.isGreaterOrEqual(absoluteDivisor)) {
-
-                    remainder = remainder.subtract(absoluteDivisor);
-                    factor = factor.inc();
-                }
-
-                if (remainder.isLesser(absoluteDivisor)) {
-
-                    fractionPart = fractionPart.add(factor);
-                    fractionPart = fractionPart.shiftRight();
-
-                    factor = ZERO;
-                }*/
 
                 if (remainder.isLesser(absoluteDivisor)) {
 

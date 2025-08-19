@@ -41,8 +41,9 @@ import jmul.math.Math;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
+import static jmul.math.numbers.NumberHelper.createInfinity;
+import static jmul.math.numbers.NumberHelper.createNegativeInfinity;
 import static jmul.math.numbers.NumberHelper.createNumber;
-import jmul.math.signs.Signs;
 
 import jmul.test.classification.UnitTest;
 
@@ -134,8 +135,8 @@ public class RoundUpTest {
 
         for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
 
-            parameters.add(new Object[] { createNumber(base), createNumber(base) });
-            parameters.add(new Object[] { createNumber(Signs.NEGATIVE, base), createNumber(Signs.NEGATIVE, base) });
+            parameters.add(new Object[] { createInfinity(base), createInfinity(base) });
+            parameters.add(new Object[] { createNegativeInfinity(base), createNegativeInfinity(base) });
 
             parameters.add(new Object[] { createNumber(base, "0"), createNumber(base, "0") });
             parameters.add(new Object[] { createNumber(base, "-0"), createNumber(base, "0") });

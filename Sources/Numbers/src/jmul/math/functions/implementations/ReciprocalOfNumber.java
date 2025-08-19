@@ -79,7 +79,7 @@ public class ReciprocalOfNumber implements UnaryOperation<Number, Result<Fractio
 
         int base = operand.base();
 
-        Number newNumerator = createNumber(Signs.POSITIVE, base, 1);
+        Number newNumerator = createNumber(base, Signs.POSITIVE, 1);
         if (operand.isNegative()) {
 
             newNumerator = newNumerator.negate();

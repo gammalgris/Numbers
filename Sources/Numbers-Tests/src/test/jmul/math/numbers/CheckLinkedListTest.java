@@ -38,7 +38,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
+import static jmul.math.numbers.NumberHelper.createInfinity;
+import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.numbers.nodes.DigitNode;
 
 import jmul.test.classification.UnitTest;
@@ -135,7 +136,8 @@ public class CheckLinkedListTest {
 
             if (leftNode != null) {
 
-                String message = String.format("inconsistent linking on the left side: %s<->%s", leftNode.digit(), node.digit());
+                String message =
+                    String.format("inconsistent linking on the left side: %s<->%s", leftNode.digit(), node.digit());
                 assertEquals(message, node, leftNode.rightNode());
                 assertEquals(message, leftNode, node.leftNode());
             }
@@ -153,36 +155,14 @@ public class CheckLinkedListTest {
 
             if (rightNode != null) {
 
-                String message = String.format("inconsistent linking on the right side: %s<->%s", node.digit(), rightNode.digit());
+                String message =
+                    String.format("inconsistent linking on the right side: %s<->%s", node.digit(), rightNode.digit());
                 assertEquals(message, node, rightNode.leftNode());
                 assertEquals(message, rightNode, node.rightNode());
             }
 
             node = node.rightNode();
         }
-    }
-
-    /**
-     * Creates a number (i.e. a number representing infinity).
-     *
-     * @return a number
-     */
-    private static Number createNumber() {
-
-        return new NumberImpl();
-    }
-
-    /**
-     * Creates a number according to the specified parameter.
-     *
-     * @param numberString
-     *        a string representing a number
-     *
-     * @return a number
-     */
-    private static Number createNumber(String numberString) {
-
-        return new NumberImpl(numberString);
     }
 
     /**
@@ -195,7 +175,7 @@ public class CheckLinkedListTest {
 
         Collection<Object[]> parameters = new ArrayList<Object[]>();
 
-        parameters.add(new Object[] { createNumber() });
+        parameters.add(new Object[] { createInfinity() });
         parameters.add(new Object[] { createNumber("0") });
         parameters.add(new Object[] { createNumber("1") });
         parameters.add(new Object[] { createNumber("123456789.87654321") });

@@ -38,7 +38,7 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
+import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.numbers.nodes.DigitNode;
 
 import jmul.test.classification.ManualTest;
@@ -83,8 +83,8 @@ public class HashCollisionTest {
 
 
         int base = 10;
-        final Number ZERO = new NumberImpl(base, "0");
-        final Number MAX = new NumberImpl(base, "1000");
+        final Number ZERO = createNumber(base, "0");
+        final Number MAX = createNumber(base, "1000");
         Number counter = ZERO;
 
         while (counter.isLesser(MAX)) {

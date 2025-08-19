@@ -88,7 +88,7 @@ public class IsMultipleFunction implements BinaryOperation<Number, Result<Boolea
         int base = operand1.base();
         Sign sign = Signs.divideAndDetermineResultSign(operand1.sign(), operand2.sign());
 
-        final Number ZERO = createNumber(Signs.POSITIVE, base, 0);
+        final Number ZERO = createNumber(base, Signs.POSITIVE, 0);
 
 
         // Handle special cases which can be resolved without computation.
@@ -116,7 +116,7 @@ public class IsMultipleFunction implements BinaryOperation<Number, Result<Boolea
 
         // Determine the integer parts (result and remainder)
 
-        final Number ONE = createNumber(Signs.POSITIVE, base, 1);
+        final Number ONE = createNumber(base, Signs.POSITIVE, 1);
 
         SortedMap<Number, Number> multiples = new TreeMap<Number, Number>(Collections.reverseOrder());
 
