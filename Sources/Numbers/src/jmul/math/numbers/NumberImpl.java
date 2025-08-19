@@ -707,7 +707,7 @@ public class NumberImpl implements Number {
      * @return an expression (e.g. a quotient, a mixed fraction or integer)
      */
     @Override
-    public Fraction divide(Number n) {
+    public Fraction divideReturnFraction(Number n) {
 
         BinaryOperation<Number, Result<Fraction>> function =
             (BinaryOperation<Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIVIDE_NUMBERS_RETURN_FRACTION_FUNCTION);
@@ -1339,6 +1339,36 @@ public class NumberImpl implements Number {
         Result<Boolean> result = function.calculate(this, number);
 
         return result.result();
+    }
+
+    /**
+     * Divides this number by the specified number.
+     *
+     * @param n
+     *        a number
+     *
+     * @return the quotient
+     */
+    @Override
+    public Number divide(Number n) {
+
+        return divide(FunctionIdentifiers.RUSSIAN_DIVISION_FUNCTION, n);
+    }
+
+    /**
+     * Divides this number by the specified number.
+     *
+     * @param n
+     *        a number
+     * @param decimalPlaces
+     *        the number of decimal places retained after cutting the fraction part
+     *
+     * @return the quotient
+     */
+    @Override
+    public Number divide(Number n, Number decimalPlaces) {
+
+        return divide(FunctionIdentifiers.RUSSIAN_DIVISION_FUNCTION, n, decimalPlaces);
     }
 
     /**

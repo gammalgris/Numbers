@@ -116,7 +116,7 @@ public class DivideNumbersReturnFractionTest {
     @Test
     public void testDivision() {
 
-        Fraction actualResult = dividend.divide(divisor);
+        Fraction actualResult = dividend.divideReturnFraction(divisor);
 
         assertEquals(toString(), expectedResult, actualResult);
         assertEquals(toString(), expectedResult.toString(), actualResult.toString());
@@ -128,7 +128,7 @@ public class DivideNumbersReturnFractionTest {
     @Test
     public void testDivisionVariant2() {
 
-        Fraction actualResult = Math.divide(dividend, divisor);
+        Fraction actualResult = Math.divideReturnFraction(dividend, divisor);
 
         assertEquals(toString(), expectedResult, actualResult);
         assertEquals(toString(), expectedResult.toString(), actualResult.toString());

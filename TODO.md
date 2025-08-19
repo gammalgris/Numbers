@@ -81,9 +81,6 @@
     Rational Numbers, Real Numbers), approximatated (i.e. some Rational Numbers, Real Numbers) and
 	which cannot be represented yet (i.e. complex numbers).
 
-34) Consider changing the operation Fraction divide(Number,Number) to Number divide(Number,Number).
-    There now exists an alternative to the first operation: Fraction Number.toFraction()
-
 35) Consider adding a stream constructor for large numbers (i.e. stream of digits/ characters).
 
 36) Add methods to convert numbers back to primitive types (i.e. int, long, double, etc.) and their
@@ -140,6 +137,10 @@
     Alternative 2: mark digits in order to identify groups of digits which are repeated
     -> Solution: there remains a constant for a default precision (i.e. the variable has been turned into a constant).
     -> Solution: some operations now have an additional variant where you specify a precision
+
+34) Consider changing the operation Fraction divide(Number,Number) to Number divide(Number,Number).
+    There now exists an alternative to the first operation: Fraction Number.toFraction()
+    -> resolved by renaming the Fraction variant and adding new methods with different parameter signatures.
 
 37) Rework constructors and helper classes (i.e. createNumber methods). Move the logic to parse input
     parameters out of the constructors into the helper class. The helper class will depending on the

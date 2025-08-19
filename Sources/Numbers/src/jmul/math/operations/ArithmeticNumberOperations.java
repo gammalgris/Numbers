@@ -201,7 +201,29 @@ public interface ArithmeticNumberOperations {
      *
      * @return a fraction (e.g. a quotient, a mixed fraction or integer)
      */
-    Fraction divide(Number n);
+    Fraction divideReturnFraction(Number n);
+
+    /**
+     * Divides this number by the specified number.
+     *
+     * @param n
+     *        a number
+     *
+     * @return the quotient
+     */
+    Number divide(Number n);
+
+    /**
+     * Divides this number by the specified number.
+     *
+     * @param n
+     *        a number
+     * @param decimalPlaces
+     *        the number of decimal places retained after cutting the fraction part
+     *
+     * @return the quotient
+     */
+    Number divide(Number n, Number decimalPlaces);
 
     /**
      * Divides this number by the specified number.

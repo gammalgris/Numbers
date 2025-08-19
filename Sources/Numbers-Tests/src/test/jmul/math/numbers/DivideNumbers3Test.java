@@ -38,6 +38,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import jmul.math.Math;
+import jmul.math.functions.repository.FunctionIdentifiers;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
@@ -52,13 +53,13 @@ import org.junit.runners.Parameterized;
 
 
 /**
- * This test suit tests dividing numbers (i.e. default algorithm).
+ * This test suit tests dividing numbers (i.e. russion division).
  *
  * @author Kristian Kutin
  */
 @UnitTest
 @RunWith(Parameterized.class)
-public class DivideNumbersTest {
+public class DivideNumbers3Test {
 
     /**
      * A number.
@@ -92,7 +93,7 @@ public class DivideNumbersTest {
      * @param expectedResult
      *        the expected result
      */
-    public DivideNumbersTest(Number number1, Number number2, Number decimalPlaces, Number expectedResult) {
+    public DivideNumbers3Test(Number number1, Number number2, Number decimalPlaces, Number expectedResult) {
 
         super();
 
@@ -132,11 +133,11 @@ public class DivideNumbersTest {
         Number actualResult;
         if (decimalPlaces == null) {
 
-            actualResult = number1.divide(number2);
+            actualResult = number1.divide(FunctionIdentifiers.RUSSIAN_DIVISION_FUNCTION, number2);
 
         } else {
 
-            actualResult = number1.divide(number2, decimalPlaces);
+            actualResult = number1.divide(FunctionIdentifiers.RUSSIAN_DIVISION_FUNCTION, number2, decimalPlaces);
         }
 
         assertEquals(toString(), expectedResult, actualResult);
@@ -152,11 +153,11 @@ public class DivideNumbersTest {
         Number actualResult;
         if (decimalPlaces == null) {
 
-            actualResult = Math.divide(number1, number2);
+            actualResult = Math.divide(FunctionIdentifiers.RUSSIAN_DIVISION_FUNCTION, number1, number2);
 
         } else {
 
-            actualResult = Math.divide(number1, number2, decimalPlaces);
+            actualResult = Math.divide(FunctionIdentifiers.RUSSIAN_DIVISION_FUNCTION, number1, number2, decimalPlaces);
         }
 
         assertEquals(toString(), expectedResult, actualResult);

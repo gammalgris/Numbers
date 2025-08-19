@@ -936,7 +936,7 @@ public final class Math {
      *
      * @return a fraction
      */
-    public static Fraction divide(Number operand1, Number operand2) {
+    public static Fraction divideReturnFraction(Number operand1, Number operand2) {
 
         BinaryOperation<Number, Result<Fraction>> function =
             (BinaryOperation<Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIVIDE_NUMBERS_RETURN_FRACTION_FUNCTION);
@@ -1575,6 +1575,38 @@ public final class Math {
 
         //TODO
         throw new UnsupportedOperationException();
+    }
+
+    /**
+     * Divides this number by the specified number.
+     *
+     * @param n1
+     *        a number
+     * @param n2
+     *        a number
+     *
+     * @return the quotient
+     */
+    public static Number divide(Number n1, Number n2) {
+
+        return divide(FunctionIdentifiers.RUSSIAN_DIVISION_FUNCTION, n1, n2);
+    }
+
+    /**
+     * Divides this number by the specified number.
+     *
+     * @param n1
+     *        a number
+     * @param n2
+     *        a number
+     * @param decimalPlaces
+     *        the number of decimal places retained after cutting the fraction part
+     *
+     * @return the quotient
+     */
+    public static Number divide(Number n1, Number n2, Number decimalPlaces) {
+
+        return divide(FunctionIdentifiers.RUSSIAN_DIVISION_FUNCTION, n1, n2, decimalPlaces);
     }
 
     /**

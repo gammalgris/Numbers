@@ -650,7 +650,24 @@ public class NumberNegativeBaseImpl implements Number {
     }
 
     @Override
-    public Fraction divide(Number n) {
+    public Number divide(Number n) {
+        // TODO Implement this method
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * Divides this number by the specified number.
+     *
+     * @param n
+     *        a number
+     * @param decimalPlaces
+     *        the number of decimal places retained after cutting the fraction part
+     *
+     * @return the quotient
+     */
+    @Override
+    public Number divide(Number n, Number decimalPlaces) {
+
         // TODO Implement this method
         throw new UnsupportedOperationException();
     }
@@ -663,6 +680,21 @@ public class NumberNegativeBaseImpl implements Number {
 
     @Override
     public Number divide(FunctionIdentifier algorithm, Number n, Number decimalPlaces) {
+        // TODO Implement this method
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * Divides this number by the specified number.
+     *
+     * @param n
+     *        a number
+     *
+     * @return a fraction (e.g. a quotient, a mixed fraction or integer)
+     */
+    @Override
+    public Fraction divideReturnFraction(Number n) {
+
         // TODO Implement this method
         throw new UnsupportedOperationException();
     }
