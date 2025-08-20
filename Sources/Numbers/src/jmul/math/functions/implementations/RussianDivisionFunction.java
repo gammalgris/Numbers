@@ -40,8 +40,10 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 import jmul.math.numbers.Number;
+import jmul.math.numbers.NumberHelper;
 import static jmul.math.numbers.NumberHelper.createInfinity;
 import static jmul.math.numbers.NumberHelper.createNumber;
+import static jmul.math.numbers.creation.CreationParameters.CLONE;
 import jmul.math.numbers.exceptions.NoResultButLimitException;
 import jmul.math.numbers.exceptions.UndefinedOperationException;
 import jmul.math.numbers.nodes.NodesHelper;
@@ -121,7 +123,7 @@ public class RussianDivisionFunction implements TernaryOperation<Number, Result<
 
         if (operand2.isOne()) {
 
-            Number clone = createNumber(operand1);
+            Number clone = NumberHelper.createNumber(CLONE, operand1);
 
             if (operand1.isPositive() && operand2.isNegative()) {
 

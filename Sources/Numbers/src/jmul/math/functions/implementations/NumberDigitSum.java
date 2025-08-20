@@ -38,7 +38,9 @@ import jmul.math.digits.Digit;
 import jmul.math.functions.FunctionSingletons;
 import jmul.math.functions.repository.FunctionIdentifiers;
 import jmul.math.numbers.Number;
+import jmul.math.numbers.NumberHelper;
 import static jmul.math.numbers.NumberHelper.createNumber;
+import static jmul.math.numbers.creation.CreationParameters.CLONE;
 import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
@@ -76,7 +78,8 @@ public class NumberDigitSum implements UnaryOperation<Number, Result<Number>> {
 
         if (n.isInfinity()) {
 
-            createNumber(n);
+            Number clone = NumberHelper.createNumber(CLONE, n);
+            return new Result<Number>(clone);
         }
 
         UnaryOperation<Digit, Result<Number>> function =

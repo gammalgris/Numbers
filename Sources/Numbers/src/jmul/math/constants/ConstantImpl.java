@@ -69,7 +69,7 @@ public class ConstantImpl implements Constant {
      * @param value
      *        a constant value
      */
-    public ConstantImpl(Number value) {
+    protected ConstantImpl(Number value) {
 
         super();
 
@@ -93,12 +93,16 @@ public class ConstantImpl implements Constant {
 
         ParameterCheckHelper.checkNumberBase(base);
 
-        Number value = constants.get(base);
+        Number value = null;
+        synchronized (this) {
 
-        if (value == null) {
+            value = constants.get(base);
 
-            value = defaultValue.rebase(base);
-            constants.put(base, value);
+            if (value == null) {
+
+                value = defaultValue.rebase(base);
+                constants.put(base, value);
+            }
         }
 
         return value;

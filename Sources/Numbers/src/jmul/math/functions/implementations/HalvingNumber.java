@@ -39,7 +39,9 @@ import jmul.math.digits.PositionalNumeralSystems;
 import jmul.math.functions.FunctionSingletons;
 import jmul.math.functions.repository.FunctionIdentifiers;
 import jmul.math.numbers.Number;
+import jmul.math.numbers.NumberHelper;
 import static jmul.math.numbers.NumberHelper.createNumber;
+import static jmul.math.numbers.creation.CreationParameters.CLONE;
 import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.NodesHelper;
 import jmul.math.operations.BinaryOperation;
@@ -79,7 +81,7 @@ public class HalvingNumber implements UnaryOperation<Number, Result<Number>> {
 
         if (number.isZero()) {
 
-            Number clone = createNumber(number);
+            Number clone = NumberHelper.createNumber(CLONE, number);
             if (clone.isNegative()) {
 
                 clone = clone.negate();
@@ -89,7 +91,7 @@ public class HalvingNumber implements UnaryOperation<Number, Result<Number>> {
 
         if (number.isInfinity()) {
 
-            Number clone = createNumber(number);
+            Number clone = NumberHelper.createNumber(CLONE, number);
             return new Result<Number>(clone);
         }
 

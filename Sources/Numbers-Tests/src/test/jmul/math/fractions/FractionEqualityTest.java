@@ -38,6 +38,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import jmul.math.fractions.Fraction;
+import jmul.math.fractions.FractionHelper;
 import static jmul.math.fractions.FractionHelper.createFraction;
 import jmul.math.numbers.Constants;
 import jmul.math.signs.Signs;
@@ -117,11 +118,12 @@ public class FractionEqualityTest {
 
         for (int base = Constants.BASE_MIN_LIMIT; base <= Constants.BASE_MAX_LIMIT; base++) {
 
-            parameters.add(new Object[] { createFraction(base), createFraction(base), true });
-            parameters.add(new Object[] { createFraction(Signs.NEGATIVE, base), createFraction(Signs.NEGATIVE, base),
+            parameters.add(new Object[] { FractionHelper.createInfinity(base), FractionHelper.createInfinity(base),
                                           true });
-            parameters.add(new Object[] { createFraction(base, "0"), createFraction(base), false });
-            parameters.add(new Object[] { createFraction(base), createFraction(base, "0"), false });
+            parameters.add(new Object[] { FractionHelper.createInfinity(base, Signs.NEGATIVE),
+                                          FractionHelper.createInfinity(base, Signs.NEGATIVE), true });
+            parameters.add(new Object[] { createFraction(base, "0"), FractionHelper.createInfinity(base), false });
+            parameters.add(new Object[] { FractionHelper.createInfinity(base), createFraction(base, "0"), false });
 
             parameters.add(new Object[] { createFraction(base, "1"), createFraction(base, "1"), true });
             parameters.add(new Object[] { createFraction(base, "0"), createFraction(base, "1"), false });

@@ -35,11 +35,12 @@ package jmul.math.functions.implementations;
 
 
 import jmul.math.fractions.Fraction;
-import static jmul.math.fractions.FractionHelper.CLONE;
-import static jmul.math.fractions.FractionHelper.DONT_CLONE;
 import static jmul.math.fractions.FractionHelper.createFraction;
 import jmul.math.numbers.Number;
+import jmul.math.numbers.NumberHelper;
 import static jmul.math.numbers.NumberHelper.createNumber;
+import static jmul.math.numbers.creation.CreationParameters.CLONE;
+import static jmul.math.numbers.creation.CreationParameters.DONT_CLONE;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
 import jmul.math.signs.Signs;
@@ -104,7 +105,7 @@ public class DecrementFraction implements UnaryOperation<Fraction, Result<Fracti
 
             Number newIntegerPart = operand.integerPart().dec();
             Number newNumerator = operand.numerator();
-            Number newDenominator = createNumber(operand.denominator());
+            Number newDenominator = NumberHelper.createNumber(CLONE, operand.denominator());
             if (newIntegerPart.isZero() && !newNumerator.isZero()) {
 
                 newNumerator = newNumerator.negate();
@@ -124,7 +125,7 @@ public class DecrementFraction implements UnaryOperation<Fraction, Result<Fracti
             } else {
 
                 Number newNumerator = operand.numerator().add(normalizedOne);
-                Number newDenominator = createNumber(operand.denominator());
+                Number newDenominator = NumberHelper.createNumber(CLONE, operand.denominator());
                 newFraction = createFraction(DONT_CLONE, newNumerator, newDenominator);
             }
         }

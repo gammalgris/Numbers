@@ -39,13 +39,13 @@ import java.util.Collection;
 
 import jmul.math.Math;
 import jmul.math.fractions.Fraction;
+import jmul.math.fractions.FractionHelper;
 import static jmul.math.fractions.FractionHelper.createFraction;
 import jmul.math.functions.implementations.NumberToFraction;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
-import static jmul.math.numbers.NumberHelper.createInfinity;
-import static jmul.math.numbers.NumberHelper.createNegativeInfinity;
+import jmul.math.numbers.NumberHelper;
 import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
@@ -160,8 +160,10 @@ public class NumberToFractionTest {
 
         for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
 
-            parameters.add(new Object[] { createInfinity(base), createFraction(Signs.POSITIVE, base) });
-            parameters.add(new Object[] { createNegativeInfinity(base), createFraction(Signs.NEGATIVE, base) });
+            parameters.add(new Object[] { NumberHelper.createInfinity(base),
+                                          FractionHelper.createInfinity(base, Signs.POSITIVE) });
+            parameters.add(new Object[] { NumberHelper.createNegativeInfinity(base),
+                                          FractionHelper.createInfinity(base, Signs.NEGATIVE) });
 
             parameters.add(new Object[] { createNumber(base, "0"), createFraction(base, "0") });
 

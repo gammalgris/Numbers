@@ -39,12 +39,12 @@ import java.util.Collection;
 
 import jmul.math.Math;
 import jmul.math.fractions.Fraction;
+import jmul.math.fractions.FractionHelper;
 import static jmul.math.fractions.FractionHelper.createFraction;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
-import static jmul.math.numbers.NumberHelper.createInfinity;
-import static jmul.math.numbers.NumberHelper.createNegativeInfinity;
+import jmul.math.numbers.NumberHelper;
 import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.signs.Signs;
 
@@ -146,13 +146,16 @@ public class MinFractionNumberTest {
 
         for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
 
-            parameters.add(new Object[] { createFraction(base), createNumber(base, "0"), createFraction(base, "0") });
-            parameters.add(new Object[] { createFraction(base), createNegativeInfinity(base),
-                                          createFraction(Signs.NEGATIVE, base) });
-            parameters.add(new Object[] { createFraction(Signs.NEGATIVE, base), createNumber(base, "0"),
-                                          createFraction(Signs.NEGATIVE, base) });
-            parameters.add(new Object[] { createFraction(Signs.NEGATIVE, base), createInfinity(base),
-                                          createFraction(Signs.NEGATIVE, base) });
+            parameters.add(new Object[] { FractionHelper.createInfinity(base), createNumber(base, "0"),
+                                          createFraction(base, "0") });
+            parameters.add(new Object[] { FractionHelper.createInfinity(base),
+                                          NumberHelper.createNegativeInfinity(base),
+                                          FractionHelper.createInfinity(base, Signs.NEGATIVE) });
+            parameters.add(new Object[] { FractionHelper.createInfinity(base, Signs.NEGATIVE), createNumber(base, "0"),
+                                          FractionHelper.createInfinity(base, Signs.NEGATIVE) });
+            parameters.add(new Object[] { FractionHelper.createInfinity(base, Signs.NEGATIVE),
+                                          NumberHelper.createInfinity(base),
+                                          FractionHelper.createInfinity(base, Signs.NEGATIVE) });
 
             parameters.add(new Object[] { createFraction(base, "1"), createNumber(base, "0"),
                                           createFraction(base, "0") });

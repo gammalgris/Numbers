@@ -39,7 +39,7 @@ import java.util.Collection;
 
 import jmul.math.Math;
 import jmul.math.fractions.Fraction;
-
+import jmul.math.fractions.FractionHelper;
 import static jmul.math.fractions.FractionHelper.createFraction;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
@@ -143,12 +143,16 @@ public class AddFractionsTest {
 
         for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
 
-            parameters.add(new Object[] { createFraction(base), createFraction(base, "1"), createFraction(base) });
-            parameters.add(new Object[] { createFraction(base, "1"), createFraction(base), createFraction(base) });
-            parameters.add(new Object[] { createFraction(Signs.NEGATIVE, base), createFraction(base, "1"),
-                                          createFraction(Signs.NEGATIVE, base) });
-            parameters.add(new Object[] { createFraction(base, "1"), createFraction(Signs.NEGATIVE, base),
-                                          createFraction(Signs.NEGATIVE, base) });
+            parameters.add(new Object[] { FractionHelper.createInfinity(base), createFraction(base, "1"),
+                                          FractionHelper.createInfinity(base) });
+            parameters.add(new Object[] { createFraction(base, "1"), FractionHelper.createInfinity(base),
+                                          FractionHelper.createInfinity(base) });
+            parameters.add(new Object[] { FractionHelper.createInfinity(base, Signs.NEGATIVE),
+                                          createFraction(base, "1"),
+                                          FractionHelper.createInfinity(base, Signs.NEGATIVE) });
+            parameters.add(new Object[] { createFraction(base, "1"),
+                                          FractionHelper.createInfinity(base, Signs.NEGATIVE),
+                                          FractionHelper.createInfinity(base, Signs.NEGATIVE) });
 
             parameters.add(new Object[] { createFraction(base, "0"), createFraction(base, "10"),
                                           createFraction(base, "10") });

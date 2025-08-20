@@ -39,8 +39,10 @@ import jmul.math.digits.Digit;
 import jmul.math.functions.FunctionSingletons;
 import jmul.math.functions.repository.FunctionIdentifiers;
 import jmul.math.numbers.Number;
+import jmul.math.numbers.NumberHelper;
 import static jmul.math.numbers.NumberHelper.createInfinity;
 import static jmul.math.numbers.NumberHelper.createNumber;
+import static jmul.math.numbers.creation.CreationParameters.CLONE;
 import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.NodesHelper;
 import jmul.math.operations.BinaryOperation;
@@ -233,7 +235,7 @@ public class RebaseNumber implements MixedBinaryOperation<Number, Integer, Resul
         int base = operand.base();
         if (base == newNumberBase) {
 
-            Number clone = createNumber(operand);
+            Number clone = NumberHelper.createNumber(CLONE, operand);
             return new Result<Number>(clone);
         }
 

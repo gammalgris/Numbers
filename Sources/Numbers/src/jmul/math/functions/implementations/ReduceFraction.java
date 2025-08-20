@@ -37,7 +37,9 @@ package jmul.math.functions.implementations;
 import java.util.SortedSet;
 
 import jmul.math.fractions.Fraction;
-import static jmul.math.fractions.FractionHelper.DONT_CLONE;
+import jmul.math.fractions.FractionHelper;
+import static jmul.math.numbers.creation.CreationParameters.CLONE;
+import static jmul.math.numbers.creation.CreationParameters.DONT_CLONE;
 import static jmul.math.fractions.FractionHelper.createFraction;
 import jmul.math.functions.repository.FunctionIdentifiers;
 import jmul.math.numbers.Number;
@@ -92,7 +94,7 @@ public class ReduceFraction implements UnaryOperation<Fraction, Result<Fraction>
                 Number newNumerator = numerator.divide(FunctionIdentifiers.RUSSIAN_DIVISION_FUNCTION, primeFactor);
                 Number newDenominator = denominator.divide(FunctionIdentifiers.RUSSIAN_DIVISION_FUNCTION, primeFactor);
 
-                reducedFraction = createFraction(DONT_CLONE, newNumerator, newDenominator);
+                reducedFraction = FractionHelper.createFraction(DONT_CLONE, newNumerator, newDenominator);
             }
         }
 

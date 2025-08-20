@@ -35,7 +35,8 @@ package jmul.math.functions.implementations;
 
 
 import jmul.math.numbers.Number;
-import static jmul.math.numbers.NumberHelper.createNumber;
+import jmul.math.numbers.NumberHelper;
+import static jmul.math.numbers.creation.CreationParameters.CLONE;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
 import jmul.math.signs.Sign;
@@ -72,7 +73,7 @@ public class RoundUpFunction implements UnaryOperation<Number, Result<Number>> {
 
         if (number.isInteger() || number.isInfinity()) {
 
-            Number clone = createNumber(number);
+            Number clone = NumberHelper.createNumber(CLONE, number);
             return new Result<Number>(clone);
         }
 

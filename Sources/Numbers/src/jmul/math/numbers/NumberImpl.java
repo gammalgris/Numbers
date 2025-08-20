@@ -46,6 +46,7 @@ import jmul.math.functions.repository.FunctionIdentifiers;
 import jmul.math.hash.HashHelper;
 import static jmul.math.numbers.Constants.DEFAULT_NUMBER_BASE;
 import static jmul.math.numbers.NumberHelper.createNumber;
+import static jmul.math.numbers.creation.CreationParameters.CLONE;
 import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.notations.NotationFunction;
 import jmul.math.operations.BinaryOperation;
@@ -1721,7 +1722,7 @@ public class NumberImpl implements Number {
 
         if (absoluteNumber.isInfinity()) {
 
-            return createNumber(absoluteNumber);
+            return NumberHelper.createNumber(CLONE, absoluteNumber);
         }
 
         Number digits = createNumber(base, "0");
@@ -1748,7 +1749,7 @@ public class NumberImpl implements Number {
 
         if (absoluteNumber.isInfinity()) {
 
-            return createNumber(absoluteNumber);
+            return NumberHelper.createNumber(CLONE, absoluteNumber);
         }
 
         Number digits = createNumber(base, "0");

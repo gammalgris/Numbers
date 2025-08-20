@@ -37,8 +37,10 @@ package jmul.math.functions.implementations;
 import jmul.math.functions.FunctionSingletons;
 import jmul.math.functions.repository.FunctionIdentifiers;
 import jmul.math.numbers.Number;
+import jmul.math.numbers.NumberHelper;
 import static jmul.math.numbers.NumberHelper.createInfinity;
 import static jmul.math.numbers.NumberHelper.createNumber;
+import static jmul.math.numbers.creation.CreationParameters.CLONE;
 import jmul.math.numbers.exceptions.UndefinedOperationException;
 import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.NodesHelper;
@@ -142,7 +144,7 @@ public class SubtractNumbers implements BinaryOperation<Number, Result<Number>> 
              * 11) -n - infinity = -infinity
              * 12) -n - -infinity = -n + infinity = infinity
              */
-            Number result = createNumber(operand2);
+            Number result = NumberHelper.createNumber(CLONE, operand2);
             result = result.negate();
             return new Result<Number>(result);
 
@@ -156,7 +158,7 @@ public class SubtractNumbers implements BinaryOperation<Number, Result<Number>> 
              *  6) -infinity - n = -infinity
              *  8) -infinity - -n = -infinity + n = -infinity
              */
-            Number result = createNumber(operand1);
+            Number result = NumberHelper.createNumber(CLONE, operand1);
             return new Result<Number>(result);
 
         } else {
@@ -227,7 +229,7 @@ public class SubtractNumbers implements BinaryOperation<Number, Result<Number>> 
              * -0 - n = -n
              * -0 - -n = 0 + n = n
              */
-            Number result = createNumber(operand2);
+            Number result = NumberHelper.createNumber(CLONE, operand2);
             result = result.negate();
             return new Result<Number>(result);
 
@@ -241,7 +243,7 @@ public class SubtractNumbers implements BinaryOperation<Number, Result<Number>> 
              * -n - 0 = -n
              * -n - -0 = -n + 0 = -n
              */
-            Number result = createNumber(operand1);
+            Number result = NumberHelper.createNumber(CLONE, operand1);
             return new Result<Number>(result);
 
         } else {

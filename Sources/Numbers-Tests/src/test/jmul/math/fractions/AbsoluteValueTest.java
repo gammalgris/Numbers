@@ -39,6 +39,7 @@ import java.util.Collection;
 
 import jmul.math.Math;
 import jmul.math.fractions.Fraction;
+import jmul.math.fractions.FractionHelper;
 import static jmul.math.fractions.FractionHelper.createFraction;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
@@ -123,8 +124,9 @@ public class AbsoluteValueTest {
 
         for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
 
-            parameters.add(new Object[] { createFraction(base), createFraction(base) });
-            parameters.add(new Object[] { createFraction(NEGATIVE, base), createFraction(base) });
+            parameters.add(new Object[] { FractionHelper.createInfinity(base), FractionHelper.createInfinity(base) });
+            parameters.add(new Object[] { FractionHelper.createInfinity(base, NEGATIVE),
+                                          FractionHelper.createInfinity(base) });
 
             parameters.add(new Object[] { createFraction(base, "0"), createFraction(base, "0") });
             parameters.add(new Object[] { createFraction(base, "-0"), createFraction(base, "0") });

@@ -39,6 +39,7 @@ import java.util.Collection;
 
 import jmul.math.Math;
 import jmul.math.fractions.Fraction;
+import jmul.math.fractions.FractionHelper;
 import static jmul.math.fractions.FractionHelper.createFraction;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
@@ -54,7 +55,7 @@ import org.junit.runners.Parameterized;
 
 /**
  * This test suite tests halving a fraction.
- * 
+ *
  * @author Kristian Kutin
  */
 @UnitTest
@@ -134,8 +135,9 @@ public class HalvingFractionTest {
 
         for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
 
-            parameters.add(new Object[] { createFraction(base), createFraction(base) });
-            parameters.add(new Object[] { createFraction(Signs.NEGATIVE, base), createFraction(Signs.NEGATIVE, base) });
+            parameters.add(new Object[] { FractionHelper.createInfinity(base), FractionHelper.createInfinity(base) });
+            parameters.add(new Object[] { FractionHelper.createInfinity(base, Signs.NEGATIVE),
+                                          FractionHelper.createInfinity(base, Signs.NEGATIVE) });
 
             parameters.add(new Object[] { createFraction(base, "0"), createFraction(base, "0") });
             parameters.add(new Object[] { createFraction(base, "-0"), createFraction(base, "0") });

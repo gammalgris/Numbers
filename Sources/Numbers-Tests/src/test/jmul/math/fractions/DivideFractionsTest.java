@@ -39,12 +39,13 @@ import java.util.Collection;
 
 import jmul.math.Math;
 import jmul.math.fractions.Fraction;
-import static jmul.math.fractions.FractionHelper.DONT_CLONE;
+import jmul.math.fractions.FractionHelper;
 import static jmul.math.fractions.FractionHelper.createFraction;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
-import static jmul.math.numbers.NumberHelper.createInfinity;
+import jmul.math.numbers.NumberHelper;
 import static jmul.math.numbers.NumberHelper.createNumber;
+import static jmul.math.numbers.creation.CreationParameters.DONT_CLONE;
 import jmul.math.signs.Signs;
 
 import jmul.test.classification.UnitTest;
@@ -145,14 +146,18 @@ public class DivideFractionsTest {
 
         for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
 
-            parameters.add(new Object[] { createFraction(base), createFraction(base, "1"), createFraction(base) });
-            parameters.add(new Object[] { createFraction(Signs.NEGATIVE, base), createFraction(base, "1"),
-                                          createFraction(Signs.NEGATIVE, base) });
+            parameters.add(new Object[] { FractionHelper.createInfinity(base), createFraction(base, "1"),
+                                          FractionHelper.createInfinity(base) });
+            parameters.add(new Object[] { FractionHelper.createInfinity(base, Signs.NEGATIVE),
+                                          createFraction(base, "1"),
+                                          FractionHelper.createInfinity(base, Signs.NEGATIVE) });
 
-            parameters.add(new Object[] { createFraction(base, "1"), createFraction(base),
+            parameters.add(new Object[] { createFraction(base, "1"), FractionHelper.createInfinity(base),
                                           createFraction(base, "1", null) });
-            parameters.add(new Object[] { createFraction(base, "1"), createFraction(Signs.NEGATIVE, base),
-                                          createFraction(DONT_CLONE, createNumber(base, "-1"), createInfinity(base)) });
+            parameters.add(new Object[] { createFraction(base, "1"),
+                                          FractionHelper.createInfinity(base, Signs.NEGATIVE),
+                                          createFraction(DONT_CLONE, createNumber(base, "-1"),
+                                                         NumberHelper.createInfinity(base)) });
 
             parameters.add(new Object[] { createFraction(base, "1"), createFraction(base, "1"),
                                           createFraction(base, "1", "1") });

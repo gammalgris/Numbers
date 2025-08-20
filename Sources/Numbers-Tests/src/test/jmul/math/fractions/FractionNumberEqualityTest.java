@@ -37,13 +37,13 @@ package test.jmul.math.fractions;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import static jmul.math.fractions.FractionHelper.DONT_CLONE;
 import static jmul.math.fractions.FractionHelper.createFraction;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import static jmul.math.numbers.NumberHelper.createInfinity;
 import static jmul.math.numbers.NumberHelper.createNegativeInfinity;
 import static jmul.math.numbers.NumberHelper.createNumber;
+import static jmul.math.numbers.creation.CreationParameters.DONT_CLONE;
 
 import jmul.test.classification.UnitTest;
 

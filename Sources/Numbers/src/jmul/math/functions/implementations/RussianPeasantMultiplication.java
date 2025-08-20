@@ -38,9 +38,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import jmul.math.numbers.Number;
+import jmul.math.numbers.NumberHelper;
 import static jmul.math.numbers.NumberHelper.createInfinity;
 import static jmul.math.numbers.NumberHelper.createNegativeInfinity;
 import static jmul.math.numbers.NumberHelper.createNumber;
+import static jmul.math.numbers.creation.CreationParameters.CLONE;
 import jmul.math.numbers.exceptions.UndefinedOperationException;
 import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.NodesHelper;
@@ -133,18 +135,18 @@ public class RussianPeasantMultiplication implements BinaryOperation<Number, Res
 
             if (operand1.equals(ONE)) {
 
-                Number result = createNumber(operand2);
+                Number result = NumberHelper.createNumber(CLONE, operand2);
                 return new Result<Number>(result);
 
             } else if (operand2.equals(ONE)) {
 
-                Number result = createNumber(operand1);
+                Number result = NumberHelper.createNumber(CLONE, operand1);
                 return new Result<Number>(result);
 
             } else if (operand1.equals(MINUS_ONE)) {
 
                 Sign newSign = Signs.negate(Signs.xor(operand1.sign(), operand2.sign()));
-                Number result = createNumber(operand2);
+                Number result = NumberHelper.createNumber(CLONE, operand2);
                 if (newSign != result.sign()) {
 
                     result = result.negate();
@@ -154,7 +156,7 @@ public class RussianPeasantMultiplication implements BinaryOperation<Number, Res
             } else if (operand2.equals(MINUS_ONE)) {
 
                 Sign newSign = Signs.negate(Signs.xor(operand1.sign(), operand2.sign()));
-                Number result = createNumber(operand1);
+                Number result = NumberHelper.createNumber(CLONE, operand1);
                 if (newSign != result.sign()) {
 
                     result = result.negate();

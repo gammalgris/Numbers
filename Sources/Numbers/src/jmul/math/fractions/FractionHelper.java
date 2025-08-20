@@ -34,10 +34,13 @@
 package jmul.math.fractions;
 
 
-import jmul.math.digits.PositionalNumeralSystems;
+import jmul.math.constants.Constant;
+import static jmul.math.constants.ConstantHelper.createConstant;
+import jmul.math.numbers.Constants;
 import jmul.math.numbers.Number;
-import static jmul.math.numbers.NumberHelper.createInfinity;
-import static jmul.math.numbers.NumberHelper.createNumber;
+import jmul.math.numbers.NumberHelper;
+import jmul.math.numbers.creation.CreationParameter;
+import jmul.math.numbers.creation.CreationParameters;
 import jmul.math.signs.Sign;
 
 
@@ -49,22 +52,28 @@ import jmul.math.signs.Sign;
 public final class FractionHelper {
 
     /**
-     * A constant value indicating to clone the specified parameters.
+     * A default value for the integer part.
      */
-    public static final boolean CLONE;
+    private static final Constant DEFAULT_INTEGER_PART;
 
     /**
-     * A constant value indicating to not clone the specified parameters.
+     * A default value for the numerator.
      */
-    public static final boolean DONT_CLONE;
+    private static final Constant DEFAULT_NUMERATOR;
+
+    /**
+     * A default value for the denominator.
+     */
+    private static final Constant DEFAULT_DENOMINATOR;
 
     /*
      * The static initializer.
      */
     static {
 
-        CLONE = true;
-        DONT_CLONE = !CLONE;
+        DEFAULT_INTEGER_PART = createConstant(Constants.DEFAULT_NUMBER_BASE, "0");
+        DEFAULT_NUMERATOR = createConstant(Constants.DEFAULT_NUMBER_BASE, "0");
+        DEFAULT_DENOMINATOR = createConstant(Constants.DEFAULT_NUMBER_BASE, "1");
     }
 
     /**
@@ -73,76 +82,6 @@ public final class FractionHelper {
     private FractionHelper() {
 
         throw new UnsupportedOperationException();
-    }
-
-    /**
-     * Creates an integer part with a default value.
-     *
-     * @param base
-     *        the number base
-     *
-     * @return a number
-     */
-    private static Number createDefaultIntegerPart(int base) {
-
-        String symbol = PositionalNumeralSystems.toString(base, 0);
-
-        return createNumber(base, symbol);
-    }
-
-    /**
-     * Creates a numerator with a default value.
-     *
-     * @param base
-     *        the number base
-     *
-     * @return a number
-     */
-    private static Number createDefaultNumerator(int base) {
-
-        String symbol = PositionalNumeralSystems.toString(base, 0);
-
-        return createNumber(base, symbol);
-    }
-
-    /**
-     * Creates a denominator with a default value.
-     *
-     * @param base
-     *        a number base
-     *
-     * @return a number
-     */
-    private static Number createDefaultDenominator(int base) {
-
-        String symbol = PositionalNumeralSystems.toString(base, 1);
-
-        return createNumber(base, symbol);
-    }
-
-    /**
-     * Clones the specified number depending on the specified flag.
-     *
-     * @param cloneFlag
-     *        <code>true</code> clones thespecified number, <code>false</code> doesn't clone the specified number
-     * @param number
-     *        a number
-     *
-     * @return the specified number or a cloned number
-     */
-    private static Number cloneNumber(boolean cloneFlag, Number number) {
-
-        if (number == null) {
-
-            throw new IllegalArgumentException("No number (null) was specified!");
-        }
-
-        if (cloneFlag) {
-
-            return createNumber(number);
-        }
-
-        return number;
     }
 
     /**
@@ -207,11 +146,11 @@ public final class FractionHelper {
      *
      * @return a fraction (i.e. a fraction with only the integer part)
      */
-    public static Fraction createFraction(int base) {
+    public static Fraction createInfinity(int base) {
 
-        Number newIntegerPart = createInfinity(base);
-        Number defaultNumerator = createDefaultNumerator(base);
-        Number defaultDenominator = createDefaultDenominator(base);
+        Number newIntegerPart = NumberHelper.createInfinity(base);
+        Number defaultNumerator = DEFAULT_NUMERATOR.value(base);
+        Number defaultDenominator = DEFAULT_DENOMINATOR.value(base);
 
         return createFractionAndDontCheckOrModifyParameters(newIntegerPart, defaultNumerator, defaultDenominator);
     }
@@ -219,18 +158,18 @@ public final class FractionHelper {
     /**
      * Creates a fraction according to the specified parameters.
      *
-     * @param sign
-     *        the sign of the number
      * @param base
      *        the number base
+     * @param sign
+     *        the sign of the number
      *
      * @return a fraction (i.e. a fraction with only the integer part)
      */
-    public static Fraction createFraction(Sign sign, int base) {
+    public static Fraction createInfinity(int base, Sign sign) {
 
-        Number newIntegerPart = createInfinity(base, sign);
-        Number defaultNumerator = createDefaultNumerator(base);
-        Number defaultDenominator = createDefaultDenominator(base);
+        Number newIntegerPart = NumberHelper.createInfinity(base, sign);
+        Number defaultNumerator = DEFAULT_NUMERATOR.value(base);
+        Number defaultDenominator = DEFAULT_DENOMINATOR.value(base);
 
         return createFractionAndDontCheckOrModifyParameters(newIntegerPart, defaultNumerator, defaultDenominator);
     }
@@ -247,9 +186,9 @@ public final class FractionHelper {
      */
     public static Fraction createFraction(int base, String s) {
 
-        Number newIntegerPart = createNumber(base, s);
-        Number defaultNumerator = createDefaultNumerator(base);
-        Number defaultDenominator = createDefaultDenominator(base);
+        Number newIntegerPart = NumberHelper.createNumber(base, s);
+        Number defaultNumerator = DEFAULT_NUMERATOR.value(base);
+        Number defaultDenominator = DEFAULT_DENOMINATOR.value(base);
 
         return createFractionAndDontCheckOrModifyParameters(newIntegerPart, defaultNumerator, defaultDenominator);
     }
@@ -257,22 +196,21 @@ public final class FractionHelper {
     /**
      * Creates a fraction according to the specified number.
      *
-     * @param cloneFlag
-     *        <code>true</code> indicates the specified number is to be cloned, else <code>false</code>
+     * @param creationParameter
+     *        indicates if the specified number is to be cloned or not
      * @param integerPart
      *        a number representing the integer part of a fraction
      *
      * @return a fraction (i.e. a fraction with only the integer part)
      */
-    public static Fraction createFraction(boolean cloneFlag, Number integerPart) {
+    public static Fraction createFraction(CreationParameter creationParameter, Number integerPart) {
 
-        checkIntgerPart(integerPart);
+        Number newIntegerPart = NumberHelper.createNumber(creationParameter, integerPart);
 
         int base = integerPart.base();
 
-        Number newIntegerPart = cloneNumber(cloneFlag, integerPart);
-        Number defaultNumerator = createDefaultNumerator(base);
-        Number defaultDenominator = createDefaultDenominator(base);
+        Number defaultNumerator = DEFAULT_NUMERATOR.value(base);
+        Number defaultDenominator = DEFAULT_DENOMINATOR.value(base);
 
         return createFractionAndDontCheckOrModifyParameters(newIntegerPart, defaultNumerator, defaultDenominator);
     }
@@ -291,9 +229,9 @@ public final class FractionHelper {
      */
     public static Fraction createFraction(int base, String numeratorString, String denominatorString) {
 
-        Number defaultIntegerPart = createDefaultIntegerPart(base);
-        Number newNumerator = createNumber(base, numeratorString);
-        Number newDenominator = createNumber(base, denominatorString);
+        Number defaultIntegerPart = DEFAULT_INTEGER_PART.value(base);
+        Number newNumerator = NumberHelper.createNumber(base, numeratorString);
+        Number newDenominator = NumberHelper.createNumber(base, denominatorString);
 
         if (newNumerator.isNegative() && newDenominator.isNegative()) {
 
@@ -312,8 +250,8 @@ public final class FractionHelper {
     /**
      * Creates a fraction according to the specified parameters.
      *
-     * @param cloneFlag
-     *        <code>true</code> indicates the specified numbers are to be cloned, else <code>false</code>
+     * @param creationParameter
+     *        indicates if the specified numbers are to be cloned or not
      * @param numerator
      *        a number representing the numerator of a fraction
      * @param denominator
@@ -321,14 +259,14 @@ public final class FractionHelper {
      *
      * @return a fraction
      */
-    public static Fraction createFraction(boolean cloneFlag, Number numerator, Number denominator) {
+    public static Fraction createFraction(CreationParameter creationParameter, Number numerator, Number denominator) {
 
         checkNumerator(numerator);
         checkDenominator(denominator);
 
         int base = numerator.base();
 
-        Number defaultIntegerPart = createDefaultIntegerPart(base);
+        Number defaultIntegerPart = DEFAULT_INTEGER_PART.value(base);
         Number newNumerator = numerator;
         Number newDenominator = denominator;
 
@@ -344,8 +282,8 @@ public final class FractionHelper {
 
         } else {
 
-            newNumerator = cloneNumber(cloneFlag, newNumerator);
-            newDenominator = cloneNumber(cloneFlag, denominator);
+            newNumerator = NumberHelper.createNumber(creationParameter, newNumerator);
+            newDenominator = NumberHelper.createNumber(creationParameter, denominator);
         }
 
         return createFractionAndDontCheckOrModifyParameters(defaultIntegerPart, newNumerator, newDenominator);
@@ -395,9 +333,9 @@ public final class FractionHelper {
     public static Fraction createFraction(int base, String integerString, String numeratorString,
                                           String denominatorString) {
 
-        Number newIntegerPart = createNumber(base, integerString);
-        Number newNumerator = createNumber(base, numeratorString);
-        Number newDenominator = createNumber(base, denominatorString);
+        Number newIntegerPart = NumberHelper.createNumber(base, integerString);
+        Number newNumerator = NumberHelper.createNumber(base, numeratorString);
+        Number newDenominator = NumberHelper.createNumber(base, denominatorString);
 
         checkForNegativeZero("integer part", newIntegerPart);
         checkForNegativeZero("numerator", newNumerator);
@@ -450,8 +388,8 @@ public final class FractionHelper {
     /**
      * Creates a fraction according to the specified numbers.
      *
-     * @param cloneFlag
-     *        <code>true</code> indicates the specified numbers are to be cloned, else <code>false</code>
+     * @param creationParameter
+     *        indicates if the specified numbers are to be cloned or not
      * @param integerPart
      *        the integer part of a fraction
      * @param numerator
@@ -461,7 +399,8 @@ public final class FractionHelper {
      *
      * @return a fraction (i.e. a mixed fraction with an integer part)
      */
-    public static Fraction createFraction(boolean cloneFlag, Number integerPart, Number numerator, Number denominator) {
+    public static Fraction createFraction(CreationParameter creationParameter, Number integerPart, Number numerator,
+                                          Number denominator) {
 
         checkIntgerPart(integerPart);
         checkNumerator(numerator);
@@ -477,7 +416,7 @@ public final class FractionHelper {
 
         if (newIntegerPart.isNegative() && newNumerator.isNegative() && newDenominator.isNegative()) {
 
-            newIntegerPart = cloneNumber(cloneFlag, newIntegerPart);
+            newIntegerPart = NumberHelper.createNumber(creationParameter, newIntegerPart);
             newNumerator = newNumerator.absoluteValue();
             newDenominator = newDenominator.absoluteValue();
 
@@ -485,17 +424,17 @@ public final class FractionHelper {
 
             newIntegerPart = newIntegerPart.absoluteValue();
             newNumerator = newNumerator.absoluteValue();
-            newDenominator = cloneNumber(cloneFlag, newDenominator);
+            newDenominator = NumberHelper.createNumber(creationParameter, newDenominator);
 
         } else if (newIntegerPart.isNegative() && newNumerator.isPositive() && newDenominator.isNegative()) {
 
             newIntegerPart = newIntegerPart.absoluteValue();
-            newNumerator = cloneNumber(cloneFlag, newNumerator);
+            newNumerator = NumberHelper.createNumber(creationParameter, newNumerator);
             newDenominator = newDenominator.absoluteValue();
 
         } else if (newIntegerPart.isPositive() && newNumerator.isNegative() && newDenominator.isNegative()) {
 
-            newIntegerPart = cloneNumber(cloneFlag, newIntegerPart);
+            newIntegerPart = NumberHelper.createNumber(creationParameter, newIntegerPart);
             newNumerator = newNumerator.absoluteValue();
             newDenominator = newDenominator.absoluteValue();
 
@@ -508,30 +447,31 @@ public final class FractionHelper {
 
             } else {
 
-                newIntegerPart = cloneNumber(cloneFlag, newIntegerPart);
-                newNumerator = cloneNumber(cloneFlag, newNumerator);
+                newIntegerPart = NumberHelper.createNumber(creationParameter, newIntegerPart);
+                newNumerator = NumberHelper.createNumber(creationParameter, newNumerator);
             }
-            newDenominator = cloneNumber(cloneFlag, newDenominator);
+
+            newDenominator = NumberHelper.createNumber(creationParameter, newDenominator);
 
         } else if (newIntegerPart.isPositive() && newNumerator.isPositive() && newDenominator.isNegative()) {
 
             if (!newIntegerPart.isZero()) {
 
                 newIntegerPart = newIntegerPart.negate();
-                newNumerator = cloneNumber(cloneFlag, newNumerator);
+                newNumerator = NumberHelper.createNumber(creationParameter, newNumerator);
 
             } else {
 
-                newIntegerPart = cloneNumber(cloneFlag, newIntegerPart);
+                newIntegerPart = NumberHelper.createNumber(creationParameter, newIntegerPart);
                 newNumerator = newNumerator.negate();
             }
             newDenominator = newDenominator.absoluteValue();
 
         } else {
 
-            newIntegerPart = cloneNumber(cloneFlag, newIntegerPart);
-            newNumerator = cloneNumber(cloneFlag, newNumerator);
-            newDenominator = cloneNumber(cloneFlag, newDenominator);
+            newIntegerPart = NumberHelper.createNumber(creationParameter, newIntegerPart);
+            newNumerator = NumberHelper.createNumber(creationParameter, newNumerator);
+            newDenominator = NumberHelper.createNumber(creationParameter, newDenominator);
         }
 
         return createFractionAndDontCheckOrModifyParameters(newIntegerPart, newNumerator, newDenominator);
@@ -567,15 +507,16 @@ public final class FractionHelper {
 
         if (fraction.hasIntegerPart() && !fraction.hasNumerator()) {
 
-            return createFraction(CLONE, fraction.integerPart());
+            return createFraction(CreationParameters.CLONE, fraction.integerPart());
 
         } else if (!fraction.hasIntegerPart() && fraction.hasNumerator()) {
 
-            return createFraction(CLONE, fraction.numerator(), fraction.denominator());
+            return createFraction(CreationParameters.CLONE, fraction.numerator(), fraction.denominator());
 
         } else {
 
-            return createFraction(CLONE, fraction.integerPart(), fraction.numerator(), fraction.denominator());
+            return createFraction(CreationParameters.CLONE, fraction.integerPart(), fraction.numerator(),
+                                  fraction.denominator());
         }
     }
 

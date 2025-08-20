@@ -36,6 +36,8 @@ package jmul.math.numbers;
 
 import jmul.math.digits.PositionalNumeralSystems;
 import static jmul.math.numbers.Constants.DEFAULT_NUMBER_BASE;
+import jmul.math.numbers.creation.CreationParameter;
+import jmul.math.numbers.creation.CreationParameters;
 import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.NodesHelper;
 import jmul.math.numbers.notations.ParserHelper;
@@ -96,14 +98,38 @@ public final class NumberHelper {
     /**
      * Creates a new number according to the specified parameters.
      *
+     * @param creationParameter
+     *        a creation parameter
      * @param number
      *        a number
      *
      * @return a clone of the specified number
      */
-    public static Number createNumber(Number number) {
+    public static Number createNumber(CreationParameter creationParameter, Number number) {
 
-        return new NumberImpl(number.base(), number.sign(), NodesHelper.cloneLinkedList(number.centerNode()));
+        if (creationParameter == null) {
+
+            throw new IllegalArgumentException("No creation parameter (null) was specified!");
+        }
+
+        if (number == null) {
+
+            throw new IllegalArgumentException("No number (null) was specified!");
+        }
+
+        if (CreationParameters.CLONE.equals(creationParameter)) {
+
+            return new NumberImpl(number.base(), number.sign(), NodesHelper.cloneLinkedList(number.centerNode()));
+
+        } else if (CreationParameters.DONT_CLONE.equals(creationParameter)) {
+
+            return new NumberImpl(number.base(), number.sign(), number.centerNode());
+
+        } else {
+
+            String message = String.format("Unknown creation parameter (%) specified!", creationParameter);
+            throw new IllegalArgumentException(message);
+        }
     }
 
     /**

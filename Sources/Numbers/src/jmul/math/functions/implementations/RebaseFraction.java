@@ -33,10 +33,11 @@
 
 package jmul.math.functions.implementations;
 
+
 import jmul.math.fractions.Fraction;
-import static jmul.math.fractions.FractionHelper.DONT_CLONE;
-import static jmul.math.fractions.FractionHelper.createFraction;
+import jmul.math.fractions.FractionHelper;
 import jmul.math.numbers.Number;
+import static jmul.math.numbers.creation.CreationParameters.DONT_CLONE;
 import jmul.math.operations.MixedBinaryOperation;
 import jmul.math.operations.Result;
 
@@ -80,7 +81,7 @@ public class RebaseFraction implements MixedBinaryOperation<Fraction, Integer, R
         numerator = numerator.rebase(destinationBase);
         denominator = denominator.rebase(destinationBase);
 
-        Fraction translatedFraction = createFraction(DONT_CLONE, integerPart, numerator, denominator);
+        Fraction translatedFraction = FractionHelper.createFraction(DONT_CLONE, integerPart, numerator, denominator);
 
         return new Result<Fraction>(translatedFraction);
     }

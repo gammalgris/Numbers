@@ -104,8 +104,6 @@
 44) Implement optimizations (e.g. right end of the linked list, left end of the linked list) to
     minimize traversing the linked list.
 
-45) Need to rework constructors of Fraction/ MixedFraction. Update tests.
-
 46)
 
 
@@ -150,6 +148,9 @@
 
 38) After the constructors are reworked, update tests.
     -> Updated tests.
+
+45) Need to rework constructors of Fraction/ MixedFraction. Update tests.
+    -> Done.
 
 
 # Obsolete

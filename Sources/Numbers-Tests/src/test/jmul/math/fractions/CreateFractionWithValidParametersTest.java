@@ -38,6 +38,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import jmul.math.fractions.Fraction;
+import jmul.math.fractions.FractionHelper;
 import static jmul.math.fractions.FractionHelper.createFraction;
 import jmul.math.numbers.Constants;
 import jmul.math.signs.Sign;
@@ -143,8 +144,9 @@ public class CreateFractionWithValidParametersTest {
 
         for (int base = Constants.BASE_MIN_LIMIT; base <= Constants.BASE_MAX_LIMIT; base++) {
 
-            parameters.add(new Object[] { createFraction(base), "infinity", Signs.POSITIVE });
-            parameters.add(new Object[] { createFraction(Signs.NEGATIVE, base), "-infinity", Signs.NEGATIVE });
+            parameters.add(new Object[] { FractionHelper.createInfinity(base), "infinity", Signs.POSITIVE });
+            parameters.add(new Object[] { FractionHelper.createInfinity(base, Signs.NEGATIVE), "-infinity",
+                                          Signs.NEGATIVE });
 
             parameters.add(new Object[] { createFraction(base, "0"), "0", Signs.POSITIVE });
             parameters.add(new Object[] { createFraction(base, "-0"), "0", Signs.POSITIVE });

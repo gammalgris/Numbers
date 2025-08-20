@@ -39,8 +39,6 @@ import java.util.SortedSet;
 
 import jmul.math.Math;
 import jmul.math.digits.PositionalNumeralSystems;
-import static jmul.math.fractions.FractionHelper.CLONE;
-import static jmul.math.fractions.FractionHelper.DONT_CLONE;
 import static jmul.math.fractions.FractionHelper.createFraction;
 import jmul.math.functions.FunctionSingletons;
 import jmul.math.functions.repository.FunctionIdentifiers;
@@ -48,6 +46,8 @@ import jmul.math.hash.HashHelper;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberHelper;
 import static jmul.math.numbers.NumberHelper.createNumber;
+import static jmul.math.numbers.creation.CreationParameters.CLONE;
+import static jmul.math.numbers.creation.CreationParameters.DONT_CLONE;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.EqualityFunction;
 import jmul.math.operations.MixedBinaryOperation;
@@ -92,7 +92,7 @@ class MixedFraction implements Fraction {
      * @param denominator
      *        the denominator of this fraction
      */
-    public MixedFraction(Number integerPart, Number numerator, Number denominator) {
+    protected MixedFraction(Number integerPart, Number numerator, Number denominator) {
 
         super();
 
@@ -113,6 +113,7 @@ class MixedFraction implements Fraction {
      * @param denominator
      *        a number representing the denominator of a fraction
      */
+    @Deprecated
     private static void checkParameters(Number integerPart, Number numerator, Number denominator) {
 
         // Check the references now. This will avoid null checking later.
@@ -392,7 +393,7 @@ class MixedFraction implements Fraction {
         Number newIntegerPart = NumberHelper.createNumber(base(), zeroString);
 
         Number newNumerator = numerator().absoluteValue();
-        Number newDenominator = createNumber(denominator());
+        Number newDenominator = NumberHelper.createNumber(CLONE, denominator());
 
         while (newNumerator.isGreaterOrEqual(denominator())) {
 

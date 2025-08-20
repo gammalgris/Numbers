@@ -39,6 +39,7 @@ import java.util.Collection;
 
 import jmul.math.Math;
 import jmul.math.fractions.Fraction;
+import jmul.math.fractions.FractionHelper;
 import static jmul.math.fractions.FractionHelper.createFraction;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
@@ -146,9 +147,10 @@ public class RebaseFractionTest {
 
             for (int destinationBase = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
 
-                parameters.add(new Object[] { createFraction(base), destinationBase, createFraction(destinationBase) });
-                parameters.add(new Object[] { createFraction(Signs.NEGATIVE, base), destinationBase,
-                                              createFraction(Signs.NEGATIVE, destinationBase) });
+                parameters.add(new Object[] { FractionHelper.createInfinity(base), destinationBase,
+                                              FractionHelper.createInfinity(destinationBase) });
+                parameters.add(new Object[] { FractionHelper.createInfinity(base, Signs.NEGATIVE), destinationBase,
+                                              FractionHelper.createInfinity(destinationBase, Signs.NEGATIVE) });
 
                 parameters.add(new Object[] { createFraction(base, "0"), destinationBase,
                                               createFraction(destinationBase, "0") });
@@ -184,8 +186,10 @@ public class RebaseFractionTest {
         parameters.add(new Object[] { createFraction(2, "1010", "1011"), 10, createFraction(10, "10", "11") });
         parameters.add(new Object[] { createFraction(2, "-1010", "1011"), 10, createFraction(10, "-10", "11") });
 
-        parameters.add(new Object[] { createFraction(2, "1", "1010", "1011"), 10, createFraction(10, "1", "10", "11") });
-        parameters.add(new Object[] { createFraction(2, "-1", "1010", "1011"), 10, createFraction(10, "-1", "10", "11") });
+        parameters.add(new Object[] { createFraction(2, "1", "1010", "1011"), 10,
+                                      createFraction(10, "1", "10", "11") });
+        parameters.add(new Object[] { createFraction(2, "-1", "1010", "1011"), 10,
+                                      createFraction(10, "-1", "10", "11") });
 
         return parameters;
     }

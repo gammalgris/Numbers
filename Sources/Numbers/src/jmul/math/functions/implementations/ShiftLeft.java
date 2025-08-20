@@ -35,8 +35,10 @@ package jmul.math.functions.implementations;
 
 
 import jmul.math.numbers.Number;
+import jmul.math.numbers.NumberHelper;
 import static jmul.math.numbers.NumberHelper.createInfinity;
 import static jmul.math.numbers.NumberHelper.createNumber;
+import static jmul.math.numbers.creation.CreationParameters.CLONE;
 import jmul.math.numbers.exceptions.UndefinedOperationException;
 import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.NodesHelper;
@@ -81,7 +83,7 @@ public class ShiftLeft implements BinaryOperation<Number, Result<Number>> {
 
         if (number.isInfinity() || number.isZero()) {
 
-            Number shiftedClone = createNumber(number);
+            Number shiftedClone = NumberHelper.createNumber(CLONE, number);
             return new Result<Number>(shiftedClone);
         }
 
@@ -102,7 +104,7 @@ public class ShiftLeft implements BinaryOperation<Number, Result<Number>> {
             }
         }
 
-        Number copy = createNumber(number);
+        Number copy = NumberHelper.createNumber(CLONE, number);
         DigitNode center = copy.centerNode();
 
         Number counter = shifts.absoluteValue();

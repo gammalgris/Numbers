@@ -35,10 +35,10 @@ package jmul.math.functions.implementations;
 
 
 import jmul.math.fractions.Fraction;
-import static jmul.math.fractions.FractionHelper.DONT_CLONE;
 import static jmul.math.fractions.FractionHelper.createFraction;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
+import static jmul.math.numbers.creation.CreationParameters.DONT_CLONE;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
 import jmul.math.signs.Signs;

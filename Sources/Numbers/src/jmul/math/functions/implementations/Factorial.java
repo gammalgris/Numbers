@@ -35,7 +35,9 @@ package jmul.math.functions.implementations;
 
 
 import jmul.math.numbers.Number;
+import jmul.math.numbers.NumberHelper;
 import static jmul.math.numbers.NumberHelper.createNumber;
+import static jmul.math.numbers.creation.CreationParameters.CLONE;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
 import jmul.math.signs.Signs;
@@ -77,7 +79,7 @@ public class Factorial implements UnaryOperation<Number, Result<Number>> {
 
         if (operand.isInfinity()) {
 
-            Number result = createNumber(operand);
+            Number result = NumberHelper.createNumber(CLONE, operand);
             return new Result<Number>(result);
         }
 

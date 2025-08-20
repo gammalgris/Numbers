@@ -36,11 +36,11 @@ package jmul.math.functions.implementations;
 
 import jmul.math.digits.PositionalNumeralSystems;
 import jmul.math.fractions.Fraction;
-import static jmul.math.fractions.FractionHelper.DONT_CLONE;
 import static jmul.math.fractions.FractionHelper.cloneFraction;
 import static jmul.math.fractions.FractionHelper.createFraction;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
+import static jmul.math.numbers.creation.CreationParameters.DONT_CLONE;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.Result;
 

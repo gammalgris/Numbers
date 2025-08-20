@@ -39,6 +39,7 @@ import java.util.Collection;
 
 import static jmul.math.Math.compare;
 import jmul.math.fractions.Fraction;
+import jmul.math.fractions.FractionHelper;
 import static jmul.math.fractions.FractionHelper.createFraction;
 import jmul.math.numbers.Constants;
 
@@ -129,9 +130,10 @@ public class FractionComparisonTest {
 
         for (int base = Constants.BASE_MIN_LIMIT; base <= Constants.BASE_MAX_LIMIT; base++) {
 
-            parameters.add(new Object[] { createFraction(base), createFraction(base), 0 });
-            parameters.add(new Object[] { createFraction(base, "0"), createFraction(base), -1 });
-            parameters.add(new Object[] { createFraction(base), createFraction(base, "0"), 1 });
+            parameters.add(new Object[] { FractionHelper.createInfinity(base), FractionHelper.createInfinity(base),
+                                          0 });
+            parameters.add(new Object[] { createFraction(base, "0"), FractionHelper.createInfinity(base), -1 });
+            parameters.add(new Object[] { FractionHelper.createInfinity(base), createFraction(base, "0"), 1 });
 
             parameters.add(new Object[] { createFraction(base, "1"), createFraction(base, "1"), 0 });
             parameters.add(new Object[] { createFraction(base, "0"), createFraction(base, "1"), -1 });
