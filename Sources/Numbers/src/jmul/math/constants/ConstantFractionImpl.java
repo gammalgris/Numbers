@@ -7,7 +7,7 @@
  * JMUL is a central repository for utilities which are used in my
  * other public and private repositories.
  *
- * Copyright (C) 2024  Kristian Kutin
+ * Copyright (C) 2025  Kristian Kutin
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -37,16 +37,19 @@ package jmul.math.constants;
 import java.util.HashMap;
 import java.util.Map;
 
+import jmul.math.Math;
+import jmul.math.fractions.Fraction;
 import jmul.math.functions.implementations.ParameterCheckHelper;
+import static jmul.math.functions.implementations.ParameterCheckHelper.checkParameter;
 import jmul.math.numbers.Number;
 
 
 /**
- * A constant for various number bases.
+ * A constant fraction for various number bases.
  *
  * @author Kristian Kutin
  */
-public class ConstantImpl implements Constant {
+class ConstantFractionImpl implements Constant {
 
     /**
      * The default base for this constant.
@@ -56,28 +59,55 @@ public class ConstantImpl implements Constant {
     /**
      * The default value for this constant.
      */
-    private final Number defaultValue;
+    private final Fraction defaultValue;
+
+    /**
+     * A default precision to evaluate the fraction.
+     */
+    private final Number defaultPrecision;
 
     /**
      * A map which associates a constant value with various number bases.
      */
-    private final Map<Integer, Number> constants;
+    private final Map<Integer, Fraction> constants;
 
     /**
-     * Vreates a new constant according to the specified initial value.
+     * A map which contains the precision for various number bases.
+     */
+    private final Map<Integer, Number> precisions;
+
+    /**
+     * Creates a new constant according to the specified initial value.
+     *
+     * @param value
+     *        a fraction
+     */
+    protected ConstantFractionImpl(Fraction value) {
+
+        this(checkParameter(value), Math.getDefaultMaximumFractionLength(value.base()));
+    }
+
+    /**
+     * Creates a new constant according to the specified initial value.
      *
      * @param value
      *        a constant value
+     * @param precision
+     *        a precision (i.e. limit to the number of digits of the fraction part)
      */
-    protected ConstantImpl(Number value) {
+    protected ConstantFractionImpl(Fraction value, Number precision) {
 
         super();
 
-        this.defaultValue = ParameterCheckHelper.checkParameter(value);
+        this.defaultValue = checkParameter(value);
         this.defaultBase = value.base();
+        this.defaultPrecision = checkParameter(precision);
+
         this.constants = new HashMap<>();
+        this.precisions = new HashMap<>();
 
         this.constants.put(defaultBase, defaultValue);
+        this.precisions.put(defaultBase, defaultPrecision);
     }
 
     /**
@@ -93,19 +123,26 @@ public class ConstantImpl implements Constant {
 
         ParameterCheckHelper.checkNumberBase(base);
 
-        Number value = null;
+        Fraction value = null;
+        Number precision = null;
         synchronized (this) {
 
             value = constants.get(base);
+            precision = precisions.get(base);
 
             if (value == null) {
 
                 value = defaultValue.rebase(base);
                 constants.put(base, value);
+
+                precision = defaultPrecision.rebase(base);
+                precisions.put(base, precision);
             }
         }
 
-        return value;
+        Number evaluatedValue = value.evaluate(precision);
+
+        return evaluatedValue;
     }
 
     /**
@@ -116,7 +153,8 @@ public class ConstantImpl implements Constant {
     @Override
     public String toString() {
 
-        return String.format("default value = [base:%d] %s", defaultBase, defaultValue);
+        return String.format("default value = [base:%d] %s (precision: %s)", defaultBase, defaultValue,
+                             defaultPrecision);
     }
 
 }

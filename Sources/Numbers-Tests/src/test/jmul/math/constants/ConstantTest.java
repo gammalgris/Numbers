@@ -35,7 +35,7 @@ package test.jmul.math.constants;
 
 
 import jmul.math.constants.Constant;
-import static jmul.math.constants.ConstantHelper.createConstant;
+import jmul.math.constants.ConstantHelper;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
 
@@ -61,7 +61,7 @@ public class ConstantTest {
 
         Number initialValue = createNumber(10, "10");
 
-        Constant constant = createConstant(initialValue);
+        Constant constant = ConstantHelper.createConstantNumber(initialValue);
 
         Number actualValue = constant.value(10);
         assertEquals(initialValue, actualValue);
@@ -76,7 +76,7 @@ public class ConstantTest {
 
         Number initialValue = createNumber(10, "10");
 
-        Constant constant = createConstant(initialValue);
+        Constant constant = ConstantHelper.createConstantNumber(initialValue);
 
         Number actualValue = constant.value(16);
         assertEquals(16, actualValue.base());

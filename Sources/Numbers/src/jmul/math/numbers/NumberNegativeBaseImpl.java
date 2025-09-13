@@ -999,4 +999,22 @@ public class NumberNegativeBaseImpl implements Number {
         throw new UnsupportedOperationException();
     }
 
+    @Override
+    public Number squareRoot(FunctionIdentifier algorithm) {
+        // TODO Implement this method
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Number squareRoot(FunctionIdentifier algorithm, Number decimalPlaces) {
+        // TODO Implement this method
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Number squareRoot(Number decimalPlaces) {
+        // TODO Implement this method
+        return null;
+    }
+
 }

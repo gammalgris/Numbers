@@ -38,7 +38,7 @@ import java.util.Comparator;
 import java.util.SortedSet;
 
 import jmul.math.constants.Constant;
-import static jmul.math.constants.ConstantHelper.createConstant;
+import jmul.math.constants.ConstantHelper;
 import jmul.math.fractions.Fraction;
 import jmul.math.functions.FunctionSingletons;
 import jmul.math.functions.implementations.ParameterCheckHelper;
@@ -70,14 +70,20 @@ public final class Math {
      * <i>Note:<br>
      * In several cases it is useful to cut the fractional part instead of running through end endless loop.</i>
      */
-    private static final Constant DEFAULT_MAXIMUM_FRACTION_LENGTH;
+    public static final Constant DEFAULT_MAXIMUM_FRACTION_LENGTH;
+
+    /**
+     * The default number of iterations for Heron's method of calculating the suqare root.
+     */
+    public static final Constant DEFAULT_HERON_METHOD_ITERATIONS;
 
     /*
      * The static initializer.
      */
     static {
 
-        DEFAULT_MAXIMUM_FRACTION_LENGTH = createConstant(10, "10");
+        DEFAULT_MAXIMUM_FRACTION_LENGTH = ConstantHelper.createConstantNumber(10, "10");
+        DEFAULT_HERON_METHOD_ITERATIONS = ConstantHelper.createConstantNumber(10, "8");
     }
 
     /**
@@ -1723,6 +1729,84 @@ public final class Math {
         UnaryOperation<Number, Result<Number>> function =
             (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.SQUARE_NUMBER_FUNCTION);
         Result<Number> result = function.calculate(number);
+
+        return result.result();
+    }
+
+    /**
+     * Calculates the square root for the specified number.
+     *
+     * @param number
+     *        a number
+     *
+     * @return the square root
+     */
+    public static Number squareRoot(Number number) {
+
+        return squareRoot(FunctionIdentifiers.SQUARE_ROOT_FUNCTION, number);
+    }
+
+    /**
+     * Calculates the square root for this number.
+     *
+     * @param number
+     *        a number
+     * @param decimalPlaces
+     *        the number of decimal places retained after cutting the fraction part
+     *
+     * @return a number
+     */
+    public static Number squareRoot(Number number, Number decimalPlaces) {
+
+        return squareRoot(FunctionIdentifiers.SQUARE_ROOT_FUNCTION, number, decimalPlaces);
+    }
+
+    /**
+     * Calculates the square root for the specified number.
+     *
+     * @param number
+     *        a number
+     * @param algorithm
+     *        the identifier for an algorithm
+     *
+     * @return a number
+     */
+    public static Number squareRoot(FunctionIdentifier algorithm, Number number) {
+
+        ParameterCheckHelper.checkParameter(number);
+
+        int base = number.base();
+        Number decimalPlaces = Math.getDefaultMaximumFractionLength(base);
+
+        return squareRoot(algorithm, number, decimalPlaces);
+    }
+
+    /**
+     * Calculates the square root for the specified number.
+     *
+     * @param number
+     *        a number
+     * @param algorithm
+     *        the identifier for an algorithm
+     * @param decimalPlaces
+     *        the number of decimal places retained after cutting the fraction part
+     *
+     * @return a number
+     */
+    public static Number squareRoot(FunctionIdentifier algorithm, Number number, Number decimalPlaces) {
+
+        final FunctionIdentifier[] ALLOWED_ALGORITHMS = new FunctionIdentifier[] {
+            FunctionIdentifiers.SQUARE_ROOT_FUNCTION };
+        FunctionIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, algorithm);
+
+        ParameterCheckHelper.checkParameter(number);
+
+        int base = number.base();
+        Number iterations = DEFAULT_HERON_METHOD_ITERATIONS.value(base);
+
+        TernaryOperation<Number, Result<Number>> function =
+            (TernaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(algorithm);
+        Result<Number> result = function.calculate(number, iterations, decimalPlaces);
 
         return result.result();
     }

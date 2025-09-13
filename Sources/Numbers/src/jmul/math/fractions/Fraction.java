@@ -36,6 +36,7 @@ package jmul.math.fractions;
 
 import java.util.SortedSet;
 
+import jmul.math.expressions.Expression;
 import jmul.math.numbers.AbstractNumber;
 import jmul.math.numbers.Number;
 import jmul.math.operations.ArithmeticFractionOperations;
@@ -50,14 +51,7 @@ import jmul.math.operations.NumberComparisons;
  * @author Kristian Kutin
  */
 public interface Fraction extends Comparable, NumberComparisons, FractionComparisons, ArithmeticFractionOperations,
-                                  AbstractNumber {
-
-    /**
-     * Evaluates this fraction and returns a number which is equivalent to the fraction.
-     *
-     * @return a number
-     */
-    Number evaluate();
+                                  AbstractNumber, Expression {
 
     /**
      * Evaluates this fraction and returns a number which is equivalent to the fraction.

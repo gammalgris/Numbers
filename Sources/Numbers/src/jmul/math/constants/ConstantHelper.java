@@ -34,8 +34,11 @@
 package jmul.math.constants;
 
 
+import jmul.math.fractions.Fraction;
+import jmul.math.numbers.Constants;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
+import static jmul.math.fractions.FractionHelper.createFraction;
 
 
 /**
@@ -56,6 +59,19 @@ public class ConstantHelper {
     /**
      * Creates a new constant according to the specified parameters.
      *
+     * @param string
+     *        a sequence of digits
+     *
+     * @return a constant
+     */
+    public static Constant createConstantNumber(String string) {
+
+        return createConstantNumber(createNumber(Constants.DEFAULT_NUMBER_BASE, string));
+    }
+
+    /**
+     * Creates a new constant according to the specified parameters.
+     *
      * @param base
      *        a number base
      * @param string
@@ -63,9 +79,9 @@ public class ConstantHelper {
      *
      * @return a constant
      */
-    public static Constant createConstant(int base, String string) {
+    public static Constant createConstantNumber(int base, String string) {
 
-        return createConstant(createNumber(base, string));
+        return createConstantNumber(createNumber(base, string));
     }
 
     /**
@@ -76,9 +92,87 @@ public class ConstantHelper {
      *
      * @return a constant
      */
-    public static Constant createConstant(Number value) {
+    public static Constant createConstantNumber(Number value) {
 
-        return new ConstantImpl(value);
+        return new ConstantNumberImpl(value);
+    }
+
+    /**
+     * Creates a new constant according to the specified parameters.
+     *
+     * @param string
+     *        a sequence of digits
+     *
+     * @return a constant
+     */
+    public static Constant createConstantFraction(String string) {
+
+        return createConstantFraction(Constants.DEFAULT_NUMBER_BASE, string);
+    }
+
+    /**
+     * Creates a new constant according to the specified parameters.
+     *
+     * @param base
+     *        a number base
+     * @param integerPartString
+     *        a sequence of digits of the integer part
+     *
+     * @return a constant
+     */
+    public static Constant createConstantFraction(int base, String integerPartString) {
+
+        return createConstantFraction(createFraction(base, integerPartString));
+    }
+
+    /**
+     * Creates a new constant according to the specified parameters.
+     *
+     * @param base
+     *        a number base
+     * @param numeratorString
+     *        a sequence of digits of the numerator
+     * @param denominatorString
+     *        a sequence of digits of the denominator
+     *
+     * @return a constant
+     */
+    public static Constant createConstantFraction(int base, String numeratorString, String denominatorString) {
+
+        return createConstantFraction(createFraction(base, numeratorString, denominatorString));
+    }
+
+    /**
+     * Creates a new constant according to the specified parameters.
+     *
+     * @param base
+     *        a number base
+     * @param integerPartString
+     *        a sequence of digits of the integer part
+     * @param numeratorString
+     *        a sequence of digits of the numerator
+     * @param denominatorString
+     *        a sequence of digits of the denominator
+     *
+     * @return a constant
+     */
+    public static Constant createConstantFraction(int base, String integerPartString, String numeratorString,
+                                                  String denominatorString) {
+
+        return createConstantFraction(createFraction(base, integerPartString, numeratorString, denominatorString));
+    }
+
+    /**
+     * Creates a new constant according to the specified parameters.
+     *
+     * @param value
+     *        an initial value
+     *
+     * @return a constant
+     */
+    public static Constant createConstantFraction(Fraction value) {
+
+        return new ConstantFractionImpl(value);
     }
 
 }

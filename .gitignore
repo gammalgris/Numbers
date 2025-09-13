@@ -16,3 +16,9 @@
 /Sources/Number/classes/*
 /Sources/Number-Tests/classes/*
 /Sources/Version/classes/*
+
+
+#
+# Ignore Books(due to size)
+#
+/Docs/books/*

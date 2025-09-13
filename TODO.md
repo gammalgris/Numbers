@@ -39,7 +39,7 @@
     -> Rationale: bugs in implementations and exit conditions might result in endless loops. On the other hand
                   exiting prematurely might result in a wrong result.
 
-17) Implement various random fucntions (i.e. random number functions, dice, dice with non numerical symbols, etc.).
+17) Implement various random functions (i.e. random number functions, dice, dice with non numerical symbols, etc.).
 
 18) Consider adding an annotation so that each function implementation can be assigned an identifier.
     -> Rationale: This should make the initialization easier (but results i.e. in scanning classes and looking for
@@ -97,14 +97,20 @@
 41) The function "Number Fraction.evaluate()" requires an aditional signature.
     "Number Fraction.evaluate(FunctionIdentifier)" to chose a among available division algorithms.
 
-42) Need speed comparisons between division algorithms.
-
 43) The conversion functions need rework. They are missing in the jmul.math.Math class.
 
 44) Implement optimizations (e.g. right end of the linked list, left end of the linked list) to
     minimize traversing the linked list.
 
-46)
+46) Migrate the formula interpreter.
+
+47) Consider a representation for expressions/ formulas / equations and for replacing/ expanding
+    formulas.
+
+48) Consider a way to provide a constant for numbers like e, Pi, etc. Alternatively provide functions
+    that calculate a value by iteration. Put it in the Math class.
+
+49)
 
 
 # Done
@@ -148,6 +154,9 @@
 
 38) After the constructors are reworked, update tests.
     -> Updated tests.
+
+42) Need speed comparisons between division algorithms.
+    -> Done. See DivisionSpeedTest.
 
 45) Need to rework constructors of Fraction/ MixedFraction. Update tests.
     -> Done.

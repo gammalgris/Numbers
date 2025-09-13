@@ -7,7 +7,7 @@
  * JMUL is a central repository for utilities which are used in my
  * other public and private repositories.
  *
- * Copyright (C) 2024  Kristian Kutin
+ * Copyright (C) 2025  Kristian Kutin
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -35,17 +35,28 @@ package jmul.math.units;
 
 
 /**
- * This enumeration contains various units of measurement.<br>
+ * This enumeration contains various angle units.<br>
  * <br>
  * <i>Note:<br>
- * This implementation is temporary and will be replaced (see project measurement units). The existing
- * implementation must be migrated.</i>
+ * This enumeration is not complete. Add missing entries.</i>
  *
  * @author Kristian Kutin
  */
-public enum Units implements Unit {
+public enum AngleUnits implements Angle {
 
+    /**
+     * See <a href="https://en.wikipedia.org/wiki/Radian">Radian</a>.
+     */
     RADIAN,
-    DEGREE, ;
+
+    /**
+     * See <a href="https://en.wikipedia.org/wiki/Degree_(angle)">Degree</a>.
+     */
+    DEGREE,
+
+    /**
+     * See <a href="https://en.wikipedia.org/wiki/Gradian">Gradian</a>.
+     */
+    GRADIAN, ;
 
 }

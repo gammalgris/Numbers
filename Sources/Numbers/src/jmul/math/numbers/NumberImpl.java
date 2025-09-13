@@ -40,6 +40,7 @@ import java.util.SortedSet;
 import jmul.math.Math;
 import jmul.math.fractions.Fraction;
 import jmul.math.functions.FunctionSingletons;
+import jmul.math.functions.implementations.ParameterCheckHelper;
 import jmul.math.functions.repository.FunctionIdentifier;
 import jmul.math.functions.repository.FunctionIdentifierHelper;
 import jmul.math.functions.repository.FunctionIdentifiers;
@@ -534,8 +535,63 @@ public class NumberImpl implements Number {
     @Override
     public Number squareRoot() {
 
-        // TODO
-        throw new UnsupportedOperationException();
+        return squareRoot(FunctionIdentifiers.SQUARE_ROOT_FUNCTION);
+    }
+
+    /**
+     * Calculates the square root for this number.
+     *
+     * @param algorithm
+     *        the identifier for an algorithm
+     *
+     * @return a number
+     */
+    @Override
+    public Number squareRoot(FunctionIdentifier algorithm) {
+
+        return squareRoot(algorithm, Math.getDefaultMaximumFractionLength(base));
+    }
+
+    /**
+     * Calculates the square root for this number.
+     *
+     * @param decimalPlaces
+     *        the number of decimal places retained after cutting the fraction part
+     *
+     * @return a number
+     */
+    @Override
+    public Number squareRoot(Number decimalPlaces) {
+
+        return squareRoot(FunctionIdentifiers.SQUARE_ROOT_FUNCTION, decimalPlaces);
+    }
+
+    /**
+     * Calculates the square root for this number.
+     *
+     * @param algorithm
+     *        the identifier for an algorithm
+     * @param decimalPlaces
+     *        the number of decimal places retained after cutting the fraction part
+     *
+     * @return a number
+     */
+    @Override
+    public Number squareRoot(FunctionIdentifier algorithm, Number decimalPlaces) {
+
+        final FunctionIdentifier[] ALLOWED_ALGORITHMS = new FunctionIdentifier[] {
+            FunctionIdentifiers.SQUARE_ROOT_FUNCTION };
+        FunctionIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, algorithm);
+
+        ParameterCheckHelper.checkParameter(this);
+
+        Number iterations = Math.DEFAULT_HERON_METHOD_ITERATIONS.value(base);
+
+        TernaryOperation<Number, Result<Number>> function =
+            (TernaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(algorithm);
+        Result<Number> result = function.calculate(this, iterations, decimalPlaces);
+
+        return result.result();
     }
 
     /**

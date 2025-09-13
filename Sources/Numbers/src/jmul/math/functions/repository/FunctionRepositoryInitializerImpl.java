@@ -37,6 +37,7 @@ package jmul.math.functions.repository;
 import jmul.math.functions.implementations.AddDigits;
 import jmul.math.functions.implementations.AddFractionAndNumber;
 import jmul.math.functions.implementations.AddFractions;
+import jmul.math.functions.implementations.AddLogarithmsFunction;
 import jmul.math.functions.implementations.AddMatrices;
 import jmul.math.functions.implementations.AddNumberAndFraction;
 import jmul.math.functions.implementations.AddNumbers;
@@ -125,8 +126,10 @@ import jmul.math.functions.implementations.ShiftLeft;
 import jmul.math.functions.implementations.ShiftRight;
 import jmul.math.functions.implementations.SquareFractionFunction;
 import jmul.math.functions.implementations.SquareNumberFunction;
+import jmul.math.functions.implementations.SquareRootFunction;
 import jmul.math.functions.implementations.SubtractFractionAndNumber;
 import jmul.math.functions.implementations.SubtractFractions;
+import jmul.math.functions.implementations.SubtractLogarithmsFunction;
 import jmul.math.functions.implementations.SubtractMatrices;
 import jmul.math.functions.implementations.SubtractNumberAndFraction;
 import jmul.math.functions.implementations.SubtractNumbers;
@@ -406,6 +409,11 @@ public class FunctionRepositoryInitializerImpl implements FunctionRepositoryInit
         repository.registerFunction(FunctionIdentifiers.RANDOM_NUMBER_FUNCTION, RandomNumberFunction.class);
         repository.registerFunction(FunctionIdentifiers.RANDOM_NUMBER_WITHIN_INTERVAL_FUNCTION,
                                     RandomNumberWithinInterval.class);
+
+        repository.registerFunction(FunctionIdentifiers.ADD_LOGARITHMS_FUNCTION, AddLogarithmsFunction.class);
+        repository.registerFunction(FunctionIdentifiers.SUBTRACT_LOGARITHMS_FUNCTION, SubtractLogarithmsFunction.class);
+
+        repository.registerFunction(FunctionIdentifiers.SQUARE_ROOT_FUNCTION, SquareRootFunction.class);
 
         return repository;
     }

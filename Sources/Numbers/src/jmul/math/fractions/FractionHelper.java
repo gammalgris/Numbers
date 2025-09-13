@@ -35,7 +35,7 @@ package jmul.math.fractions;
 
 
 import jmul.math.constants.Constant;
-import static jmul.math.constants.ConstantHelper.createConstant;
+import jmul.math.constants.ConstantHelper;
 import jmul.math.numbers.Constants;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberHelper;
@@ -71,9 +71,9 @@ public final class FractionHelper {
      */
     static {
 
-        DEFAULT_INTEGER_PART = createConstant(Constants.DEFAULT_NUMBER_BASE, "0");
-        DEFAULT_NUMERATOR = createConstant(Constants.DEFAULT_NUMBER_BASE, "0");
-        DEFAULT_DENOMINATOR = createConstant(Constants.DEFAULT_NUMBER_BASE, "1");
+        DEFAULT_INTEGER_PART = ConstantHelper.createConstantNumber(Constants.DEFAULT_NUMBER_BASE, "0");
+        DEFAULT_NUMERATOR = ConstantHelper.createConstantNumber(Constants.DEFAULT_NUMBER_BASE, "0");
+        DEFAULT_DENOMINATOR = ConstantHelper.createConstantNumber(Constants.DEFAULT_NUMBER_BASE, "1");
     }
 
     /**

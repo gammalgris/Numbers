@@ -34,12 +34,12 @@
 package jmul.math.logarithms;
 
 
-import jmul.math.numbers.AbstractNumber;
+import jmul.math.expressions.Expression;
 import jmul.math.numbers.Number;
 
 
 /**
- * This interface describes a logarithm expression.<br>
+ * This interface describes a logarithm expression (i.e. exponent = logarithm<sub>base</sub>numerus =&gt; base<sup>exponent</sup> = numerus).<br>
  * <br>
  * See <a href="https://en.wikipedia.org/wiki/Logarithm">Logarithm</a><br>
  * <br>
@@ -49,7 +49,14 @@ import jmul.math.numbers.Number;
  *
  * @author Kristian Kutin
  */
-public interface Logarithm extends AbstractNumber {
+public interface Logarithm extends Expression {
+
+    /**
+     * Returns the base of the underlying numeral system for this expression.
+     *
+     * @return a base
+     */
+    int base();
 
     /**
      * Returns the logarithm base.
@@ -63,7 +70,7 @@ public interface Logarithm extends AbstractNumber {
      *
      * @return the number of this logarithm expression
      */
-    Number number();
+    Number numerus();
 
     /**
      * Adds this logarithm and the specified logarithm. If the logarithm bases are equal then the numbers of the
@@ -77,8 +84,8 @@ public interface Logarithm extends AbstractNumber {
     Logarithm add(Logarithm logarithm);
 
     /**
-     * Subtracts the second logarithm expression from this logarithm expression. If the logarithm bases are equal then
-     * the number of this logarithm expression is divided by the number of the specified logarithm expression.
+     * Subtracts the specified logarithm expression from this logarithm expression. If the logarithm bases are equal
+     * then the number of this logarithm expression is divided by the number of the specified logarithm expression.
      *
      * @param logarithm
      *        a logarithm expression
@@ -86,19 +93,5 @@ public interface Logarithm extends AbstractNumber {
      * @return a logarithm expression
      */
     Logarithm subtract(Logarithm logarithm);
-
-    /**
-     * Negates this logarith expression (i.e. calculates the reciprocal of the number of this logarithm expression).
-     *
-     * @return a logarithm expression
-     */
-    Logarithm negate();
-
-    /**
-     * Evaluates this logarithm expression.
-     *
-     * @return a number
-     */
-    Number evaluate();
 
 }

@@ -90,6 +90,38 @@ public interface ArithmeticNumberOperations {
     Number squareRoot();
 
     /**
+     * Calculates the square root for this number.
+     *
+     * @param algorithm
+     *        the identifier for an algorithm
+     *
+     * @return a number
+     */
+    Number squareRoot(FunctionIdentifier algorithm);
+
+    /**
+     * Calculates the square root for this number.
+     *
+     * @param decimalPlaces
+     *        the number of decimal places retained after cutting the fraction part
+     *
+     * @return a number
+     */
+    Number squareRoot(Number decimalPlaces);
+
+    /**
+     * Calculates the square root for this number.
+     *
+     * @param algorithm
+     *        the identifier for an algorithm
+     * @param decimalPlaces
+     *        the number of decimal places retained after cutting the fraction part
+     *
+     * @return a number
+     */
+    Number squareRoot(FunctionIdentifier algorithm, Number decimalPlaces);
+
+    /**
      * Halves this number.
      *
      * @return a number

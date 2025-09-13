@@ -105,6 +105,17 @@
          </list>
       </hash>
    </hash>
+   <hash n="oracle.jdeveloper.runner.RunConfigurations">
+      <hash n="runConfigurationDefinitions">
+         <hash n="Default">
+            <value n="custom" v="false"/>
+            <value n="javaOptions" v="-Xrunhprof:cpu=samples,file=myprogram.hprof"/>
+            <value n="name" v="Default"/>
+            <url n="runDirectoryURL" path="."/>
+            <url n="targetURL" path="src/examples/AdditionTable.java"/>
+         </hash>
+      </hash>
+   </hash>
    <hash n="oracle.jdevimpl.config.JProjectLibraries">
       <list n="exportedReferences">
          <hash>

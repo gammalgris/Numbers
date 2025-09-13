@@ -39,6 +39,7 @@ import java.util.stream.Stream;
 
 import jmul.math.digits.Digit;
 import jmul.math.fractions.Fraction;
+import jmul.math.logarithms.Logarithm;
 import jmul.math.matrices.Matrix;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
@@ -876,6 +877,32 @@ public final class ParameterCheckHelper {
                 String.format("The number of columns of the first matrix doesn't match the number of rows of the second matrix (%s & %s)!",
                               matrix1.columns(), matrix2.rows());
             throw new IllegalArgumentException(message);
+        }
+    }
+
+    /**
+     * Checks the specified parameters.
+     *
+     * @param logarithmExpression1
+     *        a logarithm expression
+     * @param logarithmExpression2
+     *        a logarithm expression
+     */
+    public static void checkParameters(Logarithm logarithmExpression1, Logarithm logarithmExpression2) {
+
+        if (logarithmExpression1 == null) {
+
+            throw new IllegalArgumentException("No logarithm expression (null) was specified!");
+        }
+
+        if (logarithmExpression2 == null) {
+
+            throw new IllegalArgumentException("No logarithm expression (null) was specified!");
+        }
+
+        if (logarithmExpression1.base() != logarithmExpression2.base()) {
+
+            throw new IllegalArgumentException("The number bases of the specified logarithm expressions are not equal!");
         }
     }
 
