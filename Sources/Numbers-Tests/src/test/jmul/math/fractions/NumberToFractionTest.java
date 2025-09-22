@@ -41,7 +41,7 @@ import jmul.math.Math;
 import jmul.math.fractions.Fraction;
 import jmul.math.fractions.FractionHelper;
 import static jmul.math.fractions.FractionHelper.createFraction;
-import jmul.math.functions.implementations.NumberToFraction;
+import jmul.math.operations.implementations.NumberToFraction;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;

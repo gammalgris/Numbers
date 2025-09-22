@@ -38,7 +38,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import jmul.math.Math;
-import jmul.math.functions.repository.FunctionIdentifiers;
+import jmul.math.operations.repository.OperationIdentifiers;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
@@ -115,7 +115,7 @@ public class RoundToOddTest {
     @Test
     public void testRounding() {
 
-        Number actualResult = number.round(FunctionIdentifiers.ROUND_NUMBER_TO_ODD_FUNCTION, decimalPrecision);
+        Number actualResult = number.round(OperationIdentifiers.ROUND_NUMBER_TO_ODD_FUNCTION, decimalPrecision);
 
         assertEquals(toString(), expectedResult, actualResult);
         assertEquals(toString(), expectedResult.toString(), actualResult.toString());
@@ -127,7 +127,7 @@ public class RoundToOddTest {
     @Test
     public void testRoundingVariant2() {
 
-        Number actualResult = Math.round(FunctionIdentifiers.ROUND_NUMBER_TO_ODD_FUNCTION, number, decimalPrecision);
+        Number actualResult = Math.round(OperationIdentifiers.ROUND_NUMBER_TO_ODD_FUNCTION, number, decimalPrecision);
 
         assertEquals(toString(), expectedResult, actualResult);
         assertEquals(toString(), expectedResult.toString(), actualResult.toString());

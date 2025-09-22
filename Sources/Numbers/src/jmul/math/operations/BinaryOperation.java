@@ -34,9 +34,6 @@
 package jmul.math.operations;
 
 
-import jmul.math.functions.Function;
-
-
 /**
  * This interface describes a binary operation (i.e. an operation that takes two arguments).
  *
@@ -47,7 +44,7 @@ import jmul.math.functions.Function;
  * @param <S>
  *        the return type
  */
-public interface BinaryOperation<T, S extends Result> extends Function {
+public interface BinaryOperation<T, S extends Result> extends Operation {
 
     /**
      * Performs the binary (i.e. two operands) operation.

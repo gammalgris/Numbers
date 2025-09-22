@@ -39,8 +39,8 @@ import java.util.Map;
 
 import jmul.math.Math;
 import jmul.math.fractions.Fraction;
-import jmul.math.functions.implementations.ParameterCheckHelper;
-import static jmul.math.functions.implementations.ParameterCheckHelper.checkParameter;
+import jmul.math.operations.implementations.ParameterCheckHelper;
+import static jmul.math.operations.implementations.ParameterCheckHelper.checkParameter;
 import jmul.math.numbers.Number;
 
 

@@ -39,9 +39,9 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.stream.Stream;
 
-import jmul.math.functions.FunctionSingletons;
-import jmul.math.functions.implementations.ParameterCheckHelper;
-import jmul.math.functions.repository.FunctionIdentifiers;
+import jmul.math.operations.OperationSingletons;
+import jmul.math.operations.implementations.ParameterCheckHelper;
+import jmul.math.operations.repository.OperationIdentifiers;
 import jmul.math.hash.HashHelper;
 import jmul.math.indices.IndexSingletons;
 import jmul.math.matrices.Matrix;
@@ -261,7 +261,7 @@ public class VectorImpl implements Vector {
     public Vector add(Vector vector) {
 
         BinaryOperation<Vector, Result<Vector>> function =
-            (BinaryOperation<Vector, Result<Vector>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_VECTORS_FUNCTION);
+            (BinaryOperation<Vector, Result<Vector>>) OperationSingletons.getFunction(OperationIdentifiers.ADD_VECTORS_FUNCTION);
         Result<Vector> result = function.calculate(this, vector);
 
         return result.result();
@@ -279,7 +279,7 @@ public class VectorImpl implements Vector {
     public Vector subtract(Vector vector) {
 
         BinaryOperation<Vector, Result<Vector>> function =
-            (BinaryOperation<Vector, Result<Vector>>) FunctionSingletons.getFunction(FunctionIdentifiers.SUBTRACT_VECTORS_FUNCTION);
+            (BinaryOperation<Vector, Result<Vector>>) OperationSingletons.getFunction(OperationIdentifiers.SUBTRACT_VECTORS_FUNCTION);
         Result<Vector> result = function.calculate(this, vector);
 
         return result.result();
@@ -297,7 +297,7 @@ public class VectorImpl implements Vector {
     public Vector multiply(Number number) {
 
         MixedBinaryOperation<Vector, Number, Result<Vector>> function =
-            (MixedBinaryOperation<Vector, Number, Result<Vector>>) FunctionSingletons.getFunction(FunctionIdentifiers.MULTIPLY_VECTOR_WITH_NUMBER_FUNCTION);
+            (MixedBinaryOperation<Vector, Number, Result<Vector>>) OperationSingletons.getFunction(OperationIdentifiers.MULTIPLY_VECTOR_WITH_NUMBER_FUNCTION);
         Result<Vector> result = function.calculate(this, number);
 
         return result.result();
@@ -315,7 +315,7 @@ public class VectorImpl implements Vector {
     public Number scalarProduct(Vector vector) {
 
         BinaryOperation<Vector, Result<Number>> function =
-            (BinaryOperation<Vector, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.SCALAR_PRODUCT_FUNCTION);
+            (BinaryOperation<Vector, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.SCALAR_PRODUCT_FUNCTION);
         Result<Number> result = function.calculate(this, vector);
 
         return result.result();
@@ -333,7 +333,7 @@ public class VectorImpl implements Vector {
     public Vector crossProduct(Vector vector) {
 
         BinaryOperation<Vector, Result<Vector>> function =
-            (BinaryOperation<Vector, Result<Vector>>) FunctionSingletons.getFunction(FunctionIdentifiers.CROSS_PRODUCT_FUNCTION);
+            (BinaryOperation<Vector, Result<Vector>>) OperationSingletons.getFunction(OperationIdentifiers.CROSS_PRODUCT_FUNCTION);
         Result<Vector> result = function.calculate(this, vector);
 
         return result.result();
@@ -353,7 +353,7 @@ public class VectorImpl implements Vector {
     public Number tripleProduct(Vector vector1, Vector vector2) {
 
         TernaryOperation<Vector, Result<Number>> function =
-            (TernaryOperation<Vector, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.TRIPLE_PRODUCT_FUNCTION);
+            (TernaryOperation<Vector, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.TRIPLE_PRODUCT_FUNCTION);
         Result<Number> result = function.calculate(this, vector1, vector2);
 
         return result.result();
@@ -372,7 +372,7 @@ public class VectorImpl implements Vector {
     public Matrix dyadicProduct(Vector vector) {
 
         BinaryOperation<Vector, Result<Matrix>> function =
-            (BinaryOperation<Vector, Result<Matrix>>) FunctionSingletons.getFunction(FunctionIdentifiers.DYADIC_PRODUCT_FUNCTION);
+            (BinaryOperation<Vector, Result<Matrix>>) OperationSingletons.getFunction(OperationIdentifiers.DYADIC_PRODUCT_FUNCTION);
         Result<Matrix> result = function.calculate(this, vector);
 
         return result.result();
@@ -429,7 +429,7 @@ public class VectorImpl implements Vector {
             Vector other = (Vector) o;
 
             EqualityFunction<Vector> function =
-                (EqualityFunction<Vector>) FunctionSingletons.getFunction(FunctionIdentifiers.VECTOR_EQUALITY_FUNCTION);
+                (EqualityFunction<Vector>) OperationSingletons.getFunction(OperationIdentifiers.VECTOR_EQUALITY_FUNCTION);
             boolean result = function.equals(this, other);
 
             return result;

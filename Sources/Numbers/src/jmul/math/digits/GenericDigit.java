@@ -36,9 +36,9 @@ package jmul.math.digits;
 
 import java.util.Comparator;
 
-import jmul.math.functions.FunctionSingletons;
+import jmul.math.operations.OperationSingletons;
 import jmul.math.hash.HashHelper;
-import jmul.math.functions.repository.FunctionIdentifiers;
+import jmul.math.operations.repository.OperationIdentifiers;
 import jmul.math.operations.EqualityFunction;
 
 
@@ -182,7 +182,7 @@ class GenericDigit implements Digit {
 
             Digit other = (Digit) o;
             EqualityFunction<Digit> function =
-                (EqualityFunction<Digit>) FunctionSingletons.getFunction(FunctionIdentifiers.DIGIT_EQUALITY_FUNCTION);
+                (EqualityFunction<Digit>) OperationSingletons.getFunction(OperationIdentifiers.DIGIT_EQUALITY_FUNCTION);
             boolean result = function.equals(this, other);
 
             return result;
@@ -215,7 +215,7 @@ class GenericDigit implements Digit {
     public int compareTo(Digit d) {
 
         Comparator<Digit> function =
-            (Comparator<Digit>) FunctionSingletons.getFunction(FunctionIdentifiers.DIGIT_COMPARATOR_FUNCTION);
+            (Comparator<Digit>) OperationSingletons.getFunction(OperationIdentifiers.DIGIT_COMPARATOR_FUNCTION);
         int result = function.compare(this, d);
 
         return result;

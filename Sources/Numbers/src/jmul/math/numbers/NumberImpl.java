@@ -39,11 +39,11 @@ import java.util.SortedSet;
 
 import jmul.math.Math;
 import jmul.math.fractions.Fraction;
-import jmul.math.functions.FunctionSingletons;
-import jmul.math.functions.implementations.ParameterCheckHelper;
-import jmul.math.functions.repository.FunctionIdentifier;
-import jmul.math.functions.repository.FunctionIdentifierHelper;
-import jmul.math.functions.repository.FunctionIdentifiers;
+import jmul.math.operations.OperationSingletons;
+import jmul.math.operations.implementations.ParameterCheckHelper;
+import jmul.math.operations.repository.OperationIdentifier;
+import jmul.math.operations.repository.OperationIdentifierHelper;
+import jmul.math.operations.repository.OperationIdentifiers;
 import jmul.math.hash.HashHelper;
 import static jmul.math.numbers.Constants.DEFAULT_NUMBER_BASE;
 import static jmul.math.numbers.NumberHelper.createNumber;
@@ -212,7 +212,7 @@ public class NumberImpl implements Number {
     public String toScientificNotation(char decimalSeparator) {
 
         NotationFunction function =
-            (NotationFunction) FunctionSingletons.getFunction(FunctionIdentifiers.SCIENTIFIC_NOTATION_FUNCTION);
+            (NotationFunction) OperationSingletons.getFunction(OperationIdentifiers.SCIENTIFIC_NOTATION_FUNCTION);
 
         return function.toString(this, decimalSeparator);
     }
@@ -248,7 +248,7 @@ public class NumberImpl implements Number {
     public String toStandardNotation(char decimalSeparator) {
 
         NotationFunction function =
-            (NotationFunction) FunctionSingletons.getFunction(FunctionIdentifiers.STANDARD_NOTATION_FUNCTION);
+            (NotationFunction) OperationSingletons.getFunction(OperationIdentifiers.STANDARD_NOTATION_FUNCTION);
 
         return function.toString(this, decimalSeparator);
     }
@@ -355,7 +355,7 @@ public class NumberImpl implements Number {
             Fraction other = (Fraction) o;
 
             MixedComparator<Number, Fraction> comparator =
-                (MixedComparator<Number, Fraction>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_FRACTION_COMPARATOR_FUNCTION);
+                (MixedComparator<Number, Fraction>) OperationSingletons.getFunction(OperationIdentifiers.NUMBER_FRACTION_COMPARATOR_FUNCTION);
             return comparator.compare(this, other);
 
         } else if (o instanceof Number) {
@@ -363,7 +363,7 @@ public class NumberImpl implements Number {
             Number other = (Number) o;
 
             Comparator<Number> comparator =
-                (Comparator<Number>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_COMPARATOR_FUNCTION);
+                (Comparator<Number>) OperationSingletons.getFunction(OperationIdentifiers.NUMBER_COMPARATOR_FUNCTION);
             return comparator.compare(this, other);
         }
 
@@ -386,7 +386,7 @@ public class NumberImpl implements Number {
             Number other = (Number) o;
 
             EqualityFunction<Number> function =
-                (EqualityFunction<Number>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_EQUALITY_FUNCTION);
+                (EqualityFunction<Number>) OperationSingletons.getFunction(OperationIdentifiers.NUMBER_EQUALITY_FUNCTION);
             boolean result = function.equals(this, other);
 
             return result;
@@ -396,7 +396,7 @@ public class NumberImpl implements Number {
             Fraction other = (Fraction) o;
 
             MixedEqualityFunction<Number, Fraction> function =
-                (MixedEqualityFunction<Number, Fraction>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_FRACTION_EQUALITY_FUNCTION);
+                (MixedEqualityFunction<Number, Fraction>) OperationSingletons.getFunction(OperationIdentifiers.NUMBER_FRACTION_EQUALITY_FUNCTION);
             boolean result = function.equals(this, other);
 
             return result;
@@ -491,7 +491,7 @@ public class NumberImpl implements Number {
     public Number negate() {
 
         UnaryOperation<Number, Result<Number>> function =
-            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.NEGATE_NUMBER_FUNCTION);
+            (UnaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.NEGATE_NUMBER_FUNCTION);
         Result<Number> result = function.calculate(this);
 
         return result.result();
@@ -506,7 +506,7 @@ public class NumberImpl implements Number {
     public Number complement() {
 
         UnaryOperation<Number, Result<Number>> function =
-            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_COMPLEMENT_FUNCTION);
+            (UnaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.NUMBER_COMPLEMENT_FUNCTION);
         Result<Number> result = function.calculate(this);
 
         return result.result();
@@ -521,7 +521,7 @@ public class NumberImpl implements Number {
     public Number factorial() {
 
         UnaryOperation<Number, Result<Number>> function =
-            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.FACTORIAL_FUNCTION);
+            (UnaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.FACTORIAL_FUNCTION);
         Result<Number> result = function.calculate(this);
 
         return result.result();
@@ -535,7 +535,7 @@ public class NumberImpl implements Number {
     @Override
     public Number squareRoot() {
 
-        return squareRoot(FunctionIdentifiers.SQUARE_ROOT_FUNCTION);
+        return squareRoot(OperationIdentifiers.SQUARE_ROOT_FUNCTION);
     }
 
     /**
@@ -547,7 +547,7 @@ public class NumberImpl implements Number {
      * @return a number
      */
     @Override
-    public Number squareRoot(FunctionIdentifier algorithm) {
+    public Number squareRoot(OperationIdentifier algorithm) {
 
         return squareRoot(algorithm, Math.getDefaultMaximumFractionLength(base));
     }
@@ -563,7 +563,7 @@ public class NumberImpl implements Number {
     @Override
     public Number squareRoot(Number decimalPlaces) {
 
-        return squareRoot(FunctionIdentifiers.SQUARE_ROOT_FUNCTION, decimalPlaces);
+        return squareRoot(OperationIdentifiers.SQUARE_ROOT_FUNCTION, decimalPlaces);
     }
 
     /**
@@ -577,18 +577,18 @@ public class NumberImpl implements Number {
      * @return a number
      */
     @Override
-    public Number squareRoot(FunctionIdentifier algorithm, Number decimalPlaces) {
+    public Number squareRoot(OperationIdentifier algorithm, Number decimalPlaces) {
 
-        final FunctionIdentifier[] ALLOWED_ALGORITHMS = new FunctionIdentifier[] {
-            FunctionIdentifiers.SQUARE_ROOT_FUNCTION };
-        FunctionIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, algorithm);
+        final OperationIdentifier[] ALLOWED_ALGORITHMS = new OperationIdentifier[] {
+            OperationIdentifiers.SQUARE_ROOT_FUNCTION };
+        OperationIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, algorithm);
 
         ParameterCheckHelper.checkParameter(this);
 
         Number iterations = Math.DEFAULT_HERON_METHOD_ITERATIONS.value(base);
 
         TernaryOperation<Number, Result<Number>> function =
-            (TernaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(algorithm);
+            (TernaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(algorithm);
         Result<Number> result = function.calculate(this, iterations, decimalPlaces);
 
         return result.result();
@@ -603,7 +603,7 @@ public class NumberImpl implements Number {
     public Number halving() {
 
         UnaryOperation<Number, Result<Number>> function =
-            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.HALVING_NUMBER_FUNCTION);
+            (UnaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.HALVING_NUMBER_FUNCTION);
         Result<Number> result = function.calculate(this);
 
         return result.result();
@@ -618,7 +618,7 @@ public class NumberImpl implements Number {
     public Number doubling() {
 
         UnaryOperation<Number, Result<Number>> function =
-            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.DOUBLING_NUMBER_FUNCTION);
+            (UnaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.DOUBLING_NUMBER_FUNCTION);
         Result<Number> result = function.calculate(this);
 
         return result.result();
@@ -636,7 +636,7 @@ public class NumberImpl implements Number {
     public Number add(Number n) {
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_NUMBERS_TRIM_RESULT_FUNCTION);
+            (BinaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.ADD_NUMBERS_TRIM_RESULT_FUNCTION);
         Result<Number> result = function.calculate(this, n);
 
         return result.result();
@@ -654,7 +654,7 @@ public class NumberImpl implements Number {
     public Fraction add(Fraction f) {
 
         MixedBinaryOperation<Number, Fraction, Result<Fraction>> function =
-            (MixedBinaryOperation<Number, Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_NUMBER_AND_FRACTION_FUNCTION);
+            (MixedBinaryOperation<Number, Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.ADD_NUMBER_AND_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(this, f);
 
         return result.result();
@@ -672,7 +672,7 @@ public class NumberImpl implements Number {
     public Number subtract(Number n) {
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.SUBTRACT_NUMBERS_FUNCTION);
+            (BinaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.SUBTRACT_NUMBERS_FUNCTION);
         Result<Number> result = function.calculate(this, n);
 
         return result.result();
@@ -690,7 +690,7 @@ public class NumberImpl implements Number {
     public Fraction subtract(Fraction f) {
 
         MixedBinaryOperation<Number, Fraction, Result<Fraction>> function =
-            (MixedBinaryOperation<Number, Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.SUBTRACT_NUMBER_AND_FRACTION_FUNCTION);
+            (MixedBinaryOperation<Number, Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.SUBTRACT_NUMBER_AND_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(this, f);
 
         return result.result();
@@ -707,7 +707,7 @@ public class NumberImpl implements Number {
     @Override
     public Number multiply(Number n) {
 
-        return multiply(FunctionIdentifiers.LONG_MULTIPLICATION_FUNCTION, n);
+        return multiply(OperationIdentifiers.LONG_MULTIPLICATION_FUNCTION, n);
     }
 
     /**
@@ -721,17 +721,17 @@ public class NumberImpl implements Number {
      * @return a number
      */
     @Override
-    public Number multiply(FunctionIdentifier algorithm, Number n) {
+    public Number multiply(OperationIdentifier algorithm, Number n) {
 
-        final FunctionIdentifier[] ALLOWED_ALGORITHMS = new FunctionIdentifier[] {
-            FunctionIdentifiers.MULTIPLY_NUMBERS_BY_ADDITION_FUNCTION,
-            FunctionIdentifiers.RUSSIAN_PEASANT_MULTIPLICATION_FUNCTION,
-            FunctionIdentifiers.LONG_MULTIPLICATION_FUNCTION
+        final OperationIdentifier[] ALLOWED_ALGORITHMS = new OperationIdentifier[] {
+            OperationIdentifiers.MULTIPLY_NUMBERS_BY_ADDITION_FUNCTION,
+            OperationIdentifiers.RUSSIAN_PEASANT_MULTIPLICATION_FUNCTION,
+            OperationIdentifiers.LONG_MULTIPLICATION_FUNCTION
         };
-        FunctionIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, algorithm);
+        OperationIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, algorithm);
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(algorithm);
+            (BinaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(algorithm);
         Result<Number> result = function.calculate(this, n);
 
         return result.result();
@@ -749,7 +749,7 @@ public class NumberImpl implements Number {
     public Fraction multiply(Fraction f) {
 
         MixedBinaryOperation<Number, Fraction, Result<Fraction>> function =
-            (MixedBinaryOperation<Number, Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.MULTIPLY_NUMBER_AND_FRACTION_FUNCTION);
+            (MixedBinaryOperation<Number, Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.MULTIPLY_NUMBER_AND_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(this, f);
 
         return result.result();
@@ -767,7 +767,7 @@ public class NumberImpl implements Number {
     public Fraction divideReturnFraction(Number n) {
 
         BinaryOperation<Number, Result<Fraction>> function =
-            (BinaryOperation<Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIVIDE_NUMBERS_RETURN_FRACTION_FUNCTION);
+            (BinaryOperation<Number, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.DIVIDE_NUMBERS_RETURN_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(this, n);
 
         return result.result();
@@ -785,7 +785,7 @@ public class NumberImpl implements Number {
     public Fraction divide(Fraction f) {
 
         MixedBinaryOperation<Number, Fraction, Result<Fraction>> function =
-            (MixedBinaryOperation<Number, Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIVIDE_NUMBER_BY_FRACTION_FUNCTION);
+            (MixedBinaryOperation<Number, Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.DIVIDE_NUMBER_BY_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(this, f);
 
         return result.result();
@@ -803,7 +803,7 @@ public class NumberImpl implements Number {
     public Number modulo(Number n) {
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.MODULO_FUNCTION);
+            (BinaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.MODULO_FUNCTION);
         Result<Number> result = function.calculate(this, n);
 
         return result.result();
@@ -821,7 +821,7 @@ public class NumberImpl implements Number {
     public Number diviso(Number n) {
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIVISO_FUNCTION);
+            (BinaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.DIVISO_FUNCTION);
         Result<Number> result = function.calculate(this, n);
 
         return result.result();
@@ -839,7 +839,7 @@ public class NumberImpl implements Number {
     public Fraction max(Fraction f) {
 
         MixedBinaryOperation<Number, Fraction, Result<Fraction>> function =
-            (MixedBinaryOperation<Number, Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.MAX_NUMBER_FRACTION_FUNCTION);
+            (MixedBinaryOperation<Number, Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.MAX_NUMBER_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(this, f);
 
         return result.result();
@@ -857,7 +857,7 @@ public class NumberImpl implements Number {
     public Number max(Number n) {
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.MAX_NUMBER_FUNCTION);
+            (BinaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.MAX_NUMBER_FUNCTION);
         Result<Number> result = function.calculate(this, n);
 
         return result.result();
@@ -875,7 +875,7 @@ public class NumberImpl implements Number {
     public Fraction min(Fraction f) {
 
         MixedBinaryOperation<Number, Fraction, Result<Fraction>> function =
-            (MixedBinaryOperation<Number, Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.MIN_NUMBER_FRACTION_FUNCTION);
+            (MixedBinaryOperation<Number, Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.MIN_NUMBER_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(this, f);
 
         return result.result();
@@ -893,7 +893,7 @@ public class NumberImpl implements Number {
     public Number min(Number n) {
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.MIN_NUMBER_FUNCTION);
+            (BinaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.MIN_NUMBER_FUNCTION);
         Result<Number> result = function.calculate(this, n);
 
         return result.result();
@@ -938,7 +938,7 @@ public class NumberImpl implements Number {
     public Number absoluteValue() {
 
         UnaryOperation<Number, Result<Number>> function =
-            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_TO_ABSOLUTE_VALUE_FUNCTION);
+            (UnaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.NUMBER_TO_ABSOLUTE_VALUE_FUNCTION);
         Result<Number> result = function.calculate(this);
 
         return result.result();
@@ -953,7 +953,7 @@ public class NumberImpl implements Number {
     public Number removeFractionPart() {
 
         UnaryOperation<Number, Result<Number>> function =
-            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.REMOVE_FRACTION_PART_FUNCTION);
+            (UnaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.REMOVE_FRACTION_PART_FUNCTION);
         Result<Number> result = function.calculate(this);
 
         return result.result();
@@ -968,7 +968,7 @@ public class NumberImpl implements Number {
     public Number removeIntegerPart() {
 
         UnaryOperation<Number, Result<Number>> function =
-            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.REMOVE_INTEGER_PART_FUNCTION);
+            (UnaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.REMOVE_INTEGER_PART_FUNCTION);
         Result<Number> result = function.calculate(this);
 
         return result.result();
@@ -1001,7 +1001,7 @@ public class NumberImpl implements Number {
     public Number shiftLeft(Number shifts) {
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.SHIFT_LEFT_FUNCTION);
+            (BinaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.SHIFT_LEFT_FUNCTION);
         Result<Number> result = function.calculate(this, shifts);
 
         return result.result();
@@ -1034,7 +1034,7 @@ public class NumberImpl implements Number {
     public Number shiftRight(Number shifts) {
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.SHIFT_RIGHT_FUNCTION);
+            (BinaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.SHIFT_RIGHT_FUNCTION);
         Result<Number> result = function.calculate(this, shifts);
 
         return result.result();
@@ -1052,7 +1052,7 @@ public class NumberImpl implements Number {
     public Number rebase(int base) {
 
         MixedBinaryOperation<Number, Integer, Result<Number>> function =
-            (MixedBinaryOperation<Number, Integer, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.REBASE_NUMBER_FUNCTION);
+            (MixedBinaryOperation<Number, Integer, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.REBASE_NUMBER_FUNCTION);
         Result<Number> result = function.calculate(this, base);
 
         return result.result();
@@ -1067,7 +1067,7 @@ public class NumberImpl implements Number {
     public Number inc() {
 
         UnaryOperation<Number, Result<Number>> function =
-            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_INCREMENT_FUNCTION);
+            (UnaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.NUMBER_INCREMENT_FUNCTION);
         Result<Number> result = function.calculate(this);
 
         return result.result();
@@ -1082,7 +1082,7 @@ public class NumberImpl implements Number {
     public Number dec() {
 
         UnaryOperation<Number, Result<Number>> function =
-            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_DECREMENT_FUNCTION);
+            (UnaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.NUMBER_DECREMENT_FUNCTION);
         Result<Number> result = function.calculate(this);
 
         return result.result();
@@ -1097,7 +1097,7 @@ public class NumberImpl implements Number {
     public boolean isEven() {
 
         UnaryOperation<Number, Result<Boolean>> function =
-            (UnaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.EVEN_NUMBER_FUNCTION);
+            (UnaryOperation<Number, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.EVEN_NUMBER_FUNCTION);
         Result<Boolean> result = function.calculate(this);
 
         return result.result();
@@ -1112,7 +1112,7 @@ public class NumberImpl implements Number {
     public boolean isOdd() {
 
         UnaryOperation<Number, Result<Boolean>> function =
-            (UnaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.ODD_NUMBER_FUNCTION);
+            (UnaryOperation<Number, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.ODD_NUMBER_FUNCTION);
         Result<Boolean> result = function.calculate(this);
 
         return result.result();
@@ -1130,7 +1130,7 @@ public class NumberImpl implements Number {
     public boolean isGreater(Number number) {
 
         BinaryOperation<Number, Result<Boolean>> function =
-            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_GREATER_THAN_COMPARISON_FUNCTION);
+            (BinaryOperation<Number, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.NUMBER_GREATER_THAN_COMPARISON_FUNCTION);
         Result<Boolean> result = function.calculate(this, number);
 
         return result.result();
@@ -1148,7 +1148,7 @@ public class NumberImpl implements Number {
     public boolean isGreater(Fraction fraction) {
 
         MixedBinaryOperation<Number, Fraction, Result<Boolean>> function =
-            (MixedBinaryOperation<Number, Fraction, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_GREATER_THAN_FRACTION_COMPARISON_FUNCTION);
+            (MixedBinaryOperation<Number, Fraction, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.NUMBER_GREATER_THAN_FRACTION_COMPARISON_FUNCTION);
         Result<Boolean> result = function.calculate(this, fraction);
 
         return result.result();
@@ -1166,7 +1166,7 @@ public class NumberImpl implements Number {
     public boolean isGreaterOrEqual(Number number) {
 
         BinaryOperation<Number, Result<Boolean>> function =
-            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_GREATER_THAN_OR_EQUAL_COMPARISON_FUNCTION);
+            (BinaryOperation<Number, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.NUMBER_GREATER_THAN_OR_EQUAL_COMPARISON_FUNCTION);
         Result<Boolean> result = function.calculate(this, number);
 
         return result.result();
@@ -1184,7 +1184,7 @@ public class NumberImpl implements Number {
     public boolean isGreaterOrEqual(Fraction fraction) {
 
         MixedBinaryOperation<Number, Fraction, Result<Boolean>> function =
-            (MixedBinaryOperation<Number, Fraction, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_GREATER_THAN_OR_EQUAL_FRACTION_COMPARISON_FUNCTION);
+            (MixedBinaryOperation<Number, Fraction, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.NUMBER_GREATER_THAN_OR_EQUAL_FRACTION_COMPARISON_FUNCTION);
         Result<Boolean> result = function.calculate(this, fraction);
 
         return result.result();
@@ -1202,7 +1202,7 @@ public class NumberImpl implements Number {
     public boolean isLesser(Number number) {
 
         BinaryOperation<Number, Result<Boolean>> function =
-            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_LESSER_THAN_COMPARISON_FUNCTION);
+            (BinaryOperation<Number, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.NUMBER_LESSER_THAN_COMPARISON_FUNCTION);
         Result<Boolean> result = function.calculate(this, number);
 
         return result.result();
@@ -1220,7 +1220,7 @@ public class NumberImpl implements Number {
     public boolean isLesser(Fraction fraction) {
 
         MixedBinaryOperation<Number, Fraction, Result<Boolean>> function =
-            (MixedBinaryOperation<Number, Fraction, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_LESSER_THAN_FRACTION_COMPARISON_FUNCTION);
+            (MixedBinaryOperation<Number, Fraction, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.NUMBER_LESSER_THAN_FRACTION_COMPARISON_FUNCTION);
         Result<Boolean> result = function.calculate(this, fraction);
 
         return result.result();
@@ -1238,7 +1238,7 @@ public class NumberImpl implements Number {
     public boolean isLesserOrEqual(Number number) {
 
         BinaryOperation<Number, Result<Boolean>> function =
-            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_LESSER_THAN_OR_EQUAL_COMPARISON_FUNCTION);
+            (BinaryOperation<Number, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.NUMBER_LESSER_THAN_OR_EQUAL_COMPARISON_FUNCTION);
         Result<Boolean> result = function.calculate(this, number);
 
         return result.result();
@@ -1256,7 +1256,7 @@ public class NumberImpl implements Number {
     public boolean isLesserOrEqual(Fraction fraction) {
 
         MixedBinaryOperation<Number, Fraction, Result<Boolean>> function =
-            (MixedBinaryOperation<Number, Fraction, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_LESSER_THAN_OR_EQUAL_FRACTION_COMPARISON_FUNCTION);
+            (MixedBinaryOperation<Number, Fraction, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.NUMBER_LESSER_THAN_OR_EQUAL_FRACTION_COMPARISON_FUNCTION);
         Result<Boolean> result = function.calculate(this, fraction);
 
         return result.result();
@@ -1271,7 +1271,7 @@ public class NumberImpl implements Number {
     public Fraction reciprocal() {
 
         UnaryOperation<Number, Result<Fraction>> function =
-            (UnaryOperation<Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.RECIPROCAL_OF_NUMBER_FUNCTION);
+            (UnaryOperation<Number, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.RECIPROCAL_OF_NUMBER_FUNCTION);
         Result<Fraction> result = function.calculate(this);
 
         return result.result();
@@ -1286,7 +1286,7 @@ public class NumberImpl implements Number {
     public Number roundDown() {
 
         UnaryOperation<Number, Result<Number>> function =
-            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.ROUND_DOWN_NUMBER_FUNCTION);
+            (UnaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.ROUND_DOWN_NUMBER_FUNCTION);
         Result<Number> result = function.calculate(this);
 
         return result.result();
@@ -1301,7 +1301,7 @@ public class NumberImpl implements Number {
     public Number roundUp() {
 
         UnaryOperation<Number, Result<Number>> function =
-            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.ROUND_UP_NUMBER_FUNCTION);
+            (UnaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.ROUND_UP_NUMBER_FUNCTION);
         Result<Number> result = function.calculate(this);
 
         return result.result();
@@ -1320,7 +1320,7 @@ public class NumberImpl implements Number {
 
         Number convertedParameter = new NumberImpl(decimalPlaces);
 
-        return round(FunctionIdentifiers.ROUND_NUMBER_TO_ODD_FUNCTION, convertedParameter);
+        return round(OperationIdentifiers.ROUND_NUMBER_TO_ODD_FUNCTION, convertedParameter);
     }
 
     /**
@@ -1334,7 +1334,7 @@ public class NumberImpl implements Number {
     @Override
     public Number round(Number decimalPlaces) {
 
-        return round(FunctionIdentifiers.ROUND_NUMBER_TO_ODD_FUNCTION, decimalPlaces);
+        return round(OperationIdentifiers.ROUND_NUMBER_TO_ODD_FUNCTION, decimalPlaces);
     }
 
     /**
@@ -1348,7 +1348,7 @@ public class NumberImpl implements Number {
      * @return a shortened number according to the specified precision
      */
     @Override
-    public Number round(FunctionIdentifier algorithm, int decimalPlaces) {
+    public Number round(OperationIdentifier algorithm, int decimalPlaces) {
 
         Number convertedParameter = new NumberImpl(decimalPlaces);
 
@@ -1366,15 +1366,15 @@ public class NumberImpl implements Number {
      * @return a shortened number according to the specified precision
      */
     @Override
-    public Number round(FunctionIdentifier algorithm, Number decimalPlaces) {
+    public Number round(OperationIdentifier algorithm, Number decimalPlaces) {
 
-        final FunctionIdentifier[] ALLOWED_ALGORITHMS = new FunctionIdentifier[] {
-            FunctionIdentifiers.ROUND_NUMBER_TO_ODD_FUNCTION, FunctionIdentifiers.ROUND_NUMBER_TO_EVEN_FUNCTION
+        final OperationIdentifier[] ALLOWED_ALGORITHMS = new OperationIdentifier[] {
+            OperationIdentifiers.ROUND_NUMBER_TO_ODD_FUNCTION, OperationIdentifiers.ROUND_NUMBER_TO_EVEN_FUNCTION
         };
-        FunctionIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, algorithm);
+        OperationIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, algorithm);
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(algorithm);
+            (BinaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(algorithm);
         Result<Number> result = function.calculate(this, decimalPlaces);
 
         return result.result();
@@ -1392,7 +1392,7 @@ public class NumberImpl implements Number {
     public boolean isMultipleOf(Number number) {
 
         BinaryOperation<Number, Result<Boolean>> function =
-            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.IS_MULTIPLE_FUNCTION);
+            (BinaryOperation<Number, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.IS_MULTIPLE_FUNCTION);
         Result<Boolean> result = function.calculate(this, number);
 
         return result.result();
@@ -1409,7 +1409,7 @@ public class NumberImpl implements Number {
     @Override
     public Number divide(Number n) {
 
-        return divide(FunctionIdentifiers.RUSSIAN_DIVISION_FUNCTION, n);
+        return divide(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION, n);
     }
 
     /**
@@ -1425,7 +1425,7 @@ public class NumberImpl implements Number {
     @Override
     public Number divide(Number n, Number decimalPlaces) {
 
-        return divide(FunctionIdentifiers.RUSSIAN_DIVISION_FUNCTION, n, decimalPlaces);
+        return divide(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION, n, decimalPlaces);
     }
 
     /**
@@ -1439,7 +1439,7 @@ public class NumberImpl implements Number {
      * @return the quotient
      */
     @Override
-    public Number divide(FunctionIdentifier algorithm, Number n) {
+    public Number divide(OperationIdentifier algorithm, Number n) {
 
         return divide(algorithm, n, Math.getDefaultMaximumFractionLength(base()));
     }
@@ -1457,15 +1457,15 @@ public class NumberImpl implements Number {
      * @return the quotient
      */
     @Override
-    public Number divide(FunctionIdentifier algorithm, Number n, Number decimalPlaces) {
+    public Number divide(OperationIdentifier algorithm, Number n, Number decimalPlaces) {
 
-        final FunctionIdentifier[] ALLOWED_ALGORITHMS = new FunctionIdentifier[] {
-            FunctionIdentifiers.RUSSIAN_DIVISION_FUNCTION, FunctionIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION
+        final OperationIdentifier[] ALLOWED_ALGORITHMS = new OperationIdentifier[] {
+            OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION, OperationIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION
         };
-        FunctionIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, algorithm);
+        OperationIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, algorithm);
 
         TernaryOperation<Number, Result<Number>> function =
-            (TernaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(algorithm);
+            (TernaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(algorithm);
         Result<Number> result = function.calculate(this, n, decimalPlaces);
 
         return result.result();
@@ -1480,7 +1480,7 @@ public class NumberImpl implements Number {
     public boolean isPrime() {
 
         UnaryOperation<Number, Result<Boolean>> function =
-            (UnaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.IS_PRIME_FUNCTION);
+            (UnaryOperation<Number, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.IS_PRIME_FUNCTION);
         Result<Boolean> result = function.calculate(this);
 
         return result.result();
@@ -1495,7 +1495,7 @@ public class NumberImpl implements Number {
     public Number square() {
 
         UnaryOperation<Number, Result<Number>> function =
-            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.SQUARE_NUMBER_FUNCTION);
+            (UnaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.SQUARE_NUMBER_FUNCTION);
         Result<Number> result = function.calculate(this);
 
         return result.result();
@@ -1510,7 +1510,7 @@ public class NumberImpl implements Number {
     public SortedSet<Number> divisorSet() {
 
         UnaryOperation<Number, Result<SortedSet<Number>>> function =
-            (UnaryOperation<Number, Result<SortedSet<Number>>>) FunctionSingletons.getFunction(FunctionIdentifiers.DETERMINE_DIVISORS_FUNCTION);
+            (UnaryOperation<Number, Result<SortedSet<Number>>>) OperationSingletons.getFunction(OperationIdentifiers.DETERMINE_DIVISORS_FUNCTION);
         Result<SortedSet<Number>> result = function.calculate(this);
 
         return result.result();
@@ -1525,7 +1525,7 @@ public class NumberImpl implements Number {
     public SortedSet<Number> primeFactors() {
 
         UnaryOperation<Number, Result<SortedSet<Number>>> function =
-            (UnaryOperation<Number, Result<SortedSet<Number>>>) FunctionSingletons.getFunction(FunctionIdentifiers.DETERMINE_PRIME_FACTORS_NUMBER);
+            (UnaryOperation<Number, Result<SortedSet<Number>>>) OperationSingletons.getFunction(OperationIdentifiers.DETERMINE_PRIME_FACTORS_NUMBER);
         Result<SortedSet<Number>> result = function.calculate(this);
 
         return result.result();
@@ -1540,7 +1540,7 @@ public class NumberImpl implements Number {
     public Fraction toFraction() {
 
         UnaryOperation<Number, Result<Fraction>> function =
-            (UnaryOperation<Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_TO_FRACTION_FUNCTION);
+            (UnaryOperation<Number, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.NUMBER_TO_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(this);
 
         return result.result();
@@ -1560,7 +1560,7 @@ public class NumberImpl implements Number {
     public boolean isWithinInterval(Number min, Number max) {
 
         TernaryOperation<Number, Result<Boolean>> function =
-            (TernaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_IS_WITHIN_INTERVAL);
+            (TernaryOperation<Number, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.NUMBER_IS_WITHIN_INTERVAL);
         Result<Boolean> result = function.calculate(min, this, max);
 
         return result.result();
@@ -1729,7 +1729,7 @@ public class NumberImpl implements Number {
     public Number digitSum() {
 
         UnaryOperation<Number, Result<Number>> function =
-            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIGIT_SUM_FUNCTION);
+            (UnaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.DIGIT_SUM_FUNCTION);
         Result<Number> result = function.calculate(this);
 
         return result.result();
@@ -1744,7 +1744,7 @@ public class NumberImpl implements Number {
     public boolean isSingleDigit() {
 
         UnaryOperation<Number, Result<Boolean>> function =
-            (UnaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.IS_SINGLE_DIGIT_FUNCTION);
+            (UnaryOperation<Number, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.IS_SINGLE_DIGIT_FUNCTION);
         Result<Boolean> result = function.calculate(this);
 
         return result.result();

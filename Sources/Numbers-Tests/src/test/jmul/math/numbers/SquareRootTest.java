@@ -50,7 +50,7 @@ import org.junit.runners.Parameterized;
 
 
 /**
- * Tests calculating the square root.
+ * A testsuite for testing the square root algorithm.
  *
  * @author Kristian Kutin
  */
@@ -162,15 +162,57 @@ public class SquareRootTest {
 
         Collection<Object[]> parameters = new ArrayList<Object[]>();
 
+        // A result with more digits is 1,4142135623730950488016887242097. The test below omotted the zero (-> trim)
         parameters.add(new Object[] { createNumber(10, "2"), null, createNumber(10, "1.4142135623") });
-
-        // Note:
-        // A result with more digits is 1,4142135623730950488016887242097. The test below imotted the zero (-> trim)
         parameters.add(new Object[] { createNumber(10, "2"), createNumber(10, "20"),
                                       createNumber(10, "1.4142135623730950488") });
 
+        // A result with more digits is 1,7320508075688772935274463415059
+        parameters.add(new Object[] { createNumber(10, "3"), createNumber(10, "20"),
+                                      createNumber(10, "1.73205080756887729352") });
+
+        parameters.add(new Object[] { createNumber(10, "4"), createNumber(10, "20"), createNumber(10, "2") });
+
+        // A result with more digits is 2,2360679774997896964091736687313
+        parameters.add(new Object[] { createNumber(10, "5"), createNumber(10, "20"), createNumber(10, "2,2360679774997896964") });
+
+        // A result with more digits is 2,4494897427831780981972840747059
+        parameters.add(new Object[] { createNumber(10, "6"), createNumber(10, "20"), createNumber(10, "2,44948974278317809819") });
+
+        // A result with more digits is 2,6457513110645905905016157536393
+        parameters.add(new Object[] { createNumber(10, "7"), createNumber(10, "20"), createNumber(10, "2,6457513110645905905") });
+
+        // A result with more digits is 2,8284271247461900976033774484194
+        parameters.add(new Object[] { createNumber(10, "8"), createNumber(10, "20"), createNumber(10, "2,8284271247461900976") });
+
         parameters.add(new Object[] { createNumber(10, "9"), null, createNumber(10, "3") });
         parameters.add(new Object[] { createNumber(10, "9"), createNumber(10, "20"), createNumber(10, "3") });
+
+        // A result with more digits is 3,1622776601683793319988935444327
+        parameters.add(new Object[] { createNumber(10, "10"), createNumber(10, "20"), createNumber(10, "3,16227766016837933199") });
+
+        // A result with more digits is 3,3166247903553998491149327366707
+        parameters.add(new Object[] { createNumber(10, "11"), createNumber(10, "20"), createNumber(10, "3,31662479035539984911") });
+
+        // A result with more digits is 3,4641016151377545870548926830117
+        parameters.add(new Object[] { createNumber(10, "12"), createNumber(10, "20"), createNumber(10, "3,46410161513775458705") });
+
+        // A result with more digits is 3,6055512754639892931192212674705
+        parameters.add(new Object[] { createNumber(10, "13"), createNumber(10, "20"), createNumber(10, "3,60555127546398929311") });
+
+        // A result with more digits is 3,7416573867739413855837487323165
+        parameters.add(new Object[] { createNumber(10, "14"), createNumber(10, "20"), createNumber(10, "3,74165738677394138558") });
+
+        // A result with more digits is 3,8729833462074168851792653997824
+        parameters.add(new Object[] { createNumber(10, "15"), createNumber(10, "20"), createNumber(10, "3,87298334620741688517") });
+
+        parameters.add(new Object[] { createNumber(10, "16"), createNumber(10, "20"), createNumber(10, "4") });
+
+        // A result with more digits is 3,8729833462074168851792653997824
+        parameters.add(new Object[] { createNumber(10, "100"), createNumber(10, "20"), createNumber(10, "10") });
+
+        // A result with more digits is 31,622776601683793319988935444327
+        parameters.add(new Object[] { createNumber(10, "1000"), createNumber(10, "20"), createNumber(10, "31,62277660168379331998") });
 
         return parameters;
     }

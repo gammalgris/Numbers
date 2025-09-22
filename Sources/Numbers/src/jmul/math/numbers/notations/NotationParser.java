@@ -34,7 +34,7 @@
 package jmul.math.numbers.notations;
 
 
-import jmul.math.functions.Function;
+import jmul.math.operations.Operation;
 
 
 /**
@@ -42,7 +42,7 @@ import jmul.math.functions.Function;
  *
  * @author Kristian Kutin
  */
-public interface NotationParser extends Function {
+public interface NotationParser extends Operation {
 
     /**
      * Parses the specified string and returns all components of a number.

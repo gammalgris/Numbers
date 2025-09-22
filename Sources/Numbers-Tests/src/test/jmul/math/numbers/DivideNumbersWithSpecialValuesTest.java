@@ -34,7 +34,7 @@
 package test.jmul.math.numbers;
 
 
-import jmul.math.functions.implementations.DivisionOfNumbersBySubtractionReturnResultAndRemainder;
+import jmul.math.operations.implementations.DivisionOfNumbersBySubtractionReturnResultAndRemainder;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createInfinity;
 import static jmul.math.numbers.NumberHelper.createNumber;

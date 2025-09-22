@@ -42,6 +42,7 @@ import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.NodesHelper;
 import jmul.math.numbers.notations.ParserHelper;
 import jmul.math.numbers.notations.ParsingResult;
+import jmul.math.operations.implementations.ParameterCheckHelper;
 import jmul.math.signs.Sign;
 import jmul.math.signs.Signs;
 
@@ -85,6 +86,8 @@ public final class NumberHelper {
      * @return a number
      */
     public static Number createNumber(int base, String numberString) {
+
+        ParameterCheckHelper.checkNumberBase(base);
 
         if (numberString == null) {
 

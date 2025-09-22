@@ -1,0 +1,100 @@
+/*
+ * SPDX-License-Identifier: GPL-3.0
+ *
+ *
+ * (J)ava (M)iscellaneous (U)tilities (L)ibrary
+ *
+ * JMUL is a central repository for utilities which are used in my
+ * other public and private repositories.
+ *
+ * Copyright (C) 2025  Kristian Kutin
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * e-mail: kristian.kutin@arcor.de
+ */
+
+/*
+ * This section contains meta informations.
+ *
+ * $Id$
+ */
+
+package jmul.math.operations.implementations.equality;
+
+
+import jmul.math.fractions.Fraction;
+import jmul.math.operations.Operation;
+import jmul.math.operations.OperationSingletons;
+import jmul.math.operations.repository.OperationIdentifiers;
+import jmul.math.numbers.Number;
+import jmul.math.operations.EqualityFunction;
+import jmul.math.operations.MixedEqualityFunction;
+import jmul.math.operations.Result;
+import jmul.math.operations.UnaryOperation;
+
+
+/**
+ * An implementation of a mixed equality comparator for fractions and numbers.
+ *
+ * @author Kristian Kutin
+ */
+public class NumberFractionEquality implements Operation, MixedEqualityFunction<Number, Fraction> {
+
+    /**
+     * The default constructor.
+     */
+    public NumberFractionEquality() {
+
+        super();
+    }
+
+    /**
+     * Compares the specified number with the specified fraction.
+     *
+     * @param t1
+     *        a number
+     * @param t2
+     *        a fraction
+     *
+     * @return <code>true</code> if both numbers are considered equal, else <code>false</code>
+     */
+    @Override
+    public boolean equals(Number t1, Fraction t2) {
+
+        // Check the references
+
+        if ((t1 == null) && (t2 == null)) {
+
+            return true;
+        }
+
+        if ((t1 == null) || (t2 == null)) {
+
+            return false;
+        }
+
+        UnaryOperation<Number, Result<Fraction>> conversionFunction =
+            (UnaryOperation<Number, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.NUMBER_TO_FRACTION_FUNCTION);
+        Result<Fraction> wrappedResult = conversionFunction.calculate(t1);
+        Fraction f1 = wrappedResult.result();
+
+        EqualityFunction<Fraction> equalityFunction =
+            (EqualityFunction<Fraction>) OperationSingletons.getFunction(OperationIdentifiers.FRACTION_EQUALITY_FUNCTION);
+        boolean result = equalityFunction.equals(f1, t2);
+
+        return result;
+    }
+
+}

@@ -34,9 +34,9 @@
 package jmul.math.logarithms;
 
 
-import jmul.math.functions.FunctionSingletons;
-import jmul.math.functions.implementations.ParameterCheckHelper;
-import jmul.math.functions.repository.FunctionIdentifiers;
+import jmul.math.operations.OperationSingletons;
+import jmul.math.operations.implementations.ParameterCheckHelper;
+import jmul.math.operations.repository.OperationIdentifiers;
 import jmul.math.numbers.Number;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.Result;
@@ -67,7 +67,7 @@ public class LogarithmImpl implements Logarithm {
      * @param numerus
      *        the number
      */
-    public LogarithmImpl(Number logarithmBase, Number numerus) {
+    LogarithmImpl(Number logarithmBase, Number numerus) {
 
         super();
 
@@ -122,7 +122,7 @@ public class LogarithmImpl implements Logarithm {
     public Logarithm add(Logarithm logarithm) {
 
         BinaryOperation<Logarithm, Result<Logarithm>> function =
-            (BinaryOperation<Logarithm, Result<Logarithm>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_LOGARITHMS_FUNCTION);
+            (BinaryOperation<Logarithm, Result<Logarithm>>) OperationSingletons.getFunction(OperationIdentifiers.ADD_LOGARITHMS_FUNCTION);
         Result<Logarithm> result = function.calculate(this, logarithm);
 
         return result.result();
@@ -141,7 +141,7 @@ public class LogarithmImpl implements Logarithm {
     public Logarithm subtract(Logarithm logarithm) {
 
         BinaryOperation<Logarithm, Result<Logarithm>> function =
-            (BinaryOperation<Logarithm, Result<Logarithm>>) FunctionSingletons.getFunction(FunctionIdentifiers.SUBTRACT_LOGARITHMS_FUNCTION);
+            (BinaryOperation<Logarithm, Result<Logarithm>>) OperationSingletons.getFunction(OperationIdentifiers.SUBTRACT_LOGARITHMS_FUNCTION);
         Result<Logarithm> result = function.calculate(this, logarithm);
 
         return result.result();

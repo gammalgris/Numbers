@@ -38,7 +38,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import jmul.math.Math;
-import jmul.math.functions.implementations.MatrixMultiplicationFunction;
+import jmul.math.operations.implementations.MatrixMultiplicationFunction;
 import jmul.math.matrices.Matrix;
 import static jmul.math.matrices.MatrixHelper.createMatrix;
 import static jmul.math.numbers.NumberHelper.createNumber;

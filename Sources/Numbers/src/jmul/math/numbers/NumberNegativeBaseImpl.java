@@ -40,9 +40,9 @@ import java.util.List;
 import java.util.SortedSet;
 
 import jmul.math.fractions.Fraction;
-import jmul.math.functions.FunctionSingletons;
-import jmul.math.functions.repository.FunctionIdentifier;
-import jmul.math.functions.repository.FunctionIdentifiers;
+import jmul.math.operations.OperationSingletons;
+import jmul.math.operations.repository.OperationIdentifier;
+import jmul.math.operations.repository.OperationIdentifiers;
 import static jmul.math.numbers.Constants.DEFAULT_NUMBER_BASE;
 import static jmul.math.numbers.ParameterHelper.checkBase;
 import static jmul.math.numbers.ParameterHelper.checkSign;
@@ -89,14 +89,14 @@ public class NumberNegativeBaseImpl implements Number {
     /**
      * A list of parser functions.
      */
-    private static final List<FunctionIdentifier> PARSER_FUNCTION_LIST;
+    private static final List<OperationIdentifier> PARSER_FUNCTION_LIST;
 
     /*
      * The static initializer.
      */
     static {
 
-        List<FunctionIdentifiers> tmpList = new ArrayList<>();
+        List<OperationIdentifiers> tmpList = new ArrayList<>();
 
         //TODO initialization missing
 
@@ -238,9 +238,9 @@ public class NumberNegativeBaseImpl implements Number {
 
         List<Throwable> exceptions = new ArrayList<>();
 
-        for (FunctionIdentifier identifier : PARSER_FUNCTION_LIST) {
+        for (OperationIdentifier identifier : PARSER_FUNCTION_LIST) {
 
-            NotationParser parser = (NotationParser) FunctionSingletons.getFunction(identifier);
+            NotationParser parser = (NotationParser) OperationSingletons.getFunction(identifier);
 
             try {
 
@@ -638,7 +638,7 @@ public class NumberNegativeBaseImpl implements Number {
     }
 
     @Override
-    public Number multiply(FunctionIdentifier algorithm, Number n) {
+    public Number multiply(OperationIdentifier algorithm, Number n) {
         // TODO Implement this method
         return null;
     }
@@ -673,13 +673,13 @@ public class NumberNegativeBaseImpl implements Number {
     }
 
     @Override
-    public Number divide(FunctionIdentifier algorithm, Number n) {
+    public Number divide(OperationIdentifier algorithm, Number n) {
         // TODO Implement this method
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public Number divide(FunctionIdentifier algorithm, Number n, Number decimalPlaces) {
+    public Number divide(OperationIdentifier algorithm, Number n, Number decimalPlaces) {
         // TODO Implement this method
         throw new UnsupportedOperationException();
     }
@@ -784,13 +784,13 @@ public class NumberNegativeBaseImpl implements Number {
     }
 
     @Override
-    public Number round(FunctionIdentifier algorithm, int decimalPlaces) {
+    public Number round(OperationIdentifier algorithm, int decimalPlaces) {
         // TODO Implement this method
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public Number round(FunctionIdentifier algorithm, Number decimalPlaces) {
+    public Number round(OperationIdentifier algorithm, Number decimalPlaces) {
         // TODO Implement this method
         throw new UnsupportedOperationException();
     }
@@ -1000,13 +1000,13 @@ public class NumberNegativeBaseImpl implements Number {
     }
 
     @Override
-    public Number squareRoot(FunctionIdentifier algorithm) {
+    public Number squareRoot(OperationIdentifier algorithm) {
         // TODO Implement this method
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public Number squareRoot(FunctionIdentifier algorithm, Number decimalPlaces) {
+    public Number squareRoot(OperationIdentifier algorithm, Number decimalPlaces) {
         // TODO Implement this method
         throw new UnsupportedOperationException();
     }

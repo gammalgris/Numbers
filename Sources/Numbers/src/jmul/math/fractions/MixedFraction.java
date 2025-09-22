@@ -40,8 +40,8 @@ import java.util.SortedSet;
 import jmul.math.Math;
 import jmul.math.digits.PositionalNumeralSystems;
 import static jmul.math.fractions.FractionHelper.createFraction;
-import jmul.math.functions.FunctionSingletons;
-import jmul.math.functions.repository.FunctionIdentifiers;
+import jmul.math.operations.OperationSingletons;
+import jmul.math.operations.repository.OperationIdentifiers;
 import jmul.math.hash.HashHelper;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberHelper;
@@ -241,7 +241,7 @@ class MixedFraction implements Fraction {
     public Number evaluate(Number decimalPlaces) {
 
         MixedBinaryOperation<Fraction, Number, Result<Number>> function =
-            (MixedBinaryOperation<Fraction, Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.EVALUATE_FRACTION_FUNCTION);
+            (MixedBinaryOperation<Fraction, Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.EVALUATE_FRACTION_FUNCTION);
         Result<Number> result = function.calculate(this, decimalPlaces);
 
         return result.result();
@@ -455,7 +455,7 @@ class MixedFraction implements Fraction {
     public boolean isGreater(Fraction fraction) {
 
         BinaryOperation<Fraction, Result<Boolean>> function =
-            (BinaryOperation<Fraction, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_GREATER_THAN_COMPARISON_FUNCTION);
+            (BinaryOperation<Fraction, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.FRACTION_GREATER_THAN_COMPARISON_FUNCTION);
         Result<Boolean> result = function.calculate(this, fraction);
 
         return result.result();
@@ -473,7 +473,7 @@ class MixedFraction implements Fraction {
     public boolean isGreater(Number number) {
 
         MixedBinaryOperation<Fraction, Number, Result<Boolean>> function =
-            (MixedBinaryOperation<Fraction, Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_GREATER_THAN_NUMBER_COMPARISON_FUNCTION);
+            (MixedBinaryOperation<Fraction, Number, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.FRACTION_GREATER_THAN_NUMBER_COMPARISON_FUNCTION);
         Result<Boolean> result = function.calculate(this, number);
 
         return result.result();
@@ -492,7 +492,7 @@ class MixedFraction implements Fraction {
     public boolean isGreaterOrEqual(Fraction fraction) {
 
         BinaryOperation<Fraction, Result<Boolean>> function =
-            (BinaryOperation<Fraction, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_GREATER_THAN_OR_EQUAL_COMPARISON_FUNCTION);
+            (BinaryOperation<Fraction, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.FRACTION_GREATER_THAN_OR_EQUAL_COMPARISON_FUNCTION);
         Result<Boolean> result = function.calculate(this, fraction);
 
         return result.result();
@@ -511,7 +511,7 @@ class MixedFraction implements Fraction {
     public boolean isGreaterOrEqual(Number number) {
 
         MixedBinaryOperation<Fraction, Number, Result<Boolean>> function =
-            (MixedBinaryOperation<Fraction, Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_GREATER_THAN_OR_EQUAL_NUMBER_COMPARISON_FUNCTION);
+            (MixedBinaryOperation<Fraction, Number, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.FRACTION_GREATER_THAN_OR_EQUAL_NUMBER_COMPARISON_FUNCTION);
         Result<Boolean> result = function.calculate(this, number);
 
         return result.result();
@@ -529,7 +529,7 @@ class MixedFraction implements Fraction {
     public boolean isLesser(Fraction fraction) {
 
         BinaryOperation<Fraction, Result<Boolean>> function =
-            (BinaryOperation<Fraction, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_LESSER_THAN_COMPARISON_FUNCTION);
+            (BinaryOperation<Fraction, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.FRACTION_LESSER_THAN_COMPARISON_FUNCTION);
         Result<Boolean> result = function.calculate(this, fraction);
 
         return result.result();
@@ -547,7 +547,7 @@ class MixedFraction implements Fraction {
     public boolean isLesser(Number number) {
 
         MixedBinaryOperation<Fraction, Number, Result<Boolean>> function =
-            (MixedBinaryOperation<Fraction, Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_LESSER_THAN_NUMBER_COMPARISON_FUNCTION);
+            (MixedBinaryOperation<Fraction, Number, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.FRACTION_LESSER_THAN_NUMBER_COMPARISON_FUNCTION);
         Result<Boolean> result = function.calculate(this, number);
 
         return result.result();
@@ -565,7 +565,7 @@ class MixedFraction implements Fraction {
     public boolean isLesserOrEqual(Fraction fraction) {
 
         BinaryOperation<Fraction, Result<Boolean>> function =
-            (BinaryOperation<Fraction, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_LESSER_THAN_OR_EQUAL_COMPARISON_FUNCTION);
+            (BinaryOperation<Fraction, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.FRACTION_LESSER_THAN_OR_EQUAL_COMPARISON_FUNCTION);
         Result<Boolean> result = function.calculate(this, fraction);
 
         return result.result();
@@ -583,7 +583,7 @@ class MixedFraction implements Fraction {
     public boolean isLesserOrEqual(Number number) {
 
         MixedBinaryOperation<Fraction, Number, Result<Boolean>> function =
-            (MixedBinaryOperation<Fraction, Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_LESSER_THAN_OR_EQUAL_NUMBER_COMPARISON_FUNCTION);
+            (MixedBinaryOperation<Fraction, Number, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.FRACTION_LESSER_THAN_OR_EQUAL_NUMBER_COMPARISON_FUNCTION);
         Result<Boolean> result = function.calculate(this, number);
 
         return result.result();
@@ -649,7 +649,7 @@ class MixedFraction implements Fraction {
             Fraction other = (Fraction) o;
 
             EqualityFunction<Fraction> function =
-                (EqualityFunction<Fraction>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_EQUALITY_FUNCTION);
+                (EqualityFunction<Fraction>) OperationSingletons.getFunction(OperationIdentifiers.FRACTION_EQUALITY_FUNCTION);
             boolean result = function.equals(this, other);
 
             return result;
@@ -659,7 +659,7 @@ class MixedFraction implements Fraction {
             Number other = (Number) o;
 
             MixedEqualityFunction<Fraction, Number> function =
-                (MixedEqualityFunction<Fraction, Number>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_NUMBER_EQUALITY_FUNCTION);
+                (MixedEqualityFunction<Fraction, Number>) OperationSingletons.getFunction(OperationIdentifiers.FRACTION_NUMBER_EQUALITY_FUNCTION);
             boolean result = function.equals(this, other);
 
             return result;
@@ -696,7 +696,7 @@ class MixedFraction implements Fraction {
             Number other = (Number) o;
 
             MixedComparator<Fraction, Number> comparator =
-                (MixedComparator<Fraction, Number>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_NUMBER_COMPARATOR_FUNCTION);
+                (MixedComparator<Fraction, Number>) OperationSingletons.getFunction(OperationIdentifiers.FRACTION_NUMBER_COMPARATOR_FUNCTION);
             return comparator.compare(this, other);
 
         } else if (o instanceof Fraction) {
@@ -704,7 +704,7 @@ class MixedFraction implements Fraction {
             Fraction other = (Fraction) o;
 
             Comparator<Fraction> comparator =
-                (Comparator<Fraction>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_COMPARATOR_FUNCTION);
+                (Comparator<Fraction>) OperationSingletons.getFunction(OperationIdentifiers.FRACTION_COMPARATOR_FUNCTION);
             return comparator.compare(this, other);
         }
 
@@ -720,7 +720,7 @@ class MixedFraction implements Fraction {
     public Fraction negate() {
 
         UnaryOperation<Fraction, Result<Fraction>> function =
-            (UnaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.NEGATE_FRACTION_FUNCTION);
+            (UnaryOperation<Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.NEGATE_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(this);
 
         return result.result();
@@ -747,7 +747,7 @@ class MixedFraction implements Fraction {
     public Fraction halving() {
 
         UnaryOperation<Fraction, Result<Fraction>> function =
-            (UnaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.HALVING_FRACTION_FUNCTION);
+            (UnaryOperation<Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.HALVING_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(this);
 
         return result.result();
@@ -762,7 +762,7 @@ class MixedFraction implements Fraction {
     public Fraction doubling() {
 
         UnaryOperation<Fraction, Result<Fraction>> function =
-            (UnaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.DOUBLING_FRACTION_FUNCTION);
+            (UnaryOperation<Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.DOUBLING_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(this);
 
         return result.result();
@@ -777,7 +777,7 @@ class MixedFraction implements Fraction {
     public Fraction inc() {
 
         UnaryOperation<Fraction, Result<Fraction>> function =
-            (UnaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_INCREMENT_FUNCTION);
+            (UnaryOperation<Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.FRACTION_INCREMENT_FUNCTION);
         Result<Fraction> result = function.calculate(this);
 
         return result.result();
@@ -792,7 +792,7 @@ class MixedFraction implements Fraction {
     public Fraction dec() {
 
         UnaryOperation<Fraction, Result<Fraction>> function =
-            (UnaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_DECREMENT_FUNCTION);
+            (UnaryOperation<Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.FRACTION_DECREMENT_FUNCTION);
         Result<Fraction> result = function.calculate(this);
 
         return result.result();
@@ -810,7 +810,7 @@ class MixedFraction implements Fraction {
     public Fraction add(Number n) {
 
         MixedBinaryOperation<Fraction, Number, Result<Fraction>> function =
-            (MixedBinaryOperation<Fraction, Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_FRACTION_AND_NUMBER_FUNCTION);
+            (MixedBinaryOperation<Fraction, Number, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.ADD_FRACTION_AND_NUMBER_FUNCTION);
         Result<Fraction> result = function.calculate(this, n);
 
         return result.result();
@@ -828,7 +828,7 @@ class MixedFraction implements Fraction {
     public Fraction add(Fraction f) {
 
         BinaryOperation<Fraction, Result<Fraction>> function =
-            (BinaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_FRACTIONS_FUNCTION);
+            (BinaryOperation<Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.ADD_FRACTIONS_FUNCTION);
         Result<Fraction> result = function.calculate(this, f);
 
         return result.result();
@@ -846,7 +846,7 @@ class MixedFraction implements Fraction {
     public Fraction subtract(Number n) {
 
         MixedBinaryOperation<Fraction, Number, Result<Fraction>> function =
-            (MixedBinaryOperation<Fraction, Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.SUBTRACT_FRACTION_AND_NUMBER_FUNCTION);
+            (MixedBinaryOperation<Fraction, Number, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.SUBTRACT_FRACTION_AND_NUMBER_FUNCTION);
         Result<Fraction> result = function.calculate(this, n);
 
         return result.result();
@@ -864,7 +864,7 @@ class MixedFraction implements Fraction {
     public Fraction subtract(Fraction f) {
 
         BinaryOperation<Fraction, Result<Fraction>> function =
-            (BinaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.SUBTRACT_FRACTIONS_FUNCTION);
+            (BinaryOperation<Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.SUBTRACT_FRACTIONS_FUNCTION);
         Result<Fraction> result = function.calculate(this, f);
 
         return result.result();
@@ -882,7 +882,7 @@ class MixedFraction implements Fraction {
     public Fraction multiply(Number n) {
 
         MixedBinaryOperation<Fraction, Number, Result<Fraction>> function =
-            (MixedBinaryOperation<Fraction, Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.MULTIPLY_FRACTION_AND_NUMBER_FUNCTION);
+            (MixedBinaryOperation<Fraction, Number, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.MULTIPLY_FRACTION_AND_NUMBER_FUNCTION);
         Result<Fraction> result = function.calculate(this, n);
 
         return result.result();
@@ -900,7 +900,7 @@ class MixedFraction implements Fraction {
     public Fraction multiply(Fraction f) {
 
         BinaryOperation<Fraction, Result<Fraction>> function =
-            (BinaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.MULTIPLY_FRACTIONS_FUNCTION);
+            (BinaryOperation<Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.MULTIPLY_FRACTIONS_FUNCTION);
         Result<Fraction> result = function.calculate(this, f);
 
         return result.result();
@@ -918,7 +918,7 @@ class MixedFraction implements Fraction {
     public Fraction divide(Number n) {
 
         MixedBinaryOperation<Fraction, Number, Result<Fraction>> function =
-            (MixedBinaryOperation<Fraction, Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIVIDE_FRACTION_BY_NUMBER_FUNCTION);
+            (MixedBinaryOperation<Fraction, Number, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.DIVIDE_FRACTION_BY_NUMBER_FUNCTION);
         Result<Fraction> result = function.calculate(this, n);
 
         return result.result();
@@ -936,7 +936,7 @@ class MixedFraction implements Fraction {
     public Fraction divide(Fraction f) {
 
         BinaryOperation<Fraction, Result<Fraction>> function =
-            (BinaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIVIDE_FRACTIONS_FUNCTION);
+            (BinaryOperation<Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.DIVIDE_FRACTIONS_FUNCTION);
         Result<Fraction> result = function.calculate(this, f);
 
         return result.result();
@@ -954,7 +954,7 @@ class MixedFraction implements Fraction {
     public Fraction max(Number n) {
 
         MixedBinaryOperation<Fraction, Number, Result<Fraction>> function =
-            (MixedBinaryOperation<Fraction, Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.MAX_FRACTION_NUMBER_FUNCTION);
+            (MixedBinaryOperation<Fraction, Number, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.MAX_FRACTION_NUMBER_FUNCTION);
         Result<Fraction> result = function.calculate(this, n);
 
         return result.result();
@@ -972,7 +972,7 @@ class MixedFraction implements Fraction {
     public Fraction max(Fraction f) {
 
         BinaryOperation<Fraction, Result<Fraction>> function =
-            (BinaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.MAX_FRACTION_FUNCTION);
+            (BinaryOperation<Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.MAX_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(this, f);
 
         return result.result();
@@ -990,7 +990,7 @@ class MixedFraction implements Fraction {
     public Fraction min(Number n) {
 
         MixedBinaryOperation<Fraction, Number, Result<Fraction>> function =
-            (MixedBinaryOperation<Fraction, Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.MIN_FRACTION_NUMBER_FUNCTION);
+            (MixedBinaryOperation<Fraction, Number, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.MIN_FRACTION_NUMBER_FUNCTION);
         Result<Fraction> result = function.calculate(this, n);
 
         return result.result();
@@ -1008,7 +1008,7 @@ class MixedFraction implements Fraction {
     public Fraction min(Fraction f) {
 
         BinaryOperation<Fraction, Result<Fraction>> function =
-            (BinaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.MIN_FRACTION_FUNCTION);
+            (BinaryOperation<Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.MIN_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(this, f);
 
         return result.result();
@@ -1053,7 +1053,7 @@ class MixedFraction implements Fraction {
     public Fraction reduce() {
 
         UnaryOperation<Fraction, Result<Fraction>> function =
-            (UnaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.REDUCE_FRACTION_FUNCTION);
+            (UnaryOperation<Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.REDUCE_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(this);
 
         return result.result();
@@ -1068,7 +1068,7 @@ class MixedFraction implements Fraction {
     public Fraction reciprocal() {
 
         UnaryOperation<Fraction, Result<Fraction>> function =
-            (UnaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.RECIPROCAL_OF_FRACTION_FUNCTION);
+            (UnaryOperation<Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.RECIPROCAL_OF_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(this);
 
         return result.result();
@@ -1086,7 +1086,7 @@ class MixedFraction implements Fraction {
     public Fraction rebase(int base) {
 
         MixedBinaryOperation<Fraction, Integer, Result<Fraction>> function =
-            (MixedBinaryOperation<Fraction, Integer, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.REBASE_FRACTION_FUNCTION);
+            (MixedBinaryOperation<Fraction, Integer, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.REBASE_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(this, base);
 
         return result.result();
@@ -1101,7 +1101,7 @@ class MixedFraction implements Fraction {
     public Fraction absoluteValue() {
 
         UnaryOperation<Fraction, Result<Fraction>> function =
-            (UnaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_TO_ABSOLUTE_VALUE_FUNCTION);
+            (UnaryOperation<Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.FRACTION_TO_ABSOLUTE_VALUE_FUNCTION);
         Result<Fraction> result = function.calculate(this);
 
         return result.result();
@@ -1116,7 +1116,7 @@ class MixedFraction implements Fraction {
     public Fraction square() {
 
         UnaryOperation<Fraction, Result<Fraction>> function =
-            (UnaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.SQUARE_FRACTION_FUNCTION);
+            (UnaryOperation<Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.SQUARE_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(this);
 
         return result.result();
@@ -1132,7 +1132,7 @@ class MixedFraction implements Fraction {
     public SortedSet<Number> commonDivisorSet() {
 
         UnaryOperation<Fraction, Result<SortedSet<Number>>> function =
-            (UnaryOperation<Fraction, Result<SortedSet<Number>>>) FunctionSingletons.getFunction(FunctionIdentifiers.DETERMINE_COMMON_DIVISORS_FUNCTION);
+            (UnaryOperation<Fraction, Result<SortedSet<Number>>>) OperationSingletons.getFunction(OperationIdentifiers.DETERMINE_COMMON_DIVISORS_FUNCTION);
         Result<SortedSet<Number>> result = function.calculate(this);
 
         return result.result();
@@ -1148,7 +1148,7 @@ class MixedFraction implements Fraction {
     public SortedSet<Number> commonPrimeFactors() {
 
         UnaryOperation<Fraction, Result<SortedSet<Number>>> function =
-            (UnaryOperation<Fraction, Result<SortedSet<Number>>>) FunctionSingletons.getFunction(FunctionIdentifiers.DETERMINE_COMMON_PRIME_FACTORS_FUNCTION);
+            (UnaryOperation<Fraction, Result<SortedSet<Number>>>) OperationSingletons.getFunction(OperationIdentifiers.DETERMINE_COMMON_PRIME_FACTORS_FUNCTION);
         Result<SortedSet<Number>> result = function.calculate(this);
 
         return result.result();
@@ -1168,7 +1168,7 @@ class MixedFraction implements Fraction {
     public boolean isWithinInterval(Fraction min, Fraction max) {
 
         TernaryOperation<Fraction, Result<Boolean>> function =
-            (TernaryOperation<Fraction, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_IS_WITHIN_INTERVAL);
+            (TernaryOperation<Fraction, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.FRACTION_IS_WITHIN_INTERVAL);
         Result<Boolean> result = function.calculate(min, this, max);
 
         return result.result();

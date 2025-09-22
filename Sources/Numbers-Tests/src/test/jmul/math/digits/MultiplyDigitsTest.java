@@ -39,7 +39,7 @@ import java.util.Collection;
 
 import jmul.math.digits.Digit;
 import jmul.math.digits.PositionalNumeralSystems;
-import jmul.math.functions.implementations.MultiplyDigits;
+import jmul.math.operations.implementations.MultiplyDigits;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.operations.BinaryOperation;

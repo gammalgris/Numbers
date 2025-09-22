@@ -37,7 +37,7 @@ package test.jmul.math.numbers;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import jmul.math.functions.implementations.DivisionOfNumbersBySubtractionReturnResultAndRemainder;
+import jmul.math.operations.implementations.DivisionOfNumbersBySubtractionReturnResultAndRemainder;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;

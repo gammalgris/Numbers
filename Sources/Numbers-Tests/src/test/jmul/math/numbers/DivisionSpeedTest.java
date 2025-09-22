@@ -39,7 +39,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import jmul.math.functions.repository.FunctionIdentifiers;
+import jmul.math.operations.repository.OperationIdentifiers;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
 
@@ -114,7 +114,7 @@ public class DivisionSpeedTest {
             try {
 
                 actualResult =
-                    testCase.operand1.multiply(FunctionIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION, testCase.operand2);
+                    testCase.operand1.multiply(OperationIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION, testCase.operand2);
 
                 if (testCase.expectedResult.equals(actualResult)) {
 
@@ -157,7 +157,7 @@ public class DivisionSpeedTest {
             try {
 
                 actualResult =
-                    testCase.operand1.divide(FunctionIdentifiers.RUSSIAN_DIVISION_FUNCTION, testCase.operand2);
+                    testCase.operand1.divide(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION, testCase.operand2);
 
                 if (testCase.expectedResult.equals(actualResult)) {
 

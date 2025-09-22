@@ -37,8 +37,8 @@ package test.jmul.math.numbers;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import jmul.math.functions.FunctionSingletons;
-import jmul.math.functions.repository.FunctionIdentifiers;
+import jmul.math.operations.OperationSingletons;
+import jmul.math.operations.repository.OperationIdentifiers;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
@@ -115,7 +115,7 @@ public class BaseToNumberTest {
     public void testTranslation() {
 
         BinaryOperation<Integer, Result<Number>> function =
-            (BinaryOperation<Integer, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.BASE_TO_NUMBER_FUNCTION);
+            (BinaryOperation<Integer, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.BASE_TO_NUMBER_FUNCTION);
 
         Result<Number> result = function.calculate(base, destinationBase);
         Number actualResult = result.result();

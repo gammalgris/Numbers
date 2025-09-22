@@ -39,9 +39,9 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.stream.Stream;
 
-import jmul.math.functions.FunctionSingletons;
-import jmul.math.functions.implementations.ParameterCheckHelper;
-import jmul.math.functions.repository.FunctionIdentifiers;
+import jmul.math.operations.OperationSingletons;
+import jmul.math.operations.implementations.ParameterCheckHelper;
+import jmul.math.operations.repository.OperationIdentifiers;
 import jmul.math.hash.HashHelper;
 import jmul.math.indices.IndexSingletons;
 import jmul.math.numbers.Number;
@@ -356,7 +356,7 @@ public class MatrixImpl implements Matrix {
     public Matrix add(Matrix matrix) {
 
         BinaryOperation<Matrix, Result<Matrix>> function =
-            (BinaryOperation<Matrix, Result<Matrix>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_MATRICES_FUNCTION);
+            (BinaryOperation<Matrix, Result<Matrix>>) OperationSingletons.getFunction(OperationIdentifiers.ADD_MATRICES_FUNCTION);
         Result<Matrix> result = function.calculate(this, matrix);
 
         return result.result();
@@ -374,7 +374,7 @@ public class MatrixImpl implements Matrix {
     public Matrix subtract(Matrix matrix) {
 
         BinaryOperation<Matrix, Result<Matrix>> function =
-            (BinaryOperation<Matrix, Result<Matrix>>) FunctionSingletons.getFunction(FunctionIdentifiers.SUBTRACT_MATRICES_FUNCTION);
+            (BinaryOperation<Matrix, Result<Matrix>>) OperationSingletons.getFunction(OperationIdentifiers.SUBTRACT_MATRICES_FUNCTION);
         Result<Matrix> result = function.calculate(this, matrix);
 
         return result.result();
@@ -389,7 +389,7 @@ public class MatrixImpl implements Matrix {
     public Matrix transpose() {
 
         UnaryOperation<Matrix, Result<Matrix>> function =
-            (UnaryOperation<Matrix, Result<Matrix>>) FunctionSingletons.getFunction(FunctionIdentifiers.TRANSPOSE_MATRIX_FUNCTION);
+            (UnaryOperation<Matrix, Result<Matrix>>) OperationSingletons.getFunction(OperationIdentifiers.TRANSPOSE_MATRIX_FUNCTION);
         Result<Matrix> result = function.calculate(this);
 
         return result.result();
@@ -407,7 +407,7 @@ public class MatrixImpl implements Matrix {
     public Matrix multiply(Matrix matrix) {
 
         BinaryOperation<Matrix, Result<Matrix>> function =
-            (BinaryOperation<Matrix, Result<Matrix>>) FunctionSingletons.getFunction(FunctionIdentifiers.MATRIX_MULTIPLCIATION_FUNCTION);
+            (BinaryOperation<Matrix, Result<Matrix>>) OperationSingletons.getFunction(OperationIdentifiers.MATRIX_MULTIPLCIATION_FUNCTION);
         Result<Matrix> result = function.calculate(this, matrix);
 
         return result.result();
@@ -422,7 +422,7 @@ public class MatrixImpl implements Matrix {
     public Vector toVector() {
 
         UnaryOperation<Matrix, Result<Vector>> function =
-            (UnaryOperation<Matrix, Result<Vector>>) FunctionSingletons.getFunction(FunctionIdentifiers.VECTORIZATION_FUNCTION);
+            (UnaryOperation<Matrix, Result<Vector>>) OperationSingletons.getFunction(OperationIdentifiers.VECTORIZATION_FUNCTION);
         Result<Vector> result = function.calculate(this);
 
         return result.result();
@@ -495,7 +495,7 @@ public class MatrixImpl implements Matrix {
             Matrix other = (Matrix) o;
 
             EqualityFunction<Matrix> function =
-                (EqualityFunction<Matrix>) FunctionSingletons.getFunction(FunctionIdentifiers.MATRIX_EQUALITY_FUNCTION);
+                (EqualityFunction<Matrix>) OperationSingletons.getFunction(OperationIdentifiers.MATRIX_EQUALITY_FUNCTION);
             boolean result = function.equals(this, other);
 
             return result;

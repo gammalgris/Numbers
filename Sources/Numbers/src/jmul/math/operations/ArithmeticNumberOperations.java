@@ -35,7 +35,7 @@ package jmul.math.operations;
 
 
 import jmul.math.fractions.Fraction;
-import jmul.math.functions.repository.FunctionIdentifier;
+import jmul.math.operations.repository.OperationIdentifier;
 import jmul.math.numbers.Number;
 
 
@@ -97,7 +97,7 @@ public interface ArithmeticNumberOperations {
      *
      * @return a number
      */
-    Number squareRoot(FunctionIdentifier algorithm);
+    Number squareRoot(OperationIdentifier algorithm);
 
     /**
      * Calculates the square root for this number.
@@ -119,7 +119,7 @@ public interface ArithmeticNumberOperations {
      *
      * @return a number
      */
-    Number squareRoot(FunctionIdentifier algorithm, Number decimalPlaces);
+    Number squareRoot(OperationIdentifier algorithm, Number decimalPlaces);
 
     /**
      * Halves this number.
@@ -213,7 +213,7 @@ public interface ArithmeticNumberOperations {
      *
      * @return a number
      */
-    Number multiply(FunctionIdentifier algorithm, Number n);
+    Number multiply(OperationIdentifier algorithm, Number n);
 
     /**
      * Multiplies this number with the specified fraction.
@@ -267,7 +267,7 @@ public interface ArithmeticNumberOperations {
      *
      * @return the quotient
      */
-    Number divide(FunctionIdentifier algorithm, Number n);
+    Number divide(OperationIdentifier algorithm, Number n);
 
     /**
      * Divides this number by the specified number.
@@ -281,7 +281,7 @@ public interface ArithmeticNumberOperations {
      *
      * @return the quotient
      */
-    Number divide(FunctionIdentifier algorithm, Number n, Number decimalPlaces);
+    Number divide(OperationIdentifier algorithm, Number n, Number decimalPlaces);
 
     /**
      * Divides this number by the specified fraction.
@@ -424,7 +424,7 @@ public interface ArithmeticNumberOperations {
      *
      * @return a shortened number according to the specified precision
      */
-    Number round(FunctionIdentifier algorithm, int decimalPlaces);
+    Number round(OperationIdentifier algorithm, int decimalPlaces);
 
     /**
      * Shorten the precision of this number according to the specified decimal places.
@@ -436,7 +436,7 @@ public interface ArithmeticNumberOperations {
      *
      * @return a shortened number according to the specified precision
      */
-    Number round(FunctionIdentifier algorithm, Number decimalPlaces);
+    Number round(OperationIdentifier algorithm, Number decimalPlaces);
 
     /*
      * Ternary arithmetic operations.

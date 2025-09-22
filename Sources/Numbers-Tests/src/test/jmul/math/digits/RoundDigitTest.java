@@ -39,7 +39,7 @@ import java.util.Collection;
 
 import jmul.math.digits.Digit;
 import jmul.math.digits.PositionalNumeralSystems;
-import jmul.math.functions.implementations.RoundDigitHalfUpFunction;
+import jmul.math.operations.implementations.RoundDigitHalfUpFunction;
 import jmul.math.operations.ResultWithCarry;
 import jmul.math.operations.UnaryOperation;
 

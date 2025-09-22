@@ -38,7 +38,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import jmul.math.Math;
-import jmul.math.functions.repository.FunctionIdentifiers;
+import jmul.math.operations.repository.OperationIdentifiers;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
@@ -219,7 +219,7 @@ public class MultiplyNumbers2Test {
 
             // check the operation
             Number actualProduct =
-                firstOperand.multiply(FunctionIdentifiers.MULTIPLY_NUMBERS_BY_ADDITION_FUNCTION, secondOperand);
+                firstOperand.multiply(OperationIdentifiers.MULTIPLY_NUMBERS_BY_ADDITION_FUNCTION, secondOperand);
 
             assertEquals(toString(), expectedProduct, actualProduct);
 
@@ -251,7 +251,7 @@ public class MultiplyNumbers2Test {
 
             // check the operation
             Number actualProduct =
-                Math.multiply(FunctionIdentifiers.MULTIPLY_NUMBERS_BY_ADDITION_FUNCTION, firstOperand, secondOperand);
+                Math.multiply(OperationIdentifiers.MULTIPLY_NUMBERS_BY_ADDITION_FUNCTION, firstOperand, secondOperand);
 
             assertEquals(toString(), expectedProduct, actualProduct);
 

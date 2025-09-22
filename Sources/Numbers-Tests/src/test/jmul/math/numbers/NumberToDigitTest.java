@@ -39,8 +39,8 @@ import java.util.Collection;
 
 import jmul.math.digits.Digit;
 import jmul.math.digits.PositionalNumeralSystems;
-import jmul.math.functions.FunctionSingletons;
-import jmul.math.functions.repository.FunctionIdentifiers;
+import jmul.math.operations.OperationSingletons;
+import jmul.math.operations.repository.OperationIdentifiers;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
@@ -117,7 +117,7 @@ public class NumberToDigitTest {
     public void testTranslation() {
 
         MixedBinaryOperation<Number, Integer, Result<Digit>> function =
-            (MixedBinaryOperation<Number, Integer, Result<Digit>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_TO_DIGIT_FUNCTION);
+            (MixedBinaryOperation<Number, Integer, Result<Digit>>) OperationSingletons.getFunction(OperationIdentifiers.NUMBER_TO_DIGIT_FUNCTION);
 
         Result<Digit> result = function.calculate(number, destinationBase);
         Digit actualResult = result.result();

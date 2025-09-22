@@ -37,7 +37,7 @@ package jmul.math.indices;
 import java.util.HashMap;
 import java.util.Map;
 
-import jmul.math.functions.implementations.ParameterCheckHelper;
+import jmul.math.operations.implementations.ParameterCheckHelper;
 import jmul.math.numbers.Number;
 
 

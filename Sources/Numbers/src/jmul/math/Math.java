@@ -40,11 +40,11 @@ import java.util.SortedSet;
 import jmul.math.constants.Constant;
 import jmul.math.constants.ConstantHelper;
 import jmul.math.fractions.Fraction;
-import jmul.math.functions.FunctionSingletons;
-import jmul.math.functions.implementations.ParameterCheckHelper;
-import jmul.math.functions.repository.FunctionIdentifier;
-import jmul.math.functions.repository.FunctionIdentifierHelper;
-import jmul.math.functions.repository.FunctionIdentifiers;
+import jmul.math.operations.OperationSingletons;
+import jmul.math.operations.implementations.ParameterCheckHelper;
+import jmul.math.operations.repository.OperationIdentifier;
+import jmul.math.operations.repository.OperationIdentifierHelper;
+import jmul.math.operations.repository.OperationIdentifiers;
 import jmul.math.matrices.Matrix;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
@@ -118,7 +118,7 @@ public final class Math {
     public static Number absoluteValue(Number n) {
 
         UnaryOperation<Number, Result<Number>> function =
-            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_TO_ABSOLUTE_VALUE_FUNCTION);
+            (UnaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.NUMBER_TO_ABSOLUTE_VALUE_FUNCTION);
         Result<Number> result = function.calculate(n);
 
         return result.result();
@@ -135,7 +135,7 @@ public final class Math {
     public static Fraction absoluteValue(Fraction f) {
 
         UnaryOperation<Fraction, Result<Fraction>> function =
-            (UnaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_TO_ABSOLUTE_VALUE_FUNCTION);
+            (UnaryOperation<Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.FRACTION_TO_ABSOLUTE_VALUE_FUNCTION);
         Result<Fraction> result = function.calculate(f);
 
         return result.result();
@@ -154,7 +154,7 @@ public final class Math {
     public static Number add(Number firstSummand, Number secondSummand) {
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_NUMBERS_TRIM_RESULT_FUNCTION);
+            (BinaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.ADD_NUMBERS_TRIM_RESULT_FUNCTION);
         Result<Number> result = function.calculate(firstSummand, secondSummand);
 
         return result.result();
@@ -173,7 +173,7 @@ public final class Math {
     public static Fraction add(Fraction firstSummand, Fraction secondSummand) {
 
         BinaryOperation<Fraction, Result<Fraction>> function =
-            (BinaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_FRACTIONS_FUNCTION);
+            (BinaryOperation<Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.ADD_FRACTIONS_FUNCTION);
         Result<Fraction> result = function.calculate(firstSummand, secondSummand);
 
         return result.result();
@@ -192,7 +192,7 @@ public final class Math {
     public static Fraction add(Number firstSummand, Fraction secondSummand) {
 
         MixedBinaryOperation<Number, Fraction, Result<Fraction>> function =
-            (MixedBinaryOperation<Number, Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_NUMBER_AND_FRACTION_FUNCTION);
+            (MixedBinaryOperation<Number, Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.ADD_NUMBER_AND_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(firstSummand, secondSummand);
 
         return result.result();
@@ -211,7 +211,7 @@ public final class Math {
     public static Fraction add(Fraction firstSummand, Number secondSummand) {
 
         MixedBinaryOperation<Fraction, Number, Result<Fraction>> function =
-            (MixedBinaryOperation<Fraction, Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_FRACTION_AND_NUMBER_FUNCTION);
+            (MixedBinaryOperation<Fraction, Number, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.ADD_FRACTION_AND_NUMBER_FUNCTION);
         Result<Fraction> result = function.calculate(firstSummand, secondSummand);
 
         return result.result();
@@ -228,7 +228,7 @@ public final class Math {
     public static Number negate(Number n) {
 
         UnaryOperation<Number, Result<Number>> function =
-            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.NEGATE_NUMBER_FUNCTION);
+            (UnaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.NEGATE_NUMBER_FUNCTION);
         Result<Number> result = function.calculate(n);
 
         return result.result();
@@ -245,7 +245,7 @@ public final class Math {
     public static Fraction negate(Fraction f) {
 
         UnaryOperation<Fraction, Result<Fraction>> function =
-            (UnaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.NEGATE_FRACTION_FUNCTION);
+            (UnaryOperation<Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.NEGATE_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(f);
 
         return result.result();
@@ -264,7 +264,7 @@ public final class Math {
     public static Number subtract(Number minuend, Number subtrahend) {
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.SUBTRACT_NUMBERS_FUNCTION);
+            (BinaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.SUBTRACT_NUMBERS_FUNCTION);
         Result<Number> result = function.calculate(minuend, subtrahend);
 
         return result.result();
@@ -283,7 +283,7 @@ public final class Math {
     public static Fraction subtract(Fraction minuend, Fraction subtrahend) {
 
         BinaryOperation<Fraction, Result<Fraction>> function =
-            (BinaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.SUBTRACT_FRACTIONS_FUNCTION);
+            (BinaryOperation<Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.SUBTRACT_FRACTIONS_FUNCTION);
         Result<Fraction> result = function.calculate(minuend, subtrahend);
 
         return result.result();
@@ -302,7 +302,7 @@ public final class Math {
     public static Fraction subtract(Fraction minuend, Number subtrahend) {
 
         MixedBinaryOperation<Fraction, Number, Result<Fraction>> function =
-            (MixedBinaryOperation<Fraction, Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.SUBTRACT_FRACTION_AND_NUMBER_FUNCTION);
+            (MixedBinaryOperation<Fraction, Number, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.SUBTRACT_FRACTION_AND_NUMBER_FUNCTION);
         Result<Fraction> result = function.calculate(minuend, subtrahend);
 
         return result.result();
@@ -321,7 +321,7 @@ public final class Math {
     public static Fraction subtract(Number minuend, Fraction subtrahend) {
 
         MixedBinaryOperation<Number, Fraction, Result<Fraction>> function =
-            (MixedBinaryOperation<Number, Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.SUBTRACT_NUMBER_AND_FRACTION_FUNCTION);
+            (MixedBinaryOperation<Number, Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.SUBTRACT_NUMBER_AND_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(minuend, subtrahend);
 
         return result.result();
@@ -338,7 +338,7 @@ public final class Math {
     public static Number halving(Number n) {
 
         UnaryOperation<Number, Result<Number>> function =
-            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.HALVING_NUMBER_FUNCTION);
+            (UnaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.HALVING_NUMBER_FUNCTION);
         Result<Number> result = function.calculate(n);
 
         return result.result();
@@ -355,7 +355,7 @@ public final class Math {
     public static Number doubling(Number n) {
 
         UnaryOperation<Number, Result<Number>> function =
-            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.DOUBLING_NUMBER_FUNCTION);
+            (UnaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.DOUBLING_NUMBER_FUNCTION);
         Result<Number> result = function.calculate(n);
 
         return result.result();
@@ -372,7 +372,7 @@ public final class Math {
     public static Number removeFractionPart(Number n) {
 
         UnaryOperation<Number, Result<Number>> function =
-            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.REMOVE_FRACTION_PART_FUNCTION);
+            (UnaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.REMOVE_FRACTION_PART_FUNCTION);
         Result<Number> result = function.calculate(n);
 
         return result.result();
@@ -389,7 +389,7 @@ public final class Math {
     public static Number removeIntegerPart(Number n) {
 
         UnaryOperation<Number, Result<Number>> function =
-            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.REMOVE_INTEGER_PART_FUNCTION);
+            (UnaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.REMOVE_INTEGER_PART_FUNCTION);
         Result<Number> result = function.calculate(n);
 
         return result.result();
@@ -430,7 +430,7 @@ public final class Math {
     public static Number shiftLeft(Number n, Number shifts) {
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.SHIFT_LEFT_FUNCTION);
+            (BinaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.SHIFT_LEFT_FUNCTION);
         Result<Number> result = function.calculate(n, shifts);
 
         return result.result();
@@ -471,7 +471,7 @@ public final class Math {
     public static Number shiftRight(Number n, Number shifts) {
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.SHIFT_RIGHT_FUNCTION);
+            (BinaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.SHIFT_RIGHT_FUNCTION);
         Result<Number> result = function.calculate(n, shifts);
 
         return result.result();
@@ -488,7 +488,7 @@ public final class Math {
     public static Number complement(Number n) {
 
         UnaryOperation<Number, Result<Number>> function =
-            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_COMPLEMENT_FUNCTION);
+            (UnaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.NUMBER_COMPLEMENT_FUNCTION);
         Result<Number> result = function.calculate(n);
 
         return result.result();
@@ -511,7 +511,7 @@ public final class Math {
     public static int compare(Number n1, Number n2) {
 
         Comparator<Number> function =
-            (Comparator<Number>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_COMPARATOR_FUNCTION);
+            (Comparator<Number>) OperationSingletons.getFunction(OperationIdentifiers.NUMBER_COMPARATOR_FUNCTION);
         int result = function.compare(n1, n2);
 
         return result;
@@ -534,7 +534,7 @@ public final class Math {
     public static int compare(Fraction n1, Fraction n2) {
 
         Comparator<Fraction> function =
-            (Comparator<Fraction>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_COMPARATOR_FUNCTION);
+            (Comparator<Fraction>) OperationSingletons.getFunction(OperationIdentifiers.FRACTION_COMPARATOR_FUNCTION);
         int result = function.compare(n1, n2);
 
         return result;
@@ -553,7 +553,7 @@ public final class Math {
     public static Number max(Number n1, Number n2) {
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.MAX_NUMBER_FUNCTION);
+            (BinaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.MAX_NUMBER_FUNCTION);
         Result<Number> result = function.calculate(n1, n2);
 
         return result.result();
@@ -572,7 +572,7 @@ public final class Math {
     public static Fraction max(Fraction f1, Fraction f2) {
 
         BinaryOperation<Fraction, Result<Fraction>> function =
-            (BinaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.MAX_FRACTION_FUNCTION);
+            (BinaryOperation<Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.MAX_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(f1, f2);
 
         return result.result();
@@ -591,7 +591,7 @@ public final class Math {
     public static Fraction max(Fraction f, Number n) {
 
         MixedBinaryOperation<Fraction, Number, Result<Fraction>> function =
-            (MixedBinaryOperation<Fraction, Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.MAX_FRACTION_NUMBER_FUNCTION);
+            (MixedBinaryOperation<Fraction, Number, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.MAX_FRACTION_NUMBER_FUNCTION);
         Result<Fraction> result = function.calculate(f, n);
 
         return result.result();
@@ -610,7 +610,7 @@ public final class Math {
     public static Fraction max(Number n, Fraction f) {
 
         MixedBinaryOperation<Number, Fraction, Result<Fraction>> function =
-            (MixedBinaryOperation<Number, Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.MAX_NUMBER_FRACTION_FUNCTION);
+            (MixedBinaryOperation<Number, Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.MAX_NUMBER_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(n, f);
 
         return result.result();
@@ -629,7 +629,7 @@ public final class Math {
     public static Number min(Number n1, Number n2) {
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.MIN_NUMBER_FUNCTION);
+            (BinaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.MIN_NUMBER_FUNCTION);
         Result<Number> result = function.calculate(n1, n2);
 
         return result.result();
@@ -648,7 +648,7 @@ public final class Math {
     public static Fraction min(Fraction f1, Fraction f2) {
 
         BinaryOperation<Fraction, Result<Fraction>> function =
-            (BinaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.MIN_FRACTION_FUNCTION);
+            (BinaryOperation<Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.MIN_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(f1, f2);
 
         return result.result();
@@ -667,7 +667,7 @@ public final class Math {
     public static Fraction min(Fraction f, Number n) {
 
         MixedBinaryOperation<Fraction, Number, Result<Fraction>> function =
-            (MixedBinaryOperation<Fraction, Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.MIN_FRACTION_NUMBER_FUNCTION);
+            (MixedBinaryOperation<Fraction, Number, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.MIN_FRACTION_NUMBER_FUNCTION);
         Result<Fraction> result = function.calculate(f, n);
 
         return result.result();
@@ -686,7 +686,7 @@ public final class Math {
     public static Fraction min(Number n, Fraction f) {
 
         MixedBinaryOperation<Number, Fraction, Result<Fraction>> function =
-            (MixedBinaryOperation<Number, Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.MIN_NUMBER_FRACTION_FUNCTION);
+            (MixedBinaryOperation<Number, Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.MIN_NUMBER_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(n, f);
 
         return result.result();
@@ -703,7 +703,7 @@ public final class Math {
     public static Number inc(Number number) {
 
         UnaryOperation<Number, Result<Number>> function =
-            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_INCREMENT_FUNCTION);
+            (UnaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.NUMBER_INCREMENT_FUNCTION);
         Result<Number> result = function.calculate(number);
 
         return result.result();
@@ -720,7 +720,7 @@ public final class Math {
     public static Fraction inc(Fraction fraction) {
 
         UnaryOperation<Fraction, Result<Fraction>> function =
-            (UnaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_INCREMENT_FUNCTION);
+            (UnaryOperation<Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.FRACTION_INCREMENT_FUNCTION);
         Result<Fraction> result = function.calculate(fraction);
 
         return result.result();
@@ -737,7 +737,7 @@ public final class Math {
     public static Number dec(Number number) {
 
         UnaryOperation<Number, Result<Number>> function =
-            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_DECREMENT_FUNCTION);
+            (UnaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.NUMBER_DECREMENT_FUNCTION);
         Result<Number> result = function.calculate(number);
 
         return result.result();
@@ -754,7 +754,7 @@ public final class Math {
     public static Fraction dec(Fraction fraction) {
 
         UnaryOperation<Fraction, Result<Fraction>> function =
-            (UnaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_DECREMENT_FUNCTION);
+            (UnaryOperation<Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.FRACTION_DECREMENT_FUNCTION);
         Result<Fraction> result = function.calculate(fraction);
 
         return result.result();
@@ -771,7 +771,7 @@ public final class Math {
     public static boolean isEven(Number number) {
 
         UnaryOperation<Number, Result<Boolean>> function =
-            (UnaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.EVEN_NUMBER_FUNCTION);
+            (UnaryOperation<Number, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.EVEN_NUMBER_FUNCTION);
         Result<Boolean> result = function.calculate(number);
 
         return result.result();
@@ -788,7 +788,7 @@ public final class Math {
     public static boolean isOdd(Number number) {
 
         UnaryOperation<Number, Result<Boolean>> function =
-            (UnaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.ODD_NUMBER_FUNCTION);
+            (UnaryOperation<Number, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.ODD_NUMBER_FUNCTION);
         Result<Boolean> result = function.calculate(number);
 
         return result.result();
@@ -806,7 +806,7 @@ public final class Math {
      */
     public static Number multiply(Number n1, Number n2) {
 
-        return multiply(FunctionIdentifiers.LONG_MULTIPLICATION_FUNCTION, n1, n2);
+        return multiply(OperationIdentifiers.LONG_MULTIPLICATION_FUNCTION, n1, n2);
     }
 
     /**
@@ -821,17 +821,17 @@ public final class Math {
      *
      * @return a number
      */
-    public static Number multiply(FunctionIdentifier algorithm, Number n1, Number n2) {
+    public static Number multiply(OperationIdentifier algorithm, Number n1, Number n2) {
 
-        final FunctionIdentifier[] ALLOWED_ALGORITHMS = new FunctionIdentifier[] {
-            FunctionIdentifiers.MULTIPLY_NUMBERS_BY_ADDITION_FUNCTION,
-            FunctionIdentifiers.RUSSIAN_PEASANT_MULTIPLICATION_FUNCTION,
-            FunctionIdentifiers.LONG_MULTIPLICATION_FUNCTION
+        final OperationIdentifier[] ALLOWED_ALGORITHMS = new OperationIdentifier[] {
+            OperationIdentifiers.MULTIPLY_NUMBERS_BY_ADDITION_FUNCTION,
+            OperationIdentifiers.RUSSIAN_PEASANT_MULTIPLICATION_FUNCTION,
+            OperationIdentifiers.LONG_MULTIPLICATION_FUNCTION
         };
-        FunctionIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, algorithm);
+        OperationIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, algorithm);
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(algorithm);
+            (BinaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(algorithm);
         Result<Number> result = function.calculate(n1, n2);
 
         return result.result();
@@ -850,7 +850,7 @@ public final class Math {
     public static Number modulo(Number n1, Number n2) {
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.MODULO_FUNCTION);
+            (BinaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.MODULO_FUNCTION);
         Result<Number> result = function.calculate(n1, n2);
 
         return result.result();
@@ -869,7 +869,7 @@ public final class Math {
     public static Number diviso(Number n1, Number n2) {
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIVISO_FUNCTION);
+            (BinaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.DIVISO_FUNCTION);
         Result<Number> result = function.calculate(n1, n2);
 
         return result.result();
@@ -888,7 +888,7 @@ public final class Math {
     public static Fraction multiply(Fraction f1, Fraction f2) {
 
         BinaryOperation<Fraction, Result<Fraction>> function =
-            (BinaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.MULTIPLY_FRACTIONS_FUNCTION);
+            (BinaryOperation<Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.MULTIPLY_FRACTIONS_FUNCTION);
         Result<Fraction> result = function.calculate(f1, f2);
 
         return result.result();
@@ -907,7 +907,7 @@ public final class Math {
     public static Fraction multiply(Number operand1, Fraction operand2) {
 
         MixedBinaryOperation<Number, Fraction, Result<Fraction>> function =
-            (MixedBinaryOperation<Number, Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.MULTIPLY_NUMBER_AND_FRACTION_FUNCTION);
+            (MixedBinaryOperation<Number, Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.MULTIPLY_NUMBER_AND_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(operand1, operand2);
 
         return result.result();
@@ -926,7 +926,7 @@ public final class Math {
     public static Fraction multiply(Fraction operand1, Number operand2) {
 
         MixedBinaryOperation<Fraction, Number, Result<Fraction>> function =
-            (MixedBinaryOperation<Fraction, Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.MULTIPLY_FRACTION_AND_NUMBER_FUNCTION);
+            (MixedBinaryOperation<Fraction, Number, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.MULTIPLY_FRACTION_AND_NUMBER_FUNCTION);
         Result<Fraction> result = function.calculate(operand1, operand2);
 
         return result.result();
@@ -945,7 +945,7 @@ public final class Math {
     public static Fraction divideReturnFraction(Number operand1, Number operand2) {
 
         BinaryOperation<Number, Result<Fraction>> function =
-            (BinaryOperation<Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIVIDE_NUMBERS_RETURN_FRACTION_FUNCTION);
+            (BinaryOperation<Number, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.DIVIDE_NUMBERS_RETURN_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(operand1, operand2);
 
         return result.result();
@@ -964,7 +964,7 @@ public final class Math {
     public static Fraction divide(Fraction operand1, Fraction operand2) {
 
         BinaryOperation<Fraction, Result<Fraction>> function =
-            (BinaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIVIDE_FRACTIONS_FUNCTION);
+            (BinaryOperation<Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.DIVIDE_FRACTIONS_FUNCTION);
         Result<Fraction> result = function.calculate(operand1, operand2);
 
         return result.result();
@@ -983,7 +983,7 @@ public final class Math {
     public static Fraction divide(Fraction operand1, Number operand2) {
 
         MixedBinaryOperation<Fraction, Number, Result<Fraction>> function =
-            (MixedBinaryOperation<Fraction, Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIVIDE_FRACTION_BY_NUMBER_FUNCTION);
+            (MixedBinaryOperation<Fraction, Number, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.DIVIDE_FRACTION_BY_NUMBER_FUNCTION);
         Result<Fraction> result = function.calculate(operand1, operand2);
 
         return result.result();
@@ -1002,7 +1002,7 @@ public final class Math {
     public static Fraction divide(Number operand1, Fraction operand2) {
 
         MixedBinaryOperation<Number, Fraction, Result<Fraction>> function =
-            (MixedBinaryOperation<Number, Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIVIDE_NUMBER_BY_FRACTION_FUNCTION);
+            (MixedBinaryOperation<Number, Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.DIVIDE_NUMBER_BY_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(operand1, operand2);
 
         return result.result();
@@ -1021,7 +1021,7 @@ public final class Math {
     public static boolean isGreater(Number operand1, Number operand2) {
 
         BinaryOperation<Number, Result<Boolean>> function =
-            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_GREATER_THAN_COMPARISON_FUNCTION);
+            (BinaryOperation<Number, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.NUMBER_GREATER_THAN_COMPARISON_FUNCTION);
         Result<Boolean> result = function.calculate(operand1, operand2);
 
         return result.result();
@@ -1040,7 +1040,7 @@ public final class Math {
     public static boolean isGreaterOrEqual(Number operand1, Number operand2) {
 
         BinaryOperation<Number, Result<Boolean>> function =
-            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_GREATER_THAN_OR_EQUAL_COMPARISON_FUNCTION);
+            (BinaryOperation<Number, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.NUMBER_GREATER_THAN_OR_EQUAL_COMPARISON_FUNCTION);
         Result<Boolean> result = function.calculate(operand1, operand2);
 
         return result.result();
@@ -1059,7 +1059,7 @@ public final class Math {
     public static boolean isLesser(Number operand1, Number operand2) {
 
         BinaryOperation<Number, Result<Boolean>> function =
-            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_LESSER_THAN_COMPARISON_FUNCTION);
+            (BinaryOperation<Number, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.NUMBER_LESSER_THAN_COMPARISON_FUNCTION);
         Result<Boolean> result = function.calculate(operand1, operand2);
 
         return result.result();
@@ -1078,7 +1078,7 @@ public final class Math {
     public static boolean isLesserOrEqual(Number operand1, Number operand2) {
 
         BinaryOperation<Number, Result<Boolean>> function =
-            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_LESSER_THAN_OR_EQUAL_COMPARISON_FUNCTION);
+            (BinaryOperation<Number, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.NUMBER_LESSER_THAN_OR_EQUAL_COMPARISON_FUNCTION);
         Result<Boolean> result = function.calculate(operand1, operand2);
 
         return result.result();
@@ -1097,7 +1097,7 @@ public final class Math {
     public static boolean isGreater(Fraction operand1, Fraction operand2) {
 
         BinaryOperation<Fraction, Result<Boolean>> function =
-            (BinaryOperation<Fraction, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_GREATER_THAN_COMPARISON_FUNCTION);
+            (BinaryOperation<Fraction, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.FRACTION_GREATER_THAN_COMPARISON_FUNCTION);
         Result<Boolean> result = function.calculate(operand1, operand2);
 
         return result.result();
@@ -1116,7 +1116,7 @@ public final class Math {
     public static boolean isGreaterOrEqual(Fraction operand1, Fraction operand2) {
 
         BinaryOperation<Fraction, Result<Boolean>> function =
-            (BinaryOperation<Fraction, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_GREATER_THAN_OR_EQUAL_COMPARISON_FUNCTION);
+            (BinaryOperation<Fraction, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.FRACTION_GREATER_THAN_OR_EQUAL_COMPARISON_FUNCTION);
         Result<Boolean> result = function.calculate(operand1, operand2);
 
         return result.result();
@@ -1135,7 +1135,7 @@ public final class Math {
     public static boolean isLesser(Fraction operand1, Fraction operand2) {
 
         BinaryOperation<Fraction, Result<Boolean>> function =
-            (BinaryOperation<Fraction, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_LESSER_THAN_COMPARISON_FUNCTION);
+            (BinaryOperation<Fraction, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.FRACTION_LESSER_THAN_COMPARISON_FUNCTION);
         Result<Boolean> result = function.calculate(operand1, operand2);
 
         return result.result();
@@ -1154,7 +1154,7 @@ public final class Math {
     public static boolean isLesserOrEqual(Fraction operand1, Fraction operand2) {
 
         BinaryOperation<Fraction, Result<Boolean>> function =
-            (BinaryOperation<Fraction, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_LESSER_THAN_OR_EQUAL_COMPARISON_FUNCTION);
+            (BinaryOperation<Fraction, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.FRACTION_LESSER_THAN_OR_EQUAL_COMPARISON_FUNCTION);
         Result<Boolean> result = function.calculate(operand1, operand2);
 
         return result.result();
@@ -1173,7 +1173,7 @@ public final class Math {
     public static boolean isGreater(Fraction operand1, Number operand2) {
 
         MixedBinaryOperation<Fraction, Number, Result<Boolean>> function =
-            (MixedBinaryOperation<Fraction, Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_GREATER_THAN_NUMBER_COMPARISON_FUNCTION);
+            (MixedBinaryOperation<Fraction, Number, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.FRACTION_GREATER_THAN_NUMBER_COMPARISON_FUNCTION);
         Result<Boolean> result = function.calculate(operand1, operand2);
 
         return result.result();
@@ -1192,7 +1192,7 @@ public final class Math {
     public static boolean isGreaterOrEqual(Fraction operand1, Number operand2) {
 
         MixedBinaryOperation<Fraction, Number, Result<Boolean>> function =
-            (MixedBinaryOperation<Fraction, Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_GREATER_THAN_OR_EQUAL_NUMBER_COMPARISON_FUNCTION);
+            (MixedBinaryOperation<Fraction, Number, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.FRACTION_GREATER_THAN_OR_EQUAL_NUMBER_COMPARISON_FUNCTION);
         Result<Boolean> result = function.calculate(operand1, operand2);
 
         return result.result();
@@ -1211,7 +1211,7 @@ public final class Math {
     public static boolean isLesser(Fraction operand1, Number operand2) {
 
         MixedBinaryOperation<Fraction, Number, Result<Boolean>> function =
-            (MixedBinaryOperation<Fraction, Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_LESSER_THAN_NUMBER_COMPARISON_FUNCTION);
+            (MixedBinaryOperation<Fraction, Number, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.FRACTION_LESSER_THAN_NUMBER_COMPARISON_FUNCTION);
         Result<Boolean> result = function.calculate(operand1, operand2);
 
         return result.result();
@@ -1230,7 +1230,7 @@ public final class Math {
     public static boolean isLesserOrEqual(Fraction operand1, Number operand2) {
 
         MixedBinaryOperation<Fraction, Number, Result<Boolean>> function =
-            (MixedBinaryOperation<Fraction, Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_LESSER_THAN_OR_EQUAL_NUMBER_COMPARISON_FUNCTION);
+            (MixedBinaryOperation<Fraction, Number, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.FRACTION_LESSER_THAN_OR_EQUAL_NUMBER_COMPARISON_FUNCTION);
         Result<Boolean> result = function.calculate(operand1, operand2);
 
         return result.result();
@@ -1249,7 +1249,7 @@ public final class Math {
     public static boolean isGreater(Number operand1, Fraction operand2) {
 
         MixedBinaryOperation<Number, Fraction, Result<Boolean>> function =
-            (MixedBinaryOperation<Number, Fraction, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_GREATER_THAN_FRACTION_COMPARISON_FUNCTION);
+            (MixedBinaryOperation<Number, Fraction, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.NUMBER_GREATER_THAN_FRACTION_COMPARISON_FUNCTION);
         Result<Boolean> result = function.calculate(operand1, operand2);
 
         return result.result();
@@ -1268,7 +1268,7 @@ public final class Math {
     public static boolean isGreaterOrEqual(Number operand1, Fraction operand2) {
 
         MixedBinaryOperation<Number, Fraction, Result<Boolean>> function =
-            (MixedBinaryOperation<Number, Fraction, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_GREATER_THAN_OR_EQUAL_FRACTION_COMPARISON_FUNCTION);
+            (MixedBinaryOperation<Number, Fraction, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.NUMBER_GREATER_THAN_OR_EQUAL_FRACTION_COMPARISON_FUNCTION);
         Result<Boolean> result = function.calculate(operand1, operand2);
 
         return result.result();
@@ -1287,7 +1287,7 @@ public final class Math {
     public static boolean isLesser(Number operand1, Fraction operand2) {
 
         MixedBinaryOperation<Number, Fraction, Result<Boolean>> function =
-            (MixedBinaryOperation<Number, Fraction, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_LESSER_THAN_FRACTION_COMPARISON_FUNCTION);
+            (MixedBinaryOperation<Number, Fraction, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.NUMBER_LESSER_THAN_FRACTION_COMPARISON_FUNCTION);
         Result<Boolean> result = function.calculate(operand1, operand2);
 
         return result.result();
@@ -1306,7 +1306,7 @@ public final class Math {
     public static boolean isLesserOrEqual(Number operand1, Fraction operand2) {
 
         MixedBinaryOperation<Number, Fraction, Result<Boolean>> function =
-            (MixedBinaryOperation<Number, Fraction, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_LESSER_THAN_OR_EQUAL_FRACTION_COMPARISON_FUNCTION);
+            (MixedBinaryOperation<Number, Fraction, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.NUMBER_LESSER_THAN_OR_EQUAL_FRACTION_COMPARISON_FUNCTION);
         Result<Boolean> result = function.calculate(operand1, operand2);
 
         return result.result();
@@ -1323,7 +1323,7 @@ public final class Math {
     public static Fraction reciprocal(Fraction operand) {
 
         UnaryOperation<Fraction, Result<Fraction>> function =
-            (UnaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.RECIPROCAL_OF_FRACTION_FUNCTION);
+            (UnaryOperation<Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.RECIPROCAL_OF_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(operand);
 
         return result.result();
@@ -1340,7 +1340,7 @@ public final class Math {
     public static Fraction reciprocal(Number operand) {
 
         UnaryOperation<Number, Result<Fraction>> function =
-            (UnaryOperation<Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.RECIPROCAL_OF_NUMBER_FUNCTION);
+            (UnaryOperation<Number, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.RECIPROCAL_OF_NUMBER_FUNCTION);
         Result<Fraction> result = function.calculate(operand);
 
         return result.result();
@@ -1359,7 +1359,7 @@ public final class Math {
     public static Number rebase(Number number, int base) {
 
         MixedBinaryOperation<Number, Integer, Result<Number>> function =
-            (MixedBinaryOperation<Number, Integer, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.REBASE_NUMBER_FUNCTION);
+            (MixedBinaryOperation<Number, Integer, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.REBASE_NUMBER_FUNCTION);
         Result<Number> result = function.calculate(number, base);
 
         return result.result();
@@ -1378,7 +1378,7 @@ public final class Math {
     public static Fraction rebase(Fraction fraction, int base) {
 
         MixedBinaryOperation<Fraction, Integer, Result<Fraction>> function =
-            (MixedBinaryOperation<Fraction, Integer, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.REBASE_FRACTION_FUNCTION);
+            (MixedBinaryOperation<Fraction, Integer, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.REBASE_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(fraction, base);
 
         return result.result();
@@ -1395,7 +1395,7 @@ public final class Math {
     public static Number factorial(Number number) {
 
         UnaryOperation<Number, Result<Number>> function =
-            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.FACTORIAL_FUNCTION);
+            (UnaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.FACTORIAL_FUNCTION);
         Result<Number> result = function.calculate(number);
 
         return result.result();
@@ -1412,7 +1412,7 @@ public final class Math {
     public static Fraction halving(Fraction fraction) {
 
         UnaryOperation<Fraction, Result<Fraction>> function =
-            (UnaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.HALVING_FRACTION_FUNCTION);
+            (UnaryOperation<Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.HALVING_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(fraction);
 
         return result.result();
@@ -1429,7 +1429,7 @@ public final class Math {
     public static Fraction doubling(Fraction fraction) {
 
         UnaryOperation<Fraction, Result<Fraction>> function =
-            (UnaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.DOUBLING_FRACTION_FUNCTION);
+            (UnaryOperation<Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.DOUBLING_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(fraction);
 
         return result.result();
@@ -1446,7 +1446,7 @@ public final class Math {
     public static Number roundDown(Number number) {
 
         UnaryOperation<Number, Result<Number>> function =
-            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.ROUND_DOWN_NUMBER_FUNCTION);
+            (UnaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.ROUND_DOWN_NUMBER_FUNCTION);
         Result<Number> result = function.calculate(number);
 
         return result.result();
@@ -1463,7 +1463,7 @@ public final class Math {
     public static Number roundUp(Number number) {
 
         UnaryOperation<Number, Result<Number>> function =
-            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.ROUND_UP_NUMBER_FUNCTION);
+            (UnaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.ROUND_UP_NUMBER_FUNCTION);
         Result<Number> result = function.calculate(number);
 
         return result.result();
@@ -1486,7 +1486,7 @@ public final class Math {
 
         Number convertedParameter = parseInteger(decimalPlaces);
 
-        return round(FunctionIdentifiers.ROUND_NUMBER_TO_EVEN_FUNCTION, number, convertedParameter);
+        return round(OperationIdentifiers.ROUND_NUMBER_TO_EVEN_FUNCTION, number, convertedParameter);
     }
 
     /**
@@ -1501,7 +1501,7 @@ public final class Math {
      */
     public static Number round(Number number, Number decimalPlaces) {
 
-        return round(FunctionIdentifiers.ROUND_NUMBER_TO_EVEN_FUNCTION, number, decimalPlaces);
+        return round(OperationIdentifiers.ROUND_NUMBER_TO_EVEN_FUNCTION, number, decimalPlaces);
     }
 
     /**
@@ -1519,7 +1519,7 @@ public final class Math {
      * @return a shortened number according to the specified precision
      */
     @Deprecated
-    public static Number round(FunctionIdentifier algorithm, Number number, int decimalPlaces) {
+    public static Number round(OperationIdentifier algorithm, Number number, int decimalPlaces) {
 
         Number convertedParameter = parseInteger(decimalPlaces);
 
@@ -1538,15 +1538,15 @@ public final class Math {
      *
      * @return a shortened number according to the specified precision
      */
-    public static Number round(FunctionIdentifier algorithm, Number number, Number decimalPlaces) {
+    public static Number round(OperationIdentifier algorithm, Number number, Number decimalPlaces) {
 
-        final FunctionIdentifier[] ALLOWED_ALGORITHMS = new FunctionIdentifier[] {
-            FunctionIdentifiers.ROUND_NUMBER_TO_ODD_FUNCTION, FunctionIdentifiers.ROUND_NUMBER_TO_EVEN_FUNCTION
+        final OperationIdentifier[] ALLOWED_ALGORITHMS = new OperationIdentifier[] {
+            OperationIdentifiers.ROUND_NUMBER_TO_ODD_FUNCTION, OperationIdentifiers.ROUND_NUMBER_TO_EVEN_FUNCTION
         };
-        FunctionIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, algorithm);
+        OperationIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, algorithm);
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(algorithm);
+            (BinaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(algorithm);
         Result<Number> result = function.calculate(number, decimalPlaces);
 
         return result.result();
@@ -1595,7 +1595,7 @@ public final class Math {
      */
     public static Number divide(Number n1, Number n2) {
 
-        return divide(FunctionIdentifiers.RUSSIAN_DIVISION_FUNCTION, n1, n2);
+        return divide(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION, n1, n2);
     }
 
     /**
@@ -1612,7 +1612,7 @@ public final class Math {
      */
     public static Number divide(Number n1, Number n2, Number decimalPlaces) {
 
-        return divide(FunctionIdentifiers.RUSSIAN_DIVISION_FUNCTION, n1, n2, decimalPlaces);
+        return divide(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION, n1, n2, decimalPlaces);
     }
 
     /**
@@ -1627,7 +1627,7 @@ public final class Math {
      *
      * @return the quotient
      */
-    public static Number divide(FunctionIdentifier algorithm, Number n1, Number n2) {
+    public static Number divide(OperationIdentifier algorithm, Number n1, Number n2) {
 
         ParameterCheckHelper.checkParameters(n1, n2);
         Number decimalPlaces = getDefaultMaximumFractionLength(n1.base());
@@ -1649,15 +1649,15 @@ public final class Math {
      *
      * @return the quotient
      */
-    public static Number divide(FunctionIdentifier algorithm, Number n1, Number n2, Number decimalPlaces) {
+    public static Number divide(OperationIdentifier algorithm, Number n1, Number n2, Number decimalPlaces) {
 
-        final FunctionIdentifier[] ALLOWED_ALGORITHMS = new FunctionIdentifier[] {
-            FunctionIdentifiers.RUSSIAN_DIVISION_FUNCTION, FunctionIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION
+        final OperationIdentifier[] ALLOWED_ALGORITHMS = new OperationIdentifier[] {
+            OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION, OperationIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION
         };
-        FunctionIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, algorithm);
+        OperationIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, algorithm);
 
         TernaryOperation<Number, Result<Number>> function =
-            (TernaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(algorithm);
+            (TernaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(algorithm);
         Result<Number> result = function.calculate(n1, n2, decimalPlaces);
 
         return result.result();
@@ -1691,7 +1691,7 @@ public final class Math {
     public static Number evaluate(Fraction fraction, Number decimalPlaces) {
 
         MixedBinaryOperation<Fraction, Number, Result<Number>> function =
-            (MixedBinaryOperation<Fraction, Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.EVALUATE_FRACTION_FUNCTION);
+            (MixedBinaryOperation<Fraction, Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.EVALUATE_FRACTION_FUNCTION);
         Result<Number> result = function.calculate(fraction, decimalPlaces);
 
         return result.result();
@@ -1710,7 +1710,7 @@ public final class Math {
     public static boolean isMultipleOf(Number number1, Number number2) {
 
         BinaryOperation<Number, Result<Boolean>> function =
-            (BinaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.IS_MULTIPLE_FUNCTION);
+            (BinaryOperation<Number, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.IS_MULTIPLE_FUNCTION);
         Result<Boolean> result = function.calculate(number1, number2);
 
         return result.result();
@@ -1727,7 +1727,7 @@ public final class Math {
     public static Number square(Number number) {
 
         UnaryOperation<Number, Result<Number>> function =
-            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.SQUARE_NUMBER_FUNCTION);
+            (UnaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.SQUARE_NUMBER_FUNCTION);
         Result<Number> result = function.calculate(number);
 
         return result.result();
@@ -1743,7 +1743,7 @@ public final class Math {
      */
     public static Number squareRoot(Number number) {
 
-        return squareRoot(FunctionIdentifiers.SQUARE_ROOT_FUNCTION, number);
+        return squareRoot(OperationIdentifiers.SQUARE_ROOT_FUNCTION, number);
     }
 
     /**
@@ -1758,7 +1758,7 @@ public final class Math {
      */
     public static Number squareRoot(Number number, Number decimalPlaces) {
 
-        return squareRoot(FunctionIdentifiers.SQUARE_ROOT_FUNCTION, number, decimalPlaces);
+        return squareRoot(OperationIdentifiers.SQUARE_ROOT_FUNCTION, number, decimalPlaces);
     }
 
     /**
@@ -1771,7 +1771,7 @@ public final class Math {
      *
      * @return a number
      */
-    public static Number squareRoot(FunctionIdentifier algorithm, Number number) {
+    public static Number squareRoot(OperationIdentifier algorithm, Number number) {
 
         ParameterCheckHelper.checkParameter(number);
 
@@ -1793,11 +1793,11 @@ public final class Math {
      *
      * @return a number
      */
-    public static Number squareRoot(FunctionIdentifier algorithm, Number number, Number decimalPlaces) {
+    public static Number squareRoot(OperationIdentifier algorithm, Number number, Number decimalPlaces) {
 
-        final FunctionIdentifier[] ALLOWED_ALGORITHMS = new FunctionIdentifier[] {
-            FunctionIdentifiers.SQUARE_ROOT_FUNCTION };
-        FunctionIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, algorithm);
+        final OperationIdentifier[] ALLOWED_ALGORITHMS = new OperationIdentifier[] {
+            OperationIdentifiers.SQUARE_ROOT_FUNCTION };
+        OperationIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, algorithm);
 
         ParameterCheckHelper.checkParameter(number);
 
@@ -1805,7 +1805,7 @@ public final class Math {
         Number iterations = DEFAULT_HERON_METHOD_ITERATIONS.value(base);
 
         TernaryOperation<Number, Result<Number>> function =
-            (TernaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(algorithm);
+            (TernaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(algorithm);
         Result<Number> result = function.calculate(number, iterations, decimalPlaces);
 
         return result.result();
@@ -1822,7 +1822,7 @@ public final class Math {
     public static Fraction square(Fraction fraction) {
 
         UnaryOperation<Fraction, Result<Fraction>> function =
-            (UnaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.SQUARE_FRACTION_FUNCTION);
+            (UnaryOperation<Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.SQUARE_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(fraction);
 
         return result.result();
@@ -1839,7 +1839,7 @@ public final class Math {
     public static SortedSet<Number> divisorSet(Number number) {
 
         UnaryOperation<Number, Result<SortedSet<Number>>> function =
-            (UnaryOperation<Number, Result<SortedSet<Number>>>) FunctionSingletons.getFunction(FunctionIdentifiers.DETERMINE_DIVISORS_FUNCTION);
+            (UnaryOperation<Number, Result<SortedSet<Number>>>) OperationSingletons.getFunction(OperationIdentifiers.DETERMINE_DIVISORS_FUNCTION);
         Result<SortedSet<Number>> result = function.calculate(number);
 
         return result.result();
@@ -1856,7 +1856,7 @@ public final class Math {
     public static SortedSet<Number> primeFactors(Number number) {
 
         UnaryOperation<Number, Result<SortedSet<Number>>> function =
-            (UnaryOperation<Number, Result<SortedSet<Number>>>) FunctionSingletons.getFunction(FunctionIdentifiers.DETERMINE_PRIME_FACTORS_NUMBER);
+            (UnaryOperation<Number, Result<SortedSet<Number>>>) OperationSingletons.getFunction(OperationIdentifiers.DETERMINE_PRIME_FACTORS_NUMBER);
         Result<SortedSet<Number>> result = function.calculate(number);
 
         return result.result();
@@ -1873,7 +1873,7 @@ public final class Math {
     public static boolean isPrime(Number number) {
 
         UnaryOperation<Number, Result<Boolean>> function =
-            (UnaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.IS_PRIME_FUNCTION);
+            (UnaryOperation<Number, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.IS_PRIME_FUNCTION);
         Result<Boolean> result = function.calculate(number);
 
         return result.result();
@@ -1890,7 +1890,7 @@ public final class Math {
     public static Fraction reduce(Fraction fraction) {
 
         UnaryOperation<Fraction, Result<Fraction>> function =
-            (UnaryOperation<Fraction, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.REDUCE_FRACTION_FUNCTION);
+            (UnaryOperation<Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.REDUCE_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(fraction);
 
         return result.result();
@@ -1908,7 +1908,7 @@ public final class Math {
     public static SortedSet<Number> commonDivisorSet(Fraction fraction) {
 
         UnaryOperation<Fraction, Result<SortedSet<Number>>> function =
-            (UnaryOperation<Fraction, Result<SortedSet<Number>>>) FunctionSingletons.getFunction(FunctionIdentifiers.DETERMINE_COMMON_DIVISORS_FUNCTION);
+            (UnaryOperation<Fraction, Result<SortedSet<Number>>>) OperationSingletons.getFunction(OperationIdentifiers.DETERMINE_COMMON_DIVISORS_FUNCTION);
         Result<SortedSet<Number>> result = function.calculate(fraction);
 
         return result.result();
@@ -1926,7 +1926,7 @@ public final class Math {
     public static SortedSet<Number> commonPrimeFactors(Fraction fraction) {
 
         UnaryOperation<Fraction, Result<SortedSet<Number>>> function =
-            (UnaryOperation<Fraction, Result<SortedSet<Number>>>) FunctionSingletons.getFunction(FunctionIdentifiers.DETERMINE_COMMON_PRIME_FACTORS_FUNCTION);
+            (UnaryOperation<Fraction, Result<SortedSet<Number>>>) OperationSingletons.getFunction(OperationIdentifiers.DETERMINE_COMMON_PRIME_FACTORS_FUNCTION);
         Result<SortedSet<Number>> result = function.calculate(fraction);
 
         return result.result();
@@ -1945,7 +1945,7 @@ public final class Math {
     public static Vector add(Vector vector1, Vector vector2) {
 
         BinaryOperation<Vector, Result<Vector>> function =
-            (BinaryOperation<Vector, Result<Vector>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_VECTORS_FUNCTION);
+            (BinaryOperation<Vector, Result<Vector>>) OperationSingletons.getFunction(OperationIdentifiers.ADD_VECTORS_FUNCTION);
         Result<Vector> result = function.calculate(vector1, vector2);
 
         return result.result();
@@ -1964,7 +1964,7 @@ public final class Math {
     public static Vector subtract(Vector vector1, Vector vector2) {
 
         BinaryOperation<Vector, Result<Vector>> function =
-            (BinaryOperation<Vector, Result<Vector>>) FunctionSingletons.getFunction(FunctionIdentifiers.SUBTRACT_VECTORS_FUNCTION);
+            (BinaryOperation<Vector, Result<Vector>>) OperationSingletons.getFunction(OperationIdentifiers.SUBTRACT_VECTORS_FUNCTION);
         Result<Vector> result = function.calculate(vector1, vector2);
 
         return result.result();
@@ -1983,7 +1983,7 @@ public final class Math {
     public static Vector multiply(Vector vector, Number number) {
 
         MixedBinaryOperation<Vector, Number, Result<Vector>> function =
-            (MixedBinaryOperation<Vector, Number, Result<Vector>>) FunctionSingletons.getFunction(FunctionIdentifiers.MULTIPLY_VECTOR_WITH_NUMBER_FUNCTION);
+            (MixedBinaryOperation<Vector, Number, Result<Vector>>) OperationSingletons.getFunction(OperationIdentifiers.MULTIPLY_VECTOR_WITH_NUMBER_FUNCTION);
         Result<Vector> result = function.calculate(vector, number);
 
         return result.result();
@@ -2002,7 +2002,7 @@ public final class Math {
     public static Number scalarProduct(Vector vector1, Vector vector2) {
 
         BinaryOperation<Vector, Result<Number>> function =
-            (BinaryOperation<Vector, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.SCALAR_PRODUCT_FUNCTION);
+            (BinaryOperation<Vector, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.SCALAR_PRODUCT_FUNCTION);
         Result<Number> result = function.calculate(vector1, vector2);
 
         return result.result();
@@ -2021,7 +2021,7 @@ public final class Math {
     public static Vector crossProduct(Vector vector1, Vector vector2) {
 
         BinaryOperation<Vector, Result<Vector>> function =
-            (BinaryOperation<Vector, Result<Vector>>) FunctionSingletons.getFunction(FunctionIdentifiers.CROSS_PRODUCT_FUNCTION);
+            (BinaryOperation<Vector, Result<Vector>>) OperationSingletons.getFunction(OperationIdentifiers.CROSS_PRODUCT_FUNCTION);
         Result<Vector> result = function.calculate(vector1, vector2);
 
         return result.result();
@@ -2042,7 +2042,7 @@ public final class Math {
     public static Number tripleProduct(Vector vector1, Vector vector2, Vector vector3) {
 
         TernaryOperation<Vector, Result<Number>> function =
-            (TernaryOperation<Vector, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.TRIPLE_PRODUCT_FUNCTION);
+            (TernaryOperation<Vector, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.TRIPLE_PRODUCT_FUNCTION);
         Result<Number> result = function.calculate(vector1, vector2, vector3);
 
         return result.result();
@@ -2061,7 +2061,7 @@ public final class Math {
     public static Matrix add(Matrix matrix1, Matrix matrix2) {
 
         BinaryOperation<Matrix, Result<Matrix>> function =
-            (BinaryOperation<Matrix, Result<Matrix>>) FunctionSingletons.getFunction(FunctionIdentifiers.ADD_MATRICES_FUNCTION);
+            (BinaryOperation<Matrix, Result<Matrix>>) OperationSingletons.getFunction(OperationIdentifiers.ADD_MATRICES_FUNCTION);
         Result<Matrix> result = function.calculate(matrix1, matrix2);
 
         return result.result();
@@ -2078,7 +2078,7 @@ public final class Math {
     public static Fraction toFraction(Number number) {
 
         UnaryOperation<Number, Result<Fraction>> function =
-            (UnaryOperation<Number, Result<Fraction>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_TO_FRACTION_FUNCTION);
+            (UnaryOperation<Number, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.NUMBER_TO_FRACTION_FUNCTION);
         Result<Fraction> result = function.calculate(number);
 
         return result.result();
@@ -2097,7 +2097,7 @@ public final class Math {
     public static Matrix subtract(Matrix matrix1, Matrix matrix2) {
 
         BinaryOperation<Matrix, Result<Matrix>> function =
-            (BinaryOperation<Matrix, Result<Matrix>>) FunctionSingletons.getFunction(FunctionIdentifiers.SUBTRACT_MATRICES_FUNCTION);
+            (BinaryOperation<Matrix, Result<Matrix>>) OperationSingletons.getFunction(OperationIdentifiers.SUBTRACT_MATRICES_FUNCTION);
         Result<Matrix> result = function.calculate(matrix1, matrix2);
 
         return result.result();
@@ -2118,7 +2118,7 @@ public final class Math {
     public static boolean isWithinInterval(Number min, Number number, Number max) {
 
         TernaryOperation<Number, Result<Boolean>> function =
-            (TernaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_IS_WITHIN_INTERVAL);
+            (TernaryOperation<Number, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.NUMBER_IS_WITHIN_INTERVAL);
         Result<Boolean> result = function.calculate(min, number, max);
 
         return result.result();
@@ -2139,7 +2139,7 @@ public final class Math {
     public static boolean isWithinInterval(Fraction min, Fraction fraction, Fraction max) {
 
         TernaryOperation<Fraction, Result<Boolean>> function =
-            (TernaryOperation<Fraction, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.FRACTION_IS_WITHIN_INTERVAL);
+            (TernaryOperation<Fraction, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.FRACTION_IS_WITHIN_INTERVAL);
         Result<Boolean> result = function.calculate(min, fraction, max);
 
         return result.result();
@@ -2159,7 +2159,7 @@ public final class Math {
     public static Matrix dyadicProduct(Vector vector1, Vector vector2) {
 
         BinaryOperation<Vector, Result<Matrix>> function =
-            (BinaryOperation<Vector, Result<Matrix>>) FunctionSingletons.getFunction(FunctionIdentifiers.DYADIC_PRODUCT_FUNCTION);
+            (BinaryOperation<Vector, Result<Matrix>>) OperationSingletons.getFunction(OperationIdentifiers.DYADIC_PRODUCT_FUNCTION);
         Result<Matrix> result = function.calculate(vector1, vector2);
 
         return result.result();
@@ -2176,7 +2176,7 @@ public final class Math {
     public static Vector toVector(Matrix matrix) {
 
         UnaryOperation<Matrix, Result<Vector>> function =
-            (UnaryOperation<Matrix, Result<Vector>>) FunctionSingletons.getFunction(FunctionIdentifiers.VECTORIZATION_FUNCTION);
+            (UnaryOperation<Matrix, Result<Vector>>) OperationSingletons.getFunction(OperationIdentifiers.VECTORIZATION_FUNCTION);
         Result<Vector> result = function.calculate(matrix);
 
         return result.result();
@@ -2193,7 +2193,7 @@ public final class Math {
     public static Matrix transpose(Matrix matrix) {
 
         UnaryOperation<Matrix, Result<Matrix>> function =
-            (UnaryOperation<Matrix, Result<Matrix>>) FunctionSingletons.getFunction(FunctionIdentifiers.TRANSPOSE_MATRIX_FUNCTION);
+            (UnaryOperation<Matrix, Result<Matrix>>) OperationSingletons.getFunction(OperationIdentifiers.TRANSPOSE_MATRIX_FUNCTION);
         Result<Matrix> result = function.calculate(matrix);
 
         return result.result();
@@ -2212,7 +2212,7 @@ public final class Math {
     public static Matrix multiply(Matrix matrix1, Matrix matrix2) {
 
         BinaryOperation<Matrix, Result<Matrix>> function =
-            (BinaryOperation<Matrix, Result<Matrix>>) FunctionSingletons.getFunction(FunctionIdentifiers.MATRIX_MULTIPLCIATION_FUNCTION);
+            (BinaryOperation<Matrix, Result<Matrix>>) OperationSingletons.getFunction(OperationIdentifiers.MATRIX_MULTIPLCIATION_FUNCTION);
         Result<Matrix> result = function.calculate(matrix1, matrix2);
 
         return result.result();
@@ -2243,7 +2243,7 @@ public final class Math {
     public static Number random(int base, Number digits) {
 
         MixedBinaryOperation<Integer, Number, Result<Number>> function =
-            (MixedBinaryOperation<Integer, Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.RANDOM_NUMBER_FUNCTION);
+            (MixedBinaryOperation<Integer, Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.RANDOM_NUMBER_FUNCTION);
         Result<Number> result = function.calculate(base, digits);
 
         return result.result();
@@ -2290,7 +2290,7 @@ public final class Math {
     public static Number random(Number minimumValue, Number maximumValue, Number digits) {
 
         TernaryOperation<Number, Result<Number>> function =
-            (TernaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.RANDOM_NUMBER_WITHIN_INTERVAL_FUNCTION);
+            (TernaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.RANDOM_NUMBER_WITHIN_INTERVAL_FUNCTION);
         Result<Number> result = function.calculate(minimumValue, maximumValue, digits);
 
         return result.result();
@@ -2307,7 +2307,7 @@ public final class Math {
     public static Number digitSum(Number n) {
 
         UnaryOperation<Number, Result<Number>> function =
-            (UnaryOperation<Number, Result<Number>>) FunctionSingletons.getFunction(FunctionIdentifiers.DIGIT_SUM_FUNCTION);
+            (UnaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.DIGIT_SUM_FUNCTION);
         Result<Number> result = function.calculate(n);
 
         return result.result();
@@ -2324,7 +2324,7 @@ public final class Math {
     public static boolean isSingleDigit(Number n) {
 
         UnaryOperation<Number, Result<Boolean>> function =
-            (UnaryOperation<Number, Result<Boolean>>) FunctionSingletons.getFunction(FunctionIdentifiers.IS_SINGLE_DIGIT_FUNCTION);
+            (UnaryOperation<Number, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.IS_SINGLE_DIGIT_FUNCTION);
         Result<Boolean> result = function.calculate(n);
 
         return result.result();

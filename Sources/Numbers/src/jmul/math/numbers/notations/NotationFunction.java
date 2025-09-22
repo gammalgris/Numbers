@@ -34,7 +34,7 @@
 package jmul.math.numbers.notations;
 
 
-import jmul.math.functions.Function;
+import jmul.math.operations.Operation;
 import jmul.math.numbers.Number;
 
 
@@ -44,7 +44,7 @@ import jmul.math.numbers.Number;
  *
  * @author Kristian Kutin
  */
-public interface NotationFunction extends Function {
+public interface NotationFunction extends Operation {
 
     /**
      * Translates the specified number into a string notation.

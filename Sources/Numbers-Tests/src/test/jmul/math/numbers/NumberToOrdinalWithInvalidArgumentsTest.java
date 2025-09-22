@@ -37,8 +37,8 @@ package test.jmul.math.numbers;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import jmul.math.functions.FunctionSingletons;
-import jmul.math.functions.repository.FunctionIdentifiers;
+import jmul.math.operations.OperationSingletons;
+import jmul.math.operations.repository.OperationIdentifiers;
 import jmul.math.numbers.Constants;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
@@ -98,7 +98,7 @@ public class NumberToOrdinalWithInvalidArgumentsTest {
     public void testTranslation() {
 
         MixedBinaryOperation<Number, Integer, Result<Integer>> function =
-            (MixedBinaryOperation<Number, Integer, Result<Integer>>) FunctionSingletons.getFunction(FunctionIdentifiers.NUMBER_TO_ORDINAL_FUNCTION);
+            (MixedBinaryOperation<Number, Integer, Result<Integer>>) OperationSingletons.getFunction(OperationIdentifiers.NUMBER_TO_ORDINAL_FUNCTION);
 
         function.calculate(number, destinationBase);
     }

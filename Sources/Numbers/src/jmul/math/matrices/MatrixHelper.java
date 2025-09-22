@@ -34,7 +34,7 @@
 package jmul.math.matrices;
 
 
-import jmul.math.functions.implementations.ParameterCheckHelper;
+import jmul.math.operations.implementations.ParameterCheckHelper;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
 

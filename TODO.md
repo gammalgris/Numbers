@@ -110,7 +110,9 @@
 48) Consider a way to provide a constant for numbers like e, Pi, etc. Alternatively provide functions
     that calculate a value by iteration. Put it in the Math class.
 
-49)
+49) Revieweing naming of classes and interfaces is necessary. Are the names consistent with math naming?
+
+50)
 
 
 # Done

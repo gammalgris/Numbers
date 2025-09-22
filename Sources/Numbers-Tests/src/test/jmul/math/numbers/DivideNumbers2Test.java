@@ -38,7 +38,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import jmul.math.Math;
-import jmul.math.functions.repository.FunctionIdentifiers;
+import jmul.math.operations.repository.OperationIdentifiers;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
@@ -133,11 +133,11 @@ public class DivideNumbers2Test {
         Number actualResult;
         if (decimalPlaces == null) {
 
-            actualResult = number1.divide(FunctionIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION, number2);
+            actualResult = number1.divide(OperationIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION, number2);
 
         } else {
 
-            actualResult = number1.divide(FunctionIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION, number2, decimalPlaces);
+            actualResult = number1.divide(OperationIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION, number2, decimalPlaces);
         }
 
         assertEquals(toString(), expectedResult, actualResult);
@@ -153,12 +153,12 @@ public class DivideNumbers2Test {
         Number actualResult;
         if (decimalPlaces == null) {
 
-            actualResult = Math.divide(FunctionIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION, number1, number2);
+            actualResult = Math.divide(OperationIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION, number1, number2);
 
         } else {
 
             actualResult =
-                Math.divide(FunctionIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION, number1, number2, decimalPlaces);
+                Math.divide(OperationIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION, number1, number2, decimalPlaces);
         }
 
         assertEquals(toString(), expectedResult, actualResult);

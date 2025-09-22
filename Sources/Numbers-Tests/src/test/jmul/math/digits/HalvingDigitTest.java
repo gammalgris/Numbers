@@ -39,7 +39,7 @@ import java.util.Collection;
 
 import jmul.math.digits.Digit;
 import jmul.math.digits.PositionalNumeralSystems;
-import jmul.math.functions.implementations.HalvingDigit;
+import jmul.math.operations.implementations.HalvingDigit;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.ResultWithRemainder;
 

@@ -34,9 +34,6 @@
 package jmul.math.operations;
 
 
-import jmul.math.functions.Function;
-
-
 /**
  * This interface describes a ternary operation (i.e. an operation that takes three arguments).
  *
@@ -47,7 +44,7 @@ import jmul.math.functions.Function;
  * @param <S>
  *        the return type
  */
-public interface TernaryOperation<T, S extends Result> extends Function {
+public interface TernaryOperation<T, S extends Result> extends Operation {
 
     /**
      * Performs the ternary (i.e. three operands) operation.
