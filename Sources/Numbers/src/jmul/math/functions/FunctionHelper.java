@@ -35,11 +35,13 @@ package jmul.math.functions;
 
 
 import jmul.math.Math;
+import jmul.math.fractions.Fraction;
 import jmul.math.functions.conditions.ConditionFunctionEntry;
 import jmul.math.functions.conditions.GreaterOrEqualCondition;
 import jmul.math.functions.conditions.LesserThanCondition;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
+import static jmul.math.fractions.FractionHelper.createFraction;
 
 
 /**
@@ -237,6 +239,59 @@ public final class FunctionHelper {
         };
 
         return new PartialFunctionImpl(entries);
+    }
+
+    /**
+     * Creates a new root function according to the specified parameters.
+     *
+     * @param base
+     *        a number base
+     * @param coefficientString
+     *        a string representinga coefficient
+     * @param exponentNumeratorString
+     *        a string representing the numerator of an exponent
+     * @param exponentDenominatorString
+     *        a string representing the denominator of an exponent
+     *
+     * @return a function
+     */
+    public static Function createRootFunction(int base, String coefficientString, String exponentNumeratorString,
+                                              String exponentDenominatorString) {
+
+        if (coefficientString == null) {
+
+            throw new IllegalArgumentException("No coefficient (null) was specified!");
+        }
+
+        if (exponentNumeratorString == null) {
+
+            throw new IllegalArgumentException("No exponent numerator (null) was specified!");
+        }
+
+        if (exponentDenominatorString == null) {
+
+            throw new IllegalArgumentException("No exponent denominator (null) was specified!");
+        }
+
+        Number coefficient = createNumber(base, coefficientString);
+        Fraction exponent = createFraction(base, exponentNumeratorString, exponentDenominatorString);
+
+        return new RootFunctionImpl(coefficient, exponent);
+    }
+
+    /**
+     * Creates a new root function according to the specified parameters.
+     *
+     * @param coefficient
+     *        a coefficient
+     * @param exponent
+     *        an exponent
+     *
+     * @return a function
+     */
+    public static Function createRootFunction(Number coefficient, Fraction exponent) {
+
+        return new RootFunctionImpl(coefficient, exponent);
     }
 
     /**

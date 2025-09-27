@@ -226,7 +226,8 @@ public enum OperationIdentifiers implements OperationIdentifier {
     ADD_LOGARITHMS_FUNCTION(NONE),
     SUBTRACT_LOGARITHMS_FUNCTION(NONE),
 
-    SQUARE_ROOT_FUNCTION(NONE);
+    SQUARE_ROOT_FUNCTION(NONE),
+    NTH_ROOT_FUNCTION(NONE);
 
 
     /**

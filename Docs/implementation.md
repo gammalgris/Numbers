@@ -89,20 +89,14 @@ The implementations of fractions, vectors, matrices depend on the implementation
 + jmul.math.digits
   Provides implementations for digits and numeral systems.
 
-+ jmul.math.exponentions
-  Contains implementations for exponentiation expressions
++ jmul.math.functions
+  Contains implementations for various functions (e.g. monomial functions, polynomial functions, etc.)
 
 + jmul.math.fractions
   Provides implementations for fractions.
-  
-+ jmul.math.functions.implementation
-  Contains all function implementations
-
-+ jmul.math.functions.repository
-  Contains the implementation for the function repository.
 
 + jmul.math.logarithms
-  Contains implementations for logarithm expressions
+  Contains implementations for logarithm expressions.
 
 + jmul.math.matrices
   Contains implementations for matrices.
@@ -111,7 +105,13 @@ The implementations of fractions, vectors, matrices depend on the implementation
   Contains implementations for numbers.
 
 + jmul.math.operations
-  Contains operation definitions.
+  Contains generic operation definitions.
+
++ jmul.math.operations.implementation
+  Contains implementations for various mathematical operations (e.g. addition, su7btraction, etc.).
+
++ jmul.math.operations.repository
+  Contains the implementation for a repository which contains singletons of all operations.
 
 + jmul.math.signs
   Contains implementations for signs.

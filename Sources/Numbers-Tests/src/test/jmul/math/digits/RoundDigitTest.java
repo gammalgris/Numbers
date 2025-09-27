@@ -39,7 +39,7 @@ import java.util.Collection;
 
 import jmul.math.digits.Digit;
 import jmul.math.digits.PositionalNumeralSystems;
-import jmul.math.operations.implementations.RoundDigitHalfUpFunction;
+import jmul.math.operations.implementations.RoundDigitHalfUp;
 import jmul.math.operations.ResultWithCarry;
 import jmul.math.operations.UnaryOperation;
 
@@ -95,7 +95,7 @@ public class RoundDigitTest {
         this.digit = digit;
         this.expectedResult = expectedResult;
         this.expectedCarry = expectedCarry;
-        this.roundingFunction = new RoundDigitHalfUpFunction();
+        this.roundingFunction = new RoundDigitHalfUp();
     }
 
     /**

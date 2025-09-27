@@ -39,11 +39,6 @@ import java.util.SortedSet;
 
 import jmul.math.Math;
 import jmul.math.fractions.Fraction;
-import jmul.math.operations.OperationSingletons;
-import jmul.math.operations.implementations.ParameterCheckHelper;
-import jmul.math.operations.repository.OperationIdentifier;
-import jmul.math.operations.repository.OperationIdentifierHelper;
-import jmul.math.operations.repository.OperationIdentifiers;
 import jmul.math.hash.HashHelper;
 import static jmul.math.numbers.Constants.DEFAULT_NUMBER_BASE;
 import static jmul.math.numbers.NumberHelper.createNumber;
@@ -55,9 +50,16 @@ import jmul.math.operations.EqualityFunction;
 import jmul.math.operations.MixedBinaryOperation;
 import jmul.math.operations.MixedComparator;
 import jmul.math.operations.MixedEqualityFunction;
+import jmul.math.operations.OperationSingletons;
+import jmul.math.operations.ProcessingDetails;
+import jmul.math.operations.QuaternaryOperation;
 import jmul.math.operations.Result;
 import jmul.math.operations.TernaryOperation;
 import jmul.math.operations.UnaryOperation;
+import jmul.math.operations.implementations.ParameterCheckHelper;
+import jmul.math.operations.repository.OperationIdentifier;
+import jmul.math.operations.repository.OperationIdentifierHelper;
+import jmul.math.operations.repository.OperationIdentifiers;
 import jmul.math.signs.Sign;
 import jmul.math.signs.Signs;
 
@@ -528,68 +530,103 @@ public class NumberImpl implements Number {
     }
 
     /**
-     * Clalculates the suqare root for this number.
+     * Calculates the square root for this number.
      *
-     * @return a number
+     * @return the square root for this number
      */
     @Override
     public Number squareRoot() {
 
-        return squareRoot(OperationIdentifiers.SQUARE_ROOT_FUNCTION);
+        ProcessingDetails processingDetails =
+            new ProcessingDetails(OperationIdentifiers.SQUARE_ROOT_FUNCTION, null, null);
+
+        return squareRoot(processingDetails);
     }
 
     /**
      * Calculates the square root for this number.
      *
-     * @param algorithm
-     *        the identifier for an algorithm
+     * @param processingDetails
+     *        additonal processing details
      *
-     * @return a number
+     * @return the square root for this number
      */
     @Override
-    public Number squareRoot(OperationIdentifier algorithm) {
+    public Number squareRoot(ProcessingDetails processingDetails) {
 
-        return squareRoot(algorithm, Math.getDefaultMaximumFractionLength(base));
-    }
-
-    /**
-     * Calculates the square root for this number.
-     *
-     * @param decimalPlaces
-     *        the number of decimal places retained after cutting the fraction part
-     *
-     * @return a number
-     */
-    @Override
-    public Number squareRoot(Number decimalPlaces) {
-
-        return squareRoot(OperationIdentifiers.SQUARE_ROOT_FUNCTION, decimalPlaces);
-    }
-
-    /**
-     * Calculates the square root for this number.
-     *
-     * @param algorithm
-     *        the identifier for an algorithm
-     * @param decimalPlaces
-     *        the number of decimal places retained after cutting the fraction part
-     *
-     * @return a number
-     */
-    @Override
-    public Number squareRoot(OperationIdentifier algorithm, Number decimalPlaces) {
+        ParameterCheckHelper.checkParameter(processingDetails);
 
         final OperationIdentifier[] ALLOWED_ALGORITHMS = new OperationIdentifier[] {
             OperationIdentifiers.SQUARE_ROOT_FUNCTION };
-        OperationIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, algorithm);
+        OperationIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, processingDetails.algorithm);
 
-        ParameterCheckHelper.checkParameter(this);
+        Number iterations = processingDetails.iterations;
+        if (iterations == null) {
 
-        Number iterations = Math.DEFAULT_HERON_METHOD_ITERATIONS.value(base);
+            iterations = Math.DEFAULT_HERON_METHOD_ITERATIONS.value(base);
+        }
+
+        Number decimalPlaces = processingDetails.decimalPlaces;
+        if (decimalPlaces == null) {
+
+            decimalPlaces = Math.DEFAULT_MAXIMUM_FRACTION_LENGTH.value(base);
+        }
 
         TernaryOperation<Number, Result<Number>> function =
-            (TernaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(algorithm);
+            (TernaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(processingDetails.algorithm);
         Result<Number> result = function.calculate(this, iterations, decimalPlaces);
+
+        return result.result();
+    }
+
+    /**
+     * Calculates the nth root for this number.
+     *
+     * @return the nth root for this number
+     */
+    @Override
+    public Number root(Number n) {
+
+        ProcessingDetails processingDetails = new ProcessingDetails(OperationIdentifiers.NTH_ROOT_FUNCTION, null, null);
+
+        return root(processingDetails, n);
+    }
+
+    /**
+     * Calculates the nth root for this number.
+     *
+     * @param processingDetails
+     *        additonal processing details
+     * @param n
+     *        the root
+     *
+     * @return the nth root for this number
+     */
+    @Override
+    public Number root(ProcessingDetails processingDetails, Number n) {
+
+        ParameterCheckHelper.checkParameter(processingDetails);
+        ParameterCheckHelper.checkParameter(n);
+
+        final OperationIdentifier[] ALLOWED_ALGORITHMS = new OperationIdentifier[] {
+            OperationIdentifiers.NTH_ROOT_FUNCTION };
+        OperationIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, processingDetails.algorithm);
+
+        Number iterations = processingDetails.iterations;
+        if (iterations == null) {
+
+            iterations = Math.DEFAULT_NTH_ROOT_ITERATIONS.value(base);
+        }
+
+        Number decimalPlaces = processingDetails.decimalPlaces;
+        if (decimalPlaces == null) {
+
+            decimalPlaces = Math.DEFAULT_HERON_METHOD_ITERATIONS.value(base);
+        }
+
+        QuaternaryOperation<Number, Result<Number>> function =
+            (QuaternaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(processingDetails.algorithm);
+        Result<Number> result = function.calculate(this, n, iterations, decimalPlaces);
 
         return result.result();
     }
@@ -702,36 +739,40 @@ public class NumberImpl implements Number {
      * @param n
      *        a number
      *
-     * @return a number
+     * @return the product of this number and the specified number
      */
     @Override
     public Number multiply(Number n) {
 
-        return multiply(OperationIdentifiers.LONG_MULTIPLICATION_FUNCTION, n);
+        ProcessingDetails processingDetails =
+            new ProcessingDetails(OperationIdentifiers.LONG_MULTIPLICATION_FUNCTION);
+
+        return multiply(processingDetails, n);
     }
 
     /**
      * Multiplies this number with the specified number.
      *
-     * @param algorithm
-     *        the identifier for an algorithm
+     * @param processingDetails
+     *        additonal processing details
      * @param n
      *        a number
      *
-     * @return a number
+     * @return the product of this number and the specified number
      */
-    @Override
-    public Number multiply(OperationIdentifier algorithm, Number n) {
+    public Number multiply(ProcessingDetails processingDetails, Number n) {
+
+        ParameterCheckHelper.checkParameter(processingDetails);
 
         final OperationIdentifier[] ALLOWED_ALGORITHMS = new OperationIdentifier[] {
             OperationIdentifiers.MULTIPLY_NUMBERS_BY_ADDITION_FUNCTION,
             OperationIdentifiers.RUSSIAN_PEASANT_MULTIPLICATION_FUNCTION,
             OperationIdentifiers.LONG_MULTIPLICATION_FUNCTION
         };
-        OperationIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, algorithm);
+        OperationIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, processingDetails.algorithm);
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(algorithm);
+            (BinaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(processingDetails.algorithm);
         Result<Number> result = function.calculate(this, n);
 
         return result.result();

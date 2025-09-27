@@ -112,7 +112,16 @@
 
 49) Revieweing naming of classes and interfaces is necessary. Are the names consistent with math naming?
 
-50)
+50) Find a way to represent recursion equations.
+
+51) ProcessingDetails - Reduce and clean up method signatures.
+
+52) Implement an exponentiation operation x^y with y >= 0. Clean up code and remove redundancies (see
+    function implementations).
+
+53) Implement an exponentation operation x^y where y is a fraction.
+
+54)
 
 
 # Done

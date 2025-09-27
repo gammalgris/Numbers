@@ -39,8 +39,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import jmul.math.operations.repository.OperationIdentifiers;
 import jmul.math.numbers.Number;
+import jmul.math.operations.ProcessingDetails;
+import jmul.math.operations.repository.OperationIdentifiers;
 
 import jmul.test.classification.ManualTest;
 
@@ -110,9 +111,9 @@ public class MultiplicationSpeedTest {
             Number actualResult;
             try {
 
-                actualResult =
-                    testCase.operand1.multiply(OperationIdentifiers.MULTIPLY_NUMBERS_BY_ADDITION_FUNCTION,
-                                               testCase.operand2);
+                ProcessingDetails processingDetails =
+                    new ProcessingDetails(OperationIdentifiers.MULTIPLY_NUMBERS_BY_ADDITION_FUNCTION);
+                actualResult = testCase.operand1.multiply(processingDetails, testCase.operand2);
 
                 if (testCase.expectedResult.equals(actualResult)) {
 
@@ -154,8 +155,9 @@ public class MultiplicationSpeedTest {
             Number actualResult;
             try {
 
-                actualResult =
-                    testCase.operand1.multiply(OperationIdentifiers.LONG_MULTIPLICATION_FUNCTION, testCase.operand2);
+                ProcessingDetails processingDetails =
+                    new ProcessingDetails(OperationIdentifiers.LONG_MULTIPLICATION_FUNCTION);
+                actualResult = testCase.operand1.multiply(processingDetails, testCase.operand2);
 
                 if (testCase.expectedResult.equals(actualResult)) {
 

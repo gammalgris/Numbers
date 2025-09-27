@@ -40,20 +40,22 @@ import java.util.SortedSet;
 import jmul.math.constants.Constant;
 import jmul.math.constants.ConstantHelper;
 import jmul.math.fractions.Fraction;
-import jmul.math.operations.OperationSingletons;
-import jmul.math.operations.implementations.ParameterCheckHelper;
-import jmul.math.operations.repository.OperationIdentifier;
-import jmul.math.operations.repository.OperationIdentifierHelper;
-import jmul.math.operations.repository.OperationIdentifiers;
 import jmul.math.matrices.Matrix;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
 import static jmul.math.numbers.NumberHelper.parseInteger;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.MixedBinaryOperation;
+import jmul.math.operations.OperationSingletons;
+import jmul.math.operations.ProcessingDetails;
+import jmul.math.operations.QuaternaryOperation;
 import jmul.math.operations.Result;
 import jmul.math.operations.TernaryOperation;
 import jmul.math.operations.UnaryOperation;
+import jmul.math.operations.implementations.ParameterCheckHelper;
+import jmul.math.operations.repository.OperationIdentifier;
+import jmul.math.operations.repository.OperationIdentifierHelper;
+import jmul.math.operations.repository.OperationIdentifiers;
 import jmul.math.vectors.Vector;
 
 
@@ -77,6 +79,11 @@ public final class Math {
      */
     public static final Constant DEFAULT_HERON_METHOD_ITERATIONS;
 
+    /**
+     * The default number of iterations for calculating the nth root.
+     */
+    public static final Constant DEFAULT_NTH_ROOT_ITERATIONS;
+
     /*
      * The static initializer.
      */
@@ -84,6 +91,7 @@ public final class Math {
 
         DEFAULT_MAXIMUM_FRACTION_LENGTH = ConstantHelper.createConstantNumber(10, "10");
         DEFAULT_HERON_METHOD_ITERATIONS = ConstantHelper.createConstantNumber(10, "8");
+        DEFAULT_NTH_ROOT_ITERATIONS = ConstantHelper.createConstantNumber(10, "7");
     }
 
     /**
@@ -802,36 +810,41 @@ public final class Math {
      * @param n2
      *        a number
      *
-     * @return a number
+     * @return the product of the specified numbers
      */
     public static Number multiply(Number n1, Number n2) {
 
-        return multiply(OperationIdentifiers.LONG_MULTIPLICATION_FUNCTION, n1, n2);
+        ProcessingDetails processingDetails =
+            new ProcessingDetails(OperationIdentifiers.LONG_MULTIPLICATION_FUNCTION);
+
+        return multiply(processingDetails, n1, n2);
     }
 
     /**
-     * Multiplies the specified numbers.
+     * Multiplies this number with the specified number.
      *
-     * @param algorithm
-     *        the identifier for an algorithm
+     * @param processingDetails
+     *        additonal processing details
      * @param n1
      *        a number
      * @param n2
      *        a number
      *
-     * @return a number
+     * @return the product of this number and the specified number
      */
-    public static Number multiply(OperationIdentifier algorithm, Number n1, Number n2) {
+    public static Number multiply(ProcessingDetails processingDetails, Number n1, Number n2) {
+
+        ParameterCheckHelper.checkParameter(processingDetails);
 
         final OperationIdentifier[] ALLOWED_ALGORITHMS = new OperationIdentifier[] {
             OperationIdentifiers.MULTIPLY_NUMBERS_BY_ADDITION_FUNCTION,
             OperationIdentifiers.RUSSIAN_PEASANT_MULTIPLICATION_FUNCTION,
             OperationIdentifiers.LONG_MULTIPLICATION_FUNCTION
         };
-        OperationIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, algorithm);
+        OperationIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, processingDetails.algorithm);
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(algorithm);
+            (BinaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(processingDetails.algorithm);
         Result<Number> result = function.calculate(n1, n2);
 
         return result.result();
@@ -1739,74 +1752,112 @@ public final class Math {
      * @param number
      *        a number
      *
-     * @return the square root
+     * @return the square root for the specified number
      */
     public static Number squareRoot(Number number) {
 
-        return squareRoot(OperationIdentifiers.SQUARE_ROOT_FUNCTION, number);
-    }
+        ProcessingDetails processingDetails =
+            new ProcessingDetails(OperationIdentifiers.SQUARE_ROOT_FUNCTION, null, null);
 
-    /**
-     * Calculates the square root for this number.
-     *
-     * @param number
-     *        a number
-     * @param decimalPlaces
-     *        the number of decimal places retained after cutting the fraction part
-     *
-     * @return a number
-     */
-    public static Number squareRoot(Number number, Number decimalPlaces) {
-
-        return squareRoot(OperationIdentifiers.SQUARE_ROOT_FUNCTION, number, decimalPlaces);
+        return squareRoot(processingDetails, number);
     }
 
     /**
      * Calculates the square root for the specified number.
      *
+     * @param processingDetails
+     *        additonal processing details
      * @param number
      *        a number
-     * @param algorithm
-     *        the identifier for an algorithm
      *
-     * @return a number
+     * @return a square root for the specified number
      */
-    public static Number squareRoot(OperationIdentifier algorithm, Number number) {
+    public static Number squareRoot(ProcessingDetails processingDetails, Number number) {
 
+        ParameterCheckHelper.checkParameter(processingDetails);
         ParameterCheckHelper.checkParameter(number);
 
         int base = number.base();
-        Number decimalPlaces = Math.getDefaultMaximumFractionLength(base);
-
-        return squareRoot(algorithm, number, decimalPlaces);
-    }
-
-    /**
-     * Calculates the square root for the specified number.
-     *
-     * @param number
-     *        a number
-     * @param algorithm
-     *        the identifier for an algorithm
-     * @param decimalPlaces
-     *        the number of decimal places retained after cutting the fraction part
-     *
-     * @return a number
-     */
-    public static Number squareRoot(OperationIdentifier algorithm, Number number, Number decimalPlaces) {
 
         final OperationIdentifier[] ALLOWED_ALGORITHMS = new OperationIdentifier[] {
             OperationIdentifiers.SQUARE_ROOT_FUNCTION };
-        OperationIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, algorithm);
+        OperationIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, processingDetails.algorithm);
 
-        ParameterCheckHelper.checkParameter(number);
+        Number iterations = processingDetails.iterations;
+        if (iterations == null) {
 
-        int base = number.base();
-        Number iterations = DEFAULT_HERON_METHOD_ITERATIONS.value(base);
+            iterations = Math.DEFAULT_HERON_METHOD_ITERATIONS.value(base);
+        }
+
+        Number decimalPlaces = processingDetails.decimalPlaces;
+        if (decimalPlaces == null) {
+
+            decimalPlaces = Math.DEFAULT_MAXIMUM_FRACTION_LENGTH.value(base);
+        }
 
         TernaryOperation<Number, Result<Number>> function =
-            (TernaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(algorithm);
+            (TernaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(processingDetails.algorithm);
         Result<Number> result = function.calculate(number, iterations, decimalPlaces);
+
+        return result.result();
+    }
+
+    /**
+     * Calculates the nth root for the specified number.
+     *
+     * @param number
+     *        a number
+     * @param n
+     *        a root
+     *
+     * @return a number
+     */
+    public static Number root(Number number, Number n) {
+
+        ProcessingDetails processingDetails = new ProcessingDetails(OperationIdentifiers.NTH_ROOT_FUNCTION, null, null);
+
+        return root(processingDetails, number, n);
+    }
+
+    /**
+     * Calculates the nth root for this number.
+     *
+     * @param processingDetails
+     *        additonal processing details
+     * @param number
+     *        a number
+     * @param n
+     *        the root
+     *
+     * @return the nth root for this number
+     */
+    public static Number root(ProcessingDetails processingDetails, Number number, Number n) {
+
+        ParameterCheckHelper.checkParameter(processingDetails);
+        ParameterCheckHelper.checkParameter(number);
+        ParameterCheckHelper.checkParameter(n);
+
+        int base = number.base();
+
+        final OperationIdentifier[] ALLOWED_ALGORITHMS = new OperationIdentifier[] {
+            OperationIdentifiers.NTH_ROOT_FUNCTION };
+        OperationIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, processingDetails.algorithm);
+
+        Number iterations = processingDetails.iterations;
+        if (iterations == null) {
+
+            iterations = Math.DEFAULT_HERON_METHOD_ITERATIONS.value(base);
+        }
+
+        Number decimalPlaces = processingDetails.decimalPlaces;
+        if (decimalPlaces == null) {
+
+            decimalPlaces = Math.DEFAULT_MAXIMUM_FRACTION_LENGTH.value(base);
+        }
+
+        QuaternaryOperation<Number, Result<Number>> function =
+            (QuaternaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(processingDetails.algorithm);
+        Result<Number> result = function.calculate(number, n, iterations, decimalPlaces);
 
         return result.result();
     }

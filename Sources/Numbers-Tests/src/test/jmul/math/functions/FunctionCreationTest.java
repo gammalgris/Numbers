@@ -36,6 +36,8 @@ package test.jmul.math.functions;
 
 import jmul.math.data.DataEntry;
 import jmul.math.data.TrainingData;
+import jmul.math.fractions.Fraction;
+import static jmul.math.fractions.FractionHelper.createFraction;
 import jmul.math.functions.Function;
 import jmul.math.functions.FunctionHelper;
 import jmul.math.functions.conditions.ConditionFunctionEntry;
@@ -388,7 +390,7 @@ public class FunctionCreationTest {
      */
     @Test
     public void testPolynomialFunction() {
-        
+
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
@@ -416,7 +418,7 @@ public class FunctionCreationTest {
      */
     @Test
     public void testPolynomialFunction2() {
-        
+
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "1")),
@@ -444,7 +446,7 @@ public class FunctionCreationTest {
      */
     @Test
     public void testPolynomialFunction3() {
-        
+
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "1")),
@@ -472,7 +474,7 @@ public class FunctionCreationTest {
      */
     @Test
     public void testPolynomialFunction4() {
-        
+
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "1")),
@@ -546,6 +548,65 @@ public class FunctionCreationTest {
 
         assertEquals("formula", "{ x >= 2 : 2 * x + 1; x < 2 : 3 * x^2 + 2 * x + 1 }", f.toString());
         assertEquals("formula", "f(x) = { x >= 2 : 2 * x + 1; x < 2 : 3 * x^2 + 2 * x + 1 }", f.toFunctionNotation());
+
+        for (DataEntry entry : data) {
+
+            Number actualOutput = f.calculate(entry.input);
+            assertEquals("function values", entry.expectedOutput, actualOutput);
+        }
+    }
+
+    /**
+     * Tests creating a root function with valid parameters.
+     */
+    @Test
+    public void testCreateRootFunctionFunction() {
+
+        TrainingData data =
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "2")));
+
+        Function f = FunctionHelper.createRootFunction(DEFAULT_NUMBER_BASE, "2", "3", "2");
+
+        assertEquals("formula", "2 * x^(3/2)", f.toString());
+        assertEquals("formula", "f(x) = 2 * x^(3/2)", f.toFunctionNotation());
+
+        for (DataEntry entry : data) {
+
+            Number actualOutput = f.calculate(entry.input);
+            assertEquals("function values", entry.expectedOutput, actualOutput);
+        }
+    }
+
+    /**
+     * Tests creating a root function with valid parameters.
+     */
+    @Test
+    public void testCreateRootFunctionFunction2() {
+
+        TrainingData data =
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "2")));
+
+        Number coefficient = createNumber(DEFAULT_NUMBER_BASE, "2");
+        Fraction exponent = createFraction(DEFAULT_NUMBER_BASE, "1", "2");
+
+        Function f = FunctionHelper.createRootFunction(coefficient, exponent);
+
+        assertEquals("formula", "2 * x^(1/2)", f.toString());
+        assertEquals("formula", "f(x) = 2 * x^(1/2)", f.toFunctionNotation());
 
         for (DataEntry entry : data) {
 

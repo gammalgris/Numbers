@@ -85,41 +85,38 @@ public interface ArithmeticNumberOperations {
     /**
      * Calculates the square root for this number.
      *
-     * @return a number
+     * @return the square root for this number
      */
     Number squareRoot();
 
     /**
      * Calculates the square root for this number.
      *
-     * @param algorithm
-     *        the identifier for an algorithm
+     * @param processingDetails
+     *        additonal processing details
      *
-     * @return a number
+     * @return the square root for this number
      */
-    Number squareRoot(OperationIdentifier algorithm);
+    Number squareRoot(ProcessingDetails processingDetails);
 
     /**
-     * Calculates the square root for this number.
+     * Calculates the nth root for this number.
      *
-     * @param decimalPlaces
-     *        the number of decimal places retained after cutting the fraction part
-     *
-     * @return a number
+     * @return the nth root for this number
      */
-    Number squareRoot(Number decimalPlaces);
+    Number root(Number n);
 
     /**
-     * Calculates the square root for this number.
+     * Calculates the nth root for this number.
      *
-     * @param algorithm
-     *        the identifier for an algorithm
-     * @param decimalPlaces
-     *        the number of decimal places retained after cutting the fraction part
+     * @param processingDetails
+     *        additonal processing details
+     * @param n
+     *        the root
      *
-     * @return a number
+     * @return the nth root for this number
      */
-    Number squareRoot(OperationIdentifier algorithm, Number decimalPlaces);
+    Number root(ProcessingDetails processingDetails, Number n);
 
     /**
      * Halves this number.
@@ -199,21 +196,21 @@ public interface ArithmeticNumberOperations {
      * @param n
      *        a number
      *
-     * @return a number
+     * @return the product of this number and the specified number
      */
     Number multiply(Number n);
 
     /**
      * Multiplies this number with the specified number.
      *
-     * @param algorithm
-     *        the identifier for an algorithm
+     * @param processingDetails
+     *        additonal processing details
      * @param n
      *        a number
      *
-     * @return a number
+     * @return the product of this number and the specified number
      */
-    Number multiply(OperationIdentifier algorithm, Number n);
+    Number multiply(ProcessingDetails processingDetails, Number n);
 
     /**
      * Multiplies this number with the specified fraction.

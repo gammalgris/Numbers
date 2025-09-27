@@ -34,6 +34,10 @@
 package jmul.math.operations.repository;
 
 
+import jmul.math.numbers.notations.ScientificNotationFunctionImpl;
+import jmul.math.numbers.notations.ScientificNotationParserImpl;
+import jmul.math.numbers.notations.StandardNotationFunctionImpl;
+import jmul.math.numbers.notations.StandardNotationParserImpl;
 import jmul.math.operations.implementations.AddDigits;
 import jmul.math.operations.implementations.AddFractionAndNumber;
 import jmul.math.operations.implementations.AddFractions;
@@ -44,27 +48,27 @@ import jmul.math.operations.implementations.AddNumbers;
 import jmul.math.operations.implementations.AddNumbersTrimResult;
 import jmul.math.operations.implementations.AddVectors;
 import jmul.math.operations.implementations.BaseToNumber;
-import jmul.math.operations.implementations.CrossProductFunction;
+import jmul.math.operations.implementations.CrossProduct;
 import jmul.math.operations.implementations.DecrementFraction;
 import jmul.math.operations.implementations.DecrementNumber;
-import jmul.math.operations.implementations.DetermineCommonDivisorsFunction;
-import jmul.math.operations.implementations.DetermineCommonPrimeFactorsFunction;
-import jmul.math.operations.implementations.DetermineDivisorsFunction;
-import jmul.math.operations.implementations.DeterminePrimeFactorsFunction;
+import jmul.math.operations.implementations.DetermineCommonDivisors;
+import jmul.math.operations.implementations.DetermineCommonPrimeFactors;
+import jmul.math.operations.implementations.DetermineDivisors;
+import jmul.math.operations.implementations.DeterminePrimeFactors;
 import jmul.math.operations.implementations.DigitComplement;
-import jmul.math.operations.implementations.DigitToNumberFunction;
+import jmul.math.operations.implementations.DigitToNumberConversion;
 import jmul.math.operations.implementations.DivideFractionByNumber;
 import jmul.math.operations.implementations.DivideFractions;
 import jmul.math.operations.implementations.DivideNumberByFraction;
 import jmul.math.operations.implementations.DivisionBySubtraction;
 import jmul.math.operations.implementations.DivisionBySubtractionReturnFraction;
 import jmul.math.operations.implementations.DivisionOfNumbersBySubtractionReturnResultAndRemainder;
-import jmul.math.operations.implementations.DivisoWithIntegersFunction;
+import jmul.math.operations.implementations.DivisoWithIntegers;
 import jmul.math.operations.implementations.DoublingFraction;
 import jmul.math.operations.implementations.DoublingNumber;
-import jmul.math.operations.implementations.DyadicProductFunction;
+import jmul.math.operations.implementations.DyadicProduct;
 import jmul.math.operations.implementations.EvaluateFraction;
-import jmul.math.operations.implementations.EvenNumberFunction;
+import jmul.math.operations.implementations.EvenNumberCheck;
 import jmul.math.operations.implementations.Factorial;
 import jmul.math.operations.implementations.FractionToAbsoluteValue;
 import jmul.math.operations.implementations.FractionWithinInterval;
@@ -73,11 +77,11 @@ import jmul.math.operations.implementations.HalvingFraction;
 import jmul.math.operations.implementations.HalvingNumber;
 import jmul.math.operations.implementations.IncrementFraction;
 import jmul.math.operations.implementations.IncrementNumber;
-import jmul.math.operations.implementations.IsMultipleFunction;
-import jmul.math.operations.implementations.IsPrimeFunction;
-import jmul.math.operations.implementations.IsSingleDigitFunction;
+import jmul.math.operations.implementations.IsMultipleCheck;
+import jmul.math.operations.implementations.IsPrimeCheck;
+import jmul.math.operations.implementations.IsSingleDigitCheck;
 import jmul.math.operations.implementations.LongMultiplication;
-import jmul.math.operations.implementations.MatrixMultiplicationFunction;
+import jmul.math.operations.implementations.MatrixMultiplication;
 import jmul.math.operations.implementations.MaxFraction;
 import jmul.math.operations.implementations.MaxFractionNumber;
 import jmul.math.operations.implementations.MaxNumber;
@@ -86,7 +90,7 @@ import jmul.math.operations.implementations.MinFraction;
 import jmul.math.operations.implementations.MinFractionNumber;
 import jmul.math.operations.implementations.MinNumber;
 import jmul.math.operations.implementations.MinNumberFraction;
-import jmul.math.operations.implementations.ModuloWithIntegersFunction;
+import jmul.math.operations.implementations.ModuloWithIntegers;
 import jmul.math.operations.implementations.MultiplicationByAddition;
 import jmul.math.operations.implementations.MultiplyDigits;
 import jmul.math.operations.implementations.MultiplyFractionAndNumber;
@@ -95,6 +99,7 @@ import jmul.math.operations.implementations.MultiplyNumberAndFraction;
 import jmul.math.operations.implementations.MultiplyVectorWithNumber;
 import jmul.math.operations.implementations.NegateFraction;
 import jmul.math.operations.implementations.NegateNumber;
+import jmul.math.operations.implementations.NthRoot;
 import jmul.math.operations.implementations.NumberComplement;
 import jmul.math.operations.implementations.NumberDigitSum;
 import jmul.math.operations.implementations.NumberToAbsoluteValue;
@@ -102,9 +107,9 @@ import jmul.math.operations.implementations.NumberToDigit;
 import jmul.math.operations.implementations.NumberToFraction;
 import jmul.math.operations.implementations.NumberToOrdinal;
 import jmul.math.operations.implementations.NumberWithinInterval;
-import jmul.math.operations.implementations.OddNumberFunction;
-import jmul.math.operations.implementations.RandomDigitFunction;
-import jmul.math.operations.implementations.RandomNumberFunction;
+import jmul.math.operations.implementations.OddNumberCheck;
+import jmul.math.operations.implementations.RandomDigit;
+import jmul.math.operations.implementations.RandomNumber;
 import jmul.math.operations.implementations.RandomNumberWithinInterval;
 import jmul.math.operations.implementations.RebaseFraction;
 import jmul.math.operations.implementations.RebaseNumber;
@@ -113,30 +118,30 @@ import jmul.math.operations.implementations.ReciprocalOfNumber;
 import jmul.math.operations.implementations.ReduceFraction;
 import jmul.math.operations.implementations.RemoveFractionPart;
 import jmul.math.operations.implementations.RemoveIntegerPart;
-import jmul.math.operations.implementations.RoundDigitToEvenFunction;
-import jmul.math.operations.implementations.RoundDigitToOddFunction;
-import jmul.math.operations.implementations.RoundDownFunction;
-import jmul.math.operations.implementations.RoundNumberToEvenFunction;
-import jmul.math.operations.implementations.RoundNumberToOddFunction;
-import jmul.math.operations.implementations.RoundUpFunction;
-import jmul.math.operations.implementations.RussianDivisionFunction;
+import jmul.math.operations.implementations.RoundDigitToEven;
+import jmul.math.operations.implementations.RoundDigitToOdd;
+import jmul.math.operations.implementations.RoundDown;
+import jmul.math.operations.implementations.RoundNumberToEven;
+import jmul.math.operations.implementations.RoundNumberToOdd;
+import jmul.math.operations.implementations.RoundUp;
+import jmul.math.operations.implementations.RussianDivision;
 import jmul.math.operations.implementations.RussianPeasantMultiplication;
-import jmul.math.operations.implementations.ScalarProductFunction;
+import jmul.math.operations.implementations.ScalarProduct;
 import jmul.math.operations.implementations.ShiftLeft;
 import jmul.math.operations.implementations.ShiftRight;
-import jmul.math.operations.implementations.SquareFractionFunction;
-import jmul.math.operations.implementations.SquareNumberFunction;
-import jmul.math.operations.implementations.SquareRootFunction;
+import jmul.math.operations.implementations.SquareFraction;
+import jmul.math.operations.implementations.SquareNumber;
+import jmul.math.operations.implementations.SquareRoot;
 import jmul.math.operations.implementations.SubtractFractionAndNumber;
 import jmul.math.operations.implementations.SubtractFractions;
-import jmul.math.operations.implementations.SubtractLogarithmsFunction;
+import jmul.math.operations.implementations.SubtractLogarithms;
 import jmul.math.operations.implementations.SubtractMatrices;
 import jmul.math.operations.implementations.SubtractNumberAndFraction;
 import jmul.math.operations.implementations.SubtractNumbers;
 import jmul.math.operations.implementations.SubtractVectors;
-import jmul.math.operations.implementations.TransposeMatrixFunction;
-import jmul.math.operations.implementations.TripleProductFunction;
-import jmul.math.operations.implementations.VectorizationFunction;
+import jmul.math.operations.implementations.TransposeMatrix;
+import jmul.math.operations.implementations.TripleProduct;
+import jmul.math.operations.implementations.Vectorization;
 import jmul.math.operations.implementations.comparisons.DigitComparator;
 import jmul.math.operations.implementations.comparisons.FractionComparator;
 import jmul.math.operations.implementations.comparisons.FractionGreaterThanComparison;
@@ -165,10 +170,6 @@ import jmul.math.operations.implementations.equality.MatrixEquality;
 import jmul.math.operations.implementations.equality.NumberEquality;
 import jmul.math.operations.implementations.equality.NumberFractionEquality;
 import jmul.math.operations.implementations.equality.VectorEquality;
-import jmul.math.numbers.notations.ScientificNotationFunctionImpl;
-import jmul.math.numbers.notations.ScientificNotationParserImpl;
-import jmul.math.numbers.notations.StandardNotationFunctionImpl;
-import jmul.math.numbers.notations.StandardNotationParserImpl;
 
 
 /**
@@ -202,7 +203,8 @@ public class OperationRepositoryInitializerImpl implements OperationRepositoryIn
 
         OperationRepository repository = new OperationRepositoryImpl();
 
-        repository.registerFunction(OperationIdentifiers.NUMBER_TO_ABSOLUTE_VALUE_FUNCTION, NumberToAbsoluteValue.class);
+        repository.registerFunction(OperationIdentifiers.NUMBER_TO_ABSOLUTE_VALUE_FUNCTION,
+                                    NumberToAbsoluteValue.class);
         repository.registerFunction(OperationIdentifiers.FRACTION_TO_ABSOLUTE_VALUE_FUNCTION,
                                     FractionToAbsoluteValue.class);
 
@@ -216,11 +218,13 @@ public class OperationRepositoryInitializerImpl implements OperationRepositoryIn
         repository.registerFunction(OperationIdentifiers.DIGIT_EQUALITY_FUNCTION, DigitEquality.class);
 
         repository.registerFunction(OperationIdentifiers.STANDARD_NOTATION_PARSER, StandardNotationParserImpl.class);
-        repository.registerFunction(OperationIdentifiers.SCIENTIFIC_NOTATION_PARSER, ScientificNotationParserImpl.class);
+        repository.registerFunction(OperationIdentifiers.SCIENTIFIC_NOTATION_PARSER,
+                                    ScientificNotationParserImpl.class);
 
         repository.registerFunction(OperationIdentifiers.SCIENTIFIC_NOTATION_FUNCTION,
                                     ScientificNotationFunctionImpl.class);
-        repository.registerFunction(OperationIdentifiers.STANDARD_NOTATION_FUNCTION, StandardNotationFunctionImpl.class);
+        repository.registerFunction(OperationIdentifiers.STANDARD_NOTATION_FUNCTION,
+                                    StandardNotationFunctionImpl.class);
 
         repository.registerFunction(OperationIdentifiers.NEGATE_NUMBER_FUNCTION, NegateNumber.class);
         repository.registerFunction(OperationIdentifiers.NEGATE_FRACTION_FUNCTION, NegateFraction.class);
@@ -282,8 +286,8 @@ public class OperationRepositoryInitializerImpl implements OperationRepositoryIn
         repository.registerFunction(OperationIdentifiers.NUMBER_DECREMENT_FUNCTION, DecrementNumber.class);
         repository.registerFunction(OperationIdentifiers.FRACTION_DECREMENT_FUNCTION, DecrementFraction.class);
 
-        repository.registerFunction(OperationIdentifiers.EVEN_NUMBER_FUNCTION, EvenNumberFunction.class);
-        repository.registerFunction(OperationIdentifiers.ODD_NUMBER_FUNCTION, OddNumberFunction.class);
+        repository.registerFunction(OperationIdentifiers.EVEN_NUMBER_FUNCTION, EvenNumberCheck.class);
+        repository.registerFunction(OperationIdentifiers.ODD_NUMBER_FUNCTION, OddNumberCheck.class);
 
         repository.registerFunction(OperationIdentifiers.NUMBER_GREATER_THAN_COMPARISON_FUNCTION,
                                     NumberGreaterThanComparison.class);
@@ -340,11 +344,11 @@ public class OperationRepositoryInitializerImpl implements OperationRepositoryIn
                                     DivideNumberByFraction.class);
         repository.registerFunction(OperationIdentifiers.DIVIDE_FRACTION_BY_NUMBER_FUNCTION,
                                     DivideFractionByNumber.class);
-        repository.registerFunction(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION, RussianDivisionFunction.class);
+        repository.registerFunction(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION, RussianDivision.class);
         repository.registerFunction(OperationIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION, DivisionBySubtraction.class);
 
-        repository.registerFunction(OperationIdentifiers.MODULO_FUNCTION, ModuloWithIntegersFunction.class);
-        repository.registerFunction(OperationIdentifiers.DIVISO_FUNCTION, DivisoWithIntegersFunction.class);
+        repository.registerFunction(OperationIdentifiers.MODULO_FUNCTION, ModuloWithIntegers.class);
+        repository.registerFunction(OperationIdentifiers.DIVISO_FUNCTION, DivisoWithIntegers.class);
 
         repository.registerFunction(OperationIdentifiers.RECIPROCAL_OF_NUMBER_FUNCTION, ReciprocalOfNumber.class);
         repository.registerFunction(OperationIdentifiers.RECIPROCAL_OF_FRACTION_FUNCTION, ReciprocalOfFraction.class);
@@ -354,28 +358,27 @@ public class OperationRepositoryInitializerImpl implements OperationRepositoryIn
 
         repository.registerFunction(OperationIdentifiers.FACTORIAL_FUNCTION, Factorial.class);
 
-        repository.registerFunction(OperationIdentifiers.ROUND_DIGIT_TO_ODD_FUNCTION, RoundDigitToOddFunction.class);
-        repository.registerFunction(OperationIdentifiers.ROUND_DIGIT_TO_EVEN_FUNCTION, RoundDigitToEvenFunction.class);
-        repository.registerFunction(OperationIdentifiers.ROUND_NUMBER_TO_ODD_FUNCTION, RoundNumberToOddFunction.class);
-        repository.registerFunction(OperationIdentifiers.ROUND_NUMBER_TO_EVEN_FUNCTION, RoundNumberToEvenFunction.class);
-        repository.registerFunction(OperationIdentifiers.ROUND_UP_NUMBER_FUNCTION, RoundUpFunction.class);
-        repository.registerFunction(OperationIdentifiers.ROUND_DOWN_NUMBER_FUNCTION, RoundDownFunction.class);
+        repository.registerFunction(OperationIdentifiers.ROUND_DIGIT_TO_ODD_FUNCTION, RoundDigitToOdd.class);
+        repository.registerFunction(OperationIdentifiers.ROUND_DIGIT_TO_EVEN_FUNCTION, RoundDigitToEven.class);
+        repository.registerFunction(OperationIdentifiers.ROUND_NUMBER_TO_ODD_FUNCTION, RoundNumberToOdd.class);
+        repository.registerFunction(OperationIdentifiers.ROUND_NUMBER_TO_EVEN_FUNCTION, RoundNumberToEven.class);
+        repository.registerFunction(OperationIdentifiers.ROUND_UP_NUMBER_FUNCTION, RoundUp.class);
+        repository.registerFunction(OperationIdentifiers.ROUND_DOWN_NUMBER_FUNCTION, RoundDown.class);
 
         repository.registerFunction(OperationIdentifiers.EVALUATE_FRACTION_FUNCTION, EvaluateFraction.class);
-        repository.registerFunction(OperationIdentifiers.IS_MULTIPLE_FUNCTION, IsMultipleFunction.class);
+        repository.registerFunction(OperationIdentifiers.IS_MULTIPLE_FUNCTION, IsMultipleCheck.class);
 
-        repository.registerFunction(OperationIdentifiers.SQUARE_NUMBER_FUNCTION, SquareNumberFunction.class);
-        repository.registerFunction(OperationIdentifiers.SQUARE_FRACTION_FUNCTION, SquareFractionFunction.class);
+        repository.registerFunction(OperationIdentifiers.SQUARE_NUMBER_FUNCTION, SquareNumber.class);
+        repository.registerFunction(OperationIdentifiers.SQUARE_FRACTION_FUNCTION, SquareFraction.class);
 
-        repository.registerFunction(OperationIdentifiers.DETERMINE_DIVISORS_FUNCTION, DetermineDivisorsFunction.class);
-        repository.registerFunction(OperationIdentifiers.DETERMINE_PRIME_FACTORS_NUMBER,
-                                    DeterminePrimeFactorsFunction.class);
+        repository.registerFunction(OperationIdentifiers.DETERMINE_DIVISORS_FUNCTION, DetermineDivisors.class);
+        repository.registerFunction(OperationIdentifiers.DETERMINE_PRIME_FACTORS_NUMBER, DeterminePrimeFactors.class);
         repository.registerFunction(OperationIdentifiers.DETERMINE_COMMON_DIVISORS_FUNCTION,
-                                    DetermineCommonDivisorsFunction.class);
+                                    DetermineCommonDivisors.class);
         repository.registerFunction(OperationIdentifiers.DETERMINE_COMMON_PRIME_FACTORS_FUNCTION,
-                                    DetermineCommonPrimeFactorsFunction.class);
+                                    DetermineCommonPrimeFactors.class);
         repository.registerFunction(OperationIdentifiers.REDUCE_FRACTION_FUNCTION, ReduceFraction.class);
-        repository.registerFunction(OperationIdentifiers.IS_PRIME_FUNCTION, IsPrimeFunction.class);
+        repository.registerFunction(OperationIdentifiers.IS_PRIME_FUNCTION, IsPrimeCheck.class);
 
         repository.registerFunction(OperationIdentifiers.VECTOR_EQUALITY_FUNCTION, VectorEquality.class);
         repository.registerFunction(OperationIdentifiers.MATRIX_EQUALITY_FUNCTION, MatrixEquality.class);
@@ -384,9 +387,9 @@ public class OperationRepositoryInitializerImpl implements OperationRepositoryIn
         repository.registerFunction(OperationIdentifiers.SUBTRACT_VECTORS_FUNCTION, SubtractVectors.class);
         repository.registerFunction(OperationIdentifiers.MULTIPLY_VECTOR_WITH_NUMBER_FUNCTION,
                                     MultiplyVectorWithNumber.class);
-        repository.registerFunction(OperationIdentifiers.SCALAR_PRODUCT_FUNCTION, ScalarProductFunction.class);
-        repository.registerFunction(OperationIdentifiers.CROSS_PRODUCT_FUNCTION, CrossProductFunction.class);
-        repository.registerFunction(OperationIdentifiers.TRIPLE_PRODUCT_FUNCTION, TripleProductFunction.class);
+        repository.registerFunction(OperationIdentifiers.SCALAR_PRODUCT_FUNCTION, ScalarProduct.class);
+        repository.registerFunction(OperationIdentifiers.CROSS_PRODUCT_FUNCTION, CrossProduct.class);
+        repository.registerFunction(OperationIdentifiers.TRIPLE_PRODUCT_FUNCTION, TripleProduct.class);
 
         repository.registerFunction(OperationIdentifiers.ADD_MATRICES_FUNCTION, AddMatrices.class);
         repository.registerFunction(OperationIdentifiers.SUBTRACT_MATRICES_FUNCTION, SubtractMatrices.class);
@@ -394,26 +397,26 @@ public class OperationRepositoryInitializerImpl implements OperationRepositoryIn
         repository.registerFunction(OperationIdentifiers.NUMBER_IS_WITHIN_INTERVAL, NumberWithinInterval.class);
         repository.registerFunction(OperationIdentifiers.FRACTION_IS_WITHIN_INTERVAL, FractionWithinInterval.class);
 
-        repository.registerFunction(OperationIdentifiers.DYADIC_PRODUCT_FUNCTION, DyadicProductFunction.class);
+        repository.registerFunction(OperationIdentifiers.DYADIC_PRODUCT_FUNCTION, DyadicProduct.class);
 
-        repository.registerFunction(OperationIdentifiers.VECTORIZATION_FUNCTION, VectorizationFunction.class);
-        repository.registerFunction(OperationIdentifiers.TRANSPOSE_MATRIX_FUNCTION, TransposeMatrixFunction.class);
-        repository.registerFunction(OperationIdentifiers.MATRIX_MULTIPLCIATION_FUNCTION,
-                                    MatrixMultiplicationFunction.class);
+        repository.registerFunction(OperationIdentifiers.VECTORIZATION_FUNCTION, Vectorization.class);
+        repository.registerFunction(OperationIdentifiers.TRANSPOSE_MATRIX_FUNCTION, TransposeMatrix.class);
+        repository.registerFunction(OperationIdentifiers.MATRIX_MULTIPLCIATION_FUNCTION, MatrixMultiplication.class);
 
         repository.registerFunction(OperationIdentifiers.DIGIT_SUM_FUNCTION, NumberDigitSum.class);
-        repository.registerFunction(OperationIdentifiers.DIGIT_TO_NUMBER_FUNCTION, DigitToNumberFunction.class);
-        repository.registerFunction(OperationIdentifiers.IS_SINGLE_DIGIT_FUNCTION, IsSingleDigitFunction.class);
+        repository.registerFunction(OperationIdentifiers.DIGIT_TO_NUMBER_FUNCTION, DigitToNumberConversion.class);
+        repository.registerFunction(OperationIdentifiers.IS_SINGLE_DIGIT_FUNCTION, IsSingleDigitCheck.class);
 
-        repository.registerFunction(OperationIdentifiers.RANDOM_DIGIT_FUNCTION, RandomDigitFunction.class);
-        repository.registerFunction(OperationIdentifiers.RANDOM_NUMBER_FUNCTION, RandomNumberFunction.class);
+        repository.registerFunction(OperationIdentifiers.RANDOM_DIGIT_FUNCTION, RandomDigit.class);
+        repository.registerFunction(OperationIdentifiers.RANDOM_NUMBER_FUNCTION, RandomNumber.class);
         repository.registerFunction(OperationIdentifiers.RANDOM_NUMBER_WITHIN_INTERVAL_FUNCTION,
                                     RandomNumberWithinInterval.class);
 
         repository.registerFunction(OperationIdentifiers.ADD_LOGARITHMS_FUNCTION, AddLogarithmsFunction.class);
-        repository.registerFunction(OperationIdentifiers.SUBTRACT_LOGARITHMS_FUNCTION, SubtractLogarithmsFunction.class);
+        repository.registerFunction(OperationIdentifiers.SUBTRACT_LOGARITHMS_FUNCTION, SubtractLogarithms.class);
 
-        repository.registerFunction(OperationIdentifiers.SQUARE_ROOT_FUNCTION, SquareRootFunction.class);
+        repository.registerFunction(OperationIdentifiers.SQUARE_ROOT_FUNCTION, SquareRoot.class);
+        repository.registerFunction(OperationIdentifiers.NTH_ROOT_FUNCTION, NthRoot.class);
 
         return repository;
     }

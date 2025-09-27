@@ -39,7 +39,7 @@ import java.util.Collection;
 
 import jmul.math.digits.Digit;
 import jmul.math.digits.PositionalNumeralSystems;
-import jmul.math.operations.implementations.DigitToNumberFunction;
+import jmul.math.operations.implementations.DigitToNumberConversion;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.operations.Result;
@@ -101,7 +101,7 @@ public class DigitToNumberTest {
     @Before
     public void setUp() {
 
-        function = new DigitToNumberFunction();
+        function = new DigitToNumberConversion();
     }
 
     /**

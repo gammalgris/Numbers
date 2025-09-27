@@ -40,9 +40,6 @@ import java.util.List;
 import java.util.SortedSet;
 
 import jmul.math.fractions.Fraction;
-import jmul.math.operations.OperationSingletons;
-import jmul.math.operations.repository.OperationIdentifier;
-import jmul.math.operations.repository.OperationIdentifiers;
 import static jmul.math.numbers.Constants.DEFAULT_NUMBER_BASE;
 import static jmul.math.numbers.ParameterHelper.checkBase;
 import static jmul.math.numbers.ParameterHelper.checkSign;
@@ -51,6 +48,10 @@ import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.NodesHelper;
 import jmul.math.numbers.notations.NotationParser;
 import jmul.math.numbers.notations.ParsingResult;
+import jmul.math.operations.OperationSingletons;
+import jmul.math.operations.ProcessingDetails;
+import jmul.math.operations.repository.OperationIdentifier;
+import jmul.math.operations.repository.OperationIdentifiers;
 import jmul.math.signs.Sign;
 import jmul.math.signs.Signs;
 
@@ -638,12 +639,6 @@ public class NumberNegativeBaseImpl implements Number {
     }
 
     @Override
-    public Number multiply(OperationIdentifier algorithm, Number n) {
-        // TODO Implement this method
-        return null;
-    }
-
-    @Override
     public Fraction multiply(Fraction f) {
         // TODO Implement this method
         throw new UnsupportedOperationException();
@@ -1000,19 +995,25 @@ public class NumberNegativeBaseImpl implements Number {
     }
 
     @Override
-    public Number squareRoot(OperationIdentifier algorithm) {
+    public Number root(Number n) {
         // TODO Implement this method
-        throw new UnsupportedOperationException();
+        return null;
     }
 
     @Override
-    public Number squareRoot(OperationIdentifier algorithm, Number decimalPlaces) {
+    public Number squareRoot(ProcessingDetails processingDetails) {
         // TODO Implement this method
-        throw new UnsupportedOperationException();
+        return null;
     }
 
     @Override
-    public Number squareRoot(Number decimalPlaces) {
+    public Number root(ProcessingDetails processingDetails, Number n) {
+        // TODO Implement this method
+        return null;
+    }
+
+    @Override
+    public Number multiply(ProcessingDetails processingDetails, Number n) {
         // TODO Implement this method
         return null;
     }

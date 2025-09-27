@@ -41,7 +41,7 @@ import java.util.Map;
 
 import jmul.math.digits.Digit;
 import jmul.math.digits.PositionalNumeralSystems;
-import jmul.math.operations.implementations.RandomDigitFunction;
+import jmul.math.operations.implementations.RandomDigit;
 import jmul.math.numbers.Constants;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
@@ -85,7 +85,7 @@ public class RandomDigitTest {
         super();
 
         this.base = base;
-        this.function = new RandomDigitFunction();
+        this.function = new RandomDigit();
     }
 
     /**

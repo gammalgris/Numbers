@@ -39,13 +39,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import jmul.math.operations.repository.OperationIdentifiers;
 import jmul.math.numbers.Number;
-import static jmul.math.numbers.NumberHelper.createNumber;
+import jmul.math.operations.repository.OperationIdentifiers;
 
 import jmul.test.classification.ManualTest;
-
-import test.jmul.math.numbers.TestCase;
 
 import org.junit.Ignore;
 
@@ -114,7 +111,7 @@ public class DivisionSpeedTest {
             try {
 
                 actualResult =
-                    testCase.operand1.multiply(OperationIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION, testCase.operand2);
+                    testCase.operand1.divide(OperationIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION, testCase.operand2);
 
                 if (testCase.expectedResult.equals(actualResult)) {
 

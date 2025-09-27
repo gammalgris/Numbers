@@ -38,12 +38,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import jmul.math.Math;
-import jmul.math.operations.repository.OperationIdentifiers;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createInfinity;
 import static jmul.math.numbers.NumberHelper.createNumber;
+import jmul.math.operations.ProcessingDetails;
+import jmul.math.operations.repository.OperationIdentifiers;
 
 import jmul.test.classification.UnitTest;
 import jmul.test.exceptions.FailedTestException;
@@ -218,8 +219,9 @@ public class MultiplyNumbers3Test {
             checkNumberEqualsStringRepresentation(expectedProduct, expectedProductString);
 
             // check the operation
-            Number actualProduct =
-                firstOperand.multiply(OperationIdentifiers.RUSSIAN_PEASANT_MULTIPLICATION_FUNCTION, secondOperand);
+            ProcessingDetails processingDetails =
+                new ProcessingDetails(OperationIdentifiers.RUSSIAN_PEASANT_MULTIPLICATION_FUNCTION);
+            Number actualProduct = firstOperand.multiply(processingDetails, secondOperand);
 
             assertEquals(toString(), expectedProduct, actualProduct);
 
@@ -250,8 +252,9 @@ public class MultiplyNumbers3Test {
             checkNumberEqualsStringRepresentation(expectedProduct, expectedProductString);
 
             // check the operation
-            Number actualProduct =
-                Math.multiply(OperationIdentifiers.RUSSIAN_PEASANT_MULTIPLICATION_FUNCTION, firstOperand, secondOperand);
+            ProcessingDetails processingDetails =
+                new ProcessingDetails(OperationIdentifiers.RUSSIAN_PEASANT_MULTIPLICATION_FUNCTION);
+            Number actualProduct = Math.multiply(processingDetails, firstOperand, secondOperand);
 
             assertEquals(toString(), expectedProduct, actualProduct);
 
