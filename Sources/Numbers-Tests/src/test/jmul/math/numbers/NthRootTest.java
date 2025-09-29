@@ -38,7 +38,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import jmul.math.Math;
+import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
+import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
+import static jmul.math.numbers.NumberHelper.createInfinity;
 import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.operations.ProcessingDetails;
 import jmul.math.operations.repository.OperationIdentifiers;
@@ -175,6 +178,22 @@ public class NthRootTest {
 
         Collection<Object[]> parameters = new ArrayList<Object[]>();
 
+        for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
+
+            parameters.add(new Object[] { createInfinity(base), createNumber(base, "1"), null, createInfinity(base) });
+            parameters.add(new Object[] { createInfinity(base), createNumber(base, "10"), null, createInfinity(base) });
+            parameters.add(new Object[] { createInfinity(base), createNumber(base, "11"), null, createInfinity(base) });
+
+            parameters.add(new Object[] { createNumber(base, "0"), createNumber(base, "10"), null,
+                                          createNumber(base, "0") });
+            parameters.add(new Object[] { createNumber(base, "1"), createNumber(base, "10"), null,
+                                          createNumber(base, "1") });
+        }
+
+        parameters.add(new Object[] { createNumber(10, "1"), createNumber(10, "1"), null, createNumber(10, "1") });
+        parameters.add(new Object[] { createNumber(10, "1"), createNumber(10, "1"), createNumber(10, "20"),
+                                      createNumber(10, "1") });
+
         parameters.add(new Object[] { createNumber(10, "2"), createNumber(10, "1"), null, createNumber(10, "2") });
         parameters.add(new Object[] { createNumber(10, "2"), createNumber(10, "1"), createNumber(10, "20"),
                                       createNumber(10, "2") });
@@ -183,13 +202,13 @@ public class NthRootTest {
         parameters.add(new Object[] { createNumber(10, "2"), createNumber(10, "2"), null,
                                       createNumber(10, "1.4142135624") });
         parameters.add(new Object[] { createNumber(10, "2"), createNumber(10, "2"), createNumber(10, "20"),
-                                      createNumber(10, "1.4142135623730954679") });
+                                      createNumber(10, "1.41421356237309504881") });
 
         // A result with more digits is 1.25992104989487316476721060727822835057025146470150798008197511215529967651
         parameters.add(new Object[] { createNumber(10, "2"), createNumber(10, "3"), null,
-                                      createNumber(10, "1.2599210498") });
+                                      createNumber(10, "1.2599210499") });
         parameters.add(new Object[] { createNumber(10, "2"), createNumber(10, "3"), createNumber(10, "20"),
-                                      createNumber(10, "1.25992104989487316476") });
+                                      createNumber(10, "1.25992104989487316477") });
 
         parameters.add(new Object[] { createNumber(10, "27"), createNumber(10, "3"), null, createNumber(10, "3") });
         parameters.add(new Object[] { createNumber(10, "27"), createNumber(10, "3"), createNumber(10, "20"),

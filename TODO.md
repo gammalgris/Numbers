@@ -121,7 +121,19 @@
 
 53) Implement an exponentation operation x^y where y is a fraction.
 
-54)
+54) Centralize default processing details. Add methods to clone procesing details and replace settings.
+
+55) Implement suqare root, root and exponentiation for fractions too.
+
+56) The reciprocal function needs a variant with a specified precision.
+
+57) Add squareRoot, root and exponentiate to the fraction implementation.
+
+58) Find the cause for failed tests in the function subpackage and fix it.
+
+59) Find the cause for failed tests with the nth root implementation and fix it.
+
+60)
 
 
 # Done

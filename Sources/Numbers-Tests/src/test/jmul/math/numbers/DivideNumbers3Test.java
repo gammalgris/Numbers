@@ -38,11 +38,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import jmul.math.Math;
-import jmul.math.operations.repository.OperationIdentifiers;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
+import jmul.math.operations.ProcessingDetails;
+import jmul.math.operations.repository.OperationIdentifiers;
 
 import jmul.test.classification.UnitTest;
 
@@ -133,11 +134,14 @@ public class DivideNumbers3Test {
         Number actualResult;
         if (decimalPlaces == null) {
 
-            actualResult = number1.divide(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION, number2);
+            ProcessingDetails processingDetails = new ProcessingDetails(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION);
+            actualResult = number1.divide(processingDetails, number2);
 
         } else {
 
-            actualResult = number1.divide(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION, number2, decimalPlaces);
+            ProcessingDetails processingDetails =
+                new ProcessingDetails(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION, decimalPlaces);
+            actualResult = number1.divide(processingDetails, number2);
         }
 
         assertEquals(toString(), expectedResult, actualResult);
@@ -153,11 +157,14 @@ public class DivideNumbers3Test {
         Number actualResult;
         if (decimalPlaces == null) {
 
-            actualResult = Math.divide(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION, number1, number2);
+            ProcessingDetails processingDetails = new ProcessingDetails(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION);
+            actualResult = Math.divide(processingDetails, number1, number2);
 
         } else {
 
-            actualResult = Math.divide(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION, number1, number2, decimalPlaces);
+            ProcessingDetails processingDetails =
+                new ProcessingDetails(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION, decimalPlaces);
+            actualResult = Math.divide(processingDetails, number1, number2);
         }
 
         assertEquals(toString(), expectedResult, actualResult);

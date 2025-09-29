@@ -43,9 +43,9 @@ import jmul.math.fractions.Fraction;
 import jmul.math.matrices.Matrix;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
-import static jmul.math.numbers.NumberHelper.parseInteger;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.MixedBinaryOperation;
+import jmul.math.operations.MixedQuaternaryOperation;
 import jmul.math.operations.OperationSingletons;
 import jmul.math.operations.ProcessingDetails;
 import jmul.math.operations.QuaternaryOperation;
@@ -814,8 +814,7 @@ public final class Math {
      */
     public static Number multiply(Number n1, Number n2) {
 
-        ProcessingDetails processingDetails =
-            new ProcessingDetails(OperationIdentifiers.LONG_MULTIPLICATION_FUNCTION);
+        ProcessingDetails processingDetails = new ProcessingDetails(OperationIdentifiers.LONG_MULTIPLICATION_FUNCTION);
 
         return multiply(processingDetails, n1, n2);
     }
@@ -1485,21 +1484,16 @@ public final class Math {
     /**
      * Shorten the precision of this number according to the specified decimal places.
      *
-     * @deprecated the parameters should be in the same number base
-     *
      * @param number
      *        a number
-     * @param decimalPlaces
-     *        the number of decimal places remainign after rounding
      *
      * @return a rounded number
      */
-    @Deprecated
-    public static Number round(Number number, int decimalPlaces) {
+    public static Number round(Number number) {
 
-        Number convertedParameter = parseInteger(decimalPlaces);
+        ProcessingDetails processingDetails = new ProcessingDetails(OperationIdentifiers.ROUND_NUMBER_TO_ODD_FUNCTION);
 
-        return round(OperationIdentifiers.ROUND_NUMBER_TO_EVEN_FUNCTION, number, convertedParameter);
+        return round(processingDetails, number);
     }
 
     /**
@@ -1507,59 +1501,31 @@ public final class Math {
      *
      * @param number
      *        a number
-     * @param decimalPlaces
-     *        the number of decimal places remainign after rounding
-     *
-     * @return a rounded number
-     */
-    public static Number round(Number number, Number decimalPlaces) {
-
-        return round(OperationIdentifiers.ROUND_NUMBER_TO_EVEN_FUNCTION, number, decimalPlaces);
-    }
-
-    /**
-     * Shorten the precision of this number according to the specified decimal places.
-     *
-     * @deprecated the parameters should be in the same number base
-     *
-     * @param algorithm
-     *        the identifier for an algorithm
-     * @param number
-     *        a number
-     * @param decimalPlaces
-     *        the number of decimal places remaining after rounding
+     * @param processingDetails
+     *        additonal processing details
      *
      * @return a shortened number according to the specified precision
      */
-    @Deprecated
-    public static Number round(OperationIdentifier algorithm, Number number, int decimalPlaces) {
+    public static Number round(ProcessingDetails processingDetails, Number number) {
 
-        Number convertedParameter = parseInteger(decimalPlaces);
+        ParameterCheckHelper.checkParameter(processingDetails);
+        ParameterCheckHelper.checkParameter(number);
 
-        return round(algorithm, number, convertedParameter);
-    }
-
-    /**
-     * Shorten the precision of this number according to the specified decimal places.
-     *
-     * @param algorithm
-     *        the identifier for an algorithm
-     * @param number
-     *        a number
-     * @param decimalPlaces
-     *        the number of decimal places remaining after rounding
-     *
-     * @return a shortened number according to the specified precision
-     */
-    public static Number round(OperationIdentifier algorithm, Number number, Number decimalPlaces) {
+        int base = number.base();
 
         final OperationIdentifier[] ALLOWED_ALGORITHMS = new OperationIdentifier[] {
             OperationIdentifiers.ROUND_NUMBER_TO_ODD_FUNCTION, OperationIdentifiers.ROUND_NUMBER_TO_EVEN_FUNCTION
         };
-        OperationIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, algorithm);
+        OperationIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, processingDetails.algorithm);
+
+        Number decimalPlaces = processingDetails.decimalPlaces;
+        if (decimalPlaces == null) {
+
+            decimalPlaces = Math.DEFAULT_MAXIMUM_FRACTION_LENGTH.value(base);
+        }
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(algorithm);
+            (BinaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(processingDetails.algorithm);
         Result<Number> result = function.calculate(number, decimalPlaces);
 
         return result.result();
@@ -1597,83 +1563,58 @@ public final class Math {
     }
 
     /**
-     * Divides this number by the specified number.
+     * Divides the first specified number by the second specified number.
      *
      * @param n1
      *        a number
      * @param n2
      *        a number
      *
-     * @return the quotient
+     * @return the quotient of both numbers
      */
     public static Number divide(Number n1, Number n2) {
 
-        return divide(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION, n1, n2);
-    }
+        ProcessingDetails processingDetails = new ProcessingDetails(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION);
 
-    /**
-     * Divides this number by the specified number.
-     *
-     * @param n1
-     *        a number
-     * @param n2
-     *        a number
-     * @param decimalPlaces
-     *        the number of decimal places retained after cutting the fraction part
-     *
-     * @return the quotient
-     */
-    public static Number divide(Number n1, Number n2, Number decimalPlaces) {
-
-        return divide(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION, n1, n2, decimalPlaces);
+        return divide(processingDetails, n1, n2);
     }
 
     /**
      * Divides the first specified number by the second specified number.
      *
-     * @param algorithm
-     *        the identifier for an algorithm
+     * @param processingDetails
+     *        additonal processing details
      * @param n1
      *        a number
      * @param n2
      *        a number
      *
-     * @return the quotient
+     * @return the quotient of both numbers
      */
-    public static Number divide(OperationIdentifier algorithm, Number n1, Number n2) {
+    public static Number divide(ProcessingDetails processingDetails, Number n1, Number n2) {
 
-        ParameterCheckHelper.checkParameters(n1, n2);
-        Number decimalPlaces = getDefaultMaximumFractionLength(n1.base());
+        ParameterCheckHelper.checkParameter(processingDetails);
+        ParameterCheckHelper.checkParameter(n1);
 
-        return divide(algorithm, n1, n2, decimalPlaces);
-    }
-
-    /**
-     * Divides this number by the specified number.
-     *
-     * @param algorithm
-     *        the identifier for an algorithm
-     * @param n1
-     *        a number
-     * @param n2
-     *        a number
-     * @param decimalPlaces
-     *        the number of decimal places retained after cutting the fraction part
-     *
-     * @return the quotient
-     */
-    public static Number divide(OperationIdentifier algorithm, Number n1, Number n2, Number decimalPlaces) {
+        int base = n1.base();
 
         final OperationIdentifier[] ALLOWED_ALGORITHMS = new OperationIdentifier[] {
             OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION, OperationIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION
         };
-        OperationIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, algorithm);
+        OperationIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, processingDetails.algorithm);
+
+        Number decimalPlaces = processingDetails.decimalPlaces;
+        if (decimalPlaces == null) {
+
+            decimalPlaces = Math.DEFAULT_MAXIMUM_FRACTION_LENGTH.value(base);
+        }
 
         TernaryOperation<Number, Result<Number>> function =
-            (TernaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(algorithm);
+            (TernaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(processingDetails.algorithm);
         Result<Number> result = function.calculate(n1, n2, decimalPlaces);
 
         return result.result();
+
     }
 
     /**
@@ -1706,6 +1647,118 @@ public final class Math {
         MixedBinaryOperation<Fraction, Number, Result<Number>> function =
             (MixedBinaryOperation<Fraction, Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.EVALUATE_FRACTION_FUNCTION);
         Result<Number> result = function.calculate(fraction, decimalPlaces);
+
+        return result.result();
+    }
+
+    /**
+     * Exponentiates this number by the specified exponent.
+     *
+     * @param number
+     *        a number
+     * @param exponent
+     *        an exponent (must be an integer)
+     *
+     * @return the result
+     */
+    public static Number exponentiate(Number number, Number exponent) {
+
+        ProcessingDetails processingDetails =
+            new ProcessingDetails(OperationIdentifiers.EXPONENTIATE_NUMBER_WITH_NUMBER_FUNCTION);
+
+        return exponentiate(processingDetails, number, exponent);
+    }
+
+    /**
+     * Exponentiates this number by the specified exponent.
+     *
+     * @param processingDetails
+     *        additonal processing details
+     * @param number
+     *        a number
+     * @param exponent
+     *        an exponent (must be an integer)
+     *
+     * @return the result
+     */
+    public static Number exponentiate(ProcessingDetails processingDetails, Number number, Number exponent) {
+
+        ParameterCheckHelper.checkParameter(processingDetails);
+        ParameterCheckHelper.checkParameter(number);
+
+        int base = number.base();
+
+        final OperationIdentifier[] ALLOWED_ALGORITHMS = new OperationIdentifier[] {
+            OperationIdentifiers.EXPONENTIATE_NUMBER_WITH_NUMBER_FUNCTION };
+        OperationIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, processingDetails.algorithm);
+
+        Number decimalPlaces = processingDetails.decimalPlaces;
+        if (decimalPlaces == null) {
+
+            decimalPlaces = Math.DEFAULT_MAXIMUM_FRACTION_LENGTH.value(base);
+        }
+
+        TernaryOperation<Number, Result<Number>> function =
+            (TernaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(processingDetails.algorithm);
+        Result<Number> result = function.calculate(number, exponent, decimalPlaces);
+
+        return result.result();
+    }
+
+    /**
+     * Exponentiates this number by the specified exponent.
+     *
+     * @param number
+     *        a number
+     * @param exponent
+     *        an exponent
+     *
+     * @return the result
+     */
+    public static Number exponentiate(Number number, Fraction exponent) {
+
+        ProcessingDetails processingDetails =
+            new ProcessingDetails(OperationIdentifiers.EXPONENTIATE_NUMBER_WITH_FRACTION_FUNCTION);
+
+        return exponentiate(processingDetails, number, exponent);
+    }
+
+    /**
+     * Exponentiates this number by the specified exponent.
+     *
+     * @param processingDetails
+     *        additonal processing details
+     * @param exponent
+     *        an exponent
+     *
+     * @return the result
+     */
+    public static Number exponentiate(ProcessingDetails processingDetails, Number number, Fraction exponent) {
+
+        ParameterCheckHelper.checkParameter(processingDetails);
+        ParameterCheckHelper.checkParameter(number);
+
+        final OperationIdentifier[] ALLOWED_ALGORITHMS = new OperationIdentifier[] {
+            OperationIdentifiers.EXPONENTIATE_NUMBER_WITH_FRACTION_FUNCTION };
+        OperationIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, processingDetails.algorithm);
+
+        int base = number.base();
+
+        Number iterations = processingDetails.iterations;
+        if (iterations == null) {
+
+            iterations = Math.DEFAULT_NTH_ROOT_ITERATIONS.value(base);
+        }
+
+        Number decimalPlaces = processingDetails.decimalPlaces;
+        if (decimalPlaces == null) {
+
+            decimalPlaces = Math.DEFAULT_MAXIMUM_FRACTION_LENGTH.value(base);
+        }
+
+        MixedQuaternaryOperation<Number, Fraction, Result<Number>> function =
+            (MixedQuaternaryOperation<Number, Fraction, Result<Number>>) OperationSingletons.getFunction(processingDetails.algorithm);
+        Result<Number> result = function.calculate(number, exponent, iterations, decimalPlaces);
 
         return result.result();
     }

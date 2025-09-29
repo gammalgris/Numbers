@@ -292,6 +292,63 @@ public final class ParameterCheckHelper {
      *        an operand
      * @param operand3
      *        an operand
+     * @param operand4
+     *        an operand
+     */
+    public static void checkParameters(Number operand1, Fraction operand2, Number operand3, Number operand4) {
+
+        if (operand1 == null) {
+
+            String message = "The first operand is null!";
+            throw new IllegalArgumentException(message);
+        }
+
+        if (operand2 == null) {
+
+            String message = "The second operand is null!";
+            throw new IllegalArgumentException(message);
+        }
+
+        if (operand3 == null) {
+
+            String message = "The third operand is null!";
+            throw new IllegalArgumentException(message);
+        }
+
+        if (operand4 == null) {
+
+            String message = "The fourth operand is null!";
+            throw new IllegalArgumentException(message);
+        }
+
+        if (operand1.base() != operand2.base()) {
+
+            String message = "The specified numbers are of different bases!";
+            throw new IllegalArgumentException(message);
+        }
+
+        if (operand1.base() != operand3.base()) {
+
+            String message = "The specified numbers are of different bases!";
+            throw new IllegalArgumentException(message);
+        }
+
+        if (operand1.base() != operand4.base()) {
+
+            String message = "The specified numbers are of different bases!";
+            throw new IllegalArgumentException(message);
+        }
+    }
+
+    /**
+     * Checks the specifiecd parameters.
+     *
+     * @param operand1
+     *        an operand
+     * @param operand2
+     *        an operand
+     * @param operand3
+     *        an operand
      */
     public static void checkParameters(Fraction operand1, Fraction operand2, Fraction operand3) {
 

@@ -38,7 +38,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import jmul.math.Math;
+import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
+import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
+import static jmul.math.numbers.NumberHelper.createInfinity;
 import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.operations.ProcessingDetails;
 import jmul.math.operations.repository.OperationIdentifiers;
@@ -167,6 +170,16 @@ public class SquareRootTest {
     public static Collection<Object[]> data() {
 
         Collection<Object[]> parameters = new ArrayList<Object[]>();
+
+        for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
+
+            parameters.add(new Object[] { createInfinity(base), null, createInfinity(base) });
+            parameters.add(new Object[] { createInfinity(base), null, createInfinity(base) });
+            parameters.add(new Object[] { createInfinity(base), null, createInfinity(base) });
+
+            parameters.add(new Object[] { createNumber(base, "0"), null, createNumber(base, "0") });
+            parameters.add(new Object[] { createNumber(base, "1"), null, createNumber(base, "1") });
+        }
 
         // A result with more digits is 1,4142135623730950488016887242097. The test below omitted the zero (-> trim)
         parameters.add(new Object[] { createNumber(10, "2"), null, createNumber(10, "1.4142135623") });

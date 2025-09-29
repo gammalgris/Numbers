@@ -40,9 +40,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Stream;
 
-import jmul.math.operations.repository.OperationIdentifiers;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
+import jmul.math.operations.ProcessingDetails;
+import jmul.math.operations.repository.OperationIdentifiers;
 
 
 /**
@@ -51,6 +52,19 @@ import static jmul.math.numbers.NumberHelper.createNumber;
  * @author Kristian Kutin
  */
 public class TrainingDataWithResults implements Iterable<DataEntryWithResult> {
+
+    /**
+     * Additional Processing details.
+     */
+    private static final ProcessingDetails PROCESSING_DETAILS;
+
+    /*
+     * The static initializer.
+     */
+    static {
+
+        PROCESSING_DETAILS = new ProcessingDetails(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION);
+    }
 
     /**
      * A number base.
@@ -177,7 +191,7 @@ public class TrainingDataWithResults implements Iterable<DataEntryWithResult> {
         Number entries =
             createNumber(base, "" + size()); // problematic -> size is base 10 which could deviate from the actual base
 
-        Number average = cumulativeDeviation.divide(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION, entries);
+        Number average = cumulativeDeviation.divide(PROCESSING_DETAILS, entries);
 
         return average;
     }

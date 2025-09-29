@@ -655,35 +655,6 @@ public class NumberNegativeBaseImpl implements Number {
      *
      * @param n
      *        a number
-     * @param decimalPlaces
-     *        the number of decimal places retained after cutting the fraction part
-     *
-     * @return the quotient
-     */
-    @Override
-    public Number divide(Number n, Number decimalPlaces) {
-
-        // TODO Implement this method
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public Number divide(OperationIdentifier algorithm, Number n) {
-        // TODO Implement this method
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public Number divide(OperationIdentifier algorithm, Number n, Number decimalPlaces) {
-        // TODO Implement this method
-        throw new UnsupportedOperationException();
-    }
-
-    /**
-     * Divides this number by the specified number.
-     *
-     * @param n
-     *        a number
      *
      * @return a fraction (e.g. a quotient, a mixed fraction or integer)
      */
@@ -762,30 +733,6 @@ public class NumberNegativeBaseImpl implements Number {
 
     @Override
     public Number roundUp() {
-        // TODO Implement this method
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public Number round(Number decimalPlaces) {
-        // TODO Implement this method
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public Number round(int decimalPlaces) {
-        // TODO Implement this method
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public Number round(OperationIdentifier algorithm, int decimalPlaces) {
-        // TODO Implement this method
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public Number round(OperationIdentifier algorithm, Number decimalPlaces) {
         // TODO Implement this method
         throw new UnsupportedOperationException();
     }
@@ -1014,6 +961,42 @@ public class NumberNegativeBaseImpl implements Number {
 
     @Override
     public Number multiply(ProcessingDetails processingDetails, Number n) {
+        // TODO Implement this method
+        return null;
+    }
+
+    @Override
+    public Number divide(ProcessingDetails processingDetails, Number n) {
+        // TODO Implement this method
+        return null;
+    }
+
+    @Override
+    public Number round() {
+        // TODO Implement this method
+        return null;
+    }
+
+    @Override
+    public Number round(ProcessingDetails processingDetails) {
+        // TODO Implement this method
+        return null;
+    }
+
+    @Override
+    public Number exponentiate(Fraction exponent) {
+        // TODO Implement this method
+        return null;
+    }
+
+    @Override
+    public Number exponentiate(ProcessingDetails processingDetails, Number exponent) {
+        // TODO Implement this method
+        return null;
+    }
+
+    @Override
+    public Number exponentiate(ProcessingDetails processingDetails, Fraction exponent) {
         // TODO Implement this method
         return null;
     }

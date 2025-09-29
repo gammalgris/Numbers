@@ -69,6 +69,8 @@ import jmul.math.operations.implementations.DoublingNumber;
 import jmul.math.operations.implementations.DyadicProduct;
 import jmul.math.operations.implementations.EvaluateFraction;
 import jmul.math.operations.implementations.EvenNumberCheck;
+import jmul.math.operations.implementations.ExponentiateNumberWithFraction;
+import jmul.math.operations.implementations.ExponentiateNumberWithNumber;
 import jmul.math.operations.implementations.Factorial;
 import jmul.math.operations.implementations.FractionToAbsoluteValue;
 import jmul.math.operations.implementations.FractionWithinInterval;
@@ -417,6 +419,11 @@ public class OperationRepositoryInitializerImpl implements OperationRepositoryIn
 
         repository.registerFunction(OperationIdentifiers.SQUARE_ROOT_FUNCTION, SquareRoot.class);
         repository.registerFunction(OperationIdentifiers.NTH_ROOT_FUNCTION, NthRoot.class);
+
+        repository.registerFunction(OperationIdentifiers.EXPONENTIATE_NUMBER_WITH_NUMBER_FUNCTION,
+                                    ExponentiateNumberWithNumber.class);
+        repository.registerFunction(OperationIdentifiers.EXPONENTIATE_NUMBER_WITH_FRACTION_FUNCTION,
+                                    ExponentiateNumberWithFraction.class);
 
         return repository;
     }

@@ -39,8 +39,10 @@ import jmul.math.functions.FunctionHelper;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.numbers.creation.CreationParameters;
+import jmul.math.operations.ProcessingDetails;
 import jmul.math.operations.QuaternaryOperation;
 import jmul.math.operations.Result;
+import jmul.math.operations.repository.OperationIdentifiers;
 
 
 /**
@@ -105,7 +107,7 @@ public class NthRoot implements QuaternaryOperation<Number, Result<Number>> {
             throw new IllegalArgumentException("The specified precision must be a positive integer!");
         }
 
-        if (number.isInfinity()) {
+        if (number.isInfinity() || number.isZero() || number.isOne()) {
 
             Number clone = createNumber(CreationParameters.CLONE, number);
             return new Result<Number>(clone);
@@ -128,7 +130,9 @@ public class NthRoot implements QuaternaryOperation<Number, Result<Number>> {
             i = i.dec();
         }
 
-        x = x.round(decimalPlaces);
+        ProcessingDetails processingDetails =
+            new ProcessingDetails(OperationIdentifiers.ROUND_NUMBER_TO_ODD_FUNCTION, decimalPlaces);
+        x = x.round(processingDetails);
 
         return new Result<Number>(x);
     }
@@ -183,8 +187,11 @@ public class NthRoot implements QuaternaryOperation<Number, Result<Number>> {
             term2 = monomial.calculate(x);
         }
 
+        ProcessingDetails processingDetails =
+            new ProcessingDetails(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION, decimalPlaces);
+
         Number result = term1;
-        result = result.divide(term2, decimalPlaces);
+        result = result.divide(processingDetails, term2);
         result = result.negate();
         result = result.add(x);
 

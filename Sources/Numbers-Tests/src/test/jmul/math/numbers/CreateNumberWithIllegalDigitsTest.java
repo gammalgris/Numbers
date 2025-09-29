@@ -165,8 +165,8 @@ public class CreateNumberWithIllegalDigitsTest {
         Collection<Object[]> parameters = new ArrayList<Object[]>();
 
         // Test boundaries
-        parameters.add(new Object[] { NumberParsingException.class, 1, "1" });
-        parameters.add(new Object[] { NumberParsingException.class, BASE_MAX_LIMIT + 1, "1" });
+        parameters.add(new Object[] { IllegalArgumentException.class, 1, "1" });
+        parameters.add(new Object[] { IllegalArgumentException.class, BASE_MAX_LIMIT + 1, "1" });
 
         // Test text input
         parameters.add(new Object[] { NumberParsingException.class, BASE_MAX_LIMIT, "Hello World!" });

@@ -92,4 +92,15 @@ public class Result<T> {
         return result;
     }
 
+    /**
+     * Returns a string representations  of this result object.
+     *
+     * @return a string representation
+     */
+    @Override
+    public String toString() {
+
+        return String.valueOf(result());
+    }
+
 }

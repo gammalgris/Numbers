@@ -88,6 +88,19 @@ public final class ProcessingDetails {
      *        the identifier for an algorithm
      * @param decimalPlaces
      *        the number of decimal places retained after cutting the fraction part
+     */
+    public ProcessingDetails(OperationIdentifier algorithm, Number decimalPlaces) {
+
+        this(algorithm, decimalPlaces, null);
+    }
+
+    /**
+     * Creates a new instance according to the specified parameters.
+     *
+     * @param algorithm
+     *        the identifier for an algorithm
+     * @param decimalPlaces
+     *        the number of decimal places retained after cutting the fraction part
      * @param iterations
      *        an iteration depth
      */
@@ -102,7 +115,7 @@ public final class ProcessingDetails {
 
         if (decimalPlaces != null) {
 
-            ParameterCheckHelper.checkPositiveIntegerGreaterZero(decimalPlaces);
+            ParameterCheckHelper.checkPositiveInteger(decimalPlaces);
         }
 
         if (iterations != null) {
@@ -133,6 +146,45 @@ public final class ProcessingDetails {
     public boolean hasIterations() {
 
         return iterations != null;
+    }
+
+    /**
+     * Creates a copy of this entity but changes the algorithm.
+     *
+     * @param algorithm
+     *        an identifiery for an algorithm
+     *
+     * @return a modified clone
+     */
+    public ProcessingDetails replaceAlgorithm(OperationIdentifier algorithm) {
+
+        return new ProcessingDetails(algorithm);
+    }
+
+    /**
+     * Creates a copy of this entity but changes the specified iterations.
+     *
+     * @param iterations
+     *        an iteration depths
+     *
+     * @return a modified clone
+     */
+    public ProcessingDetails replaceIterations(Number iterations) {
+
+        return new ProcessingDetails(this.algorithm, this.decimalPlaces, iterations);
+    }
+
+    /**
+     * Creates a copy of this entity but changes the specified precision.
+     *
+     * @param decimalPlaces
+     *        a number precision
+     *
+     * @return a modified clone
+     */
+    public ProcessingDetails replacePrecision(Number decimalPlaces) {
+
+        return new ProcessingDetails(this.algorithm, decimalPlaces, this.iterations);
     }
 
 }

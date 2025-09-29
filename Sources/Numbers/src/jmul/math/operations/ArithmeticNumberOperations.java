@@ -35,7 +35,6 @@ package jmul.math.operations;
 
 
 import jmul.math.fractions.Fraction;
-import jmul.math.operations.repository.OperationIdentifier;
 import jmul.math.numbers.Number;
 
 
@@ -245,40 +244,14 @@ public interface ArithmeticNumberOperations {
     /**
      * Divides this number by the specified number.
      *
-     * @param n
-     *        a number
-     * @param decimalPlaces
-     *        the number of decimal places retained after cutting the fraction part
-     *
-     * @return the quotient
-     */
-    Number divide(Number n, Number decimalPlaces);
-
-    /**
-     * Divides this number by the specified number.
-     *
-     * @param algorithm
-     *        the identifier for an algorithm
+     * @param processingDetails
+     *        additonal processing details
      * @param n
      *        a number
      *
      * @return the quotient
      */
-    Number divide(OperationIdentifier algorithm, Number n);
-
-    /**
-     * Divides this number by the specified number.
-     *
-     * @param algorithm
-     *        the identifier for an algorithm
-     * @param n
-     *        a number
-     * @param decimalPlaces
-     *        the number of decimal places retained after cutting the fraction part
-     *
-     * @return the quotient
-     */
-    Number divide(OperationIdentifier algorithm, Number n, Number decimalPlaces);
+    Number divide(ProcessingDetails processingDetails, Number n);
 
     /**
      * Divides this number by the specified fraction.
@@ -351,14 +324,48 @@ public interface ArithmeticNumberOperations {
     Number min(Number n);
 
     /**
-     * Takes this number as base and exponentiates it with the specified number.
+     * Exponentiates this number by the specified exponent.
      *
-     * @param n
-     *        a number
+     * @param exponent
+     *        an exponent (must be an integer)
      *
-     * @return a number
+     * @return the result
      */
-    Number exponentiate(Number n);
+    Number exponentiate(Number exponent);
+
+    /**
+     * Exponentiates this number by the specified exponent.
+     *
+     * @param processingDetails
+     *        additonal processing details
+     * @param exponent
+     *        an exponent (must be an integer)
+     *
+     * @return the result
+     */
+    Number exponentiate(ProcessingDetails processingDetails, Number exponent);
+
+    /**
+     * Exponentiates this number by the specified exponent.
+     *
+     * @param exponent
+     *        an exponent
+     *
+     * @return the result
+     */
+    Number exponentiate(Fraction exponent);
+
+    /**
+     * Exponentiates this number by the specified exponent.
+     *
+     * @param processingDetails
+     *        additonal processing details
+     * @param exponent
+     *        an exponent
+     *
+     * @return the result
+     */
+    Number exponentiate(ProcessingDetails processingDetails, Fraction exponent);
 
     /**
      * Takes the specified number as base and claculates the logarithm for this number.
@@ -394,46 +401,19 @@ public interface ArithmeticNumberOperations {
     /**
      * Shorten the precision of this number according to the specified decimal places.
      *
-     * @param decimalPlaces
-     *        the number of decimal places remainign after rounding
-     *
      * @return a rounded number
      */
-    Number round(Number decimalPlaces);
+    Number round();
 
     /**
      * Shorten the precision of this number according to the specified decimal places.
      *
-     * @param decimalPlaces
-     *        the number of decimal places remaining after rounding
+     * @param processingDetails
+     *        additonal processing details
      *
      * @return a shortened number according to the specified precision
      */
-    Number round(int decimalPlaces);
-
-    /**
-     * Shorten the precision of this number according to the specified decimal places.
-     *
-     * @param algorithm
-     *        the identifier for an algorithm
-     * @param decimalPlaces
-     *        the number of decimal places remaining after rounding
-     *
-     * @return a shortened number according to the specified precision
-     */
-    Number round(OperationIdentifier algorithm, int decimalPlaces);
-
-    /**
-     * Shorten the precision of this number according to the specified decimal places.
-     *
-     * @param algorithm
-     *        the identifier for an algorithm
-     * @param decimalPlaces
-     *        the number of decimal places remaining after rounding
-     *
-     * @return a shortened number according to the specified precision
-     */
-    Number round(OperationIdentifier algorithm, Number decimalPlaces);
+    Number round(ProcessingDetails processingDetails);
 
     /*
      * Ternary arithmetic operations.

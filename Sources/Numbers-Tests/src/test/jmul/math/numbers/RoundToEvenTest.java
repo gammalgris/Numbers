@@ -38,13 +38,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import jmul.math.Math;
-import jmul.math.operations.repository.OperationIdentifiers;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createInfinity;
 import static jmul.math.numbers.NumberHelper.createNegativeInfinity;
 import static jmul.math.numbers.NumberHelper.createNumber;
+import jmul.math.operations.ProcessingDetails;
+import jmul.math.operations.repository.OperationIdentifiers;
 
 import jmul.test.classification.UnitTest;
 
@@ -69,9 +70,9 @@ public class RoundToEvenTest {
     private final Number number;
 
     /**
-     * A precision.
+     * A the number of decimal places retained after cutting the fraction part.
      */
-    private final Number decimalPrecision;
+    private final Number decimalPlaces;
 
     /**
      * The expected result.
@@ -83,17 +84,17 @@ public class RoundToEvenTest {
      *
      * @param number
      *        a number
-     * @param decimalPrecision
-     *        a decimal precision
+     * @param decimalPlaces
+     *        the number of decimal places retained after cutting the fraction part
      * @param expectedResult
      *        the expected result
      */
-    public RoundToEvenTest(Number number, Number decimalPrecision, Number expectedResult) {
+    public RoundToEvenTest(Number number, Number decimalPlaces, Number expectedResult) {
 
         super();
 
         this.number = number;
-        this.decimalPrecision = decimalPrecision;
+        this.decimalPlaces = decimalPlaces;
         this.expectedResult = expectedResult;
     }
 
@@ -105,8 +106,8 @@ public class RoundToEvenTest {
     @Override
     public String toString() {
 
-        return String.format("[%d] %s (precision [%d] %s) -> [%d] %s", number.base(), number, decimalPrecision.base(),
-                             decimalPrecision, expectedResult.base(), expectedResult);
+        return String.format("[%d] %s (precision [%d] %s) -> [%d] %s", number.base(), number, decimalPlaces.base(),
+                             decimalPlaces, expectedResult.base(), expectedResult);
     }
 
     /**
@@ -115,7 +116,9 @@ public class RoundToEvenTest {
     @Test
     public void testRounding() {
 
-        Number actualResult = number.round(OperationIdentifiers.ROUND_NUMBER_TO_EVEN_FUNCTION, decimalPrecision);
+        ProcessingDetails processingDetails =
+            new ProcessingDetails(OperationIdentifiers.ROUND_NUMBER_TO_EVEN_FUNCTION, decimalPlaces);
+        Number actualResult = number.round(processingDetails);
 
         assertEquals(toString(), expectedResult, actualResult);
         assertEquals(toString(), expectedResult.toString(), actualResult.toString());
@@ -127,31 +130,9 @@ public class RoundToEvenTest {
     @Test
     public void testRoundingVariant2() {
 
-        Number actualResult = Math.round(OperationIdentifiers.ROUND_NUMBER_TO_EVEN_FUNCTION, number, decimalPrecision);
-
-        assertEquals(toString(), expectedResult, actualResult);
-        assertEquals(toString(), expectedResult.toString(), actualResult.toString());
-    }
-
-    /**
-     * Rounds a number and checks the result.
-     */
-    @Test
-    public void testRoundingVariant3() {
-
-        Number actualResult = Math.round(number, decimalPrecision);
-
-        assertEquals(toString(), expectedResult, actualResult);
-        assertEquals(toString(), expectedResult.toString(), actualResult.toString());
-    }
-
-    /**
-     * Rounds a number and checks the result.
-     */
-    @Test
-    public void testRoundingVariant4() {
-
-        Number actualResult = Math.round(number, decimalPrecision);
+        ProcessingDetails processingDetails =
+            new ProcessingDetails(OperationIdentifiers.ROUND_NUMBER_TO_EVEN_FUNCTION, decimalPlaces);
+        Number actualResult = Math.round(processingDetails, number);
 
         assertEquals(toString(), expectedResult, actualResult);
         assertEquals(toString(), expectedResult.toString(), actualResult.toString());

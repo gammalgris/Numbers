@@ -42,6 +42,8 @@ import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
+import jmul.math.operations.ProcessingDetails;
+import jmul.math.operations.repository.OperationIdentifiers;
 
 import jmul.test.classification.UnitTest;
 
@@ -136,7 +138,9 @@ public class DivideNumbersTest {
 
         } else {
 
-            actualResult = number1.divide(number2, decimalPlaces);
+            ProcessingDetails processingDetails =
+                new ProcessingDetails(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION, decimalPlaces);
+            actualResult = number1.divide(processingDetails, number2);
         }
 
         assertEquals(toString(), expectedResult, actualResult);
@@ -156,7 +160,9 @@ public class DivideNumbersTest {
 
         } else {
 
-            actualResult = Math.divide(number1, number2, decimalPlaces);
+            ProcessingDetails processingDetails =
+                new ProcessingDetails(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION, decimalPlaces);
+            actualResult = Math.divide(processingDetails, number1, number2);
         }
 
         assertEquals(toString(), expectedResult, actualResult);

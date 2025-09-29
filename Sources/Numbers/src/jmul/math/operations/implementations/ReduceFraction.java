@@ -38,13 +38,12 @@ import java.util.SortedSet;
 
 import jmul.math.fractions.Fraction;
 import jmul.math.fractions.FractionHelper;
-import static jmul.math.numbers.creation.CreationParameters.CLONE;
-import static jmul.math.numbers.creation.CreationParameters.DONT_CLONE;
-import static jmul.math.fractions.FractionHelper.createFraction;
-import jmul.math.operations.repository.OperationIdentifiers;
 import jmul.math.numbers.Number;
+import static jmul.math.numbers.creation.CreationParameters.DONT_CLONE;
+import jmul.math.operations.ProcessingDetails;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
+import jmul.math.operations.repository.OperationIdentifiers;
 
 
 /**
@@ -53,6 +52,19 @@ import jmul.math.operations.UnaryOperation;
  * @author Kristian Kutin
  */
 public class ReduceFraction implements UnaryOperation<Fraction, Result<Fraction>> {
+
+    /**
+     * Additional Processing details.
+     */
+    private static final ProcessingDetails PROCESSING_DETAILS;
+
+    /*
+     * The static initializer.
+     */
+    static {
+
+        PROCESSING_DETAILS = new ProcessingDetails(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION);
+    }
 
     /**
      * The default constructor.
@@ -91,8 +103,8 @@ public class ReduceFraction implements UnaryOperation<Fraction, Result<Fraction>
                 Number numerator = reducedFraction.numerator();
                 Number denominator = reducedFraction.denominator();
 
-                Number newNumerator = numerator.divide(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION, primeFactor);
-                Number newDenominator = denominator.divide(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION, primeFactor);
+                Number newNumerator = numerator.divide(PROCESSING_DETAILS, primeFactor);
+                Number newDenominator = denominator.divide(PROCESSING_DETAILS, primeFactor);
 
                 reducedFraction = FractionHelper.createFraction(DONT_CLONE, newNumerator, newDenominator);
             }

@@ -37,8 +37,10 @@ package jmul.math.operations.implementations;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.numbers.creation.CreationParameters;
+import jmul.math.operations.ProcessingDetails;
 import jmul.math.operations.Result;
 import jmul.math.operations.TernaryOperation;
+import jmul.math.operations.repository.OperationIdentifiers;
 
 
 /**
@@ -93,12 +95,11 @@ public class SquareRoot implements TernaryOperation<Number, Result<Number>> {
             throw new IllegalArgumentException("The specified precision must be a positive integer!");
         }
 
-        if (number.isInfinity()) {
+        if (number.isInfinity() || number.isZero() || number.isOne()) {
 
             Number clone = createNumber(CreationParameters.CLONE, number);
             return new Result<Number>(clone);
         }
-
 
         Number i = iterations;
         Number s = number;
@@ -110,7 +111,9 @@ public class SquareRoot implements TernaryOperation<Number, Result<Number>> {
             i = i.dec();
         }
 
-        x = x.round(decimalPlaces);
+        ProcessingDetails processingDetails =
+            new ProcessingDetails(OperationIdentifiers.ROUND_NUMBER_TO_ODD_FUNCTION, decimalPlaces);
+        x = x.round(processingDetails);
 
         return new Result<Number>(x);
     }
@@ -147,10 +150,13 @@ public class SquareRoot implements TernaryOperation<Number, Result<Number>> {
         final Number ONE = createNumber(base, "1");
         final Number TWO = ONE.inc();
 
+        ProcessingDetails processingDetails =
+            new ProcessingDetails(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION, decimalPlaces);
+
         Number result = s;
-        result = result.divide(x, decimalPlaces);
+        result = result.divide(processingDetails, x);
         result = result.add(x);
-        result = result.divide(TWO, decimalPlaces);
+        result = result.divide(processingDetails, TWO);
 
         return result;
     }

@@ -40,6 +40,7 @@ import java.util.List;
 import java.util.Map;
 
 import jmul.math.numbers.Number;
+import jmul.math.operations.ProcessingDetails;
 import jmul.math.operations.repository.OperationIdentifiers;
 
 import jmul.test.classification.ManualTest;
@@ -105,13 +106,14 @@ public class DivisionSpeedTest {
         Map<TestCase, Number> failedResults = new HashMap<>();
         Map<TestCase, Number> successfulResults = new HashMap<>();
 
+        ProcessingDetails processingDetails = new ProcessingDetails(OperationIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION);
+
         for (TestCase testCase : testCases) {
 
             Number actualResult;
             try {
 
-                actualResult =
-                    testCase.operand1.divide(OperationIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION, testCase.operand2);
+                actualResult = testCase.operand1.divide(processingDetails, testCase.operand2);
 
                 if (testCase.expectedResult.equals(actualResult)) {
 
@@ -148,13 +150,14 @@ public class DivisionSpeedTest {
         Map<TestCase, Number> failedResults = new HashMap<>();
         Map<TestCase, Number> successfulResults = new HashMap<>();
 
+        ProcessingDetails processingDetails = new ProcessingDetails(OperationIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION);
+
         for (TestCase testCase : testCases) {
 
             Number actualResult;
             try {
 
-                actualResult =
-                    testCase.operand1.divide(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION, testCase.operand2);
+                actualResult = testCase.operand1.divide(processingDetails, testCase.operand2);
 
                 if (testCase.expectedResult.equals(actualResult)) {
 
