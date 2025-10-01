@@ -31,7 +31,9 @@
  * $Id$
  */
 
-package jmul.math.operations.repository;
+package jmul.math.operations.processing;
+
+import jmul.math.operations.repository.OperationIdentifier;
 
 
 /**
@@ -40,6 +42,19 @@ package jmul.math.operations.repository;
  * @author Kristian Kutin
  */
 public final class OperationIdentifierHelper {
+
+    /**
+     * An array index.
+     */
+    private static final int FIRST_ALGORITHM_INDEX;
+
+    /*
+     * The static initializer.
+     */
+    static {
+
+        FIRST_ALGORITHM_INDEX = 0;
+    }
 
     /**
      * The default constructor.
@@ -62,11 +77,6 @@ public final class OperationIdentifierHelper {
      */
     private static boolean containsAlgorithm(OperationIdentifier[] allowedAlgorithms, OperationIdentifier algorithm) {
 
-        if (allowedAlgorithms == null) {
-
-            throw new IllegalArgumentException("No array of allowed algorithms (null) was specified!");
-        }
-
         for (int index = 0; index < allowedAlgorithms.length; index++) {
 
             OperationIdentifier actualAlgorithm = allowedAlgorithms[index];
@@ -81,21 +91,41 @@ public final class OperationIdentifierHelper {
     }
 
     /**
-     * Checks the specified algorithm (i.e. checks if the specified list of allowed algorithms contains the specified
-     * algorithm). Otherwise an exception is thrown.
+     * Checks if the specified algorithm is one of the allowed algorithms. If no algorithm (i.e. <code>null</code>) is
+     * specified then the default algorithm is returned (i.e. the default algorithm is the first algorithm in the list
+     * of allowed algorithms).
      *
      * @param allowedAlgorithms
-     *        a list of allowed algorithms (i.e. an array of allowed algorithms)
+     *        a list of allowed algorithms (i.e. an array of allowed algorithms and the first algorithm is the default
+     *        algorithm)
      * @param algorithm
-     *        an algorithm
+     *        an algorithm or <code>null</code> for the default algorithm
      */
-    public static void checkAlgorithm(OperationIdentifier[] allowedAlgorithms, OperationIdentifier algorithm) {
+    public static OperationIdentifier checkAndReturnAlgorithm(OperationIdentifier[] allowedAlgorithms,
+                                                              OperationIdentifier algorithm) {
 
-        if (!containsAlgorithm(allowedAlgorithms, algorithm)) {
+        if (allowedAlgorithms == null) {
 
-            String message = String.format("An invalid algorithm (%s) was specified!", algorithm);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException("No array of allowed algorithms (null) was specified!");
         }
+
+        if (allowedAlgorithms.length == 0) {
+
+            throw new IllegalArgumentException("No array of allowed algorithms (empty array) was specified!");
+        }
+
+        if (algorithm == null) {
+
+            return allowedAlgorithms[FIRST_ALGORITHM_INDEX];
+        }
+
+        if (containsAlgorithm(allowedAlgorithms, algorithm)) {
+
+            return algorithm;
+        }
+
+        String message = String.format("An invalid algorithm (%s) was specified!", algorithm);
+        throw new IllegalArgumentException(message);
     }
 
 }

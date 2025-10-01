@@ -35,10 +35,12 @@ package jmul.math.functions;
 
 
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.Comparator;
 import java.util.Map;
+import java.util.TreeMap;
 
 import jmul.math.functions.conditions.Condition;
+import jmul.math.functions.conditions.ConditionComparator;
 import jmul.math.functions.conditions.ConditionFunctionEntry;
 import jmul.math.numbers.Number;
 
@@ -101,7 +103,8 @@ public class PartialFunctionImpl extends FunctionBaseImpl {
      */
     private static Map<Condition<Number>, Function> toUndmodifiableMap(ConditionFunctionEntry[] entries) {
 
-        Map<Condition<Number>, Function> tmpMap = new HashMap<>();
+        Comparator<Condition> comparator = new ConditionComparator();
+        Map<Condition<Number>, Function> tmpMap = new TreeMap<>(comparator);
         for (ConditionFunctionEntry entry : entries) {
 
             tmpMap.put(entry.condition, entry.function);

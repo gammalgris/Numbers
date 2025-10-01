@@ -44,7 +44,7 @@ import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createInfinity;
 import static jmul.math.numbers.NumberHelper.createNegativeInfinity;
 import static jmul.math.numbers.NumberHelper.createNumber;
-import jmul.math.operations.ProcessingDetails;
+import jmul.math.operations.processing.ProcessingDetails;
 import jmul.math.operations.repository.OperationIdentifiers;
 
 import jmul.test.classification.UnitTest;
@@ -117,7 +117,9 @@ public class RoundToOddTest {
     public void testRounding() {
 
         ProcessingDetails processingDetails =
-            new ProcessingDetails(OperationIdentifiers.ROUND_NUMBER_TO_ODD_FUNCTION, decimalPlaces);
+            ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM, decimalPlaces,
+                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+
         Number actualResult = number.round(processingDetails);
 
         assertEquals(toString(), expectedResult, actualResult);
@@ -131,7 +133,9 @@ public class RoundToOddTest {
     public void testRoundingVariant2() {
 
         ProcessingDetails processingDetails =
-            new ProcessingDetails(OperationIdentifiers.ROUND_NUMBER_TO_ODD_FUNCTION, decimalPlaces);
+            ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM, decimalPlaces,
+                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+
         Number actualResult = Math.round(processingDetails, number);
 
         assertEquals(toString(), expectedResult, actualResult);
@@ -145,7 +149,9 @@ public class RoundToOddTest {
     public void testRoundingVariant3() {
 
         ProcessingDetails processingDetails =
-            new ProcessingDetails(OperationIdentifiers.ROUND_NUMBER_TO_ODD_FUNCTION, decimalPlaces);
+            ProcessingDetails.setProcessingDetails(OperationIdentifiers.ROUND_NUMBER_TO_ODD_FUNCTION, decimalPlaces,
+                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+
         Number actualResult = Math.round(processingDetails, number);
 
         assertEquals(toString(), expectedResult, actualResult);
@@ -159,7 +165,9 @@ public class RoundToOddTest {
     public void testRoundingVariant4() {
 
         ProcessingDetails processingDetails =
-            new ProcessingDetails(OperationIdentifiers.ROUND_NUMBER_TO_ODD_FUNCTION, decimalPlaces);
+            ProcessingDetails.setProcessingDetails(OperationIdentifiers.ROUND_NUMBER_TO_ODD_FUNCTION, decimalPlaces,
+                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+
         Number actualResult = Math.round(processingDetails, number);
 
         assertEquals(toString(), expectedResult, actualResult);

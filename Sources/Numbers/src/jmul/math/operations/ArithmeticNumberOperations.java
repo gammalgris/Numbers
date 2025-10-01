@@ -36,6 +36,7 @@ package jmul.math.operations;
 
 import jmul.math.fractions.Fraction;
 import jmul.math.numbers.Number;
+import jmul.math.operations.processing.ProcessingDetails;
 
 
 /**

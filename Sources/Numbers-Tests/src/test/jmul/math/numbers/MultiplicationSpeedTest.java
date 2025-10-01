@@ -40,7 +40,7 @@ import java.util.List;
 import java.util.Map;
 
 import jmul.math.numbers.Number;
-import jmul.math.operations.ProcessingDetails;
+import jmul.math.operations.processing.ProcessingDetails;
 import jmul.math.operations.repository.OperationIdentifiers;
 
 import jmul.test.classification.ManualTest;
@@ -112,7 +112,10 @@ public class MultiplicationSpeedTest {
             try {
 
                 ProcessingDetails processingDetails =
-                    new ProcessingDetails(OperationIdentifiers.MULTIPLY_NUMBERS_BY_ADDITION_FUNCTION);
+                    ProcessingDetails.setProcessingDetails(OperationIdentifiers.MULTIPLY_NUMBERS_BY_ADDITION_FUNCTION,
+                                                           ProcessingDetails.DEFAULT_PRECISION,
+                                                           ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+
                 actualResult = testCase.operand1.multiply(processingDetails, testCase.operand2);
 
                 if (testCase.expectedResult.equals(actualResult)) {
@@ -156,7 +159,10 @@ public class MultiplicationSpeedTest {
             try {
 
                 ProcessingDetails processingDetails =
-                    new ProcessingDetails(OperationIdentifiers.LONG_MULTIPLICATION_FUNCTION);
+                    ProcessingDetails.setProcessingDetails(OperationIdentifiers.LONG_MULTIPLICATION_FUNCTION,
+                                                           ProcessingDetails.DEFAULT_PRECISION,
+                                                           ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+
                 actualResult = testCase.operand1.multiply(processingDetails, testCase.operand2);
 
                 if (testCase.expectedResult.equals(actualResult)) {

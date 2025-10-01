@@ -43,8 +43,7 @@ import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createInfinity;
 import static jmul.math.numbers.NumberHelper.createNumber;
-import jmul.math.operations.ProcessingDetails;
-import jmul.math.operations.repository.OperationIdentifiers;
+import jmul.math.operations.processing.ProcessingDetails;
 
 import jmul.test.classification.UnitTest;
 
@@ -138,7 +137,9 @@ public class NthRootTest {
         } else {
 
             ProcessingDetails processingDetails =
-                new ProcessingDetails(OperationIdentifiers.NTH_ROOT_FUNCTION, decimalPlaces, null);
+                ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM, decimalPlaces,
+                                                       ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+
             actualResult = number.root(processingDetails, n);
         }
 
@@ -160,7 +161,9 @@ public class NthRootTest {
         } else {
 
             ProcessingDetails processingDetails =
-                new ProcessingDetails(OperationIdentifiers.NTH_ROOT_FUNCTION, decimalPlaces, null);
+                ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM, decimalPlaces,
+                                                       ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+
             actualResult = Math.root(processingDetails, number, n);
         }
 
@@ -210,9 +213,9 @@ public class NthRootTest {
         parameters.add(new Object[] { createNumber(10, "2"), createNumber(10, "3"), createNumber(10, "20"),
                                       createNumber(10, "1.25992104989487316477") });
 
-        parameters.add(new Object[] { createNumber(10, "27"), createNumber(10, "3"), null, createNumber(10, "3") });
+        parameters.add(new Object[] { createNumber(10, "27"), createNumber(10, "3"), null, createNumber(10, "3.0000000813") });
         parameters.add(new Object[] { createNumber(10, "27"), createNumber(10, "3"), createNumber(10, "20"),
-                                      createNumber(10, "3") });
+                                      createNumber(10, "3.0000000008121020203131") });
 
         return parameters;
     }

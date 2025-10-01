@@ -40,7 +40,7 @@ import java.util.List;
 import java.util.Map;
 
 import jmul.math.numbers.Number;
-import jmul.math.operations.ProcessingDetails;
+import jmul.math.operations.processing.ProcessingDetails;
 import jmul.math.operations.repository.OperationIdentifiers;
 
 import jmul.test.classification.ManualTest;
@@ -106,7 +106,10 @@ public class DivisionSpeedTest {
         Map<TestCase, Number> failedResults = new HashMap<>();
         Map<TestCase, Number> successfulResults = new HashMap<>();
 
-        ProcessingDetails processingDetails = new ProcessingDetails(OperationIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION);
+        ProcessingDetails processingDetails =
+            ProcessingDetails.setProcessingDetails(OperationIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION,
+                                                   ProcessingDetails.DEFAULT_PRECISION,
+                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
 
         for (TestCase testCase : testCases) {
 
@@ -150,7 +153,10 @@ public class DivisionSpeedTest {
         Map<TestCase, Number> failedResults = new HashMap<>();
         Map<TestCase, Number> successfulResults = new HashMap<>();
 
-        ProcessingDetails processingDetails = new ProcessingDetails(OperationIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION);
+        ProcessingDetails processingDetails =
+            ProcessingDetails.setProcessingDetails(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION,
+                                                   ProcessingDetails.DEFAULT_PRECISION,
+                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
 
         for (TestCase testCase : testCases) {
 

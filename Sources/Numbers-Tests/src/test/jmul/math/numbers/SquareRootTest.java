@@ -43,8 +43,7 @@ import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createInfinity;
 import static jmul.math.numbers.NumberHelper.createNumber;
-import jmul.math.operations.ProcessingDetails;
-import jmul.math.operations.repository.OperationIdentifiers;
+import jmul.math.operations.processing.ProcessingDetails;
 
 import jmul.test.classification.UnitTest;
 
@@ -131,7 +130,9 @@ public class SquareRootTest {
         } else {
 
             ProcessingDetails processingDetails =
-                new ProcessingDetails(OperationIdentifiers.SQUARE_ROOT_FUNCTION, decimalPlaces, null);
+                ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM, decimalPlaces,
+                                                       ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+
             actualResult = number.squareRoot(processingDetails);
         }
 
@@ -153,7 +154,9 @@ public class SquareRootTest {
         } else {
 
             ProcessingDetails processingDetails =
-                new ProcessingDetails(OperationIdentifiers.SQUARE_ROOT_FUNCTION, decimalPlaces, null);
+                ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM, decimalPlaces,
+                                                       ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+
             actualResult = Math.squareRoot(processingDetails, number);
         }
 

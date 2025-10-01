@@ -31,68 +31,35 @@
  * $Id$
  */
 
-package jmul.math.functions.conditions;
-
-
-import jmul.math.numbers.Number;
+package jmul.math.operations;
 
 
 /**
- * A base implementation of a threshold condition.
+ * This interface describes a ternary operation (i.e. an operation that takes three arguments).
  *
  * @author Kristian Kutin
+ *
+ * @param <R>
+ *        the operand type
+ * @param <T>
+ *        the operand type
+ * @param <S>
+ *        the return type
  */
-abstract class ThresholdConditionBase implements Condition<Number> {
+public interface MixedTernaryOperation<R, T, S extends Result> extends Operation {
 
     /**
-     * A number base.
-     */
-    private final int base;
-
-    /**
-     * A threshold.
-     */
-    protected final Number threshold;
-
-    /**
-     * Creates a new condition according to the specified parmaeter.
+     * Performs the ternary (i.e. three operands) operation.
      *
-     * @param threshold
-     *        a threshold
-     */
-    public ThresholdConditionBase(Number threshold) {
-
-        super();
-
-        if (threshold == null) {
-
-            throw new IllegalArgumentException("No number (null) was specified!");
-        }
-
-        this.base = threshold.base();
-        this.threshold = threshold;
-    }
-
-    /**
-     * Returns the number base.
+     * @param operand1
+     *        an operand
+     * @param operand2
+     *        an operand
+     * @param operand3
+     *        an operand
      *
-     * @return a number base
+     * @return the result
      */
-    @Override
-    public int base() {
-
-        return base;
-    }
-
-    /**
-     * Returns the threshold.
-     *
-     * @return a htreshold
-     */
-    @Override
-    public Number threshold() {
-
-        return threshold;
-    }
+    S calculate(R operand1, T operand2, T operand3);
 
 }

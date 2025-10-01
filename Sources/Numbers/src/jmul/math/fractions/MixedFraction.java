@@ -40,8 +40,6 @@ import java.util.SortedSet;
 import jmul.math.Math;
 import jmul.math.digits.PositionalNumeralSystems;
 import static jmul.math.fractions.FractionHelper.createFraction;
-import jmul.math.operations.OperationSingletons;
-import jmul.math.operations.repository.OperationIdentifiers;
 import jmul.math.hash.HashHelper;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberHelper;
@@ -53,9 +51,11 @@ import jmul.math.operations.EqualityFunction;
 import jmul.math.operations.MixedBinaryOperation;
 import jmul.math.operations.MixedComparator;
 import jmul.math.operations.MixedEqualityFunction;
+import jmul.math.operations.OperationSingletons;
 import jmul.math.operations.Result;
 import jmul.math.operations.TernaryOperation;
 import jmul.math.operations.UnaryOperation;
+import jmul.math.operations.repository.OperationIdentifiers;
 import jmul.math.signs.Sign;
 import jmul.math.signs.Signs;
 
@@ -1017,16 +1017,19 @@ class MixedFraction implements Fraction {
     /**
      * Performs an exponentiation with this fraction as the base and the specified number as the exponent.
      *
-     * @param n
+     * @param exponent
      *        a number
      *
      * @return a fraction
      */
     @Override
-    public Fraction exponentiate(Number n) {
+    public Fraction exponentiate(Number exponent) {
 
-        // TODO Implement this method
-        throw new UnsupportedOperationException();
+        MixedBinaryOperation<Fraction, Number, Result<Fraction>> function =
+            (MixedBinaryOperation<Fraction, Number, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.EXPONENTIATE_FRACTION_WITH_NUMBER_FUNCTION);
+        Result<Fraction> result = function.calculate(this, exponent);
+
+        return result.result();
     }
 
     /**

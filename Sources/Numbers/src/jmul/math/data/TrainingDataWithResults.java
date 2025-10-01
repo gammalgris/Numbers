@@ -42,7 +42,7 @@ import java.util.stream.Stream;
 
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
-import jmul.math.operations.ProcessingDetails;
+import jmul.math.operations.processing.ProcessingDetails;
 import jmul.math.operations.repository.OperationIdentifiers;
 
 
@@ -63,7 +63,7 @@ public class TrainingDataWithResults implements Iterable<DataEntryWithResult> {
      */
     static {
 
-        PROCESSING_DETAILS = new ProcessingDetails(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION);
+        PROCESSING_DETAILS = ProcessingDetails.setAlgorithm(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION);
     }
 
     /**

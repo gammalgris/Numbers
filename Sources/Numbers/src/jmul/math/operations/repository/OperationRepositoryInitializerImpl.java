@@ -67,8 +67,10 @@ import jmul.math.operations.implementations.DivisoWithIntegers;
 import jmul.math.operations.implementations.DoublingFraction;
 import jmul.math.operations.implementations.DoublingNumber;
 import jmul.math.operations.implementations.DyadicProduct;
+import jmul.math.operations.implementations.EulersNumberFunction;
 import jmul.math.operations.implementations.EvaluateFraction;
 import jmul.math.operations.implementations.EvenNumberCheck;
+import jmul.math.operations.implementations.ExponentiateFractionWithNumber;
 import jmul.math.operations.implementations.ExponentiateNumberWithFraction;
 import jmul.math.operations.implementations.ExponentiateNumberWithNumber;
 import jmul.math.operations.implementations.Factorial;
@@ -424,6 +426,10 @@ public class OperationRepositoryInitializerImpl implements OperationRepositoryIn
                                     ExponentiateNumberWithNumber.class);
         repository.registerFunction(OperationIdentifiers.EXPONENTIATE_NUMBER_WITH_FRACTION_FUNCTION,
                                     ExponentiateNumberWithFraction.class);
+        repository.registerFunction(OperationIdentifiers.EXPONENTIATE_FRACTION_WITH_NUMBER_FUNCTION,
+                                    ExponentiateFractionWithNumber.class);
+
+        repository.registerFunction(OperationIdentifiers.EULERS_NUMBER_FUNCTION, EulersNumberFunction.class);
 
         return repository;
     }

@@ -42,7 +42,7 @@ import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
-import jmul.math.operations.ProcessingDetails;
+import jmul.math.operations.processing.ProcessingDetails;
 import jmul.math.operations.repository.OperationIdentifiers;
 
 import jmul.test.classification.UnitTest;
@@ -135,13 +135,18 @@ public class DivideNumbers2Test {
         if (decimalPlaces == null) {
 
             ProcessingDetails processingDetails =
-                new ProcessingDetails(OperationIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION);
+                ProcessingDetails.setProcessingDetails(OperationIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION,
+                                                       ProcessingDetails.DEFAULT_PRECISION,
+                                                       ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+
             actualResult = number1.divide(processingDetails, number2);
 
         } else {
 
             ProcessingDetails processingDetails =
-                new ProcessingDetails(OperationIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION, decimalPlaces);
+                ProcessingDetails.setProcessingDetails(OperationIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION,
+                                                       decimalPlaces, ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+
             actualResult = number1.divide(processingDetails, number2);
         }
 
@@ -159,13 +164,18 @@ public class DivideNumbers2Test {
         if (decimalPlaces == null) {
 
             ProcessingDetails processingDetails =
-                new ProcessingDetails(OperationIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION);
+                ProcessingDetails.setProcessingDetails(OperationIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION,
+                                                       ProcessingDetails.DEFAULT_PRECISION,
+                                                       ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+
             actualResult = Math.divide(processingDetails, number1, number2);
 
         } else {
 
             ProcessingDetails processingDetails =
-                new ProcessingDetails(OperationIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION, decimalPlaces);
+                ProcessingDetails.setProcessingDetails(OperationIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION,
+                                                       decimalPlaces, ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+
             actualResult = Math.divide(processingDetails, number1, number2);
         }
 

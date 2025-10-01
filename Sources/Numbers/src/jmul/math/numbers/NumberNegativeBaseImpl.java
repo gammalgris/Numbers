@@ -49,7 +49,7 @@ import jmul.math.numbers.nodes.NodesHelper;
 import jmul.math.numbers.notations.NotationParser;
 import jmul.math.numbers.notations.ParsingResult;
 import jmul.math.operations.OperationSingletons;
-import jmul.math.operations.ProcessingDetails;
+import jmul.math.operations.processing.ProcessingDetails;
 import jmul.math.operations.repository.OperationIdentifier;
 import jmul.math.operations.repository.OperationIdentifiers;
 import jmul.math.signs.Sign;

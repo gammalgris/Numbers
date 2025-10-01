@@ -41,12 +41,10 @@ import jmul.math.Math;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
-
-import static jmul.math.numbers.NumberHelper.createNumber;
 import static jmul.math.numbers.NumberHelper.createInfinity;
 import static jmul.math.numbers.NumberHelper.createNegativeInfinity;
-import jmul.math.operations.ProcessingDetails;
-import jmul.math.operations.repository.OperationIdentifiers;
+import static jmul.math.numbers.NumberHelper.createNumber;
+import jmul.math.operations.processing.ProcessingDetails;
 
 import jmul.test.classification.UnitTest;
 
@@ -133,7 +131,7 @@ public class ExponentiateNumberWithNumberTest {
      * Performs the division and checks the result.
      */
     @Test
-    public void testDivision() {
+    public void testExponentiation() {
 
         Number actualResult;
         if (decimalPlaces == null) {
@@ -143,7 +141,9 @@ public class ExponentiateNumberWithNumberTest {
         } else {
 
             ProcessingDetails processingDetails =
-                new ProcessingDetails(OperationIdentifiers.EXPONENTIATE_NUMBER_WITH_NUMBER_FUNCTION, decimalPlaces);
+                ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM, decimalPlaces,
+                                                       ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+
             actualResult = number.exponentiate(processingDetails, exponent);
         }
 
@@ -155,7 +155,7 @@ public class ExponentiateNumberWithNumberTest {
      * Performs the division and checks the result.
      */
     @Test
-    public void testDivisionVariant2() {
+    public void testExponentiationVariant2() {
 
         Number actualResult;
         if (decimalPlaces == null) {
@@ -165,7 +165,9 @@ public class ExponentiateNumberWithNumberTest {
         } else {
 
             ProcessingDetails processingDetails =
-                new ProcessingDetails(OperationIdentifiers.EXPONENTIATE_NUMBER_WITH_NUMBER_FUNCTION, decimalPlaces);
+                ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM, decimalPlaces,
+                                                       ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+
             actualResult = Math.exponentiate(processingDetails, number, exponent);
         }
 

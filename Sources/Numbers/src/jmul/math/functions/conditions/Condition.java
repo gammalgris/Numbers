@@ -34,6 +34,9 @@
 package jmul.math.functions.conditions;
 
 
+import jmul.math.numbers.Number;
+
+
 /**
  * This interface describes a condition entity.
  *
@@ -50,6 +53,13 @@ public interface Condition<T> {
      * @return a number base
      */
     int base();
+
+    /**
+     * Returns the threshold.
+     *
+     * @return a htreshold
+     */
+    Number threshold();
 
     /**
      * Checks if the specified parameter meets the required condition.

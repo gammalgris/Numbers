@@ -46,8 +46,7 @@ import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createInfinity;
 import static jmul.math.numbers.NumberHelper.createNegativeInfinity;
 import static jmul.math.numbers.NumberHelper.createNumber;
-import jmul.math.operations.ProcessingDetails;
-import jmul.math.operations.repository.OperationIdentifiers;
+import jmul.math.operations.processing.ProcessingDetails;
 
 import jmul.test.classification.UnitTest;
 
@@ -134,7 +133,7 @@ public class ExponentiateNumberWithFractionTest {
      * Calculates the square root and checks the result.
      */
     @Test
-    public void testDivision() {
+    public void testExponentiation() {
 
         Number actualResult;
         if (decimalPlaces == null) {
@@ -144,7 +143,9 @@ public class ExponentiateNumberWithFractionTest {
         } else {
 
             ProcessingDetails processingDetails =
-                new ProcessingDetails(OperationIdentifiers.EXPONENTIATE_NUMBER_WITH_NUMBER_FUNCTION, decimalPlaces);
+                ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM, decimalPlaces,
+                                                       ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+
             actualResult = number.exponentiate(processingDetails, exponent);
         }
 
@@ -156,7 +157,7 @@ public class ExponentiateNumberWithFractionTest {
      * Calculates the square root and checks the result.
      */
     @Test
-    public void testSquareRootVariant2() {
+    public void testExponentiationVariant2() {
 
         Number actualResult;
         if (decimalPlaces == null) {
@@ -166,7 +167,9 @@ public class ExponentiateNumberWithFractionTest {
         } else {
 
             ProcessingDetails processingDetails =
-                new ProcessingDetails(OperationIdentifiers.EXPONENTIATE_NUMBER_WITH_NUMBER_FUNCTION, decimalPlaces);
+                ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM, decimalPlaces,
+                                                       ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+
             actualResult = Math.exponentiate(processingDetails, number, exponent);
         }
 

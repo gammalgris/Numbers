@@ -40,9 +40,9 @@ import jmul.math.fractions.Fraction;
 import jmul.math.fractions.FractionHelper;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.creation.CreationParameters.DONT_CLONE;
-import jmul.math.operations.ProcessingDetails;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
+import jmul.math.operations.processing.ProcessingDetails;
 import jmul.math.operations.repository.OperationIdentifiers;
 
 
@@ -63,7 +63,7 @@ public class ReduceFraction implements UnaryOperation<Fraction, Result<Fraction>
      */
     static {
 
-        PROCESSING_DETAILS = new ProcessingDetails(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION);
+        PROCESSING_DETAILS = ProcessingDetails.setAlgorithm(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION);
     }
 
     /**

@@ -36,63 +36,51 @@ package jmul.math.functions.conditions;
 
 import jmul.math.numbers.Number;
 
+import java.util.Comparator;
+
 
 /**
- * A base implementation of a threshold condition.
+ * A custom comparator for conditions.
  *
  * @author Kristian Kutin
  */
-abstract class ThresholdConditionBase implements Condition<Number> {
+public class ConditionComparator implements Comparator<Condition> {
 
     /**
-     * A number base.
+     * The default constructor.
      */
-    private final int base;
-
-    /**
-     * A threshold.
-     */
-    protected final Number threshold;
-
-    /**
-     * Creates a new condition according to the specified parmaeter.
-     *
-     * @param threshold
-     *        a threshold
-     */
-    public ThresholdConditionBase(Number threshold) {
+    public ConditionComparator() {
 
         super();
+    }
 
-        if (threshold == null) {
+    /**
+     * Compares the specified condition.
+     *
+     * @param c1
+     *        a condition
+     * @param c2
+     *        a condition
+     *
+     * @return
+     */
+    @Override
+    public int compare(Condition c1, Condition c2) {
 
-            throw new IllegalArgumentException("No number (null) was specified!");
+        Number n1 = c1.threshold();
+        Number n2 = c2.threshold();
+
+        int result = n1.compareTo(n2);
+
+        if (result == 0) {
+
+            String s1 = String.valueOf(c1);
+            String s2 = String.valueOf(c2);
+
+            result = s1.compareTo(s2);
         }
 
-        this.base = threshold.base();
-        this.threshold = threshold;
-    }
-
-    /**
-     * Returns the number base.
-     *
-     * @return a number base
-     */
-    @Override
-    public int base() {
-
-        return base;
-    }
-
-    /**
-     * Returns the threshold.
-     *
-     * @return a htreshold
-     */
-    @Override
-    public Number threshold() {
-
-        return threshold;
+        return result;
     }
 
 }

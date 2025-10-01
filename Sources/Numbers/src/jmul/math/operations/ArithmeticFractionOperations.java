@@ -228,12 +228,12 @@ public interface ArithmeticFractionOperations {
     /**
      * Performs an exponentiation with this fraction as the base and the specified number as the exponent.
      *
-     * @param n
+     * @param exponent
      *        a number
      *
      * @return a fraction
      */
-    Fraction exponentiate(Number n);
+    Fraction exponentiate(Number exponent);
 
     /**
      * Takes the specified number as base and calculates the logarithm for this number.

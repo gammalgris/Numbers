@@ -52,14 +52,13 @@ import jmul.math.operations.MixedComparator;
 import jmul.math.operations.MixedEqualityFunction;
 import jmul.math.operations.MixedQuaternaryOperation;
 import jmul.math.operations.OperationSingletons;
-import jmul.math.operations.ProcessingDetails;
 import jmul.math.operations.QuaternaryOperation;
 import jmul.math.operations.Result;
 import jmul.math.operations.TernaryOperation;
 import jmul.math.operations.UnaryOperation;
 import jmul.math.operations.implementations.ParameterCheckHelper;
+import jmul.math.operations.processing.ProcessingDetails;
 import jmul.math.operations.repository.OperationIdentifier;
-import jmul.math.operations.repository.OperationIdentifierHelper;
 import jmul.math.operations.repository.OperationIdentifiers;
 import jmul.math.signs.Sign;
 import jmul.math.signs.Signs;
@@ -539,7 +538,9 @@ public class NumberImpl implements Number {
     public Number squareRoot() {
 
         ProcessingDetails processingDetails =
-            new ProcessingDetails(OperationIdentifiers.SQUARE_ROOT_FUNCTION, null, null);
+            ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM,
+                                                   ProcessingDetails.DEFAULT_PRECISION,
+                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
 
         return squareRoot(processingDetails);
     }
@@ -559,22 +560,15 @@ public class NumberImpl implements Number {
 
         final OperationIdentifier[] ALLOWED_ALGORITHMS = new OperationIdentifier[] {
             OperationIdentifiers.SQUARE_ROOT_FUNCTION };
-        OperationIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, processingDetails.algorithm);
 
-        Number iterations = processingDetails.iterations;
-        if (iterations == null) {
-
-            iterations = Math.DEFAULT_HERON_METHOD_ITERATIONS.value(base);
-        }
-
-        Number decimalPlaces = processingDetails.decimalPlaces;
-        if (decimalPlaces == null) {
-
-            decimalPlaces = Math.DEFAULT_MAXIMUM_FRACTION_LENGTH.value(base);
-        }
+        OperationIdentifier algorithm = processingDetails.checkAndReturnAlgorithm(ALLOWED_ALGORITHMS);
+        Number decimalPlaces =
+            processingDetails.checkAndReturnPrecision(Math.DEFAULT_MAXIMUM_FRACTION_LENGTH.value(base));
+        Number iterations =
+            processingDetails.checkAndReturnIterationDepth(Math.DEFAULT_HERON_METHOD_ITERATIONS.value(base));
 
         TernaryOperation<Number, Result<Number>> function =
-            (TernaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(processingDetails.algorithm);
+            (TernaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(algorithm);
         Result<Number> result = function.calculate(this, iterations, decimalPlaces);
 
         return result.result();
@@ -588,7 +582,10 @@ public class NumberImpl implements Number {
     @Override
     public Number root(Number n) {
 
-        ProcessingDetails processingDetails = new ProcessingDetails(OperationIdentifiers.NTH_ROOT_FUNCTION, null, null);
+        ProcessingDetails processingDetails =
+            ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM,
+                                                   ProcessingDetails.DEFAULT_PRECISION,
+                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
 
         return root(processingDetails, n);
     }
@@ -611,22 +608,15 @@ public class NumberImpl implements Number {
 
         final OperationIdentifier[] ALLOWED_ALGORITHMS = new OperationIdentifier[] {
             OperationIdentifiers.NTH_ROOT_FUNCTION };
-        OperationIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, processingDetails.algorithm);
 
-        Number iterations = processingDetails.iterations;
-        if (iterations == null) {
-
-            iterations = Math.DEFAULT_NTH_ROOT_ITERATIONS.value(base);
-        }
-
-        Number decimalPlaces = processingDetails.decimalPlaces;
-        if (decimalPlaces == null) {
-
-            decimalPlaces = Math.DEFAULT_MAXIMUM_FRACTION_LENGTH.value(base);
-        }
+        OperationIdentifier algorithm = processingDetails.checkAndReturnAlgorithm(ALLOWED_ALGORITHMS);
+        Number decimalPlaces =
+            processingDetails.checkAndReturnPrecision(Math.DEFAULT_MAXIMUM_FRACTION_LENGTH.value(base));
+        Number iterations =
+            processingDetails.checkAndReturnIterationDepth(Math.DEFAULT_NTH_ROOT_ITERATIONS.value(base));
 
         QuaternaryOperation<Number, Result<Number>> function =
-            (QuaternaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(processingDetails.algorithm);
+            (QuaternaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(algorithm);
         Result<Number> result = function.calculate(this, n, iterations, decimalPlaces);
 
         return result.result();
@@ -745,7 +735,10 @@ public class NumberImpl implements Number {
     @Override
     public Number multiply(Number n) {
 
-        ProcessingDetails processingDetails = new ProcessingDetails(OperationIdentifiers.LONG_MULTIPLICATION_FUNCTION);
+        ProcessingDetails processingDetails =
+            ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM,
+                                                   ProcessingDetails.DEFAULT_PRECISION,
+                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
 
         return multiply(processingDetails, n);
     }
@@ -765,14 +758,15 @@ public class NumberImpl implements Number {
         ParameterCheckHelper.checkParameter(processingDetails);
 
         final OperationIdentifier[] ALLOWED_ALGORITHMS = new OperationIdentifier[] {
+            OperationIdentifiers.LONG_MULTIPLICATION_FUNCTION,
             OperationIdentifiers.MULTIPLY_NUMBERS_BY_ADDITION_FUNCTION,
-            OperationIdentifiers.RUSSIAN_PEASANT_MULTIPLICATION_FUNCTION,
-            OperationIdentifiers.LONG_MULTIPLICATION_FUNCTION
+            OperationIdentifiers.RUSSIAN_PEASANT_MULTIPLICATION_FUNCTION
         };
-        OperationIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, processingDetails.algorithm);
+
+        OperationIdentifier algorithm = processingDetails.checkAndReturnAlgorithm(ALLOWED_ALGORITHMS);
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(processingDetails.algorithm);
+            (BinaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(algorithm);
         Result<Number> result = function.calculate(this, n);
 
         return result.result();
@@ -952,7 +946,9 @@ public class NumberImpl implements Number {
     public Number exponentiate(Number exponent) {
 
         ProcessingDetails processingDetails =
-            new ProcessingDetails(OperationIdentifiers.EXPONENTIATE_NUMBER_WITH_NUMBER_FUNCTION);
+            ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM,
+                                                   ProcessingDetails.DEFAULT_PRECISION,
+                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
 
         return exponentiate(processingDetails, exponent);
     }
@@ -974,16 +970,13 @@ public class NumberImpl implements Number {
 
         final OperationIdentifier[] ALLOWED_ALGORITHMS = new OperationIdentifier[] {
             OperationIdentifiers.EXPONENTIATE_NUMBER_WITH_NUMBER_FUNCTION };
-        OperationIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, processingDetails.algorithm);
 
-        Number decimalPlaces = processingDetails.decimalPlaces;
-        if (decimalPlaces == null) {
-
-            decimalPlaces = Math.DEFAULT_MAXIMUM_FRACTION_LENGTH.value(base);
-        }
+        OperationIdentifier algorithm = processingDetails.checkAndReturnAlgorithm(ALLOWED_ALGORITHMS);
+        Number decimalPlaces =
+            processingDetails.checkAndReturnPrecision(Math.DEFAULT_MAXIMUM_FRACTION_LENGTH.value(base));
 
         TernaryOperation<Number, Result<Number>> function =
-            (TernaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(processingDetails.algorithm);
+            (TernaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(algorithm);
         Result<Number> result = function.calculate(this, exponent, decimalPlaces);
 
         return result.result();
@@ -1001,7 +994,9 @@ public class NumberImpl implements Number {
     public Number exponentiate(Fraction exponent) {
 
         ProcessingDetails processingDetails =
-            new ProcessingDetails(OperationIdentifiers.EXPONENTIATE_NUMBER_WITH_FRACTION_FUNCTION);
+            ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM,
+                                                   ProcessingDetails.DEFAULT_PRECISION,
+                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
 
         return exponentiate(processingDetails, exponent);
     }
@@ -1023,22 +1018,15 @@ public class NumberImpl implements Number {
 
         final OperationIdentifier[] ALLOWED_ALGORITHMS = new OperationIdentifier[] {
             OperationIdentifiers.EXPONENTIATE_NUMBER_WITH_FRACTION_FUNCTION };
-        OperationIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, processingDetails.algorithm);
 
-        Number iterations = processingDetails.iterations;
-        if (iterations == null) {
-
-            iterations = Math.DEFAULT_NTH_ROOT_ITERATIONS.value(base);
-        }
-
-        Number decimalPlaces = processingDetails.decimalPlaces;
-        if (decimalPlaces == null) {
-
-            decimalPlaces = Math.DEFAULT_MAXIMUM_FRACTION_LENGTH.value(base);
-        }
+        OperationIdentifier algorithm = processingDetails.checkAndReturnAlgorithm(ALLOWED_ALGORITHMS);
+        Number decimalPlaces =
+            processingDetails.checkAndReturnPrecision(Math.DEFAULT_MAXIMUM_FRACTION_LENGTH.value(base));
+        Number iterations =
+            processingDetails.checkAndReturnIterationDepth(Math.DEFAULT_NTH_ROOT_ITERATIONS.value(base));
 
         MixedQuaternaryOperation<Number, Fraction, Result<Number>> function =
-            (MixedQuaternaryOperation<Number, Fraction, Result<Number>>) OperationSingletons.getFunction(processingDetails.algorithm);
+            (MixedQuaternaryOperation<Number, Fraction, Result<Number>>) OperationSingletons.getFunction(algorithm);
         Result<Number> result = function.calculate(this, exponent, iterations, decimalPlaces);
 
         return result.result();
@@ -1445,7 +1433,10 @@ public class NumberImpl implements Number {
     @Override
     public Number round() {
 
-        ProcessingDetails processingDetails = new ProcessingDetails(OperationIdentifiers.ROUND_NUMBER_TO_ODD_FUNCTION);
+        ProcessingDetails processingDetails =
+            ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM,
+                                                   ProcessingDetails.DEFAULT_PRECISION,
+                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
 
         return round(processingDetails);
     }
@@ -1466,16 +1457,13 @@ public class NumberImpl implements Number {
         final OperationIdentifier[] ALLOWED_ALGORITHMS = new OperationIdentifier[] {
             OperationIdentifiers.ROUND_NUMBER_TO_ODD_FUNCTION, OperationIdentifiers.ROUND_NUMBER_TO_EVEN_FUNCTION
         };
-        OperationIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, processingDetails.algorithm);
 
-        Number decimalPlaces = processingDetails.decimalPlaces;
-        if (decimalPlaces == null) {
-
-            decimalPlaces = Math.DEFAULT_MAXIMUM_FRACTION_LENGTH.value(base);
-        }
+        OperationIdentifier algorithm = processingDetails.checkAndReturnAlgorithm(ALLOWED_ALGORITHMS);
+        Number decimalPlaces =
+            processingDetails.checkAndReturnPrecision(Math.DEFAULT_MAXIMUM_FRACTION_LENGTH.value(base));
 
         BinaryOperation<Number, Result<Number>> function =
-            (BinaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(processingDetails.algorithm);
+            (BinaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(algorithm);
         Result<Number> result = function.calculate(this, decimalPlaces);
 
         return result.result();
@@ -1510,7 +1498,10 @@ public class NumberImpl implements Number {
     @Override
     public Number divide(Number n) {
 
-        ProcessingDetails processingDetails = new ProcessingDetails(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION);
+        ProcessingDetails processingDetails =
+            ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM,
+                                                   ProcessingDetails.DEFAULT_PRECISION,
+                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
 
         return divide(processingDetails, n);
     }
@@ -1533,16 +1524,13 @@ public class NumberImpl implements Number {
         final OperationIdentifier[] ALLOWED_ALGORITHMS = new OperationIdentifier[] {
             OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION, OperationIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION
         };
-        OperationIdentifierHelper.checkAlgorithm(ALLOWED_ALGORITHMS, processingDetails.algorithm);
 
-        Number decimalPlaces = processingDetails.decimalPlaces;
-        if (decimalPlaces == null) {
-
-            decimalPlaces = Math.DEFAULT_MAXIMUM_FRACTION_LENGTH.value(base);
-        }
+        OperationIdentifier algorithm = processingDetails.checkAndReturnAlgorithm(ALLOWED_ALGORITHMS);
+        Number decimalPlaces =
+            processingDetails.checkAndReturnPrecision(Math.DEFAULT_MAXIMUM_FRACTION_LENGTH.value(base));
 
         TernaryOperation<Number, Result<Number>> function =
-            (TernaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(processingDetails.algorithm);
+            (TernaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(algorithm);
         Result<Number> result = function.calculate(this, n, decimalPlaces);
 
         return result.result();

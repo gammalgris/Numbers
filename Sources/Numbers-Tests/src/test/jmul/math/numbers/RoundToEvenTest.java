@@ -44,7 +44,7 @@ import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createInfinity;
 import static jmul.math.numbers.NumberHelper.createNegativeInfinity;
 import static jmul.math.numbers.NumberHelper.createNumber;
-import jmul.math.operations.ProcessingDetails;
+import jmul.math.operations.processing.ProcessingDetails;
 import jmul.math.operations.repository.OperationIdentifiers;
 
 import jmul.test.classification.UnitTest;
@@ -117,7 +117,8 @@ public class RoundToEvenTest {
     public void testRounding() {
 
         ProcessingDetails processingDetails =
-            new ProcessingDetails(OperationIdentifiers.ROUND_NUMBER_TO_EVEN_FUNCTION, decimalPlaces);
+            ProcessingDetails.setProcessingDetails(OperationIdentifiers.ROUND_NUMBER_TO_EVEN_FUNCTION, decimalPlaces,
+                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
         Number actualResult = number.round(processingDetails);
 
         assertEquals(toString(), expectedResult, actualResult);
@@ -131,7 +132,8 @@ public class RoundToEvenTest {
     public void testRoundingVariant2() {
 
         ProcessingDetails processingDetails =
-            new ProcessingDetails(OperationIdentifiers.ROUND_NUMBER_TO_EVEN_FUNCTION, decimalPlaces);
+            ProcessingDetails.setProcessingDetails(OperationIdentifiers.ROUND_NUMBER_TO_EVEN_FUNCTION, decimalPlaces,
+                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
         Number actualResult = Math.round(processingDetails, number);
 
         assertEquals(toString(), expectedResult, actualResult);

@@ -43,7 +43,7 @@ import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createInfinity;
 import static jmul.math.numbers.NumberHelper.createNumber;
-import jmul.math.operations.ProcessingDetails;
+import jmul.math.operations.processing.ProcessingDetails;
 import jmul.math.operations.repository.OperationIdentifiers;
 
 import jmul.test.classification.UnitTest;
@@ -220,7 +220,10 @@ public class MultiplyNumbers2Test {
 
             // check the operation
             ProcessingDetails processingDetails =
-                new ProcessingDetails(OperationIdentifiers.MULTIPLY_NUMBERS_BY_ADDITION_FUNCTION);
+                ProcessingDetails.setProcessingDetails(OperationIdentifiers.MULTIPLY_NUMBERS_BY_ADDITION_FUNCTION,
+                                                       ProcessingDetails.DEFAULT_PRECISION,
+                                                       ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+
             Number actualProduct = firstOperand.multiply(processingDetails, secondOperand);
 
             assertEquals(toString(), expectedProduct, actualProduct);
@@ -253,7 +256,10 @@ public class MultiplyNumbers2Test {
 
             // check the operation
             ProcessingDetails processingDetails =
-                new ProcessingDetails(OperationIdentifiers.MULTIPLY_NUMBERS_BY_ADDITION_FUNCTION);
+                ProcessingDetails.setProcessingDetails(OperationIdentifiers.MULTIPLY_NUMBERS_BY_ADDITION_FUNCTION,
+                                                       ProcessingDetails.DEFAULT_PRECISION,
+                                                       ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+
             Number actualProduct = Math.multiply(processingDetails, firstOperand, secondOperand);
 
             assertEquals(toString(), expectedProduct, actualProduct);

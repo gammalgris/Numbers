@@ -39,9 +39,9 @@ import jmul.math.functions.FunctionHelper;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.numbers.creation.CreationParameters;
-import jmul.math.operations.ProcessingDetails;
 import jmul.math.operations.QuaternaryOperation;
 import jmul.math.operations.Result;
+import jmul.math.operations.processing.ProcessingDetails;
 import jmul.math.operations.repository.OperationIdentifiers;
 
 
@@ -131,7 +131,9 @@ public class NthRoot implements QuaternaryOperation<Number, Result<Number>> {
         }
 
         ProcessingDetails processingDetails =
-            new ProcessingDetails(OperationIdentifiers.ROUND_NUMBER_TO_ODD_FUNCTION, decimalPlaces);
+            ProcessingDetails.setProcessingDetails(OperationIdentifiers.ROUND_NUMBER_TO_ODD_FUNCTION, decimalPlaces,
+                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+
         x = x.round(processingDetails);
 
         return new Result<Number>(x);
@@ -188,7 +190,8 @@ public class NthRoot implements QuaternaryOperation<Number, Result<Number>> {
         }
 
         ProcessingDetails processingDetails =
-            new ProcessingDetails(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION, decimalPlaces);
+            ProcessingDetails.setProcessingDetails(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION, decimalPlaces,
+                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
 
         Number result = term1;
         result = result.divide(processingDetails, term2);

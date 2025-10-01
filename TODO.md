@@ -133,7 +133,12 @@
 
 59) Find the cause for failed tests with the nth root implementation and fix it.
 
-60)
+60) DivisionSpeedTest is failing. Needs fix.
+
+61) The reduce operation for fractions is inefficient and slow. Provide an alternative implementation which
+    should replace the default implementation. Accordingly evaluate the dependencies and do the same there.
+
+62)
 
 
 # Done

@@ -546,8 +546,8 @@ public class FunctionCreationTest {
                                                                                                                      "2")),
                                                                             f2));
 
-        assertEquals("formula", "{ x >= 2 : 2 * x + 1; x < 2 : 3 * x^2 + 2 * x + 1 }", f.toString());
-        assertEquals("formula", "f(x) = { x >= 2 : 2 * x + 1; x < 2 : 3 * x^2 + 2 * x + 1 }", f.toFunctionNotation());
+        assertEquals("formula", "{ x < 2 : 3 * x^2 + 2 * x + 1; x >= 2 : 2 * x + 1 }", f.toString());
+        assertEquals("formula", "f(x) = { x < 2 : 3 * x^2 + 2 * x + 1; x >= 2 : 2 * x + 1 }", f.toFunctionNotation());
 
         for (DataEntry entry : data) {
 

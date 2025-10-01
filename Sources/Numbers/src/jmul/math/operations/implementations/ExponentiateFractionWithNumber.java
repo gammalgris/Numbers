@@ -35,27 +35,26 @@ package jmul.math.operations.implementations;
 
 
 import jmul.math.fractions.Fraction;
+import static jmul.math.fractions.FractionHelper.cloneFraction;
 import static jmul.math.fractions.FractionHelper.createFraction;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
-import static jmul.math.numbers.creation.CreationParameters.CLONE;
+import static jmul.math.numbers.creation.CreationParameters.DONT_CLONE;
+import jmul.math.operations.MixedBinaryOperation;
 import jmul.math.operations.Result;
-import jmul.math.operations.TernaryOperation;
-import jmul.math.operations.processing.ProcessingDetails;
-import jmul.math.operations.repository.OperationIdentifiers;
 
 
 /**
- * Implements the exponentiation function with exponents that are integers.
+ * Implements the exponentiation func tion with exponents that are integers.
  *
  * @author Kristian Kutin
  */
-public class ExponentiateNumberWithNumber implements TernaryOperation<Number, Result<Number>> {
+public class ExponentiateFractionWithNumber implements MixedBinaryOperation<Fraction, Number, Result<Fraction>> {
 
     /**
      * The default constructor.
      */
-    public ExponentiateNumberWithNumber() {
+    public ExponentiateFractionWithNumber() {
 
         super();
     }
@@ -64,20 +63,17 @@ public class ExponentiateNumberWithNumber implements TernaryOperation<Number, Re
      * Exponentiates the specified number by the specified exponent.
      *
      * @param number
-     *        a number
+     *        a fraction
      * @param exponent
      *        an exponent (i.e. an integer)
-     * @param decimalPlaces
-     *        the precision
      *
      * @return the result
      */
     @Override
-    public Result<Number> calculate(Number number, Number exponent, Number decimalPlaces) {
+    public Result<Fraction> calculate(Fraction number, Number exponent) {
 
-        ParameterCheckHelper.checkParameters(number, exponent, decimalPlaces);
+        ParameterCheckHelper.checkParameters(number, exponent);
         ParameterCheckHelper.checkIntegerIgnoreNull(exponent);
-        ParameterCheckHelper.checkPositiveInteger(decimalPlaces);
 
         int base = number.base();
         final Number ZERO = createNumber(base, "0");
@@ -85,85 +81,73 @@ public class ExponentiateNumberWithNumber implements TernaryOperation<Number, Re
 
         if (exponent.isZero()) {
 
-            Number clone = createNumber(CLONE, ONE);
-            return new Result<Number>(clone);
+            Fraction clone = createFraction(DONT_CLONE, ONE);
+            return new Result<Fraction>(clone);
         }
 
-        if (number.isInfinity()) {
+        if (isInfinity(number)) {
 
             if (exponent.isNegative()) {
 
-                Number clone = createNumber(CLONE, ZERO);
-                return new Result<Number>(clone);
+                Fraction clone = createFraction(DONT_CLONE, ZERO);
+                return new Result<Fraction>(clone);
             }
 
-            Number clone = createNumber(CLONE, number);
-            return new Result<Number>(clone);
+            Fraction clone = cloneFraction(number);
+            return new Result<Fraction>(clone);
         }
 
-        Number result;
+        Fraction result;
         if (exponent.isNegative()) {
 
             Number absoluteExponent = exponent.absoluteValue();
             Fraction reciprocal = number.reciprocal();
-            result = exponentiate(reciprocal, absoluteExponent, decimalPlaces);
+            result = exponentiate(reciprocal, absoluteExponent);
 
         } else {
 
-            result = exponentiate(number, exponent, decimalPlaces);
+            result = exponentiate(number, exponent);
         }
 
-        return new Result<Number>(result);
+        return new Result<Fraction>(result);
     }
 
     /**
-     * Exponentiates the specified number by the specified exponent.
+     * Checks if the specified fraction represents infinity.
      *
-     * @param number
-     *        a number
-     * @param exponent
-     *        an exponent (i.e. a positive integer greater than or equal to one)
-     * @param decimalPlaces
-     *        the precision
+     * @param fraction
+     *        a fraction
      *
-     * @return the result
+     * @return <code>true</code> if the specified fraction represents infinity, else <code>false</code>
      */
-    private Number exponentiate(Number number, Number exponent, Number decimalPlaces) {
+    private static boolean isInfinity(Fraction fraction) {
 
-        int base = number.base();
-        final Number ONE = createNumber(base, "1");
+        if (fraction.hasIntegerPart() && fraction.integerPart().isInfinity()) {
 
-        Number counter = exponent;
-        Number result = ONE;
-
-        while (!counter.isZero()) {
-
-            result = result.multiply(number);
-            counter = counter.dec();
+            return true;
         }
 
-        ProcessingDetails processingDetails =
-            ProcessingDetails.setProcessingDetails(OperationIdentifiers.ROUND_NUMBER_TO_ODD_FUNCTION, decimalPlaces,
-                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+        if (fraction.hasNumerator() && fraction.numerator().isInfinity()) {
 
-        return result.round(processingDetails);
+            return true;
+        }
+
+        return false;
     }
 
     /**
      * Exponentiates the specified number (i.e. reciprocal of a number) by the specified exponent.
      *
-     * @param reciprocal
-     *        the reciprocal of a number
+     * @param fraction
+     *        a fraction
      * @param exponent
      *        an exponent (i.e. a positive integer greater than or equal to one)
-     * @param decimalPlaces
-     *        the precision
      *
      * @return the result
      */
-    private Number exponentiate(Fraction reciprocal, Number exponent, Number decimalPlaces) {
+    private Fraction exponentiate(Fraction fraction, Number exponent) {
 
-        int base = reciprocal.base();
+        int base = fraction.base();
         final Fraction ONE = createFraction(base, "1");
 
         Number counter = exponent;
@@ -171,11 +155,13 @@ public class ExponentiateNumberWithNumber implements TernaryOperation<Number, Re
 
         while (!counter.isZero()) {
 
-            result = result.multiply(reciprocal);
+            result = result.multiply(fraction);
             counter = counter.dec();
         }
 
-        return result.evaluate(decimalPlaces);
+        //result = result.reduce();
+
+        return result;
     }
 
 }
