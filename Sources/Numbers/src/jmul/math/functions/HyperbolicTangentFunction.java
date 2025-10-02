@@ -42,14 +42,9 @@ import static jmul.math.numbers.NumberHelper.createNumber;
 /**
  * This class implements a hyperbolic tangent function.<br>
  * <br>
- * f(x) = 1 / ( 1 + e<sup>x</sup> )<br>
- * <br>
- * f'(x) = ?
- * <br>
- * f''(x) = ?
+ * f(x) = ( 1 - e<sup>-x</sup> ) / ( 1 + e<sup>-x</sup> )<br>
  *
- * TODO Calculate more derivatives and identify a pattern.
- * TODO Need to find a suitable representation of the function to generate derivatives.
+ * @author Kristian Kutin
  */
 public class HyperbolicTangentFunction extends FunctionBaseImpl {
 
@@ -58,7 +53,7 @@ public class HyperbolicTangentFunction extends FunctionBaseImpl {
      *
      * @param base
      */
-    public HyperbolicTangentFunction(int base) {
+    protected HyperbolicTangentFunction(int base) {
 
         super(base);
     }
@@ -101,8 +96,81 @@ public class HyperbolicTangentFunction extends FunctionBaseImpl {
     @Override
     public Function derivativeFunction() {
 
-        // TODO Implement this method
+        return new HyperbolicTangentFunctionFirstDerivative(base());
+    }
+
+    /**
+     * Returns a string representation for this function.
+     *
+     * @return a string representation
+     */
+    @Override
+    public String toString() {
+
+        return "( 1 - e^-x ) / ( 1 + e^-x )";
+    }
+
+}
+
+
+/**
+ * An implementation of the first derivative of a hyperbolic tangent function.<br>
+ * <br>
+ * f'(x) = 2 * e<sup>x</sup> / ( e<sup>x</sup> + 1 )<sup>2</sup><br>
+ *
+ * @author Kristian Kutin
+ */
+class HyperbolicTangentFunctionFirstDerivative extends FunctionBaseImpl {
+
+    /**
+     * Creates a new function for the specified number base.
+     *
+     * @param base
+     *        a number base
+     */
+    protected HyperbolicTangentFunctionFirstDerivative(int base) {
+
+        super(base);
+    }
+
+    /**
+     * Calculate the function value for x.
+     *
+     * @param x
+     *        the input value
+     *
+     * @return f(x)
+     */
+    @Override
+    public Number calculate(Number x) {
+
+        final Number ONE = createNumber(base(), "1");
+        final Number TWO = ONE.inc();
+        final Number e = Math.e(base());
+
+        return (TWO.multiply(e.exponentiate(x))).divide(((e.exponentiate(x)).add(ONE)).exponentiate(TWO));
+    }
+
+    /**
+     * Returns the derivative function for this function.
+     *
+     * @return a derivative function
+     */
+    @Override
+    public Function derivativeFunction() {
+
         throw new UnsupportedOperationException();
+    }
+
+    /**
+     * Returns a string representation for this function.
+     *
+     * @return a string representation
+     */
+    @Override
+    public String toString() {
+
+        return "1 / ( 1 + e^x )";
     }
 
 }

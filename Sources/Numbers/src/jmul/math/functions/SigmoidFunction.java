@@ -43,13 +43,8 @@ import static jmul.math.numbers.NumberHelper.createNumber;
  * This class implements a sigmoid function.<br>
  * <br>
  * f(x) = 1 / ( 1 + e<sup>x</sup> )<br>
- * <br>
- * f'(x) = e<sup>x</sup> / ( e<sup>x</sup> + 1 )<sup>2</sup><br>
- * <br>
- * f''(x) = ?
  *
- * TODO Calculate more derivatives and identify a pattern.
- * TODO Need to find a suitable representation of the function to generate derivatives.
+ * @author Kristian Kutin
  */
 public class SigmoidFunction extends FunctionBaseImpl {
 
@@ -59,34 +54,21 @@ public class SigmoidFunction extends FunctionBaseImpl {
      * @param base
      *        a number base
      */
-    public SigmoidFunction(int base) {
+    protected SigmoidFunction(int base) {
 
         super(base);
     }
 
     /**
-     * Evaluate the function with the specified input value.
-     *
-     * @param number
-     *        the input value
-     *
-     * @return the output value
-     */
-    @Override
-    public Number calculate(Number number) {
-
-        return f(number);
-    }
-
-    /**
-     * The actual sigmoid function.
+     * Calculate the function value for x.
      *
      * @param x
-     *        an input value
+     *        the input value
      *
      * @return f(x)
      */
-    private Number f(Number x) {
+    @Override
+    public Number calculate(Number x) {
 
         final Number ONE = createNumber(base(), "1");
         final Number e = Math.e(base());
@@ -102,8 +84,81 @@ public class SigmoidFunction extends FunctionBaseImpl {
     @Override
     public Function derivativeFunction() {
 
-        // TODO Implement this method
+        return new SigmoidFunctionFirstDerivative(base());
+    }
+
+    /**
+     * Returns a string representation for this function.
+     *
+     * @return a string representation
+     */
+    @Override
+    public String toString() {
+
+        return "1 / ( 1 + e^x )";
+    }
+
+}
+
+
+/**
+ * An implementation of the first derivative of a sigmoid function.<br>
+ * <br>
+ * f'(x) = e<sup>x</sup> / ( e<sup>x</sup> + 1 )<sup>2</sup><br>
+ *
+ * @author Kristian Kutin
+ */
+class SigmoidFunctionFirstDerivative extends FunctionBaseImpl {
+
+    /**
+     * Creates a new function for the specified number base.
+     *
+     * @param base
+     *        a number base
+     */
+    public SigmoidFunctionFirstDerivative(int base) {
+
+        super(base);
+    }
+
+    /**
+     * Calculate the function value for x.
+     *
+     * @param x
+     *        the input value
+     *
+     * @return f(x)
+     */
+    @Override
+    public Number calculate(Number x) {
+
+        final Number ONE = createNumber(base(), "1");
+        final Number TWO = ONE.inc();
+        final Number e = Math.e(base());
+
+        return (e.exponentiate(x)).divide(((e.exponentiate(x)).add(ONE)).exponentiate(TWO));
+    }
+
+    /**
+     * Returns the derivative function for this function.
+     *
+     * @return a derivative function
+     */
+    @Override
+    public Function derivativeFunction() {
+
         throw new UnsupportedOperationException();
+    }
+
+    /**
+     * Returns a string representation for this function.
+     *
+     * @return a string representation
+     */
+    @Override
+    public String toString() {
+
+        return "e^x / ( e^x + 1 )^2";
     }
 
 }
