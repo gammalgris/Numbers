@@ -65,6 +65,16 @@ class GenericPositionalNumeralSystem implements PositionalNumeralSystem {
     private final Map<Integer, Digit> ordinalMap;
 
     /**
+     * A regex snippet with all allowed digits.
+     */
+    private final String allowedDigitsRegex;
+
+    /**
+     * A regex snippet with a subset of allowed digits.
+     */
+    private final String allowedDigitsWithoutZeroRegex;
+
+    /**
      * Creates a positional numeral system according to the specified parameters.
      *
      * @param symbols
@@ -100,6 +110,34 @@ class GenericPositionalNumeralSystem implements PositionalNumeralSystem {
 
         this.charMap = Collections.unmodifiableMap(charMap);
         this.ordinalMap = Collections.unmodifiableMap(ordinalMap);
+        this.allowedDigitsRegex = arrayToRegex(symbols);
+        this.allowedDigitsWithoutZeroRegex = removeZero(allowedDigitsRegex);
+    }
+
+    /**
+     * Creates a regex snippet according to the specified parameters.
+     *
+     * @param symbols
+     *        an array containing all allowed digits
+     *
+     * @return a regex snippet
+     */
+    private static String arrayToRegex(char... symbols) {
+
+        return String.format("[%s]", new String(symbols));
+    }
+
+    /**
+     * Removes the zero from the specified regex snippet.
+     *
+     * @param regexSnippet
+     *        a regex snippet containing valid digits
+     *
+     * @return a modified regex snippet
+     */
+    private static String removeZero(String regexSnippet) {
+
+        return regexSnippet.replace("0", "");
     }
 
     /**
@@ -181,6 +219,28 @@ class GenericPositionalNumeralSystem implements PositionalNumeralSystem {
         Digit digit = ordinalToDigit(ordinal);
 
         return digit.symbol();
+    }
+
+    /**
+     * Returns a regex snippet containing all allowed digits.
+     *
+     * @return a regex snippet
+     */
+    @Override
+    public String allowedDigitsRegex() {
+
+        return allowedDigitsRegex;
+    }
+
+    /**
+     * Returns a regex snippet containing all allowed digits without zero.
+     *
+     * @return a regex snippet
+     */
+    @Override
+    public String allowedDigitsWithoutZeroRegex() {
+
+        return allowedDigitsWithoutZeroRegex;
     }
 
 }

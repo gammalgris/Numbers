@@ -150,6 +150,9 @@ public class ReciprocalOfNumberTest {
 
             parameters.add(new Object[] { createNumber(base, "11"), createFraction(base, "1", "11") });
             parameters.add(new Object[] { createNumber(base, "-11"), createFraction(base, "-1", "11") });
+
+            parameters.add(new Object[] { createNumber(base, "11.101"), createFraction(base, "1000", "11101") });
+            parameters.add(new Object[] { createNumber(base, "-11.101"), createFraction(base, "-1000", "11101") });
         }
 
         return parameters;

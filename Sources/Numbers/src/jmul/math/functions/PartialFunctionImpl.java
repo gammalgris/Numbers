@@ -43,6 +43,7 @@ import jmul.math.functions.conditions.Condition;
 import jmul.math.functions.conditions.ConditionComparator;
 import jmul.math.functions.conditions.ConditionFunctionEntry;
 import jmul.math.numbers.Number;
+import jmul.math.operations.processing.ProcessingDetails;
 
 
 /**
@@ -114,24 +115,51 @@ public class PartialFunctionImpl extends FunctionBaseImpl {
     }
 
     /**
-     * Calculates the output value.
+     * Calculate the function value for x.
      *
-     * @param number
-     *        a value
+     * @param x
+     *        the input value
      *
-     * @return an output value
+     * @return f(x)
      */
     @Override
-    public Number calculate(Number number) {
+    public Number calculate(Number x) {
 
         for (Map.Entry<Condition<Number>, Function> entry : functionMap.entrySet()) {
 
             Condition<Number> condition = entry.getKey();
             Function function = entry.getValue();
 
-            if (condition.meetsCondition(number)) {
+            if (condition.meetsCondition(x)) {
 
-                return function.calculate(number);
+                return function.calculate(x);
+            }
+        }
+
+        throw new MissingConditionCaseException();
+    }
+
+    /**
+     * Calculate the function value for x.
+     *
+     * @param processingDetails
+     *        additonal processing details
+     * @param x
+     *        the input value
+     *
+     * @return f(x)
+     */
+    @Override
+    public Number calculate(ProcessingDetails processingDetails, Number x) {
+
+        for (Map.Entry<Condition<Number>, Function> entry : functionMap.entrySet()) {
+
+            Condition<Number> condition = entry.getKey();
+            Function function = entry.getValue();
+
+            if (condition.meetsCondition(x)) {
+
+                return function.calculate(processingDetails, x);
             }
         }
 

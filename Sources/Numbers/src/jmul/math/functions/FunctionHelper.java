@@ -294,6 +294,57 @@ public final class FunctionHelper {
         return new RootFunctionImpl(coefficient, exponent);
     }
 
+    public static Function createRandomRootFunction(int base) {
+        
+        return null;
+    }
+
+    /**
+     * Creates a new sigmoid function according to the specified parameters.
+     *
+     * @param base
+     *        a number base
+     *
+     * @return a function
+     */
+    public static Function createSigmoidFunction(int base) {
+
+        return new SigmoidFunctionImpl(base);
+    }
+
+    /**
+     * Creates a new hyperbolic tangent function according to the specified parameters.
+     *
+     * @param base
+     *        a number base
+     *
+     * @return a function
+     */
+    public static Function createHyperbolicTangentFunction(int base) {
+
+        return new HyperbolicTangentFunctionImpl(base);
+    }
+
+    /**
+     * Creates a new exponential function according to the specified parameters.
+     *
+     * @param coefficient1
+     *        a coefficient
+     * @param coefficient0
+     *        a coefficient
+     *
+     * @return a function
+     */
+    public static Function createExponentialFunction(Number coefficient1, Number coefficient0) {
+
+        return new ExponentialFunctionImpl(coefficient1, coefficient0);
+    }
+
+    public static Function createRandomExponentialFunction(int base) {
+        
+        return null;
+    }
+
     /**
      * Creates a random function.
      *
@@ -314,6 +365,15 @@ public final class FunctionHelper {
             return createRandomPolynomialFunction(base);
         case 2:
             return createRandomPartialFunction(base);
+        case 3:
+            return createRandomRootFunction(base);
+        case 4:
+            return createSigmoidFunction(base);
+        case 5:
+            return createHyperbolicTangentFunction(base);
+        case 6:
+            return createRandomExponentialFunction(base);
+
         }
 
         throw new UnsupportedOperationException("There is no corresponding rule for a case!");

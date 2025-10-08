@@ -138,7 +138,9 @@
 61) The reduce operation for fractions is inefficient and slow. Provide an alternative implementation which
     should replace the default implementation. Accordingly evaluate the dependencies and do the same there.
 
-62)
+62) Number bases 16 and upwards -> disambiguity of E (scientific notation vs standard notation).
+
+63)
 
 
 # Done

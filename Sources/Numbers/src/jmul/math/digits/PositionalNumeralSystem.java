@@ -79,4 +79,18 @@ public interface PositionalNumeralSystem {
      */
     char ordinalToSymbol(int ordinal);
 
+    /**
+     * Returns a regex snippet containing all allowed digits.
+     *
+     * @return a regex snippet
+     */
+    String allowedDigitsRegex();
+
+    /**
+     * Returns a regex snippet containing all allowed digits without zero.
+     *
+     * @return a regex snippet
+     */
+    String allowedDigitsWithoutZeroRegex();
+
 }

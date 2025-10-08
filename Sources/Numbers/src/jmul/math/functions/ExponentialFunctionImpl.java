@@ -40,36 +40,49 @@ import jmul.math.operations.processing.ProcessingDetails;
 
 
 /**
- * An implementation of a monomial function f(x) = c * x<sup>n</sup>.
+ * An implementation of an exponential  nth root function f(x) = c<sub>1</sub><sup>x</sup> + c<sub>0</sub>.<br>
+ * <br>
+ * TODO need logarithms for the derivative function
  *
  * @author Kristian Kutin
  */
-public class MonomialFunctionImpl extends FunctionBaseImpl {
+public class ExponentialFunctionImpl extends FunctionBaseImpl {
 
     /**
      * A coefficient.
      */
-    private final Number coefficient;
+    private final Number coefficient1;
 
     /**
-     * An exponent.
+     * A coefficient.
      */
-    private final Number exponent;
+    private final Number coefficient0;
+
 
     /**
      * Creates a new instance according to the specified parameters.
      *
-     * @param coefficient
+     * @param coefficient1
      *        a coefficient
-     * @param exponent
-     *        an exponent
+     * @param coefficient0
+     *        a coefficient
      */
-    MonomialFunctionImpl(Number coefficient, Number exponent) {
+    protected ExponentialFunctionImpl(Number coefficient1, Number coefficient0) {
 
-        super(extractBase(coefficient, exponent));
+        super(extractBase(coefficient1, coefficient0));
 
-        this.coefficient = coefficient;
-        this.exponent = exponent;
+        if (coefficient1.isZero()) {
+
+            throw new IllegalArgumentException("The first coefficient cannot be zero!");
+        }
+
+        if (coefficient1.isOne()) {
+
+            throw new IllegalArgumentException("The first coefficient cannot be one!");
+        }
+
+        this.coefficient1 = coefficient1;
+        this.coefficient0 = coefficient0;
     }
 
     /**
@@ -101,22 +114,7 @@ public class MonomialFunctionImpl extends FunctionBaseImpl {
     @Override
     public Number calculate(Number x) {
 
-        Number result = coefficient;
-
-        if (exponent.isZero()) {
-
-            return result;
-        }
-
-        Number counter = exponent;
-
-        while (!counter.isZero()) {
-
-            result = result.multiply(x);
-            counter = counter.dec();
-        }
-
-        return result;
+        return (coefficient1.exponentiate(x)).add(coefficient0);
     }
 
     /**
@@ -132,22 +130,7 @@ public class MonomialFunctionImpl extends FunctionBaseImpl {
     @Override
     public Number calculate(ProcessingDetails processingDetails, Number x) {
 
-        Number result = coefficient;
-
-        if (exponent.isZero()) {
-
-            return result;
-        }
-
-        Number counter = exponent;
-
-        while (!counter.isZero()) {
-
-            result = result.multiply(x);
-            counter = counter.dec();
-        }
-
-        return result;
+        return ((coefficient1.exponentiate(processingDetails, x)).add(coefficient0)).round(processingDetails);
     }
 
     /**
@@ -158,15 +141,7 @@ public class MonomialFunctionImpl extends FunctionBaseImpl {
     @Override
     public Function derivativeFunction() {
 
-        Number newCoefficient = coefficient.multiply(exponent);
-        Number newExponent = exponent.dec();
-
-        if (exponent.isZero()) {
-
-            return new MonomialFunctionImpl(newCoefficient, exponent);
-        }
-
-        return new MonomialFunctionImpl(newCoefficient, newExponent);
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -177,17 +152,7 @@ public class MonomialFunctionImpl extends FunctionBaseImpl {
     @Override
     public String toString() {
 
-        if (coefficient.isZero() || exponent.isZero()) {
-
-            return coefficient.toString();
-        }
-
-        if (exponent.isOne()) {
-
-            return String.format("%s * x", coefficient);
-        }
-
-        return String.format("%s * x^%s", coefficient, exponent);
+        return String.format("%s^x + %s", coefficient1, coefficient0);
     }
 
 }

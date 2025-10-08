@@ -272,7 +272,7 @@ public class CreateNumberTest {
 
         Collection<Object[]> parameters = new ArrayList<Object[]>();
 
-        for (int base = Constants.BASE_MIN_LIMIT; base <= Constants.BASE_MAX_LIMIT; base++) {
+        for (int base = Constants.BASE_MIN_LIMIT; base <= 14; base++) {
 
             parameters.add(new Object[] { base, "0", "0", "0" });
             parameters.add(new Object[] { base, "-0", "0", "0" });
@@ -286,6 +286,22 @@ public class CreateNumberTest {
             parameters.add(new Object[] { base, "1.1", "1.1", "1.1E0" });
             parameters.add(new Object[] { base, "+1.1", "1.1", "1.1E0" });
             parameters.add(new Object[] { base, "-1.1", "-1.1", "-1.1E0" });
+        }
+
+        for (int base = 15; base <= Constants.BASE_MAX_LIMIT; base++) {
+
+            parameters.add(new Object[] { base, "0", "0", "0" });
+            parameters.add(new Object[] { base, "-0", "0", "0" });
+
+            parameters.add(new Object[] { base, "0.0", "0", "0" });
+            parameters.add(new Object[] { base, "-0.0", "0", "0" });
+
+            parameters.add(new Object[] { base, "1", "1", "1E+0" });
+            parameters.add(new Object[] { base, "-1", "-1", "-1E+0" });
+
+            parameters.add(new Object[] { base, "1.1", "1.1", "1.1E+0" });
+            parameters.add(new Object[] { base, "+1.1", "1.1", "1.1E+0" });
+            parameters.add(new Object[] { base, "-1.1", "-1.1", "-1.1E+0" });
         }
 
         parameters.add(new Object[] { 10, "1.1E0", "1.1", "1.1E0" });
@@ -354,40 +370,40 @@ public class CreateNumberTest {
                                       "1.7976931348623157E308" });
 
 
-        parameters.add(new Object[] { 16, "1", "1", "1E0" });
-        parameters.add(new Object[] { 16, "-1", "-1", "-1E0" });
+        parameters.add(new Object[] { 16, "1", "1", "1E+0" });
+        parameters.add(new Object[] { 16, "-1", "-1", "-1E+0" });
 
-        parameters.add(new Object[] { 16, "1.1", "1.1", "1.1E0" });
-        parameters.add(new Object[] { 16, "+1.1", "1.1", "1.1E0" });
-        parameters.add(new Object[] { 16, "-1.1", "-1.1", "-1.1E0" });
+        parameters.add(new Object[] { 16, "1.1", "1.1", "1.1E+0" });
+        parameters.add(new Object[] { 16, "+1.1", "1.1", "1.1E+0" });
+        parameters.add(new Object[] { 16, "-1.1", "-1.1", "-1.1E+0" });
 
-        parameters.add(new Object[] { 16, "1.1E0", "1.1", "1.1E0" });
-        parameters.add(new Object[] { 16, "-1.1E0", "-1.1", "-1.1E0" });
+        parameters.add(new Object[] { 16, "1.1E+0", "1.1", "1.1E+0" });
+        parameters.add(new Object[] { 16, "-1.1E+0", "-1.1", "-1.1E+0" });
 
-        parameters.add(new Object[] { 16, "1.1E1", "11", "1.1E1" });
-        parameters.add(new Object[] { 16, "-1.1E1", "-11", "-1.1E1" });
+        parameters.add(new Object[] { 16, "1.1E+1", "11", "1.1E+1" });
+        parameters.add(new Object[] { 16, "-1.1E+1", "-11", "-1.1E+1" });
         parameters.add(new Object[] { 16, "1.1E-1", "0.11", "1.1E-1" });
         parameters.add(new Object[] { 16, "-1.1E-1", "-0.11", "-1.1E-1" });
 
-        parameters.add(new Object[] { 16, "1.1E2", "110", "1.1E2" });
-        parameters.add(new Object[] { 16, "-1.1E2", "-110", "-1.1E2" });
+        parameters.add(new Object[] { 16, "1.1E+2", "110", "1.1E+2" });
+        parameters.add(new Object[] { 16, "-1.1E+2", "-110", "-1.1E+2" });
         parameters.add(new Object[] { 16, "1.1E-2", "0.011", "1.1E-2" });
         parameters.add(new Object[] { 16, "-1.1E-2", "-0.011", "-1.1E-2" });
 
-        parameters.add(new Object[] { 16, "1.1E3", "1100", "1.1E3" });
-        parameters.add(new Object[] { 16, "-1.1E3", "-1100", "-1.1E3" });
+        parameters.add(new Object[] { 16, "1.1E+3", "1100", "1.1E+3" });
+        parameters.add(new Object[] { 16, "-1.1E+3", "-1100", "-1.1E+3" });
         parameters.add(new Object[] { 16, "1.1E-3", "0.0011", "1.1E-3" });
         parameters.add(new Object[] { 16, "-1.1E-3", "-0.0011", "-1.1E-3" });
 
-        parameters.add(new Object[] { 16, "1.010", "1.01", "1.01E0" });
+        parameters.add(new Object[] { 16, "1.010", "1.01", "1.01E+0" });
 
-        parameters.add(new Object[] { 16, "21.12", "21.12", "2.112E1" });
-        parameters.add(new Object[] { 16, "+21.12", "21.12", "2.112E1" });
-        parameters.add(new Object[] { 16, "-21.12", "-21.12", "-2.112E1" });
+        parameters.add(new Object[] { 16, "21.12", "21.12", "2.112E+1" });
+        parameters.add(new Object[] { 16, "+21.12", "21.12", "2.112E+1" });
+        parameters.add(new Object[] { 16, "-21.12", "-21.12", "-2.112E+1" });
 
-        parameters.add(new Object[] { 16, "321.123", "321.123", "3.21123E2" });
-        parameters.add(new Object[] { 16, "+321.123", "321.123", "3.21123E2" });
-        parameters.add(new Object[] { 16, "-321.123", "-321.123", "-3.21123E2" });
+        parameters.add(new Object[] { 16, "321.123", "321.123", "3.21123E+2" });
+        parameters.add(new Object[] { 16, "+321.123", "321.123", "3.21123E+2" });
+        parameters.add(new Object[] { 16, "-321.123", "-321.123", "-3.21123E+2" });
 
 
         parameters.add(new Object[] { 8, "1", "1", "1E0" });
@@ -441,15 +457,15 @@ public class CreateNumberTest {
         parameters.add(new Object[] { 2, "1.1E-1", "0.11", "1.1E-1" });
         parameters.add(new Object[] { 2, "-1.1E-1", "-0.11", "-1.1E-1" });
 
-        parameters.add(new Object[] { 2, "1.1E2", "110", "1.1E2" });
-        parameters.add(new Object[] { 2, "-1.1E2", "-110", "-1.1E2" });
-        parameters.add(new Object[] { 2, "1.1E-2", "0.011", "1.1E-2" });
-        parameters.add(new Object[] { 2, "-1.1E-2", "-0.011", "-1.1E-2" });
+        parameters.add(new Object[] { 2, "1.1E10", "11000000000", "1.1E10" });
+        parameters.add(new Object[] { 2, "-1.1E10", "-11000000000", "-1.1E10" });
+        parameters.add(new Object[] { 2, "1.1E-10", "0.00000000011", "1.1E-10" });
+        parameters.add(new Object[] { 2, "-1.1E-10", "-0.00000000011", "-1.1E-10" });
 
-        parameters.add(new Object[] { 2, "1.1E3", "1100", "1.1E3" });
-        parameters.add(new Object[] { 2, "-1.1E3", "-1100", "-1.1E3" });
-        parameters.add(new Object[] { 2, "1.1E-3", "0.0011", "1.1E-3" });
-        parameters.add(new Object[] { 2, "-1.1E-3", "-0.0011", "-1.1E-3" });
+        parameters.add(new Object[] { 2, "1.1E11", "110000000000", "1.1E11" });
+        parameters.add(new Object[] { 2, "-1.1E11", "-110000000000", "-1.1E11" });
+        parameters.add(new Object[] { 2, "1.1E-11", "0.000000000011", "1.1E-11" });
+        parameters.add(new Object[] { 2, "-1.1E-11", "-0.000000000011", "-1.1E-11" });
 
         parameters.add(new Object[] { 2, "1.010", "1.01", "1.01E0" });
 
@@ -460,6 +476,10 @@ public class CreateNumberTest {
         parameters.add(new Object[] { 2, "111.111", "111.111", "1.11111E2" });
         parameters.add(new Object[] { 2, "+111.111", "111.111", "1.11111E2" });
         parameters.add(new Object[] { 2, "-111.111", "-111.111", "-1.11111E2" });
+
+        parameters.add(new Object[] { 16, "5.A827999FD2", "5.A827999FD2", "5.A827999FD2E+0" });
+        parameters.add(new Object[] { 16, "A.646E17212", "A.646E17212", "A.646E17212E+0" });
+        parameters.add(new Object[] { 16, "2.D413CCCFE8", "2.D413CCCFE8", "2.D413CCCFE8E+0" });
 
         return parameters;
     }

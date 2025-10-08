@@ -37,6 +37,7 @@ package jmul.math.functions;
 import jmul.math.numbers.Number;
 import jmul.math.fractions.Fraction;
 import jmul.math.operations.implementations.ParameterCheckHelper;
+import jmul.math.operations.processing.ProcessingDetails;
 
 
 /**
@@ -56,6 +57,14 @@ public class RootFunctionImpl extends FunctionBaseImpl {
      */
     private final Fraction exponent;
 
+    /**
+     * Creates a new root function according to the specified parameters.
+     *
+     * @param coefficient
+     *        a coefficient
+     * @param exponent
+     *        an exponent
+     */
     RootFunctionImpl(Number coefficient, Fraction exponent) {
 
         super(extractBase(coefficient, exponent));
@@ -86,16 +95,46 @@ public class RootFunctionImpl extends FunctionBaseImpl {
         return coefficient.base();
     }
 
+    /**
+     * Calculate the function value for x.
+     *
+     * @param x
+     *        the input value
+     *
+     * @return f(x)
+     */
     @Override
-    public Number calculate(Number number) {
-        // TODO Implement this method
-        return null;
+    public Number calculate(Number x) {
+
+        return coefficient.multiply(x.exponentiate(exponent));
     }
 
+    /**
+     * Calculate the function value for x.
+     *
+     * @param processingDetails
+     *        additonal processing details
+     * @param x
+     *        the input value
+     *
+     * @return f(x)
+     */
+    @Override
+    public Number calculate(ProcessingDetails processingDetails, Number x) {
+
+        return coefficient.multiply(x.exponentiate(processingDetails, exponent));
+    }
+
+    /**
+     * Returns the derivative function for this function.
+     *
+     * @return a derivative function
+     */
     @Override
     public Function derivativeFunction() {
-        // TODO Implement this method
-        return null;
+
+        //TODO
+        throw new UnsupportedOperationException();
     }
 
     /**

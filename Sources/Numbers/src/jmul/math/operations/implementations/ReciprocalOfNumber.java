@@ -62,34 +62,74 @@ public class ReciprocalOfNumber implements UnaryOperation<Number, Result<Fractio
     /**
      * Calculates the reciprocal of the specified number and returns a fraction.
      *
-     * @param operand
+     * @param number
      *        a number
      *
      * @return a fraction
      */
     @Override
-    public Result<Fraction> calculate(Number operand) {
+    public Result<Fraction> calculate(Number number) {
 
-        ParameterCheckHelper.checkParameter(operand);
+        ParameterCheckHelper.checkParameter(number);
 
-        if (!operand.isInfinity()) {
+        Fraction result;
+        if (number.isFraction()) {
 
-            ParameterCheckHelper.checkInteger(operand);
+            result = reciprocalOfFraction(number);
+
+        } else {
+
+            result = reciprocalOfInteger(number);
         }
 
-        int base = operand.base();
+        return new Result<Fraction>(result);
+    }
+
+    /**
+     * Calculates the reciprocal of the specified integer.
+     *
+     * @param integer
+     *        an integer
+     *
+     * @return the reciprocal of the specified integer
+     */
+    private Fraction reciprocalOfInteger(Number integer) {
+
+        int base = integer.base();
 
         Number newNumerator = createNumber(base, Signs.POSITIVE, 1);
-        if (operand.isNegative()) {
+        if (integer.isNegative()) {
 
             newNumerator = newNumerator.negate();
         }
 
-        Number newDenominator = operand.absoluteValue();
+        Number newDenominator = integer.absoluteValue();
 
-        Fraction result = createFraction(DONT_CLONE, newNumerator, newDenominator);
+        return createFraction(DONT_CLONE, newNumerator, newDenominator);
+    }
 
-        return new Result<Fraction>(result);
+    /**
+     * Calculates the reciprocal of a number with a fractional part.
+     *
+     * @param number
+     *        a number with a fractional part
+     *
+     * @return
+     */
+    private Fraction reciprocalOfFraction(Number number) {
+
+        int base = number.base();
+
+        Number newNumerator = createNumber(base, Signs.POSITIVE, 1);
+        Number newDenominator = number;
+
+        while (newDenominator.isFraction()) {
+
+            newNumerator = newNumerator.shiftRight();
+            newDenominator = newDenominator.shiftRight();
+        }
+
+        return createFraction(DONT_CLONE, newNumerator, newDenominator);
     }
 
 }

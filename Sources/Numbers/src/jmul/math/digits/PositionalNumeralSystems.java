@@ -248,4 +248,34 @@ public class PositionalNumeralSystems {
         return String.format("%c", symbol);
     }
 
+    /**
+     * Returns a regex snippet containing all allowed digits for the specified number base.
+     *
+     * @param base
+     *        a number base
+     *
+     * @return a regex snippet
+     */
+    public static String allowedDigitsRegex(int base) {
+
+        PositionalNumeralSystem numeralSystem = getPositionalNumeralSystem(base);
+
+        return numeralSystem.allowedDigitsRegex();
+    }
+
+    /**
+     * Returns a regex snippet containing a subset of allowed digits for the specified number base.
+     *
+     * @param base
+     *        a number base
+     *
+     * @return a regex snippet
+     */
+    public static String allowedDigitsWithoutZeroRegex(int base) {
+
+        PositionalNumeralSystem numeralSystem = getPositionalNumeralSystem(base);
+
+        return numeralSystem.allowedDigitsWithoutZeroRegex();
+    }
+
 }

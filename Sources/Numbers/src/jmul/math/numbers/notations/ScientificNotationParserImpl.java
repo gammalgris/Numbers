@@ -33,15 +33,18 @@
 
 package jmul.math.numbers.notations;
 
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import jmul.math.signs.Sign;
-import jmul.math.signs.Signs;
 import jmul.math.digits.Digit;
 import jmul.math.digits.PositionalNumeralSystems;
 import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.NodesHelper;
+import jmul.math.numbers.notations.regex.NotationRegex;
+import jmul.math.numbers.notations.regex.NotationTypes;
+import jmul.math.signs.Sign;
+import jmul.math.signs.Signs;
 
 
 /**
@@ -62,24 +65,11 @@ public class ScientificNotationParserImpl implements NotationParser {
     }
 
     /**
-     * Details about the notation.
-     */
-    private final Notation notation;
-
-    /**
-     * A pattern matcher.
-     */
-    private final Pattern pattern;
-
-    /**
      * The default constructor.
      */
     public ScientificNotationParserImpl() {
 
         super();
-
-        notation = Notations.SCIENTIFIC_NOATATION;
-        pattern = Pattern.compile(notation.regex());
     }
 
     /**
@@ -95,6 +85,8 @@ public class ScientificNotationParserImpl implements NotationParser {
     @Override
     public ParsingResult parseNotation(int base, String string) {
 
+        NotationRegex notation = NotationSingletons.notationRegex(NotationTypes.SCIENTIFIC_NOTATION, base);
+        Pattern pattern = notation.pattern();
         Matcher matcher = pattern.matcher(string);
 
         if (!matcher.matches()) {

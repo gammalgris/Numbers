@@ -105,6 +105,11 @@ public class ScientificNotationFunctionImpl implements NotationFunction {
             buffer = new StringBuilder(trimmedRight);
 
             buffer.append(Constants.EXPONENT_ABBREVIATION);
+
+            if ((base >= 15) && (result.exponent() >= 0)) { //TODO problematic once digit sets can be set freely
+
+                buffer.append("+");
+            }
             buffer.append(result.exponent());
         }
 
@@ -199,6 +204,7 @@ public class ScientificNotationFunctionImpl implements NotationFunction {
     }
 
 }
+
 
 class TraversalResult {
 

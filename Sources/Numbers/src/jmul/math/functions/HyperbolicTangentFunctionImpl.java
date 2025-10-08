@@ -37,6 +37,7 @@ package jmul.math.functions;
 import jmul.math.Math;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
+import jmul.math.operations.processing.ProcessingDetails;
 
 
 /**
@@ -46,46 +47,54 @@ import static jmul.math.numbers.NumberHelper.createNumber;
  *
  * @author Kristian Kutin
  */
-public class HyperbolicTangentFunction extends FunctionBaseImpl {
+public class HyperbolicTangentFunctionImpl extends FunctionBaseImpl {
 
     /**
      * Creates a new hyperbolic tangent for the specified number base.
      *
      * @param base
      */
-    protected HyperbolicTangentFunction(int base) {
+    protected HyperbolicTangentFunctionImpl(int base) {
 
         super(base);
     }
 
     /**
-     * Evaluate the function with the specified input value.
-     *
-     * @param number
-     *        the input value
-     *
-     * @return the output value
-     */
-    @Override
-    public Number calculate(Number number) {
-
-        return f(number);
-    }
-
-    /**
-     * The actual hyperbolic tangent function.
+     * Calculate the function value for x.
      *
      * @param x
-     *        an input value
+     *        the input value
      *
      * @return f(x)
      */
-    private Number f(Number x) {
+    @Override
+    public Number calculate(Number x) {
 
         final Number ONE = createNumber(base(), "1");
         final Number e = Math.e(base());
 
         return (ONE.subtract(e.exponentiate(x.negate()))).divide(ONE.add(e.exponentiate(x.negate())));
+    }
+
+    /**
+     * Calculate the function value for x.
+     *
+     * @param processingDetails
+     *        additonal processing details
+     * @param x
+     *        the input value
+     *
+     * @return f(x)
+     */
+    @Override
+    public Number calculate(ProcessingDetails processingDetails, Number x) {
+
+        final Number ONE = createNumber(base(), "1");
+        final Number e = Math.e(base());
+
+        return (ONE.subtract(e.exponentiate(processingDetails, x.negate()))).divide(processingDetails,
+                                                                                    ONE.add(e.exponentiate(processingDetails,
+                                                                                                           x.negate())));
     }
 
     /**
@@ -146,9 +155,32 @@ class HyperbolicTangentFunctionFirstDerivative extends FunctionBaseImpl {
 
         final Number ONE = createNumber(base(), "1");
         final Number TWO = ONE.inc();
-        final Number e = Math.e(base());
+        final Number e = jmul.math.Math.e(base());
 
         return (TWO.multiply(e.exponentiate(x))).divide(((e.exponentiate(x)).add(ONE)).exponentiate(TWO));
+    }
+
+    /**
+     * Calculate the function value for x.
+     *
+     * @param processingDetails
+     *        additonal processing details
+     * @param x
+     *        the input value
+     *
+     * @return f(x)
+     */
+    @Override
+    public Number calculate(ProcessingDetails processingDetails, Number x) {
+
+        final Number ONE = createNumber(base(), "1");
+        final Number TWO = ONE.inc();
+        final Number e = jmul.math.Math.e(base());
+
+        return (TWO.multiply(e.exponentiate(processingDetails, x))).divide(processingDetails,
+                                                                           ((e.exponentiate(processingDetails,
+                                                                                            x)).add(ONE)).exponentiate(processingDetails,
+                                                                                                                       TWO));
     }
 
     /**
@@ -170,7 +202,7 @@ class HyperbolicTangentFunctionFirstDerivative extends FunctionBaseImpl {
     @Override
     public String toString() {
 
-        return "1 / ( 1 + e^x )";
+        return "( 2 * e^x ) / ( e^x + 1 )^2";
     }
 
 }

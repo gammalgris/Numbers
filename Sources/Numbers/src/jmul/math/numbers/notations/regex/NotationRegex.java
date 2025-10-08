@@ -31,28 +31,33 @@
  * $Id$
  */
 
-package jmul.math.numbers.notations;
+package jmul.math.numbers.notations.regex;
 
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 
 /**
  * This interface describes an entity which represents a number notation.
  *
  * @author Kristian Kutin
- *
- * @deprecated The regex currently ignores the various number bases. Needs Rework.
  */
-@Deprecated
-public interface Notation {
+public interface NotationRegex {
 
     /**
      * Returns the regex string which describes this notation.
      *
      * @return a regex string
      */
-    String regex();
+    String regexString();
+
+    /**
+     * Returns a compiled regex pattern.
+     *
+     * @return a compiled regex pattern
+     */
+    Pattern pattern();
 
     /**
      * Returns a list of named capturing groups which are defined within the regex string.

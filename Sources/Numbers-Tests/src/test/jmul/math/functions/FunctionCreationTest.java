@@ -53,7 +53,7 @@ import org.junit.Test;
 
 
 /**
- * This test suite tests various functions.
+ * This test suite tests various functions (in number base 10).
  *
  * @author Kristian Kutin
  */
@@ -74,10 +74,10 @@ public class FunctionCreationTest {
     }
 
     /**
-     * Tests creating a monomial function with valid parameters.
+     * Tests creating a monomial function with valid parameters (with default processing details).
      */
     @Test
-    public void testCreateMonomialFunction() {
+    public void testMonomialFunction() {
 
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
@@ -105,7 +105,7 @@ public class FunctionCreationTest {
      * Tests creating a monomial function with valid parameters.
      */
     @Test
-    public void testCreateMonomialFunction2() {
+    public void testMonomialFunction2() {
 
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
@@ -136,7 +136,7 @@ public class FunctionCreationTest {
      * Tests creating a monomial function with valid parameters.
      */
     @Test
-    public void testCreateMonomialFunction3() {
+    public void testMonomialFunction3() {
 
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
@@ -167,7 +167,7 @@ public class FunctionCreationTest {
      * Tests creating a monomial function with valid parameters.
      */
     @Test
-    public void testCreateMonomialFunction4() {
+    public void testMonomialFunction4() {
 
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
@@ -198,7 +198,7 @@ public class FunctionCreationTest {
      * Tests creating a monomial function with an invalid parameter.
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testCreateMonomialWithInvalidCoefficient() {
+    public void testMonomialFunctionWithInvalidCoefficient() {
 
         Number coefficient = null;
         Number exponent = createNumber(DEFAULT_NUMBER_BASE, "2");
@@ -210,7 +210,7 @@ public class FunctionCreationTest {
      * Tests creating a monomial function with an invalid parameter.
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testCreateMonomialWithInvalidExponent() {
+    public void testMonomialFunctionWithInvalidExponent() {
 
         Number coefficient = createNumber(DEFAULT_NUMBER_BASE, "2");
         Number exponent = null;
@@ -222,7 +222,7 @@ public class FunctionCreationTest {
      * Tests creating a monomial function with an invalid parameter.
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testCreateMonomialWithNonIntegerExponent() {
+    public void testMonomialFunctionWithNonIntegerExponent() {
 
         Number coefficient = createNumber(DEFAULT_NUMBER_BASE, "2");
         Number exponent = createNumber(DEFAULT_NUMBER_BASE, "2.2");
@@ -234,7 +234,7 @@ public class FunctionCreationTest {
      * Tests creating a monomial function with an invalid parameter.
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testCreateMonomialWithNegativeExponent() {
+    public void testMonomialFunctionWithNegativeExponent() {
 
         Number coefficient = createNumber(DEFAULT_NUMBER_BASE, "2");
         Number exponent = createNumber(DEFAULT_NUMBER_BASE, "-2");
@@ -246,7 +246,7 @@ public class FunctionCreationTest {
      * Tests a constant function.
      */
     @Test
-    public void testConstantFunctionCreation() {
+    public void testConstantFunction() {
 
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
@@ -277,7 +277,7 @@ public class FunctionCreationTest {
      * Tests a constant function.
      */
     @Test
-    public void testConstantFunction2Creation() {
+    public void testConstantFunction2() {
 
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
@@ -305,7 +305,7 @@ public class FunctionCreationTest {
      * Tests a linear function.
      */
     @Test
-    public void testLinarFunctionCreation() {
+    public void testLinearFunction() {
 
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
@@ -333,7 +333,7 @@ public class FunctionCreationTest {
      * Tests a quadratic function.
      */
     @Test
-    public void testQuadraticFunctionCreation() {
+    public void testQuadraticFunction() {
 
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
@@ -361,7 +361,7 @@ public class FunctionCreationTest {
      * Tests a cubic function.
      */
     @Test
-    public void testCubicFunctionCreation() {
+    public void testCubicFunction() {
 
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
@@ -519,12 +519,10 @@ public class FunctionCreationTest {
     }
 
     /**
-     * Tests a threshold function.<br>
-     * <br>
-     * TODO flaky test because of changing map ordering?
+     * Tests a threshold function.
      */
     @Test
-    public void testPartialFunctionCreation() {
+    public void testPartialFunction() {
 
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
@@ -560,17 +558,17 @@ public class FunctionCreationTest {
      * Tests creating a root function with valid parameters.
      */
     @Test
-    public void testCreateRootFunctionFunction() {
+    public void testRootFunction() {
 
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
-                                           createNumber(DEFAULT_NUMBER_BASE, "2")),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
-                                           createNumber(DEFAULT_NUMBER_BASE, "2")),
+                                           createNumber(DEFAULT_NUMBER_BASE, "5.6568542498")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
-                                           createNumber(DEFAULT_NUMBER_BASE, "2")));
+                                           createNumber(DEFAULT_NUMBER_BASE, "10.3923048458")));
 
         Function f = FunctionHelper.createRootFunction(DEFAULT_NUMBER_BASE, "2", "3", "2");
 
@@ -588,17 +586,17 @@ public class FunctionCreationTest {
      * Tests creating a root function with valid parameters.
      */
     @Test
-    public void testCreateRootFunctionFunction2() {
+    public void testRootFunction2() {
 
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
-                                           createNumber(DEFAULT_NUMBER_BASE, "2")),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
-                                           createNumber(DEFAULT_NUMBER_BASE, "2")),
+                                           createNumber(DEFAULT_NUMBER_BASE, "2.8284271248")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
-                                           createNumber(DEFAULT_NUMBER_BASE, "2")));
+                                           createNumber(DEFAULT_NUMBER_BASE, "3.4641016152")));
 
         Number coefficient = createNumber(DEFAULT_NUMBER_BASE, "2");
         Fraction exponent = createFraction(DEFAULT_NUMBER_BASE, "1", "2");
@@ -613,6 +611,153 @@ public class FunctionCreationTest {
             Number actualOutput = f.calculate(entry.input);
             assertEquals("function values", entry.expectedOutput, actualOutput);
         }
+    }
+
+    /**
+     * Tests creating a sigmoid function with valid parameters.
+     */
+    @Test
+    public void testSigmoidFunction() {
+
+        /*
+         * e = 2.71828182845904523536028747135266249775724709369995957496696762772407663035
+         *
+         * f(0) = 0.5
+         * f(1) = 0.73105857862573416760105423965716089451225310460654483723480200519810603176
+         * f(2) = 0.88079707797332120180976368753356831360214196373758165765427507855654849392
+         * f(3) = 0.95257412681948930085765473812182517074459784767332524812262657727600188626
+         */
+
+        TrainingData data =
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.5")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.7310585786")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.880797078")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.9525741268")));
+
+        Function f = FunctionHelper.createSigmoidFunction(DEFAULT_NUMBER_BASE);
+
+        assertEquals("formula", "1 / ( 1 + e^-x )", f.toString());
+        assertEquals("formula", "f(x) = 1 / ( 1 + e^-x )", f.toFunctionNotation());
+
+        for (DataEntry entry : data) {
+
+            Number actualOutput = f.calculate(entry.input);
+            assertEquals("function values", entry.expectedOutput, actualOutput);
+        }
+    }
+
+    /**
+     * Tests creating a sigmoid function with invalid parameters.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testSigmoidFunctionWithInvalidBase() {
+
+        FunctionHelper.createSigmoidFunction(0);
+    }
+
+    /**
+     * Tests creating a hyperbolic tangent function with valid parameters.
+     */
+    @Test
+    public void testHyperbolicTangentFunction() {
+
+        /*
+         * e = 2.71828182845904523536028747135266249775724709369995957496696762772407663035
+         *
+         * f(0) = 0
+         * f(1) = 0.46211715725146833520210847931432178902450620921308967446960401039621206352
+         * f(2) = 0.76159415594664240361952737506713662720428392747516331530855015711309698785
+         * f(3) = 0.90514825363897860171530947624365034148919569534665049624525315455200377253
+         */
+
+        TrainingData data =
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.4621171572")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.761594156")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.9051482537")));
+
+        Function f = FunctionHelper.createHyperbolicTangentFunction(DEFAULT_NUMBER_BASE);
+
+        assertEquals("formula", "( 1 - e^-x ) / ( 1 + e^-x )", f.toString());
+        assertEquals("formula", "f(x) = ( 1 - e^-x ) / ( 1 + e^-x )", f.toFunctionNotation());
+
+        for (DataEntry entry : data) {
+
+            Number actualOutput = f.calculate(entry.input);
+            assertEquals("function values", entry.expectedOutput, actualOutput);
+        }
+    }
+
+    /**
+     * Tests creating a hyperbolic tangent function with invalid parameters.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testHyperbolicTangentFunctionWithInvalidBase() {
+
+        FunctionHelper.createHyperbolicTangentFunction(0);
+    }
+
+    /**
+     * Tests creating an exponential function with valid parameters.
+     */
+    @Test
+    public void testExponentialFunction() {
+
+        TrainingData data =
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "3")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "5")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "9")));
+
+        Number coefficient1 = createNumber(DEFAULT_NUMBER_BASE, "2");
+        Number coefficient0 = createNumber(DEFAULT_NUMBER_BASE, "1");
+
+        Function f = FunctionHelper.createExponentialFunction(coefficient1, coefficient0);
+
+        assertEquals("formula", "2^x + 1", f.toString());
+        assertEquals("formula", "f(x) = 2^x + 1", f.toFunctionNotation());
+
+        for (DataEntry entry : data) {
+
+            Number actualOutput = f.calculate(entry.input);
+            assertEquals("function values", entry.expectedOutput, actualOutput);
+        }
+    }
+
+    /**
+     * Tests creating an exponential function with valid parameters.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testExponentialFunctionWithZeroCoefficient1() {
+
+        Number coefficient1 = createNumber(DEFAULT_NUMBER_BASE, "0");
+        Number coefficient0 = createNumber(DEFAULT_NUMBER_BASE, "1");
+
+        FunctionHelper.createExponentialFunction(coefficient1, coefficient0);
+    }
+
+    /**
+     * Tests creating an exponential function with valid parameters.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testExponentialFunctionWithOneCoefficient1() {
+
+        Number coefficient1 = createNumber(DEFAULT_NUMBER_BASE, "1");
+        Number coefficient0 = createNumber(DEFAULT_NUMBER_BASE, "1");
+
+        FunctionHelper.createExponentialFunction(coefficient1, coefficient0);
     }
 
 }

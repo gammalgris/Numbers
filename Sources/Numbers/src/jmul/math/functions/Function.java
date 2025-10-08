@@ -35,6 +35,7 @@ package jmul.math.functions;
 
 
 import jmul.math.numbers.Number;
+import jmul.math.operations.processing.ProcessingDetails;
 
 
 /**
@@ -46,20 +47,32 @@ public interface Function {
 
     /**
      * Returns the used number base.
-     * 
+     *
      * @return a number base
      */
     int base();
 
     /**
-     * Calculates the output value according to the specified input value.
+     * Calculate the function value for x.
      *
-     * @param number
-     *        a value
+     * @param x
+     *        the input value
      *
-     * @return an output value
+     * @return f(x)
      */
-    Number calculate(Number number);
+    Number calculate(Number x);
+
+    /**
+     * Calculate the function value for x.
+     *
+     * @param processingDetails
+     *        additonal processing details
+     * @param x
+     *        the input value
+     *
+     * @return f(x)
+     */
+    Number calculate(ProcessingDetails processingDetails, Number x);
 
     /**
      * Returns the derivative function for this function.

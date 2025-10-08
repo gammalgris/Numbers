@@ -37,16 +37,17 @@ package jmul.math.functions;
 import jmul.math.Math;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
+import jmul.math.operations.processing.ProcessingDetails;
 
 
 /**
  * This class implements a sigmoid function.<br>
  * <br>
- * f(x) = 1 / ( 1 + e<sup>x</sup> )<br>
+ * f(x) = 1 / ( 1 + e<sup>-x</sup> )<br>
  *
  * @author Kristian Kutin
  */
-public class SigmoidFunction extends FunctionBaseImpl {
+public class SigmoidFunctionImpl extends FunctionBaseImpl {
 
     /**
      * Creates a new sigmoid function for the specified number base.
@@ -54,7 +55,7 @@ public class SigmoidFunction extends FunctionBaseImpl {
      * @param base
      *        a number base
      */
-    protected SigmoidFunction(int base) {
+    protected SigmoidFunctionImpl(int base) {
 
         super(base);
     }
@@ -77,6 +78,25 @@ public class SigmoidFunction extends FunctionBaseImpl {
     }
 
     /**
+     * Calculate the function value for x.
+     *
+     * @param processingDetails
+     *        additonal processing details
+     * @param x
+     *        the input value
+     *
+     * @return f(x)
+     */
+    @Override
+    public Number calculate(ProcessingDetails processingDetails, Number x) {
+
+        final Number ONE = createNumber(base(), "1");
+        final Number e = Math.e(base());
+
+        return (ONE.divide(processingDetails, ONE.add(e.exponentiate(processingDetails, x.negate()))));
+    }
+
+    /**
      * Returns the derivative function for this function.
      *
      * @return a derivative function
@@ -95,7 +115,7 @@ public class SigmoidFunction extends FunctionBaseImpl {
     @Override
     public String toString() {
 
-        return "1 / ( 1 + e^x )";
+        return "1 / ( 1 + e^-x )";
     }
 
 }
@@ -130,13 +150,36 @@ class SigmoidFunctionFirstDerivative extends FunctionBaseImpl {
      * @return f(x)
      */
     @Override
-    public Number calculate(Number x) {
+    public Number calculate(jmul.math.numbers.Number x) {
 
         final Number ONE = createNumber(base(), "1");
         final Number TWO = ONE.inc();
-        final Number e = Math.e(base());
+        final Number e = jmul.math.Math.e(base());
 
         return (e.exponentiate(x)).divide(((e.exponentiate(x)).add(ONE)).exponentiate(TWO));
+    }
+
+    /**
+     * Calculate the function value for x.
+     *
+     * @param processingDetails
+     *        additonal processing details
+     * @param x
+     *        the input value
+     *
+     * @return f(x)
+     */
+    @Override
+    public Number calculate(ProcessingDetails processingDetails, Number x) {
+
+        final Number ONE = createNumber(base(), "1");
+        final Number TWO = ONE.inc();
+        final Number e = jmul.math.Math.e(base());
+
+        return (e.exponentiate(processingDetails, x)).divide(processingDetails,
+                                                             ((e.exponentiate(processingDetails,
+                                                                              x)).add(ONE)).exponentiate(processingDetails,
+                                                                                                         TWO));
     }
 
     /**

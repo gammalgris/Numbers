@@ -42,6 +42,7 @@ import java.util.List;
 
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
+import jmul.math.operations.processing.ProcessingDetails;
 
 
 /**
@@ -133,18 +134,17 @@ public class PolynomialFunctionImpl extends FunctionBaseImpl {
     }
 
     /**
-     * Evaluate the function with the specified input value.
+     * Calculate the function value for x.
      *
-     * @param number
+     * @param x
      *        the input value
      *
-     * @return the output value
+     * @return f(x)
      */
     @Override
-    public Number calculate(Number number) {
+    public Number calculate(Number x) {
 
         final Number ZERO = createNumber(base(), "0");
-        final Number ONE = createNumber(base(), "1");
 
         Number sum = ZERO;
 
@@ -152,14 +152,46 @@ public class PolynomialFunctionImpl extends FunctionBaseImpl {
 
             Number coefficient = coefficients.get(index);
 
-            Number x = ONE;
+            Number result = coefficient;
             for (int exponent = 1; exponent <= index; exponent++) {
 
-                x = x.multiply(number);
+                result = result.multiply(x);
             }
 
-            Number term = coefficient.multiply(x);
-            sum = sum.add(term);
+            sum = sum.add(result);
+        }
+
+        return sum;
+    }
+
+    /**
+     * Calculate the function value for x.
+     *
+     * @param processingDetails
+     *        additonal processing details
+     * @param x
+     *        the input value
+     *
+     * @return f(x)
+     */
+    @Override
+    public Number calculate(ProcessingDetails processingDetails, Number x) {
+
+        final Number ZERO = createNumber(base(), "0");
+
+        Number sum = ZERO;
+
+        for (int index = 0; index < coefficients.size(); index++) {
+
+            Number coefficient = coefficients.get(index);
+
+            Number result = coefficient;
+            for (int exponent = 1; exponent <= index; exponent++) {
+
+                result = result.multiply(x);
+            }
+
+            sum = sum.add(result);
         }
 
         return sum;
