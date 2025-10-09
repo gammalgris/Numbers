@@ -80,7 +80,9 @@ public class DerivativeCreation2Test {
     public void testMonomialFunction() {
 
         TrainingData data =
-            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "-4")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "4")),
@@ -112,7 +114,9 @@ public class DerivativeCreation2Test {
     public void testMonomialFunction2() {
 
         TrainingData data =
-            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "9")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "9")),
@@ -144,7 +148,9 @@ public class DerivativeCreation2Test {
     public void testMonomialFunction3() {
 
         TrainingData data =
-            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
@@ -176,7 +182,9 @@ public class DerivativeCreation2Test {
     public void testMonomialFunction4() {
 
         TrainingData data =
-            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
@@ -208,7 +216,9 @@ public class DerivativeCreation2Test {
     public void testConstantFunction2() {
 
         TrainingData data =
-            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
@@ -237,7 +247,9 @@ public class DerivativeCreation2Test {
     public void testLinearFunction() {
 
         TrainingData data =
-            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
@@ -266,7 +278,9 @@ public class DerivativeCreation2Test {
     public void testQuadraticFunction() {
 
         TrainingData data =
-            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "-4")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "8")),
@@ -295,7 +309,9 @@ public class DerivativeCreation2Test {
     public void testCubicFunction() {
 
         TrainingData data =
-            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "8")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "14")),
@@ -324,7 +340,9 @@ public class DerivativeCreation2Test {
     public void testPolynomialFunction() {
 
         TrainingData data =
-            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "8")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "14")),
@@ -353,7 +371,9 @@ public class DerivativeCreation2Test {
     public void testPolynomialFunction2() {
 
         TrainingData data =
-            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "6")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "12")),
@@ -382,7 +402,9 @@ public class DerivativeCreation2Test {
     public void testPolynomialFunction3() {
 
         TrainingData data =
-            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "E")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "E")),
@@ -411,7 +433,9 @@ public class DerivativeCreation2Test {
     public void testPolynomialFunction4() {
 
         TrainingData data =
-            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "-4")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "8")),
@@ -441,6 +465,8 @@ public class DerivativeCreation2Test {
 
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "8")),
@@ -477,7 +503,10 @@ public class DerivativeCreation2Test {
     public void testRootFunction() {
 
         TrainingData data =
-            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             //TODO 2 * (-1) * i
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
@@ -506,7 +535,10 @@ public class DerivativeCreation2Test {
     public void testRootFunction2() {
 
         TrainingData data =
-            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             // TODO 2 * i
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
@@ -540,6 +572,7 @@ public class DerivativeCreation2Test {
         /*
          * e = 2.71828182845904523536028747135266249775724709369995957496696762772407663035
          *
+         * f(-1) = 0.19661193324345542166463022366450615508493151331200606128718642697872213600
          * f(0) = 0.25
          * f(1) = 0.19661193324345542166463022366450615508493151331200606128718642697872213600
          * f(2) = 0.10499358540698033279007559356054896219252989126985245573537129074881962406
@@ -547,7 +580,9 @@ public class DerivativeCreation2Test {
          */
 
         TrainingData data =
-            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.325528DF4C")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0.4")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0.325528DF4C")),
@@ -578,6 +613,7 @@ public class DerivativeCreation2Test {
         /*
          * e = 2.71828182845904523536028747135266249775724709369995957496696762772407663035
          *
+         * f(-1) = 0.39322386648691084332926044732901231016986302662401212257437285395744427201
          * f(0) = 0.4
          * f(1) = 0.39322386648691084332926044732901231016986302662401212257437285395744427201
          * f(2) = 0.20998717081396066558015118712109792438505978253970491147074258149763924813
@@ -585,7 +621,9 @@ public class DerivativeCreation2Test {
          */
 
         TrainingData data =
-            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.64AA51BE99")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0.8")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0.64AA51BE99")),
@@ -614,7 +652,9 @@ public class DerivativeCreation2Test {
     public void testExponentialFunction() {
 
         TrainingData data =
-            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "1.5")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "3")),

@@ -80,7 +80,9 @@ public class FunctionCreation2Test {
     public void testMonomialFunction() {
 
         TrainingData data =
-            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
@@ -108,7 +110,9 @@ public class FunctionCreation2Test {
     public void testMonomialFunction2() {
 
         TrainingData data =
-            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
@@ -139,7 +143,9 @@ public class FunctionCreation2Test {
     public void testMonomialFunction3() {
 
         TrainingData data =
-            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
@@ -170,7 +176,9 @@ public class FunctionCreation2Test {
     public void testMonomialFunction4() {
 
         TrainingData data =
-            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
@@ -249,7 +257,9 @@ public class FunctionCreation2Test {
     public void testConstantFunction() {
 
         TrainingData data =
-            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
@@ -280,7 +290,9 @@ public class FunctionCreation2Test {
     public void testConstantFunction2() {
 
         TrainingData data =
-            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "5")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "5")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "5")),
@@ -305,10 +317,12 @@ public class FunctionCreation2Test {
      * Tests a linear function.
      */
     @Test
-    public void testLinarFunction() {
+    public void testLinearFunction() {
 
         TrainingData data =
-            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "-1")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "1")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "3")),
@@ -336,7 +350,9 @@ public class FunctionCreation2Test {
     public void testQuadraticFunction() {
 
         TrainingData data =
-            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "1")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "6")),
@@ -364,7 +380,9 @@ public class FunctionCreation2Test {
     public void testCubicFunction() {
 
         TrainingData data =
-            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "-2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "1")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "A")),
@@ -392,7 +410,9 @@ public class FunctionCreation2Test {
     public void testPolynomialFunction() {
 
         TrainingData data =
-            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "-3")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "9")),
@@ -420,7 +440,9 @@ public class FunctionCreation2Test {
     public void testPolynomialFunction2() {
 
         TrainingData data =
-            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "1")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "8")),
@@ -448,7 +470,9 @@ public class FunctionCreation2Test {
     public void testPolynomialFunction3() {
 
         TrainingData data =
-            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "-5")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "1")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "7")),
@@ -476,7 +500,9 @@ public class FunctionCreation2Test {
     public void testPolynomialFunction4() {
 
         TrainingData data =
-            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "1")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "6")),
@@ -525,7 +551,9 @@ public class FunctionCreation2Test {
     public void testPartialFunction() {
 
         TrainingData data =
-            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "1")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "6")),
@@ -585,6 +613,28 @@ public class FunctionCreation2Test {
     /**
      * Tests creating a root function with valid parameters.
      */
+    @Test(expected = UnsupportedOperationException.class)
+    public void testRootFunctionWithNegativeInput() {
+
+        TrainingData data =
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")));
+
+        Function f = FunctionHelper.createRootFunction(DEFAULT_NUMBER_BASE, "2", "3", "2");
+
+        assertEquals("formula", "2 * x^(3/2)", f.toString());
+        assertEquals("formula", "f(x) = 2 * x^(3/2)", f.toFunctionNotation());
+
+        for (DataEntry entry : data) {
+
+            Number actualOutput = f.calculate(entry.input);
+            assertEquals("function values", entry.expectedOutput, actualOutput);
+        }
+    }
+
+    /**
+     * Tests creating a root function with valid parameters.
+     */
     @Test
     public void testRootFunctionFunction2() {
 
@@ -620,6 +670,8 @@ public class FunctionCreation2Test {
     public void testSigmoidFunction() {
 
         /*
+         * f(-1) = 0.26894142137426583239894576034283910548774689539345516276519799480189396823
+         *         0.44d95851579c32..._16
          * f(0) = 0.5
          * f(1) = 0.73105857862573416760105423965716089451225310460654483723480200519810603176
          * f(2) = 0.88079707797332120180976368753356831360214196373758165765427507855654849392
@@ -627,7 +679,9 @@ public class FunctionCreation2Test {
          */
 
         TrainingData data =
-            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.44D958516")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0.8")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0.BB26A7AE9F")),
@@ -649,12 +703,23 @@ public class FunctionCreation2Test {
     }
 
     /**
+     * Tests creating a sigmoid function with invalid parameters.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testSigmoidFunctionWithInvalidBase() {
+
+        FunctionHelper.createSigmoidFunction(0);
+    }
+
+    /**
      * Tests creating a hyperbolic tangent function with valid parameters.
      */
     @Test
     public void testHyperbolicTangentFunction() {
 
         /*
+         * f(-1) = -0.4621171572514683352021084793143217890245062092130896744696040103962120635
+         *         -0.764d4f5d50c79b..._16
          * f(0) = 0
          * f(1) = 0.46211715725146833520210847931432178902450620921308967446960401039621206352
          * f(2) = 0.76159415594664240361952737506713662720428392747516331530855015711309698785
@@ -662,7 +727,9 @@ public class FunctionCreation2Test {
          */
 
         TrainingData data =
-            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "-0.764D4F5D3E")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0.764D4F5D3F")),
@@ -684,13 +751,24 @@ public class FunctionCreation2Test {
     }
 
     /**
+     * Tests creating a hyperbolic tangent function with invalid parameters.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testHyperbolicTangentFunctionWithInvalidBase() {
+
+        FunctionHelper.createHyperbolicTangentFunction(0);
+    }
+
+    /**
      * Tests creating an exponential function with valid parameters.
      */
     @Test
     public void testExponentialFunction() {
 
         TrainingData data =
-            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "1.8")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "3")),
