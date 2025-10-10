@@ -113,7 +113,7 @@ public class RussianDivision implements TernaryOperation<Number, Result<Number>>
 
         if (operand2.isZero()) {
 
-            throw new UndefinedOperationException();
+            throw new UndefinedOperationException("Division by zero!");
         }
 
         if (operand1.isZero()) {

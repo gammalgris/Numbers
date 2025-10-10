@@ -42,7 +42,7 @@ import jmul.math.operations.processing.ProcessingDetails;
 /**
  * An implementation of an exponential  nth root function f(x) = c<sub>1</sub><sup>x</sup> + c<sub>0</sub>.<br>
  * <br>
- * TODO need logarithms for the derivative function
+ * TODO need logarithms for the derivative function -&gt; f'(x) = c<sub>1</sub><sup>x</sup> * log(c<sub>1</sub>)
  *
  * @author Kristian Kutin
  */

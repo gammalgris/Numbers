@@ -38,6 +38,8 @@ import jmul.math.numbers.Number;
 import jmul.math.fractions.Fraction;
 import jmul.math.operations.implementations.ParameterCheckHelper;
 import jmul.math.operations.processing.ProcessingDetails;
+import static jmul.math.fractions.FractionHelper.createFraction;
+import static jmul.math.numbers.creation.CreationParameters.CLONE;
 
 
 /**
@@ -133,8 +135,19 @@ public class RootFunctionImpl extends FunctionBaseImpl {
     @Override
     public Function derivativeFunction() {
 
-        //TODO
-        throw new UnsupportedOperationException();
+        // f(x) = c * x^(m/n)
+        // f'(x) = ( c * m * x^(m/n - 1) ) / n
+        // f'(X) = c * m / n * x^(m/n - 1)
+
+        Number m = exponent.numerator();
+        Number n = exponent.denominator();
+
+        Number newCoefficient = coefficient.multiply(m.divide(n));
+
+        Fraction newExponent = createFraction(CLONE, m, n);
+        newExponent = newExponent.dec();
+
+        return new RootFunctionImpl(newCoefficient, newExponent);
     }
 
     /**

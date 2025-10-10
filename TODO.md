@@ -140,7 +140,9 @@
 
 62) Number bases 16 and upwards -> disambiguity of E (scientific notation vs standard notation).
 
-63)
+63) Test how far can the root function derivative can be calculated.
+
+64)
 
 
 # Done
