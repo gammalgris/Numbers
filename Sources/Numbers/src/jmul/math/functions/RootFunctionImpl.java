@@ -168,7 +168,14 @@ public class RootFunctionImpl extends FunctionBaseImpl {
             return exponent.numerator().toString();
         }
 
-        return String.format("%s * x^(%s)", coefficient, exponent);
+        if (coefficient.isOne()) {
+
+            return String.format("x^(%s)", exponent);
+
+        } else {
+
+            return String.format("%s * x^(%s)", coefficient, exponent);
+        }
     }
 
 }

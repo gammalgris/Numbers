@@ -34,12 +34,10 @@
 package test.jmul.math.logarithms;
 
 
-import jmul.math.numbers.Number;
 import jmul.math.logarithms.Logarithm;
 import static jmul.math.logarithms.LogarithmHelper.createLogarithm;
+
 import static org.junit.Assert.assertEquals;
-
-
 import org.junit.Test;
 
 
@@ -50,15 +48,66 @@ import org.junit.Test;
  */
 public class CreateLogarithmTest {
 
+    /**
+     * Create a logarithm expressions.
+     */
     @Test
     public void testCreateLogarithm() {
 
         Logarithm logarithm = createLogarithm(10, "2", "3");
-        
+
         assertEquals("base", 10, logarithm.base());
         assertEquals("logarithm base", "2", logarithm.logarithmBase().toString());
         assertEquals("numerus base", "3", logarithm.numerus().toString());
-        
+    }
+
+    /**
+     * Create a logarithm expressions with invalid parameters.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateLogarithmWithLogarithmBase1() {
+
+        createLogarithm(10, "1", "3");
+    }
+
+    /**
+     * Create a logarithm expressions.
+     */
+    @Test
+    public void testCreateLogarithmWithLogarithmBase0() {
+
+        Logarithm logarithm = createLogarithm(10, "0", "3");
+
+        assertEquals("base", 10, logarithm.base());
+        assertEquals("logarithm base", "0", logarithm.logarithmBase().toString());
+        assertEquals("numerus base", "3", logarithm.numerus().toString());
+    }
+
+    /**
+     * Create a logarithm expressions with invalid parameters.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateLogarithmWithLogarithmBaseMinus2() {
+
+        createLogarithm(10, "-2", "3");
+    }
+
+    /**
+     * Create a logarithm expressions with invalid parameters.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateLogarithmWithZeroNumerus() {
+
+        createLogarithm(10, "2", "0");
+    }
+
+    /**
+     * Create a logarithm expressions with invalid parameters.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateLogarithmWithNegativeNumerus() {
+
+        createLogarithm(10, "2", "-1");
     }
 
 }

@@ -40,11 +40,14 @@ import static jmul.math.numbers.NumberHelper.createNumber;
 
 import jmul.test.classification.ManualTest;
 
+import org.junit.Ignore;
+
 
 /**
  * A manual test to calculate euler's number.
  *
  */
+@Ignore
 @ManualTest
 public class EulersNumberTest {
 

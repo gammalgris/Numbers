@@ -34,12 +34,13 @@
 package jmul.math.logarithms;
 
 
-import jmul.math.operations.OperationSingletons;
-import jmul.math.operations.implementations.ParameterCheckHelper;
-import jmul.math.operations.repository.OperationIdentifiers;
+import jmul.math.hash.HashHelper;
 import jmul.math.numbers.Number;
 import jmul.math.operations.BinaryOperation;
+import jmul.math.operations.OperationSingletons;
 import jmul.math.operations.Result;
+import jmul.math.operations.implementations.ParameterCheckHelper;
+import jmul.math.operations.repository.OperationIdentifiers;
 
 
 /**
@@ -81,6 +82,11 @@ public class LogarithmImpl implements Logarithm {
         if (logarithmBase.isOne()) {
 
             throw new IllegalArgumentException("The base of the logarithm must not be one!");
+        }
+
+        if (logarithmBase.isNegative()) {
+
+            throw new IllegalArgumentException("The base of the logarithm must not be negative!");
         }
 
         this.logarithmBase = logarithmBase;
@@ -162,6 +168,49 @@ public class LogarithmImpl implements Logarithm {
     public int base() {
 
         return logarithmBase.base();
+    }
+
+    /**
+     * Compares this object with the specified object,
+     *
+     * @param o
+     *        an object
+     *
+     * @return <code>true</code> if both objects are considered equal, else <code>false</code>
+     */
+    @Override
+    public boolean equals(Object o) {
+
+        if (o == null) {
+
+            return false;
+        }
+
+        if (this == o) {
+
+            return true;
+        }
+
+        if (o instanceof Logarithm) {
+
+            Logarithm other = (Logarithm) o;
+
+            return (this.base() == other.base()) && this.logarithmBase().equals(other.logarithmBase()) &&
+                   this.numerus().equals(other.numerus());
+        }
+
+        return false;
+    }
+
+    /**
+     * Returns a hash code for this object.
+     *
+     * @return a hash code
+     */
+    @Override
+    public int hashCode() {
+
+        return HashHelper.calculateHashCode(Logarithm.class, base(), logarithmBase(), numerus());
     }
 
     /**

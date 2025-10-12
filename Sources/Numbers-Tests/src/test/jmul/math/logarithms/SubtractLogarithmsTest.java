@@ -33,11 +33,98 @@
 
 package test.jmul.math.logarithms;
 
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+import jmul.math.logarithms.Logarithm;
+import static jmul.math.logarithms.LogarithmHelper.createLogarithm;
+
+import jmul.test.classification.UnitTest;
+
+import static org.junit.Assert.assertEquals;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+
+
+/**
+ * This test suite tests subtracting logarithms.
+ *
+ * @author Kristian Kutin
+ */
+@UnitTest
+@RunWith(Parameterized.class)
 public class SubtractLogarithmsTest {
 
-    public SubtractLogarithmsTest() {
+    /**
+     * A logarithm expression.
+     */
+    private final Logarithm logarithm1;
+
+    /**
+     * A logarithm expression.
+     */
+    private final Logarithm logarithm2;
+
+    /**
+     * The expected result.
+     */
+    private final Logarithm expectedResult;
+
+    /**
+     * Create a test case according to the specified parameters.
+     *
+     * @param logarithm1
+     *        a logarithm expression
+     * @param logarithm2
+     *        a logarithm expression
+     * @param expectedResult
+     *        a logarithm expression
+     */
+    public SubtractLogarithmsTest(Logarithm logarithm1, Logarithm logarithm2, Logarithm expectedResult) {
 
         super();
+
+        this.logarithm1 = logarithm1;
+        this.logarithm2 = logarithm2;
+        this.expectedResult = expectedResult;
+    }
+
+    /**
+     * Returns a string representation for this test case.
+     *
+     * @return a string representation
+     */
+    @Override
+    public String toString() {
+
+        return String.format("%s - %s = %s", logarithm1, logarithm2, expectedResult);
+    }
+
+    @Test
+    public void testSubtraction() {
+
+        Logarithm actualResult = logarithm1.subtract(logarithm2);
+
+        assertEquals(toString(), expectedResult, actualResult);
+        assertEquals(toString(), expectedResult.toString(), actualResult.toString());
+    }
+
+    /**
+     * Returns a matrix of test data and expected results.
+     *
+     * @return a matrix of test data and expected results
+     */
+    @Parameterized.Parameters
+    public static Collection<Object[]> data() {
+
+        Collection<Object[]> parameters = new ArrayList<Object[]>();
+
+        parameters.add(new Object[] { createLogarithm(10, "5", "4"), createLogarithm(10, "5", "2"),
+                                      createLogarithm(10, "5", "2") });
+
+        return parameters;
     }
 
 }

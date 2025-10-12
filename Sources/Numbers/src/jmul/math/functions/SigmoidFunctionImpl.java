@@ -50,6 +50,14 @@ import jmul.math.operations.processing.ProcessingDetails;
 public class SigmoidFunctionImpl extends FunctionBaseImpl {
 
     /**
+     * Euler's number.<br>
+     * <br>
+     * <i>Note:<br>
+     * Euler's number is cached in order to improve performance.</i>
+     */
+    private final Number e;
+
+    /**
      * Creates a new sigmoid function for the specified number base.
      *
      * @param base
@@ -58,6 +66,8 @@ public class SigmoidFunctionImpl extends FunctionBaseImpl {
     protected SigmoidFunctionImpl(int base) {
 
         super(base);
+
+        this.e = Math.e(base);
     }
 
     /**
@@ -72,7 +82,6 @@ public class SigmoidFunctionImpl extends FunctionBaseImpl {
     public Number calculate(Number x) {
 
         final Number ONE = createNumber(base(), "1");
-        final Number e = Math.e(base());
 
         return (ONE.divide(ONE.add(e.exponentiate(x.negate()))));
     }
@@ -91,7 +100,6 @@ public class SigmoidFunctionImpl extends FunctionBaseImpl {
     public Number calculate(ProcessingDetails processingDetails, Number x) {
 
         final Number ONE = createNumber(base(), "1");
-        final Number e = Math.e(base());
 
         return (ONE.divide(processingDetails, ONE.add(e.exponentiate(processingDetails, x.negate()))));
     }
@@ -131,6 +139,14 @@ public class SigmoidFunctionImpl extends FunctionBaseImpl {
 class SigmoidFunctionFirstDerivative extends FunctionBaseImpl {
 
     /**
+     * Euler's number.<br>
+     * <br>
+     * <i>Note:<br>
+     * Euler's number is cached in order to improve performance.</i>
+     */
+    private final Number e;
+
+    /**
      * Creates a new function for the specified number base.
      *
      * @param base
@@ -139,6 +155,8 @@ class SigmoidFunctionFirstDerivative extends FunctionBaseImpl {
     public SigmoidFunctionFirstDerivative(int base) {
 
         super(base);
+
+        this.e = Math.e(base);
     }
 
     /**
@@ -154,7 +172,6 @@ class SigmoidFunctionFirstDerivative extends FunctionBaseImpl {
 
         final Number ONE = createNumber(base(), "1");
         final Number TWO = ONE.inc();
-        final Number e = jmul.math.Math.e(base());
 
         return (e.exponentiate(x)).divide(((e.exponentiate(x)).add(ONE)).exponentiate(TWO));
     }
@@ -174,7 +191,6 @@ class SigmoidFunctionFirstDerivative extends FunctionBaseImpl {
 
         final Number ONE = createNumber(base(), "1");
         final Number TWO = ONE.inc();
-        final Number e = jmul.math.Math.e(base());
 
         return (e.exponentiate(processingDetails, x)).divide(processingDetails,
                                                              ((e.exponentiate(processingDetails,

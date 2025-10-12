@@ -503,23 +503,20 @@ public class DerivativeCreation2Test {
     public void testRootFunction() {
 
         TrainingData data =
-            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
-                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
-                             //TODO 2 * (-1) * i
-                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
-                                           createNumber(DEFAULT_NUMBER_BASE, "2")),
+                                           createNumber(DEFAULT_NUMBER_BASE, "3")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
-                                           createNumber(DEFAULT_NUMBER_BASE, "5.6568542498")),
+                                           createNumber(DEFAULT_NUMBER_BASE, "4.3E1DB337DC")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
-                                           createNumber(DEFAULT_NUMBER_BASE, "10.3923048458")));
+                                           createNumber(DEFAULT_NUMBER_BASE, "5.32370B908F")));
 
         Function f = FunctionHelper.createRootFunction(DEFAULT_NUMBER_BASE, "2", "3", "2");
         f = f.derivativeFunction();
 
-        assertEquals("formula", "2 * x^(3/2)", f.toString());
-        assertEquals("formula", "f(x) = 2 * x^(3/2)", f.toFunctionNotation());
+        assertEquals("formula", "3 * x^(1/2)", f.toString());
+        assertEquals("formula", "f(x) = 3 * x^(1/2)", f.toFunctionNotation());
 
         for (DataEntry entry : data) {
 
@@ -535,17 +532,12 @@ public class DerivativeCreation2Test {
     public void testRootFunction2() {
 
         TrainingData data =
-            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
-                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
-                             // TODO 2 * i
-                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
-                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
-                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
-                                           createNumber(DEFAULT_NUMBER_BASE, "2")),
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "1")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
-                                           createNumber(DEFAULT_NUMBER_BASE, "2.8284271248")),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.B504F333FA")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
-                                           createNumber(DEFAULT_NUMBER_BASE, "3.4641016152")));
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.93CD3A2C81")));
 
         Number coefficient = createNumber(DEFAULT_NUMBER_BASE, "2");
         Fraction exponent = createFraction(DEFAULT_NUMBER_BASE, "1", "2");
@@ -553,8 +545,8 @@ public class DerivativeCreation2Test {
         Function f = FunctionHelper.createRootFunction(coefficient, exponent);
         f = f.derivativeFunction();
 
-        assertEquals("formula", "2 * x^(1/2)", f.toString());
-        assertEquals("formula", "f(x) = 2 * x^(1/2)", f.toFunctionNotation());
+        assertEquals("formula", "x^(-1/2)", f.toString());
+        assertEquals("formula", "f(x) = x^(-1/2)", f.toFunctionNotation());
 
         for (DataEntry entry : data) {
 

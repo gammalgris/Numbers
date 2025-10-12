@@ -547,8 +547,8 @@ public class DerivativeCreationTest {
         Function f = FunctionHelper.createRootFunction(coefficient, exponent);
         f = f.derivativeFunction();
 
-        assertEquals("formula", "1 * x^(-1/2)", f.toString());
-        assertEquals("formula", "f(x) = 1 * x^(-1/2)", f.toFunctionNotation());
+        assertEquals("formula", "x^(-1/2)", f.toString());
+        assertEquals("formula", "f(x) = x^(-1/2)", f.toFunctionNotation());
 
         for (DataEntry entry : data) {
 
