@@ -1737,6 +1737,8 @@ public final class Math {
      *
      * @param processingDetails
      *        additonal processing details
+     * @param number
+     *        a number
      * @param exponent
      *        an exponent
      *
@@ -2353,6 +2355,8 @@ public final class Math {
      *
      * @param base
      *        a number base
+     * @param digits
+     *        a number of digits to randomly generate
      *
      * @return a (pseudo) random number
      */
@@ -2472,7 +2476,7 @@ public final class Math {
      * @param base
      *        a number base
      *
-     * @return
+     * @return Euler's number
      */
     public static Number e(ProcessingDetails processingDetails, int base) {
 

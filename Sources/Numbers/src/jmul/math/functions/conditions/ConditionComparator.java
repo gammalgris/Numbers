@@ -62,7 +62,8 @@ public class ConditionComparator implements Comparator<Condition> {
      * @param c2
      *        a condition
      *
-     * @return
+     * @return <code>0</code> if both conditions are considered equal, <code>-1</code> if the first condition comes
+     *         after the second condition, <code>1</code> comes before the second condition.
      */
     @Override
     public int compare(Condition c1, Condition c2) {

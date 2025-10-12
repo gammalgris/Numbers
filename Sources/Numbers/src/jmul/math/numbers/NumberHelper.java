@@ -235,7 +235,7 @@ public final class NumberHelper {
     /**
      * Creates a number which represents negative infinity.
      *
-     * @return
+     * @return a number
      */
     public static Number createNegativeInfinity() {
 

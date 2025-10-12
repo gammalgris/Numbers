@@ -101,7 +101,10 @@ public interface ArithmeticNumberOperations {
 
     /**
      * Calculates the nth root for this number.
-     *
+     * 
+     * @param n
+     *        a number
+     * 
      * @return the nth root for this number
      */
     Number root(Number n);

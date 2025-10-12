@@ -51,13 +51,12 @@ import jmul.math.operations.implementations.ParameterCheckHelper;
  * &nbsp;&nbsp;&nbsp;&nbsp;{sign}{mantissa}E{exponent}<br>
  * <br>
  * Using the letter E (or e) as a digit leads to disambiguities. To reduce disambiguities there are two cases to
- * handle.<br>
+ * handle.</i><br>
  * <br>
  * <ul>
- *   <li>E (or e) is used as a digit. Remove the disambiguitiy by making the sign of the exponent mandatory.</li>
- *   <li>E (or e) is not used as a digit. There is no disambiguity and the sign of teh exponent can stay optional.</li>
+ *   <li><i>E (or e) is used as a digit. Remove the disambiguitiy by making the sign of the exponent mandatory.</i></li>
+ *   <li><i>E (or e) is not used as a digit. There is no disambiguity and the sign of teh exponent can stay optional.</i></li>
  * </ul>
- * </i>
  *
  * @author Kristian Kutin
  */

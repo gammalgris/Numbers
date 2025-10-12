@@ -100,6 +100,8 @@ public final class OperationIdentifierHelper {
      *        algorithm)
      * @param algorithm
      *        an algorithm or <code>null</code> for the default algorithm
+     * 
+     * @return the specified algorithm or the default algorithm
      */
     public static OperationIdentifier checkAndReturnAlgorithm(OperationIdentifier[] allowedAlgorithms,
                                                               OperationIdentifier algorithm) {
