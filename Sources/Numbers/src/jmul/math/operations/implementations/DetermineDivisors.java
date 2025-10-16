@@ -73,6 +73,7 @@ public class DetermineDivisors implements UnaryOperation<Number, Result<SortedSe
         ParameterCheckHelper.checkInteger(operand);
 
         int base = operand.base();
+        Number absoluteOperand = operand.absoluteValue();
 
         final Number TWO;
         {
@@ -82,13 +83,13 @@ public class DetermineDivisors implements UnaryOperation<Number, Result<SortedSe
 
         SortedSet<Number> divisors = new TreeSet<>();
 
-        for (Number number = TWO; number.isLesser(operand); number = number.inc()) {
+        for (Number number = TWO; number.isLesser(absoluteOperand); number = number.inc()) {
 
             Number doubled = number.doubling();
 
-            if (doubled.isLesserOrEqual(operand)) {
+            if (doubled.isLesserOrEqual(absoluteOperand)) {
 
-                if (operand.isMultipleOf(number)) {
+                if (absoluteOperand.isMultipleOf(number)) {
 
                     divisors.add(number);
                 }
@@ -97,6 +98,11 @@ public class DetermineDivisors implements UnaryOperation<Number, Result<SortedSe
 
                 break;
             }
+        }
+
+        if (!absoluteOperand.isOne()) {
+
+            divisors.add(absoluteOperand);
         }
 
         return new Result<SortedSet<Number>>(divisors);

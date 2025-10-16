@@ -34,6 +34,7 @@
 package jmul.math.operations.implementations;
 
 
+import jmul.math.Math;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberHelper;
 import static jmul.math.numbers.NumberHelper.createInfinity;
@@ -94,7 +95,7 @@ public class ShiftLeft implements BinaryOperation<Number, Result<Number>> {
 
             if (Signs.isPositive(sign)) {
 
-                Number shiftedClone = createNumber(base, "0");
+                Number shiftedClone = Math.ZERO.value(base);
                 return new Result<Number>(shiftedClone);
 
             } else {
@@ -108,7 +109,7 @@ public class ShiftLeft implements BinaryOperation<Number, Result<Number>> {
         DigitNode center = copy.centerNode();
 
         Number counter = shifts.absoluteValue();
-        final Number ONE = createNumber(base, "1");
+        final Number ONE = Math.ONE.value(base);
 
         while (!counter.isZero()) {
 

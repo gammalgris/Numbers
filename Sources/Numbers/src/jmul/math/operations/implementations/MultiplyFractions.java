@@ -34,12 +34,11 @@
 package jmul.math.operations.implementations;
 
 
-import jmul.math.digits.PositionalNumeralSystems;
+import jmul.math.Math;
 import jmul.math.fractions.Fraction;
 import static jmul.math.fractions.FractionHelper.cloneFraction;
 import static jmul.math.fractions.FractionHelper.createFraction;
 import jmul.math.numbers.Number;
-import static jmul.math.numbers.NumberHelper.createNumber;
 import static jmul.math.numbers.creation.CreationParameters.DONT_CLONE;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.Result;
@@ -77,9 +76,8 @@ public class MultiplyFractions implements BinaryOperation<Fraction, Result<Fract
 
         int base = operand1.base();
 
-        String symbol = PositionalNumeralSystems.toString(base, 1);
-        final Number ONE = createNumber(base, symbol);
-        final Number MINUS_ONE = ONE.negate();
+        final Number ONE = Math.ONE.value(base);
+        final Number MINUS_ONE = Math.MINUS_ONE.value(base);
 
         Fraction result;
         if (ONE.equals(operand1)) {

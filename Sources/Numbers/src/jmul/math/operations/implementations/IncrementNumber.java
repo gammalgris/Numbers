@@ -34,14 +34,13 @@
 package jmul.math.operations.implementations;
 
 
-import jmul.math.digits.PositionalNumeralSystems;
-import jmul.math.operations.OperationSingletons;
-import jmul.math.operations.repository.OperationIdentifiers;
+import jmul.math.Math;
 import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberHelper;
 import jmul.math.operations.BinaryOperation;
+import jmul.math.operations.OperationSingletons;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
+import jmul.math.operations.repository.OperationIdentifiers;
 
 
 /**
@@ -73,8 +72,7 @@ public class IncrementNumber implements UnaryOperation<Number, Result<Number>> {
         ParameterCheckHelper.checkParameter(operand);
 
         int base = operand.base();
-        String symbol = PositionalNumeralSystems.toString(base, 1);
-        final Number ONE = NumberHelper.createNumber(base, symbol);
+        final Number ONE = Math.ONE.value(base);
 
         BinaryOperation<Number, Result<Number>> function =
             (BinaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.ADD_NUMBERS_TRIM_RESULT_FUNCTION);

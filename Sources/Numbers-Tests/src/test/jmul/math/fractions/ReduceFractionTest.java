@@ -137,6 +137,33 @@ public class ReduceFractionTest {
 
         parameters.add(new Object[] { createFraction(10, "100", "200"), createFraction(10, "1", "2") });
 
+        parameters.add(new Object[] { createFraction(10, "4", "9"), createFraction(10, "4", "9") });
+        parameters.add(new Object[] { createFraction(10, "6", "11"), createFraction(10, "6", "11") });
+        parameters.add(new Object[] { createFraction(10, "10", "20"), createFraction(10, "1", "2") });
+        parameters.add(new Object[] { createFraction(10, "15", "30"), createFraction(10, "1", "2") });
+
+        parameters.add(new Object[] { createFraction(2, "100", "1001"), createFraction(2, "100", "1001") });
+        parameters.add(new Object[] { createFraction(2, "110", "1011"), createFraction(2, "110", "1011") });
+        parameters.add(new Object[] { createFraction(2, "1010", "10100"), createFraction(2, "1", "10") });
+        parameters.add(new Object[] { createFraction(2, "1111", "11110"), createFraction(2, "1", "10") });
+
+        parameters.add(new Object[] { createFraction(16, "4", "9"), createFraction(16, "4", "9") });
+        parameters.add(new Object[] { createFraction(16, "6", "B"), createFraction(16, "6", "B") });
+        parameters.add(new Object[] { createFraction(16, "A", "14"), createFraction(16, "1", "2") });
+        parameters.add(new Object[] { createFraction(16, "F", "1E"), createFraction(16, "1", "2") });
+
+        parameters.add(new Object[] { createFraction(10, "5", "10"), createFraction(10, "1", "2") });
+        parameters.add(new Object[] { createFraction(10, "20", "40"), createFraction(10, "1", "2") });
+        parameters.add(new Object[] { createFraction(10, "25", "50"), createFraction(10, "1", "2") });
+
+        parameters.add(new Object[] { createFraction(2, "101", "1010"), createFraction(2, "1", "10") });
+        parameters.add(new Object[] { createFraction(2, "10100", "101000"), createFraction(2, "1", "10") });
+        parameters.add(new Object[] { createFraction(2, "11001", "110010"), createFraction(2, "1", "10") });
+
+        parameters.add(new Object[] { createFraction(16, "5", "A"), createFraction(16, "1", "2") });
+        parameters.add(new Object[] { createFraction(16, "14", "28"), createFraction(16, "1", "2") });
+        parameters.add(new Object[] { createFraction(16, "19", "32"), createFraction(16, "1", "2") });
+
         return parameters;
     }
 

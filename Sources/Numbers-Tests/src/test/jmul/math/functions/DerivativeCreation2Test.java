@@ -82,12 +82,20 @@ public class DerivativeCreation2Test {
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "-4")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "-1.4")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "1.4")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "4")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "5.4")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
                                            createNumber(DEFAULT_NUMBER_BASE, "8")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "9.4")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
                                            createNumber(DEFAULT_NUMBER_BASE, "C")));
 
@@ -116,12 +124,20 @@ public class DerivativeCreation2Test {
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "9")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.E1")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.E1")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "9")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "F.81")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
                                            createNumber(DEFAULT_NUMBER_BASE, "24")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "30.21")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
                                            createNumber(DEFAULT_NUMBER_BASE, "51")));
 
@@ -150,11 +166,19 @@ public class DerivativeCreation2Test {
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.5"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.5"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")));
@@ -184,11 +208,19 @@ public class DerivativeCreation2Test {
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.5"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.5"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")));
@@ -218,11 +250,19 @@ public class DerivativeCreation2Test {
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.5"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.5"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")));
@@ -249,11 +289,19 @@ public class DerivativeCreation2Test {
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "2")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.5"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "2")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.5"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")));
@@ -280,12 +328,20 @@ public class DerivativeCreation2Test {
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "-4")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.2")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "3.E")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "8")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "9.E")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
                                            createNumber(DEFAULT_NUMBER_BASE, "E")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "F.E")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
                                            createNumber(DEFAULT_NUMBER_BASE, "14")));
 
@@ -311,12 +367,20 @@ public class DerivativeCreation2Test {
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "8")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "1.4C")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "5.0C")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "14")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "1E.8C")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
                                            createNumber(DEFAULT_NUMBER_BASE, "3E")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "50.0C")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
                                            createNumber(DEFAULT_NUMBER_BASE, "80")));
 
@@ -342,12 +406,20 @@ public class DerivativeCreation2Test {
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "8")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "1.4C")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "5.0C")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "14")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "1E.8C")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
                                            createNumber(DEFAULT_NUMBER_BASE, "3E")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "50.0C")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
                                            createNumber(DEFAULT_NUMBER_BASE, "80")));
 
@@ -373,12 +445,20 @@ public class DerivativeCreation2Test {
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "6")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "-0.B4")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "3.0C")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "12")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "1C.8C")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
                                            createNumber(DEFAULT_NUMBER_BASE, "3C")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "4E.0C")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
                                            createNumber(DEFAULT_NUMBER_BASE, "7E")));
 
@@ -404,12 +484,20 @@ public class DerivativeCreation2Test {
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "E")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "3.2C")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "3.2C")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "E")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "16.AC")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
                                            createNumber(DEFAULT_NUMBER_BASE, "32")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "42.2C")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
                                            createNumber(DEFAULT_NUMBER_BASE, "6E")));
 
@@ -435,12 +523,20 @@ public class DerivativeCreation2Test {
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "-4")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.2")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "3.E")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "8")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "9.E")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
                                            createNumber(DEFAULT_NUMBER_BASE, "E")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "F.E")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
                                            createNumber(DEFAULT_NUMBER_BASE, "14")));
 
@@ -458,19 +554,66 @@ public class DerivativeCreation2Test {
     }
 
     /**
+     * Test a polynomial function with component of 1.
+     */
+    @Test
+    public void testPolynomialFunction5() {
+
+        TrainingData data =
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.AB")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "1")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "1.EB")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "6")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "8.CB")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "11")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "15.AB")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "22")));
+
+        Function f = FunctionHelper.createPolynomialFunction(DEFAULT_NUMBER_BASE, "1", "1", "1", "1");
+        f = f.derivativeFunction();
+
+        assertEquals("formula", "3 * x^2 + 2 * x + 1", f.toString());
+        assertEquals("formula", "f(x) = 3 * x^2 + 2 * x + 1", f.toFunctionNotation());
+
+        for (DataEntry entry : data) {
+
+            Number actualOutput = f.calculate(entry.input);
+            assertEquals("function values", entry.expectedOutput, actualOutput);
+        }
+    }
+
+    /**
      * Tests the derivative function of a threshold function.
      */
     @Test
     public void testPartialFunction() {
 
         TrainingData data =
-            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
-                                           createNumber(DEFAULT_NUMBER_BASE, "2")),
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "-4")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.2")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "3.E")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "8")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "9.E")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.5"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")));
@@ -497,7 +640,7 @@ public class DerivativeCreation2Test {
     }
 
     /**
-     * Tests creating a root function with valid parameters.
+     * Tests creating a root function with valid parameters (x &gt;= 0).
      */
     @Test
     public void testRootFunction() {
@@ -505,10 +648,16 @@ public class DerivativeCreation2Test {
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "1.AD5336964")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "3")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "3.6FDAC2B3F6")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
                                            createNumber(DEFAULT_NUMBER_BASE, "4.3E1DB337DC")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "4.8FE3F1A2BA")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
                                            createNumber(DEFAULT_NUMBER_BASE, "5.32370B908F")));
 
@@ -526,16 +675,22 @@ public class DerivativeCreation2Test {
     }
 
     /**
-     * Tests creating a root function with valid parameters.
+     * Tests creating a root function with valid parameters (x &gt; 0).
      */
     @Test
     public void testRootFunction2() {
 
         TrainingData data =
-            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "1.C9F25C5BFF")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "1")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.DF7482B7DD")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0.B504F333FA")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.A8583547E3")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0.93CD3A2C81")));
 
@@ -574,12 +729,20 @@ public class DerivativeCreation2Test {
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0.325528DF4C")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0.4")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.3E766B9B91")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0.325528DF4C")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.2AC6C44F36")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0.1AE0DC0FA4")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.14FC615D87")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0.0B90B2941E")));
 
@@ -615,12 +778,20 @@ public class DerivativeCreation2Test {
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0.64AA51BE99")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0.8")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.7CECD73722")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0.64AA51BE99")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.558D889E6C")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0.35C1B81F48")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.29F8C2BB0E")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0.172165283D")));
 
@@ -646,12 +817,20 @@ public class DerivativeCreation2Test {
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "1.5")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "11")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "22")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "3")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "33")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
                                            createNumber(DEFAULT_NUMBER_BASE, "5")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "44")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
                                            createNumber(DEFAULT_NUMBER_BASE, "9")));
 

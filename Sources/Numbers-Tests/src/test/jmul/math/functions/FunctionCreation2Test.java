@@ -82,12 +82,20 @@ public class FunctionCreation2Test {
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.8")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.8")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "4.8")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
                                            createNumber(DEFAULT_NUMBER_BASE, "8")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "C.8")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
                                            createNumber(DEFAULT_NUMBER_BASE, "12")));
 
@@ -112,12 +120,20 @@ public class FunctionCreation2Test {
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.8")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.8")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "4.8")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
                                            createNumber(DEFAULT_NUMBER_BASE, "8")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "C.8")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
                                            createNumber(DEFAULT_NUMBER_BASE, "12")));
 
@@ -145,11 +161,19 @@ public class FunctionCreation2Test {
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.8"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.8"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")));
@@ -178,11 +202,19 @@ public class FunctionCreation2Test {
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "2")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.8"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "2")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.8"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")));
@@ -259,11 +291,19 @@ public class FunctionCreation2Test {
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.8"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.8"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")));
@@ -292,11 +332,19 @@ public class FunctionCreation2Test {
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "5")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "5")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "5")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.8"),
                                            createNumber(DEFAULT_NUMBER_BASE, "5")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "5")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "5")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "5")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.8"),
                                            createNumber(DEFAULT_NUMBER_BASE, "5")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
                                            createNumber(DEFAULT_NUMBER_BASE, "5")));
@@ -322,12 +370,20 @@ public class FunctionCreation2Test {
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "-1")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "1")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "2")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "3")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "4")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
                                            createNumber(DEFAULT_NUMBER_BASE, "5")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "6")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
                                            createNumber(DEFAULT_NUMBER_BASE, "7")));
 
@@ -352,12 +408,20 @@ public class FunctionCreation2Test {
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.C")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "1")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "2.C")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "6")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "A.C")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
                                            createNumber(DEFAULT_NUMBER_BASE, "11")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "18.C")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
                                            createNumber(DEFAULT_NUMBER_BASE, "22")));
 
@@ -382,12 +446,20 @@ public class FunctionCreation2Test {
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "-2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.4")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "1")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "3.4")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "A")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "18.4")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
                                            createNumber(DEFAULT_NUMBER_BASE, "31")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "57.4")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
                                            createNumber(DEFAULT_NUMBER_BASE, "8E")));
 
@@ -412,12 +484,20 @@ public class FunctionCreation2Test {
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "-3")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "-0.C")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "2.4")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "9")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "17.4")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
                                            createNumber(DEFAULT_NUMBER_BASE, "30")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "56.4")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
                                            createNumber(DEFAULT_NUMBER_BASE, "8D")));
 
@@ -442,12 +522,20 @@ public class FunctionCreation2Test {
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "1.4")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "1")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "2.4")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "8")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "15.4")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2D")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "52.4")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
                                            createNumber(DEFAULT_NUMBER_BASE, "88")));
 
@@ -472,12 +560,20 @@ public class FunctionCreation2Test {
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "-5")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "-0.8")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "1")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "2.8")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "7")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "11.8")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
                                            createNumber(DEFAULT_NUMBER_BASE, "25")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "44.8")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
                                            createNumber(DEFAULT_NUMBER_BASE, "73")));
 
@@ -502,12 +598,20 @@ public class FunctionCreation2Test {
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.C")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "1")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "2.C")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "6")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "A.C")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
                                            createNumber(DEFAULT_NUMBER_BASE, "11")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "18.C")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
                                            createNumber(DEFAULT_NUMBER_BASE, "22")));
 
@@ -515,6 +619,44 @@ public class FunctionCreation2Test {
 
         assertEquals("formula", "3 * x^2 + 2 * x + 1", f.toString());
         assertEquals("formula", "f(x) = 3 * x^2 + 2 * x + 1", f.toFunctionNotation());
+
+        for (DataEntry entry : data) {
+
+            Number actualOutput = f.calculate(entry.input);
+            assertEquals("function values", entry.expectedOutput, actualOutput);
+        }
+    }
+
+    /**
+     * Test a polynomial function with component of 1.
+     */
+    @Test
+    public void testPolynomialFunction5() {
+
+        TrainingData data =
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.C13")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "1")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "1.70D")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "4")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "6.4BD")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "F")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "15.06D")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "28")));
+
+        Function f = FunctionHelper.createPolynomialFunction(DEFAULT_NUMBER_BASE, "1", "1", "1", "1");
+
+        assertEquals("formula", "x^3 + x^2 + x + 1", f.toString());
+        assertEquals("formula", "f(x) = x^3 + x^2 + x + 1", f.toFunctionNotation());
 
         for (DataEntry entry : data) {
 
@@ -553,12 +695,20 @@ public class FunctionCreation2Test {
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.C")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "1")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "2.C")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "6")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "A.C")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
                                            createNumber(DEFAULT_NUMBER_BASE, "5")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "6")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
                                            createNumber(DEFAULT_NUMBER_BASE, "7")));
 
@@ -583,7 +733,7 @@ public class FunctionCreation2Test {
     }
 
     /**
-     * Tests creating a root function with valid parameters.
+     * Tests creating a root function with valid parameters (x &gt;= 0).
      */
     @Test
     public void testRootFunctionFunction() {
@@ -591,10 +741,16 @@ public class FunctionCreation2Test {
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.B504F333FA")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "3.AC9AA3C1BE")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
                                            createNumber(DEFAULT_NUMBER_BASE, "5.A827999FD2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "7.E7DB92644")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
                                            createNumber(DEFAULT_NUMBER_BASE, "A.646E17212")));
 
@@ -633,7 +789,7 @@ public class FunctionCreation2Test {
     }
 
     /**
-     * Tests creating a root function with valid parameters.
+     * Tests creating a root function with valid parameters (x &gt;= 0).
      */
     @Test
     public void testRootFunctionFunction2() {
@@ -641,10 +797,16 @@ public class FunctionCreation2Test {
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "1.6A09E667F4")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "2.7311C28126")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2.D413CCCFE8")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "3.298B075B4C")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
                                            createNumber(DEFAULT_NUMBER_BASE, "3.76CF5D0B0A")));
 
@@ -655,6 +817,43 @@ public class FunctionCreation2Test {
 
         assertEquals("formula", "2 * x^(1/2)", f.toString());
         assertEquals("formula", "f(x) = 2 * x^(1/2)", f.toFunctionNotation());
+
+        for (DataEntry entry : data) {
+
+            Number actualOutput = f.calculate(entry.input);
+            assertEquals("function values", entry.expectedOutput, actualOutput);
+        }
+    }
+
+    /**
+     * Tests creating a root function with valid parameters (x &gt;= 0).
+     */
+    @Test
+    public void testRootFunction3() {
+
+        TrainingData data =
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")));
+
+        Number coefficient = createNumber(DEFAULT_NUMBER_BASE, "0");
+        Fraction exponent = createFraction(DEFAULT_NUMBER_BASE, "1", "2");
+
+        Function f = FunctionHelper.createRootFunction(coefficient, exponent);
+
+        assertEquals("formula", "0", f.toString());
+        assertEquals("formula", "f(x) = 0", f.toFunctionNotation());
 
         for (DataEntry entry : data) {
 
@@ -681,12 +880,20 @@ public class FunctionCreation2Test {
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0.44D958516")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.60A681596E")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0.8")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.9F597EA691")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0.BB26A7AE9F")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.D14C8F953C")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0.E17BEAD445")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.EC948EEDA")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0.F3DBE5E1AF")));
 
@@ -729,12 +936,20 @@ public class FunctionCreation2Test {
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "-0.764D4F5D3E")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "-0.3EB2FD4D23")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.3EB2FD4D23")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0.764D4F5D3F")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.A2991F2A78")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
-                                           createNumber(DEFAULT_NUMBER_BASE, "0.C2F7D5A88A")),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.C2F7D5A88B")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.D9291DDB41")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0.E7B7CBC35E")));
 
@@ -768,12 +983,20 @@ public class FunctionCreation2Test {
         TrainingData data =
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "1.8")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "1.B504F333FA")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "2.6A09E667F4")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "3")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "3.D413CCCFE9")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
                                            createNumber(DEFAULT_NUMBER_BASE, "5")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.8"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "6.A827999FD4")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
                                            createNumber(DEFAULT_NUMBER_BASE, "9")));
 

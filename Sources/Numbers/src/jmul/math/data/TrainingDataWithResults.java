@@ -40,6 +40,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Stream;
 
+import jmul.math.Math;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.operations.processing.ProcessingDetails;
@@ -170,7 +171,7 @@ public class TrainingDataWithResults implements Iterable<DataEntryWithResult> {
      */
     public Number cumulativeDeviation() {
 
-        Number sum = createNumber(base, "0");
+        Number sum = Math.ZERO.value(base);
         for (DataEntryWithResult entry : this) {
 
             Number deviation = entry.deviation();

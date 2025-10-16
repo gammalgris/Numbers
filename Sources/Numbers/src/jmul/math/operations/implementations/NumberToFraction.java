@@ -34,17 +34,16 @@
 package jmul.math.operations.implementations;
 
 
-import jmul.math.digits.PositionalNumeralSystems;
+import jmul.math.Math;
 import jmul.math.fractions.Fraction;
 import static jmul.math.fractions.FractionHelper.createFraction;
-import static jmul.math.operations.implementations.ParameterCheckHelper.checkParameter;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberHelper;
-import static jmul.math.numbers.NumberHelper.createNumber;
 import static jmul.math.numbers.creation.CreationParameters.CLONE;
 import static jmul.math.numbers.creation.CreationParameters.DONT_CLONE;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
+import static jmul.math.operations.implementations.ParameterCheckHelper.checkParameter;
 
 
 /**
@@ -118,10 +117,8 @@ public class NumberToFraction implements UnaryOperation<Number, Result<Fraction>
 
         int base = number.base();
 
-        String symbol = PositionalNumeralSystems.toString(base, 1);
-
         Number newNumerator = NumberHelper.createNumber(CLONE, number);
-        Number newDenominator = createNumber(base, symbol);
+        Number newDenominator = Math.ONE.value(base);
 
         while (newNumerator.isFraction()) {
 

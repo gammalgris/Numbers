@@ -34,7 +34,9 @@
 package jmul.math.functions;
 
 
+import jmul.math.numbers.Number;
 import jmul.math.operations.implementations.ParameterCheckHelper;
+import jmul.math.operations.processing.ProcessingDetails;
 
 
 /**
@@ -80,6 +82,25 @@ abstract class FunctionBaseImpl implements Function {
     public String toFunctionNotation() {
 
         return String.format("f(x) = %s", toString());
+    }
+
+    /**
+     * Calculate the function value for x.
+     *
+     * @param x
+     *        the input value
+     *
+     * @return f(x)
+     */
+    @Override
+    public Number calculate(Number x) {
+
+        ProcessingDetails processingDetails =
+            ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM,
+                                                   ProcessingDetails.DEFAULT_PRECISION,
+                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+
+        return calculate(processingDetails, x);
     }
 
 }

@@ -34,10 +34,10 @@
 package jmul.math.operations.implementations;
 
 
+import jmul.math.Math;
 import jmul.math.fractions.Fraction;
 import static jmul.math.fractions.FractionHelper.createFraction;
 import jmul.math.numbers.Number;
-import static jmul.math.numbers.NumberHelper.createNumber;
 import static jmul.math.numbers.creation.CreationParameters.DONT_CLONE;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.Result;
@@ -110,7 +110,7 @@ public class DivisionBySubtractionReturnFraction implements BinaryOperation<Numb
 
         Number remainder = absoluteDividend;
         Number subtrahend = absoluteDivisor;
-        Number multiple = createNumber(base, "0");
+        Number multiple = Math.ZERO.value(base);
 
         while (true) {
 

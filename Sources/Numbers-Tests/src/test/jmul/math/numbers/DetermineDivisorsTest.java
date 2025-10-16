@@ -132,85 +132,123 @@ public class DetermineDivisorsTest {
 
         Collection<Object[]> parameters = new ArrayList<Object[]>();
 
-        // 8 : { 2, 4 }
+        // 8 : { 2, 4, 8 }
         parameters.add(new Object[] { createNumber(2, "1000"),
-                                      new Number[] { createNumber(2, "10"), createNumber(2, "100") } });
-        // 9 : { 3 }
-        parameters.add(new Object[] { createNumber(2, "1001"), new Number[] { createNumber(2, "11") } });
-        // 10 : { 2, 5 }
+                                      new Number[] { createNumber(2, "10"), createNumber(2, "100"),
+                                                     createNumber(2, "1000") } });
+        // 9 : { 3, 9 }
+        parameters.add(new Object[] { createNumber(2, "1001"),
+                                      new Number[] { createNumber(2, "11"), createNumber(2, "1001") } });
+        // 10 : { 2, 5, 10 }
         parameters.add(new Object[] { createNumber(2, "1010"),
-                                      new Number[] { createNumber(2, "10"), createNumber(2, "101") } });
-        // 11 : { }
-        parameters.add(new Object[] { createNumber(2, "1011"), new Number[] { } });
-        // 12 : { 2, 3, 4, 6 }
+                                      new Number[] { createNumber(2, "10"), createNumber(2, "101"),
+                                                     createNumber(2, "1010") } });
+        // 11 : { 11 }
+        parameters.add(new Object[] { createNumber(2, "1011"), new Number[] { createNumber(2, "1011") } });
+        // 12 : { 2, 3, 4, 6, 12 }
         parameters.add(new Object[] { createNumber(2, "1100"),
                                       new Number[] { createNumber(2, "10"), createNumber(2, "11"),
-                                                     createNumber(2, "100"), createNumber(2, "110") } });
-        // 13 : { }
-        parameters.add(new Object[] { createNumber(2, "1101"), new Number[] { } });
-        // 14 : { 2, 7 }
+                                                     createNumber(2, "100"), createNumber(2, "110"),
+                                                     createNumber(2, "1100") } });
+        // 13 : { 13 }
+        parameters.add(new Object[] { createNumber(2, "1101"), new Number[] { createNumber(2, "1101") } });
+        // 14 : { 2, 7, 14 }
         parameters.add(new Object[] { createNumber(2, "1110"),
-                                      new Number[] { createNumber(2, "10"), createNumber(2, "111") } });
+                                      new Number[] { createNumber(2, "10"), createNumber(2, "111"),
+                                                     createNumber(2, "1110") } });
 
-        // 8 : { 2, 4 }
+
+        // 8 : { 2, 4, 8 }
         parameters.add(new Object[] { createNumber(3, "22"),
-                                      new Number[] { createNumber(3, "2"), createNumber(3, "11") } });
-        // 9 : { 3 }
-        parameters.add(new Object[] { createNumber(3, "100"), new Number[] { createNumber(3, "10") } });
-        // 10 : { 2, 5 }
+                                      new Number[] { createNumber(3, "2"), createNumber(3, "11"),
+                                                     createNumber(3, "22") } });
+        // 9 : { 3, 9 }
+        parameters.add(new Object[] { createNumber(3, "100"),
+                                      new Number[] { createNumber(3, "10"), createNumber(3, "100") } });
+        // 10 : { 2, 5, 10 }
         parameters.add(new Object[] { createNumber(3, "101"),
-                                      new Number[] { createNumber(3, "2"), createNumber(3, "12") } });
-        // 11 : { }
-        parameters.add(new Object[] { createNumber(3, "102"), new Number[] { } });
-        // 12 : { 2, 3, 4, 6 }
+                                      new Number[] { createNumber(3, "2"), createNumber(3, "12"),
+                                                     createNumber(3, "101") } });
+        // 11 : { 11 }
+        parameters.add(new Object[] { createNumber(3, "102"), new Number[] { createNumber(3, "102") } });
+        // 12 : { 2, 3, 4, 6, 12 }
         parameters.add(new Object[] { createNumber(3, "110"),
                                       new Number[] { createNumber(3, "2"), createNumber(3, "10"), createNumber(3, "11"),
-                                                     createNumber(3, "20") } });
-        // 13 : { }
-        parameters.add(new Object[] { createNumber(3, "111"), new Number[] { } });
-        // 14 : { 2, 7 }
+                                                     createNumber(3, "20"), createNumber(3, "110") } });
+        // 13 : { 13 }
+        parameters.add(new Object[] { createNumber(3, "111"), new Number[] { createNumber(3, "111") } });
+        // 14 : { 2, 7, 14 }
         parameters.add(new Object[] { createNumber(3, "112"),
-                                      new Number[] { createNumber(3, "2"), createNumber(3, "21") } });
+                                      new Number[] { createNumber(3, "2"), createNumber(3, "21"),
+                                                     createNumber(3, "112") } });
 
-        // 8 : { 2, 4 }
+
+        // 8 : { 2, 4, 8 }
         parameters.add(new Object[] { createNumber(4, "20"),
-                                      new Number[] { createNumber(4, "2"), createNumber(4, "10") } });
-        // 9 : { 3 }
-        parameters.add(new Object[] { createNumber(4, "21"), new Number[] { createNumber(4, "3") } });
-        // 10 : { 2, 5 }
+                                      new Number[] { createNumber(4, "2"), createNumber(4, "10"),
+                                                     createNumber(4, "20") } });
+        // 9 : { 3, 9 }
+        parameters.add(new Object[] { createNumber(4, "21"),
+                                      new Number[] { createNumber(4, "3"), createNumber(4, "21") } });
+        // 10 : { 2, 5, 10 }
         parameters.add(new Object[] { createNumber(4, "22"),
-                                      new Number[] { createNumber(4, "2"), createNumber(4, "11") } });
-        // 11 : { }
-        parameters.add(new Object[] { createNumber(4, "23"), new Number[] { } });
-        // 12 : { 2, 3, 4, 6 }
+                                      new Number[] { createNumber(4, "2"), createNumber(4, "11"),
+                                                     createNumber(4, "22") } });
+        // 11 : { 11 }
+        parameters.add(new Object[] { createNumber(4, "23"), new Number[] { createNumber(4, "23") } });
+        // 12 : { 2, 3, 4, 6, 12 }
         parameters.add(new Object[] { createNumber(4, "30"),
                                       new Number[] { createNumber(4, "2"), createNumber(4, "3"), createNumber(4, "10"),
-                                                     createNumber(4, "12") } });
-        // 13 : { }
-        parameters.add(new Object[] { createNumber(4, "31"), new Number[] { } });
-        // 14 : { 2, 7 }
+                                                     createNumber(4, "12"), createNumber(4, "30") } });
+        // 13 : { 13 }
+        parameters.add(new Object[] { createNumber(4, "31"), new Number[] { createNumber(4, "31") } });
+        // 14 : { 2, 7, 14 }
         parameters.add(new Object[] { createNumber(4, "32"),
-                                      new Number[] { createNumber(4, "2"), createNumber(4, "13") } });
+                                      new Number[] { createNumber(4, "2"), createNumber(4, "13"),
+                                                     createNumber(4, "32") } });
 
-        // 8 : { 2, 4 }
-        parameters.add(new Object[] { createNumber(10, "8"),
+
+        // 1 : { }
+        parameters.add(new Object[] { createNumber(10, "1"), new Number[] { } });
+        // 2 : { 2 }
+        parameters.add(new Object[] { createNumber(10, "2"), new Number[] { createNumber(10, "2") } });
+        // 3 : { 3 }
+        parameters.add(new Object[] { createNumber(10, "3"), new Number[] { createNumber(10, "3") } });
+        // 4 : { 2, 4 }
+        parameters.add(new Object[] { createNumber(10, "4"),
                                       new Number[] { createNumber(10, "2"), createNumber(10, "4") } });
-        // 9 : { 3 }
-        parameters.add(new Object[] { createNumber(10, "9"), new Number[] { createNumber(10, "3") } });
-        // 10 : { 2, 5 }
+        // 5 : { 5 }
+        parameters.add(new Object[] { createNumber(10, "5"), new Number[] { createNumber(10, "5") } });
+        // 6 : { 2, 3, 6 }
+        parameters.add(new Object[] { createNumber(10, "6"),
+                                      new Number[] { createNumber(10, "2"), createNumber(10, "3"),
+                                                     createNumber(10, "6") } });
+        // 7 : { 7 }
+        parameters.add(new Object[] { createNumber(10, "7"), new Number[] { createNumber(10, "7") } });
+        // 8 : { 2, 4, 8 }
+        parameters.add(new Object[] { createNumber(10, "8"),
+                                      new Number[] { createNumber(10, "2"), createNumber(10, "4"),
+                                                     createNumber(10, "8") } });
+        // 9 : { 3, 9 }
+        parameters.add(new Object[] { createNumber(10, "9"),
+                                      new Number[] { createNumber(10, "3"), createNumber(10, "9") } });
+        // 10 : { 2, 5, 10 }
         parameters.add(new Object[] { createNumber(10, "10"),
-                                      new Number[] { createNumber(10, "2"), createNumber(10, "5") } });
-        // 11 : { }
-        parameters.add(new Object[] { createNumber(10, "11"), new Number[] { } });
-        // 12 : { 2, 3, 4, 6 }
+                                      new Number[] { createNumber(10, "2"), createNumber(10, "5"),
+                                                     createNumber(10, "10") } });
+        // 11 : { 11 }
+        parameters.add(new Object[] { createNumber(10, "11"), new Number[] { createNumber(10, "11") } });
+        // 12 : { 2, 3, 4, 6, 12 }
         parameters.add(new Object[] { createNumber(10, "12"),
                                       new Number[] { createNumber(10, "2"), createNumber(10, "3"),
-                                                     createNumber(10, "4"), createNumber(10, "6") } });
-        // 13 : { }
-        parameters.add(new Object[] { createNumber(10, "13"), new Number[] { } });
-        // 14 : { 2, 7 }
+                                                     createNumber(10, "4"), createNumber(10, "6"),
+                                                     createNumber(10, "12") } });
+        // 13 : { 13 }
+        parameters.add(new Object[] { createNumber(10, "13"), new Number[] { createNumber(10, "13") } });
+        // 14 : { 2, 7, 14 }
         parameters.add(new Object[] { createNumber(10, "14"),
-                                      new Number[] { createNumber(10, "2"), createNumber(10, "7") } });
+                                      new Number[] { createNumber(10, "2"), createNumber(10, "7"),
+                                                     createNumber(10, "14") } });
 
         return parameters;
     }

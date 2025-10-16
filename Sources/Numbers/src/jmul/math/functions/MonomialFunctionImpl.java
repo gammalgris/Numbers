@@ -93,35 +93,6 @@ public class MonomialFunctionImpl extends FunctionBaseImpl {
     /**
      * Calculate the function value for x.
      *
-     * @param x
-     *        the input value
-     *
-     * @return f(x)
-     */
-    @Override
-    public Number calculate(Number x) {
-
-        Number result = coefficient;
-
-        if (exponent.isZero()) {
-
-            return result;
-        }
-
-        Number counter = exponent;
-
-        while (!counter.isZero()) {
-
-            result = result.multiply(x);
-            counter = counter.dec();
-        }
-
-        return result;
-    }
-
-    /**
-     * Calculate the function value for x.
-     *
      * @param processingDetails
      *        additonal processing details
      * @param x

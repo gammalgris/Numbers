@@ -34,9 +34,8 @@
 package jmul.math.operations.implementations;
 
 
-import jmul.math.digits.PositionalNumeralSystems;
+import jmul.math.Math;
 import jmul.math.numbers.Number;
-import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.Result;
 import jmul.math.signs.Sign;
@@ -89,25 +88,18 @@ public class BaseToNumber implements BinaryOperation<Integer, Result<Number>> {
     @Override
     public Result<Number> calculate(Integer base, Integer destinationBase) {
 
-        Sign baseSign = determineSign(base);
-        int absoluteBase = Math.abs(base);
+        int absoluteBase = java.lang.Math.abs(base);
 
-        String symbol = PositionalNumeralSystems.toString(destinationBase, 0);
-        Number result = createNumber(destinationBase, symbol);
+        Number result = Math.ZERO.value(destinationBase);
 
-        if (Signs.isPositive(baseSign)) {
+        for (int a = 0; a < absoluteBase; a++) {
 
-            for (int a = 0; a < absoluteBase; a++) {
+            result = result.inc();
+        }
 
-                result = result.inc();
-            }
+        if (base < 0) {
 
-        } else {
-
-            for (int a = 0; a < absoluteBase; a++) {
-
-                result = result.dec();
-            }
+            result = result.negate();
         }
 
         return new Result<Number>(result);

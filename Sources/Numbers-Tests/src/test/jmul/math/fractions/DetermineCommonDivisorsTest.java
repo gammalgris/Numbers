@@ -144,7 +144,7 @@ public class DetermineCommonDivisorsTest {
                                       new Number[] { createNumber(10, "2"), createNumber(10, "4"),
                                                      createNumber(10, "5"), createNumber(10, "10"),
                                                      createNumber(10, "20"), createNumber(10, "25"),
-                                                     createNumber(10, "50") } });
+                                                     createNumber(10, "50"), createNumber(10, "100") } });
 
         return parameters;
     }

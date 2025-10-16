@@ -81,6 +81,8 @@ public class IsPrimeCheck implements UnaryOperation<Number, Result<Boolean>> {
         }
 
         SortedSet<Number> primeFactors = operand.primeFactors();
+        primeFactors.remove(operand);
+
         boolean isPrime = primeFactors.isEmpty();
 
         return new Result<Boolean>(isPrime);

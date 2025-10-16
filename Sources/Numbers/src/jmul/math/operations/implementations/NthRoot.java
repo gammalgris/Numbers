@@ -34,6 +34,7 @@
 package jmul.math.operations.implementations;
 
 
+import jmul.math.Math;
 import jmul.math.functions.Function;
 import jmul.math.functions.FunctionHelper;
 import jmul.math.numbers.Number;
@@ -174,7 +175,7 @@ public class NthRoot implements QuaternaryOperation<Number, Result<Number>> {
 
         Number term1;
         {
-            final Number ONE = createNumber(base, "1");
+            final Number ONE = Math.ONE.value(base);
 
             Function monomial = FunctionHelper.createMonomialFunction(ONE, n);
 

@@ -34,6 +34,7 @@
 package jmul.math.operations.implementations;
 
 
+import jmul.math.Math;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.numbers.exceptions.NoResultButLimitException;
@@ -122,7 +123,7 @@ public class DivisionBySubtraction implements TernaryOperation<Number, Result<Nu
 
         Number remainder = absoluteDividend;
         Number subtrahend = absoluteDivisor;
-        Number multiple = createNumber(base, "0");
+        Number multiple = Math.ZERO.value(base);
 
         while (remainder.isGreaterOrEqual(subtrahend)) {
 

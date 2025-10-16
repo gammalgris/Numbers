@@ -42,7 +42,6 @@ import jmul.math.constants.ConstantHelper;
 import jmul.math.fractions.Fraction;
 import jmul.math.matrices.Matrix;
 import jmul.math.numbers.Number;
-import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.MixedBinaryOperation;
 import jmul.math.operations.MixedQuaternaryOperation;
@@ -55,6 +54,7 @@ import jmul.math.operations.implementations.ParameterCheckHelper;
 import jmul.math.operations.processing.ProcessingDetails;
 import jmul.math.operations.repository.OperationIdentifier;
 import jmul.math.operations.repository.OperationIdentifiers;
+import jmul.math.signs.Signs;
 import jmul.math.vectors.Vector;
 
 
@@ -88,6 +88,21 @@ public final class Math {
      */
     public static final Constant DEFAULT_EULERS_NUMBER_ITERATIONS;
 
+    /**
+     * A constant.
+     */
+    public static final Constant MINUS_ONE;
+
+    /**
+     * A constant.
+     */
+    public static final Constant ZERO;
+
+    /**
+     * A constant.
+     */
+    public static final Constant ONE;
+
     /*
      * The static initializer.
      */
@@ -97,6 +112,10 @@ public final class Math {
         DEFAULT_HERON_METHOD_ITERATIONS = ConstantHelper.createConstantNumber(10, "8");
         DEFAULT_NTH_ROOT_ITERATIONS = ConstantHelper.createConstantNumber(10, "7");
         DEFAULT_EULERS_NUMBER_ITERATIONS = ConstantHelper.createConstantNumber(10, "12");
+
+        MINUS_ONE = ConstantHelper.createConstantNumber(10, Signs.NEGATIVE, 1);
+        ZERO = ConstantHelper.createConstantNumber(10, Signs.POSITIVE, 0);
+        ONE = ConstantHelper.createConstantNumber(10, Signs.POSITIVE, 1);
     }
 
     /**
@@ -423,9 +442,7 @@ public final class Math {
             throw new IllegalArgumentException("No number (null) was specified!");
         }
 
-        final Number ONE = createNumber(n.base(), "1");
-
-        return shiftLeft(n, ONE);
+        return shiftLeft(n, ONE.value(n.base()));
     }
 
     /**
@@ -464,9 +481,7 @@ public final class Math {
             throw new IllegalArgumentException("No number (null) was specified!");
         }
 
-        final Number ONE = createNumber(n.base(), "1");
-
-        return shiftRight(n, ONE);
+        return shiftRight(n, ONE.value(n.base()));
     }
 
     /**

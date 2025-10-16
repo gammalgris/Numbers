@@ -41,7 +41,6 @@ import jmul.math.Math;
 import jmul.math.fractions.Fraction;
 import jmul.math.hash.HashHelper;
 import static jmul.math.numbers.Constants.DEFAULT_NUMBER_BASE;
-import static jmul.math.numbers.NumberHelper.createNumber;
 import static jmul.math.numbers.creation.CreationParameters.CLONE;
 import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.notations.NotationFunction;
@@ -1100,7 +1099,7 @@ public class NumberImpl implements Number {
     @Override
     public Number shiftLeft() {
 
-        final Number ONE = createNumber(base(), "1");
+        final Number ONE = Math.ONE.value(base());
 
         return shiftLeft(ONE);
     }
@@ -1133,7 +1132,7 @@ public class NumberImpl implements Number {
     @Override
     public Number shiftRight() {
 
-        final Number ONE = createNumber(base(), "1");
+        final Number ONE = Math.ONE.value(base());
 
         return shiftRight(ONE);
     }
@@ -1846,7 +1845,7 @@ public class NumberImpl implements Number {
             return NumberHelper.createNumber(CLONE, absoluteNumber);
         }
 
-        Number digits = createNumber(base, "0");
+        Number digits = Math.ZERO.value(base);
         DigitNode node = absoluteNumber.centerNode();
 
         while (node != null) {
@@ -1873,7 +1872,7 @@ public class NumberImpl implements Number {
             return NumberHelper.createNumber(CLONE, absoluteNumber);
         }
 
-        Number digits = createNumber(base, "0");
+        Number digits = Math.ZERO.value(base);
         DigitNode node = absoluteNumber.centerNode();
         node = node.rightNode();
 

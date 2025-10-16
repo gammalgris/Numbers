@@ -36,10 +36,12 @@ package jmul.math.operations.implementations;
 
 import jmul.math.digits.Digit;
 import jmul.math.numbers.Number;
-import jmul.math.numbers.NumberImpl;
+import static jmul.math.numbers.NumberHelper.createNumber;
+import jmul.math.numbers.nodes.DigitNode;
+import jmul.math.numbers.nodes.NodesHelper;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
-import static jmul.math.numbers.NumberHelper.createNumber;
+import jmul.math.signs.Signs;
 
 
 /**
@@ -71,9 +73,8 @@ public class DigitToNumberConversion implements UnaryOperation<Digit, Result<Num
         ParameterCheckHelper.checkParameter(d);
 
         int base = d.base();
-        String s = d.toString();
-
-        Number result = createNumber(base, s);
+        DigitNode centerNode = NodesHelper.createNode(d);
+        Number result = createNumber(base, Signs.POSITIVE, centerNode);
 
         return new Result<Number>(result);
     }

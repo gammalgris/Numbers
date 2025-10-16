@@ -34,6 +34,7 @@
 package jmul.math.functions;
 
 
+import jmul.math.fractions.Fraction;
 import jmul.math.numbers.Number;
 import jmul.math.operations.implementations.ParameterCheckHelper;
 import jmul.math.operations.processing.ProcessingDetails;
@@ -106,20 +107,6 @@ public class ExponentialFunctionImpl extends FunctionBaseImpl {
     /**
      * Calculate the function value for x.
      *
-     * @param x
-     *        the input value
-     *
-     * @return f(x)
-     */
-    @Override
-    public Number calculate(Number x) {
-
-        return (coefficient1.exponentiate(x)).add(coefficient0);
-    }
-
-    /**
-     * Calculate the function value for x.
-     *
      * @param processingDetails
      *        additonal processing details
      * @param x
@@ -130,7 +117,9 @@ public class ExponentialFunctionImpl extends FunctionBaseImpl {
     @Override
     public Number calculate(ProcessingDetails processingDetails, Number x) {
 
-        return ((coefficient1.exponentiate(processingDetails, x)).add(coefficient0)).round(processingDetails);
+        Fraction exponent = x.toFraction().reduce();
+
+        return ((coefficient1.exponentiate(processingDetails, exponent)).add(coefficient0)).round(processingDetails);
     }
 
     /**

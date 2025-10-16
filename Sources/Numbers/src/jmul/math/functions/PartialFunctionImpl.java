@@ -117,31 +117,6 @@ public class PartialFunctionImpl extends FunctionBaseImpl {
     /**
      * Calculate the function value for x.
      *
-     * @param x
-     *        the input value
-     *
-     * @return f(x)
-     */
-    @Override
-    public Number calculate(Number x) {
-
-        for (Map.Entry<Condition<Number>, Function> entry : functionMap.entrySet()) {
-
-            Condition<Number> condition = entry.getKey();
-            Function function = entry.getValue();
-
-            if (condition.meetsCondition(x)) {
-
-                return function.calculate(x);
-            }
-        }
-
-        throw new MissingConditionCaseException();
-    }
-
-    /**
-     * Calculate the function value for x.
-     *
      * @param processingDetails
      *        additonal processing details
      * @param x

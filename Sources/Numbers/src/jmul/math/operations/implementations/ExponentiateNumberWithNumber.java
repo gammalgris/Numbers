@@ -34,6 +34,7 @@
 package jmul.math.operations.implementations;
 
 
+import jmul.math.Math;
 import jmul.math.fractions.Fraction;
 import static jmul.math.fractions.FractionHelper.createFraction;
 import jmul.math.numbers.Number;
@@ -80,8 +81,8 @@ public class ExponentiateNumberWithNumber implements TernaryOperation<Number, Re
         ParameterCheckHelper.checkPositiveInteger(decimalPlaces);
 
         int base = number.base();
-        final Number ZERO = createNumber(base, "0");
-        final Number ONE = ZERO.inc();
+        final Number ZERO = Math.ZERO.value(base);
+        final Number ONE = Math.ONE.value(base);
 
         if (exponent.isZero()) {
 
@@ -131,7 +132,7 @@ public class ExponentiateNumberWithNumber implements TernaryOperation<Number, Re
     private Number exponentiate(Number number, Number exponent, Number decimalPlaces) {
 
         int base = number.base();
-        final Number ONE = createNumber(base, "1");
+        final Number ONE = Math.ONE.value(base);
 
         Number counter = exponent;
         Number result = ONE;

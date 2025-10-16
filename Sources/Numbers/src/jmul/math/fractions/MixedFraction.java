@@ -389,9 +389,7 @@ class MixedFraction implements Fraction {
     @Override
     public Fraction normalizedMixedFraction() {
 
-        String zeroString = PositionalNumeralSystems.toString(base(), 0);
-        Number newIntegerPart = NumberHelper.createNumber(base(), zeroString);
-
+        Number newIntegerPart = Math.ZERO.value(base());
         Number newNumerator = numerator().absoluteValue();
         Number newDenominator = NumberHelper.createNumber(CLONE, denominator());
 
@@ -403,8 +401,7 @@ class MixedFraction implements Fraction {
 
         if (newNumerator.isZero()) {
 
-            String oneString = PositionalNumeralSystems.toString(base(), 1);
-            newDenominator = NumberHelper.createNumber(base(), oneString);
+            newDenominator = Math.ONE.value(base());
         }
 
         if (this.isNegative()) {
@@ -597,8 +594,8 @@ class MixedFraction implements Fraction {
     @Override
     public int hashCode() {
 
-        final Number ZERO = createNumber(base(), "0");
-        final Number ONE = createNumber(base(), "1");
+        final Number ZERO = Math.ZERO.value(base());
+        final Number ONE = Math.ONE.value(base());
 
         Number integerPart;
         if (hasIntegerPart()) {

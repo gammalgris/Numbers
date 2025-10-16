@@ -34,6 +34,7 @@
 package jmul.math.operations.implementations;
 
 
+import jmul.math.Math;
 import jmul.math.fractions.Fraction;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
@@ -100,8 +101,8 @@ public class ExponentiateNumberWithFraction implements MixedQuaternaryOperation<
         normalizedExponent = normalizedExponent.reduce();
 
         int base = number.base();
-        final Number ZERO = createNumber(base, "0");
-        final Number ONE = ZERO.inc();
+        final Number ZERO = Math.ZERO.value(base);
+        final Number ONE = Math.ONE.value(base);
 
         if (normalizedExponent.numerator().isZero()) {
 

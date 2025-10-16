@@ -35,10 +35,11 @@ package jmul.math.constants;
 
 
 import jmul.math.fractions.Fraction;
+import static jmul.math.fractions.FractionHelper.createFraction;
 import jmul.math.numbers.Constants;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
-import static jmul.math.fractions.FractionHelper.createFraction;
+import jmul.math.signs.Sign;
 
 
 /**
@@ -82,6 +83,23 @@ public class ConstantHelper {
     public static Constant createConstantNumber(int base, String string) {
 
         return createConstantNumber(createNumber(base, string));
+    }
+
+    /**
+     * Creates a new constant according to the specified parameters.
+     *
+     * @param base
+     *        a number base
+     * @param sign
+     *        a sign
+     * @param ordinal
+     *        an ordinal number
+     *
+     * @return a constant
+     */
+    public static Constant createConstantNumber(int base, Sign sign, int ordinal) {
+
+        return createConstantNumber(createNumber(base, sign, ordinal));
     }
 
     /**

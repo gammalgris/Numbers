@@ -145,6 +145,11 @@ public class DetermineCommonPrimeFactorsTest {
         parameters.add(new Object[] { createFraction(10, "100", "200"),
                                       new Number[] { createNumber(10, "2"), createNumber(10, "5") } });
 
+        parameters.add(new Object[] { createFraction(10, "5", "10"), new Number[] { createNumber(10, "5") } });
+        parameters.add(new Object[] { createFraction(10, "20", "40"),
+                                      new Number[] { createNumber(10, "2"), createNumber(10, "5") } });
+        parameters.add(new Object[] { createFraction(10, "25", "50"), new Number[] { createNumber(10, "5") } });
+
         return parameters;
     }
 

@@ -40,8 +40,8 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import jmul.math.Math;
 import jmul.math.numbers.Number;
-import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.operations.processing.ProcessingDetails;
 
 
@@ -136,37 +136,6 @@ public class PolynomialFunctionImpl extends FunctionBaseImpl {
     /**
      * Calculate the function value for x.
      *
-     * @param x
-     *        the input value
-     *
-     * @return f(x)
-     */
-    @Override
-    public Number calculate(Number x) {
-
-        final Number ZERO = createNumber(base(), "0");
-
-        Number sum = ZERO;
-
-        for (int index = 0; index < coefficients.size(); index++) {
-
-            Number coefficient = coefficients.get(index);
-
-            Number result = coefficient;
-            for (int exponent = 1; exponent <= index; exponent++) {
-
-                result = result.multiply(x);
-            }
-
-            sum = sum.add(result);
-        }
-
-        return sum;
-    }
-
-    /**
-     * Calculate the function value for x.
-     *
      * @param processingDetails
      *        additonal processing details
      * @param x
@@ -177,7 +146,7 @@ public class PolynomialFunctionImpl extends FunctionBaseImpl {
     @Override
     public Number calculate(ProcessingDetails processingDetails, Number x) {
 
-        final Number ZERO = createNumber(base(), "0");
+        final Number ZERO = Math.ZERO.value(base());
 
         Number sum = ZERO;
 
@@ -205,7 +174,7 @@ public class PolynomialFunctionImpl extends FunctionBaseImpl {
     @Override
     public Function derivativeFunction() {
 
-        Number ZERO = createNumber(base(), "0");
+        Number ZERO = Math.ZERO.value(base());
         List<Number> newCoefficients = new ArrayList<>();
 
         Iterator<Number> iterator = coefficients.iterator();
@@ -217,7 +186,7 @@ public class PolynomialFunctionImpl extends FunctionBaseImpl {
 
         iterator.next();
 
-        Number index = createNumber(base(), "1");
+        Number index = Math.ONE.value(base());
 
         while (iterator.hasNext()) {
 
@@ -257,11 +226,19 @@ public class PolynomialFunctionImpl extends FunctionBaseImpl {
 
             if (!coefficient.isZero()) {
 
-                buffer.append(coefficient);
+                if ((index != 0) && !coefficient.isOne()) {
+
+                    buffer.append(coefficient);
+                    buffer.append(" * ");
+
+                } else if (index == 0) {
+
+                    buffer.append(coefficient);
+                }
 
                 if (index > 0) {
 
-                    buffer.append(" * x");
+                    buffer.append("x");
 
                     if (index > 1) {
 

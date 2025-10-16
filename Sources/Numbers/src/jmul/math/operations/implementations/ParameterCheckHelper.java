@@ -178,7 +178,7 @@ public final class ParameterCheckHelper {
 
         if (integer.isFraction()) {
 
-            String message = "An integer is requred!";
+            String message = "An integer is required!";
             throw new IllegalArgumentException(message);
         }
     }

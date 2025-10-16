@@ -34,12 +34,13 @@
 package jmul.math.operations.implementations;
 
 
+import jmul.math.Math;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.numbers.creation.CreationParameters;
-import jmul.math.operations.processing.ProcessingDetails;
 import jmul.math.operations.Result;
 import jmul.math.operations.TernaryOperation;
+import jmul.math.operations.processing.ProcessingDetails;
 import jmul.math.operations.repository.OperationIdentifiers;
 
 
@@ -148,7 +149,7 @@ public class SquareRoot implements TernaryOperation<Number, Result<Number>> {
 
         int base = x.base();
 
-        final Number ONE = createNumber(base, "1");
+        final Number ONE = Math.ONE.value(base);
         final Number TWO = ONE.inc();
 
         ProcessingDetails processingDetails =

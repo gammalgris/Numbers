@@ -34,15 +34,16 @@
 package jmul.math.operations.implementations;
 
 
+import jmul.math.Math;
 import jmul.math.digits.Digit;
 import jmul.math.digits.PositionalNumeralSystems;
-import static jmul.math.operations.implementations.ParameterCheckHelper.checkParameter;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.NodesHelper;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
+import static jmul.math.operations.implementations.ParameterCheckHelper.checkParameter;
 import jmul.math.signs.Sign;
 import jmul.math.signs.Signs;
 
@@ -79,8 +80,7 @@ public class RemoveIntegerPart implements UnaryOperation<Number, Result<Number>>
 
         if (operand.isInfinity()) {
 
-            String symbol = PositionalNumeralSystems.toString(base, 0);
-            Number clone = createNumber(base, symbol);
+            Number clone = Math.ZERO.value(base);
             return new Result<Number>(clone);
         }
 

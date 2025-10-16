@@ -140,12 +140,12 @@ public class DeterminePrimeFactorsTest {
         parameters.add(new Object[] { createNumber(2, "1010"),
                                       new Number[] { createNumber(2, "10"), createNumber(2, "101") } });
         // 11 : { }
-        parameters.add(new Object[] { createNumber(2, "1011"), new Number[] { } });
+        parameters.add(new Object[] { createNumber(2, "1011"), new Number[] { createNumber(2, "1011") } });
         // 12 : { 2, 3 }
         parameters.add(new Object[] { createNumber(2, "1100"),
                                       new Number[] { createNumber(2, "10"), createNumber(2, "11") } });
         // 13 : { }
-        parameters.add(new Object[] { createNumber(2, "1101"), new Number[] { } });
+        parameters.add(new Object[] { createNumber(2, "1101"), new Number[] { createNumber(2, "1101") } });
         // 14 : { 2, 7 }
         parameters.add(new Object[] { createNumber(2, "1110"),
                                       new Number[] { createNumber(2, "10"), createNumber(2, "111") } });
@@ -158,12 +158,12 @@ public class DeterminePrimeFactorsTest {
         parameters.add(new Object[] { createNumber(3, "101"),
                                       new Number[] { createNumber(3, "2"), createNumber(3, "12") } });
         // 11 : { }
-        parameters.add(new Object[] { createNumber(3, "102"), new Number[] { } });
+        parameters.add(new Object[] { createNumber(3, "102"), new Number[] { createNumber(3, "102") } });
         // 12 : { 2, 3 }
         parameters.add(new Object[] { createNumber(3, "110"),
                                       new Number[] { createNumber(3, "2"), createNumber(3, "10") } });
         // 13 : { }
-        parameters.add(new Object[] { createNumber(3, "111"), new Number[] { } });
+        parameters.add(new Object[] { createNumber(3, "111"), new Number[] { createNumber(3, "111") } });
         // 14 : { 2, 7 }
         parameters.add(new Object[] { createNumber(3, "112"),
                                       new Number[] { createNumber(3, "2"), createNumber(3, "21") } });
@@ -176,16 +176,31 @@ public class DeterminePrimeFactorsTest {
         parameters.add(new Object[] { createNumber(4, "22"),
                                       new Number[] { createNumber(4, "2"), createNumber(4, "11") } });
         // 11 : { }
-        parameters.add(new Object[] { createNumber(4, "23"), new Number[] { } });
+        parameters.add(new Object[] { createNumber(4, "23"), new Number[] { createNumber(4, "23") } });
         // 12 : { 2, 3 }
         parameters.add(new Object[] { createNumber(4, "30"),
                                       new Number[] { createNumber(4, "2"), createNumber(4, "3") } });
         // 13 : { }
-        parameters.add(new Object[] { createNumber(4, "31"), new Number[] { } });
+        parameters.add(new Object[] { createNumber(4, "31"), new Number[] { createNumber(4, "31") } });
         // 14 : { 2, 7 }
         parameters.add(new Object[] { createNumber(4, "32"),
                                       new Number[] { createNumber(4, "2"), createNumber(4, "13") } });
 
+        // 1 : { }
+        parameters.add(new Object[] { createNumber(10, "1"), new Number[] { } });
+        // 2 : { 2 }
+        parameters.add(new Object[] { createNumber(10, "2"), new Number[] { createNumber(10, "2") } });
+        // 3 : { 3 }
+        parameters.add(new Object[] { createNumber(10, "3"), new Number[] { createNumber(10, "3") } });
+        // 4 : { 2 }
+        parameters.add(new Object[] { createNumber(10, "4"), new Number[] { createNumber(10, "2") } });
+        // 5 : { 5 }
+        parameters.add(new Object[] { createNumber(10, "5"), new Number[] { createNumber(10, "5") } });
+        // 6 : { 2, 3 }
+        parameters.add(new Object[] { createNumber(10, "6"),
+                                      new Number[] { createNumber(10, "2"), createNumber(10, "3") } });
+        // 7 : { 7 }
+        parameters.add(new Object[] { createNumber(10, "7"), new Number[] { createNumber(10, "7") } });
         // 8 : { 2 }
         parameters.add(new Object[] { createNumber(10, "8"), new Number[] { createNumber(10, "2") } });
         // 9 : { 3 }
@@ -194,12 +209,12 @@ public class DeterminePrimeFactorsTest {
         parameters.add(new Object[] { createNumber(10, "10"),
                                       new Number[] { createNumber(10, "2"), createNumber(10, "5") } });
         // 11 : { }
-        parameters.add(new Object[] { createNumber(10, "11"), new Number[] { } });
+        parameters.add(new Object[] { createNumber(10, "11"), new Number[] { createNumber(10, "11") } });
         // 12 : { 2, 3 }
         parameters.add(new Object[] { createNumber(10, "12"),
                                       new Number[] { createNumber(10, "2"), createNumber(10, "3") } });
         // 13 : { }
-        parameters.add(new Object[] { createNumber(10, "13"), new Number[] { } });
+        parameters.add(new Object[] { createNumber(10, "13"), new Number[] { createNumber(10, "13") } });
         // 14 : { 2, 7 }
         parameters.add(new Object[] { createNumber(10, "14"),
                                       new Number[] { createNumber(10, "2"), createNumber(10, "7") } });
@@ -213,7 +228,7 @@ public class DeterminePrimeFactorsTest {
                                       new Number[] { createNumber(10, "2"), createNumber(10, "5") } });
 
         // 2137 : { }
-        parameters.add(new Object[] { createNumber(10, "2137"), new Number[] { } });
+        parameters.add(new Object[] { createNumber(10, "2137"), new Number[] { createNumber(10, "2137") } });
         // 2138 : { 2, 5 }
         parameters.add(new Object[] { createNumber(10, "2138"),
                                       new Number[] { createNumber(10, "2"), createNumber(10, "1069") } });

@@ -35,8 +35,8 @@ package jmul.math.functions;
 
 
 import jmul.math.Math;
+import jmul.math.fractions.Fraction;
 import jmul.math.numbers.Number;
-import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.operations.processing.ProcessingDetails;
 
 
@@ -81,9 +81,12 @@ public class SigmoidFunctionImpl extends FunctionBaseImpl {
     @Override
     public Number calculate(Number x) {
 
-        final Number ONE = createNumber(base(), "1");
+        ProcessingDetails processingDetails =
+            ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM,
+                                                   ProcessingDetails.DEFAULT_PRECISION,
+                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
 
-        return (ONE.divide(ONE.add(e.exponentiate(x.negate()))));
+        return calculate(processingDetails, x);
     }
 
     /**
@@ -99,9 +102,16 @@ public class SigmoidFunctionImpl extends FunctionBaseImpl {
     @Override
     public Number calculate(ProcessingDetails processingDetails, Number x) {
 
-        final Number ONE = createNumber(base(), "1");
+        final Number ONE = Math.ONE.value(base());
+        Fraction exponent = x.toFraction().reduce().negate();
 
-        return (ONE.divide(processingDetails, ONE.add(e.exponentiate(processingDetails, x.negate()))));
+        Number result1 = (ONE.divide(processingDetails, ONE.add(e.exponentiate(processingDetails, exponent))));
+
+        Number result2 = e.exponentiate(processingDetails, exponent);
+        result2 = ONE.add(result2);
+        result2 = ONE.divide(processingDetails, result2);
+
+        return result1;
     }
 
     /**
@@ -162,23 +172,6 @@ class SigmoidFunctionFirstDerivative extends FunctionBaseImpl {
     /**
      * Calculate the function value for x.
      *
-     * @param x
-     *        the input value
-     *
-     * @return f(x)
-     */
-    @Override
-    public Number calculate(jmul.math.numbers.Number x) {
-
-        final Number ONE = createNumber(base(), "1");
-        final Number TWO = ONE.inc();
-
-        return (e.exponentiate(x)).divide(((e.exponentiate(x)).add(ONE)).exponentiate(TWO));
-    }
-
-    /**
-     * Calculate the function value for x.
-     *
      * @param processingDetails
      *        additonal processing details
      * @param x
@@ -189,13 +182,15 @@ class SigmoidFunctionFirstDerivative extends FunctionBaseImpl {
     @Override
     public Number calculate(ProcessingDetails processingDetails, Number x) {
 
-        final Number ONE = createNumber(base(), "1");
+        final Number ONE = Math.ONE.value(base());
         final Number TWO = ONE.inc();
+        Fraction exponent1 = x.toFraction().reduce();
+        Fraction exponent2 = TWO.toFraction();
 
-        return (e.exponentiate(processingDetails, x)).divide(processingDetails,
-                                                             ((e.exponentiate(processingDetails,
-                                                                              x)).add(ONE)).exponentiate(processingDetails,
-                                                                                                         TWO));
+        return (e.exponentiate(processingDetails, exponent1)).divide(processingDetails,
+                                                                     ((e.exponentiate(processingDetails,
+                                                                                      exponent1)).add(ONE)).exponentiate(processingDetails,
+                                                                                                                         exponent2));
     }
 
     /**

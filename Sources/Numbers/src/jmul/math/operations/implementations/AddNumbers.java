@@ -34,10 +34,9 @@
 package jmul.math.operations.implementations;
 
 
+import jmul.math.Math;
 import jmul.math.digits.Digit;
 import jmul.math.digits.PositionalNumeralSystems;
-import jmul.math.operations.OperationSingletons;
-import jmul.math.operations.repository.OperationIdentifiers;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberHelper;
 import static jmul.math.numbers.NumberHelper.createInfinity;
@@ -48,9 +47,11 @@ import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.NodesHelper;
 import jmul.math.numbers.nodes.NodesResult;
 import jmul.math.operations.BinaryOperation;
+import jmul.math.operations.OperationSingletons;
 import jmul.math.operations.Result;
 import jmul.math.operations.ResultWithCarry;
 import jmul.math.operations.UnaryOperation;
+import jmul.math.operations.repository.OperationIdentifiers;
 import jmul.math.signs.Sign;
 import jmul.math.signs.Signs;
 
@@ -198,7 +199,7 @@ public class AddNumbers implements BinaryOperation<Number, Result<Number>> {
              * -0 + 0 = 0
              */
 
-            Number result = createNumber(base, "0");
+            Number result = Math.ZERO.value(base);
             return new Result<Number>(result);
         }
     }
@@ -366,7 +367,7 @@ public class AddNumbers implements BinaryOperation<Number, Result<Number>> {
              * -n + m -> 0 (if abs(n) = abs(m))
              */
 
-            Number result = createNumber(base, "0");
+            Number result = Math.ZERO.value(base);
             return new Result<Number>(result);
 
         } else if (comparisonResult > 0) {

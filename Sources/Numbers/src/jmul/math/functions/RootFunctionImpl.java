@@ -100,20 +100,6 @@ public class RootFunctionImpl extends FunctionBaseImpl {
     /**
      * Calculate the function value for x.
      *
-     * @param x
-     *        the input value
-     *
-     * @return f(x)
-     */
-    @Override
-    public Number calculate(Number x) {
-
-        return coefficient.multiply(x.exponentiate(exponent));
-    }
-
-    /**
-     * Calculate the function value for x.
-     *
      * @param processingDetails
      *        additonal processing details
      * @param x

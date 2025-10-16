@@ -34,16 +34,16 @@
 package jmul.math.operations.implementations;
 
 
+import jmul.math.Math;
 import jmul.math.digits.Digit;
-import jmul.math.operations.OperationSingletons;
-import jmul.math.operations.repository.OperationIdentifiers;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.NumberHelper;
-import static jmul.math.numbers.NumberHelper.createNumber;
 import static jmul.math.numbers.creation.CreationParameters.CLONE;
 import jmul.math.numbers.nodes.DigitNode;
+import jmul.math.operations.OperationSingletons;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
+import jmul.math.operations.repository.OperationIdentifiers;
 import jmul.math.signs.Sign;
 import jmul.math.signs.Signs;
 
@@ -86,7 +86,7 @@ public class NumberDigitSum implements UnaryOperation<Number, Result<Number>> {
             (UnaryOperation<Digit, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.DIGIT_TO_NUMBER_FUNCTION);
 
         int base = n.base();
-        Number sum = createNumber(base, "0");
+        Number sum = Math.ZERO.value(base);
         DigitNode currentNode = n.centerNode();
 
         while (currentNode != null) {

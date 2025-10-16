@@ -34,11 +34,11 @@
 package jmul.math.operations.implementations;
 
 
+import jmul.math.Math;
 import jmul.math.fractions.Fraction;
 import static jmul.math.fractions.FractionHelper.cloneFraction;
 import static jmul.math.fractions.FractionHelper.createFraction;
 import jmul.math.numbers.Number;
-import static jmul.math.numbers.NumberHelper.createNumber;
 import static jmul.math.numbers.creation.CreationParameters.DONT_CLONE;
 import jmul.math.operations.MixedBinaryOperation;
 import jmul.math.operations.Result;
@@ -76,8 +76,8 @@ public class ExponentiateFractionWithNumber implements MixedBinaryOperation<Frac
         ParameterCheckHelper.checkIntegerIgnoreNull(exponent);
 
         int base = number.base();
-        final Number ZERO = createNumber(base, "0");
-        final Number ONE = ZERO.inc();
+        final Number ZERO = Math.ZERO.value(base);
+        final Number ONE = Math.ONE.value(base);
 
         if (exponent.isZero()) {
 
