@@ -34,20 +34,17 @@
 package jmul.math.functions;
 
 
-import jmul.math.fractions.Fraction;
 import jmul.math.numbers.Number;
 import jmul.math.operations.implementations.ParameterCheckHelper;
 import jmul.math.operations.processing.ProcessingDetails;
 
 
-/**
- * An implementation of an exponential  nth root function f(x) = c<sub>1</sub><sup>x</sup> + c<sub>0</sub>.<br>
- * <br>
- * TODO need logarithms for the derivative function -&gt; f'(x) = c<sub>1</sub><sup>x</sup> * log(c<sub>1</sub>)
- *
- * @author Kristian Kutin
- */
-public class ExponentialFunctionImpl extends FunctionBaseImpl {
+ /**
+  * An implementation of an sinus function f(x) = c<sub>1</sub> * sin(x) + c<sub>0</sub>.
+  *
+  * @author Kristian Kutin
+  */
+public class SinusDegreeFunctionImpl extends FunctionBaseImpl {
 
     /**
      * A coefficient.
@@ -59,29 +56,10 @@ public class ExponentialFunctionImpl extends FunctionBaseImpl {
      */
     private final Number coefficient0;
 
-
-    /**
-     * Creates a new instance according to the specified parameters.
-     *
-     * @param coefficient1
-     *        a coefficient
-     * @param coefficient0
-     *        a coefficient
-     */
-    protected ExponentialFunctionImpl(Number coefficient1, Number coefficient0) {
+    public SinusDegreeFunctionImpl(Number coefficient1, Number coefficient0) {
 
         super(extractBase(coefficient1, coefficient0));
-
-        if (coefficient1.isZero()) {
-
-            throw new IllegalArgumentException("The first coefficient cannot be zero!");
-        }
-
-        if (coefficient1.isOne()) {
-
-            throw new IllegalArgumentException("The first coefficient cannot be one!");
-        }
-
+        
         this.coefficient1 = coefficient1;
         this.coefficient0 = coefficient0;
     }
@@ -98,49 +76,28 @@ public class ExponentialFunctionImpl extends FunctionBaseImpl {
      */
     private static int extractBase(Number coefficient1, Number coefficient0) {
 
-        ParameterCheckHelper.checkParameters(coefficient0, coefficient1);
+        ParameterCheckHelper.checkParameters(coefficient1, coefficient0);
 
         return coefficient0.base();
     }
 
-    /**
-     * Calculate the function value for x.
-     *
-     * @param processingDetails
-     *        additonal processing details
-     * @param x
-     *        the input value
-     *
-     * @return f(x)
-     */
     @Override
     public Number calculate(ProcessingDetails processingDetails, Number x) {
-
-        Fraction exponent = x.toFraction().reduce();
-
-        return ((coefficient1.exponentiate(processingDetails, exponent)).add(coefficient0)).round(processingDetails);
+        // TODO Implement this method
+        return null;
     }
 
-    /**
-     * Returns the derivative function for this function.
-     *
-     * @return a derivative function
-     */
     @Override
     public Function derivativeFunction() {
-
-        throw new UnsupportedOperationException();
+        // TODO Implement this method
+        return null;
     }
 
-    /**
-     * Returns a string representation for this function.
-     *
-     * @return a string representation
-     */
     @Override
     public String toString() {
 
-        return String.format("%s^x + %s", coefficient1, coefficient0);
+        // TODO Implement this method
+        return null;
     }
 
 }

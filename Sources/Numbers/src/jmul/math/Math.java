@@ -89,6 +89,11 @@ public final class Math {
     public static final Constant DEFAULT_EULERS_NUMBER_ITERATIONS;
 
     /**
+     * The default number of iterations for calculating Pi.
+     */
+    public static final Constant DEFAULT_LEIBNITZ_PI_APPROXIMATION_ITERATIONS;
+
+    /**
      * A constant.
      */
     public static final Constant MINUS_ONE;
@@ -112,6 +117,7 @@ public final class Math {
         DEFAULT_HERON_METHOD_ITERATIONS = ConstantHelper.createConstantNumber(10, "8");
         DEFAULT_NTH_ROOT_ITERATIONS = ConstantHelper.createConstantNumber(10, "7");
         DEFAULT_EULERS_NUMBER_ITERATIONS = ConstantHelper.createConstantNumber(10, "12");
+        DEFAULT_LEIBNITZ_PI_APPROXIMATION_ITERATIONS = ConstantHelper.createConstantNumber(10, "100");
 
         MINUS_ONE = ConstantHelper.createConstantNumber(10, Signs.NEGATIVE, 1);
         ZERO = ConstantHelper.createConstantNumber(10, Signs.POSITIVE, 0);
@@ -2491,7 +2497,7 @@ public final class Math {
      * @param base
      *        a number base
      *
-     * @return Euler's number
+     * @return an approximation for Euler's number
      */
     public static Number e(ProcessingDetails processingDetails, int base) {
 
@@ -2505,6 +2511,57 @@ public final class Math {
 
         BinaryOperation<Number, Result<Number>> function =
             (BinaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.EULERS_NUMBER_FUNCTION);
+        Result<Number> result = function.calculate(iterations, decimalPlaces);
+
+        return result.result();
+    }
+
+    /**
+     * Returns an approximation for Pi.
+     *
+     * @param base
+     *        a number base
+     *
+     * @return an approximation for Pi
+     */
+    public static Number pi(int base) {
+
+        ProcessingDetails processingDetails =
+            ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM,
+                                                   ProcessingDetails.DEFAULT_PRECISION,
+                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+
+        return pi(processingDetails, base);
+    }
+
+    /**
+     * Returns an approximation for Pi.
+     *
+     * @param processingDetails
+     *        additonal processing details
+     * @param base
+     *        a number base
+     *
+     * @return an approximation for Pi
+     */
+    public static Number pi(ProcessingDetails processingDetails, int base) {
+
+        ParameterCheckHelper.checkParameter(processingDetails);
+        ParameterCheckHelper.checkNumberBase(base);
+
+        final OperationIdentifier[] ALLOWED_ALGORITHMS = new OperationIdentifier[] {
+            OperationIdentifiers.ARCHIMEDES_PI_APPROXIMATION_FUNCTION,
+            OperationIdentifiers.LEIBNIZ_PI_APPROXIMATION_FUNCTION
+        };
+
+        OperationIdentifier algorithm = processingDetails.checkAndReturnAlgorithm(ALLOWED_ALGORITHMS);
+        Number iterations =
+            processingDetails.checkAndReturnPrecision(Math.DEFAULT_LEIBNITZ_PI_APPROXIMATION_ITERATIONS.value(base));
+        Number decimalPlaces =
+            processingDetails.checkAndReturnPrecision(Math.DEFAULT_MAXIMUM_FRACTION_LENGTH.value(base));
+
+        BinaryOperation<Number, Result<Number>> function =
+            (BinaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(algorithm);
         Result<Number> result = function.calculate(iterations, decimalPlaces);
 
         return result.result();

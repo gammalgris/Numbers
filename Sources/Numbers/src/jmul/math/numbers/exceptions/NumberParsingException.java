@@ -112,7 +112,7 @@ class JoinedParsingExceptions extends Throwable {
     private static String createMessage(List<Throwable> exceptions) {
 
         StringBuilder buffer = new StringBuilder();
-        buffer.append("All collected parsing exceptions:");
+        buffer.append("All parsing exceptions:");
 
         int count = 1;
         for (Throwable parsingException : exceptions) {

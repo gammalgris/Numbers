@@ -34,10 +34,11 @@
 package test.jmul.math.numbers;
 
 
-import jmul.math.numbers.Number;
 import jmul.math.Math;
+import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.operations.processing.ProcessingDetails;
+import jmul.math.operations.repository.OperationIdentifiers;
 
 import jmul.test.classification.UnitTest;
 
@@ -109,6 +110,85 @@ public class SpecialNumbersTest {
 
         assertEquals("2.LGDI8COIGJ", e.toString());
         assertEquals("2.7182818282", e.rebase(10).toString());
+    }
+
+    /**
+     * Tests Pi with base 10 and default processing details.
+     */
+    @Test
+    public void testPiBase10() {
+
+        int base = 10;
+
+        Number pi = Math.pi(base);
+
+        // 3.14159265358979323846264338327950288419716939937510582097494459230781640628
+        assertEquals("3.1428571428", pi.toString());
+    }
+
+    /**
+     * Tests Pi with base 10 and different processing details.
+     */
+    @Test
+    public void testPiBase10Variant2() {
+
+        int base = 10;
+
+        ProcessingDetails processingDetails =
+            ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM, createNumber(base, "20"),
+                                                   Math.DEFAULT_LEIBNITZ_PI_APPROXIMATION_ITERATIONS.value(base).doubling());
+
+        Number pi = Math.pi(processingDetails, base);
+
+        // 3.14159265358979323846264338327950288419716939937510582097494459230781640628
+        assertEquals("3.14285714285714285714", pi.toString());
+    }
+
+    /**
+     * Tests Pi with base 10 and different processing details.
+     */
+    @Test
+    public void testPiBase10Variant3() {
+
+        int base = 10;
+
+        ProcessingDetails processingDetails =
+            ProcessingDetails.setProcessingDetails(OperationIdentifiers.LEIBNIZ_PI_APPROXIMATION_FUNCTION,
+                                                   ProcessingDetails.DEFAULT_PRECISION,
+                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+
+        Number pi = Math.pi(processingDetails, base);
+
+        // 3.14159265358979323846264338327950288419716939937510582097494459230781640628
+        assertEquals("3.1315929056", pi.toString());
+    }
+
+    /**
+     * Tests Pi with base 2 and default processing details.
+     */
+    @Test
+    public void testPiBase2() {
+
+        int base = 2;
+
+        Number pi = Math.pi(base);
+
+        assertEquals("11.001001001", pi.toString());
+        assertEquals("3.142578125", pi.rebase(10).toString());
+    }
+
+    /**
+     * Tests Pi with base 30 and default processing details.
+     */
+    @Test
+    public void testPiBase30() {
+
+        int base = 30;
+
+        Number pi = Math.pi(base);
+
+        assertEquals("3.48H48H48H4", pi.toString());
+        assertEquals("3.1428571428", pi.rebase(10).toString());
     }
 
 }

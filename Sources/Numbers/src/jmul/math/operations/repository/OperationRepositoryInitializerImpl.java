@@ -47,6 +47,7 @@ import jmul.math.operations.implementations.AddNumberAndFraction;
 import jmul.math.operations.implementations.AddNumbers;
 import jmul.math.operations.implementations.AddNumbersTrimResult;
 import jmul.math.operations.implementations.AddVectors;
+import jmul.math.operations.implementations.ArchimedesPiApproximation;
 import jmul.math.operations.implementations.BaseToNumber;
 import jmul.math.operations.implementations.CrossProduct;
 import jmul.math.operations.implementations.DecrementFraction;
@@ -84,6 +85,7 @@ import jmul.math.operations.implementations.IncrementNumber;
 import jmul.math.operations.implementations.IsMultipleCheck;
 import jmul.math.operations.implementations.IsPrimeCheck;
 import jmul.math.operations.implementations.IsSingleDigitCheck;
+import jmul.math.operations.implementations.LeibnizPiApproximation;
 import jmul.math.operations.implementations.LongMultiplication;
 import jmul.math.operations.implementations.MatrixMultiplication;
 import jmul.math.operations.implementations.MaxFraction;
@@ -430,6 +432,10 @@ public class OperationRepositoryInitializerImpl implements OperationRepositoryIn
                                     ExponentiateFractionWithNumber.class);
 
         repository.registerFunction(OperationIdentifiers.EULERS_NUMBER_FUNCTION, EulersNumberFunction.class);
+        repository.registerFunction(OperationIdentifiers.LEIBNIZ_PI_APPROXIMATION_FUNCTION,
+                                    LeibnizPiApproximation.class);
+        repository.registerFunction(OperationIdentifiers.ARCHIMEDES_PI_APPROXIMATION_FUNCTION,
+                                    ArchimedesPiApproximation.class);
 
         return repository;
     }
