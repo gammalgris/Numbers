@@ -34,12 +34,12 @@
 package jmul.math.operations.implementations;
 
 
-import jmul.math.operations.OperationSingletons;
-import jmul.math.operations.repository.OperationIdentifiers;
 import jmul.math.numbers.Number;
 import jmul.math.numbers.exceptions.UndefinedOperationException;
 import jmul.math.operations.BinaryOperation;
+import jmul.math.operations.OperationSingletons;
 import jmul.math.operations.Result;
+import jmul.math.operations.repository.OperationIdentifiers;
 
 
 /**

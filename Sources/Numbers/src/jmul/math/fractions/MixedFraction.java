@@ -35,9 +35,10 @@ package jmul.math.fractions;
 
 
 import java.util.Comparator;
-import java.util.SortedSet;
 
 import jmul.math.Math;
+import jmul.math.collections.Sequence;
+import jmul.math.collections.Set;
 import jmul.math.digits.PositionalNumeralSystems;
 import static jmul.math.fractions.FractionHelper.createFraction;
 import jmul.math.hash.HashHelper;
@@ -55,6 +56,9 @@ import jmul.math.operations.OperationSingletons;
 import jmul.math.operations.Result;
 import jmul.math.operations.TernaryOperation;
 import jmul.math.operations.UnaryOperation;
+import jmul.math.operations.implementations.ParameterCheckHelper;
+import jmul.math.operations.processing.ProcessingDetails;
+import jmul.math.operations.repository.OperationIdentifier;
 import jmul.math.operations.repository.OperationIdentifiers;
 import jmul.math.signs.Sign;
 import jmul.math.signs.Signs;
@@ -1052,8 +1056,35 @@ class MixedFraction implements Fraction {
     @Override
     public Fraction reduce() {
 
+        ProcessingDetails processingDetails =
+            ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM,
+                                                   ProcessingDetails.DEFAULT_PRECISION,
+                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+
+        return reduce(processingDetails);
+    }
+
+    /**
+     * Reduce fraction.
+     *
+     * @param processingDetails
+     *        some processing details
+     *
+     * @return a fraction
+     */
+    @Override
+    public Fraction reduce(ProcessingDetails processingDetails) {
+
+        ParameterCheckHelper.checkParameter(processingDetails);
+
+        final OperationIdentifier[] ALLOWED_ALGORITHMS = new OperationIdentifier[] {
+            OperationIdentifiers.OPTIMIZED_REDUCE_FRACTION, OperationIdentifiers.REDUCE_FRACTION_BY_COMMON_PRIME_FACTORS
+        };
+
+        OperationIdentifier algorithm = processingDetails.checkAndReturnAlgorithm(ALLOWED_ALGORITHMS);
+
         UnaryOperation<Fraction, Result<Fraction>> function =
-            (UnaryOperation<Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.REDUCE_FRACTION_FUNCTION);
+            (UnaryOperation<Fraction, Result<Fraction>>) OperationSingletons.getFunction(algorithm);
         Result<Fraction> result = function.calculate(this);
 
         return result.result();
@@ -1123,33 +1154,31 @@ class MixedFraction implements Fraction {
     }
 
     /**
-     * Determines the common divisors for this fraction (i.e. numerator and denominator). The result set contains
-     * divisors greater than one.
+     * Determines the common divisors for this fraction (i.e. numerator and denominator).
      *
-     * @return a set of divisors
+     * @return a set of common divisors or an empty set if there are no common divisors
      */
     @Override
-    public SortedSet<Number> commonDivisorSet() {
+    public Set<Number> commonDivisors() {
 
-        UnaryOperation<Fraction, Result<SortedSet<Number>>> function =
-            (UnaryOperation<Fraction, Result<SortedSet<Number>>>) OperationSingletons.getFunction(OperationIdentifiers.DETERMINE_COMMON_DIVISORS_FUNCTION);
-        Result<SortedSet<Number>> result = function.calculate(this);
+        UnaryOperation<Fraction, Result<Set<Number>>> function =
+            (UnaryOperation<Fraction, Result<Set<Number>>>) OperationSingletons.getFunction(OperationIdentifiers.DETERMINE_COMMON_DIVISORS_IN_FRACTION);
+        Result<Set<Number>> result = function.calculate(this);
 
         return result.result();
     }
 
     /**
-     * Determines the common prime factors for this fraction (i.e. numerator and denominator). The result set contains
-     * the prime factors.
+     * Determines the common prime factors for this fraction (i.e. numerator and denominator).
      *
-     * @return a set of prime factors
+     * @return a sequence of prime factors or an empty sequence if there are no common prime factors
      */
     @Override
-    public SortedSet<Number> commonPrimeFactors() {
+    public Sequence<Number> commonPrimeFactors() {
 
-        UnaryOperation<Fraction, Result<SortedSet<Number>>> function =
-            (UnaryOperation<Fraction, Result<SortedSet<Number>>>) OperationSingletons.getFunction(OperationIdentifiers.DETERMINE_COMMON_PRIME_FACTORS_FUNCTION);
-        Result<SortedSet<Number>> result = function.calculate(this);
+        UnaryOperation<Fraction, Result<Sequence<Number>>> function =
+            (UnaryOperation<Fraction, Result<Sequence<Number>>>) OperationSingletons.getFunction(OperationIdentifiers.DETERMINE_COMMON_PRIME_FACTORS_IN_FRACTION);
+        Result<Sequence<Number>> result = function.calculate(this);
 
         return result.result();
     }

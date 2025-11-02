@@ -31,18 +31,16 @@
  * $Id$
  */
 
-package test.jmul.math.fractions;
+package test.jmul.math.numbers;
 
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 import jmul.math.Math;
-import static jmul.math.collections.CollectionsHelper.createNumberSet;
-import jmul.math.collections.Set;
-import jmul.math.fractions.Fraction;
-import static jmul.math.fractions.FractionHelper.createFraction;
 import jmul.math.numbers.Number;
+
+import static jmul.math.numbers.NumberHelper.createNumber;
 
 import jmul.test.classification.UnitTest;
 
@@ -53,70 +51,58 @@ import org.junit.runners.Parameterized;
 
 
 /**
- * This test suite tests determining divisors of a fraction.
+ * This test suite tests calculating the cosine.
  *
  * @author Kristian Kutin
  */
 @UnitTest
 @RunWith(Parameterized.class)
-public class DetermineCommonDivisorsTest {
+public class CosineTest {
 
     /**
-     * A fraction.
+     * The input for calculating the sine.
      */
-    private final Fraction fraction;
+    private final Number input;
 
     /**
      * The expected result.
      */
-    private final Set<Number> expectedResult;
+    private final Number expectedResult;
 
     /**
      * Creates a new test case according to the specified parameters.
      *
-     * @param fraction
-     *        a fraction
-     * @param set
-     *        all expected divisors
+     * @param input
+     *        the input
+     * @param expectedResult
+     *        the expected result
      */
-    public DetermineCommonDivisorsTest(Fraction fraction, Set<Number> set) {
+    public CosineTest(Number input, Number expectedResult) {
 
         super();
 
-        this.fraction = fraction;
-        this.expectedResult = set;
+        this.input = input;
+        this.expectedResult = expectedResult;
     }
 
     /**
-     * Returns a test summary.
+     * Returns a string representation for this test case.
      *
-     * @return a test summary
+     * @return a string representation
      */
     @Override
     public String toString() {
 
-        return String.format("[base:%d] %s : %s", fraction.base(), fraction, expectedResult);
+        return String.format("cosine([%d] %s) = [%d] %s", input.base(), input, expectedResult.base(), expectedResult);
     }
 
     /**
-     * Checks the divisors and the expected divisors.
+     * Tests calculating the sine.
      */
     @Test
-    public void checkDivisors() {
+    public void calculateSine() {
 
-        Set<Number> actualResult = fraction.commonDivisors();
-
-        assertEquals(toString(), expectedResult, actualResult);
-        assertEquals(toString(), expectedResult.toString(), actualResult.toString());
-    }
-
-    /**
-     * Checks the divisors and the expected divisors.
-     */
-    @Test
-    public void checkDivisorsVariant2() {
-
-        Set<Number> actualResult = Math.commonDivisors(fraction);
+        Number actualResult = input.cosine();
 
         assertEquals(toString(), expectedResult, actualResult);
         assertEquals(toString(), expectedResult.toString(), actualResult.toString());
@@ -130,16 +116,25 @@ public class DetermineCommonDivisorsTest {
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
 
+        int base = 10;
+
+        final Number pi = Math.PI.value(10);
+        
+        final Number degree0 = Math.ZERO.value(base);
+        final Number degree90 = pi.halving();
+        final Number degree180 = pi;
+        final Number degree270 = degree90.add(degree180);
+        final Number degree360 = pi.doubling();
+        final Number degree450 = degree360.add(degree90);
+
         Collection<Object[]> parameters = new ArrayList<Object[]>();
 
-        parameters.add(new Object[] { createFraction(10, "14"), createNumberSet(10, "1") });
-
-        parameters.add(new Object[] { createFraction(10, "14", "12"), createNumberSet(10, "1", "2") });
-
-        parameters.add(new Object[] { createFraction(10, "15", "51"), createNumberSet(10, "1", "3") });
-
-        parameters.add(new Object[] { createFraction(10, "100", "200"),
-                                      createNumberSet(10, "1", "2", "4", "5", "10", "20", "25", "50", "100") });
+        parameters.add(new Object[] { degree0, createNumber(base, "1") });
+        parameters.add(new Object[] { degree90, createNumber(base, "0") });
+        parameters.add(new Object[] { degree180, createNumber(base, "-1") });
+        parameters.add(new Object[] { degree270, createNumber(base, "0") });
+        parameters.add(new Object[] { degree360, createNumber(base, "1") });
+        parameters.add(new Object[] { degree450, createNumber(base, "0") });
 
         return parameters;
     }

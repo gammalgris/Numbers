@@ -35,18 +35,14 @@ package test.jmul.math.fractions;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.SortedSet;
-
-import java.util.TreeSet;
 
 import jmul.math.Math;
+import static jmul.math.collections.CollectionsHelper.createNumberSequence;
+import jmul.math.collections.Sequence;
 import jmul.math.fractions.Fraction;
 import static jmul.math.fractions.FractionHelper.createFraction;
 import jmul.math.numbers.Number;
-
-import static jmul.math.numbers.NumberHelper.createNumber;
 
 import jmul.test.classification.UnitTest;
 
@@ -73,7 +69,7 @@ public class DetermineCommonPrimeFactorsTest {
     /**
      * The expected result.
      */
-    private final SortedSet<Number> expectedResult;
+    private final Sequence<Number> expectedResult;
 
     /**
      * Creates a new test case according to the specified parameters.
@@ -83,12 +79,12 @@ public class DetermineCommonPrimeFactorsTest {
      * @param primeFactors
      *        all expected prime factors
      */
-    public DetermineCommonPrimeFactorsTest(Fraction fraction, Number... primeFactors) {
+    public DetermineCommonPrimeFactorsTest(Fraction fraction, Sequence<Number> primeFactors) {
 
         super();
 
         this.fraction = fraction;
-        this.expectedResult = new TreeSet<>(Arrays.asList(primeFactors));
+        this.expectedResult = primeFactors;
     }
 
     /**
@@ -108,7 +104,7 @@ public class DetermineCommonPrimeFactorsTest {
     @Test
     public void checkPrimeFactors() {
 
-        SortedSet<Number> actualResult = fraction.commonPrimeFactors();
+        Sequence<Number> actualResult = fraction.commonPrimeFactors();
 
         assertEquals(toString(), expectedResult, actualResult);
         assertEquals(toString(), expectedResult.toString(), actualResult.toString());
@@ -120,7 +116,7 @@ public class DetermineCommonPrimeFactorsTest {
     @Test
     public void checkPrimeFactors2() {
 
-        SortedSet<Number> actualResult = Math.commonPrimeFactors(fraction);
+        Sequence<Number> actualResult = Math.commonPrimeFactors(fraction);
 
         assertEquals(toString(), expectedResult, actualResult);
         assertEquals(toString(), expectedResult.toString(), actualResult.toString());
@@ -136,19 +132,17 @@ public class DetermineCommonPrimeFactorsTest {
 
         Collection<Object[]> parameters = new ArrayList<Object[]>();
 
-        parameters.add(new Object[] { createFraction(10, "14"), new Number[] { } });
+        parameters.add(new Object[] { createFraction(10, "14"), createNumberSequence(10) });
 
-        parameters.add(new Object[] { createFraction(10, "14", "12"), new Number[] { createNumber(10, "2") } });
+        parameters.add(new Object[] { createFraction(10, "14", "12"), createNumberSequence(10, "2") });
 
-        parameters.add(new Object[] { createFraction(10, "15", "51"), new Number[] { createNumber(10, "3") } });
+        parameters.add(new Object[] { createFraction(10, "15", "51"), createNumberSequence(10, "3") });
 
-        parameters.add(new Object[] { createFraction(10, "100", "200"),
-                                      new Number[] { createNumber(10, "2"), createNumber(10, "5") } });
+        parameters.add(new Object[] { createFraction(10, "100", "200"), createNumberSequence(10, "2", "2", "5", "5") });
 
-        parameters.add(new Object[] { createFraction(10, "5", "10"), new Number[] { createNumber(10, "5") } });
-        parameters.add(new Object[] { createFraction(10, "20", "40"),
-                                      new Number[] { createNumber(10, "2"), createNumber(10, "5") } });
-        parameters.add(new Object[] { createFraction(10, "25", "50"), new Number[] { createNumber(10, "5") } });
+        parameters.add(new Object[] { createFraction(10, "5", "10"), createNumberSequence(10, "5") });
+        parameters.add(new Object[] { createFraction(10, "20", "40"), createNumberSequence(10, "2", "2", "5") });
+        parameters.add(new Object[] { createFraction(10, "25", "50"), createNumberSequence(10, "5", "5") });
 
         return parameters;
     }

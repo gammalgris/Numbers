@@ -37,8 +37,9 @@ package jmul.math.numbers;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.SortedSet;
 
+import jmul.math.collections.Sequence;
+import jmul.math.collections.Set;
 import jmul.math.fractions.Fraction;
 import static jmul.math.numbers.Constants.DEFAULT_NUMBER_BASE;
 import static jmul.math.numbers.ParameterHelper.checkBase;
@@ -82,6 +83,8 @@ import jmul.math.signs.Signs;
  * TODO Test how this affects addition, subtraction, etc.). In the default number implementation the operations depend
  *      on addition and/ or subtraction. In this case the dependent operations don't need to change.
  *      Identify the other operations that do low level digit manipulations and need a rework.
+ *
+ * TODO Identify common method implementations with the other number implementations and move those into a base class.
  *
  * @author Kristian Kutin
  */
@@ -525,13 +528,7 @@ public class NumberNegativeBaseImpl implements Number {
     }
 
     @Override
-    public SortedSet<Number> divisorSet() {
-        // TODO Implement this method
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public SortedSet<Number> primeFactors() {
+    public Set<Number> divisors() {
         // TODO Implement this method
         throw new UnsupportedOperationException();
     }
@@ -997,6 +994,48 @@ public class NumberNegativeBaseImpl implements Number {
 
     @Override
     public Number exponentiate(ProcessingDetails processingDetails, Fraction exponent) {
+        // TODO Implement this method
+        return null;
+    }
+
+    @Override
+    public Number sine() {
+        // TODO Implement this method
+        return null;
+    }
+
+    @Override
+    public Number sine(ProcessingDetails processingDetails) {
+        // TODO Implement this method
+        return null;
+    }
+
+    @Override
+    public Number cosine() {
+        // TODO Implement this method
+        return null;
+    }
+
+    @Override
+    public Number cosine(ProcessingDetails processingDetails) {
+        // TODO Implement this method
+        return null;
+    }
+
+    @Override
+    public Set<Number> commonDivisors(Number number) {
+        // TODO Implement this method
+        return null;
+    }
+
+    @Override
+    public Sequence<Number> primeFactors() {
+        // TODO Implement this method
+        return null;
+    }
+
+    @Override
+    public Sequence<Number> commonPrimeFactors(Number number) {
         // TODO Implement this method
         return null;
     }

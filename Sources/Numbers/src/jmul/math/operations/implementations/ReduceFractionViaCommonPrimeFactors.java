@@ -34,8 +34,7 @@
 package jmul.math.operations.implementations;
 
 
-import java.util.SortedSet;
-
+import jmul.math.collections.Sequence;
 import jmul.math.fractions.Fraction;
 import jmul.math.fractions.FractionHelper;
 import jmul.math.numbers.Number;
@@ -43,15 +42,14 @@ import static jmul.math.numbers.creation.CreationParameters.DONT_CLONE;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
 import jmul.math.operations.processing.ProcessingDetails;
-import jmul.math.operations.repository.OperationIdentifiers;
 
 
 /**
- * Implements a function that reduces a fraction.
+ * Implements a function that reduces a fraction by dividing by common prime factors.
  *
  * @author Kristian Kutin
  */
-public class ReduceFraction implements UnaryOperation<Fraction, Result<Fraction>> {
+public class ReduceFractionViaCommonPrimeFactors implements UnaryOperation<Fraction, Result<Fraction>> {
 
     /**
      * Additional Processing details.
@@ -63,13 +61,16 @@ public class ReduceFraction implements UnaryOperation<Fraction, Result<Fraction>
      */
     static {
 
-        PROCESSING_DETAILS = ProcessingDetails.setAlgorithm(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION);
+        PROCESSING_DETAILS =
+            ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM,
+                                                   ProcessingDetails.DEFAULT_PRECISION,
+                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
     }
 
     /**
      * The default constructor.
      */
-    public ReduceFraction() {
+    public ReduceFractionViaCommonPrimeFactors() {
 
         super();
     }
@@ -87,30 +88,20 @@ public class ReduceFraction implements UnaryOperation<Fraction, Result<Fraction>
 
         ParameterCheckHelper.checkParameter(operand);
 
-        Fraction reducedFraction = operand.normalizedFraction();
+        Fraction normalizedFraction = operand.normalizedFraction();
+        Sequence<Number> commonPrimeFactors = normalizedFraction.commonPrimeFactors();
 
-        while (true) {
+        Number numerator = normalizedFraction.numerator();
+        Number denominator = normalizedFraction.denominator();
 
-            SortedSet<Number> commonPrimeFactors = reducedFraction.commonPrimeFactors();
+        for (Number divisor : commonPrimeFactors) {
 
-            if (commonPrimeFactors.isEmpty()) {
-
-                break;
-            }
-
-            for (Number primeFactor : commonPrimeFactors) {
-
-                Number numerator = reducedFraction.numerator();
-                Number denominator = reducedFraction.denominator();
-
-                Number newNumerator = numerator.divide(PROCESSING_DETAILS, primeFactor);
-                Number newDenominator = denominator.divide(PROCESSING_DETAILS, primeFactor);
-
-                reducedFraction = FractionHelper.createFraction(DONT_CLONE, newNumerator, newDenominator);
-            }
+            numerator = numerator.divide(divisor);
+            denominator = denominator.divide(divisor);
         }
 
-        return new Result<Fraction>(reducedFraction);
+        Fraction newFraction = FractionHelper.createFraction(DONT_CLONE, numerator, denominator);
+        return new Result<Fraction>(newFraction);
     }
 
 }

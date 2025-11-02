@@ -34,14 +34,15 @@
 package jmul.math.operations.implementations;
 
 
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.ArrayList;
+import java.util.List;
 
+import jmul.math.Math;
+import jmul.math.collections.Set;
+import jmul.math.collections.SetImpl;
 import jmul.math.numbers.Number;
-import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
-import jmul.math.signs.Signs;
 
 
 /**
@@ -49,7 +50,7 @@ import jmul.math.signs.Signs;
  *
  * @author Kristian Kutin
  */
-public class DetermineDivisors implements UnaryOperation<Number, Result<SortedSet<Number>>> {
+public class DetermineDivisors implements UnaryOperation<Number, Result<Set<Number>>> {
 
     /**
      * The default constructor.
@@ -68,20 +69,18 @@ public class DetermineDivisors implements UnaryOperation<Number, Result<SortedSe
      * @return a set of divisors
      */
     @Override
-    public Result<SortedSet<Number>> calculate(Number operand) {
+    public Result<Set<Number>> calculate(Number operand) {
 
         ParameterCheckHelper.checkInteger(operand);
 
         int base = operand.base();
         Number absoluteOperand = operand.absoluteValue();
 
-        final Number TWO;
-        {
-            final Number ONE = createNumber(base, Signs.POSITIVE, 1);
-            TWO = ONE.inc();
-        }
+        final Number ONE = Math.ONE.value(base);
+        final Number TWO = Math.TWO.value(base);
 
-        SortedSet<Number> divisors = new TreeSet<>();
+        List<Number> divisors = new ArrayList<>();
+        divisors.add(ONE);
 
         for (Number number = TWO; number.isLesser(absoluteOperand); number = number.inc()) {
 
@@ -105,7 +104,8 @@ public class DetermineDivisors implements UnaryOperation<Number, Result<SortedSe
             divisors.add(absoluteOperand);
         }
 
-        return new Result<SortedSet<Number>>(divisors);
+        Set<Number> resultSet = new SetImpl<>(base, divisors);
+        return new Result<Set<Number>>(resultSet);
     }
 
 }

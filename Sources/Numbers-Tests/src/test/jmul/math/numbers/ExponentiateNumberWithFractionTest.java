@@ -510,8 +510,7 @@ public class ExponentiateNumberWithFractionTest {
 
         /* 2.71828182845904523536028747135266249775724709369995957496696762772407663035^0
            -> 1 */
-        parameters.add(new Object[] { Math.e(10), createFraction(10, "0", "1"), null,
-                                      createNumber(10, "1") });
+        parameters.add(new Object[] { Math.e(10), createFraction(10, "0", "1"), null, createNumber(10, "1") });
 
         /* 2.71828182845904523536028747135266249775724709369995957496696762772407663035^(1/1)
            -> 2.71828182845904523536028747135266249775724709369995957496696762772407663035 */
@@ -530,23 +529,19 @@ public class ExponentiateNumberWithFractionTest {
 
         /* 2.71828182845904523536028747135266249775724709369995957496696762772407663035^-0
            -> 1 */
-        parameters.add(new Object[] { Math.e(10), createFraction(10, "-0"), null,
-                                      createNumber(10, "1") });
+        parameters.add(new Object[] { Math.e(10), createFraction(10, "-0"), null, createNumber(10, "1") });
 
         /* 2.71828182845904523536028747135266249775724709369995957496696762772407663035^-1
            -> 0.36787944117144232159552377016146086744581113103176783450783680169746149574 */
-        parameters.add(new Object[] { Math.e(10), createFraction(10, "-1"), null,
-                                      createNumber(10, "0.3678794412") });
+        parameters.add(new Object[] { Math.e(10), createFraction(10, "-1"), null, createNumber(10, "0.3678794412") });
 
         /* 2.71828182845904523536028747135266249775724709369995957496696762772407663035^-2
            -> 0.13533528323661269189399949497248440340763154590957588146815887265407337410 */
-        parameters.add(new Object[] { Math.e(10), createFraction(10, "-2"), null,
-                                      createNumber(10, "0.1353352832") });
+        parameters.add(new Object[] { Math.e(10), createFraction(10, "-2"), null, createNumber(10, "0.1353352832") });
 
         /* 2.71828182845904523536028747135266249775724709369995957496696762772407663035^-3
            -> 0.04978706836786394297934241565006177663169959218842321556762772760606066773 */
-        parameters.add(new Object[] { Math.e(10), createFraction(10, "-3"), null,
-                                      createNumber(10, "0.0497870683") });
+        parameters.add(new Object[] { Math.e(10), createFraction(10, "-3"), null, createNumber(10, "0.0497870683") });
 
         return parameters;
     }

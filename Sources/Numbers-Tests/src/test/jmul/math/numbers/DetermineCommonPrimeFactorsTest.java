@@ -31,18 +31,17 @@
  * $Id$
  */
 
-package test.jmul.math.fractions;
+package test.jmul.math.numbers;
 
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 import jmul.math.Math;
-import static jmul.math.collections.CollectionsHelper.createNumberSet;
-import jmul.math.collections.Set;
-import jmul.math.fractions.Fraction;
-import static jmul.math.fractions.FractionHelper.createFraction;
+import static jmul.math.collections.CollectionsHelper.createNumberSequence;
+import jmul.math.collections.Sequence;
 import jmul.math.numbers.Number;
+import static jmul.math.numbers.NumberHelper.createNumber;
 
 import jmul.test.classification.UnitTest;
 
@@ -53,37 +52,45 @@ import org.junit.runners.Parameterized;
 
 
 /**
- * This test suite tests determining divisors of a fraction.
+ * This test suite tests determining the common prime factors of two numbers.
  *
  * @author Kristian Kutin
  */
 @UnitTest
 @RunWith(Parameterized.class)
-public class DetermineCommonDivisorsTest {
+public class DetermineCommonPrimeFactorsTest {
 
     /**
-     * A fraction.
+     * A number.
      */
-    private final Fraction fraction;
+    private final Number number1;
+
+    /**
+     * A number.
+     */
+    private final Number number2;
 
     /**
      * The expected result.
      */
-    private final Set<Number> expectedResult;
+    private final Sequence<Number> expectedResult;
 
     /**
      * Creates a new test case according to the specified parameters.
      *
-     * @param fraction
-     *        a fraction
+     * @param number1
+     *        a number
+     * @param number2
+     *        a number
      * @param set
-     *        all expected divisors
+     *        the expected result
      */
-    public DetermineCommonDivisorsTest(Fraction fraction, Set<Number> set) {
+    public DetermineCommonPrimeFactorsTest(Number number1, Number number2, Sequence<Number> set) {
 
         super();
 
-        this.fraction = fraction;
+        this.number1 = number1;
+        this.number2 = number2;
         this.expectedResult = set;
     }
 
@@ -95,7 +102,8 @@ public class DetermineCommonDivisorsTest {
     @Override
     public String toString() {
 
-        return String.format("[base:%d] %s : %s", fraction.base(), fraction, expectedResult);
+        return String.format("[base:%d] %s & [base:%d] %s : %s", number1.base(), number1, number2.base(), number2,
+                             expectedResult);
     }
 
     /**
@@ -104,7 +112,7 @@ public class DetermineCommonDivisorsTest {
     @Test
     public void checkDivisors() {
 
-        Set<Number> actualResult = fraction.commonDivisors();
+        Sequence<Number> actualResult = number1.commonPrimeFactors(number2);
 
         assertEquals(toString(), expectedResult, actualResult);
         assertEquals(toString(), expectedResult.toString(), actualResult.toString());
@@ -116,7 +124,7 @@ public class DetermineCommonDivisorsTest {
     @Test
     public void checkDivisorsVariant2() {
 
-        Set<Number> actualResult = Math.commonDivisors(fraction);
+        Sequence<Number> actualResult = Math.commonPrimeFactors(number1, number2);
 
         assertEquals(toString(), expectedResult, actualResult);
         assertEquals(toString(), expectedResult.toString(), actualResult.toString());
@@ -132,14 +140,15 @@ public class DetermineCommonDivisorsTest {
 
         Collection<Object[]> parameters = new ArrayList<Object[]>();
 
-        parameters.add(new Object[] { createFraction(10, "14"), createNumberSet(10, "1") });
-
-        parameters.add(new Object[] { createFraction(10, "14", "12"), createNumberSet(10, "1", "2") });
-
-        parameters.add(new Object[] { createFraction(10, "15", "51"), createNumberSet(10, "1", "3") });
-
-        parameters.add(new Object[] { createFraction(10, "100", "200"),
-                                      createNumberSet(10, "1", "2", "4", "5", "10", "20", "25", "50", "100") });
+        // 17 & 19 : { 17 } & { 19 } : { }
+        parameters.add(new Object[] { createNumber(10, "17"), createNumber(10, "19"), createNumberSequence(10) });
+        // 9 & 3 : { 3, 3 } & { 3 } : { 3 }
+        parameters.add(new Object[] { createNumber(10, "9"), createNumber(10, "3"), createNumberSequence(10, "3") });
+        // 9 & 6 : { 3, 3 } & { 2, 3 } : { 3 }
+        parameters.add(new Object[] { createNumber(10, "9"), createNumber(10, "6"), createNumberSequence(10, "3") });
+        // 5134 & 1020 : { 2, 17, 151 } & { 2, 2, 3, 5, 17 } : { 2, 17 }
+        parameters.add(new Object[] { createNumber(10, "5134"), createNumber(10, "1020"),
+                                      createNumberSequence(10, "2", "17") });
 
         return parameters;
     }

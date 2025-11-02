@@ -34,21 +34,71 @@
 package jmul.math.operations;
 
 
-import jmul.measures.definitions.reader.Unit;
+import jmul.math.operations.processing.ProcessingDetails;
+import jmul.math.numbers.Number;
 
 
+/**
+ * This iterface describes various trigonometric operations.
+ *
+ * @author Kristian Kutin
+ */
 public interface TrigonometricOperations {
 
-    Number sine(Unit unit);
+    /**
+     * Calculates the sine of this number (in radian).
+     *
+     * @return the sine of this number
+     */
+    Number sine();
 
-    Number cosine(Unit unit);
+    /**
+     * Calculates the sine of this number (in radian) according to the specified proessing parameters.
+     *
+     * @param processingDetails
+     *        procewssing parameters
+     *
+     * @return the sine of this number
+     */
+    Number sine(ProcessingDetails processingDetails);
 
-    Number tangent(Unit unit);
+    /**
+     * Calculates the cosine of this number (in radian).
+     *
+     * @return the cosine of this number
+     */
+    Number cosine();
 
-    Number cosecant(Unit unit);
+    /**
+     * Calculates the cosine of this number (in radian) according to the specified proessing parameters.
+     *
+     * @param processingDetails
+     *        procewssing parameters
+     *
+     * @return the cosine of this number
+     */
+    Number cosine(ProcessingDetails processingDetails);
 
-    Number secant(Unit unit);
+    /*
+    //TODO
+    // Add the latter method signatures later. Currently too many method signatures without implementation will only
+    // clutter the implementation classes.
 
-    Number cotangent(Unit unit);
+    Number tangent();
+
+    Number tangent(ProcessingDetails processingDetails);
+
+    Number cosecant();
+
+    Number cosecant(ProcessingDetails processingDetails);
+
+    Number secant();
+
+    Number secant(ProcessingDetails processingDetails);
+
+    Number cotangent();
+
+    Number cotangent(ProcessingDetails processingDetails);
+    */
 
 }

@@ -49,11 +49,14 @@ import jmul.math.operations.implementations.AddNumbersTrimResult;
 import jmul.math.operations.implementations.AddVectors;
 import jmul.math.operations.implementations.ArchimedesPiApproximation;
 import jmul.math.operations.implementations.BaseToNumber;
+import jmul.math.operations.implementations.CosineApproximation;
 import jmul.math.operations.implementations.CrossProduct;
 import jmul.math.operations.implementations.DecrementFraction;
 import jmul.math.operations.implementations.DecrementNumber;
-import jmul.math.operations.implementations.DetermineCommonDivisors;
-import jmul.math.operations.implementations.DetermineCommonPrimeFactors;
+import jmul.math.operations.implementations.DetermineCommonDivisorsInFraction;
+import jmul.math.operations.implementations.DetermineCommonDivisorsOfNumbers;
+import jmul.math.operations.implementations.DetermineCommonPrimeFactorsInFraction;
+import jmul.math.operations.implementations.DetermineCommonPrimeFactorsInNumbers;
 import jmul.math.operations.implementations.DetermineDivisors;
 import jmul.math.operations.implementations.DeterminePrimeFactors;
 import jmul.math.operations.implementations.DigitComplement;
@@ -105,6 +108,7 @@ import jmul.math.operations.implementations.MultiplyNumberAndFraction;
 import jmul.math.operations.implementations.MultiplyVectorWithNumber;
 import jmul.math.operations.implementations.NegateFraction;
 import jmul.math.operations.implementations.NegateNumber;
+import jmul.math.operations.implementations.NextPrimeNumber;
 import jmul.math.operations.implementations.NthRoot;
 import jmul.math.operations.implementations.NumberComplement;
 import jmul.math.operations.implementations.NumberDigitSum;
@@ -114,6 +118,7 @@ import jmul.math.operations.implementations.NumberToFraction;
 import jmul.math.operations.implementations.NumberToOrdinal;
 import jmul.math.operations.implementations.NumberWithinInterval;
 import jmul.math.operations.implementations.OddNumberCheck;
+import jmul.math.operations.implementations.OptimizedReduceFraction;
 import jmul.math.operations.implementations.RandomDigit;
 import jmul.math.operations.implementations.RandomNumber;
 import jmul.math.operations.implementations.RandomNumberWithinInterval;
@@ -121,7 +126,7 @@ import jmul.math.operations.implementations.RebaseFraction;
 import jmul.math.operations.implementations.RebaseNumber;
 import jmul.math.operations.implementations.ReciprocalOfFraction;
 import jmul.math.operations.implementations.ReciprocalOfNumber;
-import jmul.math.operations.implementations.ReduceFraction;
+import jmul.math.operations.implementations.ReduceFractionViaCommonPrimeFactors;
 import jmul.math.operations.implementations.RemoveFractionPart;
 import jmul.math.operations.implementations.RemoveIntegerPart;
 import jmul.math.operations.implementations.RoundDigitToEven;
@@ -135,6 +140,7 @@ import jmul.math.operations.implementations.RussianPeasantMultiplication;
 import jmul.math.operations.implementations.ScalarProduct;
 import jmul.math.operations.implementations.ShiftLeft;
 import jmul.math.operations.implementations.ShiftRight;
+import jmul.math.operations.implementations.SineApproximation;
 import jmul.math.operations.implementations.SquareFraction;
 import jmul.math.operations.implementations.SquareNumber;
 import jmul.math.operations.implementations.SquareRoot;
@@ -378,12 +384,19 @@ public class OperationRepositoryInitializerImpl implements OperationRepositoryIn
         repository.registerFunction(OperationIdentifiers.SQUARE_FRACTION_FUNCTION, SquareFraction.class);
 
         repository.registerFunction(OperationIdentifiers.DETERMINE_DIVISORS_FUNCTION, DetermineDivisors.class);
-        repository.registerFunction(OperationIdentifiers.DETERMINE_PRIME_FACTORS_NUMBER, DeterminePrimeFactors.class);
-        repository.registerFunction(OperationIdentifiers.DETERMINE_COMMON_DIVISORS_FUNCTION,
-                                    DetermineCommonDivisors.class);
-        repository.registerFunction(OperationIdentifiers.DETERMINE_COMMON_PRIME_FACTORS_FUNCTION,
-                                    DetermineCommonPrimeFactors.class);
-        repository.registerFunction(OperationIdentifiers.REDUCE_FRACTION_FUNCTION, ReduceFraction.class);
+        repository.registerFunction(OperationIdentifiers.DETERMINE_PRIME_FACTORS_OF_NUMBER,
+                                    DeterminePrimeFactors.class);
+        repository.registerFunction(OperationIdentifiers.DETERMINE_COMMON_DIVISORS_IN_FRACTION,
+                                    DetermineCommonDivisorsInFraction.class);
+        repository.registerFunction(OperationIdentifiers.DETERMINE_COMMON_DIVISORS_OF_NUMBERS,
+                                    DetermineCommonDivisorsOfNumbers.class);
+        repository.registerFunction(OperationIdentifiers.DETERMINE_COMMON_PRIME_FACTORS_IN_FRACTION,
+                                    DetermineCommonPrimeFactorsInFraction.class);
+        repository.registerFunction(OperationIdentifiers.DETERMINE_COMMON_PRIME_FACTORS_IN_NUMBERS,
+                                    DetermineCommonPrimeFactorsInNumbers.class);
+        repository.registerFunction(OperationIdentifiers.REDUCE_FRACTION_BY_COMMON_PRIME_FACTORS,
+                                    ReduceFractionViaCommonPrimeFactors.class);
+        repository.registerFunction(OperationIdentifiers.OPTIMIZED_REDUCE_FRACTION, OptimizedReduceFraction.class);
         repository.registerFunction(OperationIdentifiers.IS_PRIME_FUNCTION, IsPrimeCheck.class);
 
         repository.registerFunction(OperationIdentifiers.VECTOR_EQUALITY_FUNCTION, VectorEquality.class);
@@ -436,6 +449,11 @@ public class OperationRepositoryInitializerImpl implements OperationRepositoryIn
                                     LeibnizPiApproximation.class);
         repository.registerFunction(OperationIdentifiers.ARCHIMEDES_PI_APPROXIMATION_FUNCTION,
                                     ArchimedesPiApproximation.class);
+
+        repository.registerFunction(OperationIdentifiers.SINE_APPROXIMATION_FUNCTION, SineApproximation.class);
+        repository.registerFunction(OperationIdentifiers.COSINE_APPROXIMATION_FUNCTION, CosineApproximation.class);
+
+        repository.registerFunction(OperationIdentifiers.NEXT_PRIME_NUMBER, NextPrimeNumber.class);
 
         return repository;
     }

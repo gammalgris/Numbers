@@ -34,9 +34,7 @@
 package jmul.math.operations.implementations;
 
 
-import java.util.SortedSet;
-import java.util.TreeSet;
-
+import jmul.math.collections.Sequence;
 import jmul.math.fractions.Fraction;
 import jmul.math.numbers.Number;
 import jmul.math.operations.Result;
@@ -49,12 +47,12 @@ import jmul.math.operations.UnaryOperation;
  *
  * @author Kristian Kutin
  */
-public class DetermineCommonPrimeFactors implements UnaryOperation<Fraction, Result<SortedSet<Number>>> {
+public class DetermineCommonPrimeFactorsInFraction implements UnaryOperation<Fraction, Result<Sequence<Number>>> {
 
     /**
      * The default constructor.
      */
-    public DetermineCommonPrimeFactors() {
+    public DetermineCommonPrimeFactorsInFraction() {
 
         super();
     }
@@ -68,25 +66,17 @@ public class DetermineCommonPrimeFactors implements UnaryOperation<Fraction, Res
      * @return all common divisors
      */
     @Override
-    public Result<SortedSet<Number>> calculate(Fraction operand) {
+    public Result<Sequence<Number>> calculate(Fraction operand) {
 
         ParameterCheckHelper.checkParameter(operand);
 
         Fraction normalizedFraction = operand.normalizedFraction();
 
-        SortedSet<Number> numeratorPrimeFactors = normalizedFraction.numerator().primeFactors();
-        SortedSet<Number> denominatorPrimeFactors = normalizedFraction.denominator().primeFactors();
-        SortedSet<Number> commonPrimeFactors = new TreeSet<>();
+        Number numerator = normalizedFraction.numerator();
+        Number denominator = normalizedFraction.denominator();
 
-        for (Number number : numeratorPrimeFactors) {
-
-            if (denominatorPrimeFactors.contains(number)) {
-
-                commonPrimeFactors.add(number);
-            }
-        }
-
-        return new Result<SortedSet<Number>>(commonPrimeFactors);
+        Sequence<Number> commonPrimeFactors = numerator.commonPrimeFactors(denominator);
+        return new Result<Sequence<Number>>(commonPrimeFactors);
     }
 
 }

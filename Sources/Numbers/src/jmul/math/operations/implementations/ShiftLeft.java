@@ -144,6 +144,7 @@ public class ShiftLeft implements BinaryOperation<Number, Result<Number>> {
         }
 
         Number shiftedCopy = createNumber(base, number.sign(), center);
+        NodesHelper.trimRight(shiftedCopy.centerNode());
         NodesHelper.trimLeft(shiftedCopy.centerNode());
 
         return new Result<Number>(shiftedCopy);

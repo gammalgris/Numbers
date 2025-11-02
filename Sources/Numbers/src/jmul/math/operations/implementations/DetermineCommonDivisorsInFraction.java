@@ -34,13 +34,14 @@
 package jmul.math.operations.implementations;
 
 
-import java.util.SortedSet;
-import java.util.TreeSet;
-
+import jmul.math.collections.Set;
 import jmul.math.fractions.Fraction;
 import jmul.math.numbers.Number;
+import jmul.math.operations.BinaryOperation;
+import jmul.math.operations.OperationSingletons;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
+import jmul.math.operations.repository.OperationIdentifiers;
 
 
 /**
@@ -48,12 +49,12 @@ import jmul.math.operations.UnaryOperation;
  *
  * @author Kristian Kutin
  */
-public class DetermineCommonDivisors implements UnaryOperation<Fraction, Result<SortedSet<Number>>> {
+public class DetermineCommonDivisorsInFraction implements UnaryOperation<Fraction, Result<Set<Number>>> {
 
     /**
      * The ddefault constructor.
      */
-    public DetermineCommonDivisors() {
+    public DetermineCommonDivisorsInFraction() {
 
         super();
     }
@@ -68,25 +69,18 @@ public class DetermineCommonDivisors implements UnaryOperation<Fraction, Result<
      * @return all common divisors
      */
     @Override
-    public Result<SortedSet<Number>> calculate(Fraction operand) {
+    public Result<Set<Number>> calculate(Fraction operand) {
 
         ParameterCheckHelper.checkParameter(operand);
 
         Fraction normalizedFraction = operand.normalizedFraction();
 
-        SortedSet<Number> numeratorDivisors = normalizedFraction.numerator().divisorSet();
-        SortedSet<Number> denominatorDivisors = normalizedFraction.denominator().divisorSet();
-        SortedSet<Number> commonDivisors = new TreeSet<>();
+        BinaryOperation<Number, Result<Set<Number>>> function =
+            (BinaryOperation<Number, Result<Set<Number>>>) OperationSingletons.getFunction(OperationIdentifiers.DETERMINE_COMMON_DIVISORS_OF_NUMBERS);
+        Result<Set<Number>> result =
+            function.calculate(normalizedFraction.numerator(), normalizedFraction.denominator());
 
-        for (Number number : numeratorDivisors) {
-
-            if (denominatorDivisors.contains(number)) {
-
-                commonDivisors.add(number);
-            }
-        }
-
-        return new Result<SortedSet<Number>>(commonDivisors);
+        return result;
     }
 
 }

@@ -35,8 +35,9 @@ package jmul.math;
 
 
 import java.util.Comparator;
-import java.util.SortedSet;
 
+import jmul.math.collections.Sequence;
+import jmul.math.collections.Set;
 import jmul.math.constants.Constant;
 import jmul.math.constants.ConstantHelper;
 import jmul.math.fractions.Fraction;
@@ -84,29 +85,54 @@ public final class Math {
     public static final Constant DEFAULT_NTH_ROOT_ITERATIONS;
 
     /**
-     * The default number of iterations for calculating Euler's number.
+     * The default number of iterations for approximating Euler's number.
      */
     public static final Constant DEFAULT_EULERS_NUMBER_ITERATIONS;
 
     /**
-     * The default number of iterations for calculating Pi.
+     * The default number of iterations for approximating Pi.
      */
     public static final Constant DEFAULT_LEIBNITZ_PI_APPROXIMATION_ITERATIONS;
 
     /**
-     * A constant.
+     * The default number of iterations for approximating the sine.
+     */
+    public static final Constant DEFAULT_SINE_APPROXIMATION_ITERATIONS;
+
+    /**
+     * The default number of iterations for approximating the cosine.
+     */
+    public static final Constant DEFAULT_COSINE_APPROXIMATION_ITERATIONS;
+
+    /**
+     * A constant representing the number minus one.
      */
     public static final Constant MINUS_ONE;
 
     /**
-     * A constant.
+     * A constant representing the number zero.
      */
     public static final Constant ZERO;
 
     /**
-     * A constant.
+     * A constant representing the number one.
      */
     public static final Constant ONE;
+
+    /**
+     * A constant representing the number two.
+     */
+    public static final Constant TWO;
+
+    /**
+     * A constant representing Euler's number.
+     */
+    public static final Constant E;
+
+    /**
+     * A constant representing the number Pi.
+     */
+    public static final Constant PI;
 
     /*
      * The static initializer.
@@ -118,10 +144,19 @@ public final class Math {
         DEFAULT_NTH_ROOT_ITERATIONS = ConstantHelper.createConstantNumber(10, "7");
         DEFAULT_EULERS_NUMBER_ITERATIONS = ConstantHelper.createConstantNumber(10, "12");
         DEFAULT_LEIBNITZ_PI_APPROXIMATION_ITERATIONS = ConstantHelper.createConstantNumber(10, "100");
+        DEFAULT_SINE_APPROXIMATION_ITERATIONS = ConstantHelper.createConstantNumber(10, "25");
+        DEFAULT_COSINE_APPROXIMATION_ITERATIONS = ConstantHelper.createConstantNumber(10, "25");
 
         MINUS_ONE = ConstantHelper.createConstantNumber(10, Signs.NEGATIVE, 1);
         ZERO = ConstantHelper.createConstantNumber(10, Signs.POSITIVE, 0);
         ONE = ConstantHelper.createConstantNumber(10, Signs.POSITIVE, 1);
+        TWO = ConstantHelper.createConstantNumber(10, "2");
+
+        // e = 2.71828182845904523536028747135266249775724709369995957496696762772407663035
+        E = ConstantHelper.createConstantNumber(10, "2.7182818284");
+
+        // pi = 3.14159265358979323846264338327950288419716939937510582097494459230781640628
+        PI = ConstantHelper.createConstantNumber(10, "3.1415926535");
     }
 
     /**
@@ -1968,35 +2003,54 @@ public final class Math {
     }
 
     /**
-     * Determines the divisors for the specified number.
+     * Determines all divisors of this number.
      *
      * @param number
      *        a number
      *
-     * @return a set of divisors
+     * @return a set containing all divisors or an empty set if there are no divisors
      */
-    public static SortedSet<Number> divisorSet(Number number) {
+    public static Set<Number> divisors(Number number) {
 
-        UnaryOperation<Number, Result<SortedSet<Number>>> function =
-            (UnaryOperation<Number, Result<SortedSet<Number>>>) OperationSingletons.getFunction(OperationIdentifiers.DETERMINE_DIVISORS_FUNCTION);
-        Result<SortedSet<Number>> result = function.calculate(number);
+        UnaryOperation<Number, Result<Set<Number>>> function =
+            (UnaryOperation<Number, Result<Set<Number>>>) OperationSingletons.getFunction(OperationIdentifiers.DETERMINE_DIVISORS_FUNCTION);
+        Result<Set<Number>> result = function.calculate(number);
 
         return result.result();
     }
 
     /**
-     * Determines the prime factors for the specified number.
+     * Determines all common divisors of this number and the specified number.
+     *
+     * @param number1
+     *        a number
+     * @param number2
+     *        a number
+     *
+     * @return a set containing all common divisors or an empty set if there are no common divisors
+     */
+    public static Set<Number> commonDivisors(Number number1, Number number2) {
+
+        BinaryOperation<Number, Result<Set<Number>>> function =
+            (BinaryOperation<Number, Result<Set<Number>>>) OperationSingletons.getFunction(OperationIdentifiers.DETERMINE_COMMON_DIVISORS_OF_NUMBERS);
+        Result<Set<Number>> result = function.calculate(number1, number2);
+
+        return result.result();
+    }
+
+    /**
+     * Determines the prime factors for the specified number. The result sequence contains all prime factors.
      *
      * @param number
      *        a number
      *
-     * @return a set of prime factors
+     * @return a sequnce of prime factors or an empty sequence if there are no prime factors
      */
-    public static SortedSet<Number> primeFactors(Number number) {
+    public static Sequence<Number> primeFactors(Number number) {
 
-        UnaryOperation<Number, Result<SortedSet<Number>>> function =
-            (UnaryOperation<Number, Result<SortedSet<Number>>>) OperationSingletons.getFunction(OperationIdentifiers.DETERMINE_PRIME_FACTORS_NUMBER);
-        Result<SortedSet<Number>> result = function.calculate(number);
+        UnaryOperation<Number, Result<Sequence<Number>>> function =
+            (UnaryOperation<Number, Result<Sequence<Number>>>) OperationSingletons.getFunction(OperationIdentifiers.DETERMINE_PRIME_FACTORS_OF_NUMBER);
+        Result<Sequence<Number>> result = function.calculate(number);
 
         return result.result();
     }
@@ -2028,45 +2082,90 @@ public final class Math {
      */
     public static Fraction reduce(Fraction fraction) {
 
+        ProcessingDetails processingDetails =
+            ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM,
+                                                   ProcessingDetails.DEFAULT_PRECISION,
+                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+
+        return reduce(processingDetails, fraction);
+    }
+
+    /**
+     * Reduces the specified fraction.
+     *
+     * @param processingDetails
+     *        some processing details
+     * @param fraction
+     *        a fraction
+     *
+     * @return a fraction
+     */
+    public static Fraction reduce(ProcessingDetails processingDetails, Fraction fraction) {
+
+        ParameterCheckHelper.checkParameter(processingDetails);
+
+        final OperationIdentifier[] ALLOWED_ALGORITHMS = new OperationIdentifier[] {
+            OperationIdentifiers.OPTIMIZED_REDUCE_FRACTION, OperationIdentifiers.REDUCE_FRACTION_BY_COMMON_PRIME_FACTORS
+        };
+
+        OperationIdentifier algorithm = processingDetails.checkAndReturnAlgorithm(ALLOWED_ALGORITHMS);
+
         UnaryOperation<Fraction, Result<Fraction>> function =
-            (UnaryOperation<Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.REDUCE_FRACTION_FUNCTION);
+            (UnaryOperation<Fraction, Result<Fraction>>) OperationSingletons.getFunction(algorithm);
         Result<Fraction> result = function.calculate(fraction);
 
         return result.result();
     }
 
     /**
-     * Determines the common divisors for the specified fraction (i.e. numerator and denominator). The result set
-     * contains divisors greater than one.
+     * Determines the common divisors for this fraction (i.e. numerator and denominator).
      *
      * @param fraction
      *        a fraction
      *
-     * @return a set of divisors or an empty set if there are no common divisors
+     * @return a set of common divisors or an empty set if there are no common divisors
      */
-    public static SortedSet<Number> commonDivisorSet(Fraction fraction) {
+    public static Set<Number> commonDivisors(Fraction fraction) {
 
-        UnaryOperation<Fraction, Result<SortedSet<Number>>> function =
-            (UnaryOperation<Fraction, Result<SortedSet<Number>>>) OperationSingletons.getFunction(OperationIdentifiers.DETERMINE_COMMON_DIVISORS_FUNCTION);
-        Result<SortedSet<Number>> result = function.calculate(fraction);
+        UnaryOperation<Fraction, Result<Set<Number>>> function =
+            (UnaryOperation<Fraction, Result<Set<Number>>>) OperationSingletons.getFunction(OperationIdentifiers.DETERMINE_COMMON_DIVISORS_IN_FRACTION);
+        Result<Set<Number>> result = function.calculate(fraction);
 
         return result.result();
     }
 
     /**
-     * Determines the common prime factors for the specified fraction (i.e. numerator and denominator). The result set
-     * contains the prime factors.
+     * Determines the common prime factors for the specified fraction (i.e. numerator and denominator).
      *
      * @param fraction
      *        a fraction
      *
      * @return a set of prime factors or an empty set if there are no common prime factors
      */
-    public static SortedSet<Number> commonPrimeFactors(Fraction fraction) {
+    public static Sequence<Number> commonPrimeFactors(Fraction fraction) {
 
-        UnaryOperation<Fraction, Result<SortedSet<Number>>> function =
-            (UnaryOperation<Fraction, Result<SortedSet<Number>>>) OperationSingletons.getFunction(OperationIdentifiers.DETERMINE_COMMON_PRIME_FACTORS_FUNCTION);
-        Result<SortedSet<Number>> result = function.calculate(fraction);
+        UnaryOperation<Fraction, Result<Sequence<Number>>> function =
+            (UnaryOperation<Fraction, Result<Sequence<Number>>>) OperationSingletons.getFunction(OperationIdentifiers.DETERMINE_COMMON_PRIME_FACTORS_IN_FRACTION);
+        Result<Sequence<Number>> result = function.calculate(fraction);
+
+        return result.result();
+    }
+
+    /**
+     * Determines the common prime factors of this number and the specified number.
+     *
+     * @param number1
+     *        a number
+     * @param number2
+     *        a number
+     *
+     * @return a sequence of common prime factors or an empty sequence if there are no common prime factors
+     */
+    public static Sequence<Number> commonPrimeFactors(Number number1, Number number2) {
+
+        BinaryOperation<Number, Result<Sequence<Number>>> function =
+            (BinaryOperation<Number, Result<Sequence<Number>>>) OperationSingletons.getFunction(OperationIdentifiers.DETERMINE_COMMON_PRIME_FACTORS_IN_NUMBERS);
+        Result<Sequence<Number>> result = function.calculate(number1, number2);
 
         return result.result();
     }
@@ -2563,6 +2662,23 @@ public final class Math {
         BinaryOperation<Number, Result<Number>> function =
             (BinaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(algorithm);
         Result<Number> result = function.calculate(iterations, decimalPlaces);
+
+        return result.result();
+    }
+
+    /**
+     * Returns the next prime number (e.g. 0 -&gt; 2, 1 -&gt; 3, etc.).
+     *
+     * @param ordinal
+     *        the nth prime number
+     *
+     * @return a prime number
+     */
+    public static Number nextPrimeNumber(Number ordinal) {
+
+        UnaryOperation<Number, Result<Number>> function =
+            (UnaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.NEXT_PRIME_NUMBER);
+        Result<Number> result = function.calculate(ordinal);
 
         return result.result();
     }

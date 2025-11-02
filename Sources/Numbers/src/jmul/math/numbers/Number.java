@@ -34,14 +34,15 @@
 package jmul.math.numbers;
 
 
-import java.util.SortedSet;
-
+import jmul.math.collections.Sequence;
+import jmul.math.collections.Set;
 import jmul.math.fractions.Fraction;
 import jmul.math.numbers.conversions.Conversions;
 import jmul.math.numbers.nodes.LinkedDigitList;
 import jmul.math.operations.ArithmeticNumberOperations;
 import jmul.math.operations.FractionComparisons;
 import jmul.math.operations.NumberComparisons;
+import jmul.math.operations.TrigonometricOperations;
 
 
 /**
@@ -60,7 +61,7 @@ import jmul.math.operations.NumberComparisons;
  * @author Kristian Kutin
  */
 public interface Number extends LinkedDigitList, ArithmeticNumberOperations, NumberComparisons, FractionComparisons,
-                                Comparable, AbstractNumber, Conversions {
+                                Comparable, AbstractNumber, Conversions, TrigonometricOperations {
 
     /**
      * Returns a scientific notation for this number. The default decimal separator is used.
@@ -263,18 +264,38 @@ public interface Number extends LinkedDigitList, ArithmeticNumberOperations, Num
     boolean isPrime();
 
     /**
-     * Determines the divisor set for this number. The result set contains divisors greater than one.
+     * Determines all divisors of this number.
      *
-     * @return a set of divisors or an empty set if there are no divisors
+     * @return a set containing all divisors or an empty set if there are no divisors
      */
-    SortedSet<Number> divisorSet();
+    Set<Number> divisors();
 
     /**
-     * Determines the prime factors for this number. The result set contains the prime factors.
+     * Determines all common divisors of this number and the specified number.
      *
-     * @return a set of prime factors or an empty set if there are no prime factors
+     * @param number
+     *        a number
+     *
+     * @return a set containing all common divisors or an empty set if there are no common divisors
      */
-    SortedSet<Number> primeFactors();
+    Set<Number> commonDivisors(Number number);
+
+    /**
+     * Determines the prime factors for this number. The result sequence contains all prime factors.
+     *
+     * @return a sequence of prime factors or an empty sequence if there are no prime factors
+     */
+    Sequence<Number> primeFactors();
+
+    /**
+     * Determines the common prime factors of this number and the specified number.
+     *
+     * @param number
+     *        a number
+     *
+     * @return a sequence of common prime factors or an empty sequence if there are no common prime factors
+     */
+    Sequence<Number> commonPrimeFactors(Number number);
 
     /**
      * Translates this number into a fraction.

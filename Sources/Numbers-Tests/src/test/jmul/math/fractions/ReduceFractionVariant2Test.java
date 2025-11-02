@@ -40,6 +40,8 @@ import java.util.Collection;
 import jmul.math.Math;
 import jmul.math.fractions.Fraction;
 import static jmul.math.fractions.FractionHelper.createFraction;
+import jmul.math.operations.processing.ProcessingDetails;
+import jmul.math.operations.repository.OperationIdentifiers;
 
 import jmul.test.classification.UnitTest;
 
@@ -56,7 +58,7 @@ import org.junit.runners.Parameterized;
  */
 @UnitTest
 @RunWith(Parameterized.class)
-public class ReduceFractionTest {
+public class ReduceFractionVariant2Test {
 
     /**
      * A fraction.
@@ -76,7 +78,7 @@ public class ReduceFractionTest {
      * @param expectedResult
      *        the expected result
      */
-    public ReduceFractionTest(Fraction fraction, Fraction expectedResult) {
+    public ReduceFractionVariant2Test(Fraction fraction, Fraction expectedResult) {
 
         super();
 
@@ -101,7 +103,12 @@ public class ReduceFractionTest {
     @Test(timeout = 2000)
     public void testReduceFraction() {
 
-        Fraction actualResult = fraction.reduce();
+        ProcessingDetails processingDetails =
+            ProcessingDetails.setProcessingDetails(OperationIdentifiers.REDUCE_FRACTION_BY_COMMON_PRIME_FACTORS,
+                                                   ProcessingDetails.DEFAULT_PRECISION,
+                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+
+        Fraction actualResult = fraction.reduce(processingDetails);
 
         assertEquals(toString(), expectedResult, actualResult);
         assertEquals(toString(), expectedResult.toString(), actualResult.toString());
@@ -113,7 +120,12 @@ public class ReduceFractionTest {
     @Test(timeout = 2000)
     public void checkDivisorsVariant2() {
 
-        Fraction actualResult = Math.reduce(fraction);
+        ProcessingDetails processingDetails =
+            ProcessingDetails.setProcessingDetails(OperationIdentifiers.REDUCE_FRACTION_BY_COMMON_PRIME_FACTORS,
+                                                   ProcessingDetails.DEFAULT_PRECISION,
+                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+
+        Fraction actualResult = Math.reduce(processingDetails, fraction);
 
         assertEquals(toString(), expectedResult, actualResult);
         assertEquals(toString(), expectedResult.toString(), actualResult.toString());
@@ -166,6 +178,7 @@ public class ReduceFractionTest {
 
         parameters.add(new Object[] { createFraction(10, "250000000000", "500000000000"),
                                       createFraction(10, "1", "2") });
+
         parameters.add(new Object[] { createFraction(10, "12344696348678", "4015106"),
                                       createFraction(10, "6172348174339", "2007553") });
 

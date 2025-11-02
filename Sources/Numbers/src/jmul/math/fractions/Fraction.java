@@ -34,14 +34,15 @@
 package jmul.math.fractions;
 
 
-import java.util.SortedSet;
-
+import jmul.math.collections.Sequence;
+import jmul.math.collections.Set;
 import jmul.math.expressions.Expression;
 import jmul.math.numbers.AbstractNumber;
 import jmul.math.numbers.Number;
 import jmul.math.operations.ArithmeticFractionOperations;
 import jmul.math.operations.FractionComparisons;
 import jmul.math.operations.NumberComparisons;
+import jmul.math.operations.processing.ProcessingDetails;
 
 
 /**
@@ -127,6 +128,16 @@ public interface Fraction extends Comparable, NumberComparisons, FractionCompari
     Fraction reduce();
 
     /**
+     * Reduce fraction.
+     *
+     * @param processingDetails
+     *        some processing details
+     *
+     * @return a fraction
+     */
+    Fraction reduce(ProcessingDetails processingDetails);
+
+    /**
      * Translates this fraction into a number of the specified base.
      *
      * @param base
@@ -144,20 +155,18 @@ public interface Fraction extends Comparable, NumberComparisons, FractionCompari
     Fraction absoluteValue();
 
     /**
-     * Determines the common divisors for this fraction (i.e. numerator and denominator). The result set contains
-     * divisors greater than one.
+     * Determines the common divisors for this fraction (i.e. numerator and denominator).
      *
-     * @return a set of divisors or an empty set if there are no common divisors
+     * @return a set of common divisors or an empty set if there are no common divisors
      */
-    SortedSet<Number> commonDivisorSet();
+    Set<Number> commonDivisors();
 
     /**
-     * Determines the common prime factors for this fraction (i.e. numerator and denominator). The result set contains
-     * the prime factors.
+     * Determines the common prime factors for this fraction (i.e. numerator and denominator).
      *
-     * @return a set of prime factors or an empty set if there are no common prime factors
+     * @return a sequence of prime factors or an empty sequence if there are no common prime factors
      */
-    SortedSet<Number> commonPrimeFactors();
+    Sequence<Number> commonPrimeFactors();
 
     /**
      * Checks if this fraction is within the specified bounds (including bounds).

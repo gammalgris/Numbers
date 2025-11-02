@@ -16,3 +16,7 @@
    number bases?
    Take a number in number base 2 with 10 digits. Take a number in base 10 with 10 digits (or higher). Count/
    quantify the difference in posible numbers (i.e. states).
+
+4) Due to the dependencies recursion may be problematic because the default stack size may be exhausted quickly. In
+   such a case avoid recursion and use ordinary loops (i.e. for or while loops). The math utilities should work with
+   default memory settings.

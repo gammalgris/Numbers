@@ -34,21 +34,29 @@
 package jmul.math.operations.implementations;
 
 
-import java.util.Iterator;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.ArrayList;
+import java.util.List;
 
+import jmul.math.Math;
+import jmul.math.collections.Sequence;
+import jmul.math.collections.SequenceImpl;
 import jmul.math.numbers.Number;
+import jmul.math.operations.BinaryOperation;
+import jmul.math.operations.OperationSingletons;
 import jmul.math.operations.Result;
+import jmul.math.operations.ResultWithRemainder;
 import jmul.math.operations.UnaryOperation;
+import jmul.math.operations.repository.OperationIdentifiers;
 
 
 /**
  * An implementation of a function that determines the prime factors of a number.
  *
+ * TODO Consider caching the results
+ *
  * @author Kristian Kutin
  */
-public class DeterminePrimeFactors implements UnaryOperation<Number, Result<SortedSet<Number>>> {
+public class DeterminePrimeFactors implements UnaryOperation<Number, Result<Sequence<Number>>> {
 
     /**
      * The default constructor.
@@ -61,43 +69,89 @@ public class DeterminePrimeFactors implements UnaryOperation<Number, Result<Sort
     /**
      * Determines the prime factors of the specified number. The result set contains all prime factors.
      *
-     * @param operand
+     * @param number
      *        a number
      *
      * @return a set of divisors
      */
     @Override
-    public Result<SortedSet<Number>> calculate(Number operand) {
+    public Result<Sequence<Number>> calculate(Number number) {
 
-        ParameterCheckHelper.checkInteger(operand);
+        ParameterCheckHelper.checkInteger(number);
 
-        SortedSet<Number> divisors = operand.divisorSet();
-        SortedSet<Number> remainingDivisors = new TreeSet<>();
+        int base = number.base();
 
-        Iterator<Number> outerIterator = divisors.iterator();
-        while (outerIterator.hasNext()) {
+        List<Number> divisors = determinePrimeFactors(number);
+        Sequence<Number> sequence = new SequenceImpl<>(base, divisors);
 
-            Number number1 = outerIterator.next();
+        return new Result<Sequence<Number>>(sequence);
+    }
 
-            boolean isNotMultiple = true;
-            Iterator<Number> innerIterator = divisors.iterator();
-            while (innerIterator.hasNext()) {
+    /**
+     * Returns a list of prime factors which represent the specified number.
+     *
+     * @param number
+     *        a number (i.e. positive integer greater than zero)
+     *
+     * @return a list of prime factors
+     */
+    private List<Number> determinePrimeFactors(Number number) {
 
-                Number number2 = innerIterator.next();
+        List<Number> allDivisors = new ArrayList<>();
+        if (number.isOne()) {
 
-                if (!number1.equals(number2)) {
-
-                    isNotMultiple = !number1.isMultipleOf(number2) && isNotMultiple;
-                }
-            }
-
-            if (isNotMultiple) {
-
-                remainingDivisors.add(number1);
-            }
+            return allDivisors;
         }
 
-        return new Result<SortedSet<Number>>(remainingDivisors);
+        int base = number.base();
+
+        BinaryOperation<Number, ResultWithRemainder<Number>> function =
+            (BinaryOperation<Number, ResultWithRemainder<Number>>) OperationSingletons.getFunction(OperationIdentifiers.DIVIDE_NUMBERS_RETURN_RESULT_AND_REMAINDER_FUNCTION);
+
+        Number ordinal = Math.ZERO.value(base);
+
+        Number normalizedNumber = number.absoluteValue();
+        Number divisor;
+        Number result;
+        Number remainder;
+        while (true) {
+
+            if (normalizedNumber.isZero() || normalizedNumber.isOne()) {
+
+                break;
+            }
+
+            while (true) {
+
+                divisor = Math.nextPrimeNumber(ordinal);
+
+                ResultWithRemainder<Number> resultWrapper = function.calculate(normalizedNumber, divisor);
+
+                result = resultWrapper.result();
+                remainder = resultWrapper.remainder();
+
+                if (remainder.isZero()) {
+
+                    break;
+                }
+
+                if (divisor.equals(normalizedNumber)) {
+
+                    break;
+                }
+
+                ordinal = ordinal.inc();
+            }
+
+            if (remainder.isZero()) {
+
+                allDivisors.add(divisor);
+            }
+
+            normalizedNumber = result;
+        }
+
+        return allDivisors;
     }
 
 }

@@ -34,8 +34,7 @@
 package jmul.math.operations.implementations;
 
 
-import java.util.SortedSet;
-
+import jmul.math.Math;
 import jmul.math.numbers.Number;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
@@ -59,31 +58,51 @@ public class IsPrimeCheck implements UnaryOperation<Number, Result<Boolean>> {
     /**
      * Checks if the specified number is a prime number.
      *
-     * @param operand
+     * @param number
      *        a number
      *
      * @return <code>true</code> if the specified number is a prime number, else <code>false</code>
      */
     @Override
-    public Result<Boolean> calculate(Number operand) {
+    public Result<Boolean> calculate(Number number) {
 
-        ParameterCheckHelper.checkInteger(operand);
+        ParameterCheckHelper.checkInteger(number);
 
-        if (operand.isZero() || operand.isNegative()) {
+        if (number.isZero() || number.isNegative()) {
 
-            String message = String.format("An invalid number (%s) was specified!", operand);
+            String message = String.format("An invalid number (%s) was specified!", number);
             throw new IllegalArgumentException(message);
         }
 
-        if (operand.isOne()) {
+        if (number.isOne()) {
 
             return new Result<Boolean>(false);
         }
 
-        SortedSet<Number> primeFactors = operand.primeFactors();
-        primeFactors.remove(operand);
+        int base = number.base();
+        Number divisor = Math.TWO.value(base);
+        int divisors = 1; // 1 is a divisor but we don't need to test it
 
-        boolean isPrime = primeFactors.isEmpty();
+        while ((divisor.doubling()).isLesserOrEqual(number)) {
+
+            Number remainder = number.modulo(divisor);
+            if (remainder.isZero()) {
+
+                divisors++;
+
+                if (divisors > 2) { // We don't need to test all possible divisors. If there are more than 2 divisors
+                    // we stop and save computing cycles.
+
+                    break;
+                }
+            }
+
+            divisor = divisor.inc();
+        }
+
+        divisors++; // The loop doesn't test the spüecified number itself as divisor. There is also no need to test it.
+
+        boolean isPrime = divisors == 2;
 
         return new Result<Boolean>(isPrime);
     }

@@ -35,9 +35,10 @@ package jmul.math.numbers;
 
 
 import java.util.Comparator;
-import java.util.SortedSet;
 
 import jmul.math.Math;
+import jmul.math.collections.Sequence;
+import jmul.math.collections.Set;
 import jmul.math.fractions.Fraction;
 import jmul.math.hash.HashHelper;
 import static jmul.math.numbers.Constants.DEFAULT_NUMBER_BASE;
@@ -1566,31 +1567,49 @@ public class NumberImpl implements Number {
     }
 
     /**
-     * Determines the divisor set for this number. The result set contains divisors greater than one.
+     * Determines all divisors of this number.
      *
-     * @return a set of divisors
+     * @return a set containing all divisors or an empty set if there are no divisors
      */
     @Override
-    public SortedSet<Number> divisorSet() {
+    public Set<Number> divisors() {
 
-        UnaryOperation<Number, Result<SortedSet<Number>>> function =
-            (UnaryOperation<Number, Result<SortedSet<Number>>>) OperationSingletons.getFunction(OperationIdentifiers.DETERMINE_DIVISORS_FUNCTION);
-        Result<SortedSet<Number>> result = function.calculate(this);
+        UnaryOperation<Number, Result<Set<Number>>> function =
+            (UnaryOperation<Number, Result<Set<Number>>>) OperationSingletons.getFunction(OperationIdentifiers.DETERMINE_DIVISORS_FUNCTION);
+        Result<Set<Number>> result = function.calculate(this);
 
         return result.result();
     }
 
     /**
-     * Determines the prime factors for this number. The result set contains the prime factors.
+     * Determines all common divisors of this number and the specified number.
      *
-     * @return a set of prime factors
+     * @param number
+     *        a number
+     *
+     * @return a set containing all common divisors or an empty set if there are no common divisors
      */
     @Override
-    public SortedSet<Number> primeFactors() {
+    public Set<Number> commonDivisors(Number number) {
 
-        UnaryOperation<Number, Result<SortedSet<Number>>> function =
-            (UnaryOperation<Number, Result<SortedSet<Number>>>) OperationSingletons.getFunction(OperationIdentifiers.DETERMINE_PRIME_FACTORS_NUMBER);
-        Result<SortedSet<Number>> result = function.calculate(this);
+        BinaryOperation<Number, Result<Set<Number>>> function =
+            (BinaryOperation<Number, Result<Set<Number>>>) OperationSingletons.getFunction(OperationIdentifiers.DETERMINE_COMMON_DIVISORS_OF_NUMBERS);
+        Result<Set<Number>> result = function.calculate(this, number);
+
+        return result.result();
+    }
+
+    /**
+     * Determines the prime factors for this number. The result sequence contains all prime factors.
+     *
+     * @return a sequnce of prime factors or an empty sequence if there are no prime factors
+     */
+    @Override
+    public Sequence<Number> primeFactors() {
+
+        UnaryOperation<Number, Result<Sequence<Number>>> function =
+            (UnaryOperation<Number, Result<Sequence<Number>>>) OperationSingletons.getFunction(OperationIdentifiers.DETERMINE_PRIME_FACTORS_OF_NUMBER);
+        Result<Sequence<Number>> result = function.calculate(this);
 
         return result.result();
     }
@@ -1883,6 +1902,106 @@ public class NumberImpl implements Number {
         }
 
         return digits;
+    }
+
+    /**
+     * Calculates the sine of this number (in radian).
+     *
+     * @return the sine of this number
+     */
+    @Override
+    public Number sine() {
+
+        ProcessingDetails processingDetails =
+            ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM,
+                                                   ProcessingDetails.DEFAULT_PRECISION,
+                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+
+        return sine(processingDetails);
+    }
+
+    /**
+     * Calculates the sine of this number (in radian) according to the specified proessing parameters.
+     *
+     * @param processingDetails
+     *        procewssing parameters
+     *
+     * @return the sine of this number
+     */
+    @Override
+    public Number sine(ProcessingDetails processingDetails) {
+
+        ParameterCheckHelper.checkParameter(processingDetails);
+
+        Number iterations =
+            processingDetails.checkAndReturnIterationDepth(Math.DEFAULT_SINE_APPROXIMATION_ITERATIONS.value(base));
+        Number decimalPlaces =
+            processingDetails.checkAndReturnPrecision(Math.DEFAULT_MAXIMUM_FRACTION_LENGTH.value(base));
+
+        TernaryOperation<Number, Result<Number>> function =
+            (TernaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.SINE_APPROXIMATION_FUNCTION);
+        Result<Number> result = function.calculate(this, iterations, decimalPlaces);
+
+        return result.result();
+    }
+
+    /**
+     * Calculates the cosine of this number (in radian).
+     *
+     * @return the cosine of this number
+     */
+    @Override
+    public Number cosine() {
+
+        ProcessingDetails processingDetails =
+            ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM,
+                                                   ProcessingDetails.DEFAULT_PRECISION,
+                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+
+        return cosine(processingDetails);
+    }
+
+    /**
+     * Calculates the cosine of this number (in radian) according to the specified proessing parameters.
+     *
+     * @param processingDetails
+     *        procewssing parameters
+     *
+     * @return the cosine of this number
+     */
+    @Override
+    public Number cosine(ProcessingDetails processingDetails) {
+
+        ParameterCheckHelper.checkParameter(processingDetails);
+
+        Number iterations =
+            processingDetails.checkAndReturnIterationDepth(Math.DEFAULT_COSINE_APPROXIMATION_ITERATIONS.value(base));
+        Number decimalPlaces =
+            processingDetails.checkAndReturnPrecision(Math.DEFAULT_MAXIMUM_FRACTION_LENGTH.value(base));
+
+        TernaryOperation<Number, Result<Number>> function =
+            (TernaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.COSINE_APPROXIMATION_FUNCTION);
+        Result<Number> result = function.calculate(this, iterations, decimalPlaces);
+
+        return result.result();
+    }
+
+    /**
+     * Determines the common prime factors of this number and the specified number.
+     *
+     * @param number
+     *        a number
+     *
+     * @return a sequence of common prime factors or an empty sequence if there are no common prime factors
+     */
+    @Override
+    public Sequence<Number> commonPrimeFactors(Number number) {
+
+        BinaryOperation<Number, Result<Sequence<Number>>> function =
+            (BinaryOperation<Number, Result<Sequence<Number>>>) OperationSingletons.getFunction(OperationIdentifiers.DETERMINE_COMMON_PRIME_FACTORS_IN_NUMBERS);
+        Result<Sequence<Number>> result = function.calculate(this, number);
+
+        return result.result();
     }
 
 }

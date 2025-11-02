@@ -254,6 +254,9 @@ public class ShiftLeftTest {
 
             parameters.add(new Object[] { base, "1.1010101", "0.11010101" });
             parameters.add(new Object[] { base, "-1.1010101", "-0.11010101" });
+
+            parameters.add(new Object[] { base, "1000000", "100000" });
+            parameters.add(new Object[] { base, "-1000000", "-100000" });
         }
 
         for (int base = BASE_MIN_LIMIT + 1; base <= BASE_MAX_LIMIT; base++) {
