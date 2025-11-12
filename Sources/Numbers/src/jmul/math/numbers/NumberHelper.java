@@ -35,6 +35,7 @@ package jmul.math.numbers;
 
 
 import jmul.math.digits.PositionalNumeralSystems;
+import jmul.math.functions.PolynomialFunction;
 import static jmul.math.numbers.Constants.DEFAULT_NUMBER_BASE;
 import jmul.math.numbers.creation.CreationParameter;
 import jmul.math.numbers.creation.CreationParameters;
@@ -42,7 +43,11 @@ import jmul.math.numbers.nodes.DigitNode;
 import jmul.math.numbers.nodes.NodesHelper;
 import jmul.math.numbers.notations.ParserHelper;
 import jmul.math.numbers.notations.ParsingResult;
+import jmul.math.operations.OperationSingletons;
+import jmul.math.operations.Result;
+import jmul.math.operations.UnaryOperation;
 import jmul.math.operations.implementations.ParameterCheckHelper;
+import jmul.math.operations.repository.OperationIdentifiers;
 import jmul.math.signs.Sign;
 import jmul.math.signs.Signs;
 
@@ -358,6 +363,23 @@ public final class NumberHelper {
         ParsingResult parsingResult = ParserHelper.parseNumber(n);
 
         return createNumber(parsingResult);
+    }
+
+    /**
+     * Translates the specified polynomial function into a number.
+     *
+     * @param f
+     *        a polynomial function
+     *
+     * @return a number
+     */
+    public static Number fromPolynomialFunction(PolynomialFunction f) {
+
+        UnaryOperation<PolynomialFunction, Result<Number>> function =
+            (UnaryOperation<PolynomialFunction, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.POLYNOMIAL_FUNCTION_TO_NUMBER);
+        Result<Number> result = function.calculate(f);
+
+        return result.result();
     }
 
 }

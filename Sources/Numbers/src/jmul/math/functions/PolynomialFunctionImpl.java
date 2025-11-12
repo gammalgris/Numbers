@@ -50,7 +50,7 @@ import jmul.math.operations.processing.ProcessingDetails;
  *
  * @author Kristian Kutin
  */
-public class PolynomialFunctionImpl extends FunctionBaseImpl {
+public class PolynomialFunctionImpl extends FunctionBaseImpl implements PolynomialFunction {
 
     /**
      * All coefficients of the function. The index position determines the position within the formula (see class
@@ -67,7 +67,7 @@ public class PolynomialFunctionImpl extends FunctionBaseImpl {
      *        all coefficients. The index position determines the position within the formula (see class description;
      *        in ascending order c<sub>0</sub>, c<sub>1</sub>, c<sub>2</sub>, ..., c<sub>n</sub>).
      */
-    PolynomialFunctionImpl(Number... coefficients) {
+    public PolynomialFunctionImpl(Number... coefficients) {
 
         super(extractBase(coefficients));
 
@@ -261,6 +261,30 @@ public class PolynomialFunctionImpl extends FunctionBaseImpl {
         }
 
         return s;
+    }
+
+    /**
+     * Returns the coefficient with the specified index.
+     *
+     * @param index
+     *        an index
+     *
+     * @return a coefficient
+     */
+    @Override
+    public Number coefficient(int index) {
+
+        return coefficients.get(index);
+    }
+
+    /**
+     * Returns the total coefficient count.
+     *
+     * @return the total coefficient count
+     */
+    public int coefficients() {
+
+        return coefficients.size();
     }
 
 }

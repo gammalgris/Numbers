@@ -38,6 +38,8 @@ import jmul.math.numbers.notations.ScientificNotationFunctionImpl;
 import jmul.math.numbers.notations.ScientificNotationParserImpl;
 import jmul.math.numbers.notations.StandardNotationFunctionImpl;
 import jmul.math.numbers.notations.StandardNotationParserImpl;
+import jmul.math.operations.implementations.NumberToPolynomialFunction;
+import jmul.math.operations.implementations.PolynomialFunctionToNumber;
 import jmul.math.operations.implementations.AddDigits;
 import jmul.math.operations.implementations.AddFractionAndNumber;
 import jmul.math.operations.implementations.AddFractions;
@@ -454,6 +456,11 @@ public class OperationRepositoryInitializerImpl implements OperationRepositoryIn
         repository.registerFunction(OperationIdentifiers.COSINE_APPROXIMATION_FUNCTION, CosineApproximation.class);
 
         repository.registerFunction(OperationIdentifiers.NEXT_PRIME_NUMBER, NextPrimeNumber.class);
+
+        repository.registerFunction(OperationIdentifiers.NUMBER_TO_POLYNOMIAL_FUNCTION,
+                                    NumberToPolynomialFunction.class);
+        repository.registerFunction(OperationIdentifiers.POLYNOMIAL_FUNCTION_TO_NUMBER,
+                                    PolynomialFunctionToNumber.class);
 
         return repository;
     }

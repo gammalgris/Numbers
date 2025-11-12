@@ -36,12 +36,16 @@ package jmul.math.functions;
 
 import jmul.math.Math;
 import jmul.math.fractions.Fraction;
+import static jmul.math.fractions.FractionHelper.createFraction;
 import jmul.math.functions.conditions.ConditionFunctionEntry;
 import jmul.math.functions.conditions.GreaterOrEqualCondition;
 import jmul.math.functions.conditions.LesserThanCondition;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
-import static jmul.math.fractions.FractionHelper.createFraction;
+import jmul.math.operations.OperationSingletons;
+import jmul.math.operations.Result;
+import jmul.math.operations.UnaryOperation;
+import jmul.math.operations.repository.OperationIdentifiers;
 
 
 /**
@@ -139,7 +143,7 @@ public final class FunctionHelper {
      *
      * @return a function
      */
-    public static Function createPolynomialFunction(int base, String... coefficientStrings) {
+    public static PolynomialFunction createPolynomialFunction(int base, String... coefficientStrings) {
 
         if (coefficientStrings == null) {
 
@@ -166,7 +170,7 @@ public final class FunctionHelper {
      *
      * @return a function
      */
-    public static Function createRandomPolynomialFunction(int base) {
+    public static PolynomialFunction createRandomPolynomialFunction(int base) {
 
         int maxNumbers = randomInteger(4);
 
@@ -295,7 +299,7 @@ public final class FunctionHelper {
     }
 
     public static Function createRandomRootFunction(int base) {
-        
+
         return null;
     }
 
@@ -341,7 +345,7 @@ public final class FunctionHelper {
     }
 
     public static Function createRandomExponentialFunction(int base) {
-        
+
         return null;
     }
 
@@ -390,6 +394,23 @@ public final class FunctionHelper {
     private static int randomIndex(int max) {
 
         return (int) (java.lang.Math.random() * ((double) max));
+    }
+
+    /**
+     * Translates the specified number into a polynomial function.
+     *
+     * @param n
+     *        a number
+     *
+     * @return a polynomial funtion
+     */
+    public static PolynomialFunction fromNumber(Number n) {
+
+        UnaryOperation<Number, Result<PolynomialFunction>> function =
+            (UnaryOperation<Number, Result<PolynomialFunction>>) OperationSingletons.getFunction(OperationIdentifiers.NUMBER_TO_POLYNOMIAL_FUNCTION);
+        Result<PolynomialFunction> result = function.calculate(n);
+
+        return result.result();
     }
 
 }

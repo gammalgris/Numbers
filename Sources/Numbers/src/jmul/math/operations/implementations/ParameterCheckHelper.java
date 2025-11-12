@@ -39,6 +39,7 @@ import java.util.stream.Stream;
 
 import jmul.math.digits.Digit;
 import jmul.math.fractions.Fraction;
+import jmul.math.functions.Function;
 import jmul.math.logarithms.Logarithm;
 import jmul.math.matrices.Matrix;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
@@ -1079,6 +1080,20 @@ public final class ParameterCheckHelper {
         if (logarithmExpression1.base() != logarithmExpression2.base()) {
 
             throw new IllegalArgumentException("The number bases of the specified logarithm expressions are not equal!");
+        }
+    }
+
+    /**
+     * Checks the specified parameter.
+     *
+     * @param function
+     *        a function
+     */
+    public static void checkParameter(Function function) {
+
+        if (function == null) {
+
+            throw new IllegalArgumentException("No function was specified!");
         }
     }
 
