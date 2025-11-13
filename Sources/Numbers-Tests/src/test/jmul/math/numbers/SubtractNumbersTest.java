@@ -44,16 +44,12 @@ import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
 
 import jmul.test.classification.UnitTest;
-import jmul.test.exceptions.FailedTestException;
 
-import org.junit.After;
 import static org.junit.Assert.assertEquals;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import static test.jmul.math.numbers.NumberCheckHelper.checkNumberEqualsStringRepresentation;
 import static test.jmul.math.numbers.NumberCheckHelper.checkNumbersAreUniqueInstances;
 
 
@@ -67,82 +63,49 @@ import static test.jmul.math.numbers.NumberCheckHelper.checkNumbersAreUniqueInst
 public class SubtractNumbersTest {
 
     /**
-     * The base for all summands.
+     * A number.
      */
-    private final int base;
+    private final Number number1;
 
     /**
-     * The minuend as number string.
+     * A number.
      */
-    private final String minuendString;
+    private final Number number2;
 
     /**
-     * The minuend parsed from the specified number string.
+     * The expected result.
      */
-    private Number minuend;
+    private final Number expectedResult;
 
     /**
-     * The subtrahend as number string.
-     */
-    private final String subtrahendString;
-
-    /**
-     * The subtrahend parsed from the specified number string,
-     */
-    private Number subtrahend;
-
-    /**
-     * The expected difference as number string.
-     */
-    private final String differenceString;
-
-    /**
-     * The expected difference parsed from the specified number string.
-     */
-    private Number difference;
-
-    /**
-     * Creates a new test according to the specified parmaeters.
+     * Creates a new test case according to the specified parameters.
      *
-     * @param base
-     *        the base for all numbers
-     * @param minuendString
-     *        the first summand as number string
-     * @param subtrahendString
-     *        the second summand as number string
-     * @param differenceString
-     *        the sum as number string
+     * @param number1
+     *        a number
+     * @param number2
+     *        a number
+     * @param expectedResult
+     *        the expected result
      */
-    public SubtractNumbersTest(int base, String minuendString, String subtrahendString, String differenceString) {
+    public SubtractNumbersTest(Number number1, Number number2, Number expectedResult) {
 
         super();
 
-        this.base = base;
-        this.minuendString = minuendString;
-        this.subtrahendString = subtrahendString;
-        this.differenceString = differenceString;
+        this.number1 = number1;
+        this.number2 = number2;
+        this.expectedResult = expectedResult;
     }
 
     /**
-     * Parses the specified number strings before the actual test.
+     * Returns a string retpresentation for this test case.
+     *
+     * @return a string representation
      */
-    @Before
-    public void setUp() {
+    @Override
+    public String toString() {
 
-        minuend = createNumber(base, minuendString);
-        subtrahend = createNumber(base, subtrahendString);
-        difference = createNumber(base, differenceString);
-    }
-
-    /**
-     * Cleans up after a test.
-     */
-    @After
-    public void tearDown() {
-
-        minuend = null;
-        subtrahend = null;
-        difference = null;
+        return String.format("[base:%d] %s - [base:%d] %s = [base:%d] %s", number1.base(), number1, number2.base(),
+                             number2, expectedResult.base(), expectedResult);
     }
 
     /**
@@ -151,30 +114,11 @@ public class SubtractNumbersTest {
     @Test
     public void testSubtraction() {
 
-        try {
+        Number actualResult = number1.subtract(number2);
 
-            // check that the operands and the expected result are built correctly
-            checkNumberEqualsStringRepresentation(minuend, minuendString);
-            checkNumberEqualsStringRepresentation(subtrahend, subtrahendString);
-            checkNumberEqualsStringRepresentation(difference, differenceString);
-
-            // check the operation
-            Number actualDifference = minuend.subtract(subtrahend);
-
-            String message = String.format(toString(), minuendString, subtrahendString, differenceString);
-            assertEquals(message, difference, actualDifference);
-
-            // check the number instances
-            checkNumbersAreUniqueInstances(minuend, subtrahend, difference);
-
-            // check that the operands didn't change
-            checkNumberEqualsStringRepresentation(minuend, minuendString);
-            checkNumberEqualsStringRepresentation(subtrahend, subtrahendString);
-
-        } catch (Exception e) {
-
-            throw new FailedTestException(toString(), e);
-        }
+        checkNumbersAreUniqueInstances(number1, number2, actualResult);
+        assertEquals(toString(), expectedResult, actualResult);
+        assertEquals(toString(), expectedResult.toString(), actualResult.toString());
     }
 
     /**
@@ -183,41 +127,11 @@ public class SubtractNumbersTest {
     @Test
     public void testSubtractionVariant2() {
 
-        try {
+        Number actualResult = Math.subtract(number1, number2);
 
-            // check that the operands and the expected result are built correctly
-            checkNumberEqualsStringRepresentation(minuend, minuendString);
-            checkNumberEqualsStringRepresentation(subtrahend, subtrahendString);
-            checkNumberEqualsStringRepresentation(difference, differenceString);
-
-            // check the operation
-            Number actualDifference = Math.subtract(minuend, subtrahend);
-
-            String message = String.format(toString(), base, minuendString, subtrahendString, differenceString);
-            assertEquals(message, difference, actualDifference);
-
-            // check the number instances
-            checkNumbersAreUniqueInstances(minuend, subtrahend, difference);
-
-            // check that the operands didn't change
-            checkNumberEqualsStringRepresentation(minuend, minuendString);
-            checkNumberEqualsStringRepresentation(subtrahend, subtrahendString);
-
-        } catch (Exception e) {
-
-            throw new FailedTestException(toString(), e);
-        }
-    }
-
-    /**
-     * Returns a summary of this test case (i.e. the operation with its operands)
-     *
-     * @return a summary
-     */
-    @Override
-    public String toString() {
-
-        return String.format("[base:%d] %s - %s = %s", base, minuendString, subtrahendString, differenceString);
+        checkNumbersAreUniqueInstances(number1, number2, actualResult);
+        assertEquals(toString(), expectedResult, actualResult);
+        assertEquals(toString(), expectedResult.toString(), actualResult.toString());
     }
 
     /**
@@ -232,111 +146,131 @@ public class SubtractNumbersTest {
 
         for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
 
-            parameters.add(new Object[] { base, "0", "0", "0" });
+            parameters.add(createTestCase(base, "0", "0", "0"));
 
-            parameters.add(new Object[] { base, "1", "0", "1" });
-            parameters.add(new Object[] { base, "0", "1", "-1" });
+            parameters.add(createTestCase(base, "1", "0", "1"));
+            parameters.add(createTestCase(base, "0", "1", "-1"));
 
-            parameters.add(new Object[] { base, "-1", "0", "-1" });
-            parameters.add(new Object[] { base, "0", "-1", "1" });
+            parameters.add(createTestCase(base, "-1", "0", "-1"));
+            parameters.add(createTestCase(base, "0", "-1", "1"));
 
-            parameters.add(new Object[] { base, "100", "0", "100" });
-            parameters.add(new Object[] { base, "0", "100", "-100" });
+            parameters.add(createTestCase(base, "100", "0", "100"));
+            parameters.add(createTestCase(base, "0", "100", "-100"));
 
-            parameters.add(new Object[] { base, "-100", "0", "-100" });
-            parameters.add(new Object[] { base, "0", "-100", "100" });
+            parameters.add(createTestCase(base, "-100", "0", "-100"));
+            parameters.add(createTestCase(base, "0", "-100", "100"));
         }
 
-        parameters.add(new Object[] { 2, "11", "1", "10" });
-        parameters.add(new Object[] { 3, "11", "1", "10" });
+        parameters.add(createTestCase(2, "11", "1", "10"));
+        parameters.add(createTestCase(3, "11", "1", "10"));
 
-        parameters.add(new Object[] { 2, "1.1111", "0", "1.1111" });
-        parameters.add(new Object[] { 2, "0", "1.1111", "-1.1111" });
+        parameters.add(createTestCase(2, "1.1111", "0", "1.1111"));
+        parameters.add(createTestCase(2, "0", "1.1111", "-1.1111"));
 
-        parameters.add(new Object[] { 2, "-1.1111", "0", "-1.1111" });
-        parameters.add(new Object[] { 2, "0", "-1.1111", "1.1111" });
+        parameters.add(createTestCase(2, "-1.1111", "0", "-1.1111"));
+        parameters.add(createTestCase(2, "0", "-1.1111", "1.1111"));
 
-        parameters.add(new Object[] { 2, "100.1111", "0", "100.1111" });
-        parameters.add(new Object[] { 2, "0", "100.1111", "-100.1111" });
+        parameters.add(createTestCase(2, "100.1111", "0", "100.1111"));
+        parameters.add(createTestCase(2, "0", "100.1111", "-100.1111"));
 
-        parameters.add(new Object[] { 2, "-100.1111", "0", "-100.1111" });
-        parameters.add(new Object[] { 2, "0", "-100.1111", "100.1111" });
-
-
-        parameters.add(new Object[] { 10, "1.2345", "0", "1.2345" });
-        parameters.add(new Object[] { 10, "0", "1.2345", "-1.2345" });
-
-        parameters.add(new Object[] { 10, "-1.2345", "0", "-1.2345" });
-        parameters.add(new Object[] { 10, "0", "-1.2345", "1.2345" });
-
-        parameters.add(new Object[] { 10, "100.2345", "0", "100.2345" });
-        parameters.add(new Object[] { 10, "0", "100.2345", "-100.2345" });
-
-        parameters.add(new Object[] { 10, "-100.2345", "0", "-100.2345" });
-        parameters.add(new Object[] { 10, "0", "-100.2345", "100.2345" });
+        parameters.add(createTestCase(2, "-100.1111", "0", "-100.1111"));
+        parameters.add(createTestCase(2, "0", "-100.1111", "100.1111"));
 
 
-        parameters.add(new Object[] { 10, "1", "0.5", "0.5" });
-        parameters.add(new Object[] { 10, "0.5", "1", "-0.5" });
+        parameters.add(createTestCase(10, "1.2345", "0", "1.2345"));
+        parameters.add(createTestCase(10, "0", "1.2345", "-1.2345"));
 
-        parameters.add(new Object[] { 10, "-1", "0.5", "-1.5" });
-        parameters.add(new Object[] { 10, "0.5", "-1", "1.5" });
+        parameters.add(createTestCase(10, "-1.2345", "0", "-1.2345"));
+        parameters.add(createTestCase(10, "0", "-1.2345", "1.2345"));
 
-        parameters.add(new Object[] { 10, "100", "0.555", "99.445" });
-        parameters.add(new Object[] { 10, "0.555", "100", "-99.445" });
+        parameters.add(createTestCase(10, "100.2345", "0", "100.2345"));
+        parameters.add(createTestCase(10, "0", "100.2345", "-100.2345"));
 
-        parameters.add(new Object[] { 10, "899.999", "0.555", "899.444" });
-        parameters.add(new Object[] { 10, "-100", "0.555", "-100.555" });
-        parameters.add(new Object[] { 10, "0.555", "-100", "100.555" });
-
-
-        parameters.add(new Object[] { 10, "1.2345", "10.98765", "-9.75315" });
-        parameters.add(new Object[] { 10, "10.98765", "1.2345", "9.75315" });
-
-        parameters.add(new Object[] { 10, "-1.2345", "10.98765", "-12.22215" });
-        parameters.add(new Object[] { 10, "10.98765", "-1.2345", "12.22215" });
-
-        parameters.add(new Object[] { 10, "123.45", "1.098765", "122.351235" });
-        parameters.add(new Object[] { 10, "1.098765", "123.45", "-122.351235" });
-
-        parameters.add(new Object[] { 10, "-123.45", "1.098765", "-124.548765" });
-        parameters.add(new Object[] { 10, "1.098765", "-123.45", "124.548765" });
+        parameters.add(createTestCase(10, "-100.2345", "0", "-100.2345"));
+        parameters.add(createTestCase(10, "0", "-100.2345", "100.2345"));
 
 
-        parameters.add(new Object[] { 10, "0.5", "0.5", "0" });
-        parameters.add(new Object[] { 10, "0.12345", "0.98765", "-0.8642" });
+        parameters.add(createTestCase(10, "1", "0.5", "0.5"));
+        parameters.add(createTestCase(10, "0.5", "1", "-0.5"));
 
-        parameters.add(new Object[] { 10, "1", "1", "0" });
-        parameters.add(new Object[] { 10, "2", "2", "0" });
-        parameters.add(new Object[] { 10, "10", "10", "0" });
-        parameters.add(new Object[] { 10, "123", "123", "0" });
+        parameters.add(createTestCase(10, "-1", "0.5", "-1.5"));
+        parameters.add(createTestCase(10, "0.5", "-1", "1.5"));
 
-        parameters.add(new Object[] { 10, "123456789", "987654321", "-864197532" });
-        parameters.add(new Object[] { 10, "-123456789", "987654321", "-1111111110" });
-        parameters.add(new Object[] { 10, "123456789", "-987654321", "1111111110" });
-        parameters.add(new Object[] { 10, "-123456789", "-987654321", "864197532" });
+        parameters.add(createTestCase(10, "100", "0.555", "99.445"));
+        parameters.add(createTestCase(10, "0.555", "100", "-99.445"));
 
-        parameters.add(new Object[] { 10, "11", "1", "10" });
-        parameters.add(new Object[] { 10, "1", "11", "-10" });
-        parameters.add(new Object[] { 10, "-11", "1", "-12" });
-        parameters.add(new Object[] { 10, "1", "-11", "12" });
-        parameters.add(new Object[] { 10, "11", "-1", "12" });
-        parameters.add(new Object[] { 10, "-1", "11", "-12" });
-        parameters.add(new Object[] { 10, "-11", "-1", "-10" });
-        parameters.add(new Object[] { 10, "-1", "-11", "10" });
+        parameters.add(createTestCase(10, "899.999", "0.555", "899.444"));
+        parameters.add(createTestCase(10, "-100", "0.555", "-100.555"));
+        parameters.add(createTestCase(10, "0.555", "-100", "100.555"));
 
-        parameters.add(new Object[] { 10, "1234567890.0123456789", "0.012345678987654321",
-                                      "1234567889.999999999912345679" });
-        parameters.add(new Object[] { 10, "-1234567890.0123456789", "0.012345678987654321",
-                                      "-1234567890.024691357887654321" });
-        parameters.add(new Object[] { 10, "1234567890.0123456789", "-0.012345678987654321",
-                                      "1234567890.024691357887654321" });
-        parameters.add(new Object[] { 10, "-1234567890.0123456789", "-0.012345678987654321",
-                                      "-1234567889.999999999912345679" });
 
-        parameters.add(new Object[] { 16, "FF", "11", "EE" });
+        parameters.add(createTestCase(10, "1.2345", "10.98765", "-9.75315"));
+        parameters.add(createTestCase(10, "10.98765", "1.2345", "9.75315"));
+
+        parameters.add(createTestCase(10, "-1.2345", "10.98765", "-12.22215"));
+        parameters.add(createTestCase(10, "10.98765", "-1.2345", "12.22215"));
+
+        parameters.add(createTestCase(10, "123.45", "1.098765", "122.351235"));
+        parameters.add(createTestCase(10, "1.098765", "123.45", "-122.351235"));
+
+        parameters.add(createTestCase(10, "-123.45", "1.098765", "-124.548765"));
+        parameters.add(createTestCase(10, "1.098765", "-123.45", "124.548765"));
+
+
+        parameters.add(createTestCase(10, "0.5", "0.5", "0"));
+        parameters.add(createTestCase(10, "0.12345", "0.98765", "-0.8642"));
+
+        parameters.add(createTestCase(10, "1", "1", "0"));
+        parameters.add(createTestCase(10, "2", "2", "0"));
+        parameters.add(createTestCase(10, "10", "10", "0"));
+        parameters.add(createTestCase(10, "123", "123", "0"));
+
+        parameters.add(createTestCase(10, "123456789", "987654321", "-864197532"));
+        parameters.add(createTestCase(10, "-123456789", "987654321", "-1111111110"));
+        parameters.add(createTestCase(10, "123456789", "-987654321", "1111111110"));
+        parameters.add(createTestCase(10, "-123456789", "-987654321", "864197532"));
+
+        parameters.add(createTestCase(10, "11", "1", "10"));
+        parameters.add(createTestCase(10, "1", "11", "-10"));
+        parameters.add(createTestCase(10, "-11", "1", "-12"));
+        parameters.add(createTestCase(10, "1", "-11", "12"));
+        parameters.add(createTestCase(10, "11", "-1", "12"));
+        parameters.add(createTestCase(10, "-1", "11", "-12"));
+        parameters.add(createTestCase(10, "-11", "-1", "-10"));
+        parameters.add(createTestCase(10, "-1", "-11", "10"));
+
+        parameters.add(createTestCase(10, "1234567890.0123456789", "0.012345678987654321",
+                                      "1234567889.999999999912345679"));
+        parameters.add(createTestCase(10, "-1234567890.0123456789", "0.012345678987654321",
+                                      "-1234567890.024691357887654321"));
+        parameters.add(createTestCase(10, "1234567890.0123456789", "-0.012345678987654321",
+                                      "1234567890.024691357887654321"));
+        parameters.add(createTestCase(10, "-1234567890.0123456789", "-0.012345678987654321",
+                                      "-1234567889.999999999912345679"));
+
+        parameters.add(createTestCase(16, "FF", "11", "EE"));
 
         return parameters;
+    }
+
+    /**
+     * Creates a test case according to the specified parameters.
+     *
+     * @param base
+     *        a number base
+     * @param numberString1
+     *        a number string
+     * @param numberString2
+     *        a number string
+     * @param resultString
+     *        a number string
+     *
+     * @return an object array
+     */
+    private static Object[] createTestCase(int base, String numberString1, String numberString2, String resultString) {
+
+        return new Object[] {
+               createNumber(base, numberString1), createNumber(base, numberString2), createNumber(base, resultString) };
     }
 
 }

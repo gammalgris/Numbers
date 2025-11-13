@@ -142,8 +142,9 @@
 
 63) Test how far can the root function derivative can be calculated.
 
-64)
+64) Number.digits() needs too much heap memory for large numbers. Needs some optimization.
 
+65) 
 
 # Done
 
