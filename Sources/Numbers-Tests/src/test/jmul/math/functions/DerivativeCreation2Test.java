@@ -692,7 +692,7 @@ public class DerivativeCreation2Test {
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.5"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0.A8583547E3")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
-                                           createNumber(DEFAULT_NUMBER_BASE, "0.93CD3A2C81")));
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.93CD3A2C82")));
 
         Number coefficient = createNumber(DEFAULT_NUMBER_BASE, "2");
         Fraction exponent = createFraction(DEFAULT_NUMBER_BASE, "1", "2");
@@ -787,7 +787,7 @@ public class DerivativeCreation2Test {
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0.64AA51BE99")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.5"),
-                                           createNumber(DEFAULT_NUMBER_BASE, "0.558D889E6C")),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.558D889E6D")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0.35C1B81F48")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.5"),

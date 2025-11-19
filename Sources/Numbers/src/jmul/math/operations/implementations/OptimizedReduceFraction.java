@@ -98,6 +98,11 @@ public class OptimizedReduceFraction implements UnaryOperation<Fraction, Result<
 
         reducedFraction = FractionHelper.createFraction(DONT_CLONE, newNumerator, newDenominator);
 
+        if (newDenominator.isOne() || newNumerator.isOne()) {
+
+            return new Result<Fraction>(reducedFraction);
+        }
+
         UnaryOperation<Fraction, Result<Fraction>> function =
             (UnaryOperation<Fraction, Result<Fraction>>) OperationSingletons.getFunction(OperationIdentifiers.REDUCE_FRACTION_BY_COMMON_PRIME_FACTORS);
         Result<Fraction> result = function.calculate(reducedFraction);

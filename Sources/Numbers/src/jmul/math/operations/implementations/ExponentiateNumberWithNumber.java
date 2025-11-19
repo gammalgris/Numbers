@@ -36,7 +36,6 @@ package jmul.math.operations.implementations;
 
 import jmul.math.Math;
 import jmul.math.fractions.Fraction;
-import static jmul.math.fractions.FractionHelper.createFraction;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
 import static jmul.math.numbers.creation.CreationParameters.CLONE;
@@ -134,20 +133,27 @@ public class ExponentiateNumberWithNumber implements TernaryOperation<Number, Re
         int base = number.base();
         final Number ONE = Math.ONE.value(base);
 
+        ProcessingDetails processingDetails =
+            ProcessingDetails.setProcessingDetails(OperationIdentifiers.ROUND_NUMBER_TO_ODD_FUNCTION, decimalPlaces,
+                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+
         Number counter = exponent;
         Number result = ONE;
 
         while (!counter.isZero()) {
 
             result = result.multiply(number);
+            result = result.round(processingDetails);
+
+            if (result.isZero()) {
+
+                break;
+            }
+
             counter = counter.dec();
         }
 
-        ProcessingDetails processingDetails =
-            ProcessingDetails.setProcessingDetails(OperationIdentifiers.ROUND_NUMBER_TO_ODD_FUNCTION, decimalPlaces,
-                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
-
-        return result.round(processingDetails);
+        return result;
     }
 
     /**
@@ -164,19 +170,9 @@ public class ExponentiateNumberWithNumber implements TernaryOperation<Number, Re
      */
     private Number exponentiate(Fraction reciprocal, Number exponent, Number decimalPlaces) {
 
-        int base = reciprocal.base();
-        final Fraction ONE = createFraction(base, "1");
+        Number n = reciprocal.evaluate(decimalPlaces);
 
-        Number counter = exponent;
-        Fraction result = ONE;
-
-        while (!counter.isZero()) {
-
-            result = result.multiply(reciprocal);
-            counter = counter.dec();
-        }
-
-        return result.evaluate(decimalPlaces);
+        return exponentiate(n, exponent, decimalPlaces);
     }
 
 }

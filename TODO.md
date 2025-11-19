@@ -144,7 +144,12 @@
 
 64) Number.digits() needs too much heap memory for large numbers. Needs some optimization.
 
-65) 
+65) Review rounding in calculating a root, nth-root, squaring and exponentiation.
+    Exponentiating with a fraction needs a review regarding correctness and performance.
+
+66) Determining divisors and prime factors is slow. Need a faster implementation.
+
+67)
 
 # Done
 

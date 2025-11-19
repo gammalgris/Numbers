@@ -39,14 +39,17 @@ import jmul.math.functions.Function;
 import jmul.math.functions.FunctionHelper;
 
 import jmul.test.classification.ManualTest;
+
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
+import jmul.math.operations.processing.ProcessingDetails;
+
 import org.junit.Ignore;
 
 
 /**
  * This test suite tests the calculation speed for sigmoid functions.
- * 
+ *
  * @author Kristian Kutin
  */
 @Ignore
@@ -55,14 +58,14 @@ public class SigmoidSpeedTest {
 
     /**
      * Invokes a sigmoid function repeatedly.
-     * 
+     *
      * @param args
      *        command line arguments are not evaluated
      */
     public static void main(String... args) {
 
         Function function = FunctionHelper.createSigmoidFunction(10);
-        Number x = createNumber(10, "5");
+        Number x = createNumber(10, "54321");
 
         long start = System.currentTimeMillis();
 
@@ -70,33 +73,38 @@ public class SigmoidSpeedTest {
 
         long end = System.currentTimeMillis();
         long delta = end - start;
-        
+
         String info = String.format("%d milliseconds", delta);
         System.out.println(info);
     }
 
     /**
      * The specified function is invoked with the specified input value. The calculation is repeated.
-     * 
+     *
      * @param function
      *        a function
      * @param x
      *        an input value
      * @param repetitions
+     * 
      *        the number of repetitions
      */
     private static void calculate(Function function, Number x, int repetitions) {
-        
+
+        ProcessingDetails processingDetails =
+            ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM, createNumber(10, "2"),
+                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+
         for (int a = 0; a < repetitions; a++) {
-            
-            function.calculate(x);
-            
+
+            function.calculate(processingDetails, x);
+
             if (a % 50 == 0) {
-                
+
                 System.out.print(".");
             }
         }
-        
+
         System.out.println();
     }
 

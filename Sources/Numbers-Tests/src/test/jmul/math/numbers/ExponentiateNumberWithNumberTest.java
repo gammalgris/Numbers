@@ -260,7 +260,7 @@ public class ExponentiateNumberWithNumberTest {
         parameters.add(new Object[] { createNumber(10, "1"), createNumber(10, "-2"), null, createNumber(10, "1") });
         parameters.add(new Object[] { createNumber(10, "2"), createNumber(10, "-2"), null, createNumber(10, "0.25") });
         parameters.add(new Object[] { createNumber(10, "3"), createNumber(10, "-2"), null,
-                                      createNumber(10, "0.1111111111") });
+                                      createNumber(10, "0.111111111") });
         parameters.add(new Object[] { createNumber(10, "4"), createNumber(10, "-2"), null,
                                       createNumber(10, "0.0625") });
         parameters.add(new Object[] { createNumber(10, "5"), createNumber(10, "-2"), null, createNumber(10, "0.04") });
@@ -302,6 +302,9 @@ public class ExponentiateNumberWithNumberTest {
                                       createNumber(10, "0.0013717421") });
         parameters.add(new Object[] { createNumber(10, "10"), createNumber(10, "-3"), null,
                                       createNumber(10, "0.001") });
+
+        parameters.add(new Object[] { createNumber(10, "10"), createNumber(10, "-10000000"), null,
+                                      createNumber(10, "0") });
 
         return parameters;
     }

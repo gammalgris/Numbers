@@ -121,6 +121,10 @@ public class NthRoot implements QuaternaryOperation<Number, Result<Number>> {
         }
 
 
+        ProcessingDetails processingDetails =
+            ProcessingDetails.setProcessingDetails(OperationIdentifiers.ROUND_NUMBER_TO_ODD_FUNCTION, decimalPlaces,
+                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+
         Number i = iterations;
         Number s = number;
         Number x = x0(s);
@@ -128,14 +132,15 @@ public class NthRoot implements QuaternaryOperation<Number, Result<Number>> {
         while (!i.isZero()) {
 
             x = f(x, number, n, decimalPlaces);
+            x = x.round(processingDetails);
+
+            if (x.isZero()) {
+
+                break;
+            }
+
             i = i.dec();
         }
-
-        ProcessingDetails processingDetails =
-            ProcessingDetails.setProcessingDetails(OperationIdentifiers.ROUND_NUMBER_TO_ODD_FUNCTION, decimalPlaces,
-                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
-
-        x = x.round(processingDetails);
 
         return new Result<Number>(x);
     }

@@ -20,3 +20,28 @@
 4) Due to the dependencies recursion may be problematic because the default stack size may be exhausted quickly. In
    such a case avoid recursion and use ordinary loops (i.e. for or while loops). The math utilities should work with
    default memory settings.
+
+5) Some operations (e.g. addition, subtraction, multiplication, halving, doubling, incrementing, decrementing, etc.)
+   will not round the result. This is on purpose. If rounding is necessary then it should be done explicitely before
+   and/ or after the calculation. Adding rounding by default costs performance.
+
+6) There is a dependency and hierarchy between various ata types:
+   a) digit (there is a distinct digit set for each number base used at runtime)
+   b) number (i.e. a linked list of digits)
+   c) fraction (the components of a fraction depend on the number implementations)
+   d) vector (the components of a vector depend on the number implementations)
+   e) matrix (the components of a matrix depend on the number implementations)
+   f) function (the coefficients of a function depend on the number implementations)
+
+7) A polynomial function can be translated into a number and back.
+
+8) There is a dependency and hierarchy between operations:
+   a) addition of numbers (depends on addition of digits)
+   b) subtraction of numbers (depends on complement of a number and addition)
+   c) multiplication (depends on addition, see details in the various multiplication implementations for detailed
+      dependencies)
+   d) division (see details in the various multiplication implementations for detailed dependencies)
+   e) root/ nth-root (depends on the basic four operations)
+   f) exponentiation (depends on the basic four operations)
+   g) sine (depends on the basic four operations and calculating roots and exponentiation)
+   h) cosine (depends on the basic four operations and calculating roots and exponentiation)

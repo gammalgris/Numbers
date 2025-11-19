@@ -157,6 +157,8 @@ public class ReciprocalOfFractionTest {
             parameters.add(new Object[] { createFraction(base, "-11"), createFraction(base, "-1", "11") });
         }
 
+        parameters.add(new Object[] { createFraction(10, "54321"), createFraction(10, "1", "54321") });
+
         return parameters;
     }
 

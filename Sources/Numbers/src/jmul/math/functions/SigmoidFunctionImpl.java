@@ -102,16 +102,23 @@ public class SigmoidFunctionImpl extends FunctionBaseImpl {
     @Override
     public Number calculate(ProcessingDetails processingDetails, Number x) {
 
+        Number decimalPlaces = processingDetails.checkAndReturnPrecision(Math.DEFAULT_MAXIMUM_FRACTION_LENGTH.value(base()));
+
         final Number ONE = Math.ONE.value(base());
-        Fraction exponent = x.toFraction().reduce().negate();
+        //Fraction exponent = x.toFraction().reduce().negate();
+        Fraction exponent = x.toFraction();
+        exponent = exponent.reduce();
+        exponent = exponent.negate();
 
-        Number result1 = (ONE.divide(processingDetails, ONE.add(e.exponentiate(processingDetails, exponent))));
+        //Number result1 = (ONE.divide(processingDetails, ONE.add(e.exponentiate(processingDetails, exponent))));
 
-        Number result2 = e.exponentiate(processingDetails, exponent);
-        result2 = ONE.add(result2);
-        result2 = ONE.divide(processingDetails, result2);
+        Number result = e.exponentiate(processingDetails, exponent);
+        //result = result.round(processingDetails);
+        result = result.add(ONE);
+        result = ONE.divide(processingDetails, result);
+        result = result.round(processingDetails);
 
-        return result1;
+        return result;
     }
 
     /**
