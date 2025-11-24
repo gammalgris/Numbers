@@ -251,4 +251,104 @@ seguenti esempi scritti in base negativo-decimale.
 
 
 
+                                   - 208 -
+
+                                 Osservazioni.
+
+   A. Si opera in complesso come nell'aritm. ordinaria ricordando ripetutamente
+quanto fu detto intorno all'addizione (vedi osser. alinea A).
+   B. Sia per fattori interi che per fattori radicali, il numero delle cifre del
+prodotto negli esempi qui sopra corrisponde alle formole suesposte.
+   C. Fattori contenanti ambidue una parte intera, possono fornire un prodotto
+senza parte intera (Es. I°) e viceversa fattori senza parte intera, possono fornire
+un prodotto con parte intera (es. II°).
+
+
+                                     IV.
+
+                                  Divisione.
+
+   Per analogia a quanto ci risultù nella moltiplicazione potremo concludere, che
+chiamando risp.  ed n il nuero delle cifre di dividendo e divisore (abidue
+interi), il quoziente appossiato a eno do 1 unità si coporrà di (-n+3) cifre;
+nell'arit. ordinaria invece il quoziente avrebbe (-n) o (-n+1) cifre. Anche
+queste forole sono in perfetto accordo colla regola dei segni per la divisione.
+
+   Però precisamente in base alla regola dei segni, bisogna avere qui delle av-
+ertenze speciali nell' incominciare l'operazione, apunto per non incorrere in un
+errore di segni. Bisogna adunqne prendere alla sinistra del dividendo una parte
+in valore assoluto non minore del divisore, nè maggiore di (b-1) volte il divisore
+chiamando con b il valore assoluto della base del sistema numerico adottato. Es-
+sendo n il numero delle cifre componenti il divisore, il 1. dividendo parziale ne
+avrà (n±1), n, oppure (n+2); (Verdi osser. C dell'introduzione) ed a seconda che il
+1° quoziente parziale dovrà riuscire positivo o negativo si comporrà di 1 o 2 cifre;
+in seguito però si ottengono le cifre del quoziente ad una ad una; epperciò i suc-
+cessivi dividendi parziali dovranno esser tutti del segno del divisore, e quindi di
+segno contrario dei singoli rispettivi resti parziali dovranno soddisfare ad una
+duplice condizione, cioè esser sempre di segno contrario del divisore e per va-
+lore assoluto sempre minori del medesimo: ove questi requisiti non si verificassero,
+la successiva cifra nel quoziente risulterebbe nel 1° caso troppo piccola, nel 2°
+troppo grande. Del resto quest'operazione si eseguisce anche nell'aritmetica dei
+sistei nuerici a base negativa come nell' aritmetica ordinaria, il che si ve-
+drà conferato negli esepi seguenti, i quali proverano pure quanto si disse più
+sopra.
+
+
+
+                                   - 209 -
+
+                      Esercizi in base negativo-deciale.
+
+          I.                  II.                  III.
+
+    23650 : 78 = 1897   0,0724 : 1,81 = 1,73    1,98365 : 0,345 = 0,73
+    78                  181                     19955
+	--                  ----                    ------
+   1656                  262                       815
+   1504                  267                       815
+   ----                  ----                      ---
+    1525                  154                        0
+    1562                  143
+	----                  ---
+     1630                  11
+     1646
+	 ----
+	    4
+
+
+                                 Osservazioni.
+
+   I. Nel caso in cui, come si é fatto negli esempi I e II, il 1° quoziente par-
+tiale si compone di 2 cifre, le oltiplicazioni e sottrazioni ausiliarie possono ese-
+guirsi per ciascuna delle 2 cifre separatamente.
+   II. Vediamo confermato quanto fu di sopra asserito intorno al nuero delle
+cifre del quoziente, alla natura dei resti, ecc.
+   III. Finalmente notiamo che contrariamente a quanto si verifica nell'aritme-
+tica ordinaria (es. II e III):
+   a) un dividendo senza parte intera con undivisore con parte intera può dare
+un quoziente con parte intera.
+   b) Un dividendo con parte intera con un divisore senza parte intera può dare
+un quoziente sensa parte intera.
+
+
+                                     VI.
+
+                        Moltiplicazioni e Divisi.
+                da effettuarsi con etodi spediti in alouni casi particolari.
+
+   Riferendoci a quanto si disse su tale argomento nel Saggio... ed ai lemi che
+egualente qui si potrebbero proporre, deduciao senz' altro le seguenti regole
+particolari, trattandosi di numeri scritti in sistemi nuerici a base negativa.
+   Regola I. Per oltiplicare un nuero scritto in base (-b) rispettivamente
+
+
+                                   - 209 -
+
+   per (-b), 
+
+
+TODO write down first, then translate
+
                                    - 221 -
+
+(last page)
