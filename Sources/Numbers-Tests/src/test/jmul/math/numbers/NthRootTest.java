@@ -209,7 +209,7 @@ public class NthRootTest {
 
         // A result with more digits is 1.25992104989487316476721060727822835057025146470150798008197511215529967651
         parameters.add(new Object[] { createNumber(10, "2"), createNumber(10, "3"), null,
-                                      createNumber(10, "1.2599210499") });
+                                      createNumber(10, "1.25992105") });
         parameters.add(new Object[] { createNumber(10, "2"), createNumber(10, "3"), createNumber(10, "20"),
                                       createNumber(10, "1.25992104989487316477") });
 

@@ -172,6 +172,14 @@ public class DetermineCommonDivisorsTest {
         parameters.add(new Object[] { createNumber(10, "153"), createNumber(10, "27"),
                                       createNumberSet(10, "1", "3", "9") });
 
+        // 854 & 397 : { 1 }
+        parameters.add(new Object[] { createNumber(10, "854"), createNumber(10, "397"),
+                                      createNumberSet(10, "1") });
+
+        // 1286 & 566 : { 1, 2 }
+        parameters.add(new Object[] { createNumber(10, "1286"), createNumber(10, "566"),
+                                      createNumberSet(10, "1", "2") });
+
         return parameters;
     }
 

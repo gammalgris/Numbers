@@ -34,7 +34,12 @@
 package jmul.math.operations.implementations;
 
 
+import java.lang.reflect.Array;
+
 import jmul.math.Math;
+import jmul.math.collections.Set;
+import jmul.math.concurrent.CalculationPool;
+import jmul.math.concurrent.ConcurrentCalculation;
 import jmul.math.functions.Function;
 import jmul.math.functions.FunctionHelper;
 import jmul.math.numbers.Number;
@@ -43,7 +48,6 @@ import jmul.math.numbers.creation.CreationParameters;
 import jmul.math.operations.QuaternaryOperation;
 import jmul.math.operations.Result;
 import jmul.math.operations.processing.ProcessingDetails;
-import jmul.math.operations.repository.OperationIdentifiers;
 
 
 /**
@@ -122,7 +126,7 @@ public class NthRoot implements QuaternaryOperation<Number, Result<Number>> {
 
 
         ProcessingDetails processingDetails =
-            ProcessingDetails.setProcessingDetails(OperationIdentifiers.ROUND_NUMBER_TO_ODD_FUNCTION, decimalPlaces,
+            ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM, decimalPlaces,
                                                    ProcessingDetails.DEFAULT_ITERATION_DEPTH);
 
         Number i = iterations;
@@ -134,7 +138,7 @@ public class NthRoot implements QuaternaryOperation<Number, Result<Number>> {
             x = f(x, number, n, decimalPlaces);
             x = x.round(processingDetails);
 
-            if (x.isZero()) {
+            if (x.isZero() || x.isOne()) {
 
                 break;
             }
@@ -155,7 +159,6 @@ public class NthRoot implements QuaternaryOperation<Number, Result<Number>> {
      */
     private static Number x0(Number s) {
 
-        //return s.shiftLeft();
         return s.halving();
     }
 
@@ -174,8 +177,21 @@ public class NthRoot implements QuaternaryOperation<Number, Result<Number>> {
      *
      * @return an approximation for the nth root
      */
-    private static Number f(Number x, Number number, Number n, Number decimalPlaces) {
+    private Number f(Number x, Number number, Number n, Number decimalPlaces) {
 
+        ProcessingDetails processingDetails =
+            ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM, decimalPlaces,
+                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+
+        // concurrent calculations
+
+        CalculationPool<Number, Number> threadPool = new ConcurrentCalculateTermsPool();
+        Number[] partialResults = threadPool.calculateResultsAndWaitForThreads(x, number, n, decimalPlaces);
+        Number term1 = partialResults[0];
+        Number term2 = partialResults[1];
+
+        /*
+        // sequential computation
         int base = x.base();
 
         Number term1;
@@ -184,7 +200,7 @@ public class NthRoot implements QuaternaryOperation<Number, Result<Number>> {
 
             Function monomial = FunctionHelper.createMonomialFunction(ONE, n);
 
-            term1 = monomial.calculate(x);
+            term1 = monomial.calculate(processingDetails, x);
             term1 = term1.subtract(number);
         }
 
@@ -192,12 +208,9 @@ public class NthRoot implements QuaternaryOperation<Number, Result<Number>> {
         {
             Number exponent = n.dec();
             Function monomial = FunctionHelper.createMonomialFunction(n, exponent);
-            term2 = monomial.calculate(x);
+            term2 = monomial.calculate(processingDetails, x);
         }
-
-        ProcessingDetails processingDetails =
-            ProcessingDetails.setProcessingDetails(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION, decimalPlaces,
-                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+        */
 
         Number result = term1;
         result = result.divide(processingDetails, term2);
@@ -205,6 +218,199 @@ public class NthRoot implements QuaternaryOperation<Number, Result<Number>> {
         result = result.add(x);
 
         return result;
+    }
+
+}
+
+
+/**
+ * A class for handling calculations.
+ *
+ * @author Kristian Kutin
+ */
+class ConcurrentCalculateTerm1 extends ConcurrentCalculation<Number, Number> {
+
+    /**
+     * The number for which to calculate the nth root
+     */
+    private final Number number;
+
+    /**
+     * The nth root.
+     */
+    private final Number n;
+
+    /**
+     * The precision.
+     */
+    private final Number decimalPlaces;
+
+    /**
+     * Creates a new instance according to the specified parameter.
+     *
+     * @param number
+     *        a number
+     */
+    ConcurrentCalculateTerm1(Number x, Number number, Number n, Number decimalPlaces) {
+
+        super(x);
+
+        this.number = number;
+        this.n = n;
+        this.decimalPlaces = decimalPlaces;
+    }
+
+    /**
+     * The actual concurrent calculation.
+     *
+     * @param x
+     *        a number
+     *
+     * @return a sequence of prime factors
+     */
+    @Override
+    public Number calculate(Number x) {
+
+        int base = number.base();
+
+        ProcessingDetails processingDetails =
+            ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM, decimalPlaces,
+                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+
+        final Number ONE = Math.ONE.value(base);
+
+        Function monomial = FunctionHelper.createMonomialFunction(ONE, n);
+
+        Number term1;
+
+        term1 = monomial.calculate(processingDetails, x);
+        term1 = term1.subtract(number);
+
+        return term1;
+    }
+
+}
+
+
+/**
+ * A class for handling calculations.
+ *
+ * @author Kristian Kutin
+ */
+class ConcurrentCalculateTerm2 extends ConcurrentCalculation<Number, Number> {
+
+    /**
+     * The number for which to calculate the nth root
+     */
+    private final Number number;
+
+    /**
+     * The nth root.
+     */
+    private final Number n;
+
+    /**
+     * The precision.
+     */
+    private final Number decimalPlaces;
+
+    /**
+     * Creates a new instance according to the specified parameter.
+     *
+     * @param number
+     *        a number
+     */
+    ConcurrentCalculateTerm2(Number x, Number number, Number n, Number decimalPlaces) {
+
+        super(x);
+
+        this.number = number;
+        this.n = n;
+        this.decimalPlaces = decimalPlaces;
+    }
+
+    /**
+     * The actual concurrent calculation.
+     *
+     * @param x
+     *        a number
+     *
+     * @return a sequence of prime factors
+     */
+    @Override
+    public Number calculate(Number x) {
+
+        ProcessingDetails processingDetails =
+            ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM, decimalPlaces,
+                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+
+        Number term2;
+        Number exponent = n.dec();
+        Function monomial = FunctionHelper.createMonomialFunction(n, exponent);
+        term2 = monomial.calculate(processingDetails, x);
+
+        return term2;
+    }
+
+}
+
+
+/**
+ * A pool for handling concurrent computations.
+ *
+ * @author Kristian Kutin
+ */
+class ConcurrentCalculateTermsPool extends CalculationPool<Number, Number> {
+
+    /**
+     * Creates a new empty array of the result type.
+     *
+     * @param length
+     *        the array size
+     *
+     * @return a new empty array
+     */
+    @Override
+    protected Number[] newArray(int length) {
+
+        return (Number[]) Array.newInstance(Number.class, length);
+    }
+
+    /**
+     * Creates all concurrent calculations (i.e. runnables).
+     *
+     * @param inputs
+     *        numbers
+     *
+     * @return all concurrent calculations (i.e. runnables)
+     */
+    @Override
+    public ConcurrentCalculation<Number, Number>[] createConcurrentCalculations(Number... inputs) {
+
+        int length = inputs.length;
+
+        if (length != 4) {
+
+            throw new IllegalArgumentException("A wrong numer of arguments was specified!");
+        }
+
+        Number x = inputs[0];
+        Number number = inputs[1];
+        Number n = inputs[2];
+        Number decimalPlaces = inputs[3];
+
+        ConcurrentCalculation<Number, Number>[] calculations =
+            (ConcurrentCalculation<Number, Number>[]) Array.newInstance(ConcurrentCalculation.class, 2);
+
+        ConcurrentCalculation<Number, Number> calculateTerm1 =
+            new ConcurrentCalculateTerm1(x, number, n, decimalPlaces);
+        ConcurrentCalculation<Number, Number> calculateTerm2 =
+            new ConcurrentCalculateTerm2(x, number, n, decimalPlaces);
+
+        calculations[0] = calculateTerm1;
+        calculations[1] = calculateTerm2;
+
+        return calculations;
     }
 
 }

@@ -116,6 +116,16 @@ public class MonomialFunctionImpl extends FunctionBaseImpl {
 
             result = result.multiply(x);
             counter = counter.dec();
+
+            if (result.isFraction()) {
+
+                result = result.round(processingDetails);
+            }
+
+            if (result.isZero() || result.isOne()) {
+
+                break;
+            }
         }
 
         return result;

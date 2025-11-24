@@ -209,9 +209,6 @@ public class ExponentiateNumberWithFraction implements MixedQuaternaryOperation<
             return number.evaluate(decimalPlaces);
         }
 
-        ProcessingDetails processingDetails =
-            ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM, decimalPlaces, iterations);
-
         Result<Number> result;
         Number n = number.evaluate(decimalPlaces);
 

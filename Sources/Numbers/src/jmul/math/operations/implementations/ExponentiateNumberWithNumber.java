@@ -42,7 +42,6 @@ import static jmul.math.numbers.creation.CreationParameters.CLONE;
 import jmul.math.operations.Result;
 import jmul.math.operations.TernaryOperation;
 import jmul.math.operations.processing.ProcessingDetails;
-import jmul.math.operations.repository.OperationIdentifiers;
 
 
 /**
@@ -134,7 +133,7 @@ public class ExponentiateNumberWithNumber implements TernaryOperation<Number, Re
         final Number ONE = Math.ONE.value(base);
 
         ProcessingDetails processingDetails =
-            ProcessingDetails.setProcessingDetails(OperationIdentifiers.ROUND_NUMBER_TO_ODD_FUNCTION, decimalPlaces,
+            ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM, decimalPlaces,
                                                    ProcessingDetails.DEFAULT_ITERATION_DEPTH);
 
         Number counter = exponent;
@@ -145,7 +144,7 @@ public class ExponentiateNumberWithNumber implements TernaryOperation<Number, Re
             result = result.multiply(number);
             result = result.round(processingDetails);
 
-            if (result.isZero()) {
+            if (result.isZero() || result.isOne()) {
 
                 break;
             }

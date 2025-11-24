@@ -34,12 +34,16 @@
 package jmul.math.operations.implementations;
 
 
+import java.lang.reflect.Array;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import jmul.math.Math;
 import jmul.math.collections.Sequence;
 import jmul.math.collections.SequenceImpl;
+import jmul.math.concurrent.CalculationPool;
+import jmul.math.concurrent.ConcurrentCalculation;
 import jmul.math.numbers.Number;
 import jmul.math.operations.BinaryOperation;
 import jmul.math.operations.Result;
@@ -77,8 +81,17 @@ public class DetermineCommonPrimeFactorsInNumbers implements BinaryOperation<Num
 
         int base = number1.base();
 
+        /*
+        // sequential calculation
         Sequence<Number> sequence1 = number1.primeFactors();
         Sequence<Number> sequence2 = number2.primeFactors();
+        */
+
+        // concurrent calulation
+        CalculationPool<Number, Sequence<Number>> threadPool = new ConcurrentDeterminePrimeFactorsPool();
+        Sequence<Number>[] results = threadPool.calculateResultsAndWaitForThreads(number1, number2);
+        Sequence<Number> sequence1 = results[0];
+        Sequence<Number> sequence2 = results[1];
 
         final Number ZERO = Math.ZERO.value(base);
         Number ordinal1 = ZERO;
@@ -187,6 +200,95 @@ public class DetermineCommonPrimeFactorsInNumbers implements BinaryOperation<Num
 
         Sequence<Number> result = new SequenceImpl<>(base, common);
         return new Result<Sequence<Number>>(result);
+    }
+
+}
+
+
+/**
+ * A thread implementation for concurrent computing.
+ *
+ * @author Kristian Kutin
+ */
+class ConcurrentDeterminePrimeFactors extends ConcurrentCalculation<Number, Sequence<Number>> {
+
+    /**
+     * Creates a new instance according to the specified parameter.
+     *
+     * @param number
+     *        a number
+     */
+    ConcurrentDeterminePrimeFactors(Number number) {
+
+        super(number);
+    }
+
+    /**
+     * The actual concurrent calculation.
+     *
+     * @param input
+     *        a number
+     *
+     * @return a sequence of prime factors
+     */
+    @Override
+    public Sequence<Number> calculate(Number input) {
+
+        return input.primeFactors();
+    }
+
+}
+
+
+/**
+ * A pool for handling concurrent computations.
+ *
+ * @author Kristian Kutin
+ */
+class ConcurrentDeterminePrimeFactorsPool extends CalculationPool<Number, Sequence<Number>> {
+
+    /**
+     * Creates a new empty array of the result type.
+     *
+     * @param length
+     *        the array size
+     *
+     * @return a new empty array
+     */
+    @Override
+    protected Sequence<Number>[] newArray(int length) {
+
+        return (Sequence<Number>[]) Array.newInstance(Sequence.class, length);
+    }
+
+    /**
+     * Creates all concurrent calculations (i.e. runnables).
+     *
+     * @param inputs
+     *        numbers
+     *
+     * @return all concurrent calculations (i.e. runnables)
+     */
+    @Override
+    protected ConcurrentCalculation<Number, Sequence<Number>>[] createConcurrentCalculations(Number... inputs) {
+
+        int length = inputs.length;
+
+        if (length != 2) {
+
+            throw new IllegalArgumentException("A wrong numer of arguments was specified!");
+        }
+
+        ConcurrentDeterminePrimeFactors[] calculations = new ConcurrentDeterminePrimeFactors[length];
+
+        for (int index = 0; index < length; index++) {
+
+            Number number = inputs[index];
+            ConcurrentDeterminePrimeFactors runnable = new ConcurrentDeterminePrimeFactors(number);
+            calculations[index] = runnable;
+        }
+
+        return calculations;
     }
 
 }
