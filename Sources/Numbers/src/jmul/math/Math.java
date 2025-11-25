@@ -1755,7 +1755,9 @@ public final class Math {
         int base = number.base();
 
         final OperationIdentifier[] ALLOWED_ALGORITHMS = new OperationIdentifier[] {
-            OperationIdentifiers.EXPONENTIATE_NUMBER_WITH_NUMBER_FUNCTION };
+            OperationIdentifiers.EXPONENTIATE_NUMBER_WITH_NUMBER_FUNCTION,
+            OperationIdentifiers.CONCURRENT_EXPONENTIATE_NUMBER_WITH_NUMBER_FUNCTION
+        };
 
         OperationIdentifier algorithm = processingDetails.checkAndReturnAlgorithm(ALLOWED_ALGORITHMS);
         Number decimalPlaces =

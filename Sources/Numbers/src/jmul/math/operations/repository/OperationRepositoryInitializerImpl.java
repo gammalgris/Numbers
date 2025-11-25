@@ -38,8 +38,6 @@ import jmul.math.numbers.notations.ScientificNotationFunctionImpl;
 import jmul.math.numbers.notations.ScientificNotationParserImpl;
 import jmul.math.numbers.notations.StandardNotationFunctionImpl;
 import jmul.math.numbers.notations.StandardNotationParserImpl;
-import jmul.math.operations.implementations.NumberToPolynomialFunction;
-import jmul.math.operations.implementations.PolynomialFunctionToNumber;
 import jmul.math.operations.implementations.AddDigits;
 import jmul.math.operations.implementations.AddFractionAndNumber;
 import jmul.math.operations.implementations.AddFractions;
@@ -118,9 +116,11 @@ import jmul.math.operations.implementations.NumberToAbsoluteValue;
 import jmul.math.operations.implementations.NumberToDigit;
 import jmul.math.operations.implementations.NumberToFraction;
 import jmul.math.operations.implementations.NumberToOrdinal;
+import jmul.math.operations.implementations.NumberToPolynomialFunction;
 import jmul.math.operations.implementations.NumberWithinInterval;
 import jmul.math.operations.implementations.OddNumberCheck;
 import jmul.math.operations.implementations.OptimizedReduceFraction;
+import jmul.math.operations.implementations.PolynomialFunctionToNumber;
 import jmul.math.operations.implementations.RandomDigit;
 import jmul.math.operations.implementations.RandomNumber;
 import jmul.math.operations.implementations.RandomNumberWithinInterval;
@@ -440,6 +440,8 @@ public class OperationRepositoryInitializerImpl implements OperationRepositoryIn
         repository.registerFunction(OperationIdentifiers.NTH_ROOT_FUNCTION, NthRoot.class);
 
         repository.registerFunction(OperationIdentifiers.EXPONENTIATE_NUMBER_WITH_NUMBER_FUNCTION,
+                                    ExponentiateNumberWithNumber.class);
+        repository.registerFunction(OperationIdentifiers.CONCURRENT_EXPONENTIATE_NUMBER_WITH_NUMBER_FUNCTION,
                                     ExponentiateNumberWithNumber.class);
         repository.registerFunction(OperationIdentifiers.EXPONENTIATE_NUMBER_WITH_FRACTION_FUNCTION,
                                     ExponentiateNumberWithFraction.class);
