@@ -160,10 +160,18 @@ public class ConcurrentExponentiateNumberWithNumber implements TernaryOperation<
 
         Number[] results = threadPool.calculateResultsAndWaitForThreads(number, exponent, decimalPlaces);
 
-        Number factor1 = results[0];
-        Number factor2 = results[1];
+        Number product = null;
+        for (Number result : results) {
 
-        Number product = factor1.multiply(processingDetails, factor2);
+            if (product == null) {
+
+                product = result;
+
+            } else {
+
+                product = product.multiply(processingDetails, result);
+            }
+        }
 
         return product;
     }

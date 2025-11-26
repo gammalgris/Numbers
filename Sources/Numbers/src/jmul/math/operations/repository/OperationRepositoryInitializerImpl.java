@@ -49,6 +49,7 @@ import jmul.math.operations.implementations.AddNumbersTrimResult;
 import jmul.math.operations.implementations.AddVectors;
 import jmul.math.operations.implementations.ArchimedesPiApproximation;
 import jmul.math.operations.implementations.BaseToNumber;
+import jmul.math.operations.implementations.ConcurrentExponentiateNumberWithNumber;
 import jmul.math.operations.implementations.CosineApproximation;
 import jmul.math.operations.implementations.CrossProduct;
 import jmul.math.operations.implementations.DecrementFraction;
@@ -442,7 +443,7 @@ public class OperationRepositoryInitializerImpl implements OperationRepositoryIn
         repository.registerFunction(OperationIdentifiers.EXPONENTIATE_NUMBER_WITH_NUMBER_FUNCTION,
                                     ExponentiateNumberWithNumber.class);
         repository.registerFunction(OperationIdentifiers.CONCURRENT_EXPONENTIATE_NUMBER_WITH_NUMBER_FUNCTION,
-                                    ExponentiateNumberWithNumber.class);
+                                    ConcurrentExponentiateNumberWithNumber.class);
         repository.registerFunction(OperationIdentifiers.EXPONENTIATE_NUMBER_WITH_FRACTION_FUNCTION,
                                     ExponentiateNumberWithFraction.class);
         repository.registerFunction(OperationIdentifiers.EXPONENTIATE_FRACTION_WITH_NUMBER_FUNCTION,
