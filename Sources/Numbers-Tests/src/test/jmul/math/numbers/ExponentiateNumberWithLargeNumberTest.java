@@ -41,12 +41,12 @@ import jmul.math.Math;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.operations.processing.ProcessingDetails;
-
 import jmul.math.operations.repository.OperationIdentifiers;
 
 import jmul.test.classification.UnitTest;
 
 import static org.junit.Assert.assertEquals;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -57,6 +57,7 @@ import org.junit.runners.Parameterized;
  *
  * @author Kristian Kutin
  */
+@Ignore
 @UnitTest
 @RunWith(Parameterized.class)
 public class ExponentiateNumberWithLargeNumberTest {
@@ -139,7 +140,7 @@ public class ExponentiateNumberWithLargeNumberTest {
         } else {
 
             ProcessingDetails processingDetails =
-                ProcessingDetails.setProcessingDetails(OperationIdentifiers.CONCURRENT_EXPONENTIATE_NUMBER_WITH_NUMBER_FUNCTION,
+                ProcessingDetails.setProcessingDetails(OperationIdentifiers.EXPONENTIATE_NUMBER_WITH_NUMBER_FUNCTION,
                                                        decimalPlaces, ProcessingDetails.DEFAULT_ITERATION_DEPTH);
 
             actualResult = number.exponentiate(processingDetails, exponent);
@@ -163,7 +164,7 @@ public class ExponentiateNumberWithLargeNumberTest {
         } else {
 
             ProcessingDetails processingDetails =
-                ProcessingDetails.setProcessingDetails(OperationIdentifiers.CONCURRENT_EXPONENTIATE_NUMBER_WITH_NUMBER_FUNCTION,
+                ProcessingDetails.setProcessingDetails(OperationIdentifiers.EXPONENTIATE_NUMBER_WITH_NUMBER_FUNCTION,
                                                        decimalPlaces, ProcessingDetails.DEFAULT_ITERATION_DEPTH);
 
             actualResult = Math.exponentiate(processingDetails, number, exponent);

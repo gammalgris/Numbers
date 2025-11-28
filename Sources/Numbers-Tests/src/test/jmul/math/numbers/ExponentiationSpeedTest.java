@@ -133,7 +133,7 @@ public class ExponentiationSpeedTest {
         Number exponent = createNumber(10, "10");
 
         ProcessingDetails processingDetails =
-            ProcessingDetails.setProcessingDetails(OperationIdentifiers.CONCURRENT_EXPONENTIATE_NUMBER_WITH_NUMBER_FUNCTION,
+            ProcessingDetails.setProcessingDetails(OperationIdentifiers.EXPONENTIATE_NUMBER_WITH_NUMBER_BY_SQUARING_FUNCTION,
                                                    ProcessingDetails.DEFAULT_PRECISION,
                                                    ProcessingDetails.DEFAULT_ITERATION_DEPTH);
 
@@ -153,7 +153,7 @@ public class ExponentiationSpeedTest {
         Number exponent = createNumber(10, "1000");
 
         ProcessingDetails processingDetails =
-            ProcessingDetails.setProcessingDetails(OperationIdentifiers.CONCURRENT_EXPONENTIATE_NUMBER_WITH_NUMBER_FUNCTION,
+            ProcessingDetails.setProcessingDetails(OperationIdentifiers.EXPONENTIATE_NUMBER_WITH_NUMBER_BY_SQUARING_FUNCTION,
                                                    ProcessingDetails.DEFAULT_PRECISION,
                                                    ProcessingDetails.DEFAULT_ITERATION_DEPTH);
 
@@ -173,7 +173,7 @@ public class ExponentiationSpeedTest {
         Number exponent = createNumber(10, "10000");
 
         ProcessingDetails processingDetails =
-            ProcessingDetails.setProcessingDetails(OperationIdentifiers.CONCURRENT_EXPONENTIATE_NUMBER_WITH_NUMBER_FUNCTION,
+            ProcessingDetails.setProcessingDetails(OperationIdentifiers.EXPONENTIATE_NUMBER_WITH_NUMBER_BY_SQUARING_FUNCTION,
                                                    createNumber(10, "5"), ProcessingDetails.DEFAULT_ITERATION_DEPTH);
 
         long start = System.currentTimeMillis();

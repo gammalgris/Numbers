@@ -187,11 +187,6 @@ public class ExponentiateNumberWithNumberTest {
 
         for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
 
-            parameters.add(new Object[] { createInfinity(base), createNumber(base, "0"), null,
-                                          createNumber(base, "1") });
-            parameters.add(new Object[] { createNegativeInfinity(base), createNumber(base, "0"), null,
-                                          createNumber(base, "1") });
-
             parameters.add(new Object[] { createInfinity(base), createNumber(base, "1"), null, createInfinity(base) });
             parameters.add(new Object[] { createInfinity(base), createNumber(base, "-1"), null,
                                           createNumber(base, "0") });

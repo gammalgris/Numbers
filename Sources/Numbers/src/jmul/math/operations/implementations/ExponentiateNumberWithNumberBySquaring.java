@@ -46,16 +46,17 @@ import jmul.math.operations.processing.ProcessingDetails;
 
 
 /**
- * Implements the exponentiation function with exponents that are integers (i.e. exponentiation by multiplication).
+ * Implements the exponentiation function with exponents that are integers (see
+ * <a href="https://en.wikipedia.org/wiki/Exponentiation_by_squaring">exponentiation by squaring</a>).
  *
  * @author Kristian Kutin
  */
-public class ExponentiateNumberWithNumber implements TernaryOperation<Number, Result<Number>> {
+public class ExponentiateNumberWithNumberBySquaring implements TernaryOperation<Number, Result<Number>> {
 
     /**
      * The default constructor.
      */
-    public ExponentiateNumberWithNumber() {
+    public ExponentiateNumberWithNumberBySquaring() {
 
         super();
     }
@@ -79,9 +80,14 @@ public class ExponentiateNumberWithNumber implements TernaryOperation<Number, Re
         ParameterCheckHelper.checkIntegerIgnoreNull(exponent);
         ParameterCheckHelper.checkPositiveInteger(decimalPlaces);
 
+        if (number.isZero()) {
+
+            System.out.println("zero^?");
+        }
+
         int base = number.base();
-        final Number ZERO = Math.ZERO.value(base);
         final Number ONE = Math.ONE.value(base);
+        final Number ZERO = Math.ZERO.value(base);
 
         if (number.isInfinity()) {
 
@@ -99,20 +105,11 @@ public class ExponentiateNumberWithNumber implements TernaryOperation<Number, Re
                 Number result = number.absoluteValue();
                 return new Result<Number>(result);
 
+            } else {
+
+                Number result = createNumber(CLONE, number);
+                return new Result<Number>(result);
             }
-
-            Number result = createNumber(CLONE, number);
-            return new Result<Number>(result);
-
-        } else if (number.isZero()) {
-
-            if (exponent.isNegative()) {
-
-                throw new UndefinedOperationException("Division by zero!");
-            }
-
-            return new Result<Number>(ZERO);
-
         }
 
         if (exponent.isZero()) {
@@ -168,23 +165,126 @@ public class ExponentiateNumberWithNumber implements TernaryOperation<Number, Re
             ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM, decimalPlaces,
                                                    ProcessingDetails.DEFAULT_ITERATION_DEPTH);
 
-        Number counter = exponent;
-        Number result = ONE;
+        Number x = number;
+        Number n = exponent;
+        Number y = ONE;
 
-        while (!counter.isZero()) {
+        while (n.isGreater(ONE)) {
 
-            result = result.multiply(number);
-            result = result.round(processingDetails);
+            if (isOdd(n)) {
 
-            if (result.isZero() || result.isOne()) {
-
-                break;
+                y = x.multiply(y);
+                y = y.round(processingDetails);
+                n = n.dec();
             }
 
-            counter = counter.dec();
+            x = x.multiply(x);
+            x = x.round(processingDetails);
+            n = n.halving();
         }
 
-        return result;
+        x = x.multiply(y);
+        x = x.round(processingDetails);
+
+        return x;
+    }
+
+    /**
+     * Checks if the specified number is odd.<br>
+     * <br>
+     * <i>Note:<br>
+     * A number might be odd or even within a specific positional numeral system of a specific base, but there are
+     * differences between odd and even number bases. E.g.:</i><br>
+     * <br>
+     * <table>
+     * <tr>
+     * <th>base 10</th>
+     * <th></th>
+     * <th>base 3</th>
+     * <th></th>
+     * </tr>
+     * <tr>
+     * <td>1</td>
+     * <td>odd</td>
+     * <td>1<td>
+     * <td>odd</td>
+     * </tr>
+     * <tr>
+     * <td>2</td>
+     * <td>even</td>
+     * <td>2<td>
+     * <td>even</td>
+     * </tr>
+     * <tr>
+     * <td>3</td>
+     * <td>odd</td>
+     * <td>10<td>
+     * <td>even</td>
+     * </tr>
+     * <tr>
+     * <td>4</td>
+     * <td>even</td>
+     * <td>11<td>
+     * <td>odd</td>
+     * </tr>
+     * <tr>
+     * <td>5</td>
+     * <td>odd</td>
+     * <td>12<td>
+     * <td>even</td>
+     * </tr>
+     * <tr>
+     * <td>6</td>
+     * <td>even</td>
+     * <td>20<td>
+     * <td>even</td>
+     * </tr>
+     * <tr>
+     * <td>7</td>
+     * <td>odd</td>
+     * <td>21<td>
+     * <td>odd</td>
+     * </tr>
+     * <tr>
+     * <td>8</td>
+     * <td>even</td>
+     * <td>22<td>
+     * <td>even</td>
+     * </tr>
+     * <tr>
+     * <td>9</td>
+     * <td>odd</td>
+     * <td>100<td>
+     * <td>even</td>
+     * </tr>
+     * <tr>
+     * <td>10</td>
+     * <td>even</td>
+     * <td>101<td>
+     * <td>odd</td>
+     * </tr>
+     * </table>
+     * <br>
+     * <i>The table shows that determining if a number is odd or even based on the last digit, might not suffice.</i>
+     *
+     * @param n
+     *        a number
+     *
+     * @return <code>true</code> if the specified number is odd, else <code>false</code>
+     */
+    private boolean isOdd(Number n) {
+
+        int base = n.base();
+
+        if (base % 2 == 0) {
+
+            return n.isOdd();
+
+        } else {
+
+            Number digitSum = n.digitSum();
+            return digitSum.isOdd();
+        }
     }
 
     /**

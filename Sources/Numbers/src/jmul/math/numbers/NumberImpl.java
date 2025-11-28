@@ -969,8 +969,8 @@ public class NumberImpl implements Number {
         ParameterCheckHelper.checkParameter(processingDetails);
 
         final OperationIdentifier[] ALLOWED_ALGORITHMS = new OperationIdentifier[] {
-            OperationIdentifiers.EXPONENTIATE_NUMBER_WITH_NUMBER_FUNCTION,
-            OperationIdentifiers.CONCURRENT_EXPONENTIATE_NUMBER_WITH_NUMBER_FUNCTION
+            OperationIdentifiers.EXPONENTIATE_NUMBER_WITH_NUMBER_BY_SQUARING_FUNCTION,
+            OperationIdentifiers.EXPONENTIATE_NUMBER_WITH_NUMBER_FUNCTION
         };
 
         OperationIdentifier algorithm = processingDetails.checkAndReturnAlgorithm(ALLOWED_ALGORITHMS);

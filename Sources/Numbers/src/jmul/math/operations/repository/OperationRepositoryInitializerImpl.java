@@ -49,7 +49,6 @@ import jmul.math.operations.implementations.AddNumbersTrimResult;
 import jmul.math.operations.implementations.AddVectors;
 import jmul.math.operations.implementations.ArchimedesPiApproximation;
 import jmul.math.operations.implementations.BaseToNumber;
-import jmul.math.operations.implementations.ConcurrentExponentiateNumberWithNumber;
 import jmul.math.operations.implementations.CosineApproximation;
 import jmul.math.operations.implementations.CrossProduct;
 import jmul.math.operations.implementations.DecrementFraction;
@@ -78,6 +77,7 @@ import jmul.math.operations.implementations.EvenNumberCheck;
 import jmul.math.operations.implementations.ExponentiateFractionWithNumber;
 import jmul.math.operations.implementations.ExponentiateNumberWithFraction;
 import jmul.math.operations.implementations.ExponentiateNumberWithNumber;
+import jmul.math.operations.implementations.ExponentiateNumberWithNumberBySquaring;
 import jmul.math.operations.implementations.Factorial;
 import jmul.math.operations.implementations.FractionToAbsoluteValue;
 import jmul.math.operations.implementations.FractionWithinInterval;
@@ -442,8 +442,8 @@ public class OperationRepositoryInitializerImpl implements OperationRepositoryIn
 
         repository.registerFunction(OperationIdentifiers.EXPONENTIATE_NUMBER_WITH_NUMBER_FUNCTION,
                                     ExponentiateNumberWithNumber.class);
-        repository.registerFunction(OperationIdentifiers.CONCURRENT_EXPONENTIATE_NUMBER_WITH_NUMBER_FUNCTION,
-                                    ConcurrentExponentiateNumberWithNumber.class);
+        repository.registerFunction(OperationIdentifiers.EXPONENTIATE_NUMBER_WITH_NUMBER_BY_SQUARING_FUNCTION,
+                                    ExponentiateNumberWithNumberBySquaring.class);
         repository.registerFunction(OperationIdentifiers.EXPONENTIATE_NUMBER_WITH_FRACTION_FUNCTION,
                                     ExponentiateNumberWithFraction.class);
         repository.registerFunction(OperationIdentifiers.EXPONENTIATE_FRACTION_WITH_NUMBER_FUNCTION,

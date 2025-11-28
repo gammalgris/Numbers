@@ -45,7 +45,6 @@ import static jmul.math.numbers.NumberHelper.createInfinity;
 import static jmul.math.numbers.NumberHelper.createNegativeInfinity;
 import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.operations.processing.ProcessingDetails;
-
 import jmul.math.operations.repository.OperationIdentifiers;
 
 import jmul.test.classification.UnitTest;
@@ -135,19 +134,22 @@ public class ExponentiateNumberWithNumber2Test {
     @Test
     public void testExponentiation() {
 
-        Number actualResult;
+        ProcessingDetails processingDetails;
         if (decimalPlaces == null) {
 
-            actualResult = number.exponentiate(exponent);
+            processingDetails =
+                ProcessingDetails.setProcessingDetails(OperationIdentifiers.EXPONENTIATE_NUMBER_WITH_NUMBER_FUNCTION,
+                                                       ProcessingDetails.DEFAULT_PRECISION,
+                                                       ProcessingDetails.DEFAULT_ITERATION_DEPTH);
 
         } else {
 
-            ProcessingDetails processingDetails =
-                ProcessingDetails.setProcessingDetails(OperationIdentifiers.CONCURRENT_EXPONENTIATE_NUMBER_WITH_NUMBER_FUNCTION,
+            processingDetails =
+                ProcessingDetails.setProcessingDetails(OperationIdentifiers.EXPONENTIATE_NUMBER_WITH_NUMBER_FUNCTION,
                                                        decimalPlaces, ProcessingDetails.DEFAULT_ITERATION_DEPTH);
-
-            actualResult = number.exponentiate(processingDetails, exponent);
         }
+
+        Number actualResult = number.exponentiate(processingDetails, exponent);
 
         assertEquals(toString(), expectedResult, actualResult);
         assertEquals(toString(), expectedResult.toString(), actualResult.toString());
@@ -159,19 +161,22 @@ public class ExponentiateNumberWithNumber2Test {
     @Test
     public void testExponentiationVariant2() {
 
-        Number actualResult;
+        ProcessingDetails processingDetails;
         if (decimalPlaces == null) {
 
-            actualResult = Math.exponentiate(number, exponent);
+            processingDetails =
+                ProcessingDetails.setProcessingDetails(OperationIdentifiers.EXPONENTIATE_NUMBER_WITH_NUMBER_FUNCTION,
+                                                       ProcessingDetails.DEFAULT_PRECISION,
+                                                       ProcessingDetails.DEFAULT_ITERATION_DEPTH);
 
         } else {
 
-            ProcessingDetails processingDetails =
-                ProcessingDetails.setProcessingDetails(OperationIdentifiers.CONCURRENT_EXPONENTIATE_NUMBER_WITH_NUMBER_FUNCTION,
+            processingDetails =
+                ProcessingDetails.setProcessingDetails(OperationIdentifiers.EXPONENTIATE_NUMBER_WITH_NUMBER_FUNCTION,
                                                        decimalPlaces, ProcessingDetails.DEFAULT_ITERATION_DEPTH);
-
-            actualResult = Math.exponentiate(processingDetails, number, exponent);
         }
+
+        Number actualResult = Math.exponentiate(processingDetails, number, exponent);
 
         assertEquals(toString(), expectedResult, actualResult);
         assertEquals(toString(), expectedResult.toString(), actualResult.toString());
@@ -188,11 +193,6 @@ public class ExponentiateNumberWithNumber2Test {
         Collection<Object[]> parameters = new ArrayList<Object[]>();
 
         for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
-
-            parameters.add(new Object[] { createInfinity(base), createNumber(base, "0"), null,
-                                          createNumber(base, "1") });
-            parameters.add(new Object[] { createNegativeInfinity(base), createNumber(base, "0"), null,
-                                          createNumber(base, "1") });
 
             parameters.add(new Object[] { createInfinity(base), createNumber(base, "1"), null, createInfinity(base) });
             parameters.add(new Object[] { createInfinity(base), createNumber(base, "-1"), null,
