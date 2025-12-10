@@ -149,7 +149,11 @@
 
 66) Determining divisors and prime factors is slow. Need a faster implementation.
 
-67)
+67) Need some more informations aboit JVMs and how they optimize code. Need to run tests with differen
+    JVMs.
+
+68)
+
 
 # Done
 

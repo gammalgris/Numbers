@@ -73,7 +73,7 @@ public class DivisionBySubtraction implements TernaryOperation<Number, Result<Nu
      * @param divisor
      *        a number
      * @param decimalPlaces
-     *        the number of decimal places retained after cutting fraction part
+     *        the number of decimal places retained after cutting the fraction part
      *
      * @return the quotient
      */
@@ -81,6 +81,7 @@ public class DivisionBySubtraction implements TernaryOperation<Number, Result<Nu
     public Result<Number> calculate(Number dividend, Number divisor, Number decimalPlaces) {
 
         ParameterCheckHelper.checkParameters(dividend, divisor, decimalPlaces);
+        ParameterCheckHelper.checkPositiveInteger(decimalPlaces);
 
         int base = dividend.base();
         Sign sign = Signs.negate(Signs.xor(dividend.sign(), divisor.sign()));
@@ -104,7 +105,7 @@ public class DivisionBySubtraction implements TernaryOperation<Number, Result<Nu
 
             } else {
 
-                throw new UndefinedOperationException(sign.toString(), dividend, divisor);
+                throw new UndefinedOperationException("/", dividend, divisor);
             }
 
         } else if (absoluteDivisor.isOne()) {

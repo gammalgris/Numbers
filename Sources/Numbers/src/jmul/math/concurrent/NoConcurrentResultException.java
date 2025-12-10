@@ -49,4 +49,15 @@ public class NoConcurrentResultException extends RuntimeException {
         super("The concurrent calculation doesn't have a result!");
     }
 
+    /**
+     * Creates a new instance according to the specified parameter.
+     *
+     * @param cause
+     *        a cause
+     */
+    public NoConcurrentResultException(Throwable cause) {
+
+        super("The concurrent calculation doesn't have a result!", cause);
+    }
+
 }

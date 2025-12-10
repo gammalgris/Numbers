@@ -43,11 +43,11 @@ import jmul.math.operations.processing.ProcessingDetails;
 /**
  * This class implements a sigmoid function.<br>
  * <br>
- * f(x) = 1 / ( 1 + e<sup>-x</sup> )<br>
+ * f(x) = e<sup>x</sup> / ( 1 + e<sup>x</sup> )<br>
  *
  * @author Kristian Kutin
  */
-public class SigmoidFunctionImpl extends FunctionBaseImpl {
+public class SigmoidFunction2Impl extends FunctionBaseImpl {
 
     /**
      * Euler's number.<br>
@@ -63,7 +63,7 @@ public class SigmoidFunctionImpl extends FunctionBaseImpl {
      * @param base
      *        a number base
      */
-    protected SigmoidFunctionImpl(int base) {
+    protected SigmoidFunction2Impl(int base) {
 
         super(base);
 
@@ -104,17 +104,17 @@ public class SigmoidFunctionImpl extends FunctionBaseImpl {
 
         final Number ONE = Math.ONE.value(base());
 
-        //Fraction exponent = x.toFraction().reduce().negate();
-        Fraction exponent = x.toFraction();
-        //exponent = exponent.reduce();
-        exponent = exponent.negate();
+        Number result;
+        {
+            Fraction exponent = x.toFraction();
 
-        //Number result1 = (ONE.divide(processingDetails, ONE.add(e.exponentiate(processingDetails, exponent))));
-        Number result = e.round(processingDetails);
-        result = result.exponentiate(processingDetails, exponent);
-        result = result.add(ONE);
-        result = ONE.divide(processingDetails, result);
-        result = result.round(processingDetails);
+            Number term1 = e.round(processingDetails);
+            term1 = term1.exponentiate(processingDetails, exponent);
+
+            Number term2 = ONE.add(term1);
+
+            result = term1.divide(processingDetails, term2);
+        }
 
         return result;
     }
@@ -138,86 +138,7 @@ public class SigmoidFunctionImpl extends FunctionBaseImpl {
     @Override
     public String toString() {
 
-        return "1 / ( 1 + e^-x )";
-    }
-
-}
-
-
-/**
- * An implementation of the first derivative of a sigmoid function.<br>
- * <br>
- * f'(x) = e<sup>x</sup> / ( e<sup>x</sup> + 1 )<sup>2</sup><br>
- *
- * @author Kristian Kutin
- */
-class SigmoidFunctionFirstDerivative extends FunctionBaseImpl {
-
-    /**
-     * Euler's number.<br>
-     * <br>
-     * <i>Note:<br>
-     * Euler's number is cached in order to improve performance.</i>
-     */
-    private final Number e;
-
-    /**
-     * Creates a new function for the specified number base.
-     *
-     * @param base
-     *        a number base
-     */
-    public SigmoidFunctionFirstDerivative(int base) {
-
-        super(base);
-
-        this.e = Math.e(base);
-    }
-
-    /**
-     * Calculate the function value for x.
-     *
-     * @param processingDetails
-     *        additonal processing details
-     * @param x
-     *        the input value
-     *
-     * @return f(x)
-     */
-    @Override
-    public Number calculate(ProcessingDetails processingDetails, Number x) {
-
-        final Number ONE = Math.ONE.value(base());
-        final Number TWO = ONE.inc();
-        Fraction exponent1 = x.toFraction().reduce();
-        Fraction exponent2 = TWO.toFraction();
-
-        return (e.exponentiate(processingDetails, exponent1)).divide(processingDetails,
-                                                                     ((e.exponentiate(processingDetails,
-                                                                                      exponent1)).add(ONE)).exponentiate(processingDetails,
-                                                                                                                         exponent2));
-    }
-
-    /**
-     * Returns the derivative function for this function.
-     *
-     * @return a derivative function
-     */
-    @Override
-    public Function derivativeFunction() {
-
-        throw new UnsupportedOperationException();
-    }
-
-    /**
-     * Returns a string representation for this function.
-     *
-     * @return a string representation
-     */
-    @Override
-    public String toString() {
-
-        return "e^x / ( e^x + 1 )^2";
+        return "e^x / ( 1 + e^x )";
     }
 
 }

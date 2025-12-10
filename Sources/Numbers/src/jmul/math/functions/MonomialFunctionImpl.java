@@ -103,30 +103,11 @@ public class MonomialFunctionImpl extends FunctionBaseImpl {
     @Override
     public Number calculate(ProcessingDetails processingDetails, Number x) {
 
-        Number result = coefficient;
+        Number result;
 
-        if (exponent.isZero()) {
-
-            return result;
-        }
-
-        Number counter = exponent;
-
-        while (!counter.isZero()) {
-
-            result = result.multiply(x);
-            counter = counter.dec();
-
-            if (result.isFraction()) {
-
-                result = result.round(processingDetails);
-            }
-
-            if (result.isZero() || result.isOne()) {
-
-                break;
-            }
-        }
+        result = x.exponentiate(processingDetails, exponent);
+        result = result.multiply(coefficient);
+        result = result.round(processingDetails);
 
         return result;
     }

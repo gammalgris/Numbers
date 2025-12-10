@@ -35,11 +35,8 @@ package test.jmul.math.numbers;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import jmul.math.numbers.Number;
 import jmul.math.operations.processing.ProcessingDetails;
 import jmul.math.operations.repository.OperationIdentifiers;
 
@@ -74,70 +71,103 @@ public class DivisionSpeedTest {
     public static void compareRussionaDivisionWithDivisionBySubtraction() {
 
         System.out.println("create test data");
-        List<TestCase> testCases = createTestdata();
+        //List<TestCase> testCases = createTestdata();
+        List<TestCase> testCases = createTestdata2();
         int testCount = testCases.size();
         System.out.println("created " + testCount + " tests");
 
-        System.out.println("test multiplication by subtraction");
+        System.out.println("test division by subtraction");
         long start1 = System.currentTimeMillis();
-        float successRate1 = testRussianDivision(testCases);
+        testRussianDivision(testCases);
         long end1 = System.currentTimeMillis();
         long duration1 = end1 - start1;
-        System.out.println("duration " + duration1 + " ms with a success rate of " + (int) (successRate1 * 100) + "%");
+        System.out.println("duration " + duration1 + " ms.");
 
-        System.out.println("test long multiplication");
+        /*System.out.println("test russian division");
         long start2 = System.currentTimeMillis();
-        float successRate2 = testDivisionBySubtraction(testCases);
+        testDivisionBySubtraction(testCases);
         long end2 = System.currentTimeMillis();
         long duration2 = end2 - start2;
-        System.out.println("duration " + duration2 + " ms with a success rate of " + (int) (successRate2 * 100) + "%");
+        System.out.println("duration " + duration2 + " ms");*/
+
+        System.out.println("test long division");
+        long start3 = System.currentTimeMillis();
+        testDivisionBySubtraction(testCases);
+        long end3 = System.currentTimeMillis();
+        long duration3 = end3 - start3;
+        System.out.println("duration " + duration3 + " ms");
     }
 
     /**
-     * Tests the long division with the specified test cases.
+     * Tests the division by subtraction with the specified test cases.
      *
      * @param testCases
      *        all test cases
-     *
-     * @return a success rate
      */
-    public static float testDivisionBySubtraction(List<TestCase> testCases) {
-
-        Map<TestCase, Number> failedResults = new HashMap<>();
-        Map<TestCase, Number> successfulResults = new HashMap<>();
+    public static void testDivisionBySubtraction(List<TestCase> testCases) {
 
         ProcessingDetails processingDetails =
             ProcessingDetails.setProcessingDetails(OperationIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION,
                                                    ProcessingDetails.DEFAULT_PRECISION,
                                                    ProcessingDetails.DEFAULT_ITERATION_DEPTH);
 
-        for (TestCase testCase : testCases) {
+        int max = testCases.size();
 
-            Number actualResult;
+        for (int index = 0; index < max; index++) {
+
             try {
 
-                actualResult = testCase.operand1.divide(processingDetails, testCase.operand2);
-
-                if (testCase.expectedResult.equals(actualResult)) {
-
-                    successfulResults.put(testCase, actualResult);
-
-                } else {
-
-                    failedResults.put(testCase, actualResult);
-                }
+                TestCase testCase = testCases.get(index);
+                testCase.operand1.divide(processingDetails, testCase.operand2);
 
             } catch (Exception e) {
 
-                failedResults.put(testCase, null);
+                // ignore
+            }
+
+            if (index % 200 == 0) {
+
+                System.out.print(".");
             }
         }
 
-        float maxTests = (float) testCases.size();
-        float successfulTests = (float) successfulResults.size();
-        float successRate = successfulTests / maxTests;
+        System.out.println();
+    }
 
-        return successRate;
+    /**
+     * Tests the russian division with the specified test cases.
+     *
+     * @param testCases
+     *        all test cases
+     */
+    public static void testRussianDivision(List<TestCase> testCases) {
+
+        ProcessingDetails processingDetails =
+            ProcessingDetails.setProcessingDetails(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION,
+                                                   ProcessingDetails.DEFAULT_PRECISION,
+                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+
+        int max = testCases.size();
+
+        for (int index = 0; index < max; index++) {
+
+            try {
+
+                TestCase testCase = testCases.get(index);
+                testCase.operand1.divide(processingDetails, testCase.operand2);
+
+            } catch (Exception e) {
+
+                // ignore
+            }
+
+            if (index % 200 == 0) {
+
+                System.out.print(".");
+            }
+        }
+
+        System.out.println();
     }
 
     /**
@@ -145,46 +175,35 @@ public class DivisionSpeedTest {
      *
      * @param testCases
      *        all test cases
-     *
-     * @return a success rate
      */
-    public static float testRussianDivision(List<TestCase> testCases) {
-
-        Map<TestCase, Number> failedResults = new HashMap<>();
-        Map<TestCase, Number> successfulResults = new HashMap<>();
+    public static void testLongDivision(List<TestCase> testCases) {
 
         ProcessingDetails processingDetails =
-            ProcessingDetails.setProcessingDetails(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION,
+            ProcessingDetails.setProcessingDetails(OperationIdentifiers.LONG_DIVISION,
                                                    ProcessingDetails.DEFAULT_PRECISION,
                                                    ProcessingDetails.DEFAULT_ITERATION_DEPTH);
 
-        for (TestCase testCase : testCases) {
+        int max = testCases.size();
 
-            Number actualResult;
+        for (int index = 0; index < max; index++) {
+
             try {
 
-                actualResult = testCase.operand1.divide(processingDetails, testCase.operand2);
-
-                if (testCase.expectedResult.equals(actualResult)) {
-
-                    successfulResults.put(testCase, actualResult);
-
-                } else {
-
-                    failedResults.put(testCase, actualResult);
-                }
+                TestCase testCase = testCases.get(index);
+                testCase.operand1.divide(processingDetails, testCase.operand2);
 
             } catch (Exception e) {
 
-                failedResults.put(testCase, null);
+                // ignore
+            }
+
+            if (index % 200 == 0) {
+
+                System.out.print(".");
             }
         }
 
-        float maxTests = (float) testCases.size();
-        float successfulTests = (float) successfulResults.size();
-        float successRate = successfulTests / maxTests;
-
-        return successRate;
+        System.out.println();
     }
 
     /**
@@ -205,12 +224,58 @@ public class DivisionSpeedTest {
                     continue;
                 }
 
-                int result = a / b;
+                int result = a * b;
                 TestCase testCase = new TestCase(result, b, a);
 
                 testCases.add(testCase);
             }
         }
+
+        return testCases;
+    }
+
+    /**
+     * Creates a set of test cases.
+     *
+     * @return a set of test cases
+     */
+    public static List<TestCase> createTestdata2() {
+
+        List<TestCase> testCases = new ArrayList<>();
+
+        for (int a = -100; a <= 100; a++) {
+
+            for (int b = -100; b <= 100; b++) {
+
+                if (b == 0) {
+
+                    continue;
+                }
+
+                int c = a * a * a;
+                int result = c * b;
+                TestCase testCase = new TestCase(result, b, c);
+
+                testCases.add(testCase);
+            }
+        }
+
+        /*for (int a = -100; a <= 100; a++) {
+
+            for (int b = -100; b <= 100; b++) {
+
+                if (b == 0) {
+
+                    continue;
+                }
+
+                int c = a * a * a;
+                int result = c * b;
+                TestCase testCase = new TestCase(result, b, c);
+
+                testCases.add(testCase);
+            }
+        }*/
 
         return testCases;
     }

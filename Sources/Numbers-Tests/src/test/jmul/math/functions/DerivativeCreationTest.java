@@ -657,9 +657,9 @@ public class DerivativeCreationTest {
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
                                            createNumber(DEFAULT_NUMBER_BASE, "4.2426406872")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.5"),
-                                           createNumber(DEFAULT_NUMBER_BASE, "4.7434164903")),
+                                           createNumber(DEFAULT_NUMBER_BASE, "4.74341649")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
-                                           createNumber(DEFAULT_NUMBER_BASE, "5.1961524228")));
+                                           createNumber(DEFAULT_NUMBER_BASE, "5.1961524225")));
 
         Function f = FunctionHelper.createRootFunction(DEFAULT_NUMBER_BASE, "2", "3", "2");
         f = f.derivativeFunction();
@@ -690,9 +690,9 @@ public class DerivativeCreationTest {
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0.7071067812")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.5"),
-                                           createNumber(DEFAULT_NUMBER_BASE, "0.6324555321")),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.632455532")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
-                                           createNumber(DEFAULT_NUMBER_BASE, "0.5773502692")));
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.5773502691")));
 
         Number coefficient = createNumber(DEFAULT_NUMBER_BASE, "2");
         Fraction exponent = createFraction(DEFAULT_NUMBER_BASE, "1", "2");
@@ -791,7 +791,7 @@ public class DerivativeCreationTest {
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0.2099871708")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.5"),
-                                           createNumber(DEFAULT_NUMBER_BASE, "0.140207433")),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.1402074331")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0.0903533194")));
 

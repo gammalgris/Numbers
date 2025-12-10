@@ -35,7 +35,7 @@ package test.jmul.math.numbers;
 
 
 import jmul.math.numbers.Number;
-import static jmul.math.numbers.NumberHelper.createNumber;
+import static jmul.math.numbers.NumberHelper.parseInteger;
 
 
 /**
@@ -72,7 +72,7 @@ class TestCase {
      */
     public TestCase(int operand1, int operand2, int expectedResult) {
 
-        this(createNumber(10, "" + operand1), createNumber(10, "" + operand2), createNumber(10, "" + expectedResult));
+        this(parseInteger(operand1), parseInteger(operand2), parseInteger(expectedResult));
     }
 
     /**

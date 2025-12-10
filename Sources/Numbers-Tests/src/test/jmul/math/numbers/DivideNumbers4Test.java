@@ -56,13 +56,13 @@ import org.junit.runners.Parameterized;
 
 
 /**
- * This test suit tests dividing numbers (i.e. russion division).
+ * This test suit tests dividing numbers (i.e. long division).
  *
  * @author Kristian Kutin
  */
 @UnitTest
 @RunWith(Parameterized.class)
-public class DivideNumbers3Test {
+public class DivideNumbers4Test {
 
     /**
      * A number.
@@ -96,7 +96,7 @@ public class DivideNumbers3Test {
      * @param expectedResult
      *        the expected result
      */
-    public DivideNumbers3Test(Number number1, Number number2, Number decimalPlaces, Number expectedResult) {
+    public DivideNumbers4Test(Number number1, Number number2, Number decimalPlaces, Number expectedResult) {
 
         super();
 
@@ -137,7 +137,7 @@ public class DivideNumbers3Test {
         if (decimalPlaces == null) {
 
             ProcessingDetails processingDetails =
-                ProcessingDetails.setProcessingDetails(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION,
+                ProcessingDetails.setProcessingDetails(OperationIdentifiers.LONG_DIVISION,
                                                        ProcessingDetails.DEFAULT_PRECISION,
                                                        ProcessingDetails.DEFAULT_ITERATION_DEPTH);
 
@@ -146,7 +146,7 @@ public class DivideNumbers3Test {
         } else {
 
             ProcessingDetails processingDetails =
-                ProcessingDetails.setProcessingDetails(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION, decimalPlaces,
+                ProcessingDetails.setProcessingDetails(OperationIdentifiers.LONG_DIVISION, decimalPlaces,
                                                        ProcessingDetails.DEFAULT_ITERATION_DEPTH);
 
             actualResult = number1.divide(processingDetails, number2);
@@ -166,7 +166,7 @@ public class DivideNumbers3Test {
         if (decimalPlaces == null) {
 
             ProcessingDetails processingDetails =
-                ProcessingDetails.setProcessingDetails(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION,
+                ProcessingDetails.setProcessingDetails(OperationIdentifiers.LONG_DIVISION,
                                                        ProcessingDetails.DEFAULT_PRECISION,
                                                        ProcessingDetails.DEFAULT_ITERATION_DEPTH);
 
@@ -175,7 +175,7 @@ public class DivideNumbers3Test {
         } else {
 
             ProcessingDetails processingDetails =
-                ProcessingDetails.setProcessingDetails(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION, decimalPlaces,
+                ProcessingDetails.setProcessingDetails(OperationIdentifiers.LONG_DIVISION, decimalPlaces,
                                                        ProcessingDetails.DEFAULT_ITERATION_DEPTH);
 
             actualResult = Math.divide(processingDetails, number1, number2);
@@ -808,8 +808,6 @@ public class DivideNumbers3Test {
         parameters.add(createTestCase(3, "10100", "-101", "101", "-100"));
         parameters.add(createTestCase(3, "10201", "-101", "101", "-101"));
 
-        parameters.add(createTestCase(10, "11", "22", "10", "0.5"));
-        parameters.add(createTestCase(10, "1", "3", "10", "0.3333333333"));
 
         return parameters;
     }

@@ -90,6 +90,7 @@ import jmul.math.operations.implementations.IsMultipleCheck;
 import jmul.math.operations.implementations.IsPrimeCheck;
 import jmul.math.operations.implementations.IsSingleDigitCheck;
 import jmul.math.operations.implementations.LeibnizPiApproximation;
+import jmul.math.operations.implementations.LongDivision;
 import jmul.math.operations.implementations.LongMultiplication;
 import jmul.math.operations.implementations.MatrixMultiplication;
 import jmul.math.operations.implementations.MaxFraction;
@@ -361,6 +362,7 @@ public class OperationRepositoryInitializerImpl implements OperationRepositoryIn
                                     DivideFractionByNumber.class);
         repository.registerFunction(OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION, RussianDivision.class);
         repository.registerFunction(OperationIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION, DivisionBySubtraction.class);
+        repository.registerFunction(OperationIdentifiers.LONG_DIVISION, LongDivision.class);
 
         repository.registerFunction(OperationIdentifiers.MODULO_FUNCTION, ModuloWithIntegers.class);
         repository.registerFunction(OperationIdentifiers.DIVISO_FUNCTION, DivisoWithIntegers.class);

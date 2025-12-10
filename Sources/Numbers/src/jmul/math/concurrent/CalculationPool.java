@@ -164,7 +164,7 @@ public abstract class CalculationPool<T, S> {
 
             if (calculation.hasFailed()) {
 
-                throw new NoConcurrentResultException();
+                throw new NoConcurrentResultException(calculation.exception());
             }
 
             S result = calculation.result();

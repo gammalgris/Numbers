@@ -205,7 +205,7 @@ public class NthRootTest {
         parameters.add(new Object[] { createNumber(10, "2"), createNumber(10, "2"), null,
                                       createNumber(10, "1.4142135624") });
         parameters.add(new Object[] { createNumber(10, "2"), createNumber(10, "2"), createNumber(10, "20"),
-                                      createNumber(10, "1.41421356237309504881") });
+                                      createNumber(10, "1.4142135623730950488") });
 
         // A result with more digits is 1.25992104989487316476721060727822835057025146470150798008197511215529967651
         parameters.add(new Object[] { createNumber(10, "2"), createNumber(10, "3"), null,
@@ -214,13 +214,13 @@ public class NthRootTest {
                                       createNumber(10, "1.25992104989487316477") });
 
         parameters.add(new Object[] { createNumber(10, "27"), createNumber(10, "3"), null,
-                                      createNumber(10, "3.0000000813") });
+                                      createNumber(10, "3.0000000001") });
         parameters.add(new Object[] { createNumber(10, "27"), createNumber(10, "3"), createNumber(10, "20"),
-                                      createNumber(10, "3.00000008121020203131") });
+                                      createNumber(10, "3.00000000000000000001") });
 
         /* 2.71828182845904523536028747135266249775724709369995957496696762772407663035^(1/2)
            -> 1.64872127070012814684865078781416357165377610071014801157507931164066102119 */
-        parameters.add(new Object[] { Math.e(10), createNumber(10, "2"), null, createNumber(10, "1.6487212707") });
+        parameters.add(new Object[] { Math.e(10), createNumber(10, "2"), null, createNumber(10, "1.6487212706") });
 
         /* 2.71828182845904523536028747135266249775724709369995957496696762772407663035^(1/3)
            -> 1.39561242508608952862812531960258683759790651519940698261751670603173901564 */

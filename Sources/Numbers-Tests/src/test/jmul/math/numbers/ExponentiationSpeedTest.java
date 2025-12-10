@@ -34,13 +34,14 @@
 package test.jmul.math.numbers;
 
 
-import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.numbers.Number;
+import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.operations.processing.ProcessingDetails;
-
 import jmul.math.operations.repository.OperationIdentifiers;
 
 import jmul.test.classification.ManualTest;
+
+import org.junit.Ignore;
 
 
 /**
@@ -48,6 +49,7 @@ import jmul.test.classification.ManualTest;
  *
  * @author Kristian Kutin
  */
+@Ignore
 @ManualTest
 public class ExponentiationSpeedTest {
 

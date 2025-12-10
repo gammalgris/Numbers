@@ -61,6 +61,11 @@ public class PolynomialFunctionImpl extends FunctionBaseImpl implements Polynomi
     private final List<Number> coefficients;
 
     /**
+     * This ploynomial split up into monomials.
+     */
+    private final List<Function> monomials;
+
+    /**
      * Creates a new instance according to the specified parameters.
      *
      * @param coefficients
@@ -72,6 +77,7 @@ public class PolynomialFunctionImpl extends FunctionBaseImpl implements Polynomi
         super(extractBase(coefficients));
 
         this.coefficients = Collections.unmodifiableList(Arrays.asList(coefficients));
+        this.monomials = Collections.unmodifiableList(transformCoefficientsToMonomials(coefficients));
     }
 
     /**
@@ -98,6 +104,40 @@ public class PolynomialFunctionImpl extends FunctionBaseImpl implements Polynomi
     }
 
     /**
+     * Transforms the specified list of coefficients into a list of monomials.<br>
+     * <br>
+     * <i>Note:<br>
+     * This is a duplicate method. The array version and the list version cannot be merged. As seperate methods the
+     * coefficients are only traversed once when being transformed into a list of monomials.</i>
+     *
+     * @param coefficients
+     *        a list of coefficients
+     *
+     * @return a list of monomials
+     */
+    private List<Function> transformCoefficientsToMonomials(Number... coefficients) {
+
+        final Number ZERO = Math.ZERO.value(base());
+
+        Number exponent = ZERO;
+
+        List<Function> components = new ArrayList<>();
+
+        for (Number coefficient : coefficients) {
+
+            if (!coefficient.isZero()) {
+
+                Function function = new MonomialFunctionImpl(coefficient, exponent);
+                components.add(function);
+            }
+
+            exponent = exponent.inc();
+        }
+
+        return components;
+    }
+
+    /**
      * Creates a new instance according to the specified parameters.
      *
      * @param coefficients
@@ -108,6 +148,7 @@ public class PolynomialFunctionImpl extends FunctionBaseImpl implements Polynomi
         super(extractBase(coefficients));
 
         this.coefficients = Collections.unmodifiableList(coefficients);
+        this.monomials = Collections.unmodifiableList(transformCoefficientsToMonomials(coefficients));
     }
 
     /**
@@ -134,6 +175,40 @@ public class PolynomialFunctionImpl extends FunctionBaseImpl implements Polynomi
     }
 
     /**
+     * Transforms the specified list of coefficients into a list of monomials.<br>
+     * <br>
+     * <i>Note:<br>
+     * This is a duplicate method. The array version and the list version cannot be merged. As seperate methods the
+     * coefficients are only traversed once when being transformed into a list of monomials.</i>
+     *
+     * @param coefficients
+     *        a list of coefficients
+     *
+     * @return a list of monomials
+     */
+    private List<Function> transformCoefficientsToMonomials(Iterable<Number> coefficients) {
+
+        final Number ZERO = Math.ZERO.value(base());
+
+        Number exponent = ZERO;
+
+        List<Function> components = new ArrayList<>();
+
+        for (Number coefficient : coefficients) {
+
+            if (!coefficient.isZero()) {
+
+                Function function = new MonomialFunctionImpl(coefficient, exponent);
+                components.add(function);
+            }
+
+            exponent = exponent.inc();
+        }
+
+        return components;
+    }
+
+    /**
      * Calculate the function value for x.
      *
      * @param processingDetails
@@ -150,18 +225,15 @@ public class PolynomialFunctionImpl extends FunctionBaseImpl implements Polynomi
 
         Number sum = ZERO;
 
-        for (int index = 0; index < coefficients.size(); index++) {
+        for (int index = 0; index < monomials.size(); index++) {
 
-            Number coefficient = coefficients.get(index);
-
-            Number result = coefficient;
-            for (int exponent = 1; exponent <= index; exponent++) {
-
-                result = result.multiply(x);
-            }
+            Function function = monomials.get(index);
+            Number result = function.calculate(processingDetails, x);
 
             sum = sum.add(result);
         }
+
+        sum = sum.round(processingDetails);
 
         return sum;
     }

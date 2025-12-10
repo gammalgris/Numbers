@@ -34,18 +34,21 @@
 package jmul.math.operations.implementations;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jmul.math.Math;
+import jmul.math.collections.Sequence;
+import jmul.math.collections.SequenceImpl;
 import jmul.math.fractions.Fraction;
+import static jmul.math.fractions.FractionHelper.createFraction;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
 import static jmul.math.numbers.creation.CreationParameters.CLONE;
 import jmul.math.operations.MixedQuaternaryOperation;
-import jmul.math.operations.OperationSingletons;
-import jmul.math.operations.QuaternaryOperation;
 import jmul.math.operations.Result;
-import jmul.math.operations.TernaryOperation;
 import jmul.math.operations.processing.ProcessingDetails;
-import jmul.math.operations.repository.OperationIdentifiers;
+import jmul.math.signs.Signs;
 
 
 /**
@@ -87,11 +90,9 @@ public class ExponentiateNumberWithFraction implements MixedQuaternaryOperation<
 
         if (exponent.hasIntegerPart() && !exponent.hasNumerator() && !exponent.hasDenominator()) {
 
-            TernaryOperation<Number, Result<Number>> function =
-                (TernaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.EXPONENTIATE_NUMBER_WITH_NUMBER_FUNCTION);
-            Result<Number> result = function.calculate(number, exponent.integerPart(), decimalPlaces);
-
-            return result;
+            ProcessingDetails processingDetails = ProcessingDetails.setAlgorithm(ProcessingDetails.DEFAULT_ALGORITHM);
+            Number result = number.exponentiate(processingDetails, exponent.integerPart());
+            return new Result<Number>(result);
         }
 
         Fraction normalizedExponent = exponent;
@@ -99,7 +100,6 @@ public class ExponentiateNumberWithFraction implements MixedQuaternaryOperation<
 
             normalizedExponent = exponent.normalizedFraction();
         }
-        normalizedExponent = normalizedExponent.reduce();
 
         int base = number.base();
         final Number ZERO = Math.ZERO.value(base);
@@ -159,33 +159,62 @@ public class ExponentiateNumberWithFraction implements MixedQuaternaryOperation<
             return number;
         }
 
-        ProcessingDetails processingDetails =
+
+        int base = number.base();
+        final Number ZERO = createNumber(base, Signs.POSITIVE, 0);
+        final Number ONE = createNumber(base, Signs.POSITIVE, 1);
+
+        Sequence<Fraction> exponents = splitExponent(exponent);
+        Number lastElementIndex = exponents.elements().dec();
+
+        Number product1;
+        if (exponents.elements().isOne()) {
+
+            product1 = null;
+
+        } else {
+
+            product1 = ONE;
+        }
+
+        for (Number index = ZERO; index.isLesser(lastElementIndex); index = index.inc()) {
+
+            Fraction f = exponents.ordinal(index);
+            Number factorN = exponentiate(number, f, iterations, decimalPlaces);
+            product1 = product1.multiply(factorN);
+        }
+
+
+        Fraction lastExponent = exponents.ordinal(lastElementIndex);
+        lastExponent = lastExponent.reduce();
+
+
+        ProcessingDetails processingDetails;
+        Number product2;
+
+        processingDetails =
             ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM, decimalPlaces, iterations);
+        product2 = number.root(processingDetails, lastExponent.denominator());
 
-        Result<Number> result;
-        Number n = number;
+        processingDetails =
+            ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM, decimalPlaces,
+                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+        product2 = product2.exponentiate(processingDetails, lastExponent.numerator());
 
-        QuaternaryOperation<Number, Result<Number>> rootFunction =
-            (QuaternaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.NTH_ROOT_FUNCTION);
-        result = rootFunction.calculate(n, exponent.denominator(), iterations, decimalPlaces);
+        if (product1 == null) {
 
-        n = result.result();
-        if (n.isFraction()) {
+            return product2;
 
-            n = n.round(processingDetails);
+        } else {
+
+            processingDetails = ProcessingDetails.setAlgorithm(ProcessingDetails.DEFAULT_ALGORITHM);
+            product1 = product1.multiply(processingDetails, product2);
+
+            processingDetails = ProcessingDetails.setPrecision(decimalPlaces);
+            product1 = product1.round(processingDetails);
+
+            return product1;
         }
-
-        TernaryOperation<Number, Result<Number>> exponentiateFunction =
-            (TernaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.EXPONENTIATE_NUMBER_WITH_NUMBER_FUNCTION);
-        result = exponentiateFunction.calculate(n, exponent.numerator(), decimalPlaces);
-
-        n = result.result();
-        if (n.isFraction()) {
-
-            n = n.round(processingDetails);
-        }
-
-        return n;
     }
 
     /**
@@ -204,27 +233,52 @@ public class ExponentiateNumberWithFraction implements MixedQuaternaryOperation<
      */
     private Number exponentiate(Fraction number, Fraction exponent, Number iterations, Number decimalPlaces) {
 
-        if (exponent.numerator().equals(exponent.denominator())) {
+        Number normalizedNumber = number.evaluate(decimalPlaces);
 
-            return number.evaluate(decimalPlaces);
+        return exponentiate(normalizedNumber, exponent, iterations, decimalPlaces);
+    }
+
+    /**
+     * Split up an exponent. Instead of reducing the exponent it is split up into summands. Example:<br>
+     * <br>
+     * a^(11/3)<br>
+     * -&gt; a^(3/3 + 3/3 + 3/3 + 2/3)<br>
+     * -&gt; a^(3/3) * a(3/3) * a^(3/3) * a^(2/3)<br>
+     * -&gt; a * a * a * a^(2/3)<br>
+     * <br>
+     * Afterwards the individual exponents can be further reduced if possible.
+     *
+     * @param exponent
+     *        an unsigned exponent (i.e. positive)
+     *
+     * @return a reduced exponent
+     */
+    private Sequence<Fraction> splitExponent(Fraction exponent) {
+
+        int base = exponent.base();
+
+        List<Fraction> splitExponent = new ArrayList<>();
+
+        Number numerator = exponent.numerator();
+        Number denominator = exponent.denominator();
+
+        while (numerator.isGreaterOrEqual(denominator)) {
+
+            numerator = numerator.subtract(denominator);
+
+            Fraction part = createFraction(CLONE, denominator, denominator);
+            splitExponent.add(part);
         }
 
-        Result<Number> result;
-        Number n = number.evaluate(decimalPlaces);
+        if (!numerator.isZero()) {
 
-        QuaternaryOperation<Number, Result<Number>> rootFunction =
-            (QuaternaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.NTH_ROOT_FUNCTION);
-        result = rootFunction.calculate(n, exponent.denominator(), iterations, decimalPlaces);
+            Fraction part = createFraction(CLONE, numerator, denominator);
+            splitExponent.add(part);
+        }
 
-        n = result.result();
+        Sequence<Fraction> sequence = new SequenceImpl<>(base, splitExponent);
 
-        TernaryOperation<Number, Result<Number>> exponentiateFunction =
-            (TernaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.EXPONENTIATE_NUMBER_WITH_NUMBER_FUNCTION);
-        result = exponentiateFunction.calculate(n, exponent.numerator(), decimalPlaces);
-
-        n = result.result();
-
-        return n;
+        return sequence;
     }
 
 }

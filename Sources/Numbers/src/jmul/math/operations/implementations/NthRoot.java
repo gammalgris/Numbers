@@ -48,13 +48,14 @@ import jmul.math.numbers.creation.CreationParameters;
 import jmul.math.operations.QuaternaryOperation;
 import jmul.math.operations.Result;
 import jmul.math.operations.processing.ProcessingDetails;
+import jmul.math.signs.Signs;
 
 
 /**
  * An implementation to calculate the nth root of a number.<br>
  * See <a href="https://en.wikipedia.org/wiki/Nth_root">Nth Root</a>.
  * <br>
- * x<sub>k+1</sub> = x<sub>k</sub> - ( x<sub>k</sub><sup>n</sup> - A ) / ( n * k<sub>k</sub><sup>n - 1</sup> )<br>
+ * x<sub>k+1</sub> = x<sub>k</sub> - ( x<sub>k</sub><sup>n</sup> - A ) / ( n * x<sub>k</sub><sup>n - 1</sup> )<br>
  * <br>
  * The recursive equation calculates the nth root of a number A.
  *
@@ -130,8 +131,7 @@ public class NthRoot implements QuaternaryOperation<Number, Result<Number>> {
                                                    ProcessingDetails.DEFAULT_ITERATION_DEPTH);
 
         Number i = iterations;
-        Number s = number;
-        Number x = x0(s);
+        Number x = x0(number, n, decimalPlaces);
 
         while (!i.isZero()) {
 
@@ -152,19 +152,38 @@ public class NthRoot implements QuaternaryOperation<Number, Result<Number>> {
     /**
      * Calculates a starting value for s.
      *
-     * @param s
+     * @param number
      *        the number for which the square root should be calculated
+     * @param n
+     *        the root
+     * @param decimalPlaces
+     *        the number of decimal places retained after cutting the fraction part
      *
      * @return a starting calue for Heron's method
      */
-    private static Number x0(Number s) {
+    private static Number x0(Number number, Number n, Number decimalPlaces) {
 
-        return s.halving();
+        ProcessingDetails processingDetails = ProcessingDetails.setPrecision(decimalPlaces);
+        Number counter = n;
+        
+        Number guess = number;
+        while (true) {
+            
+            counter = counter.shiftLeft();
+            guess = guess.squareRoot(processingDetails);
+            
+            if (counter.centerNode().leftNode() == null) {
+
+                break;
+            }
+        }
+        
+        return guess;
     }
 
     /**
      * Calculates the next value for x (i.e.
-     * x<sub>k+1</sub> = x<sub>k</sub> - ( x<sub>k</sub><sup>n</sup> - A ) / ( n * k<sub>k</sub><sup>n - 1</sup> ) ).
+     * x<sub>k+1</sub> = x<sub>k</sub> - ( x<sub>k</sub><sup>n</sup> - A ) / ( n * x<sub>k</sub><sup>n - 1</sup> ) ).
      *
      * @param x
      *        the current value of x<sub>n</sub>
@@ -212,8 +231,8 @@ public class NthRoot implements QuaternaryOperation<Number, Result<Number>> {
         }
         */
 
-        Number result = term1;
-        result = result.divide(processingDetails, term2);
+        Number result;
+        result = term1.divide(processingDetails, term2);
         result = result.negate();
         result = result.add(x);
 

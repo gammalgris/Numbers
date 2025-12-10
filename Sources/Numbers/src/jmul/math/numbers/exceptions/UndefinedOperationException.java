@@ -100,7 +100,7 @@ public class UndefinedOperationException extends RuntimeException {
      */
     public UndefinedOperationException(String operationSymbol, Number n1, Number n2) {
 
-        super(String.format("%s %s %s is undefined!", n1.toString(), operationSymbol, n1.toString()));
+        super(String.format("%s %s %s is undefined!", n1.toString(), operationSymbol, n2.toString()));
     }
 
 }

@@ -196,7 +196,7 @@ public class ExponentiateNumberWithNumberBySquaring implements TernaryOperation<
      * A number might be odd or even within a specific positional numeral system of a specific base, but there are
      * differences between odd and even number bases. E.g.:</i><br>
      * <br>
-     * <table>
+     * <table border="1">
      * <tr>
      * <th>base 10</th>
      * <th></th>

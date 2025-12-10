@@ -317,6 +317,19 @@ public final class FunctionHelper {
     }
 
     /**
+     * Creates a new sigmoid function according to the specified parameters.
+     *
+     * @param base
+     *        a number base
+     *
+     * @return a function
+     */
+    public static Function createSigmoidFunction2(int base) {
+
+        return new SigmoidFunction2Impl(base);
+    }
+
+    /**
      * Creates a new hyperbolic tangent function according to the specified parameters.
      *
      * @param base

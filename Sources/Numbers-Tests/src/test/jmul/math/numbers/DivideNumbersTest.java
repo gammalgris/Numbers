@@ -41,6 +41,8 @@ import jmul.math.Math;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
+import static jmul.math.numbers.NumberHelper.createInfinity;
+import static jmul.math.numbers.NumberHelper.createNegativeInfinity;
 import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.operations.processing.ProcessingDetails;
 
@@ -183,6 +185,10 @@ public class DivideNumbersTest {
         Collection<Object[]> parameters = new ArrayList<Object[]>();
 
         for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
+
+            parameters.add(new Object[] { createInfinity(base), createNumber(base, "1"), null, createInfinity(base) });
+            parameters.add(new Object[] { createNegativeInfinity(base), createNumber(base, "1"), null,
+                                          createNegativeInfinity(base) });
 
             parameters.add(new Object[] { createNumber(base, "0"), createNumber(base, "10"), null,
                                           createNumber(base, "0") });

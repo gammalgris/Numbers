@@ -875,10 +875,7 @@ public final class Math {
      */
     public static Number multiply(Number n1, Number n2) {
 
-        ProcessingDetails processingDetails =
-            ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM,
-                                                   ProcessingDetails.DEFAULT_PRECISION,
-                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+        ProcessingDetails processingDetails = ProcessingDetails.setAlgorithm(ProcessingDetails.DEFAULT_ALGORITHM);
 
         return multiply(processingDetails, n1, n2);
     }
@@ -1667,7 +1664,8 @@ public final class Math {
         int base = n1.base();
 
         final OperationIdentifier[] ALLOWED_ALGORITHMS = new OperationIdentifier[] {
-            OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION, OperationIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION
+            OperationIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION, OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION,
+            OperationIdentifiers.LONG_DIVISION
         };
 
         OperationIdentifier algorithm = processingDetails.checkAndReturnAlgorithm(ALLOWED_ALGORITHMS);
@@ -2084,10 +2082,7 @@ public final class Math {
      */
     public static Fraction reduce(Fraction fraction) {
 
-        ProcessingDetails processingDetails =
-            ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM,
-                                                   ProcessingDetails.DEFAULT_PRECISION,
-                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+        ProcessingDetails processingDetails = ProcessingDetails.setAlgorithm(ProcessingDetails.DEFAULT_ALGORITHM);
 
         return reduce(processingDetails, fraction);
     }
@@ -2606,7 +2601,7 @@ public final class Math {
         ParameterCheckHelper.checkNumberBase(base);
 
         Number iterations =
-            processingDetails.checkAndReturnPrecision(Math.DEFAULT_EULERS_NUMBER_ITERATIONS.value(base));
+            processingDetails.checkAndReturnIterationDepth(Math.DEFAULT_EULERS_NUMBER_ITERATIONS.value(base));
         Number decimalPlaces =
             processingDetails.checkAndReturnPrecision(Math.DEFAULT_MAXIMUM_FRACTION_LENGTH.value(base));
 
@@ -2657,7 +2652,7 @@ public final class Math {
 
         OperationIdentifier algorithm = processingDetails.checkAndReturnAlgorithm(ALLOWED_ALGORITHMS);
         Number iterations =
-            processingDetails.checkAndReturnPrecision(Math.DEFAULT_LEIBNITZ_PI_APPROXIMATION_ITERATIONS.value(base));
+            processingDetails.checkAndReturnIterationDepth(Math.DEFAULT_LEIBNITZ_PI_APPROXIMATION_ITERATIONS.value(base));
         Number decimalPlaces =
             processingDetails.checkAndReturnPrecision(Math.DEFAULT_MAXIMUM_FRACTION_LENGTH.value(base));
 

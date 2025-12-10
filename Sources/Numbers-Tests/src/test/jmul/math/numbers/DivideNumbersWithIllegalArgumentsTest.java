@@ -37,8 +37,13 @@ package test.jmul.math.numbers;
 import jmul.math.operations.implementations.DivisionOfNumbersBySubtractionReturnResultAndRemainder;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
+import jmul.math.numbers.exceptions.UndefinedOperationException;
 import jmul.math.operations.BinaryOperation;
+import jmul.math.operations.Result;
 import jmul.math.operations.ResultWithRemainder;
+
+import jmul.math.operations.TernaryOperation;
+import jmul.math.operations.implementations.DivisionBySubtraction;
 
 import jmul.test.classification.UnitTest;
 
@@ -111,6 +116,36 @@ public class DivideNumbersWithIllegalArgumentsTest {
         Number operand2 = createNumber(10, "1.1");
 
         function.calculate(operand1, operand2);
+    }
+
+    /**
+     * Tests division where the second parameter is zero.
+     */
+    @Test(expected = UndefinedOperationException.class)
+    public void divideByZero() {
+
+        BinaryOperation<Number, ResultWithRemainder<Number>> function =
+            new DivisionOfNumbersBySubtractionReturnResultAndRemainder();
+
+        Number operand1 = createNumber(10, "1");
+        Number operand2 = createNumber(10, "0");
+
+        function.calculate(operand1, operand2);
+    }
+
+    /**
+     * Tests division where the second parameter is zero.
+     */
+    @Test(expected = UndefinedOperationException.class)
+    public void divideByZeroVarian2() {
+
+        TernaryOperation<Number, Result<Number>> function = new DivisionBySubtraction();
+
+        Number precision = createNumber(10, "10");
+        Number operand1 = createNumber(10, "1");
+        Number operand2 = createNumber(10, "0");
+
+        function.calculate(operand1, operand2, precision);
     }
 
 }

@@ -129,6 +129,7 @@ public class ExponentialFunctionImpl extends FunctionBaseImpl {
     @Override
     public Function derivativeFunction() {
 
+        //TODO
         throw new UnsupportedOperationException();
     }
 

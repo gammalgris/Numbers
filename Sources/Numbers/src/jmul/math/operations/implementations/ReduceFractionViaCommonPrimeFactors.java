@@ -41,7 +41,6 @@ import jmul.math.numbers.Number;
 import static jmul.math.numbers.creation.CreationParameters.DONT_CLONE;
 import jmul.math.operations.Result;
 import jmul.math.operations.UnaryOperation;
-import jmul.math.operations.processing.ProcessingDetails;
 
 
 /**
@@ -50,22 +49,6 @@ import jmul.math.operations.processing.ProcessingDetails;
  * @author Kristian Kutin
  */
 public class ReduceFractionViaCommonPrimeFactors implements UnaryOperation<Fraction, Result<Fraction>> {
-
-    /**
-     * Additional Processing details.
-     */
-    private static final ProcessingDetails PROCESSING_DETAILS;
-
-    /*
-     * The static initializer.
-     */
-    static {
-
-        PROCESSING_DETAILS =
-            ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM,
-                                                   ProcessingDetails.DEFAULT_PRECISION,
-                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
-    }
 
     /**
      * The default constructor.

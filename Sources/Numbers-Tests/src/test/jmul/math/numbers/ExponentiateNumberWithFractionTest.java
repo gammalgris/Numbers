@@ -322,30 +322,30 @@ public class ExponentiateNumberWithFractionTest {
         parameters.add(new Object[] { createNumber(10, "2"), createFraction(10, "1", "2"), null,
                                       createNumber(10, "1.4142135624") });
         parameters.add(new Object[] { createNumber(10, "3"), createFraction(10, "1", "2"), null,
-                                      createNumber(10, "1.7320508076") });
+                                      createNumber(10, "1.7320508075") });
         parameters.add(new Object[] { createNumber(10, "4"), createFraction(10, "1", "2"), null,
                                       createNumber(10, "2") });
         parameters.add(new Object[] { createNumber(10, "5"), createFraction(10, "1", "2"), null,
-                                      createNumber(10, "2.2360679776") });
+                                      createNumber(10, "2.2360679775") });
         parameters.add(new Object[] { createNumber(10, "6"), createFraction(10, "1", "2"), null,
                                       createNumber(10, "2.4494897428") });
         parameters.add(new Object[] { createNumber(10, "7"), createFraction(10, "1", "2"), null,
-                                      createNumber(10, "2.6457513111") });
+                                      createNumber(10, "2.645751311") });
         parameters.add(new Object[] { createNumber(10, "8"), createFraction(10, "1", "2"), null,
-                                      createNumber(10, "2.8284271248") });
+                                      createNumber(10, "2.8284271247") });
         parameters.add(new Object[] { createNumber(10, "9"), createFraction(10, "1", "2"), null,
-                                      createNumber(10, "3.0000000001") });
+                                      createNumber(10, "3") });
         parameters.add(new Object[] { createNumber(10, "10"), createFraction(10, "1", "2"), null,
-                                      createNumber(10, "3.1622776602") });
+                                      createNumber(10, "3.1622776601") });
 
         parameters.add(new Object[] { createNumber(10, "1"), createFraction(10, "-1", "2"), null,
                                       createNumber(10, "1") });
         parameters.add(new Object[] { createNumber(10, "2"), createFraction(10, "-1", "2"), null,
-                                      createNumber(10, "0.7071067813") });
+                                      createNumber(10, "0.7071067812") });
         parameters.add(new Object[] { createNumber(10, "3"), createFraction(10, "-1", "2"), null,
-                                      createNumber(10, "0.5773502692") });
+                                      createNumber(10, "0.5773502691") });
         parameters.add(new Object[] { createNumber(10, "4"), createFraction(10, "-1", "2"), null,
-                                      createNumber(10, "0.5000000001") });
+                                      createNumber(10, "0.5") });
         parameters.add(new Object[] { createNumber(10, "5"), createFraction(10, "-1", "2"), null,
                                       createNumber(10, "0.4472135956") });
         parameters.add(new Object[] { createNumber(10, "6"), createFraction(10, "-1", "2"), null,
@@ -355,9 +355,9 @@ public class ExponentiateNumberWithFractionTest {
         parameters.add(new Object[] { createNumber(10, "8"), createFraction(10, "-1", "2"), null,
                                       createNumber(10, "0.3535533907") });
         parameters.add(new Object[] { createNumber(10, "9"), createFraction(10, "-1", "2"), null,
-                                      createNumber(10, "0.3333333335") });
+                                      createNumber(10, "0.3333333334") });
         parameters.add(new Object[] { createNumber(10, "10"), createFraction(10, "-1", "2"), null,
-                                      createNumber(10, "0.3162277662") });
+                                      createNumber(10, "0.3162277661") });
 
         parameters.add(new Object[] { createNumber(10, "1"), createFraction(10, "1", "3"), null,
                                       createNumber(10, "1") });
@@ -383,23 +383,23 @@ public class ExponentiateNumberWithFractionTest {
         parameters.add(new Object[] { createNumber(10, "1"), createFraction(10, "-1", "3"), null,
                                       createNumber(10, "1") });
         parameters.add(new Object[] { createNumber(10, "2"), createFraction(10, "-1", "3"), null,
-                                      createNumber(10, "0.7937023271") });
+                                      createNumber(10, "0.7937005261") });
         parameters.add(new Object[] { createNumber(10, "3"), createFraction(10, "-1", "3"), null,
-                                      createNumber(10, "0.6964249829") });
+                                      createNumber(10, "0.6933612744") });
         parameters.add(new Object[] { createNumber(10, "4"), createFraction(10, "-1", "3"), null,
-                                      createNumber(10, "0.6670883852") });
+                                      createNumber(10, "0.6299605251") });
         parameters.add(new Object[] { createNumber(10, "5"), createFraction(10, "-1", "3"), null,
-                                      createNumber(10, "0.7014618621") });
+                                      createNumber(10, "0.5848035478") });
         parameters.add(new Object[] { createNumber(10, "6"), createFraction(10, "-1", "3"), null,
-                                      createNumber(10, "0.7743066121") });
+                                      createNumber(10, "0.5503212081") });
         parameters.add(new Object[] { createNumber(10, "7"), createFraction(10, "-1", "3"), null,
-                                      createNumber(10, "0.8668219399") });
+                                      createNumber(10, "0.5227579586") });
         parameters.add(new Object[] { createNumber(10, "8"), createFraction(10, "-1", "3"), null,
-                                      createNumber(10, "0.9694339306") });
+                                      createNumber(10, "0.5000000001") });
         parameters.add(new Object[] { createNumber(10, "9"), createFraction(10, "-1", "3"), null,
-                                      createNumber(10, "1.0774949754") });
+                                      createNumber(10, "0.4807498568") });
         parameters.add(new Object[] { createNumber(10, "10"), createFraction(10, "-1", "3"), null,
-                                      createNumber(10, "1.1886673234") });
+                                      createNumber(10, "0.4641588835") });
 
         parameters.add(new Object[] { createNumber(10, "1"), createFraction(10, "2", "3"), null,
                                       createNumber(10, "1") });
@@ -425,65 +425,65 @@ public class ExponentiateNumberWithFractionTest {
         parameters.add(new Object[] { createNumber(10, "1"), createFraction(10, "-2", "3"), null,
                                       createNumber(10, "1") });
         parameters.add(new Object[] { createNumber(10, "2"), createFraction(10, "-2", "3"), null,
-                                      createNumber(10, "0.629963384") });
+                                      createNumber(10, "0.6299605251") });
         parameters.add(new Object[] { createNumber(10, "3"), createFraction(10, "-2", "3"), null,
-                                      createNumber(10, "0.4850077568") });
+                                      createNumber(10, "0.4807498568") });
         parameters.add(new Object[] { createNumber(10, "4"), createFraction(10, "-2", "3"), null,
-                                      createNumber(10, "0.4450069136") });
+                                      createNumber(10, "0.3968502631") });
         parameters.add(new Object[] { createNumber(10, "5"), createFraction(10, "-2", "3"), null,
-                                      createNumber(10, "0.4920487439") });
+                                      createNumber(10, "0.3419951895") });
         parameters.add(new Object[] { createNumber(10, "6"), createFraction(10, "-2", "3"), null,
-                                      createNumber(10, "0.5995507295") });
+                                      createNumber(10, "0.302853432") });
         parameters.add(new Object[] { createNumber(10, "7"), createFraction(10, "-2", "3"), null,
-                                      createNumber(10, "0.7513802754") });
+                                      createNumber(10, "0.2732758832") });
         parameters.add(new Object[] { createNumber(10, "8"), createFraction(10, "-2", "3"), null,
-                                      createNumber(10, "0.9398021458") });
+                                      createNumber(10, "0.2500000001") });
         parameters.add(new Object[] { createNumber(10, "9"), createFraction(10, "-2", "3"), null,
-                                      createNumber(10, "1.160995422") });
+                                      createNumber(10, "0.2311204248") });
         parameters.add(new Object[] { createNumber(10, "10"), createFraction(10, "-2", "3"), null,
-                                      createNumber(10, "1.4129300057") });
+                                      createNumber(10, "0.2154434691") });
 
         parameters.add(new Object[] { createNumber(10, "1"), createFraction(10, "4", "3"), null,
                                       createNumber(10, "1") });
         parameters.add(new Object[] { createNumber(10, "2"), createFraction(10, "4", "3"), null,
-                                      createNumber(10, "2.5198421005") });
+                                      createNumber(10, "2.5198421") });
         parameters.add(new Object[] { createNumber(10, "3"), createFraction(10, "4", "3"), null,
-                                      createNumber(10, "4.3267487119") });
+                                      createNumber(10, "4.3267487112") });
         parameters.add(new Object[] { createNumber(10, "4"), createFraction(10, "4", "3"), null,
-                                      createNumber(10, "6.3496042081") });
+                                      createNumber(10, "6.349604208") });
         parameters.add(new Object[] { createNumber(10, "5"), createFraction(10, "4", "3"), null,
                                       createNumber(10, "8.5498797335") });
         parameters.add(new Object[] { createNumber(10, "6"), createFraction(10, "4", "3"), null,
-                                      createNumber(10, "10.9027235584") });
+                                      createNumber(10, "10.9027235574") });
         parameters.add(new Object[] { createNumber(10, "7"), createFraction(10, "4", "3"), null,
-                                      createNumber(10, "13.3905182799") });
+                                      createNumber(10, "13.3905182796") });
         parameters.add(new Object[] { createNumber(10, "8"), createFraction(10, "4", "3"), null,
-                                      createNumber(10, "16.0000000032") });
+                                      createNumber(10, "16.0000000008") });
         parameters.add(new Object[] { createNumber(10, "9"), createFraction(10, "4", "3"), null,
-                                      createNumber(10, "18.7207544089") });
+                                      createNumber(10, "18.7207544079") });
         parameters.add(new Object[] { createNumber(10, "10"), createFraction(10, "4", "3"), null,
-                                      createNumber(10, "21.5443469029") });
+                                      createNumber(10, "21.544346901") });
 
         parameters.add(new Object[] { createNumber(10, "1"), createFraction(10, "-4", "3"), null,
                                       createNumber(10, "1") });
         parameters.add(new Object[] { createNumber(10, "2"), createFraction(10, "-4", "3"), null,
-                                      createNumber(10, "0.3968538651") });
+                                      createNumber(10, "0.396850263") });
         parameters.add(new Object[] { createNumber(10, "3"), createFraction(10, "-4", "3"), null,
-                                      createNumber(10, "0.2352325241") });
+                                      createNumber(10, "0.2311204247") });
         parameters.add(new Object[] { createNumber(10, "4"), createFraction(10, "-4", "3"), null,
-                                      createNumber(10, "0.1980311531") });
+                                      createNumber(10, "0.1574901312") });
         parameters.add(new Object[] { createNumber(10, "5"), createFraction(10, "-4", "3"), null,
-                                      createNumber(10, "0.2421119663") });
+                                      createNumber(10, "0.1169607095") });
         parameters.add(new Object[] { createNumber(10, "6"), createFraction(10, "-4", "3"), null,
-                                      createNumber(10, "0.3594610772") });
+                                      createNumber(10, "0.0917202013") });
         parameters.add(new Object[] { createNumber(10, "7"), createFraction(10, "-4", "3"), null,
-                                      createNumber(10, "0.5645723183") });
+                                      createNumber(10, "0.0746797083") });
         parameters.add(new Object[] { createNumber(10, "8"), createFraction(10, "-4", "3"), null,
-                                      createNumber(10, "0.8832280731") });
+                                      createNumber(10, "0.0625") });
         parameters.add(new Object[] { createNumber(10, "9"), createFraction(10, "-4", "3"), null,
-                                      createNumber(10, "1.3479103698") });
+                                      createNumber(10, "0.0534166507") });
         parameters.add(new Object[] { createNumber(10, "10"), createFraction(10, "-4", "3"), null,
-                                      createNumber(10, "1.996371201") });
+                                      createNumber(10, "0.0464158883") });
 
         parameters.add(new Object[] { createNumber(10, "1"), createFraction(10, "5", "5"), null,
                                       createNumber(10, "1") });
@@ -520,7 +520,7 @@ public class ExponentiateNumberWithFractionTest {
         /* 2.71828182845904523536028747135266249775724709369995957496696762772407663035^(1/2)
            -> 1.64872127070012814684865078781416357165377610071014801157507931164066102119 */
         parameters.add(new Object[] { Math.e(10), createFraction(10, "1", "2"), null,
-                                      createNumber(10, "1.6487212707") });
+                                      createNumber(10, "1.6487212706") });
 
         /* 2.71828182845904523536028747135266249775724709369995957496696762772407663035^(1/3)
            -> 1.39561242508608952862812531960258683759790651519940698261751670603173901564 */

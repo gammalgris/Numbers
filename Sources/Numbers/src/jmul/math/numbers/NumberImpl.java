@@ -735,10 +735,7 @@ public class NumberImpl implements Number {
     @Override
     public Number multiply(Number n) {
 
-        ProcessingDetails processingDetails =
-            ProcessingDetails.setProcessingDetails(ProcessingDetails.DEFAULT_ALGORITHM,
-                                                   ProcessingDetails.DEFAULT_PRECISION,
-                                                   ProcessingDetails.DEFAULT_ITERATION_DEPTH);
+        ProcessingDetails processingDetails = ProcessingDetails.setAlgorithm(ProcessingDetails.DEFAULT_ALGORITHM);
 
         return multiply(processingDetails, n);
     }
@@ -1524,7 +1521,8 @@ public class NumberImpl implements Number {
         ParameterCheckHelper.checkParameter(processingDetails);
 
         final OperationIdentifier[] ALLOWED_ALGORITHMS = new OperationIdentifier[] {
-            OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION, OperationIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION
+            OperationIdentifiers.DIVIDE_NUMBERS_BY_SUBTRACTION, OperationIdentifiers.RUSSIAN_DIVISION_FUNCTION,
+            OperationIdentifiers.LONG_DIVISION
         };
 
         OperationIdentifier algorithm = processingDetails.checkAndReturnAlgorithm(ALLOWED_ALGORITHMS);

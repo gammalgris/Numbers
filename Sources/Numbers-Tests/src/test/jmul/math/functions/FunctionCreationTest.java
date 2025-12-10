@@ -748,11 +748,11 @@ public class FunctionCreationTest {
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.5"),
                                            createNumber(DEFAULT_NUMBER_BASE, "3.6742346142")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
-                                           createNumber(DEFAULT_NUMBER_BASE, "5.6568542498")),
+                                           createNumber(DEFAULT_NUMBER_BASE, "5.6568542496")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.5"),
-                                           createNumber(DEFAULT_NUMBER_BASE, "7.9056941506")),
+                                           createNumber(DEFAULT_NUMBER_BASE, "7.90569415")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
-                                           createNumber(DEFAULT_NUMBER_BASE, "10.3923048458")));
+                                           createNumber(DEFAULT_NUMBER_BASE, "10.392304845")));
 
         Function f = FunctionHelper.createRootFunction(DEFAULT_NUMBER_BASE, "2", "3", "2");
 
@@ -806,9 +806,9 @@ public class FunctionCreationTest {
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
                                            createNumber(DEFAULT_NUMBER_BASE, "2.8284271248")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.5"),
-                                           createNumber(DEFAULT_NUMBER_BASE, "3.1622776602")),
+                                           createNumber(DEFAULT_NUMBER_BASE, "3.16227766")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
-                                           createNumber(DEFAULT_NUMBER_BASE, "3.4641016152")));
+                                           createNumber(DEFAULT_NUMBER_BASE, "3.464101615")));
 
         Number coefficient = createNumber(DEFAULT_NUMBER_BASE, "2");
         Fraction exponent = createFraction(DEFAULT_NUMBER_BASE, "1", "2");
@@ -882,15 +882,15 @@ public class FunctionCreationTest {
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0.2689414213")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.5"),
-                                           createNumber(DEFAULT_NUMBER_BASE, "0.3775406687")),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.3775406688")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0.5")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.5"),
-                                           createNumber(DEFAULT_NUMBER_BASE, "0.6224593311")),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.6224593312")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0.7310585786")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.5"),
-                                           createNumber(DEFAULT_NUMBER_BASE, "0.8175744761")),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.8175744762")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0.880797078")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.5"),
@@ -920,6 +920,54 @@ public class FunctionCreationTest {
     }
 
     /**
+     * Tests creating a sigmoid function with valid parameters.
+     */
+    @Test
+    public void testSigmoidFunction2() {
+
+        /*
+         * e = 2.71828182845904523536028747135266249775724709369995957496696762772407663035
+         *
+         * f(-1) = 0.26894142137426583239894576034283910548774689539345516276519799480189396823
+         * f(0) = 0.5
+         * f(1) = 0.73105857862573416760105423965716089451225310460654483723480200519810603176
+         * f(2) = 0.88079707797332120180976368753356831360214196373758165765427507855654849392
+         * f(3) = 0.95257412681948930085765473812182517074459784767332524812262657727600188626
+         */
+
+        TrainingData data =
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.2689414213")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.3775406687")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.5")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.6224593311")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.7310585786")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.8175744761")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.8807970779")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.9241418199")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.9525741268")));
+
+        Function f = FunctionHelper.createSigmoidFunction2(DEFAULT_NUMBER_BASE);
+
+        assertEquals("formula", "e^x / ( 1 + e^x )", f.toString());
+        assertEquals("formula", "f(x) = e^x / ( 1 + e^x )", f.toFunctionNotation());
+
+        for (DataEntry entry : data) {
+
+            Number actualOutput = f.calculate(entry.input);
+            assertEquals("function values", entry.expectedOutput, actualOutput);
+        }
+    }
+
+    /**
      * Tests creating a hyperbolic tangent function with valid parameters.
      */
     @Test
@@ -939,15 +987,15 @@ public class FunctionCreationTest {
             new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "-0.4621171572")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.5"),
-                                           createNumber(DEFAULT_NUMBER_BASE, "-0.2449186624")),
+                                           createNumber(DEFAULT_NUMBER_BASE, "-0.2449186623")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.5"),
-                                           createNumber(DEFAULT_NUMBER_BASE, "0.2449186623")),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.2449186624")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0.4621171572")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.5"),
-                                           createNumber(DEFAULT_NUMBER_BASE, "0.6351489523")),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.6351489524")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
                                            createNumber(DEFAULT_NUMBER_BASE, "0.761594156")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.5"),
@@ -994,11 +1042,11 @@ public class FunctionCreationTest {
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
                                            createNumber(DEFAULT_NUMBER_BASE, "3")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.5"),
-                                           createNumber(DEFAULT_NUMBER_BASE, "3.8284271249")),
+                                           createNumber(DEFAULT_NUMBER_BASE, "3.8284271248")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
                                            createNumber(DEFAULT_NUMBER_BASE, "5")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.5"),
-                                           createNumber(DEFAULT_NUMBER_BASE, "6.65685425")),
+                                           createNumber(DEFAULT_NUMBER_BASE, "6.6568542496")),
                              new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
                                            createNumber(DEFAULT_NUMBER_BASE, "9")));
 

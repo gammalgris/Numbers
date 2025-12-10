@@ -33,8 +33,6 @@
 
 package jmul.math.concurrent;
 
-import jmul.concurrent.threads.ThreadHelper;
-
 
 /**
  * A base class for concurrent calculations.
