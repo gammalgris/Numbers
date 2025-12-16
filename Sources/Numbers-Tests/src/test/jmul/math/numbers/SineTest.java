@@ -36,9 +36,12 @@ package test.jmul.math.numbers;
 
 import java.util.ArrayList;
 import java.util.Collection;
+
 import jmul.math.Math;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
+
+import jmul.math.operations.processing.ProcessingDetails;
 
 import jmul.test.classification.UnitTest;
 
@@ -107,6 +110,22 @@ public class SineTest {
     }
 
     /**
+     * Tests calculating the sine.
+     */
+    @Test
+    public void calculateSineVariant2() {
+
+        int base = input.base();
+
+        ProcessingDetails processingDetails = ProcessingDetails.setPrecision(createNumber(base, "5"));
+
+        Number actualResult = input.sine(processingDetails);
+
+        assertEquals(toString(), expectedResult, actualResult);
+        assertEquals(toString(), expectedResult.toString(), actualResult.toString());
+    }
+
+    /**
      * Returns a matrix of test data and expected results.
      *
      * @return a matrix of test data and expected results
@@ -117,7 +136,7 @@ public class SineTest {
         int base = 10;
 
         final Number pi = Math.PI.value(10);
-        
+
         final Number degree0 = Math.ZERO.value(base);
         final Number degree90 = pi.halving();
         final Number degree180 = pi;

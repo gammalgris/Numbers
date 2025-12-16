@@ -37,7 +37,10 @@ package test.jmul.math.numbers;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import jmul.math.Math;
+import static jmul.math.intervals.BoundaryTypes.CLOSED_BOUNDARY;
+import static jmul.math.intervals.BoundaryTypes.OPEN_BOUNDARY;
+import jmul.math.intervals.Interval;
+import static jmul.math.intervals.IntervalHelper.createInterval;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
 import jmul.math.numbers.Number;
@@ -66,14 +69,9 @@ public class NumberIsWithinIntervalTest {
     private final Number number;
 
     /**
-     * A number (i.e. lower bound of an interval)
+     * An interval.
      */
-    private final Number min;
-
-    /**
-     * A number  (i.e. upper bound of an interval)
-     */
-    private final Number max;
+    private final Interval interval;
 
     /**
      * The expected result.
@@ -85,20 +83,17 @@ public class NumberIsWithinIntervalTest {
      *
      * @param number
      *        a number
-     * @param min
-     *        a number (i.e. lower bound of an interval)
-     * @param max
-     *        a number (i.e. upper bound of an interval)
+     * @param interval
+     *        an interval
      * @param expectedResult
      *        the expected result
      */
-    public NumberIsWithinIntervalTest(Number number, Number min, Number max, boolean expectedResult) {
+    public NumberIsWithinIntervalTest(Number number, Interval interval, boolean expectedResult) {
 
         super();
 
         this.number = number;
-        this.min = min;
-        this.max = max;
+        this.interval = interval;
         this.expectedResult = expectedResult;
     }
 
@@ -110,8 +105,7 @@ public class NumberIsWithinIntervalTest {
     @Override
     public String toString() {
 
-        return String.format("[base:%d] %s =< [base:%d] %s =< [base:%d] %s -> %b", min.base(), min, number.base(),
-                             number, max.base(), max, expectedResult);
+        return String.format("[base:%d] %s %s", number.base(), number, interval, expectedResult);
     }
 
     /**
@@ -120,20 +114,11 @@ public class NumberIsWithinIntervalTest {
     @Test
     public void testIsWithinInterval() {
 
-        boolean actualResult = number.isWithinInterval(min, max);
+        boolean actualResult = interval.isWithinInterval(number);
+        boolean actualResult2 = interval.isOutsideInterval(number);
 
         assertEquals(toString(), expectedResult, actualResult);
-    }
-
-    /**
-     * Tests if a number is within an interval.
-     */
-    @Test
-    public void testIsWithinIntervalVariant2() {
-
-        boolean actualResult = Math.isWithinInterval(min, number, max);
-
-        assertEquals(toString(), expectedResult, actualResult);
+        assertEquals(toString(), !expectedResult, actualResult2);
     }
 
     /**
@@ -148,12 +133,46 @@ public class NumberIsWithinIntervalTest {
 
         for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
 
-            parameters.add(new Object[] { createNumber(base, "0"), createNumber(base, "-1"), createNumber(base, "1"),
-                                          true });
-            parameters.add(new Object[] { createNumber(base, "-1"), createNumber(base, "0"), createNumber(base, "1"),
-                                          false });
-            parameters.add(new Object[] { createNumber(base, "1"), createNumber(base, "-1"), createNumber(base, "0"),
-                                          false });
+            parameters.add(new Object[] { createNumber(base, "-10"),
+                                          createInterval(createNumber(base, "-1"), CLOSED_BOUNDARY,
+                                                         createNumber(base, "1"), CLOSED_BOUNDARY), false });
+
+            parameters.add(new Object[] { createNumber(base, "-1"),
+                                          createInterval(createNumber(base, "-1"), CLOSED_BOUNDARY,
+                                                         createNumber(base, "1"), CLOSED_BOUNDARY), true });
+
+            parameters.add(new Object[] { createNumber(base, "0"),
+                                          createInterval(createNumber(base, "-1"), CLOSED_BOUNDARY,
+                                                         createNumber(base, "1"), CLOSED_BOUNDARY), true });
+
+            parameters.add(new Object[] { createNumber(base, "1"),
+                                          createInterval(createNumber(base, "-1"), CLOSED_BOUNDARY,
+                                                         createNumber(base, "1"), CLOSED_BOUNDARY), true });
+
+            parameters.add(new Object[] { createNumber(base, "10"),
+                                          createInterval(createNumber(base, "-1"), CLOSED_BOUNDARY,
+                                                         createNumber(base, "1"), CLOSED_BOUNDARY), false });
+
+
+            parameters.add(new Object[] { createNumber(base, "-10"),
+                                          createInterval(createNumber(base, "-1"), OPEN_BOUNDARY,
+                                                         createNumber(base, "1"), OPEN_BOUNDARY), false });
+
+            parameters.add(new Object[] { createNumber(base, "-1"),
+                                          createInterval(createNumber(base, "-1"), OPEN_BOUNDARY,
+                                                         createNumber(base, "1"), OPEN_BOUNDARY), false });
+
+            parameters.add(new Object[] { createNumber(base, "0"),
+                                          createInterval(createNumber(base, "-1"), OPEN_BOUNDARY,
+                                                         createNumber(base, "1"), OPEN_BOUNDARY), true });
+
+            parameters.add(new Object[] { createNumber(base, "1"),
+                                          createInterval(createNumber(base, "-1"), OPEN_BOUNDARY,
+                                                         createNumber(base, "1"), OPEN_BOUNDARY), false });
+
+            parameters.add(new Object[] { createNumber(base, "10"),
+                                          createInterval(createNumber(base, "-1"), OPEN_BOUNDARY,
+                                                         createNumber(base, "1"), OPEN_BOUNDARY), false });
         }
 
         return parameters;

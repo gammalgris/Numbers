@@ -144,7 +144,7 @@ public final class Math {
         DEFAULT_NTH_ROOT_ITERATIONS = ConstantHelper.createConstantNumber(10, "7");
         DEFAULT_EULERS_NUMBER_ITERATIONS = ConstantHelper.createConstantNumber(10, "12");
         DEFAULT_LEIBNITZ_PI_APPROXIMATION_ITERATIONS = ConstantHelper.createConstantNumber(10, "100");
-        DEFAULT_SINE_APPROXIMATION_ITERATIONS = ConstantHelper.createConstantNumber(10, "25");
+        DEFAULT_SINE_APPROXIMATION_ITERATIONS = ConstantHelper.createConstantNumber(10, "30");
         DEFAULT_COSINE_APPROXIMATION_ITERATIONS = ConstantHelper.createConstantNumber(10, "25");
 
         MINUS_ONE = ConstantHelper.createConstantNumber(10, Signs.NEGATIVE, 1);
@@ -2334,48 +2334,6 @@ public final class Math {
         BinaryOperation<Matrix, Result<Matrix>> function =
             (BinaryOperation<Matrix, Result<Matrix>>) OperationSingletons.getFunction(OperationIdentifiers.SUBTRACT_MATRICES_FUNCTION);
         Result<Matrix> result = function.calculate(matrix1, matrix2);
-
-        return result.result();
-    }
-
-    /**
-     * Checks if the specified number is within the specified bounds (including bounds).
-     *
-     * @param min
-     *        a number (i.e. lower bound of an interval)
-     * @param number
-     *        a number
-     * @param max
-     *        a number (i.e. upper bound of an interval)
-     *
-     * @return <code>true</code> if the specified number is within the specified bounds, else <code>false</code>
-     */
-    public static boolean isWithinInterval(Number min, Number number, Number max) {
-
-        TernaryOperation<Number, Result<Boolean>> function =
-            (TernaryOperation<Number, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.NUMBER_IS_WITHIN_INTERVAL);
-        Result<Boolean> result = function.calculate(min, number, max);
-
-        return result.result();
-    }
-
-    /**
-     * Checks if the specified fraction is within the specified bounds (including bounds).
-     *
-     * @param min
-     *        a fraction (i.e. lower bound of an interval)
-     * @param fraction
-     *        a fraction
-     * @param max
-     *        a fraction (i.e. upper bound of an interval)
-     *
-     * @return <code>true</code> if the specified fraction is within the specified bounds, else <code>false</code>
-     */
-    public static boolean isWithinInterval(Fraction min, Fraction fraction, Fraction max) {
-
-        TernaryOperation<Fraction, Result<Boolean>> function =
-            (TernaryOperation<Fraction, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.FRACTION_IS_WITHIN_INTERVAL);
-        Result<Boolean> result = function.calculate(min, fraction, max);
 
         return result.result();
     }

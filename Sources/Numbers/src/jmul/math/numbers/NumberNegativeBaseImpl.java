@@ -540,12 +540,6 @@ public class NumberNegativeBaseImpl implements Number {
     }
 
     @Override
-    public boolean isWithinInterval(Number min, Number max) {
-        // TODO Implement this method
-        return false;
-    }
-
-    @Override
     public DigitNode centerNode() {
         // TODO Implement this method
         throw new UnsupportedOperationException();

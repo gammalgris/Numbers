@@ -305,18 +305,6 @@ public interface Number extends LinkedDigitList, ArithmeticNumberOperations, Num
     Fraction toFraction();
 
     /**
-     * Checks if this number is within the specified bounds (including bounds).
-     *
-     * @param min
-     *        a number (i.e. lower bound of an interval)
-     * @param max
-     *        a number (i.e. upper bound of an interval)
-     *
-     * @return <code>true</code> if this number is within the specified bounds, else <code>false</code>
-     */
-    boolean isWithinInterval(Number min, Number max);
-
-    /**
      * Calculates the digit sum for this number.
      *
      * @return the digit sum

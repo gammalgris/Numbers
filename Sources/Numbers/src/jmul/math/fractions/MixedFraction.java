@@ -54,7 +54,6 @@ import jmul.math.operations.MixedComparator;
 import jmul.math.operations.MixedEqualityFunction;
 import jmul.math.operations.OperationSingletons;
 import jmul.math.operations.Result;
-import jmul.math.operations.TernaryOperation;
 import jmul.math.operations.UnaryOperation;
 import jmul.math.operations.implementations.ParameterCheckHelper;
 import jmul.math.operations.processing.ProcessingDetails;
@@ -1179,26 +1178,6 @@ class MixedFraction implements Fraction {
         UnaryOperation<Fraction, Result<Sequence<Number>>> function =
             (UnaryOperation<Fraction, Result<Sequence<Number>>>) OperationSingletons.getFunction(OperationIdentifiers.DETERMINE_COMMON_PRIME_FACTORS_IN_FRACTION);
         Result<Sequence<Number>> result = function.calculate(this);
-
-        return result.result();
-    }
-
-    /**
-     * Checks if this fraction is within the specified bounds (including bounds).
-     *
-     * @param min
-     *        a fraction (i.e. lower bound of an interval)
-     * @param max
-     *        a fraction (i.e. upper bound of an interval)
-     *
-     * @return <code>true</code> if this fraction is within the specified bounds, else <code>false</code>
-     */
-    @Override
-    public boolean isWithinInterval(Fraction min, Fraction max) {
-
-        TernaryOperation<Fraction, Result<Boolean>> function =
-            (TernaryOperation<Fraction, Result<Boolean>>) OperationSingletons.getFunction(OperationIdentifiers.FRACTION_IS_WITHIN_INTERVAL);
-        Result<Boolean> result = function.calculate(min, this, max);
 
         return result.result();
     }

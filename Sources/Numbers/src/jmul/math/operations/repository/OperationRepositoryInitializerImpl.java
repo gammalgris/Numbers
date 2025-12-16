@@ -80,7 +80,6 @@ import jmul.math.operations.implementations.ExponentiateNumberWithNumber;
 import jmul.math.operations.implementations.ExponentiateNumberWithNumberBySquaring;
 import jmul.math.operations.implementations.Factorial;
 import jmul.math.operations.implementations.FractionToAbsoluteValue;
-import jmul.math.operations.implementations.FractionWithinInterval;
 import jmul.math.operations.implementations.HalvingDigit;
 import jmul.math.operations.implementations.HalvingFraction;
 import jmul.math.operations.implementations.HalvingNumber;
@@ -119,7 +118,6 @@ import jmul.math.operations.implementations.NumberToDigit;
 import jmul.math.operations.implementations.NumberToFraction;
 import jmul.math.operations.implementations.NumberToOrdinal;
 import jmul.math.operations.implementations.NumberToPolynomialFunction;
-import jmul.math.operations.implementations.NumberWithinInterval;
 import jmul.math.operations.implementations.OddNumberCheck;
 import jmul.math.operations.implementations.OptimizedReduceFraction;
 import jmul.math.operations.implementations.PolynomialFunctionToNumber;
@@ -417,9 +415,6 @@ public class OperationRepositoryInitializerImpl implements OperationRepositoryIn
 
         repository.registerFunction(OperationIdentifiers.ADD_MATRICES_FUNCTION, AddMatrices.class);
         repository.registerFunction(OperationIdentifiers.SUBTRACT_MATRICES_FUNCTION, SubtractMatrices.class);
-
-        repository.registerFunction(OperationIdentifiers.NUMBER_IS_WITHIN_INTERVAL, NumberWithinInterval.class);
-        repository.registerFunction(OperationIdentifiers.FRACTION_IS_WITHIN_INTERVAL, FractionWithinInterval.class);
 
         repository.registerFunction(OperationIdentifiers.DYADIC_PRODUCT_FUNCTION, DyadicProduct.class);
 

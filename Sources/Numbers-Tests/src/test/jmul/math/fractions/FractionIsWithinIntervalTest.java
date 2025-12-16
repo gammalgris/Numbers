@@ -37,11 +37,15 @@ package test.jmul.math.fractions;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import jmul.math.Math;
 import jmul.math.fractions.Fraction;
 import static jmul.math.fractions.FractionHelper.createFraction;
+import static jmul.math.intervals.BoundaryTypes.CLOSED_BOUNDARY;
+import static jmul.math.intervals.BoundaryTypes.OPEN_BOUNDARY;
+import jmul.math.intervals.Interval;
+import static jmul.math.intervals.IntervalHelper.createInterval;
 import static jmul.math.numbers.Constants.BASE_MAX_LIMIT;
 import static jmul.math.numbers.Constants.BASE_MIN_LIMIT;
+import static jmul.math.numbers.NumberHelper.createNumber;
 
 import jmul.test.classification.UnitTest;
 
@@ -66,14 +70,9 @@ public class FractionIsWithinIntervalTest {
     private final Fraction fraction;
 
     /**
-     * A fraction (i.e. lower bound of an interval)
+     * An interval.
      */
-    private final Fraction min;
-
-    /**
-     * A fraction  (i.e. upper bound of an interval)
-     */
-    private final Fraction max;
+    private final Interval interval;
 
     /**
      * The expected result.
@@ -85,20 +84,17 @@ public class FractionIsWithinIntervalTest {
      *
      * @param fraction
      *        a fraction
-     * @param min
-     *        a fraction (i.e. lower bound of an interval)
-     * @param max
-     *        a fraction  (i.e. upper bound of an interval)
+     * @param interval
+     *        an interval
      * @param expectedResult
      *        the expected result
      */
-    public FractionIsWithinIntervalTest(Fraction fraction, Fraction min, Fraction max, boolean expectedResult) {
+    public FractionIsWithinIntervalTest(Fraction fraction, Interval interval, boolean expectedResult) {
 
         super();
 
         this.fraction = fraction;
-        this.min = min;
-        this.max = max;
+        this.interval = interval;
         this.expectedResult = expectedResult;
     }
 
@@ -110,8 +106,7 @@ public class FractionIsWithinIntervalTest {
     @Override
     public String toString() {
 
-        return String.format("[base:%d] %s =< [base:%d] %s =< [base:%d] %s -> %b", min.base(), min, fraction.base(),
-                             fraction, max.base(), max, expectedResult);
+        return String.format("[base:%d] %s %s", fraction.base(), fraction, interval, expectedResult);
     }
 
     /**
@@ -120,20 +115,11 @@ public class FractionIsWithinIntervalTest {
     @Test
     public void testIsWithinInterval() {
 
-        boolean actualResult = fraction.isWithinInterval(min, max);
+        boolean actualResult = interval.isWithinInterval(fraction);
+        boolean actualResult2 = interval.isOutsideInterval(fraction);
 
         assertEquals(toString(), expectedResult, actualResult);
-    }
-
-    /**
-     * Tests if a number is within an interval.
-     */
-    @Test
-    public void testIsWithinIntervalVariant2() {
-
-        boolean actualResult = Math.isWithinInterval(min, fraction, max);
-
-        assertEquals(toString(), expectedResult, actualResult);
+        assertEquals(toString(), !expectedResult, actualResult2);
     }
 
     /**
@@ -148,18 +134,88 @@ public class FractionIsWithinIntervalTest {
 
         for (int base = BASE_MIN_LIMIT; base <= BASE_MAX_LIMIT; base++) {
 
-            parameters.add(new Object[] { createFraction(base, "0"), createFraction(base, "-1"),
-                                          createFraction(base, "1"), true });
-            parameters.add(new Object[] { createFraction(base, "-1"), createFraction(base, "0"),
-                                          createFraction(base, "1"), false });
-            parameters.add(new Object[] { createFraction(base, "1"), createFraction(base, "-1"),
-                                          createFraction(base, "0"), false });
+            parameters.add(new Object[] { createFraction(base, "-10"),
+                                          createInterval(createNumber(base, "-1"), CLOSED_BOUNDARY,
+                                                         createNumber(base, "1"), CLOSED_BOUNDARY), false });
 
-            parameters.add(new Object[] { createFraction(base, "11", "10"), createFraction(base, "10", "10"),
-                                          createFraction(base, "111", "10"), true });
+            parameters.add(new Object[] { createFraction(base, "-1"),
+                                          createInterval(createNumber(base, "-1"), CLOSED_BOUNDARY,
+                                                         createNumber(base, "1"), CLOSED_BOUNDARY), true });
 
-            parameters.add(new Object[] { createFraction(base, "1", "100", "10"), createFraction(base, "1", "11", "10"),
-                                          createFraction(base, "11", "111", "10"), true });
+            parameters.add(new Object[] { createFraction(base, "0"),
+                                          createInterval(createNumber(base, "-1"), CLOSED_BOUNDARY,
+                                                         createNumber(base, "1"), CLOSED_BOUNDARY), true });
+
+            parameters.add(new Object[] { createFraction(base, "1"),
+                                          createInterval(createNumber(base, "-1"), CLOSED_BOUNDARY,
+                                                         createNumber(base, "1"), CLOSED_BOUNDARY), true });
+
+            parameters.add(new Object[] { createFraction(base, "10"),
+                                          createInterval(createNumber(base, "-1"), CLOSED_BOUNDARY,
+                                                         createNumber(base, "1"), CLOSED_BOUNDARY), false });
+
+
+            parameters.add(new Object[] { createFraction(base, "-10"),
+                                          createInterval(createNumber(base, "-1"), OPEN_BOUNDARY,
+                                                         createNumber(base, "1"), OPEN_BOUNDARY), false });
+
+            parameters.add(new Object[] { createFraction(base, "-1"),
+                                          createInterval(createNumber(base, "-1"), OPEN_BOUNDARY,
+                                                         createNumber(base, "1"), OPEN_BOUNDARY), false });
+
+            parameters.add(new Object[] { createFraction(base, "0"),
+                                          createInterval(createNumber(base, "-1"), OPEN_BOUNDARY,
+                                                         createNumber(base, "1"), OPEN_BOUNDARY), true });
+
+            parameters.add(new Object[] { createFraction(base, "1"),
+                                          createInterval(createNumber(base, "-1"), OPEN_BOUNDARY,
+                                                         createNumber(base, "1"), OPEN_BOUNDARY), false });
+
+            parameters.add(new Object[] { createFraction(base, "10"),
+                                          createInterval(createNumber(base, "-1"), OPEN_BOUNDARY,
+                                                         createNumber(base, "1"), OPEN_BOUNDARY), false });
+
+
+            parameters.add(new Object[] { createFraction(base, "-10", "1"),
+                                          createInterval(createNumber(base, "-1"), CLOSED_BOUNDARY,
+                                                         createNumber(base, "1"), CLOSED_BOUNDARY), false });
+
+            parameters.add(new Object[] { createFraction(base, "-1", "1"),
+                                          createInterval(createNumber(base, "-1"), CLOSED_BOUNDARY,
+                                                         createNumber(base, "1"), CLOSED_BOUNDARY), true });
+
+            parameters.add(new Object[] { createFraction(base, "0", "1"),
+                                          createInterval(createNumber(base, "-1"), CLOSED_BOUNDARY,
+                                                         createNumber(base, "1"), CLOSED_BOUNDARY), true });
+
+            parameters.add(new Object[] { createFraction(base, "1", "1"),
+                                          createInterval(createNumber(base, "-1"), CLOSED_BOUNDARY,
+                                                         createNumber(base, "1"), CLOSED_BOUNDARY), true });
+
+            parameters.add(new Object[] { createFraction(base, "10", "1"),
+                                          createInterval(createNumber(base, "-1"), CLOSED_BOUNDARY,
+                                                         createNumber(base, "1"), CLOSED_BOUNDARY), false });
+
+
+            parameters.add(new Object[] { createFraction(base, "-10", "1"),
+                                          createInterval(createNumber(base, "-1"), OPEN_BOUNDARY,
+                                                         createNumber(base, "1"), OPEN_BOUNDARY), false });
+
+            parameters.add(new Object[] { createFraction(base, "-1", "1"),
+                                          createInterval(createNumber(base, "-1"), OPEN_BOUNDARY,
+                                                         createNumber(base, "1"), OPEN_BOUNDARY), false });
+
+            parameters.add(new Object[] { createFraction(base, "0", "1"),
+                                          createInterval(createNumber(base, "-1"), OPEN_BOUNDARY,
+                                                         createNumber(base, "1"), OPEN_BOUNDARY), true });
+
+            parameters.add(new Object[] { createFraction(base, "1", "1"),
+                                          createInterval(createNumber(base, "-1"), OPEN_BOUNDARY,
+                                                         createNumber(base, "1"), OPEN_BOUNDARY), false });
+
+            parameters.add(new Object[] { createFraction(base, "10", "1"),
+                                          createInterval(createNumber(base, "-1"), OPEN_BOUNDARY,
+                                                         createNumber(base, "1"), OPEN_BOUNDARY), false });
         }
 
         return parameters;
