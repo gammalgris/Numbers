@@ -143,6 +143,7 @@ import jmul.math.operations.implementations.ScalarProduct;
 import jmul.math.operations.implementations.ShiftLeft;
 import jmul.math.operations.implementations.ShiftRight;
 import jmul.math.operations.implementations.SineApproximation;
+import jmul.math.operations.implementations.SineApproximation2;
 import jmul.math.operations.implementations.SquareFraction;
 import jmul.math.operations.implementations.SquareNumber;
 import jmul.math.operations.implementations.SquareRoot;
@@ -453,6 +454,7 @@ public class OperationRepositoryInitializerImpl implements OperationRepositoryIn
                                     ArchimedesPiApproximation.class);
 
         repository.registerFunction(OperationIdentifiers.SINE_APPROXIMATION_FUNCTION, SineApproximation.class);
+        repository.registerFunction(OperationIdentifiers.SINE_APPROXIMATION_2_FUNCTION, SineApproximation2.class);
         repository.registerFunction(OperationIdentifiers.COSINE_APPROXIMATION_FUNCTION, CosineApproximation.class);
 
         repository.registerFunction(OperationIdentifiers.NEXT_PRIME_NUMBER, NextPrimeNumber.class);

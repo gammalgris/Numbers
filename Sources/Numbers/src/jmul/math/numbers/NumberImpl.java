@@ -1913,13 +1913,19 @@ public class NumberImpl implements Number {
 
         ParameterCheckHelper.checkParameter(processingDetails);
 
+        final OperationIdentifier[] ALLOWED_ALGORITHMS = new OperationIdentifier[] {
+            OperationIdentifiers.SINE_APPROXIMATION_FUNCTION, OperationIdentifiers.SINE_APPROXIMATION_2_FUNCTION
+        };
+
+        OperationIdentifier algorithm = processingDetails.checkAndReturnAlgorithm(ALLOWED_ALGORITHMS);
+
         Number iterations =
             processingDetails.checkAndReturnIterationDepth(Math.DEFAULT_SINE_APPROXIMATION_ITERATIONS.value(base));
         Number decimalPlaces =
             processingDetails.checkAndReturnPrecision(Math.DEFAULT_MAXIMUM_FRACTION_LENGTH.value(base));
 
         TernaryOperation<Number, Result<Number>> function =
-            (TernaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(OperationIdentifiers.SINE_APPROXIMATION_FUNCTION);
+            (TernaryOperation<Number, Result<Number>>) OperationSingletons.getFunction(algorithm);
         Result<Number> result = function.calculate(this, iterations, decimalPlaces);
 
         return result.result();

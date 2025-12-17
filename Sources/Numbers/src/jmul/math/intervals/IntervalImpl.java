@@ -49,7 +49,7 @@ public class IntervalImpl implements Interval {
     /**
      * The lower boundary value.
      */
-    private final Number lowerBoundaryValue;
+    private final Number lowerBoundary;
 
     /**
      * The lower boundary type.
@@ -59,7 +59,7 @@ public class IntervalImpl implements Interval {
     /**
      * The upper boundary value.
      */
-    private final Number upperBoundaryValue;
+    private final Number upperBoundary;
 
     /**
      * The upper boundary type.
@@ -69,27 +69,47 @@ public class IntervalImpl implements Interval {
     /**
      * Creates a new interval according to the specified parameters.
      *
-     * @param lowerBoundaryValue
+     * @param lowerBoundary
      *        a value for the lower bound
      * @param lowerBoundaryType
      *        the type of the lower bound
-     * @param upperBoundaryValue
+     * @param upperBoundary
      *        a value for the upper bound
      * @param upperBoundaryType
      *        the type of the upper bound
      */
-    IntervalImpl(Number lowerBoundaryValue, BoundaryType lowerBoundaryType, Number upperBoundaryValue,
+    IntervalImpl(Number lowerBoundary, BoundaryType lowerBoundaryType, Number upperBoundary,
                  BoundaryType upperBoundaryType) {
 
         super();
 
-        ParameterCheckHelper.checkParameters(lowerBoundaryValue, upperBoundaryValue);
+        ParameterCheckHelper.checkParameters(lowerBoundary, upperBoundary);
         checkBoundaries(lowerBoundaryType, upperBoundaryType);
 
-        this.lowerBoundaryValue = lowerBoundaryValue;
+        if (lowerBoundary.isInfinity()) {
+
+            throw new IllegalArgumentException("The lower boundary cannot be infinity!");
+        }
+
+        if (upperBoundary.isInfinity()) {
+
+            throw new IllegalArgumentException("The upper boundary cannot be infinity!");
+        }
+
+        if (lowerBoundary.equals(upperBoundary)) {
+
+            throw new IllegalArgumentException("The upper abd lower boundary cannot be equal!");
+        }
+
+        if (lowerBoundary.isGreater(upperBoundary)) {
+
+            throw new IllegalArgumentException("The lower boundary is greater than the upper boundary!");
+        }
+
+        this.lowerBoundary = lowerBoundary;
         this.lowerBoundaryType = lowerBoundaryType;
 
-        this.upperBoundaryValue = upperBoundaryValue;
+        this.upperBoundary = upperBoundary;
         this.upperBoundaryType = upperBoundaryType;
     }
 
@@ -115,6 +135,17 @@ public class IntervalImpl implements Interval {
     }
 
     /**
+     * The number base.
+     *
+     * @return a number base
+     */
+    @Override
+    public int base() {
+
+        return lowerBoundary.base();
+    }
+
+    /**
      * Checks if the specified number is within the bounds of this interval.
      *
      * @param n
@@ -127,19 +158,19 @@ public class IntervalImpl implements Interval {
 
         if (lowerBoundaryType.includesBoundary() && upperBoundaryType.includesBoundary()) {
 
-            return lowerBoundaryValue.isLesserOrEqual(n) && upperBoundaryValue.isGreaterOrEqual(n);
+            return lowerBoundary.isLesserOrEqual(n) && upperBoundary.isGreaterOrEqual(n);
 
         } else if (lowerBoundaryType.includesBoundary() && !upperBoundaryType.includesBoundary()) {
 
-            return lowerBoundaryValue.isLesserOrEqual(n) && upperBoundaryValue.isGreater(n);
+            return lowerBoundary.isLesserOrEqual(n) && upperBoundary.isGreater(n);
 
         } else if (!lowerBoundaryType.includesBoundary() && upperBoundaryType.includesBoundary()) {
 
-            return lowerBoundaryValue.isLesser(n) && upperBoundaryValue.isGreaterOrEqual(n);
+            return lowerBoundary.isLesser(n) && upperBoundary.isGreaterOrEqual(n);
 
         } else {
 
-            return lowerBoundaryValue.isLesser(n) && upperBoundaryValue.isGreater(n);
+            return lowerBoundary.isLesser(n) && upperBoundary.isGreater(n);
         }
     }
 
@@ -170,19 +201,19 @@ public class IntervalImpl implements Interval {
 
         if (lowerBoundaryType.includesBoundary() && upperBoundaryType.includesBoundary()) {
 
-            return lowerBoundaryValue.isLesserOrEqual(f) && upperBoundaryValue.isGreaterOrEqual(f);
+            return lowerBoundary.isLesserOrEqual(f) && upperBoundary.isGreaterOrEqual(f);
 
         } else if (lowerBoundaryType.includesBoundary() && !upperBoundaryType.includesBoundary()) {
 
-            return lowerBoundaryValue.isLesserOrEqual(f) && upperBoundaryValue.isGreater(f);
+            return lowerBoundary.isLesserOrEqual(f) && upperBoundary.isGreater(f);
 
         } else if (!lowerBoundaryType.includesBoundary() && upperBoundaryType.includesBoundary()) {
 
-            return lowerBoundaryValue.isLesser(f) && upperBoundaryValue.isGreaterOrEqual(f);
+            return lowerBoundary.isLesser(f) && upperBoundary.isGreaterOrEqual(f);
 
         } else {
 
-            return lowerBoundaryValue.isLesser(f) && upperBoundaryValue.isGreater(f);
+            return lowerBoundary.isLesser(f) && upperBoundary.isGreater(f);
         }
     }
 
@@ -208,9 +239,56 @@ public class IntervalImpl implements Interval {
     @Override
     public String toString() {
 
-        return String.format("%s%s,%s%s", lowerBoundaryType.symbol(BoundaryPositions.LOWER_BOUNDARY),
-                             lowerBoundaryValue, upperBoundaryValue,
-                             upperBoundaryType.symbol(BoundaryPositions.UPPER_BOUNDARY));
+        return String.format("%s%s,%s%s", lowerBoundaryType.symbol(BoundaryPositions.LOWER_BOUNDARY), lowerBoundary,
+                             upperBoundary, upperBoundaryType.symbol(BoundaryPositions.UPPER_BOUNDARY));
+    }
+
+    /**
+     * Returns the length of this interval. The fraction component of the boundaries is not considered when  calculating
+     * the length.
+     *
+     * @return a length
+     */
+    @Override
+    public Number length() {
+
+        return upperBoundary.subtract(lowerBoundary);
+    }
+
+    /**
+     * Returns the midpoint for this interval.
+     *
+     * @return a midpoint
+     */
+    @Override
+    public Number midpoint() {
+
+        Number midpoint = length().halving();
+        midpoint = midpoint.add(lowerBoundary);
+
+        return midpoint;
+    }
+
+    /**
+     * Returns the upper bounday of this interval.
+     *
+     * @return a number
+     */
+    @Override
+    public Number upperBoundary() {
+
+        return upperBoundary;
+    }
+
+    /**
+     * Returns the lower boundary of this interval.
+     *
+     * @return a number
+     */
+    @Override
+    public Number lowerBoundary() {
+
+        return lowerBoundary;
     }
 
 }

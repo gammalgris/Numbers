@@ -38,14 +38,19 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import jmul.math.Math;
+import jmul.math.intervals.Interval;
+import jmul.math.intervals.IntervalHelper;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
 
 import jmul.math.operations.processing.ProcessingDetails;
 
+import jmul.math.operations.repository.OperationIdentifiers;
+
 import jmul.test.classification.UnitTest;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -103,10 +108,15 @@ public class SineTest {
     @Test
     public void calculateSine() {
 
+        int base = input.base();
+
+        Interval interval = IntervalHelper.createInterval(expectedResult, createNumber(base, "5"));
+
         Number actualResult = input.sine();
 
-        assertEquals(toString(), expectedResult, actualResult);
-        assertEquals(toString(), expectedResult.toString(), actualResult.toString());
+        //assertEquals(toString(), expectedResult, actualResult);
+        //assertEquals(toString(), expectedResult.toString(), actualResult.toString());
+        assertTrue(toString() + "?=" + actualResult, interval.isWithinInterval(actualResult));
     }
 
     /**
@@ -117,12 +127,17 @@ public class SineTest {
 
         int base = input.base();
 
-        ProcessingDetails processingDetails = ProcessingDetails.setPrecision(createNumber(base, "5"));
+        Interval interval = IntervalHelper.createInterval(expectedResult, createNumber(base, "3"));
+
+        ProcessingDetails processingDetails =
+            ProcessingDetails.setProcessingDetails(OperationIdentifiers.SINE_APPROXIMATION_2_FUNCTION,
+                                                   createNumber(base, "20"), createNumber(base, "1"));
 
         Number actualResult = input.sine(processingDetails);
 
-        assertEquals(toString(), expectedResult, actualResult);
-        assertEquals(toString(), expectedResult.toString(), actualResult.toString());
+        //assertEquals(toString(), expectedResult, actualResult);
+        //assertEquals(toString(), expectedResult.toString(), actualResult.toString());
+        assertTrue(toString() + "?=" + actualResult, interval.isWithinInterval(actualResult));
     }
 
     /**

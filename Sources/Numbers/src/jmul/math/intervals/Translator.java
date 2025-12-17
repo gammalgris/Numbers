@@ -31,49 +31,48 @@
  * $Id$
  */
 
-package jmul.math.operations.implementations;
+package jmul.math.intervals;
 
 
 import jmul.math.numbers.Number;
-import jmul.math.operations.Result;
-import jmul.math.operations.TernaryOperation;
 
 
 /**
- * An implementation of a function that checks if a number is within an interval.
+ * This interface describes a translator that tranlsates numbers from one interval to another interval.
  *
  * @author Kristian Kutin
  */
-public class NumberWithinInterval implements TernaryOperation<Number, Result<Boolean>> {
+public interface Translator {
 
     /**
-     * The default constructor.
-     */
-    public NumberWithinInterval() {
-
-        super();
-    }
-
-    /**
-     * Checks if the specified number is within the specified bounds (i.e. min and max value).
+     * The number base.
      *
-     * @param min
-     *        a number (i.e. lower bound of an interval)
+     * @return a number base
+     */
+    int base();
+
+    /**
+     * Translates the specified number from an origin interval to a destination interval.
+     *
      * @param number
-     *        a number
-     * @param max
-     *        a number (i.e. upper bound of an interval)
+     *        a number which has to be within the origin interval
      *
-     * @return <code>true</code> if the number is with the specified bounds, else <code>false</code>
+     * @return a translated number
      */
-    @Override
-    public Result<Boolean> calculate(Number min, Number number, Number max) {
+    Number translate(Number number);
 
-        ParameterCheckHelper.checkParameters(min, number, max);
+    /**
+     * Returns the origin interval.
+     *
+     * @return an interval
+     */
+    Interval originInterval();
 
-        boolean result = number.isGreaterOrEqual(min) && number.isLesserOrEqual(max);
-
-        return new Result<Boolean>(result);
-    }
+    /**
+     * Returns the destination interval.
+     *
+     * @return an interval
+     */
+    Interval destinationInterval();
 
 }

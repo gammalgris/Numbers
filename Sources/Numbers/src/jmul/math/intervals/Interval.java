@@ -46,6 +46,13 @@ import jmul.math.numbers.Number;
 public interface Interval {
 
     /**
+     * The number base.
+     * 
+     * @return a number base
+     */
+    int base();
+
+    /**
      * Checks if the specified number is within the bounds of this interval.
      *
      * @param n
@@ -84,5 +91,34 @@ public interface Interval {
      * @return <code>true</code> if the specified fraction is outside the bounds of this interval, else <code>false</code>
      */
     boolean isOutsideInterval(Fraction f);
+
+    /**
+     * Returns the length of this interval. The fraction component of the boundaries is not considered when  calculating
+     * the length.
+     *
+     * @return a length
+     */
+    Number length();
+
+    /**
+     * Returns the midpoint for this interval.
+     *
+     * @return a midpoint
+     */
+    Number midpoint();
+
+    /**
+     * Returns the upper bounday of this interval.
+     *
+     * @return a number
+     */
+    Number upperBoundary();
+
+    /**
+     * Returns the lower boundary of this interval.
+     *
+     * @return a number
+     */
+    Number lowerBoundary();
 
 }
