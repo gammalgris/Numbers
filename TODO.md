@@ -152,7 +152,13 @@
 67) Need some more informations about JVMs and how they optimize code. Need to run tests with differen
     JVMs.
 
-68)
+68) Try a geometric approach to implement an algorithm for sine and cosine functions. When the basic operations
+    are covered then the remaining operations can be derived from these. Or better have independent geometric
+	algorithms for each operation?
+
+69) Need to look into logarithms again and find an algorithm to evaluate a logarithm expression.
+
+70)
 
 
 # Done

@@ -45,3 +45,17 @@
    f) exponentiation (depends on the basic four operations)
    g) sine (depends on the basic four operations and calculating roots and exponentiation)
    h) cosine (depends on the basic four operations and calculating roots and exponentiation)
+
+9) The implementation/ reimplementation of arithmetic operations and other operations has a hierarchy of dependencies
+   (see 8). The available source materials (e.g. wikipedia, math books, formula collections, tutorials, etc.) assume
+   that all arithmetic operations are known. Actually there is not yet an implementation for all known operations. This
+   is like running in circles. I cannot use algorithms, approximations or formulas where operations are used that
+   are not yet implemented. This is currently an issue for the trigonometric operations (e.g. sine, cos, tan, etc.)
+   and for some approximations (e.g. CORDIC) and for approximating exponentiation and roots. This is slowing down
+   further implementation and requires more research of available source materials.
+   Since this number implementation differs from the built in native binary number types the existing math libraries
+   should only be used for test and verification purposes. It would beat the purpose of creating a number type with
+   it's own algorithms for arithmetic operations and other operations.
+   Providing result tables for various operations is an option after algorithms for calculation or approximation have
+   been implemented.
+
