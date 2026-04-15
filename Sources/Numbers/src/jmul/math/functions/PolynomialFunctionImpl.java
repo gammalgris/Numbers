@@ -285,10 +285,32 @@ public class PolynomialFunctionImpl extends FunctionBaseImpl implements Polynomi
     @Override
     public String toString() {
 
-        if (coefficients.size() == 0) {
+        if (coefficients.size() == 1) {
 
-            return "0";
+            return toSingleMonomialString();
         }
+
+        return toMultipleMonomialString();
+    }
+
+    /**
+     * Returns a string representation for a single coefficient.
+     *
+     * @return a string representation
+     */
+    private String toSingleMonomialString() {
+
+        Number coefficient = coefficients.get(0);
+
+        return coefficient.toString();
+    }
+
+    /**
+     * Returns a string representation for multiple coefficients.
+     *
+     * @return a string representation
+     */
+    private String toMultipleMonomialString() {
 
         StringBuilder buffer = new StringBuilder();
 

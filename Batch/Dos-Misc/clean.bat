@@ -92,15 +92,17 @@
 	set rootDir=%~dp0..\..\
 	set projectDir=%rootDir%Sources\
 
-	set directories.length=7
+	set directories.length=9
 
 	set directories[1]=%projectDir%.data\
-	set directories[2]=%projectDir%Examples\classes\
-	set directories[3]=%projectDir%Numbers\classes\
-	set directories[4]=%projectDir%Numbers-Tests\classes\
-	set directories[5]=%projectDir%Version\classes\
-	set directories[6]=%rootDir%Batch\classes\
-	set directories[7]=%rootDir%tmp\
+	set directories[2]=%projectDir%Equation\classes\
+	set directories[3]=%projectDir%Equation-Test\classes\
+	set directories[4]=%projectDir%Examples\classes\
+	set directories[5]=%projectDir%Numbers\classes\
+	set directories[6]=%projectDir%Numbers-Tests\classes\
+	set directories[7]=%projectDir%Version\classes\
+	set directories[8]=%rootDir%Batch\classes\
+	set directories[9]=%rootDir%tmp\
 
 	set files.length=4
 

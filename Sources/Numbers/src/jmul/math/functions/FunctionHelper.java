@@ -37,9 +37,11 @@ package jmul.math.functions;
 import jmul.math.Math;
 import jmul.math.fractions.Fraction;
 import static jmul.math.fractions.FractionHelper.createFraction;
+import jmul.math.functions.conditions.Condition;
 import jmul.math.functions.conditions.ConditionFunctionEntry;
 import jmul.math.functions.conditions.GreaterOrEqualCondition;
 import jmul.math.functions.conditions.LesserThanCondition;
+import jmul.math.numbers.Constants;
 import jmul.math.numbers.Number;
 import static jmul.math.numbers.NumberHelper.createNumber;
 import jmul.math.operations.OperationSingletons;
@@ -157,6 +159,24 @@ public final class FunctionHelper {
 
             Number n = createNumber(base, coefficientStrings[index]);
             coefficients[index] = n;
+        }
+
+        return new PolynomialFunctionImpl(coefficients);
+    }
+
+    /**
+     * Creates a new polynomial function according to the specified parameters.
+     *
+     * @param coefficients
+     *        all coefficients (in ascending order c<sub>0</sub>, c<sub>1</sub>, c<sub>2</sub>, ..., c<sub>n</sub>)
+     *
+     * @return a function
+     */
+    public static PolynomialFunction createPolynomialFunction(Number... coefficients) {
+
+        if (coefficients == null) {
+
+            throw new IllegalArgumentException("No coefficients (null) were specified!");
         }
 
         return new PolynomialFunctionImpl(coefficients);
@@ -327,6 +347,79 @@ public final class FunctionHelper {
     public static Function createSigmoidFunction2(int base) {
 
         return new SigmoidFunction2Impl(base);
+    }
+
+    /**
+     * Creates a linear approximation of a sigmoid function.<br>
+     * <br>
+     * Notes:<br>
+     * <pre>
+     * base 10
+     * f(x) :
+     *     x &lt; -4 : g^1(x) = 0
+     *     [-4, -2) : g^2(x) = 1/20 * x + 1/5
+     *     [-2, -1) : g^3(x) =  3/20 * x + 2/5
+     *     [-1, 1] : g^4(x) = 1/4 * x + 1/2
+     *     (1, 2] : g^5(x) = 3/20 * x + 3/5
+     *     (2, 4] : g^6(x) = 1/20 * x + 4/5
+     *     x &gt; 4 : g^7(x) = 1
+     * </pre>
+     * The partial function is generated in base 10 and then translated to the specified base.
+     *
+     * @param base
+     *        a number base
+     *
+     * @return a function
+     */
+    public static Function createSigmoidLinearAppoximationFunction(int base) {
+
+        int defaultBase = Constants.DEFAULT_NUMBER_BASE;
+
+        Number coefficient11 = createNumber(defaultBase, "0");
+        Fraction coefficient21 = createFraction(base, "1", "20");
+        Fraction coefficient22 = createFraction(base, "1", "5");
+        Fraction coefficient31 = createFraction(base, "3", "20");
+        Fraction coefficient32 = createFraction(base, "2", "5");
+        Fraction coefficient41 = createFraction(base, "1", "4");
+        Fraction coefficient42 = createFraction(base, "1", "2");
+        Fraction coefficient51 = createFraction(base, "3", "20");
+        Fraction coefficient52 = createFraction(base, "3", "5");
+        Fraction coefficient61 = createFraction(base, "1", "20");
+        Fraction coefficient62 = createFraction(base, "4", "5");
+        Number coefficient71 = createNumber(defaultBase, "1");
+
+        Function[] functions = {
+            createPolynomialFunction(coefficient11.rebase(base)),
+            createPolynomialFunction(coefficient22.evaluate().rebase(base), coefficient21.evaluate().rebase(base)),
+            createPolynomialFunction(coefficient32.evaluate().rebase(base), coefficient31.evaluate().rebase(base)),
+            createPolynomialFunction(coefficient42.evaluate().rebase(base), coefficient41.evaluate().rebase(base)),
+            createPolynomialFunction(coefficient52.evaluate().rebase(base), coefficient51.evaluate().rebase(base)),
+            createPolynomialFunction(coefficient62.evaluate().rebase(base), coefficient61.evaluate().rebase(base)),
+            createPolynomialFunction(coefficient71.rebase(base))
+        };
+
+        Number[] thresholds = {
+            createNumber(defaultBase, "-4").rebase(base), createNumber(defaultBase, "-2").rebase(base),
+            createNumber(defaultBase, "-1").rebase(base), createNumber(defaultBase, "1").rebase(base),
+            createNumber(defaultBase, "2").rebase(base), createNumber(defaultBase, "4").rebase(base)
+        };
+
+        Condition<Number> condition1 = new LesserThanCondition(thresholds[0]);
+        Condition<Number> condition2 = new LesserThanCondition(thresholds[1]);
+        Condition<Number> condition3 = new LesserThanCondition(thresholds[2]);
+        Condition<Number> condition4 = new LesserThanCondition(thresholds[3]);
+        Condition<Number> condition5 = new LesserThanCondition(thresholds[4]);
+        Condition<Number> condition6 = new LesserThanCondition(thresholds[5]);
+        Condition<Number> condition7 = new GreaterOrEqualCondition(thresholds[5]);
+
+        ConditionFunctionEntry[] entries = {
+            new ConditionFunctionEntry(condition1, functions[0]), new ConditionFunctionEntry(condition2, functions[1]),
+            new ConditionFunctionEntry(condition3, functions[2]), new ConditionFunctionEntry(condition4, functions[3]),
+            new ConditionFunctionEntry(condition5, functions[4]), new ConditionFunctionEntry(condition6, functions[5]),
+            new ConditionFunctionEntry(condition7, functions[6])
+        };
+
+        return new PartialFunctionImpl(entries);
     }
 
     /**

@@ -339,12 +339,57 @@ un quoziente sensa parte intera.
    Riferendoci a quanto si disse su tale argomento nel Saggio... ed ai lemi che
 egualente qui si potrebbero proporre, deduciao senz' altro le seguenti regole
 particolari, trattandosi di numeri scritti in sistemi nuerici a base negativa.
-   Regola I. Per oltiplicare un nuero scritto in base (-b) rispettivamente
+   Regola I. Per moltiplicare un numero scritto in base (-b) rispettivamente
 
 
-                                   - 209 -
+                                   - 210 -
 
-   per (-b), 
+   per (-b), (-b)^2, ... ,(-b)^m basta transportarne la virgola radicale rispettivamente
+di 1, 2 ... m posti verso destra.
+   II. Per moltiplicare un numero scritto in base (b) rispettivamente per b, b^1, ...
+(-1)^(m-1) (-b)^m basta construirne il valore uguale-opposto e transportarne la virgola
+radicale rispettivamente di 1, 2 ... m posti verso destra.
+   III. Per dividere un numero scritto in base (-b) rispettivamente per (-b),
+(-b)^2, (-b)^3, ... (-b)^m basta transportarne la virgola radicale rispettivamente di 1, 2,
+3, ... m posti verso sinistra.
+   IV. Per dividere un numero in base (-b) rispettivamente per b, -b^2, v^3, ...
+(-1)^(m-1) (-b)^m basta construirne il valore uguale-opposto e transportarne la virgola
+radicale rispettivamente di 1, 2, ... m posti verso sinistra.
+
+
+                         Esempi in base negativo-decimale.
+
+               78,35 X 10000  = 783500      738500 : 10000 = 78,35
+	           78,35 X 190000 = 1438500    1438500 : 190000 = 78,35 
+
+   V. Per moltiplicare un numero scritto in base (b) per F^m, basta moltiplicarlo
+per (-b)^m, vedi Regola I, e dividere il prodotto ottenuto per f^m, essendo
+(-b)=F.f.
+   VI. Per dividere un numero scritto in base (-b) per F^m basta dividerlo per
+(-b)^m, vedi Regola III, e moltiplicare il quoziente ottenuto oer f^m , essendo come
+prima (-b)=F.f. Queste ultime due regole sono di convenienza, qualora (F-f) sia
+un numera grande e positivo; che se il numero operatore (moltiplicatore o divisore)
+fosse -F^m basterebbe costrurre il valore uguale-opposto del risultato superiormente
+ottenuto.
+
+                         Esempi in base negativo-decimale.
+
+   9,576 X 285 = 9576 : 12 = 19131,5             19131,5 : 285 = 19,1315 X 12 = 9,576
+   9,576 X 785 = 0,0009576 X 24 = 0,1943184    0,1943184 X 785 = 194,3184 : 24 = 9,576
+
+   VII. a) Per moltiplicare un numero N scritto in base (-b), per l'esspressione
+(b24-r), basta transportarne la virgola rdicale di 2n posti verso destra, e dal risultat
+levare il prodotto r.N.
+   b) Per moltiplicare un numero N scritto in base (-b), per l'esspressione (b^(24+1) + r)
+basta transportarne la virgola radicale di (2n+1) posti verso destra, ed al risultato
+aggiungere il prodotto r.N (*).
+
+
+(*) Veggaso ancora la divisione per (b+1), nei criterii di divisibilità, Capitolo IX, A.
+
+
+
+                                   - 211 -
 
 
 TODO write down first, then translate

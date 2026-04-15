@@ -58,19 +58,34 @@
       <value n="oracle.toplink.workbench.addin.migration.TopLinkProjectMigrator" v="11.1.1.1.0"/>
    </hash>
    <list n="contentSets">
-      <string v="oracle.mds.internal.dt.ide.MDSLibraryCustCSProvider/mdsContentSet"/>
-      <string v="oracle.mds.internal.dt.ide.MDSADFLibVirtualNodeCSProvider/mdsLibVirtualNodeContentSet"/>
       <string v="oracle.jdeveloper.model.J2eeSettings/webContentSet"/>
+      <string v="oracle.bm.commonIde.data.project.ModelerProjectSettings/modelersContentSet"/>
       <string v="oracle.jdeveloper.model.PathsConfiguration/javaContentSet"/>
       <string v="oracle.ide.model.ResourcePaths/resourcesContentSet"/>
+      <string v="oracle.mds.internal.dt.ide.MDSLibraryCustCSProvider/mdsContentSet"/>
+      <string v="oracle.mds.internal.dt.ide.MDSADFLibVirtualNodeCSProvider/mdsLibVirtualNodeContentSet"/>
       <string v="oracle.jdeveloper.offlinedb.model.OfflineDBProjectSettings/offlineDBContentSet"/>
       <string v="oracle.adfdtinternal.model.ide.settings.ADFMSettings/adfmContentSet"/>
-      <string v="oracle.bm.commonIde.data.project.ModelerProjectSettings/modelersContentSet"/>
       <string v="oracle.toplink.workbench.addin/toplinkContentSet"/>
    </list>
-   <value n="defaultPackage" v="jmul.math.number"/>
+   <value n="defaultPackage" v="test.jmul.math.equations"/>
    <hash n="oracle.ide.model.DependencyConfiguration">
-      <list n="dependencyList"/>
+      <list n="dependencyList">
+         <hash>
+            <hash n="dependable">
+               <url n="sourceOwnerURL" path="../Math.jws"/>
+               <url n="sourceURL" path="../Numbers/Numbers.jpr"/>
+            </hash>
+            <value n="recognizerId" v="oracle.jdeveloper.library"/>
+         </hash>
+         <hash>
+            <hash n="dependable">
+               <url n="sourceOwnerURL" path="../Math.jws"/>
+               <url n="sourceURL" path="../Equation/Equation.jpr"/>
+            </hash>
+            <value n="recognizerId" v="oracle.jdeveloper.library"/>
+         </hash>
+      </list>
    </hash>
    <hash n="oracle.ide.model.TechnologyScopeConfiguration">
       <list n="technologyScope">
@@ -82,25 +97,12 @@
    </hash>
    <hash n="oracle.jdeveloper.model.PathsConfiguration">
       <hash n="javaContentSet">
-         <list n="constituent-sets">
-            <hash>
-               <list n="pattern-filters">
-                  <string v="+**"/>
-               </list>
-               <list n="url-path">
-                  <url path="src/"/>
-               </list>
-            </hash>
-            <hash>
-               <list n="pattern-filters">
-                  <string v="+**"/>
-               </list>
-               <list n="url-path">
-                  <url path="properties/"/>
-               </list>
-            </hash>
+         <list n="pattern-filters">
+            <string v="+**"/>
          </list>
-         <list n="url-path"/>
+         <list n="url-path">
+            <url path="src/"/>
+         </list>
       </hash>
    </hash>
    <hash n="oracle.jdevimpl.config.JProjectLibraries">
@@ -109,45 +111,29 @@
             <value n="id" v="Jmul-2.1.2"/>
             <value n="isJDK" v="false"/>
          </hash>
+         <hash>
+            <value n="id" v="Junit-4.11"/>
+            <value n="isJDK" v="false"/>
+         </hash>
       </list>
       <hash n="internalDefinitions">
-         <list n="jdkDefinitions">
+         <list n="libraryDefinitions">
             <hash>
                <list n="classPath">
-                  <url path="../../../../dependencies/java/jre/lib/resources.jar" jar-entry=""/>
-                  <url path="../../../../dependencies/java/jre/lib/rt.jar" jar-entry=""/>
-                  <url path="../../../../dependencies/java/jre/lib/jsse.jar" jar-entry=""/>
-                  <url path="../../../../dependencies/java/jre/lib/jce.jar" jar-entry=""/>
-                  <url path="../../../../dependencies/java/jre/lib/charsets.jar" jar-entry=""/>
-                  <url path="../../../../dependencies/java/jre/lib/jfr.jar" jar-entry=""/>
-                  <url path="../../../../dependencies/java/jre/classes/"/>
+                  <url path="../../Libraries/JUnit/junit-4.11.jar" jar-entry=""/>
+                  <url path="../../Libraries/JUnit/hamcrest-core-1.3.jar" jar-entry=""/>
                </list>
-               <value n="description" v="1.8.0_361"/>
+               <value n="description" v="Junit-4.11"/>
                <list n="docPath">
-                  <url protocol="http" host="docs.oracle.com" path="/javase/8/docs/api/"/>
+                  <url path="../../Libraries/JUnit/junit-4.11-javadoc.jar" jar-entry=""/>
+                  <url path="../../Libraries/JUnit/hamcrest-core-1.3-javadoc.jar" jar-entry=""/>
                </list>
-               <list n="expandedClassPath">
-                  <url path="../../../../dependencies/java/jre/lib/resources.jar" jar-entry=""/>
-                  <url path="../../../../dependencies/java/jre/lib/rt.jar" jar-entry=""/>
-                  <url path="../../../../dependencies/java/jre/lib/jsse.jar" jar-entry=""/>
-                  <url path="../../../../dependencies/java/jre/lib/jce.jar" jar-entry=""/>
-                  <url path="../../../../dependencies/java/jre/lib/charsets.jar" jar-entry=""/>
-                  <url path="../../../../dependencies/java/jre/lib/jfr.jar" jar-entry=""/>
-                  <url path="../../../../dependencies/java/jre/classes/"/>
-               </list>
-               <list n="expandedSourcePath">
-                  <url path="../../../../dependencies/java/src.zip" jar-entry=""/>
-               </list>
-               <value n="id" v="1.8.0_361"/>
-               <url n="javaExecutable" path="../../../../dependencies/java/bin/java.exe"/>
-               <url n="sdkBinDir" path="../../../../dependencies/java/bin/"/>
+               <value n="id" v="Junit-4.11"/>
                <list n="sourcePath">
-                  <url path="../../../../dependencies/java/src.zip" jar-entry=""/>
+                  <url path="../../Libraries/JUnit/junit-4.11-sources.jar" jar-entry=""/>
+                  <url path="../../Libraries/JUnit/hamcrest-core-1.3-sources.jar" jar-entry=""/>
                </list>
-               <value n="version" v="1.8.0_361"/>
             </hash>
-         </list>
-         <list n="libraryDefinitions">
             <hash>
                <list n="classPath">
                   <url path="../../Libraries/Jmul/jmul-2.1.2.jar" jar-entry=""/>
@@ -164,14 +150,13 @@
             </hash>
          </list>
       </hash>
-      <hash n="jdkReference">
-         <value n="id" v="1.8.0_361"/>
-         <value n="isJDK" v="true"/>
-         <value n="jdkVersion" v="1.8.0_361"/>
-      </hash>
       <list n="libraryReferences">
          <hash>
             <value n="id" v="Jmul-2.1.2"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Junit-4.11"/>
             <value n="isJDK" v="false"/>
          </hash>
       </list>

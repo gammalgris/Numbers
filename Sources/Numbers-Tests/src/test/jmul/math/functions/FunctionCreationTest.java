@@ -362,6 +362,44 @@ public class FunctionCreationTest {
     }
 
     /**
+     * Tests a constant function.
+     */
+    @Test
+    public void testConstantFunction3() {
+
+        TrainingData data =
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0")));
+
+        Function f = FunctionHelper.createPolynomialFunction(DEFAULT_NUMBER_BASE, "0");
+
+        assertEquals("formula", "0", f.toString());
+        assertEquals("formula", "f(x) = 0", f.toFunctionNotation());
+
+        for (DataEntry entry : data) {
+
+            Number actualOutput = f.calculate(entry.input);
+            assertEquals("function values", entry.expectedOutput, actualOutput);
+        }
+    }
+
+    /**
      * Tests a linear function.
      */
     @Test
@@ -902,6 +940,48 @@ public class FunctionCreationTest {
 
         assertEquals("formula", "1 / ( 1 + e^-x )", f.toString());
         assertEquals("formula", "f(x) = 1 / ( 1 + e^-x )", f.toFunctionNotation());
+
+        for (DataEntry entry : data) {
+
+            Number actualOutput = f.calculate(entry.input);
+            assertEquals("function values", entry.expectedOutput, actualOutput);
+        }
+    }
+
+    /**
+     * Tests creating a sigmoid approximation function with valid parameters.
+     */
+    @Test
+    public void testSigmoidLinearApproximationFunction() {
+
+        TrainingData data =
+            new TrainingData(new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.25")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "-0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.375")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.5")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "0.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.625")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.75")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "1.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.825")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.9")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "2.5"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.925")),
+                             new DataEntry(createNumber(DEFAULT_NUMBER_BASE, "3"),
+                                           createNumber(DEFAULT_NUMBER_BASE, "0.95")));
+
+        Function f = FunctionHelper.createSigmoidLinearAppoximationFunction(DEFAULT_NUMBER_BASE);
+
+        assertEquals("formula",
+                     "{ x < -4 : 0; x < -2 : 0.05 * x + 0.2; x < -1 : 0.15 * x + 0.4; x < 1 : 0.25 * x + 0.5; x < 2 : 0.15 * x + 0.6; x < 4 : 0.05 * x + 0.8; x >= 4 : 1 }",
+                     f.toString());
+        assertEquals("formula",
+                     "f(x) = { x < -4 : 0; x < -2 : 0.05 * x + 0.2; x < -1 : 0.15 * x + 0.4; x < 1 : 0.25 * x + 0.5; x < 2 : 0.15 * x + 0.6; x < 4 : 0.05 * x + 0.8; x >= 4 : 1 }",
+                     f.toFunctionNotation());
 
         for (DataEntry entry : data) {
 
